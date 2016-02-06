@@ -1,0 +1,17 @@
+<div class="tab-pane" id="projects">
+
+
+<% @contractor.projects.each do |project| %>
+             <div class="row">
+            <div class="col-md-1 col-md-offset-1  col-sm-3 col-xs-3">
+            <%#= image_tag attachment_url(contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
+            </div>
+            <div class="col-md-7 col-sm-9 col-xs-9">
+            <h4><%= project.name.upcase %></h4>
+            <span class="pull-right"> </span>
+            <span class="help-block"><%=project.cost %></span>
+            </div>
+            </div>
+           <hr />
+            <% end %>
+</div><!-- /.tab-pane -->

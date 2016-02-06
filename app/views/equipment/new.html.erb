@@ -1,0 +1,41 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-1">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-blue-active">
+      <h3 class="widget-user-username">New Equipment</h3>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+          <div>
+                  <%= simple_form_for @equipment, html: { class: 'form-horizontal' },
+                            wrapper: :horizontal_form,
+                            wrapper_mappings: {
+                            check_boxes: :vertical_radio_and_checkboxes,
+                            radio_buttons: :vertical_radio_and_checkboxes,
+                            file: :horizontal_file_input,
+                            boolean: :horizontal_boolean
+                            } do |f| %>
+<%=f.error_notification %>
+<div class="row">
+  <div class="col-md-5">
+  </div>
+  <div class="col-md-5">
+    <h4>Details</h4>
+    <hr>
+<%= f.input :make %>
+<%=f.input :model %>
+<%=f.input :plate_number %>
+<%=f.input :acquisition_cost %>
+
+
+<div class="modal-footer">
+<%=f.submit "Save", class: "btn btn-primary" %>
+</div>
+<% end %>
+</div>
+<div class="col-md-2">
+</div>
+</div>

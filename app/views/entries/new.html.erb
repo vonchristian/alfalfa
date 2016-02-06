@@ -1,0 +1,43 @@
+<div class="col-md-4 col-md-offset-4">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-red-active">
+      <h3 class="widget-user-username">New Expense</h3>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+          <div>
+                  <%= simple_form_for @entry, html: { class: 'form-horizontal' },
+                            wrapper: :horizontal_form,
+                            wrapper_mappings: {
+                            check_boxes: :vertical_radio_and_checkboxes,
+                            radio_buttons: :vertical_radio_and_checkboxes,
+                            file: :horizontal_file_input,
+                            boolean: :horizontal_boolean
+                            } do |f| %>
+<%=f.error_notification %>
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-9">
+<%=f.input :description %>
+<h4>Charge To:</h4>
+<%=f.simple_fields_for :credit_amounts do |d| %>
+<%=d.input :amount %>
+<%=d.input :account %>
+<% end %>
+<h4>Received By:</h4>
+<%=f.simple_fields_for :debit_amounts do |c| %>
+<%=c.input :amount %>
+<%=c.input :account%>
+<% end %>
+</div>
+</div>
+<div class="modal-footer">
+<%=f.submit "Record Expense", class: "btn btn-danger" %>
+
+</div>
+<% end %>
+</div>

@@ -1,0 +1,48 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-1">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-aqua-active">
+      <h3 class="widget-user-username">New Project</h3>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+          <div>
+                  <%= simple_form_for @project, html: { class: 'form-horizontal' },
+                            wrapper: :horizontal_form,
+                            wrapper_mappings: {
+                            check_boxes: :vertical_radio_and_checkboxes,
+                            radio_buttons: :vertical_radio_and_checkboxes,
+                            file: :horizontal_file_input,
+                            boolean: :horizontal_boolean
+                            } do |f| %>
+<%=f.error_notification %>
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-6">
+    <h5>Main Contractor </h5> 
+    <%=f.input :main_contractor_id, collection: Contractor.main_contractors, as: :radio_buttons %>
+    <hr>
+    <h5>Details</h5>
+    <hr>
+<%= f.input :id_number %>
+<%=f.input :name, as: :text %>
+<%=f.input :cost %>
+<%=f.input :address %>
+<h5>Duration</h5>
+<hr>
+<%=f.input :duration %>
+<%=f.input :classification, collection:   Project.classifications.keys.to_a.map{ |a| [a.titleize, a] },  as: :radio_buttons %>
+
+
+<div class="modal-footer">
+<%=f.submit "Save", class: "btn btn-primary" %>
+</div>
+<% end %>
+</div>
+<div class="col-md-2">
+</div>
+</div>

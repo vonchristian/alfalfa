@@ -1,0 +1,18 @@
+<div class="tab-pane" id="contractors">
+  <%=link_to new_project_contract_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Subcontractor <%end%>
+
+
+
+<hr>
+<h4 class="widget-user-username">Contractors </h4>
+<% @project.contractors.each do |contractor|%>
+<h4><%=contractor.company %>
+  <%if contractor.main_contractor? %>
+  <h5>Main Contractor</h5>
+  <% end %>
+  <hr></h4>
+
+<% end %>
+
+
+</div><!-- /.tab-pane -->

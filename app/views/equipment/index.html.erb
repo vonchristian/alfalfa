@@ -1,0 +1,34 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-blue-active">
+      <h3 class="widget-user-username">Equipments
+      <span class="pull-right"><%=link_to new_equipment_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-truck"></i> New Equipment <%end%></span>
+    </h3>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+
+          <div>
+
+
+            <% @equipments.each do |equipment| %>
+
+            <h4><%=link_to equipment.make_and_model, equipment %>
+              <span class="pull-right"><%= number_to_currency equipment.acquisition_cost %></span></h4>
+              <span class="help-block"><i class="fa fa-truck"></i> Available
+            <hr />
+            <% end %>
+          </div><!-- /.description-block -->
+        </div><!-- /.col -->
+
+          </div><!-- /.description-block -->
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div>
+  </div><!-- /.widget-user -->
+</div><!-- /.col -->
+</div>

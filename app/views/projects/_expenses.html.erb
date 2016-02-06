@@ -1,0 +1,25 @@
+<div class="tab-pane" id="expenses">
+ <%=link_to new_project_expense_path(@project), class: "btn btn-danger" do %><i class="fa fa-plus-circle"></i> New Expense <%end%>
+ <hr />
+ <div class="table table-responsive">
+   <table class="table table-hover">
+     <thead>
+       <tr>
+         <th>Description</th>
+         <th>Amount</th>
+       </tr>
+       <tbody>
+         <% @project.expenses.each do |expense| %>
+           <tr>
+             <td><%= expense.description %></td>
+             <td><%= expense.amount %></td>
+           </tr>
+         <% end %>
+
+       </tbody>
+
+     </table>
+      <hr />
+      <%=number_to_currency @project.expenses.sum(:amount) %>
+ </div>
+  </div><!-- /.tab-pane -->

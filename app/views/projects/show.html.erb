@@ -1,0 +1,98 @@
+<% breadcrumb :project, @project %>
+<div class="row">
+  <div class="col-md-3">
+
+    <!-- Profile Image -->
+    <div class="box box-primary">
+      <div class="box-body box-profile">
+<br>
+        <h3 class="profile-username text-center"><%=@project.name %></h3>
+      <br>
+
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <b>Cost</b> <a class="pull-right"><%=number_to_currency @project.final_cost %></a>
+          </li>
+          <li class="list-group-item">
+            <b>Duration</b> <a class="pull-right"><%=@project.duration%> Calendar Days</a>
+          </li>
+          <li class="list-group-item">
+            <b>Days Elapsed</b> <a class="pull-right"><%=@project.days_elapsed%></a>
+          </li>
+        </ul>
+
+        <a href="#" class="btn btn-primary btn-block"><b>Update Info</b></a>
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+    <!-- About Me Box -->
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Project Info</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <strong><i class="fa fa-building margin-r-5"></i>  Implementing Office</strong>
+        <p class="text-muted">
+        DPWH District 1
+        </p>
+
+        <hr>
+        <strong><i class="fa fa-calendar margin-r-5"></i>  Notice to Proceed</strong>
+        <p class="text-muted">
+        <% if @project.notice_to_proceed.blank? %>
+        <%=link_to "Enter Date", new_project_notice_to_proceed_path(@project) %>
+        <% else %>
+        <%=@project.notice_to_proceed.date%>
+        <% end %>
+        </p>
+ 
+        <hr>
+
+        <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+        <p class="text-muted"><%=@project.address %></p>
+
+        <hr>
+
+        <strong><i class="fa fa-map-marker margin-r-5"></i> Time Extension</strong>
+        <p class="text-muted"><%=link_to "New Time Extension", new_project_time_extension_path(@project)%></p>
+
+        <hr>
+
+         <strong><i class="fa fa-rub margin-r-5"></i> Amount Revision</strong>
+        <p class="text-muted"><%=link_to "New Contract Amount Revision", new_project_amount_revision_path(@project)%></p>
+
+        <hr>
+
+
+
+        <strong><i class="fa fa-file-text-o margin-r-5"></i> Remarks</strong>
+       <p class="text-muted"><%=link_to "Add Remark", new_project_remark_path(@project)%></p>
+        <% @project.remarks.each do |remark| %>
+          <%=remark.content %>
+          <hr>
+        <% end %>
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+  </div><!-- /.col -->
+  <div class="col-md-9">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#activity" data-toggle="tab"> Activity</a></li>
+        <li><a href="#expenses" data-toggle="tab"> Expenses</a></li>
+        <li><a href="#billings" data-toggle="tab"> Billings</a></li>
+        <li><a href="#contractors" data-toggle="tab">  Contractors</a></li>
+        <li><a href="#bidding" data-toggle="tab">Bidding</a></li>
+        <li><a href="#settings" data-toggle="tab">Settings</a></li>
+      </ul>
+      <div class="tab-content">
+        <%=render 'timeline' %>
+        <%=render 'expenses' %>
+          <%=render 'projects/billings/billings' %>
+          <%=render 'contractors' %>
+          <%=render 'bidding' %>
+
+        <%=render 'settings' %>
+      </div><!-- /.tab-content -->
+    </div><!-- /.nav-tabs-custom -->
+  </div><!-- /.col -->
+</div><!-- /.row -->

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contractor_id: 
+  inventory_id: 
+  quantity: 1
+
+two:
+  contractor_id: 
+  inventory_id: 
+  quantity: 1
