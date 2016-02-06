@@ -1,0 +1,23 @@
+
+<div class="col-md-4 col-md-offset-4">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-blue-active">
+      <h3 class="widget-user-username">New Accomplishment</h3>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12">
+          <div>
+                  <%= simple_form_for [@project, @accomplishment] do |f| %>
+<%=f.error_notification %>
+
+<%=f.input :percent, as: :text, placeholder: "Add.", label: false, autofocus: true %>
+
+<div class="modal-footer">
+<%=f.submit "Save Accomplishment", class: "btn btn-primary" %>
+
+</div>
+<% end %>
+</div>

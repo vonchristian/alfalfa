@@ -7,7 +7,7 @@ crumb :projects do
 end
 
 crumb :project do |project|
-  link project.name, project_path(project)
+  link truncate(project.name, length: 40)
   parent :projects
 end
 

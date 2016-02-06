@@ -39,6 +39,7 @@ end
     resources :time_extensions
     resources :amount_revisions
     resources :remarks
+    resources :accomplishments
     resources :expenses,         module: :projects
     resources :bids
     resources :contracts

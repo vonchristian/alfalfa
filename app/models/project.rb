@@ -12,9 +12,13 @@ class Project < ActiveRecord::Base
     has_many :contractors, through: :contracts
     has_many :time_extensions
     has_many :amount_revisions
+    has_many :accomplishments
     has_many :remarks
     after_create :add_to_accounts, :add_main_contractor_to_contractors
-    
+    def slippage
+        percent_of_accomplishment - percent_actual_accomplished
+    end
+
     def final_cost
         if no_amount_revisions?
             cost 
