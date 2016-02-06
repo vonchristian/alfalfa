@@ -7,6 +7,7 @@
       <div class="box-body box-profile">
 <br>
         <h3 class="profile-username text-center">Project: <%=@project.id_number %></h3>
+        <%=@project.date_created %>
       <br>
 
         <ul class="list-group list-group-unbordered">
@@ -20,7 +21,7 @@
             <b>Days Elapsed</b> <a class="pull-right"><%=@project.days_elapsed%></a>
           </li>
           <li class="list-group-item">
-            <b>Accomplished</b> <a class="pull-right"><%=@project.accomplishments.last.percent if @project.accomplishments.any?%></a>
+            <b>Accomplished</b> <a class="pull-right"><%=@project.percent_accomplished%></a>
             <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
           </li>
         </ul>

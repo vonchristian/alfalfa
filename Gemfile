@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem "gretel"
+gem 'draper'
 gem 'searchkick'
 gem 'public_activity'
 gem 'puma'
@@ -42,14 +43,27 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner'
+  gem 'faker'
+end
+
+
+###########code optimization and cleanup####
+  gem 'traceroute', group: :development
+  # gem 'rack-mini-profiler'
+  gem 'bullet', group: :development
+  gem 'brakeman', :require => false, group: :development
+  gem "rails_best_practices", group: :development
+############################################
