@@ -10,7 +10,7 @@ end
 
 
 def site_name
-    "ALFALFA"
+    "Alfafa"
   end
 
   def site_url
