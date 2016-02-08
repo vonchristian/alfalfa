@@ -24,6 +24,9 @@ class Project < ActiveRecord::Base
         0
     end
   end
+  def road?
+    true
+  end
 
     def percent_of_accomplishment
       if self.accomplishments.present?
@@ -49,6 +52,13 @@ end
         amount_revisions.last.revised_contract_amount
     end
     end
+    def final_expiry_date
+    if  time_extensions.present?
+       revised_expiry_date
+    else
+      expiry_date 
+    end
+  end
 
     def start_date
       if notice_to_proceed

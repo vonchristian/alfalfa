@@ -37,3 +37,4 @@ Plutus::Expense.create(name: "Repairs and Maintenance")
 Plutus::Expense.create(name: "Miscellaneous")
 
 
+User.create!(first_name: 'Juan', last_name: 'Cruz', role: 0, email: 'vc.halip@gmail.com', password: '1111111111', password_confirmation: '1111111111')

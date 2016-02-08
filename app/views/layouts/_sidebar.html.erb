@@ -4,12 +4,12 @@
     <div class="user-panel">
       <div class="pull-left image">
 
-           <%#=link_to (image_tag attachment_url(current_user, :profile_image, :fill, 40, 40), class: 'img-square'), user_path(current_user) %>
+           <%=link_to (image_tag attachment_url(current_user, :profile_photo, :fill, 40, 40, fallback: "default-xs-small.png"), class: 'img-square'), user_path(current_user) %>
 
       </div>
       <div class="pull-left info">
-        <p><%#= link_to current_user.first_name, user_path(current_user) %></p>
-        <a href="#"><%#=current_user.role.to_s.titleize %></a>
+        <p><%= link_to current_user.first_name, user_path(current_user) %></p>
+        <a href="#"><%=current_user.role.to_s.titleize %></a>
       </div>
     </div>
     <!-- search form -->
@@ -69,8 +69,15 @@
     <i class="fa fa-circle-o"></i> <span>Reports</span>
   </a>
 </li>
-
-
+<li class="header">SETTINGS</li>
+<li>
+  <a href="/users">
+  
+  <i class="fa fa-users"></i>
+ 
+    </i> <span>Employees</span>
+  </a>
+</li>
         </ul>
       </li>
     </ul>

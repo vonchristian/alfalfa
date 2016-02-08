@@ -1,6 +1,19 @@
 class ProjectDecorator < Draper::Decorator
   delegate_all
-  
+ 
+  def sign
+    if project.road?
+    'road'
+  end
+end
+
+  def start_date_to_end_date
+    if project.notice_to_proceed.present?
+      "#{project.start_date} to #{project.final_expiry_date}"
+    else
+      "No NTP"
+    end
+  end
   def notice_to_proceed_link(project)
     if project.notice_to_proceed.blank?
       link_to 'Enter NTP Date', new_project_notice_to_proceed_path(project)
@@ -23,13 +36,7 @@ end
     'green'
   end
 end
-  def final_expiry_date
-    if project.time_extensions.present?
-      project.revised_expiry_date
-    else
-      project.expiry_date 
-    end
-  end
+  
 
   def ntp
     if project.notice_to_proceed

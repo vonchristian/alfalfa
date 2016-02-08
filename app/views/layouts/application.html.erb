@@ -15,12 +15,12 @@
   </head>
     <body class="hold-transition skin-blue-light sidebar-mini">
     <div class="wrapper">
-      <%# if user_signed_in? %>
+      <% if user_signed_in? %>
         <%=render 'layouts/header' %>
        
          
         <%=render 'layouts/sidebar' %>
-      <%# end %>
+      <% end %>
       <div class="content-wrapper">
       <section class="content-header">
           <ol class="breadcrumb">

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+ devise_for :users, :controllers => { :registrations => "users" }
+
   mount Plutus::Engine => "/accounting", :as => "accounting"
 resources :accounts
 resources :assets
@@ -7,7 +9,7 @@ resources :liabilities
 resources :equities
 resources :incomes
 
-
+resources :users
 
   root "projects#index"
   get "projects/search"

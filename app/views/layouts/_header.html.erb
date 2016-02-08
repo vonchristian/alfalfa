@@ -14,16 +14,16 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <%#= image_tag attachment_url(current_user, :profile_image, :fill, 150, 150), class: 'user-image' %>
-                <span class="hidden-xs"><%#=current_user.full_name %></span>
+                  <%= image_tag attachment_url(current_user, :profile_photo, :fill, 150, 150, default: "default-xs-small.png"), class: 'user-image' %>
+                <span class="hidden-xs"><%=current_user.full_name %></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <%#= image_tag attachment_url(current_user, :profile_image, :fill, 150, 150) %>
+                  <%= image_tag attachment_url(current_user, :profile_photo, :fill, 150, 150, default: "default-small.png") %>
                   <p>
-                    <%#=current_user.full_name %>
-                    <small><%#=current_user.role.to_s.titleize %></small>
+                    <%=current_user.full_name %>
+                    <small><%=current_user.role.to_s.titleize %></small>
                   </p>
                 </li>
                 <!-- Menu Body -->
@@ -31,10 +31,10 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                     <%#=link_to 'Profile', user_path(current_user), class: "btn btn-default btn-flat" %>
+                     <%=link_to 'Profile', user_path(current_user), class: "btn btn-default btn-flat" %>
                   </div>
                   <div class="pull-right">
-                   <%#=link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-danger btn-flat" %>
+                   <%=link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-danger btn-flat" %>
                   </div>
                 </li>
               </ul>

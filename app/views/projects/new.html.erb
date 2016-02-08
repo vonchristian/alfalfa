@@ -4,7 +4,7 @@
   <div class="box-body">
   <br>
   <h3 class="text-center">New Project Details</h3>
-  <span class="help-block text-center">We se this info to put the project in a group of projects with the same attributes </span>
+ 
   <hr>
   <div class="row">
                   <%= simple_form_for @project do |f| %>
@@ -18,24 +18,24 @@
        
   </div> 
   <div class="col-md-6 col-sm-6">
-  <%=f.input :name, as: :text, input_html: {class: "input-lg", rows: 6 }, label: "Project Name", autofocus: true %>
+  <%=f.input :name, as: :text, input_html: {class: "input-lg", rows: 6 }, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
       <br>
   <div class="row"> 
   <div class="col-md-6 col-sm-6">
-  <%= f.input :id_number, label: "Contract ID:" %>
+  <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
 
   </div>
   <div class="col-md-6 col-sm-6">
-  <%=f.input :duration, label: "Duration (Number of Days)", as: :string %> 
-
+  <%=f.input :duration, label: "Duration (Number of Days)", as: :string, placeholder: "Contract Duration" %> 
+ 
 </div>
   </div>
-  <div class="row">
+  <div class="row"> 
    <div class="col-md-6 col-sm-6">
    <%= f.input :cost, label: "Contract Cost", as: :string, placeholder: "Contract Cost"%>
 </div>
  <div class="col-md-6 col-sm-6">
-<%=f.input :address, label: "Contract Location" %>
+<%=f.input :address, label: "Contract Location", placeholder: "Contract Location" %>
 </div>
 </div>  
 </div>
