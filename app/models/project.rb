@@ -4,7 +4,6 @@ class Project < ActiveRecord::Base
     enum classification:[:building, :road_concreting, :water_system, :bridge, :irrigation]
     has_one :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
-    belongs_to :account, :class_name => "Plutus::Account"
     has_many :expenses, as: :expensable
     has_many :bids
     has_many :billings
@@ -14,18 +13,23 @@ class Project < ActiveRecord::Base
     has_many :amount_revisions
     has_many :accomplishments
     has_many :remarks
-    after_create :add_to_accounts, :add_main_contractor_to_contractors
-    def slippage
-        percent_of_accomplishment - percent_actual_accomplished
+
+  def slippage
+    if notice_to_proceed.present?
+      (percent_of_accomplishment - percent_actual_accomplished).round(2)
+    else
+        0
+    end
+  end
+
+    def percent_of_accomplishment
+        self.accomplishments.sum(:percent)
     end
 
-    def final_cost
-        if no_amount_revisions?
-            cost 
-        else
-           latest_revised_amount
-        end
-    end
+    def percent_actual_accomplished
+       (days_elapsed / duration.to_f) * 100
+end
+
 
     def no_amount_revisions?
         amount_revisions.empty?
@@ -44,13 +48,9 @@ class Project < ActiveRecord::Base
     end
     
     def days_elapsed
-      ((notice_to_proceed.date.to_i - Time.zone.now.to_i)/86400).abs
+      ((Time.zone.now.to_i - notice_to_proceed.date.to_i)/86400)
     end
   
-
-    def date_of_notice_to_proceed
-        notice_to_proceed.date.to_date.strftime("%B %d, %Y")
-    end
 
     def expiry_date
         if notice_to_proceed.present?
@@ -62,16 +62,13 @@ class Project < ActiveRecord::Base
 
     def revised_expiry_date
      if notice_to_proceed.present? && time_extensions.present?
-        ((self.notice_to_proceed.date.to_date) + (self.duration) + ((total_number_of_days_extended)).days).strftime("%B %d, %Y") 
+        ((self.notice_to_proceed.date) + (self.duration) + ((total_number_of_days_extended)).days).strftime("%B %d, %Y") 
     else
         "No Time Revisions "
     end
     end
 
     private
-    def add_to_accounts
-      Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: self.cost, account: "Receivables"], credit_amounts_attributes:[amount: self.cost, account: "Trade Payable"])
-    end
     def add_main_contractor_to_contractors
       Contract.create(contractor_id: self.main_contractor.id, project_id: self.id )
     end

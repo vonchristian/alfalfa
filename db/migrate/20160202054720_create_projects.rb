@@ -6,9 +6,9 @@ class CreateProjects < ActiveRecord::Migration
       t.string  :name
       t.string  :address
       t.integer :status
-      t.datetime :start_date
-      t.datetime :target_completion_date
+     t.integer :duration
       t.decimal :cost
+      t.integer :classification
       t.timestamps null: false
     end
   end

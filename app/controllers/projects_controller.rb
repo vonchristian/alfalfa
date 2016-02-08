@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all.order('created_at DESC')
+    @projects =ProjectDecorator.decorate_collection(Project.all)
   end
   def search
   end

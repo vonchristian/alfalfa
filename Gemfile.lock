@@ -41,6 +41,7 @@ GEM
     autoprefixer-rails (6.3.1)
       execjs
       json
+    bcrypt (3.1.10)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -80,6 +81,13 @@ GEM
     colored (1.2)
     concurrent-ruby (1.0.0)
     database_cleaner (1.5.1)
+    devise (3.5.6)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     domain_name (0.5.20160128)
       unf (>= 0.0.5, < 1.0.0)
@@ -139,23 +147,39 @@ GEM
     mini_magick (4.3.6)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    mono_logger (1.1.0)
     multi_json (1.11.2)
     multipart-post (2.0.0)
     netrc (0.11.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    orm_adapter (0.5.0)
+    pdf-core (0.6.0)
     pg (0.18.4)
+    pg_search (1.0.5)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     plutus (0.12.2)
       jquery-rails (>= 3.0)
       jquery-ui-rails (>= 4.0)
       rails (~> 4.0)
+    prawn (2.0.2)
+      pdf-core (~> 0.6.0)
+      ttfunk (~> 1.4.0)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     public_activity (1.4.2)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     puma (2.16.0)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
+    rack-mini-profiler (0.9.8)
+      rack (>= 1.1.3)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -179,6 +203,9 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
     rails_best_practices (1.15.7)
       activesupport
       code_analyzer (>= 0.4.3)
@@ -188,13 +215,17 @@ GEM
       json
       require_all
       ruby-progressbar
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.4)
     railties (4.2.5.1)
       actionpack (= 4.2.5.1)
       activesupport (= 4.2.5.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.5.0)
-    rdoc (4.2.1)
+    redis (3.2.2)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     refile (0.6.2)
       mime-types
       rest-client (~> 1.8)
@@ -204,6 +235,19 @@ GEM
       refile (~> 0.5)
     request_store (1.3.0)
     require_all (1.3.3)
+    responders (2.1.1)
+      railties (>= 4.2.0, < 5.1)
+    resque (1.25.2)
+      mono_logger (~> 1.0)
+      multi_json (~> 1.0)
+      redis-namespace (~> 1.3)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
+    resque-scheduler (4.0.0)
+      mono_logger (~> 1.0)
+      redis (~> 3.0)
+      resque (~> 1.25)
+      rufus-scheduler (~> 3.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -231,6 +275,7 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.7.3)
       sexp_processor (~> 4.1)
+    rufus-scheduler (3.2.0)
     safe_yaml (1.0.4)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -239,9 +284,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sdoc (0.4.1)
-      json (~> 1.7, >= 1.7.7)
-      rdoc (~> 4.0)
     searchkick (1.2.0)
       activemodel
       elasticsearch (>= 1)
@@ -259,6 +301,8 @@ GEM
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
+    source-sans-pro-rails (0.6.1)
+      railties (>= 3.2, < 5.0)
     spring (1.6.3)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -274,8 +318,7 @@ GEM
     tilt (2.0.2)
     traceroute (0.5.0)
       rails (>= 3.0.0)
-    turbolinks (2.5.3)
-      coffee-rails
+    ttfunk (1.4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -285,6 +328,10 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     uniform_notifier (1.9.0)
+    vegas (0.1.11)
+      rack (>= 1.0.0)
+    warden (1.2.6)
+      rack (>= 1.0)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -292,39 +339,49 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   bootstrap-sass
   brakeman
   bullet
   byebug
   capybara
-  coffee-rails (~> 4.1.0)
+  coffee-rails
   database_cleaner
+  devise
   draper
   factory_girl_rails
   faker
   font-awesome-rails
   gretel
-  jbuilder (~> 2.0)
+  jbuilder
   jquery-rails
   jquery-ui-rails
-  pg (~> 0.15)
+  pg
+  pg_search
   plutus
+  prawn
+  prawn-table
   public_activity
   puma
+  pundit
+  rack-mini-profiler
   rails (= 4.2.5.1)
+  rails_12factor
   rails_best_practices
   refile
   refile-mini_magick
+  responders
+  resque
+  resque-scheduler
   rspec-rails
-  sass-rails (~> 5.0)
-  sdoc (~> 0.4.0)
+  sass-rails
   searchkick
   shoulda-matchers (~> 3.0)
   simple_form
+  source-sans-pro-rails
   spring
   traceroute
-  turbolinks
-  uglifier (>= 1.3.0)
+  uglifier
 
 BUNDLED WITH
    1.11.2

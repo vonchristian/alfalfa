@@ -7,6 +7,7 @@ body {
 .layout-boxed body {
   height: 100%;
 }
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -85,7 +86,7 @@ body {
 .content-wrapper,
 .right-side {
   min-height: 100%;
-  background-color: #F4F4F4;
+  background-color: #ECF0F5;
   z-index: 800;
 }
 .main-footer {
@@ -156,7 +157,7 @@ h6,
 }
 /* General Links */
 a {
-  color: #3c8dbc;
+  color: #3C8DBC;
 }
 a:hover,
 a:active,

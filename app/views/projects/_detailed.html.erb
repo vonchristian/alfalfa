@@ -1,0 +1,57 @@
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">List of Projects</h3>
+                  <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Project <%end%></span>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="example2" class="table table-bordered table-hover">
+<thead> 
+<tr>
+  <th>Contract ID</th>
+  <th>Project Name</th>
+  <th>Original Amount</th>
+  <th>Duration</th>
+  <th>Notice to Proceed</th>
+  <th>Expiry date</th>
+  <th>Time Extension/Suspension</th>
+  <th>Revised Contract Amount</th> 
+  <th>Additional Calendar Days</th>
+  <th>Revised Expiry Date</th>
+  <th>Slippage</th> 
+  <th>Remarks</th>
+</tr>
+
+
+
+
+</thead>
+<tbody>
+ <% @projects.each do |project| %>
+ <tr>
+ <td><%=project.id_number %></td>
+  <td><%=link_to project.name, project %></td>
+  <td><%=number_to_currency project.cost %></td>
+  <td><%=project.duration %> Days</td>
+  <td><% if project.notice_to_proceed.blank? %>
+        <%=link_to "Enter Date", new_project_notice_to_proceed_path(project) %>
+        <% else %>
+        <%=project.date_of_notice_to_proceed %>
+        <% end %></td>
+  <td><%=project.expiry_date %></td>
+  <td><%=project.total_number_of_days_extended %> Days</td>
+  <td><%= project.latest_revised_amount %></td>
+  <td><%= project.total_number_of_days_extended %> Days</td>
+  <td><%= project.revised_expiry_date %></td>
+  <td></td>
+  <td><%= project.remarks.count %></td>
+  </tr>
+  </tbody>
+  <% end %>
+</table>
+</div>
+</div>
+</div>
+</div>

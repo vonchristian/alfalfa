@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206065855) do
+ActiveRecord::Schema.define(version: 20160207152831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,15 +82,15 @@ ActiveRecord::Schema.define(version: 20160206065855) do
   add_index "billings", ["project_id"], name: "index_billings_on_project_id", using: :btree
 
   create_table "contractors", force: :cascade do |t|
-    t.boolean  "main_contractor"
+    t.boolean  "main_contractor",  default: false
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "company"
     t.string   "position"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
     t.string   "profile_image_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "contracts", force: :cascade do |t|
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20160206065855) do
   end
 
   create_table "notice_to_proceeds", force: :cascade do |t|
-    t.string   "date"
+    t.datetime "date"
     t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -198,11 +198,12 @@ ActiveRecord::Schema.define(version: 20160206065855) do
     t.string   "name"
     t.string   "address"
     t.integer  "status"
+    t.integer  "duration"
     t.decimal  "cost"
+    t.integer  "classification"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.integer  "classification"
-    t.integer  "duration"
+    t.string   "project_type_photo"
   end
 
   add_index "projects", ["main_contractor_id"], name: "index_projects_on_main_contractor_id", using: :btree

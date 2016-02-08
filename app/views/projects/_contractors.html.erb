@@ -1,18 +1,22 @@
 <div class="tab-pane" id="contractors">
   <%=link_to new_project_contract_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Subcontractor <%end%>
-
-
-
 <hr>
-<h4 class="widget-user-username">Contractors </h4>
-<% @project.contractors.each do |contractor|%>
-<h4><%=contractor.company %>
-  <%if contractor.main_contractor? %>
-  <h5>Main Contractor</h5>
-  <% end %>
-  <hr></h4>
-
-<% end %>
-
-
+<div class="row">
+ <% @project.contractors.each do |contractor| %>
+             <div class="row">
+            <div class="col-md-1 col-md-offset-1  col-sm-3 col-xs-3">
+            <%= image_tag attachment_url(contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
+            </div>
+            <div class="col-md-7 col-sm-9 col-xs-9">
+            <h4><%= link_to contractor.full_name.upcase, contractor %></h4>
+            <% if contractor.main_contractor? %>
+            <span class="pull-right text-sucess"> MAIN </span>
+            <% end %>
+            <span class="help-block"><%=contractor.company %></span>
+            </div>
+            </div>
+           <hr />
+            <% end %>
+            </div>
 </div><!-- /.tab-pane -->
+ 

@@ -1,58 +1,121 @@
 <% breadcrumb :projects, @projects %>
 
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">List of Projects</h3>
-                  <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Project <%end%></span>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example2" class="table table-bordered table-hover">
-<thead> 
-<tr>
-  <th>Contract ID</th>
-  <th>Project Name</th>
-  <th>Original Amount</th>
-  <th>Duration</th>
-  <th>Notice to Proceed</th>
-  <th>Expiry date</th>
-  <th>Time Extension/Suspension</th>
-  <th>Revised Contract Amount</th> 
-  <th>Additional Calendar Days</th>
-  <th>Revised Expiry Date</th>
-  <th>Slippage</th> 
-  <th>Remarks</th>
-</tr>
+<div class="row">
+      <div class="col-md-3 col-sm-4">
+                      <div class="pad box-pane-right bg-light-blue" style="min-height: 780px">
+                     
+                        <h4 class="widget-user-username">Current Projects</h4>
+                        
+                        <hr>
+                           <p><i class="fa fa-th margin-5"></i> <span >New Projects</span> <small class="label pull-right bg-green">4</small></p>
+                          
+                           <p><i class="fa fa-th margin-5"></i> <span >Finished Projects</span> <small class="label pull-right bg-green">45</small></p>
+                           <p><i class="fa fa-th margin-5"></i> <span>On-going Projects</span> <small class="label pull-right bg-yellow">5</small></p>
+                           <i class="fa fa-th margin-5"></i> <span>Slippage Projects</span> <small class="label pull-right bg-red">0</small>
+                           <hr>
+                        <h4 class="info-box-text">On Going Projects</h4>
+                         <div class="progress-group">
+                        <span class="progress-text">Tinoc Road Opening and Conreting at KM100+ and Graveling ant dsda </span>
+                        <span class="progress-number"><b>160</b>/200</span>
+                        <div class="progress sm">
+                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                        </div>
+                      </div><!-- /.progress-group -->
+                      <div class="progress-group">
+                        <span class="progress-text">Tinoc Road Openig</span>
+                        <span class="progress-number"><b>160</b>/200</span>
+                        <div class="progress sm">
+                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                        </div>
+                      </div><!-- /.progress-group -->
+                      <div class="progress-group">
+                        <span class="progress-text">Tinoc Road Openig</span>
+                        <span class="progress-number"><b>160</b>/200</span>
+                        <div class="progress sm">
+                          <div class="progress-bar progress-bar-aqua" style="width: 50%"></div>
+                        </div>
+                      </div><!-- /.progress-group -->
+                      <div class="progress-group">
+                        <span class="progress-text">Tinoc Road Openig</span>
+                        <span class="progress-number"><b>160</b>/200</span>
+                        <div class="progress sm">
+                          <div class="progress-bar progress-bar-aqua" style="width: 60%"></div>
+                        </div>
+                      </div><!-- /.progress-group -->
+                      <div class="progress-group">
+                        <span class="progress-text">Tinoc Road Openig</span>
+                        <span class="progress-number"><b>160</b>/200</span>
+                        <div class="progress sm">
+                          <div class="progress-bar progress-bar-yellow" style="width: 20%"></div>
+                        </div>
+                      </div><!-- /.progress-group -->
+                      <br>
+                      <h4 class="info-box-text">Projects with Slippages</h4> 
+                       <div class="progress-group">
+                        <span class="progress-text">Tinoc Road Opening</span>
+                        <span class="progress-number"><b>160</b>/200</span>
+                        <div class="progress sm">
+                          <div class="progress-bar progress-bar-red" style="width: 10%"></div>
+                        </div>
+                      </div><!-- /.progress-group -->
+                      </div>
+                    </div><!-- /.col -->
+                  
+            <!-- Left col -->
+           <div class="col-md-9">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+   <div class="widget-user-header bg-white-active">
+      <h4 class="widget-user-username">List of Projects
+      <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-road"></i> New project <%end%></span>
+    </h4>
+    </div> 
+    <div class="box-footer">
+                
+                
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                  
+                      <% @projects.each do |project| %>
+             <div class="row">
+           <div class="col-md-1">
+           <h4 class="text-<%=project.slippage_color %> text-center"><i class="fa fa-caret-<%=project.slippage_sign %>"></i> <%=project.slippage%>%</h4>
+           </div> 
+            <div class="col-md-6 col-sm-6 col-xs-6">
+            <h4><%#=project.id_number %> <%= link_to truncate(project.name.upcase, length: 50), project %>
+             
+            </h4> 
+            <span class="help-block"><i class="fa fa-map-marker text-success"></i> <%=project.address %>
+           <i class="fa fa-calendar-o text-primary"></i> <%=project.duration %> days 
 
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6">
+            <% if project.amount_revisions.present? %>
+            <p class="text-danger"><strike><%=number_to_currency project.cost %> </strike></p>
+            <p class="text-success"><%=number_to_currency project.final_cost %></p>
+            <% else %>
+            <p class="text-success"><%=number_to_currency project.cost %> </p>
+            <% end %>
+          
+            
+            </div> 
+            <div class="col-md-3">
+            <% project.contractors.each do |contractor| %>
+                  <span class="text-muted">
+                  <%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
+            <%#=contractor.company.upcase %>
+            </span>
+            <% end %>
+            </div>
 
-
-
-</thead>
-<tbody>
- <% @projects.each do |project| %>
- <tr>
- <td><%=project.id_number %></td>
-  <td><%=link_to project.name, project %></td>
-  <td><%=number_to_currency project.cost %></td>
-  <td><%=project.duration %> Days</td>
-  <td><% if project.notice_to_proceed.blank? %>
-        <%=link_to "Enter Date", new_project_notice_to_proceed_path(project) %>
-        <% else %>
-        <%=project.date_of_notice_to_proceed %>
-        <% end %></td>
-  <td><%=project.expiry_date %></td>
-  <td><%=project.total_number_of_days_extended %> Days</td>
-  <td><%= project.latest_revised_amount %></td>
-  <td><%= project.total_number_of_days_extended %> Days</td>
-  <td><%= project.revised_expiry_date %></td>
-  <td></td>
-  <td><%= project.remarks.count %></td>
-  </tr>
-  </tbody>
-  <% end %>
-</table>
-</div>
-</div>
-</div>
-</div>
+            </div>
+           <hr />
+            <% end %>
+                      </div>
+                    </div><!-- /.col -->
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+              
