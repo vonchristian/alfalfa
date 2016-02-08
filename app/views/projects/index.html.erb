@@ -2,7 +2,7 @@
 
 <div class="row">
       <div class="col-md-3 col-sm-4">
-                      <div class="pad box-pane-right bg-light-blue" style="min-height: 780px">
+                      <div class="pad box-pane-right bg-blue-active" style="min-height: 780px">
                      
                         <h4 class="widget-user-username">Current Projects</h4>
                         
@@ -18,14 +18,14 @@
                         <span class="progress-text">Tinoc Road Opening and Conreting at KM100+ and Graveling ant dsda </span>
                         <span class="progress-number"><b>160</b>/200</span>
                         <div class="progress sm">
-                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                          <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
                         </div>
                       </div><!-- /.progress-group -->
                       <div class="progress-group">
                         <span class="progress-text">Tinoc Road Openig</span>
                         <span class="progress-number"><b>160</b>/200</span>
                         <div class="progress sm">
-                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                          <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
                         </div>
                       </div><!-- /.progress-group -->
                       <div class="progress-group">
@@ -60,21 +60,23 @@
                       </div><!-- /.progress-group -->
                       </div>
                    </div><!-- /.col -->
-                   
+                    
             <!-- Left col -->
            <div class="col-md-9">
   <!-- Widget: user widget style 1 -->
   <div class="box box-widget widget-user">
    <div class="widget-user-header bg-white-active">
       <h4 class="widget-user-username">List of Projects
-        <span class="pull-right"><%=link_to detailed_projects_path, class: "btn btn-default" do %><i class="fa fa-th"></i><%end%></span>
-            </h4>
+       <span class="pull-right"><%=link_to detailed_projects_path, class: "btn btn-default" do %><i class="fa fa-th"></i><%end%></span>
+      
+        <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-road"></i> New project <%end%></span>
+               
+             </h4>
     </div> 
     <div class="box-footer">
-                 <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-road"></i> New project <%end%></span>
                 
                   <div class="row">
-                    <div class="col-md-12 col-sm-12">
+                     <div class="col-md-12 col-sm-12">
                   
                       <% @projects.each do |project| %>
              <div class="row">
@@ -85,8 +87,11 @@
             <h4><%#=project.id_number %> <%= link_to truncate(project.name.upcase, length: 50), project %>
              
             </h4> 
-            <span class="help-block"><i class="fa fa-map-marker text-success"></i> <%=project.address %>
-           <i class="fa fa-calendar-o text-primary"></i> <%=project.duration %> days 
+            <span class="help-block"><i class="fa fa-map-marker"></i> <%=project.address %>
+           <i class="fa fa-calendar"></i> <%=project.duration %> days 
+            (<%=project.ntp %> to
+             <%=project.expiry_date %>)
+           </span>
 
             </div>
             <div class="col-md-2 col-sm-6 col-xs-6">
@@ -99,7 +104,7 @@
           
             
             </div> 
-            <div class="col-md-3">
+            <div class="col-md-2">
             <% project.contractors.each do |contractor| %>
                   <span class="text-muted">
                   <%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
@@ -107,7 +112,10 @@
             </span>
             <% end %>
             </div>
-
+            <div class="col-md-1">
+            <%=project.days_elapsed_divided_by_project_duration%>
+          
+            </div>
             </div>
            <hr />
             <% end %>

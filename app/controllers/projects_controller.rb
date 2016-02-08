@@ -13,11 +13,11 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create(project_params)
-    if @project.save
-      redirect_to @project, notice: "Project successfully created"
-    else
-      render :new
-    end
+    if  @project.save
+    redirect_to @project, notice: "Project successfully saved."
+  else 
+    render :new 
+  end
   end
 
   def show
@@ -26,6 +26,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :classification)
+    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :category_id)
   end
 end

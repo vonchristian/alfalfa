@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require refile
+//= require bootstrap-slider
 //= require_tree .

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207152831) do
+ActiveRecord::Schema.define(version: 20160208023719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,13 @@ ActiveRecord::Schema.define(version: 20160207152831) do
   add_index "billings", ["contractor_id"], name: "index_billings_on_contractor_id", using: :btree
   add_index "billings", ["inventory_id"], name: "index_billings_on_inventory_id", using: :btree
   add_index "billings", ["project_id"], name: "index_billings_on_project_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "contractors", force: :cascade do |t|
     t.boolean  "main_contractor",  default: false
@@ -197,15 +204,15 @@ ActiveRecord::Schema.define(version: 20160207152831) do
     t.string   "id_number"
     t.string   "name"
     t.string   "address"
-    t.integer  "status"
+    t.string   "status"
     t.integer  "duration"
     t.decimal  "cost"
-    t.integer  "classification"
+    t.integer  "category_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.string   "project_type_photo"
   end
 
+  add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
   add_index "projects", ["main_contractor_id"], name: "index_projects_on_main_contractor_id", using: :btree
 
   create_table "remarks", force: :cascade do |t|

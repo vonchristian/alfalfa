@@ -1,49 +1,73 @@
 <div class="row">
-<div class="col-md-8 col-md-offset-1">
-  <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
-      <h3 class="widget-user-username">New Project</h3>
-    </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-                  <%= simple_form_for @project, html: { class: 'form-horizontal' },
-                            wrapper: :horizontal_form,
-                            wrapper_mappings: {
-                            check_boxes: :vertical_radio_and_checkboxes,
-                            radio_buttons: :vertical_radio_and_checkboxes,
-                            file: :horizontal_file_input,
-                            boolean: :horizontal_boolean
-                            } do |f| %>
+<div class="col-md-8 col-md-offset-2">
+  <div class="box box-solid">
+  <div class="box-body">
+  <br>
+  <h3 class="text-center">New Project Details</h3>
+  <span class="help-block text-center">We se this info to put the project in a group of projects with the same attributes </span>
+  <hr>
+  <div class="row">
+                  <%= simple_form_for @project do |f| %>
 <%=f.error_notification %>
-<div class="row">
-  <div class="col-md-5">
+
+  <div class="col-md-4 col-sm-6">
+  <br> 
+  <h4 class="text-muted text-center">
+  Project Information
+  </h4>
+       
+  </div> 
+  <div class="col-md-6 col-sm-6">
+  <%=f.input :name, as: :text, input_html: {class: "input-lg", rows: 6 }, label: "Project Name", autofocus: true %>
+      <br>
+  <div class="row"> 
+  <div class="col-md-6 col-sm-6">
+  <%= f.input :id_number, label: "Contract ID:" %>
+
   </div>
-  <div class="col-md-6">
-    <h5>Main Contractor </h5> 
-    <%=f.input :main_contractor_id, collection: Contractor.main_contractors %>
-    <hr>
-    <h5>Details</h5>
-    <hr>
-<%= f.input :id_number, label: "Contract ID" %>
-<%=f.input :name, as: :text %>
-<%=f.input :cost %>
-<%=f.input :address %>
-<h5>Duration</h5>
+  <div class="col-md-6 col-sm-6">
+  <%=f.input :duration, label: "Duration (Number of Days)", as: :string %> 
+
+</div>
+  </div>
+  <div class="row">
+   <div class="col-md-6 col-sm-6">
+   <%= f.input :cost, label: "Contract Cost", as: :string, placeholder: "Contract Cost"%>
+</div>
+ <div class="col-md-6 col-sm-6">
+<%=f.input :address, label: "Contract Location" %>
+</div>
+</div>  
+</div>
+</div>
 <hr>
-<%=f.input :duration %>
-<%=f.input :classification, collection:   Project.classifications.keys.to_a.map{ |a| [a.titleize, a] } %>
-
-
-<div class="modal-footer">
-<%=f.submit "Save", class: "btn btn-primary" %>
+<div class="row">
+<div class="col-md-4 col-sm-6">
+<h4 class="text-muted text-center">Category
+</h4>
+</div>
+<div class="col-md-8 col-sm-6">
+<%=f.input :category_id,
+   collection: Category.all.map { |a| [a.name.titleize , a.id] }, as: :radio_buttons, label: false %>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-md-4 col-sm-6">
+<h4 class="text-muted text-center">Main Contractor
+</h4>
+</div>
+<div class="col-md-8">
+<%=f.association :main_contractor, collection: Contractor.main_contractors.map { |a| [a.company.titleize , a.id] }, as: :radio_buttons, label: false %>
+</div>
+</div>
+</div>
+<div class="modal-footer">  
+<%=f.submit "Save Continue", class: "btn btn-primary" %>
 </div>
 <% end %>
 </div>
-<div class="col-md-2">
-</div>
+
 </div>
  
+</div>

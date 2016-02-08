@@ -1,9 +1,12 @@
 class Project < ActiveRecord::Base
+
     include PublicActivity::Model
     tracked
-    enum classification:[:building, :road_concreting, :water_system, :bridge, :irrigation]
+
     has_one :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
+    belongs_to :category
+
     has_many :expenses, as: :expensable
     has_many :bids
     has_many :billings
@@ -13,9 +16,9 @@ class Project < ActiveRecord::Base
     has_many :amount_revisions
     has_many :accomplishments
     has_many :remarks
-
+    before_save :add_main_contractor_to_contractors
   def slippage
-    if notice_to_proceed.present?
+    if notice_to_proceed.present? && accomplishments.present?
       (percent_of_accomplishment - percent_actual_accomplished).round(2)
     else
         0
@@ -23,7 +26,11 @@ class Project < ActiveRecord::Base
   end
 
     def percent_of_accomplishment
+      if self.accomplishments.present?
         self.accomplishments.sum(:percent)
+      else
+        0
+      end
     end
 
     def percent_actual_accomplished
@@ -43,18 +50,30 @@ end
     end
     end
 
+    def start_date
+      if notice_to_proceed
+      notice_to_proceed.date
+    else
+      "NTP Not Yet Awarded"
+    end
+    end
+
     def total_number_of_days_extended
         self.time_extensions.sum(:number_of_days)
     end
     
     def days_elapsed
-      ((Time.zone.now.to_i - notice_to_proceed.date.to_i)/86400)
+      ((Time.zone.now.to_i - start_date.to_i)/86400).floor
+    end
+
+    def remaining_days_before_expiry
+      Time.zone.now..(self.expiry_date)
     end
   
 
     def expiry_date
         if notice_to_proceed.present?
-        ((self.notice_to_proceed.date.to_date) + (self.duration)).strftime("%B %d, %Y") 
+        ((self.notice_to_proceed.date.to_date) + (self.duration))
     else
         "NTP not yet awarded"
     end

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 gem 'rails', '4.2.5.1'
-gem 'source-sans-pro-rails'
+gem 'font-kit-rails', '~> 1.2.0'
 gem "gretel"
 gem 'draper'
 gem 'searchkick'
@@ -28,6 +28,8 @@ gem 'plutus'
   gem 'jquery-rails'
   gem 'jbuilder'
   gem 'responders'
+  gem 'wicked'
+  gem 'bootstrap-slider-rails'
  
 group :production do
   gem 'pg',  group: :development

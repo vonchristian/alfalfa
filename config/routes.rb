@@ -35,8 +35,9 @@ resources :incomes
   resources :assets
 end
   resources :projects do
-    match :detailed, via: [:get], on: :collection
  
+    match :detailed, via: [:get], on: :collection
+    
     resource :notice_to_proceed
     resources :time_extensions
     resources :amount_revisions

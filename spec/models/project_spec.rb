@@ -7,6 +7,8 @@ RSpec.describe Project, type: :model do
   describe "associations" do 
     it {is_expected.to have_one :notice_to_proceed }
     it {is_expected.to belong_to :main_contractor }
+    it {is_expected.to belong_to :category }
+
     it {is_expected.to have_many :expenses }
     it {is_expected.to have_many :bids }
     it {is_expected.to have_many :billings }
@@ -18,8 +20,11 @@ RSpec.describe Project, type: :model do
     it {is_expected.to have_many :remarks }
   end
   describe "slippage" do
+    before(:each) do 
+      
+    end
     it "returns zero if notice to proceed is not yet awarded" do 
-      project = create(:project, notice_to_proceed: nil)
+      project = create(:project, notice_to_proceed: nil )
 
       expect(project.slippage).to eql(0)
     end
@@ -59,19 +64,39 @@ RSpec.describe Project, type: :model do
       expect(project.days_elapsed).to eql(0)
     end
 
-     it "returns 10 days if notice to proceed is awarded 10 days from now" do 
+     it "returns -10 days if notice to proceed is awarded 10 days from now" do 
       project = create(:project, duration: 60, created_at: Time.zone.now )
       notice_to_proceed = create(:notice_to_proceed, date: (Time.zone.now + 10.days ), project: project)
 
       expect(project.days_elapsed).to eql(-10)
     end
 
-    it "returns  -10 days if notice to proceed is awarded 10 days ago" do 
+    it "returns  -1 day if notice to proceed is awarded 1 days from now" do 
       project = create(:project, duration: 60, created_at: Time.zone.now )
-      notice_to_proceed = create(:notice_to_proceed, date: (Time.zone.now - 10.days ), project: project)
+      notice_to_proceed = create(:notice_to_proceed, date: (Time.zone.now  + 1.days ), project: project)
 
-      expect(project.days_elapsed).to eql(10)
+      expect(project.days_elapsed).to eql(-1)
     end
   end
+
+  describe "expiry date" do 
+    it "the date is equal to the date NTP is awarded plus duration of the project" do
+      project = create(:project, duration: 60, created_at: Time.zone.now.beginning_of_year)
+      notice_to_proceed = create(:notice_to_proceed, date: (Time.zone.now.beginning_of_year + 15.days), project: project)
+
+      expect(project.expiry_date.to_date).to eql((notice_to_proceed.date + 60.days).to_date)
+    end
+  end
+
+  describe "percent of accomplishment" do 
+    it "is zero if no accomplishment is given" do 
+      project = create(:project)
+
+      expect(project.percent_of_accomplishment).to be(0)
+    end
+
+    it "is positive if days percent of accomplishment" 
+
+   end
 end
 

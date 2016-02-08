@@ -8,7 +8,8 @@ class CreateProjects < ActiveRecord::Migration
       t.integer :status
      t.integer :duration
       t.decimal :cost
-      t.integer :classification
+      t.integer :category_id, :index => true
+      t.string :status
       t.timestamps null: false
     end
   end
