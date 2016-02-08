@@ -1,13 +1,6 @@
 class ProjectDecorator < Draper::Decorator
   delegate_all
-  def days_elapsed_divided_by_project_duration
-    if notice_to_proceed
-      "#{project.days_elapsed} / #{project.duration}"
-    else
-      "No NTP"
-    end
-  end
-
+  
   def notice_to_proceed_link(project)
     if project.notice_to_proceed.blank?
       link_to 'Enter NTP Date', new_project_notice_to_proceed_path(project)

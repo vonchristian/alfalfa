@@ -77,6 +77,15 @@ RSpec.describe Project, type: :model do
 
       expect(project.days_elapsed).to eql(-1)
     end
+
+    it "returns  10 days if notice to proceed is awarded 10 days ago" do 
+      project = create(:project, duration: 60, created_at: Time.zone.now )
+      notice_to_proceed = create(:notice_to_proceed, date: (Time.zone.now), project: project)
+     
+        travel_to(10.day.from_now) do
+      expect(project.days_elapsed).to eql(10)
+    end
+    end
   end
 
   describe "expiry date" do 

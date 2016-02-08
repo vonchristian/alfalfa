@@ -21,6 +21,7 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include RSpec::Rails::RequestExampleGroup, type: :feature
   config.include FactoryGirl::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

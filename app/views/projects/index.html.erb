@@ -101,19 +101,31 @@
             <% else %>
             <p class="text-success"><%=number_to_currency project.cost %> </p>
             <% end %>
-          
+           
             
             </div> 
             <div class="col-md-2">
             <% project.contractors.each do |contractor| %>
                   <span class="text-muted">
-                  <%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
+                   <%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
             <%#=contractor.company.upcase %>
-            </span>
+            </span> 
             <% end %>
             </div>
             <div class="col-md-1">
-            <%=project.days_elapsed_divided_by_project_duration%>
+            
+            <div class="btn-group">
+  <button type="button" class="btn btn-default btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   <span class="fa fa-ellipsis-v"></span>
+  </button>
+  <ul class="dropdown-menu pull-right">
+    <li><a href="#"><i class="fa fa-rub"></i> New Expense</a></li>
+    <li><a href="#">Add Subcontractors</a></li>
+    <li><a href="#">New Material </a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Update Accomplishment</a></li>
+  </ul>
+</div>
           
             </div>
             </div>
