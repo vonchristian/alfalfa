@@ -2,6 +2,9 @@ class ProjectsController < ApplicationController
   def index
     @projects =ProjectDecorator.decorate_collection(Project.all)
   end
+  def detailed
+   @projects =ProjectDecorator.decorate_collection(Project.all)
+  end
   def search
   end
   def new

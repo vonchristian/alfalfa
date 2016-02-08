@@ -4,6 +4,7 @@
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">List of Projects</h3>
+                   <span class="pull-right"><%=link_to projects_path, class: "btn btn-default" do %><i class="fa fa-ellipsis-v"></i><%end%></span>
                   <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Project <%end%></span>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -38,7 +39,7 @@
   <td><% if project.notice_to_proceed.blank? %>
         <%=link_to "Enter Date", new_project_notice_to_proceed_path(project) %>
         <% else %>
-        <%=project.date_of_notice_to_proceed %>
+        <%=project.notice_to_proceed %>
         <% end %></td>
   <td><%=project.expiry_date %></td>
   <td><%=project.total_number_of_days_extended %> Days</td>
