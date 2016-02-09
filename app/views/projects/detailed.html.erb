@@ -8,11 +8,12 @@
                   <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Project <%end%></span>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example2" class="table table-bordered table-hover">
+                <div class="table table-responsive">
+                  <table class="table  table-hover">
 <thead> 
 <tr>
   <th>Contract ID</th>
-  <th>Project Name</th>
+  <th style="width: 30%">Project Name</th>
   <th>Original Amount</th>
   <th>Duration</th>
   <th>Notice to Proceed</th>
@@ -52,6 +53,7 @@
   </tbody>
   <% end %>
 </table>
+</div>
 </div>
 </div>
 </div>

@@ -79,7 +79,11 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: alfalfa_production
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: alfalfa_construction_production
+  host: localhost
   username: alfalfa
-  password: <%= ENV['ALFALFA_DATABASE_PASSWORD'] %>
+  password: alfalfa_production
+
