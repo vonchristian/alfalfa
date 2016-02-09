@@ -27,16 +27,21 @@
 <h4>Credit Account:</h4>
 <%=f.simple_fields_for :credit_amounts do |d| %>
 <%=d.input :amount %>
-
-<%=d.input :account %>
-
+<div class="row">
+<div class="col-md-4 col-md-offset-4">
+<%=d.input :account, collection: Plutus::Asset.all.pluck(:name), as: :radio_buttons, label: false %>
+ 
+</div>
+</div> 
 <% end %>
 <h4>Debit Account:</h4>
 <%=f.simple_fields_for :debit_amounts do |c| %>
 <%=c.input :amount%>
-
-<%=c.input :account, collection: Plutus::Expense.all.pluck(:name), as: :radio_buttons %>
-
+<div class="row">
+<div class="col-md-4 col-md-offset-4">
+<%=c.input :account, collection: Plutus::Expense.all.pluck(:name), as: :radio_buttons, label: false %>
+</div>
+</div>
 <% end %>
 </div>
 </div>
