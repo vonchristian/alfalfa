@@ -3,9 +3,9 @@
   <!-- Widget: user widget style 1 -->
   <div class="box box-widget widget-user">
     <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
+    <div class="widget-user-header bg-red-active">
       <h4 class="widget-user-username">Transactions
-      <span class="pull-right"><%=link_to new_entry_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> New Transaction <%end%></span>
+      <span class="pull-right"><%=link_to new_entry_path, class: "btn btn-default bg-red-active pull-right" do %><i class="fa fa-plus-circle"></i> New Expense <%end%></span>
     </h4>
     </div>
     <div class="box-footer">
@@ -28,6 +28,7 @@
             </div>
             <div class="col-md-7 col-sm-9 col-xs-9">
             <h5><%= entry.description%>
+            <span class="help-block"><%=entry.debit_amounts.last.account.name %></span>
             </div>
             <div class="col-md-2">
             <span class="pull-right"><%=number_to_currency entry.debit_amounts.last.amount %> </span>

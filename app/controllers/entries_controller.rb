@@ -16,15 +16,7 @@ class EntriesController < ApplicationController
       render :new
     end
   end
-  def income_statement
-      @from_date = params[:from_date] ? Date.parse(params[:from_date]) : Date.today.at_beginning_of_month
-      @to_date = params[:to_date] ? Date.parse(params[:to_date]) : Date.today
-      @revenues = Plutus::Entry.all
-
-      respond_to do |format|
-        format.html # index.html.erb
-      end
-    end
+  
   def show
     @entry = Plutus::Entry.find(params[:id])
   end
