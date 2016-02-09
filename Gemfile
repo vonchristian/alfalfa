@@ -29,7 +29,6 @@ gem 'plutus'
   gem 'jbuilder'
   gem 'responders'
   gem 'wicked'
-  gem 'bootstrap-slider-rails'
  
 group :production do
   gem 'pg',  group: :development

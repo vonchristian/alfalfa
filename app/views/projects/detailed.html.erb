@@ -9,51 +9,39 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                 <div class="table table-responsive">
-                  <table class="table  table-hover">
-<thead> 
+                  <table class="table table-striped">
+<thead>  
 <tr>
-  <th>Contract ID</th>
-  <th style="width: 30%">Project Name</th>
-  <th>Original Amount</th>
-  <th>Duration</th>
-  <th>Notice to Proceed</th>
-  <th>Expiry date</th>
-  <th>Time Extension/Suspension</th>
-  <th>Revised Contract Amount</th> 
-  <th>Additional Calendar Days</th>
-  <th>Revised Expiry Date</th>
-  <th>Slippage</th> 
-  <th>Remarks</th>
+  <th>ID</th>
+  <th style="width: 20%" class="text-uppercase">Project Name</th>
+  <th style="width: 10%" class="text-uppercase">Amount</th>
+  <th style="width: 20%" class="text-uppercase">Contractors</th>
+  <th style="width: 10%" class="text-uppercase">Duration</th>
+  <th style="width: 10%" class="text-uppercase">NPT Date Awarded</th>
+  <th style="width: 10%" class="text-uppercase">Time Extension/Suspension</th>
+  <th style="width: 10%" class="text-uppercase">Slippage</th> 
+  <th style="width: 10%" class="text-uppercase">Remarks</th>
 </tr>
-
-
-
-
 </thead>
-<tbody>
- <% @projects.each do |project| %>
+<tbody> 
+ <% @projects.each do |project| %> 
  <tr>
  <td><%=project.id_number %></td>
-  <td><%=link_to project.name, project %></td>
+  <td><%=link_to project.name.upcase, project %></td>
   <td><%=number_to_currency project.cost %></td>
+  <td><% project.contractors.each do |contractor| %>
+           <p><%=contractor.company.upcase %></p>
+           <% end %>
+  </td>
   <td><%=project.duration %> Days</td>
-  <td><% if project.notice_to_proceed.blank? %>
-        <%=link_to "Enter Date", new_project_notice_to_proceed_path(project) %>
-        <% else %>
-        <%=project.notice_to_proceed %>
-        <% end %></td>
-  <td><%=project.expiry_date %></td>
-  <td><%=project.total_number_of_days_extended %> Days</td>
-  <td><%= project.latest_revised_amount %></td>
-  <td><%= project.total_number_of_days_extended %> Days</td>
-  <td><%= project.revised_expiry_date %></td>
-  <td></td>
+ <td><%= project.ntp %></td>
+ <td></td>
+  <td class="text-<%=project.slippage_color %> text-center"><i class="fa fa-caret-<%=project.slippage_sign %>"></i> <%=project.slippage%> %</td>
   <td><%= project.remarks.count %></td>
   </tr>
   </tbody>
   <% end %>
 </table>
-</div>
 </div>
 </div>
 </div>
