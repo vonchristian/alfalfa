@@ -24,19 +24,18 @@
   </div> 
   <div class="col-md-9">
 <%=f.input :description, as: :text %>
-<h4>Credit Account:</h4>
 <%=f.simple_fields_for :credit_amounts do |d| %>
 <%=d.input :amount %>
 <div class="row">
 <div class="col-md-4 col-md-offset-4">
-<%=d.input :account, collection: Plutus::Asset.all.pluck(:name), as: :radio_buttons, label: false %>
+<%=d.input :account, collection: Plutus::Asset.all.pluck(:name), as: :radio_buttons, label: false, checked: "Cash", input_html: {value: "Cash"}, as: :hidden %>
  
 </div>
 </div> 
 <% end %>
-<h4>Debit Account:</h4>
+<h4>Expense Account:</h4>
 <%=f.simple_fields_for :debit_amounts do |c| %>
-<%=c.input :amount,  disabled: true%>
+<%=c.input :amount,  read_only: true, as: :hidden %> 
 <div class="row">
 <div class="col-md-4 col-md-offset-4">
 <%=c.input :account, collection: Plutus::Expense.all.pluck(:name), as: :radio_buttons, label: false %>
