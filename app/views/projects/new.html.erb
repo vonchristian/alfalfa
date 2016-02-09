@@ -1,19 +1,22 @@
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
-  <div class="box box-solid">
-  <div class="box-body">
-  <br>
-  <h3 class="text-center">New Project Details</h3>
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-blue-active">
+      <h4 class="widget-user-username">New Project</h4>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        
  
-  <hr>
-  <div class="row">
                   <%= simple_form_for @project do |f| %>
 <%=f.error_notification %>
 
   <div class="col-md-4 col-sm-6">
   <br> 
-  <h4 class="text-muted text-center">
-  Project Information
+  <h4 class="text-muted">
+  <i class="fa fa-suitcase text-muted"></i> Project Information
   </h4>
        
   </div> 
@@ -22,20 +25,20 @@
       <br>
   <div class="row"> 
   <div class="col-md-6 col-sm-6">
-  <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
+  <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID", input_html: {class: "input-lg"}%>
 
   </div>
   <div class="col-md-6 col-sm-6">
-  <%=f.input :duration, label: "Duration (Number of Days)", as: :string, placeholder: "Contract Duration" %> 
+  <%=f.input :duration, label: "Duration (Number of Days)", input_html: {class: "input-lg"}, as: :string, placeholder: "Contract Duration" %> 
  
 </div>
   </div>
   <div class="row"> 
    <div class="col-md-6 col-sm-6">
-   <%= f.input :cost, label: "Contract Cost", as: :string, placeholder: "Contract Cost"%>
+   <%= f.input :cost, label: "Contract Cost", input_html: {class: "input-lg"}, as: :string, placeholder: "Contract Cost"%>
 </div>
  <div class="col-md-6 col-sm-6">
-<%=f.input :address, label: "Contract Location", placeholder: "Contract Location" %>
+<%=f.input :address, label: "Contract Location",input_html: {class: "input-lg"}, placeholder: "Contract Location" %>
 </div>
 </div>  
 </div>
@@ -43,7 +46,7 @@
 <hr>
 <div class="row">
 <div class="col-md-4 col-sm-6">
-<h4 class="text-muted text-center">Category
+<h4 class="text-muted"><i class="fa fa-road text-muted"></i> Category
 </h4>
 </div>
 <div class="col-md-8 col-sm-6">
@@ -54,7 +57,7 @@
 <hr>
 <div class="row">
 <div class="col-md-4 col-sm-6">
-<h4 class="text-muted text-center">Main Contractor
+<h4 class="text-muted"><i class="fa fa-user text-muted"></i>  Main Contractor
 </h4>
 </div>
 <div class="col-md-8">
