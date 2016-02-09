@@ -36,7 +36,7 @@
 <% end %>
 <h4>Debit Account:</h4>
 <%=f.simple_fields_for :debit_amounts do |c| %>
-<%=c.input :amount%>
+<%=c.input :amount,  disabled: true%>
 <div class="row">
 <div class="col-md-4 col-md-offset-4">
 <%=c.input :account, collection: Plutus::Expense.all.pluck(:name), as: :radio_buttons, label: false %>
