@@ -45,8 +45,6 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    bootstrap-slider-rails (6.0.17)
-      railties (>= 3.2, < 5.0)
     brakeman (3.1.5)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
@@ -345,7 +343,6 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass
-  bootstrap-slider-rails
   brakeman
   bullet
   byebug
