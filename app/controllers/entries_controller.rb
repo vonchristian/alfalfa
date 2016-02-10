@@ -11,7 +11,7 @@ class EntriesController < ApplicationController
   def create
     @entry = Plutus::Entry.new(entry_params)
     if @entry.save
-      redirect_to entries_path, notice: "Success Success Success"
+      redirect_to entries_path, notice: "Expense Recorded successfully"
     else
       render :new
     end
