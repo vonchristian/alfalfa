@@ -21,24 +21,17 @@
   <div class="col-md-6 col-sm-6">
   <%=f.input :name, as: :text, input_html: {rows: 6 }, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
       <br>
-  <div class="row"> 
-  <div class="col-md-6 col-sm-6">
+  
   <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
 
-  </div>
-  <div class="col-md-6 col-sm-6">
+ 
   <%=f.input :duration, label: "Duration (Number of Days)", as: :string, placeholder: "Contract Duration" %> 
  
-</div>
-  </div>
-  <div class="row"> 
-   <div class="col-md-6 col-sm-6">
+
    <%= f.input :cost, label: "Contract Cost",  as: :string, placeholder: "Contract Cost"%>
-</div>
- <div class="col-md-6 col-sm-6">
+
 <%=f.input :address, label: "Contract Location", placeholder: "Contract Location" %>
-</div>
-</div>  
+
 </div>
 </div>
 <hr>
