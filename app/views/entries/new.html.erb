@@ -1,5 +1,5 @@
 <div class="row">
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-8 col-md-offset-2">
   <!-- Widget: user widget style 1 -->
   <div class="box box-widget widget-user">
     <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -17,7 +17,7 @@
                            radio_buttons: :vertical_radio_and_checkboxes,
                             file: :horizontal_file_input,
                             boolean: :horizontal_boolean
-                            } do |f| %>
+                            } do |f| %> 
 <%=f.error_notification %>
 <div class="row">
   <div class="col-md-2">
@@ -25,7 +25,7 @@
   <div class="col-md-9">
 <%=f.input :description, as: :text %>
 <%=f.simple_fields_for :credit_amounts do |d| %>
-<%=d.input :amount %>
+<%=d.input :amount, as: :string %>
 <div class="row">
 <div class="col-md-4 col-md-offset-4">
 <%=d.input :account, collection: Plutus::Asset.all.pluck(:name), as: :radio_buttons, label: false, checked: "Cash", input_html: {value: "Cash"}, as: :hidden %>

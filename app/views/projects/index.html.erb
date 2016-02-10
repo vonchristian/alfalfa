@@ -83,10 +83,10 @@
            <div class="col-md-1">
            <h4 class="text-<%=project.slippage_color %> text-center"><i class="fa fa-caret-<%=project.slippage_sign %>"></i> <%=project.slippage%>%</h4>
            </div> 
-            <div class="col-md-6 col-sm-6 col-xs-6">
-            <h4><%#=project.id_number %> <%= link_to truncate(project.name.upcase, length: 50), project %>
+            <div class="col-md-5 col-sm-6 col-xs-6">
+            <h5><%#=project.id_number %> <%= link_to truncate(project.name.upcase, length: 50), project %>
              
-            </h4> 
+            </h5> 
             <span class="help-block"><i class="fa fa-map-marker"></i> <%=project.address %>
            <i class="fa fa-calendar"></i> <%=project.duration %> days 
             (<%=project.start_date_to_end_date %>)

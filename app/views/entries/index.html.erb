@@ -1,13 +1,43 @@
+
+
 <div class="row">
-<div class="col-md-10">
-<div class="box box-solid">
-  <div class="box-body">
-  <div  class="col-md-8">
-  COntent
-  </div>
-  <div class="col-md-4">
-  Form
-  </div>
-</div>
-</div>
+<div class="col-md-9 col-md-offset-2">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-red-active">
+      <h4 class="widget-user-username">Expenses
+      <span class="pull-right"><%=link_to new_entry_path, class: "btn btn-default bg-red-active pull-right" do %><i class="fa fa-user-plus"></i> New Expense <%end%></span>
+    </h4>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+
+          <div> 
+            <% @entries.each do |entry| %>
+             <div class="row">
+            <div class="col-md-1 col-md-offset-1  col-sm-3 col-xs-3">
+            <%#= image_tag attachment_url(entry, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-square" %>
+            </div>
+            <div class="col-md-7 col-sm-9 col-xs-9">
+            <h5><%=  entry.description%>
+            <span class="pull-right"><%=number_to_currency entry.debit_amounts.last.amount %></span>
+            </h5>
+            <span class="help-block"><%#=entry.company %></span>
+            </div>
+            </div>
+           <hr />
+            <% end %>
+ 
+
+          </div><!-- /.description-block -->
+        </div><!-- /.col -->
+
+          </div><!-- /.description-block -->
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div>
+  </div><!-- /.widget-user -->
+</div><!-- /.col -->
 </div>
