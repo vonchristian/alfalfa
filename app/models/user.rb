@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attachment :profile_photo
-    enum role: [:system_administrator, :clerk, :project_engineer, :bookkeeper]
+    enum role: [:system_administrator, :accounting_officer, :project_engineer, :supply_officer]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -3,11 +3,13 @@ class Project < ActiveRecord::Base
     include PublicActivity::Model
     tracked
 
+
     has_one :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category
 
-    has_many :expenses, as: :expensable
+    has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
+
     has_many :bids
     has_many :billings
     has_many :contracts
@@ -17,6 +19,22 @@ class Project < ActiveRecord::Base
     has_many :accomplishments
     has_many :remarks
     before_save :add_main_contractor_to_contractors
+   
+  def total_expenses
+    expenses.joins(:debit_amounts).sum(:amount)
+  end
+
+  def total_amount_revision
+    amount_revisions.sum(:revised_contract_amount)
+  end
+
+  def self.total_amount_revisions
+    self.joins(:amount_revisions).sum(:revised_contract_amount)
+   end
+
+  def self.total_cost_of_projects_with_revisions
+    self.total_amount_revisions + self.sum(:cost)
+  end
   def slippage
     if notice_to_proceed.present? && accomplishments.present?
       (percent_of_accomplishment - percent_actual_accomplished).round(2)
@@ -35,6 +53,9 @@ class Project < ActiveRecord::Base
         0
       end
     end
+    def self.with_amount_revisions
+where('no_amount_revisions? < ?', false)
+end
 
     def percent_actual_accomplished
        (days_elapsed / duration.to_f) * 100
@@ -45,11 +66,11 @@ end
         amount_revisions.empty?
     end
 
-    def latest_revised_amount
+    def revised_contract_amount
         if no_amount_revisions?
-            "No Amount Revision"
+           cost
         else
-        amount_revisions.last.revised_contract_amount
+        cost + amount_revisions.sum(:revised_contract_amount)
     end
     end
     def final_expiry_date

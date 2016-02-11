@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'settings/index'
+  get 'reports/contract_summary_report', as: 'contract_summary_report'
+  get 'reports/index', as: 'reports'
  devise_for :users, :controllers => { :registrations => "users" }
 
   mount Plutus::Engine => "/accounting", :as => "accounting"
@@ -45,7 +48,7 @@ end
     resources :amount_revisions
     resources :remarks
     resources :accomplishments
-    resources :expenses,         module: :projects
+    resources :entries,         module: :projects
     resources :bids
     resources :contracts
     resources :billings, module: :projects

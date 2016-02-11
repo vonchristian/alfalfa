@@ -16,6 +16,6 @@ class TimeExtensionsController < ApplicationController
 
   private 
   def time_extension_params
-    params.require(:time_extension).permit(:number_of_days)
+    params.require(:time_extension).permit(:number_of_days, :remark)
   end
 end

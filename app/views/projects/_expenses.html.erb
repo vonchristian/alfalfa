@@ -1,10 +1,23 @@
 <div class="tab-pane" id="expenses">
- <%=link_to new_project_expense_path(@project), class: "btn btn-danger" do %><i class="fa fa-plus-circle"></i> New Expense <%end%>
- <hr />
+  <div class="margin">
+                    <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-danger"><i class="fa fa-plus-circle"></i> New Expense</button>
+                      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#"><%=link_to "Repairs and Maintenance", new_project_entry_path(@project) %></a></li>
+                        <li><a href="#">Wages</a></li>
+                        <li><a href="#">Supplies</a></li>
+                        <li><a href="#">Gas and Oil</a></li>
+                      </ul>
+                    </div>
+                    </div>
  <div class="table table-responsive">
    <table class="table table-hover">
-     <thead>
-       <tr>
+     <thead> 
+       <tr> 
          <th>Description</th>
          <th>Amount</th>
        </tr>
@@ -12,14 +25,15 @@
          <% @project.expenses.each do |expense| %>
            <tr>
              <td><%= expense.description %></td>
-             <td><%= expense.amount %></td>
+             <td><%= expense.debit_amounts.last.amount %></td>
+             <td><%= expense.debit_amounts.last.account.name %></td>
            </tr>
          <% end %>
 
        </tbody>
-
+         
      </table>
       <hr />
-      <%=number_to_currency @project.expenses.sum(:amount) %>
+       <%=number_to_currency @project.expenses.joins(:debit_amounts).sum(:amount) %>
  </div>
   </div><!-- /.tab-pane -->

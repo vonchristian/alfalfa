@@ -89,25 +89,25 @@
             </h5> 
             <span class="help-block"><i class="fa fa-map-marker"></i> <%=project.address %>
            <i class="fa fa-calendar"></i> <%=project.duration %> days 
-            (<%=project.start_date_to_end_date %>)
+            <p>(<%=project.start_date_to_end_date %>)</p>
            </span>
 
             </div>
             <div class="col-md-2 col-sm-6 col-xs-6">
             <% if project.amount_revisions.present? %>
             <p class="text-danger"><strike><%=number_to_currency project.cost %> </strike></p>
-            <p class="text-success"><%=number_to_currency project.final_cost %></p>
+            <p class="text-success"><%=number_to_currency project.revised_contract_amount %></p>
             <% else %>
             <p class="text-success"><%=number_to_currency project.cost %> </p>
             <% end %>
            
             
             </div> 
-            <div class="col-md-2">
+            <div class="col-md-3">
             <% project.contractors.each do |contractor| %>
                   <span class="text-muted">
-                   <%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
-            <%#=contractor.company.upcase %>
+                   <%#= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
+            <small><%=contractor.company.upcase %></small>
             </span> 
             <% end %>
             </div>

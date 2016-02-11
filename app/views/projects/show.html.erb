@@ -1,120 +1,42 @@
 <% breadcrumb :project, @project %>
 <div class="row">
-  <div class="col-md-3">
-
-    <!-- Profile Image -->
-    <div class="box box-primary">
-      <div class="box-body box-profile">
-      <div class="text-center">
-        <i class="fa fa-<%=@project.sign%> fa-4x  fa-border"></i>
-        </div>
-        <h3 class="profile-username text-center"><%=@project.name.upcase %></h3>
-        <ul class="list-group list-group-unbordered">
-      
-          <li class="list-group-item">
-            <b>Cost</b> <a class="pull-right text-muted"><%=number_to_currency @project.final_cost %></a>
-          </li>
-          <li class="list-group-item">
-            <b>Duration</b> <a class="pull-right text-muted"><%=@project.duration%> Calendar Days</a> 
-          </li>  
-          <li class="list-group-item">
-            <b>Days Elapsed</b> <a class="pull-right text-muted"><%=@project.days_elapsed%></a>
-          </li>
-          <li class="list-group-item">
-            <b>Accomplished</b> <a class="pull-right text-success"><%=@project.percent_accomplished%></a>
-          
-          </li>
-          <li class="list-group-item">
-            <b>Expiry Date</b> <a class=" text-muted pull-right"><%=@project.final_expiry_date%></a>
-            
-          </li> 
-        </ul>
-<span><%=link_to new_project_accomplishment_path(@project), class: "btn btn-primary btn-block pull-right" do %><i class="fa fa-pencil"></i> Update Info <%end%></span>
-
-     
-      </div><!-- /.box-body -->
-    </div><!-- /.box -->
-
-    <!-- About Me Box -->
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Project Info</h3>
-      </div><!-- /.box-header -->
-      <div class="box-body">
-        <strong><i class="fa fa-building margin-r-5"></i>  Implementing Office</strong>
-        <p class="text-muted">
-        DPWH District 1
-        </p> 
-
-        <hr>
-        <strong><i class="fa fa-certificate margin-r-5"></i>  NTP Date of Award</strong>
-        <p class="text-muted">
-        <% if @project.notice_to_proceed.blank? %>
-        <%=link_to "Enter Date", new_project_notice_to_proceed_path(@project), class: "pull-right text-danger" %>
-        <% else %>
-        <%=@project.notice_to_proceed.date.strftime("%B %e, %Y") %>
-        <% end %>
-        </p>
-        <hr>
-
-        <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-        <p class="text-muted"><%=@project.address %></p>
-
-        <hr>
-
-        <strong><i class="fa fa-clock-o margin-r-5"></i> Time Extensions</strong>
-         <p class="text-muted pull-right"><%=link_to "New Time Extension", new_project_time_extension_path(@project), class: "text-danger"%></p>
-        <% @project.time_extensions.each do |time_extension| %>
-        <p class="text-muted">
-          <%=time_extension.number_of_days %> Days &nbsp; &nbsp;
-          <%=time_extension.created_at.strftime("%B %e, %Y") %>
-        </p>
-        
-        <% end %>
-      
-       
-        <hr>
-
-         <strong><i class="fa fa-rub margin-r-5"></i> Amount Revision</strong>
-        <p class="text-muted pull-right"><%=link_to "New Revision", new_project_amount_revision_path(@project), class: "text-danger"%></p>
-
-        <hr>
-  
-
  
-        <strong><i class="fa fa-file-text-o margin-r-5"></i> Remarks </strong>
-        <p class="text-muted pull-right"><%=link_to "Add Remark", new_project_remark_path(@project), class: "text-danger"%></p>
-       
-        <% @project.remarks.each do |remark| %>
-          <p class="text-muted"><%=remark.content %></p>
-          <i class="fa fa-calendar"></i> <%=remark.created_at.strftime("%d %B %Y") %>
-          </p>
-          <hr>
-        <% end %>
-      </div><!-- /.box-body -->
-    </div><!-- /.box --> 
-  </div><!-- /.co l -->
-    <div class="col-md-9"> 
+    <div class="col-md-12"> 
  
     <div class="nav-tabs-custom">
-
+    
   
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#activity" data-toggle="tab"><i class="fa fa-list"></i> Timeline</a></li>
-        <li><a href="#accomplishment" data-toggle="tab"><i class="fa fa-check-square-o"></i> Accomplishments</a></li>
+      <br>
+      <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10">
+<h4 class="text-info"><%=@project.name.upcase %></h4>
+<hr>
+</div>
+</div>
+
+        <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+        
+        <li><a href="#activity" data-toggle="tab">Timeline</a></li>
+        <li><a href="#accomplishment" data-toggle="tab"></i> Accomplishments</a></li>
+        <li><a href="#budget" data-toggle="tab"></i> Budget</a></li>
+        <li><a href="#budget" data-toggle="tab"></i> Inspections</a></li>
        
-        <li><a href="#expenses" data-toggle="tab"><i class="fa fa-money"></i> &nbsp; Expenses</a></li>
-       <!--  <li><a href="#billings" data-toggle="tab"><i class="fa fa-cubes"></i> Materials</a></li>
-          <li><a href="#billings" data-toggle="tab"><i class="fa fa-truck"></i> Equipment</a></li> -->
-        <li><a href="#contractors" data-toggle="tab"><i class="fa fa-users"></i>  Contractors</a></li>
+        <li><a href="#expenses" data-toggle="tab">&nbsp; Expenses</a></li>
+         <li><a href="#billings" data-toggle="tab"><i class="fa fa-cubes"></i> Materials</a></li>
+          <li><a href="#billings" data-toggle="tab"><i class="fa fa-truck"></i> Equipment</a></li> 
+        <li><a href="#contractors" data-toggle="tab">Contractors</a></li>
         <!-- <li><a href="#bidding" data-toggle="tab"><i class="fa fa-balance-scale"></i> Bidding</a></li> -->
-        <li><a href="#settings" data-toggle="tab"><i class="fa fa-cog"></i> Settings</a></li>
-        <li><a href="#settings" data-toggle="tab"><i class="fa fa-file-text"></i> Reports</a></li>
+        <li><a href="#settings" data-toggle="tab">Settings</a></li>
+        <li><a href="#settings" data-toggle="tab">Reports</a></li>
          
 
       </ul>
      
       <div class="tab-content">
+        <%=render 'profile' %>
         <%=render 'timeline' %>
         <%=render 'accomplishment' %>
 

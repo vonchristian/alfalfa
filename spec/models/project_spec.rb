@@ -107,5 +107,21 @@ RSpec.describe Project, type: :model do
     it "is positive if days percent of accomplishment" 
 
    end
+
+   describe "contract cost" do
+   it "returns the original contract cost if no amount amount_revisions" do 
+      project = create(:project, cost: 1_000_000)
+
+      expect(project.latest_revised_amount).to eql(1_000_000.0)
+   end 
+
+   it "returns the original contract cost plus the total amount revisions if amount revisions is present" do 
+      project = create(:project, cost: 1_000_000)
+      amount_revision = create(:amount_revision, revised_contract_amount: 10_000, project: project)
+
+
+      expect(project.latest_revised_amount).to eql(1_010_000.0)
+   end 
+   end
 end
 

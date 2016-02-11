@@ -67,9 +67,9 @@ end
 
   def final_cost
     if project.amount_revisions.present?
-      amount_revisions.last.revised_contract_amount
+      project.cost + project.amount_revisions.sum(:revised_contract_amount)
     else
-      cost 
+      "No Revision"
     end
   end
 

@@ -28,8 +28,13 @@
  <tr>
  <td><%=project.id_number %></td>
   <td><%=link_to project.name.upcase, project %></td>
-  <td><span class"help-block text-red"><strike>1,900,00 </strike></span>
-  <%=number_to_currency project.cost %></td>
+  
+  <% if project.amount_revisions.present? %>
+            <td class="text-danger"><strike><%=number_to_currency project.cost %> </strike>
+            <span class="text-success"><%=number_to_currency project.final_cost %></span></td>
+            <% else %>
+            <td class="text-success"><%=number_to_currency project.cost %> </td>
+            <% end %>
   <td><% project.contractors.each do |contractor| %>
            <p><%=contractor.company.upcase %></p>
            <% end %>

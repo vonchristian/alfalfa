@@ -40,9 +40,17 @@
 <h5 class="text-center"> Category
 </h5>
 </div>
-<div class="col-md-8 col-sm-6">
-<%=f.input :category_id,
-   collection: Category.all.map { |a| [a.name.titleize , a.id] }, as: :radio_buttons, label: false %>
+<div class="col-md-6">
+<table class="table table-compressed">
+  <% Category.all.each do |category| %>
+        <tr height="60px">
+            <td width="20px"><input class="radio_buttons optional" value="<%=category.id%>" name="project[category_id]" id="project_category_id_<%=category.id%>" type="radio"></td>
+            <td width="45px"><%= image_tag attachment_url(category, :photo, :fill, 35, 35, fallback: 'default-xs-small.png'), class: 'img-rounded' %></td>
+            <td><%= category.name %></td>
+        </tr>
+       
+      <% end %>
+       </table>
 </div>
 </div>
 <hr>
@@ -51,8 +59,16 @@
 <h5 class="text-center"> Main Contractor
 </h5>
 </div>
-<div class="col-md-8">
-<%=f.association :main_contractor, collection: Contractor.main_contractors.map { |a| [a.company.titleize , a.id] }, as: :radio_buttons, label: false %>
+<div class="col-md-6">
+  <table class="table table-compressed">
+      <% Contractor.main_contractors.each do |main_contractor| %>
+        <tr height="60px">
+            <td width="20px"><input class="radio_buttons optional" value="<%=main_contractor.id%>" name="project[main_contractor_id]" id="project_main_contractor_id_<%=main_contractor.id%>" type="radio"></td>
+            <td width="45px"><%= image_tag attachment_url(main_contractor, :profile_image, :fill, 35, 35, fallback: 'default-small.png'), class: 'img-rounded' %></td>
+            <td><%= main_contractor.company %></td>
+        </tr>
+      <% end %>
+  </table>
 </div>
 </div>
 <div class="modal-footer">  
