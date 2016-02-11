@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211024040) do
+ActiveRecord::Schema.define(version: 20160211060808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160211024040) do
     t.float    "percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "remarks"
   end
 
   add_index "accomplishments", ["project_id"], name: "index_accomplishments_on_project_id", using: :btree

@@ -22,7 +22,17 @@
   <div class="col-md-2">
   </div>
   <div class="col-md-9">
-<%=f.input :contractor_id, collection: Contractor.sub_contractors %>
+<div class="col-md-6">
+  <table class="table table-compressed">
+      <% Contractor.all.each do |contractor| %>
+        <tr height="60px">
+            <td width="20px"><input class="radio_buttons optional" value="<%=contractor.id%>" name="contract[contractor_id]" id="contract_contractor_id_<%=contractor.id%>" type="radio"></td>
+            <td width="45px"><%= image_tag attachment_url(contractor, :profile_image, :fill, 35, 35, fallback: 'default-small.png'), class: 'img-rounded' %></td>
+            <td><%= contractor.company %></td>
+        </tr>
+      <% end %>
+  </table>
+</div>
 <div class="modal-footer">
 <%=f.submit "Save", class: "btn btn-primary" %>
 </div>

@@ -45,7 +45,7 @@ resources :users
   resources :assets
 end
   resources :projects do
-    resources :collections 
+    resources :collections
     match :detailed, via: [:get], on: :collection
     
     resource :notice_to_proceed

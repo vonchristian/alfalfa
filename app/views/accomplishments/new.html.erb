@@ -13,7 +13,8 @@
                   <%= simple_form_for [@project, @accomplishment] do |f| %>
 <%=f.error_notification %>
 
-<%=f.input :percent, as: :text, placeholder: "Add.", label: false, autofocus: true %>
+<%=f.input :percent, as: :string, placeholder: "Percent of Accomplishment", autofocus: true %>
+<%=f.input :remarks, as: :text, input_html:{rows: 10} %>
 
 <div class="modal-footer">
 <%=f.submit "Save Accomplishment", class: "btn btn-primary" %>
