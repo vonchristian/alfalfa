@@ -1,18 +1,20 @@
-<div class="container">
+<div class="box">
   <center>
     <h1>General Ledger</h1>
     <br>
   </center>
 
-<table class="table table-striped table-hover">
+<table id="example1" class="table table-striped table-hover">
+  <thead>
   <tr>
     <th>Name</th>
     <th>Type</th>
     <th>Credit Balance</th>
     <th>Debit Balance</th>
-    <th>Balance</td>
+    <th>Balance</th>
   </tr>
-
+  </thead>
+<tbody>
 <% @accounts.each do |account| %>
   <tr class="<%= cycle("even", "odd") -%>">
     <td><%=h account.name %></td>
@@ -22,5 +24,6 @@
     <td><%=h account.balance.round(2) %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 </div>

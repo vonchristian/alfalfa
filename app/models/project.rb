@@ -1,15 +1,13 @@
 class Project < ActiveRecord::Base
 
-    include PublicActivity::Model
-    tracked
-
-
+    include PublicActivity::Common
+   has_many :collections
     has_one :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category
 
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
-
+    has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
     has_many :bids
     has_many :billings
     has_many :contracts
@@ -18,8 +16,15 @@ class Project < ActiveRecord::Base
     has_many :amount_revisions
     has_many :accomplishments
     has_many :remarks
+  
+
     before_save :add_main_contractor_to_contractors
-   
+   def total_collection
+    self.collections.sum(:amount)
+  end
+  def remaining_collection
+    revised_contract_amount -  total_collection
+  end
   def total_expenses
     expenses.joins(:debit_amounts).sum(:amount)
   end

@@ -1,4 +1,47 @@
-<div class="active tab-pane" id="activity">
+<div class="tab-pane" id="timeline">
+<br>
+<div class="row">
+<div class="col-md-8 col-md-offset-1">
+<div class="box box-solid">
+<div class="box-body">
+<h4>Collections</h4>
+<hr>
+<% PublicActivity::Activity.where(recipient: @project, trackable_type: "Collection").each do |activity|%>
+<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+<b><%= activity.owner.full_name %></b> added a <b>Collection</b> of <b><%=number_to_currency activity.trackable.amount %>.</b>
+<span class="pull-right text-muted"><%=activity.created_at.strftime("%B %d, %Y") %></span>
+<hr>
+<% end %>
+<h4>Accomplishments</h4>
+<hr>
+<% PublicActivity::Activity.where(recipient: @project, trackable_type: "Accomplishment").each do |activity|%>
+<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+<b><%= activity.owner.full_name %></b> added an <b>Accomplishment</b> of <b><%=activity.trackable.percent %> %.</b>
+<span class="pull-right text-muted"><%=activity.created_at.strftime("%B %d, %Y") %></span>
+<hr>
+<% end %>
+<h4>Notice to Proceed</h4>
+<hr>
+<% PublicActivity::Activity.where(recipient: @project, trackable_type: "NoticeToProceed").each do |activity|%>
+<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+<b><%= activity.owner.full_name %></b> saved the <b>NTP date of Award</b> as <b><%=activity.trackable.date.strftime("%B %d, %Y") %></b>
+<span class="pull-right text-muted"><%=activity.created_at.strftime("%B %d, %Y") %></span><% end %>
+<hr>
+<h4>Project Start</h4>
+<hr>
+<% PublicActivity::Activity.where(trackable: @project).each do |activity|%>
+<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+<b><%= activity.owner.full_name %></b> saved this project
+ <span class="pull-right text-muted"><%=activity.created_at.strftime("%B %d, %Y") %></span>
+<% end %>
+<hr>
+ 
+
+</div> 
+</div>
+</div>
+</div>
 
 </div><!-- /.tab-pane -->
+ 
  

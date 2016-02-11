@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210051048) do
+ActiveRecord::Schema.define(version: 20160211024040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,16 @@ ActiveRecord::Schema.define(version: 20160210051048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "collections", force: :cascade do |t|
+    t.datetime "date"
+    t.integer  "project_id"
+    t.decimal  "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "collections", ["project_id"], name: "index_collections_on_project_id", using: :btree
 
   create_table "contractors", force: :cascade do |t|
     t.boolean  "main_contractor",  default: false
@@ -272,6 +282,7 @@ ActiveRecord::Schema.define(version: 20160210051048) do
   add_foreign_key "billings", "contractors"
   add_foreign_key "billings", "inventories"
   add_foreign_key "billings", "projects"
+  add_foreign_key "collections", "projects"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"

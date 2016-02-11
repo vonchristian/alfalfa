@@ -1,0 +1,44 @@
+
+<div class="tab-pane" id="collections">
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-green-active">
+      <h4 class="widget-user-username">Collections
+      <span class="pull-right"><%=link_to new_project_collection_path(@project),class: "btn btn-default bg-green-active pull-right" do %><i class="fa fa-plus-circle"></i> New Collection <%end%></span>
+    </h4>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+
+          <div>
+            <% @project.collections.each do |collection| %>
+             <div class="row">
+            <div class="col-md-1 col-md-offset-1  col-sm-3 col-xs-3">
+            <%#= image_tag attachment_url(collection, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-square" %>
+            </div>
+            <div class="col-md-7 col-sm-9 col-xs-9">
+            <h4><%= number_to_currency collection.amount %>
+            <span class="pull-right"><%=collection.date.strftime("%B %e, %Y") %></span>
+           </h4>
+            </div>
+            </div>
+           <hr />
+            <% end %>
+ 
+
+          </div><!-- /.description-block -->
+        </div><!-- /.col -->
+
+          </div><!-- /.description-block -->
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div>
+  </div><!-- /.widget-user -->
+</div><!-- /.col -->
+
+   

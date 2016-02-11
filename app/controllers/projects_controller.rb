@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.create(project_params)
     if  @project.save
+      @project.create_activity :create, owner: current_user
     redirect_to @project, notice: "Project successfully saved."
   else 
     render :new 

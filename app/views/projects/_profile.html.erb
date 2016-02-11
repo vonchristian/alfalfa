@@ -19,21 +19,24 @@
                     </div><!-- /.col -->
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                        <h5 class="description-header">$24,813.53</h5>
-                        <span class="description-text">TOTAL PROFIT</span>
+                            <h5 class="description-header"><%=number_to_currency @project.total_expenses %></h5>
+                        <span class="description-text">TOTAL BUDGET</span>
                       </div><!-- /.description-block -->
                     </div><!-- /.col -->
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block">
-                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                        <h5 class="description-header">1200</h5>
+                       
+                        <h5 class="description-header"><%=@project.slippage %></h5>
                         <span class="description-text">GOAL COMPLETIONS</span>
                       </div><!-- /.description-block -->
                     </div>
                   </div><!-- /.row -->
                 </div><!-- /.box-footer -->
                 <hr>
-                
-           
+                NPT Date of Award:
+                <% if @project.notice_to_proceed.present? %>
+                <%=@project.notice_to_proceed.date.strftime("%B %d, %Y") %>
+                <% else %>
+        <%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project) %>
+        <% end %>
             </div>

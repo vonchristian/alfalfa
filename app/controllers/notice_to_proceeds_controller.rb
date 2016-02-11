@@ -8,6 +8,7 @@ class NoticeToProceedsController < ApplicationController
     @project = Project.find(params[:project_id])
     @notice_to_proceed = @project.create_notice_to_proceed(notice_to_proceed_params)
     if @notice_to_proceed.save 
+     @notice_to_proceed.create_activity :create, owner: current_user, recipient: @project
       redirect_to @project, notice: "success"
     else
       render :new 

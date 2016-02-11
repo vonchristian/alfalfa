@@ -1,0 +1,18 @@
+<%= simple_form_for [@project, @collection] do |f| %>
+  <div class="col-md-4 col-md-offset-4">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h4>Collection</h4>
+      </div>
+      <div class="box-body">
+        <div class="col-md-10 col-md-offset-2">
+        <%= f.input :date, as: :string, input_html: {class: 'datepicker'} %>
+        <%= f.input :amount %>
+        </div>
+      </div>
+      <div class="box-footer">
+        <%= f.submit 'Save Collection', class: "btn btn-primary pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>
