@@ -5,6 +5,7 @@ class CreateBillings < ActiveRecord::Migration
       t.belongs_to :contractor, index: true, foreign_key: true
       t.belongs_to :inventory, index: true, foreign_key: true
       t.integer :quantity
+      t.decimal :cost
 
       t.timestamps null: false
     end

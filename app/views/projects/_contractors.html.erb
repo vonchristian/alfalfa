@@ -1,5 +1,13 @@
 <div class="tab-pane" id="contractors">
-  <%=link_to new_project_contract_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Subcontractor <%end%>
+<br>
+<div class="row">
+<div class="col-md-6">
+</div>
+<div class="col-md-4">
+  <span class="pull-right"><%=link_to new_project_contract_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Subcontractor <%end%>
+  </span>
+  </div>
+  </div>
 <hr>
 <div class="row">
  <% @project.contractors.each do |contractor| %>
@@ -9,10 +17,11 @@
             </div>
             <div class="col-md-7 col-sm-9 col-xs-9">
             <h4><%= link_to contractor.full_name.upcase, contractor %></h4>
-            <% if contractor.main_contractor? %>
-            <span class="pull-right text-sucess"> MAIN </span>
-            <% end %>
             <span class="help-block"><%=contractor.company %></span>
+            <span class="help-block"><%=link_to 'New Billing',new_project_billing_path(@project), class: "btn btn-danger btn-xs"%></span>
+            </div>
+            <div class="col-md-3">
+              dadas
             </div>
             </div>
            <hr />

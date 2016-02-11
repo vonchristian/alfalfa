@@ -1,24 +1,38 @@
 <div class="tab-pane" id="billings">
-
-  <%=link_to new_project_billing_path(@project), class: "btn btn-danger" do %><i class="fa fa-plus-circle"></i> New Billing <%end%>
-<hr>
-<% @project.billings.each do |billing| %>
+<br>
 <div class="row">
-  <div class="col-md-1">
-    <%=billing.created_at.strftime("%D") %>
+<div class="col-md-6 col-md-offset-1">
+<h4 class="text-success">Total Accomplishment: <%=@project.accomplishments.total %> % </h4>
+
+</div>
+<div class="col-md-3">
+ <span class="pull-right"><%=link_to new_project_billing_path(@project), class: "btn btn-danger" do %><i class="fa fa-plus-circle"></i> New Billing <%end%>
+ </span>
+ </div>
+ 
+ </div>
+ <hr /> 
+<% @project.contractors.each do |contractor| %>
+<div class="row"> 
+<div class="col-md-9 col-md-offset-1">
+ <%= image_tag attachment_url(contractor, :profile_image, :fill, 35, 35, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
+  <%=contractor.full_name %>
+  <%=contractor.company %>
+  <span class="pull-right"><%=link_to new_project_accomplishment_path(@project), class: "btn btn-danger btn-flat btn-sm" do %><i class="fa fa-print"></i> Print<%end%>
+ </span>
+  <hr>
+  </div> 
   </div>
-  <div class="col-md-5">
-  <h4><%=billing.contractor %></h4>
-  <span class="help-block"><%=billing.quantity %> <%=billing.inventory.unit %> <%=billing.inventory.name %></span>
+  <div class="row">
+  <div class="col-md-8 col-md-offset-2">
+  <% contractor.billings_for(@project).each do |billing| %>
+  <%=billing.quantity %>  <%=billing.inventory.unit %> <%=billing.inventory.name %>
+  <span class="pull-right text-danger"><%=number_to_currency billing.cost %></span>
 
-
-</div>
-<div class="col-md-5">
-  <h4>
-  <span class="pull-right">  <%=number_to_currency billing.cost %></span>
-</h4>
-</div>
-</div>
-
+  <hr>
+  <% end %>
+  </div>
+  </div>
 <% end %>
 </div><!-- /.tab-pane -->
+ 

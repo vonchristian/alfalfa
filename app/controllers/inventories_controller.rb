@@ -2,6 +2,7 @@ class InventoriesController < ApplicationController
   def index
     @inventories = Inventory.all
   end
+
   def new
     @inventory = Inventory.new
   end
@@ -9,7 +10,8 @@ class InventoriesController < ApplicationController
   def create
     @inventory = Inventory.create(inventory_params)
     if @inventory.save
-      redirect_to @inventory, notice: "Saved successfully."
+      @inventory.create_activity :create, owner: current_user
+      redirect_to inventories_url, notice: "Inventory saved successfully."
     else
       render :new
     end

@@ -24,10 +24,8 @@ resources :users
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'entries/daily' => 'entries#daily'
 
-  resources :contractors do
-    resources :billings, module: :contractors
-
-  end
+  resources :contractors
+    
   resources :expenses do
     resources :entries
   end
@@ -53,7 +51,7 @@ end
     resources :amount_revisions
     resources :remarks
     resources :accomplishments
-    resources :entries,         module: :projects
+    resources :expenses,         module: :projects
     resources :bids
     resources :contracts
     resources :billings, module: :projects

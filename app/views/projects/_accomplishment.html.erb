@@ -1,20 +1,56 @@
 
 <div class="tab-pane" id="accomplishment">
- <%=link_to new_project_accomplishment_path(@project), class: "btn btn-success" do %><i class="fa fa-plus-circle"></i> Update Accomplishment <%end%>
+<br>
+<% unless @project.accomplishments.any? %>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+    <div class="box box-solid">
+      <div class="box-body">
+        <div class="alert alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="fa fa-check-o"></i> Welcome to the Project Accomplishment Page.</h4> 
+          <hr>
+          <span class="text-muted">This is where you update the work accomplishments  of this project. Be sure to enter the date of NOTICE TO PROCEED before saving accomplishments. </span>
+          <hr>
+           <span class="text-center"><%=link_to new_project_expense_path(@project), class: "btn btn-link bg-green-active pull-right" do %><i class="fa fa-plus-circle"></i> New Accomplishment<%end%></span>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+  <% else %>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-1">
+<h4 class="text-success">Total Accomplishment: <%=@project.accomplishments.total %> % </h4>
+
+</div>
+<div class="col-md-3">
+ <span class="pull-right"><%=link_to new_project_accomplishment_path(@project), class: "btn btn-success" do %><i class="fa fa-plus-circle"></i> Update Accomplishment <%end%>
+ </span>
+ </div>
+ 
+ </div>
  <hr /> 
- <div class="row">
  <% @project.accomplishments.each do |accomplishment| %>
              <div class="row">
-            <div class="col-md-1 col-md-offset-1  col-sm-3 col-xs-3">
-            <%#= image_tag attachment_url(accomplisment, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
-            </div>
-            <div class="col-md-7 col-sm-9 col-xs-9">
+           
+<div class="col-md-1 col-md-offset-1">
             <h4><%=accomplishment.percent %>%
-            <span class="pull-right">Recorded last <%=accomplishment.created_at.strftime("%B %d, %Y") %></span>
             </h4>
             </div>
+            <div class="col-md-3">
+<span class="help-block"><%=accomplishment.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+</div>
+            <div class="col-md-6">
+            <span class="pull-right text-muted"><%=accomplishment.remarks %></span>
             </div>
-           <hr />
+            
+          
+         
+           </div>
+           <hr>
             <% end %> 
-            </div>
+            
+   <% end %>
 </div>

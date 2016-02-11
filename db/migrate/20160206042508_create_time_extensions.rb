@@ -3,6 +3,7 @@ class CreateTimeExtensions < ActiveRecord::Migration
     create_table :time_extensions do |t|
       t.belongs_to :project, index: true, foreign_key: true
       t.integer :number_of_days
+      t.string :remarks
 
       t.timestamps null: false
     end

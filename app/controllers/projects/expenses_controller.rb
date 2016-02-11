@@ -1,4 +1,4 @@
-class Projects::EntriesController < ApplicationController
+class Projects::ExpensesController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @entry = Plutus::Entry.new

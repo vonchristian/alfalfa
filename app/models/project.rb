@@ -1,6 +1,5 @@
 class Project < ActiveRecord::Base
-
-    include PublicActivity::Common
+  include PublicActivity::Common
    has_many :collections
     has_one :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
@@ -18,7 +17,10 @@ class Project < ActiveRecord::Base
     has_many :remarks
   
 
+  
+
     before_save :add_main_contractor_to_contractors
+    
    def total_collection
     self.collections.sum(:amount)
   end

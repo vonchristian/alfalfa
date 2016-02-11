@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211060808) do
+ActiveRecord::Schema.define(version: 20160211024040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20160211060808) do
   create_table "accomplishments", force: :cascade do |t|
     t.integer  "project_id"
     t.float    "percent"
+    t.string   "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text     "remarks"
   end
 
   add_index "accomplishments", ["project_id"], name: "index_accomplishments_on_project_id", using: :btree
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160211060808) do
     t.integer  "contractor_id"
     t.integer  "inventory_id"
     t.integer  "quantity"
+    t.decimal  "cost"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -248,9 +249,9 @@ ActiveRecord::Schema.define(version: 20160211060808) do
   create_table "time_extensions", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "number_of_days"
+    t.string   "remarks"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.text     "remark"
   end
 
   add_index "time_extensions", ["project_id"], name: "index_time_extensions_on_project_id", using: :btree
@@ -261,17 +262,12 @@ ActiveRecord::Schema.define(version: 20160211060808) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "role"
+    t.string   "profile_photo_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "profile_photo_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
