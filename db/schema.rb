@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211024040) do
+ActiveRecord::Schema.define(version: 20160212042937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,12 +76,14 @@ ActiveRecord::Schema.define(version: 20160211024040) do
     t.integer  "inventory_id"
     t.integer  "quantity"
     t.decimal  "cost"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "project_billing_id"
   end
 
   add_index "billings", ["contractor_id"], name: "index_billings_on_contractor_id", using: :btree
   add_index "billings", ["inventory_id"], name: "index_billings_on_inventory_id", using: :btree
+  add_index "billings", ["project_billing_id"], name: "index_billings_on_project_billing_id", using: :btree
   add_index "billings", ["project_id"], name: "index_billings_on_project_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -212,6 +214,16 @@ ActiveRecord::Schema.define(version: 20160211024040) do
   add_index "plutus_entries", ["commercial_document_id", "commercial_document_type"], name: "index_entries_on_commercial_doc", using: :btree
   add_index "plutus_entries", ["date"], name: "index_plutus_entries_on_date", using: :btree
 
+  create_table "project_billings", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "billing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "project_billings", ["billing_id"], name: "index_project_billings_on_billing_id", using: :btree
+  add_index "project_billings", ["project_id"], name: "index_project_billings_on_project_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.integer  "main_contractor_id"
     t.string   "id_number"
@@ -279,12 +291,15 @@ ActiveRecord::Schema.define(version: 20160211024040) do
   add_foreign_key "bids", "projects"
   add_foreign_key "billings", "contractors"
   add_foreign_key "billings", "inventories"
+  add_foreign_key "billings", "project_billings"
   add_foreign_key "billings", "projects"
   add_foreign_key "collections", "projects"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"
   add_foreign_key "notice_to_proceeds", "projects"
+  add_foreign_key "project_billings", "billings"
+  add_foreign_key "project_billings", "projects"
   add_foreign_key "remarks", "projects"
   add_foreign_key "requirements", "bids"
   add_foreign_key "requirements", "documents"

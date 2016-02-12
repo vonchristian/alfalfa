@@ -1,5 +1,6 @@
 <div class="tab-pane" id="billings">
 <br>
+<%=link_to "New Billing", new_project_project_billing_path(@project) %>
 <div class="row">
 <div class="col-md-6 col-md-offset-1">
 <h4 class="text-success">Total Accomplishment: <%=@project.accomplishments.total %> % </h4>

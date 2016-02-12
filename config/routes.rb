@@ -44,6 +44,7 @@ resources :users
 end
   resources :projects do
     resources :collections
+    resources :project_billings
     match :detailed, via: [:get], on: :collection
     
     resource :notice_to_proceed

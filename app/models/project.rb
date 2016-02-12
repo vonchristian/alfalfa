@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Common
    has_many :collections
+   has_many :project_billings
     has_one :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category

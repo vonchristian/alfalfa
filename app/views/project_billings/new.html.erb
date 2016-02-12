@@ -1,0 +1,26 @@
+<div class="row">
+<div class="col-md-8">
+<div class="box box-solid">
+<div class="box-body">
+<%=@project.name %>
+<hr>
+<%= simple_form_for [@project, @project_billing] do |f| %>
+
+<h4>Billing</h4>
+<hr>
+<div class="billings">
+  <%=f.simple_fields_for :billings do |billing| %>
+      <%= render 'billing_fields', f: billing %>
+      <% end %>
+      </div>
+      <div id="links">
+    <%=link_to_add_association 'add bill', f, :billings %>
+    </div>
+    <div class="modal-footer">
+  <%=f.submit %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>

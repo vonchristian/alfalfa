@@ -5,6 +5,7 @@ gem 'rails', '4.2.5.1'
 gem 'font-kit-rails', '~> 1.2.0'
 gem "gretel"
 gem 'draper'
+gem 'cocoon'
 gem 'searchkick'
 gem 'public_activity'
 gem "refile", require: "refile/rails"
