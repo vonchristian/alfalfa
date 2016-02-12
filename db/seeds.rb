@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Contractor.create(first_name: "Letty", middle_name: "Bulayo", last_name: "Ngipol", company: "Alfalfa Construction Inc.", position: "President", main_contractor: true)
 Contractor.create(first_name: "Letty", middle_name: "Bulayo", last_name: "Ngipol", company: "Bugani Construction Inc.", position: "President", main_contractor: true)
-Contractor.create(first_name: "Donald", middle_name: "", last_name: "Mungolnon", company: "D & A Enterprises", position: "President", main_contractor: true)
+Contractor.create(first_name: "Donald", middle_name: "", last_name: "Mongolnon", company: "D & A Enterprises", position: "President", main_contractor: true)
 
 
 Plutus::Asset.create(:name => "Cash")
@@ -37,4 +37,4 @@ Plutus::Expense.create(name: "Repairs and Maintenance")
 Plutus::Expense.create(name: "Miscellaneous")
 
 
-User.create!(first_name: 'Juan', last_name: 'Cruz', role: 0, email: 'vc.halip@gmail.com.p', password: '1111111111', password_confirmation: '1111111111')
+User.create!(first_name: 'Juan', last_name: 'Cruz', role: 0, email: 'vc.halip@gmail.com', password: '1111111111', password_confirmation: '1111111111')

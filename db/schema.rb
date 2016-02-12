@@ -52,9 +52,10 @@ ActiveRecord::Schema.define(version: 20160211024040) do
 
   create_table "amount_revisions", force: :cascade do |t|
     t.integer  "project_id"
-    t.decimal  "revised_contract_amount"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.decimal  "amount"
+    t.string   "remarks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "amount_revisions", ["project_id"], name: "index_amount_revisions_on_project_id", using: :btree

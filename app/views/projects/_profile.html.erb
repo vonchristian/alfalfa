@@ -1,7 +1,7 @@
 
 <div class="active tab-pane" id="profile">
 <br>
- <div class="box-footer">
+ <div class="box-body">
                   <div class="row">
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
@@ -26,18 +26,115 @@
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block">
                        
-                        <h5 class="description-header"><%=@project.slippage %></h5>
-                        <span class="description-text">GOAL COMPLETIONS</span>
+                        <h5 class="description-header"><%=@project.slippage %> % </h5>
+                        <span class="description-text">PROJECT SLIPPAGE</span>
                       </div><!-- /.description-block -->
                     </div>
                   </div><!-- /.row -->
                 </div><!-- /.box-footer -->
                 <hr>
-                NPT Date of Award:
-                <% if @project.notice_to_proceed.present? %>
-                <%=@project.notice_to_proceed.date.strftime("%B %d, %Y") %>
-                <% else %>
-        <%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project) %>
-        <% end %>
-        <%=link_to "Add Contractor", new_project_contract_path(@project) %>
+                <br>
+           <div class="row">
+             <div class="col-md-4">
+               <div class="box box-primary">
+                 <div class="box-header with-border">
+                   <h4 class="box-title">Sub Contractors</h4>
+                     <div class="box-tools pull-right">
+                       <span><%=link_to "Add Sub Contractor", new_project_contract_path(@project), class: "btn btn-primary btn-sm btn-flat" %>
+                       </span>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <%@project.contractors.each do |contractor| %>
+                        <%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
+                        <span class="text-muted"><%=contractor.full_name %></span>
+                        <span class="help-block"><%= contractor.company %></span>
+                        <hr>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+             <div class="col-md-4">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Latest Expenses</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Account</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @project.expenses.limit(5).each do |expense| %>
+                        <tr>
+                          <td><%=expense.created_at.strftime("%D")%></td>
+                          <td><%=number_to_currency expense.debit_amounts.last.amount %></td>
+                          <td><%=expense.debit_amounts.last.account.name %></td>
+                          <td><%=expense.description %></td>
+                        </tr>
+                        <% end %>
+                      </tbody> 
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->    
+            <div class="col-md-4">
+              <div class="info-box bg-aqua">
+                <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Notice of Award</span>
+                  <span class="info-box-number">
+                    <% if @project.notice_to_proceed.present? %>
+                      <%=@project.notice_to_proceed.date.strftime("%D") %>
+                    <% else %>
+                      <%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn" %>
+                    <% end %> 
+                  </span> 
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+              <div class="info-box bg-yellow">
+                <span class="info-box-icon"><i class="fa fa-calendar-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Duration</span>
+                  <span class="info-box-number"><%=@project.duration%> Days </span>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%=@project.percent_actual_accomplished %>%"></div>
+                  </div>
+                  <span class="progress-description">
+                    <%=@project.days_elapsed %> days elapsed
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+             <div class="info-box bg-green">
+                <span class="info-box-icon"><i class="fa fa-check-square-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Accomplishment</span>
+                  <span class="info-box-number"><%=@project.accomplishments.total %> % </span>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%=@project.accomplishments.total %>%"></div>
+                  </div>
+                  <span class="progress-description">
+                    <%=@project.accomplishments.total %> % progress in 30 Days
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div>
+            
+
+
+                
+
+              </div>
+
             </div>

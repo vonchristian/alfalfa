@@ -42,10 +42,11 @@
  <td><%=number_to_currency project.revised_contract_amount%></td>
  <% else %>
  <td>No Revision</td>
- <% end %>
+ <% end %> 
  <td></td>
  <td></td>
- <td></td>
+ <td><%=number_to_currency project.total_collection %></td>
+ <td><%=number_to_currency project.remaining_collection %></td>
  <td></td>
  <td><%=project.percent_of_accomplishment %> %</td>
  <td></td>

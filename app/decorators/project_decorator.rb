@@ -53,9 +53,6 @@ end
        "No NTP yet."
     end
   end
-  def date_created
-    object.created_at.strftime("%A, %B %e")
-  end
 
   def percent_accomplished
     if project.accomplishments.any?

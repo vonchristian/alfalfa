@@ -32,11 +32,11 @@ class Project < ActiveRecord::Base
   end
 
   def total_amount_revision
-    amount_revisions.sum(:revised_contract_amount)
+    amount_revisions.sum(:amount)
   end
 
   def self.total_amount_revisions
-    self.joins(:amount_revisions).sum(:revised_contract_amount)
+    self.joins(:amount_revisions).sum(:amount)
    end
 
   def self.total_cost_of_projects_with_revisions
@@ -49,8 +49,12 @@ class Project < ActiveRecord::Base
         0
     end
   end
-  def road?
-    true
+  def latest_duration
+    if time_extensions.present?
+      time_extensions.sum(:number_of_days) + duration 
+    else
+      duration
+    end
   end
 
     def percent_of_accomplishment
@@ -60,9 +64,6 @@ class Project < ActiveRecord::Base
         0
       end
     end
-    def self.with_amount_revisions
-where('no_amount_revisions? < ?', false)
-end
 
     def percent_actual_accomplished
        (days_elapsed / duration.to_f) * 100
@@ -77,7 +78,7 @@ end
         if no_amount_revisions?
            cost
         else
-        cost + amount_revisions.sum(:revised_contract_amount)
+        cost + amount_revisions.sum(:amount)
     end
     end
     def final_expiry_date

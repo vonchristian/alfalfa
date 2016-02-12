@@ -1,5 +1,5 @@
 
-<div class="col-md-4 col-md-offset-4">
+<div class="col-md-5 col-md-offset-4">
   <!-- Widget: user widget style 1 -->
   <div class="box box-widget widget-user">
     <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -20,7 +20,8 @@
                             } do |f| %>
 <%=f.error_notification %>
 
-<%=f.input :revised_contract_amount, label: "Revised Contract Amount" %>
+<%=f.input :revised_contract_amount, label: "Additional Amount", as: :string %>
+<%=f.input :remarks %>
 
 <div class="modal-footer">
 <%=f.submit "Record Amount Revision", class: "btn btn-primary" %>

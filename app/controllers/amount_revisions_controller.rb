@@ -16,6 +16,6 @@ class AmountRevisionsController < ApplicationController
 
   private 
   def amount_revision_params
-    params.require(:amount_revision).permit(:revised_contract_amount)
+    params.require(:amount_revision).permit(:amount)
   end
 end

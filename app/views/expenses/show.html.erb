@@ -1,7 +1,1 @@
-<%=@expense.name %>
-<hr>
-<h3>Debit</h3>
-<% @expense.debit_amounts.each do |a| %>
-<%=a.amount %>
-<% end %>
-<%=link_to "New Disbursement", new_expense_entry_path(@expense) %>
+<%=@entry.description %>
