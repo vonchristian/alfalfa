@@ -5,9 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Contractor.create(first_name: "Letty", middle_name: "Bulayo", last_name: "Ngipol", company: "Alfalfa Construction Inc.", position: "President", main_contractor: true)
-Contractor.create(first_name: "Letty", middle_name: "Bulayo", last_name: "Ngipol", company: "Bugani Construction Inc.", position: "President", main_contractor: true)
-Contractor.create(first_name: "Donald", middle_name: "", last_name: "Mongolnon", company: "D & A Enterprises", position: "President", main_contractor: true)
+Contractor.create(first_name: "Frederick", last_name: "Ngipol", company: "Alfalfa Construction Inc.", position: "President", main_contractor: true)
+Contractor.create(first_name: "Letty",  last_name: "Ngipol", company: "Bugani Construction Inc.", position: "President", main_contractor: true)
+Contractor.create(first_name: "Donald", last_name: "Mongolnon", company: "D & A Enterprises", position: "President", main_contractor: true)
 
 
 Plutus::Asset.create(:name => "Cash")
