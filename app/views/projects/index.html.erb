@@ -17,8 +17,9 @@
   <th><small>ACTUAL ACC.</small></th>
 <th style="width: 10%"><small>SLIPPAGE</small></th>
   <th><small>AMOUNT</small></th>
-  <th style="width: 20%"><small>CONTRACTORS</small></th>
-  <th style="width: 20%"><small>DURATION</small></th> 
+  <!-- <th><small>CONTRACTORS</small></th> -->
+  <th><small>DURATION/EXPIRY</small></th> 
+  <th style="width: 20%">REMARKS</th>
 </tr>
 </thead> 
 <tbody> 
@@ -35,23 +36,37 @@
   <% else %>
   <td><%=number_to_currency project.cost %></td>
   <% end %>
-  <td><% project.contractors.each do |contractor| %>
-            <p class="text-muted"><small><%=contractor.company.upcase %> </small></p>
-           <% end %>
-  </td> 
+  <!-- <td><%# project.contractors.each do |contractor| %>
+            <p class="text-muted"><small><%#=contractor.company.upcase %> </small></p>
+           <%# end %>
+  </td>  -->
   <% if project.time_extensions.present? %>
   <td><%=project.revised_duration %> Days
   <% else %> 
   <td><%=project.duration %> Days
   <% end %>
-   <p class="text-muted"><small><%=project.start_date_to_end_date %></small></p>
    <% if project.notice_to_proceed.present? %>
-    <p><small class="text-success"><i class="fa fa-calendar text-success"></i> NTP: (<%=project.start_date.strftime("%D") %>) </small></p>
+    <p><small class="text-muted"><i class="fa fa-calendar"></i> NTP: (<%=project.start_date.strftime("%B %e, %Y") %>) </small></p>
+     <p><small class="text-muted"><i class="fa fa-calendar"></i> Expiry: (<%=project.expiry_date.strftime("%B %e, %Y") %>) </small></p>
    <p><small class="text-success"><i class="fa fa-clock-o text-success"></i> <%=project.days_elapsed %> elapsed</small></p>
    <p><small class="text-danger"><i class="fa fa-clock-o text-danger"></i> <%=project.remaining_days %> remaining </small></p>
+
    <% end %>
   </td>
+   <% if project.remarks.present? %>
+<td><% project.remarks.limit(2).each do |remark| %>
+<p><small class="text-info"><%=remark.remarker.full_name if remark.remarker %></small>
+<small class="text-muted"><i class="fa fa-clock-o"></i> <%=remark.created_at.strftime("%b %e")%></small></p>
+<p><small><%=remark.content %></small></p>
 
+
+ 
+<% end %>
+<% if project.remarks.count > 2 %>
+<center class="text-primary"><%=project.remarks.count - 2 %> more </center>
+<%end %>
+<% end %>
+</td>
   </tr>
   </tbody>
   <% end %>
