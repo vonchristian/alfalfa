@@ -1,58 +1,45 @@
+<div class="container">
+<div class="row">
+<%@expenses.each do |expense| %>
+<div class="col-md-4">
+                <div class="box box-solid">
+                 <div class="box-header">
+                   <b class="text-muted"><%=expense.name%></b>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <table class="table with-border">
+                      <%expense.debit_entries.each do |entry| %>
+                         <tr>
+                        <td  width="55px"><%= image_tag attachment_url(entry.owner, :profile_photo, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
+                        <small><%=entry.owner.full_name if entry.owner.present? %></small>
+                        </td>
 
-<div class="col-md-4 col-sm-4">
-                      <div class="pad box-pane-right bg-blue-active" style="min-height: 780px">
-                     
-                        <h4 class="widget-user-username">Expense Accounts</h4>
-                        <hr>
-                        <% Plutus::Expense.all.each do |account| %>
-                        <div class="row">
-                        <div class="col-md-10">
-                        <h5><%=account.name.upcase %>
-                        <span class="pull-right"><%=number_to_currency account.balance %></span>
-                        </h5>
+                        <td><small class="text-danger"><b><%=entry.description %></b></small>
+                        <span class="help-block text-muted"><%=number_to_currency entry.debit_amounts.last.amount %></span >
+                        <span class="help-block text-muted"><%=entry.debit_amounts.last.amount %></span >
+
+                        
+                        <!-- <div class="row">
+                        <div class="col-md-4">
+                        <span class="help-block"> Billings </span> 
+                        <small class="text-muted">900,000.00</small>
                         </div>
-                        </div>
-                        <% end %>
-                        </div>
-                   </div><!-- /.col -->
-<div class="col-md-8">
-  <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
-      <h4 class="widget-user-username">Expenses
-      <span class="pull-right"><%=link_to new_entry_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Expense <%end%></span>
-    </h4>
-    </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-
-          <div> 
-            <% @expenses.each do |entry| %>
-             <div class="row">
-            <div class="col-md-4 col-md-offset-1  col-sm-3 col-xs-3">
-            <%=entry.debit_amounts.last.account.name%>
-             <span class="help-block"><%#=entry.commercial_document.name %></span>
-            </div>
-            <div class="col-md-7 col-sm-9 col-xs-9">
-            <h5><%=  entry.description%>
-            <span class="pull-right"><%=number_to_currency entry.debit_amounts.last.amount %></span>
-            </h5>
-            <span class="help-block"><%#=entry.company %></span>
-            </div>
-            </div>
-           <hr />
-            <% end %>
- 
-
-          </div><!-- /.description-block -->
-        </div><!-- /.col -->
-
-          </div><!-- /.description-block -->
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div>
-  </div><!-- /.widget-user -->
-</div><!-- /.col -->
+                        <div class="col-md-4">
+                         <span class="help-block"> Paid </span>
+                         <small class="text-success">100,000.00</small>
+                         </div>
+                         <div class="col-md-4">
+                         <span class="help-block"> Remaining </span>
+                         <small class="text-danger">800,000.00</small>
+                         </div>
+                         </div> -->
+                        </td>
+                        </tr>
+                      <% end %>
+                     </table>
+                      <br>
+                    </div> 
+                  </div>
+                </div>
+<% end %>
 </div>

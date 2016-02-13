@@ -1,0 +1,23 @@
+<div class="row">
+<div class="col-md-9 col-md-offset-2">
+<div class="box box-solid">
+<div class="box-body">
+<h4>Petty Cash</h4>
+<hr>
+
+<div class="col-md-3">
+<span class="help-block"><i class="fa fa-clock-o"></i> <%#=activity.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+</div>
+<div class="col-md-8">
+<%#=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+<b><%#= link_to activity.owner.full_name  if activity.owner %></b>
+
+<%#= render_activity activity %>
+<%=link_to "New Disbursement", new_asset_entry_path(@asset.id) %>
+<hr>
+</div>
+
+
+<%# end %>
+ </div>
+</div>

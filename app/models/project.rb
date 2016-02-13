@@ -16,11 +16,13 @@ class Project < ActiveRecord::Base
     has_many :amount_revisions
     has_many :accomplishments
     has_many :remarks
+
   
     validates :name,  :id_number, :duration, :cost, :address, presence: true
   
 
     after_create :add_main_contractor_to_contractors
+    after_commit :add_to_accounts
     
    def total_collection
     self.collections.sum(:amount)
@@ -134,5 +136,10 @@ end
     def add_main_contractor_to_contractors
       Contract.create(contractor_id: self.main_contractor.id, project_id: self.id ) if self.new_record?
     end
+
+     def add_to_accounts
+       Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: (self.cost), account: "Trade Payable"],
+                         credit_amounts_attributes:[amount: (self.cost), account: "Receivables"])
+   end
 
 end

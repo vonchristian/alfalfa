@@ -10,6 +10,7 @@ class Projects::ExpensesController < ApplicationController
     @project = Project.find(params[:project_id])
     @entry = Plutus::Entry.new(entry_params)
     @entry.commercial_document = @project
+    @entry.owner = current_user
     if @entry.save
       redirect_to @project, notice: "Expense Recorded successfully"
     else
@@ -22,6 +23,6 @@ class Projects::ExpensesController < ApplicationController
   end
   private
   def entry_params
-    params.require(:entry).permit(:description, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
+    params.require(:entry).permit(:description, :owner_id, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
   end
 end

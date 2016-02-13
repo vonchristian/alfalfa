@@ -15,9 +15,11 @@ class CreatePlutusTables < ActiveRecord::Migration
       t.date :date
       t.integer :commercial_document_id
       t.string :commercial_document_type
+      t.integer :owner_id
 
       t.timestamps
     end
+    add_index :plutus_entries, :owner_id
     add_index :plutus_entries, :date
     add_index :plutus_entries, [:commercial_document_id, :commercial_document_type], :name => "index_entries_on_commercial_doc"
 

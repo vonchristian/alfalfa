@@ -1,1 +1,23 @@
-<%=@entry.description %>
+<div class="row">
+<div class="col-md-9 col-md-offset-2">
+<div class="box box-solid">
+<div class="box-body">
+<h4>Activity Logs</h4>
+<hr>
+<% @expense.debit_entries.each do |entry| %>
+<div class="col-md-3">
+<span class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+</div>
+<div class="col-md-8">
+<%#=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+<b><%#= link_to activity.owner.full_name  if activity.owner %></b>
+
+<%#= render_activity activity %>
+
+<hr>
+</div>
+
+
+<% end %>
+ </div>
+</div>

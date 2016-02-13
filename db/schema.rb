@@ -207,12 +207,14 @@ ActiveRecord::Schema.define(version: 20160212232800) do
     t.date     "date"
     t.integer  "commercial_document_id"
     t.string   "commercial_document_type"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "plutus_entries", ["commercial_document_id", "commercial_document_type"], name: "index_entries_on_commercial_doc", using: :btree
   add_index "plutus_entries", ["date"], name: "index_plutus_entries_on_date", using: :btree
+  add_index "plutus_entries", ["owner_id"], name: "index_plutus_entries_on_owner_id", using: :btree
 
   create_table "project_billings", force: :cascade do |t|
     t.integer  "project_id"

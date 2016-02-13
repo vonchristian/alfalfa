@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 resources :activities
 resources :categories
 resources :accounts
-resources :assets
+resources :assets do 
+  resources :entries, module: :assets
+end
 resources :revenues
 resources :liabilities
 resources :equities
