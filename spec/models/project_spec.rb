@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Project, type: :model do
   describe "validations" do 
+    it {is_expected.to validate_presence_of :name }
+    it {is_expected.to validate_presence_of :id_number }
+    it {is_expected.to validate_presence_of :duration }
+    it {is_expected.to validate_presence_of :cost }
+    it {is_expected.to validate_presence_of :address}
   end
 
   describe "associations" do 
@@ -19,7 +24,7 @@ RSpec.describe Project, type: :model do
     it {is_expected.to have_many :accomplishments }
     it {is_expected.to have_many :remarks }
   end
-  describe "slippage" do
+  describe "#slippage" do
     before(:each) do 
       
     end
@@ -29,7 +34,7 @@ RSpec.describe Project, type: :model do
       expect(project.slippage).to eql(0)
     end
 
-    it "returns positive slippage if accomplishments is greater than the percent of actual accomplishments" do 
+    it "positive for actual accomplishment is greater than target accomplishment" do 
        project = create(:project, duration: 60)
        notice_to_proceed = create(:notice_to_proceed, date: Time.zone.now, project: project)
        accomplishment = create(:accomplishment, percent: 2, project: project)
@@ -43,16 +48,6 @@ RSpec.describe Project, type: :model do
        accomplishment = create(:accomplishment, percent: 2, project: project)
 
        expect(project.slippage).to be_negative
-    end
-  end
-
-  describe "percent of accomplishment" do 
-    it "returns the correct sum of all accomplishments" do 
-      project = create(:project)
-      accomplishment1 = create(:accomplishment, percent: 2, project: project)
-      accomplishment2 = create(:accomplishment, percent: 4, project: project)
-
-      expect(project.percent_of_accomplishment).to eql(accomplishment1.percent + accomplishment2.percent)
     end
   end
 
@@ -97,30 +92,36 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  describe "percent of accomplishment" do 
-    it "is zero if no accomplishment is given" do 
+  describe "#actual_accomplishment" do 
+    it "is zero if no for new project" do 
       project = create(:project)
 
-      expect(project.percent_of_accomplishment).to be(0)
+      expect(project.actual_accomplishment).to be(0)
     end
 
-    it "is positive if days percent of accomplishment" 
+    it ".total" do 
+      project = create(:project)
+      accomplishment1 = create(:accomplishment, percent: 2, project: project)
+      accomplishment2 = create(:accomplishment, percent: 2, project: project)
 
+      expect(project.actual_accomplishment).to eql(4.0)
+     
+end
    end
 
    describe "contract cost" do
    it "returns the original contract cost if no amount amount_revisions" do 
       project = create(:project, cost: 1_000_000)
 
-      expect(project.latest_revised_amount).to eql(1_000_000.0)
+      expect(project.revised_contract_amount).to eql(1_000_000.0)
    end 
 
-   it "returns the original contract cost plus the total amount revisions if amount revisions is present" do 
+   it ".revised_contract_amount" do 
       project = create(:project, cost: 1_000_000)
-      amount_revision = create(:amount_revision, revised_contract_amount: 10_000, project: project)
+      amount_revision = create(:amount_revision, amount: 10_000, project: project)
 
 
-      expect(project.latest_revised_amount).to eql(1_010_000.0)
+      expect(project.revised_contract_amount).to eql(1_010_000.0)
    end 
    end
 end

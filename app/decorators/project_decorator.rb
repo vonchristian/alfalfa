@@ -9,11 +9,15 @@ end
 
   def start_date_to_end_date
     if project.notice_to_proceed.present?
-      "#{project.start_date} to #{project.final_expiry_date}"
+      "#{project.start_date.strftime("%D")} to #{project.final_expiry_date.strftime("%D")}"
     else
       "No NTP"
     end
   end
+  def end_date
+     "#{project.final_expiry_date.strftime("%b %e, %Y")}"
+   end
+
   def notice_to_proceed_link(project)
     if project.notice_to_proceed.blank?
       link_to 'Enter NTP Date', new_project_notice_to_proceed_path(project)

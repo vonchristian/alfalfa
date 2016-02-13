@@ -61,7 +61,6 @@ GEM
     bullet (5.0.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
-    byebug (8.2.2)
     capybara (2.6.2)
       addressable
       mime-types (>= 1.16)
@@ -119,8 +118,6 @@ GEM
     fastercsv (1.5.5)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
-    font-kit-rails (1.2.0)
-      rails
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     gretel (3.0.8)
@@ -132,9 +129,6 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
-    jbuilder (2.4.1)
-      activesupport (>= 3.0.0, < 5.1)
-      multi_json (~> 1.2)
     jquery-rails (4.1.0)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -150,7 +144,6 @@ GEM
     mini_magick (4.4.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    mono_logger (1.1.0)
     multi_json (1.11.2)
     multipart-post (2.0.0)
     netrc (0.11.0)
@@ -159,10 +152,6 @@ GEM
     orm_adapter (0.5.0)
     pdf-core (0.6.0)
     pg (0.18.4)
-    pg_search (1.0.5)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
-      arel
     plutus (0.12.2)
       jquery-rails (>= 3.0)
       jquery-ui-rails (>= 4.0)
@@ -226,9 +215,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.5.0)
-    redis (3.2.2)
-    redis-namespace (1.5.2)
-      redis (~> 3.0, >= 3.0.4)
     refile (0.6.2)
       mime-types
       rest-client (~> 1.8)
@@ -240,17 +226,6 @@ GEM
     require_all (1.3.3)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
-    resque (1.25.2)
-      mono_logger (~> 1.0)
-      multi_json (~> 1.0)
-      redis-namespace (~> 1.3)
-      sinatra (>= 0.9.2)
-      vegas (~> 0.1.2)
-    resque-scheduler (4.1.0)
-      mono_logger (~> 1.0)
-      redis (~> 3.0)
-      resque (~> 1.25)
-      rufus-scheduler (~> 3.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -278,7 +253,6 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.7.3)
       sexp_processor (~> 4.1)
-    rufus-scheduler (3.2.0)
     safe_yaml (1.0.4)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -329,8 +303,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     uniform_notifier (1.9.0)
-    vegas (0.1.11)
-      rack (>= 1.0.0)
     warden (1.2.6)
       rack (>= 1.0)
     wicked (1.2.1)
@@ -346,7 +318,6 @@ DEPENDENCIES
   bootstrap-sass
   brakeman
   bullet
-  byebug
   capybara
   cocoon
   coffee-rails
@@ -356,13 +327,10 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
-  font-kit-rails (~> 1.2.0)
   gretel
-  jbuilder
   jquery-rails
   jquery-ui-rails
   pg
-  pg_search
   plutus
   prawn
   prawn-table
@@ -375,9 +343,6 @@ DEPENDENCIES
   rails_best_practices
   refile
   refile-mini_magick
-  responders
-  resque
-  resque-scheduler
   rspec-rails
   sass-rails
   searchkick

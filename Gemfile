@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 gem 'rails', '4.2.5.1'
-gem 'font-kit-rails', '~> 1.2.0'
 gem "gretel"
 gem 'draper'
 gem 'cocoon'
@@ -13,11 +12,9 @@ gem "refile-mini_magick"
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'plutus'
-  gem 'resque'
-  gem 'resque-scheduler'
+ 
   gem 'prawn'
   gem 'prawn-table'
-  gem 'pg_search'
   gem 'devise'
   gem 'pundit'
   gem 'simple_form'
@@ -25,10 +22,9 @@ gem 'plutus'
   gem 'sass-rails'
   gem 'autoprefixer-rails'
   gem 'uglifier'
-  gem 'coffee-rails'
+ 
   gem 'jquery-rails'
-  gem 'jbuilder'
-  gem 'responders'
+   gem "coffee-rails"
   gem 'wicked'
  
 group :production do
@@ -37,7 +33,6 @@ group :production do
   gem 'puma', group: :development
 end
 group :development, :test do
-  gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'

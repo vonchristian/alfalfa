@@ -1,8 +1,7 @@
 class Billing < ActiveRecord::Base
   belongs_to :project
-  belongs_to :project_billing
   belongs_to :contractor
- belongs_to :inventory
+ has_many :invoices
  # before_save :set_cost
   validates :quantity, numericality:{less_than: :current_inventory_quantity}
   after_commit :update_quantity_of_inventory

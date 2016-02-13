@@ -1,0 +1,81 @@
+
+<% breadcrumb :projects, @projects %>
+
+     
+           <div class="col-md-12">
+  <!-- Widget: user widget style 1 -->
+  
+ <div class="box box-solid">
+ <div class="box-body">
+ <div class="box-header with-border">
+      <span class="pull-right"><%=link_to projects_path, class: "btn btn-default" do %><i class="fa fa-th"></i><%end%></span>
+      
+        <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default pull-right" do %><i class="fa fa-road"></i> New project <%end%></span>
+               
+             </h4>
+    </div> 
+    <div class="box-footer">
+                
+                   <div class="row">
+                     <div class="col-md-12 col-sm-12">
+                  
+                      <% @projects.each do |project| %>
+             <div class="row">
+           <div class="col-md-2">
+           <h4 class="text-<%=project.slippage_color %> text-center"><i class="fa fa-caret-<%=project.slippage_sign %>"></i> <%=project.slippage%>%</h4>
+           </div> 
+            <div class="col-md-5 col-sm-6 col-xs-6">
+            <h5><%#=project.id_number %> <%= link_to truncate(project.name.upcase, length: 50), project %>
+             
+            </h5> 
+            <span class="help-block"><i class="fa fa-map-marker"></i> <%=project.address %>
+           <i class="fa fa-calendar"></i> <%=project.duration %> days 
+           
+           </span>
+
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6">
+            <% if project.amount_revisions.present? %>
+            <p class="text-danger"><strike><%=number_to_currency project.cost %> </strike></p>
+            <p class="text-success"><%=number_to_currency project.revised_contract_amount %></p>
+            <% else %>
+            <p class="text-success"><%=number_to_currency project.cost %> </p>
+            <% end %>
+           
+            
+            </div> 
+            <div class="col-md-2">
+            <ul>
+            <% project.contractors.each do |contractor| %>
+                  <li><span class="text-muted">
+                   <%#= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
+            <small><%=contractor.company.upcase %></small><br>
+            </span> </li>
+            <% end %>
+            </ul>
+            </div>
+            <div class="col-md-1">
+            
+            <div class="btn-group">
+  <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   <span class="fa fa-ellipsis-v"></span>
+  </button>
+  <ul class="dropdown-menu pull-right">
+    <li><a href="#"><i class="fa fa-rub"></i> New Expense</a></li>
+    <li><a href="#">Add Subcontractors</a></li>
+    <li><a href="#">New Material </a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Update Accomplishment</a></li>
+  </ul>
+</div>
+          
+            </div>
+            </div>
+           <hr />
+            <% end %>
+                      </div>
+                    </div><!-- /.col -->
+                    </div>
+                    </div>
+                    </div>
+                    </div>              

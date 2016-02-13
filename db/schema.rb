@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212042937) do
+ActiveRecord::Schema.define(version: 20160212232800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,11 +217,13 @@ ActiveRecord::Schema.define(version: 20160212042937) do
   create_table "project_billings", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "billing_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "contractor_id"
   end
 
   add_index "project_billings", ["billing_id"], name: "index_project_billings_on_billing_id", using: :btree
+  add_index "project_billings", ["contractor_id"], name: "index_project_billings_on_contractor_id", using: :btree
   add_index "project_billings", ["project_id"], name: "index_project_billings_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
@@ -233,8 +235,9 @@ ActiveRecord::Schema.define(version: 20160212042937) do
     t.integer  "duration"
     t.decimal  "cost"
     t.integer  "category_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "implementing_office"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
@@ -243,8 +246,10 @@ ActiveRecord::Schema.define(version: 20160212042937) do
   create_table "remarks", force: :cascade do |t|
     t.integer  "project_id"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.integer  "remarker_id"
   end
 
   add_index "remarks", ["project_id"], name: "index_remarks_on_project_id", using: :btree
@@ -299,6 +304,7 @@ ActiveRecord::Schema.define(version: 20160212042937) do
   add_foreign_key "equipment", "projects"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "project_billings", "billings"
+  add_foreign_key "project_billings", "contractors"
   add_foreign_key "project_billings", "projects"
   add_foreign_key "remarks", "projects"
   add_foreign_key "requirements", "bids"

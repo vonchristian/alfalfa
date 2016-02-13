@@ -17,10 +17,10 @@ class Project < ActiveRecord::Base
     has_many :accomplishments
     has_many :remarks
   
-
+    validates :name,  :id_number, :duration, :cost, :address, presence: true
   
 
-    before_save :add_main_contractor_to_contractors
+    after_create :add_main_contractor_to_contractors
     
    def total_collection
     self.collections.sum(:amount)
@@ -44,8 +44,8 @@ class Project < ActiveRecord::Base
     self.total_amount_revisions + self.sum(:cost)
   end
   def slippage
-    if notice_to_proceed.present? && accomplishments.present?
-      (percent_of_accomplishment - percent_actual_accomplished).round(2)
+    if notice_to_proceed.present?
+      (actual_accomplishment - target_accomplishment ).round(2)
     else
         0
     end
@@ -58,7 +58,7 @@ class Project < ActiveRecord::Base
     end
   end
 
-    def percent_of_accomplishment
+    def actual_accomplishment
       if self.accomplishments.present?
         self.accomplishments.sum(:percent)
       else
@@ -66,8 +66,12 @@ class Project < ActiveRecord::Base
       end
     end
 
-    def percent_actual_accomplished
-       (days_elapsed / duration.to_f) * 100
+    def target_accomplishment
+      if notice_to_proceed.present?
+       ((days_elapsed / duration.to_f) * 100).round(2)
+     else
+      0
+     end
 end
 
 
@@ -91,11 +95,7 @@ end
   end
 
     def start_date
-      if notice_to_proceed
       notice_to_proceed.date
-    else
-      "NTP Not Yet Awarded"
-    end
     end
 
     def total_number_of_days_extended
@@ -106,8 +106,8 @@ end
       ((Time.zone.now.to_i - start_date.to_i)/86400).floor
     end
 
-    def remaining_days_before_expiry
-      Time.zone.now..(self.expiry_date)
+    def remaining_days
+      revised_duration - days_elapsed
     end
   
 
@@ -115,21 +115,24 @@ end
         if notice_to_proceed.present?
         ((self.notice_to_proceed.date.to_date) + (self.duration))
     else
-        "NTP not yet awarded"
+        "No NTP Yet"
     end
     end
 
     def revised_expiry_date
      if notice_to_proceed.present? && time_extensions.present?
-        ((self.notice_to_proceed.date) + (self.duration) + ((total_number_of_days_extended)).days).strftime("%B %d, %Y") 
+        self.notice_to_proceed.date + self.revised_duration.days
     else
         "No Time Revisions "
     end
     end
 
+    def revised_duration
+      self.duration + self.total_number_of_days_extended
+    end
     private
     def add_main_contractor_to_contractors
-      Contract.create(contractor_id: self.main_contractor.id, project_id: self.id )
+      Contract.create(contractor_id: self.main_contractor.id, project_id: self.id ) if self.new_record?
     end
 
 end

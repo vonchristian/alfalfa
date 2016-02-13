@@ -8,7 +8,7 @@ class AmountRevisionsController < ApplicationController
     @project = Project.find(params[:project_id])
     @amount_revision = @project.amount_revisions.build(amount_revision_params)
       if @amount_revision.save 
-      redirect_to @project, notice: "Project Amount  revised to #{ view_context.number_to_currency(@amount_revision.revised_contract_amount) }"
+      redirect_to @project, notice: "Successfully added."
     else
       render :new 
     end

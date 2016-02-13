@@ -18,7 +18,7 @@ def billings_for(project)
     self.where(:main_contractor => false)
   end
   def full_name
-    "#{first_name} #{middle_name.to_s.first.upcase}. #{last_name}"
+    "#{first_name} #{last_name}"
   end
   def to_s
     "#{company}"

@@ -1,40 +1,63 @@
 <% breadcrumb :project, @project %>
-<div class="row">
- 
-    <div class="col-md-12"> 
- 
-    <div class="nav-tabs-custom">
-    
-  
-      <ul class="nav nav-tabs">
-      <br>
+<div class="col-md-12">
+   <div class="card">
       <div class="row">
-      <div class="col-md-2">
-      </div>
-      <div class="col-md-10">
-<h4 class="text-info"><%=@project.name.upcase %></h4>
-<hr>
-</div>
-</div>
+        <div class="col-md-2">
+         <h2><a href="/projects" data-toggle="tooltip" title="Return to Project Index"><i class="fa fa-angle-left"></i></a></h2>
+        </div>
+        <div class="col-md-10">
+          <h4 class="text-info"><%=@project.name.upcase %></h4>
+        </div>
+      </div><hr>
+      <ul class="nav nav-tabs" role="tablist">
 
-        <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+        <li  role="presentation" class="active">
+           <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+        </li>
         
-        <li><a href="#timeline" data-toggle="tab">Activities</a></li>
-        <li><a href="#accomplishment" data-toggle="tab"></i> Accomplishments</a></li>
-         <li><a href="#expenses" data-toggle="tab">Expenses</a></li>
+        <li role="presentation">
+           <a href="#accomplishment" aria-controls="accomplishment" role="tab" data-toggle="tab"></i> Accomplishments</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#contractors" aria-controls="contractors" role="tab" data-toggle="tab"></i> Contractors</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a>
+        </li>
        
-        <li><a href="#budget" data-toggle="tab"></i> Budget</a></li>
-        <li><a href="#budget" data-toggle="tab"></i> Inspections</a></li>
+       <!--  <li role="presentation">
+           <a href="#budget" aria-controls="budget" role="tab" data-toggle="tab"></i> Budget</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#inspection" aria-controls="inspection" role="tab" data-toggle="tab"></i> Inspections</a>
+        </li> -->
        
-       
-        <li><a href="#billings" data-toggle="tab">Billings</a></li>
-        <li><a href="#collections" data-toggle="tab">Collections</a></li>
+        <li role="presentation">
+           <a href="#billings" aria-controls="billings" role="tab" data-toggle="tab">Billings</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#collections" aria-controls="collections" role="tab" data-toggle="tab">Collections</a>
+        </li>
       
-        <!-- <li><a href="#bidding" data-toggle="tab"><i class="fa fa-balance-scale"></i> Bidding</a></li> -->
-        <li><a href="#settings" data-toggle="tab">Settings</a></li>
-        <li><a href="#settings" data-toggle="tab">Reports</a></li>
-         
-    
+        <li role="presentation">
+           <a href="#remarks" aria-controls="bidding" role="tab" data-toggle="tab"> Remarks</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Activities</a>
+        </li>
       </ul>
      
       <div class="tab-content">
@@ -48,9 +71,9 @@
           <%=render 'collections' %>
 
           <%=render 'bidding' %>
+           <%=render 'remarks' %>
 
         <%=render 'settings' %>
       </div><!-- /.tab-content -->
-    </div><!-- /.nav-tabs-custom -->
-  </div><!-- /.col -->
+   </div><!-- /.col -->
 </div><!-- /.row -->

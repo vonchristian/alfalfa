@@ -5,7 +5,7 @@
 <%=@project.name %>
 <hr>
 <%= simple_form_for [@project, @project_billing] do |f| %>
-
+<%=f.input :contractor_id, collection: @project.contractors %>
 <h4>Billing</h4>
 <hr>
 <div class="billings">

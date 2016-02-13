@@ -10,7 +10,7 @@ class AccomplishmentsController < ApplicationController
       if @accomplishment.save 
         @accomplishment.create_activity :create, owner: current_user, recipient: @project
       
-      redirect_to @project, notice: "Project accomplishment marked at #{@accomplishment.percent} %."
+      redirect_to @project, notice: "Accomplishment saved successfully."
     else
       render :new 
     end

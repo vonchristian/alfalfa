@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   def index
     @projects =ProjectDecorator.decorate_collection(Project.all)
   end
-  def detailed
+  def overview
    @projects =ProjectDecorator.decorate_collection(Project.all)
   end
   def search
@@ -13,12 +13,25 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create(project_params)
-    if  @project.save
-      @project.create_activity :create, owner: current_user, trackable: @project
-    redirect_to @project, notice: "Project successfully saved."
-  else 
-    render :new 
+      if  @project.save
+        @project.create_activity :create, owner: current_user, trackable: @project
+      redirect_to @project, notice: "Project successfully saved."
+    else 
+      render :new 
+    end
   end
+
+  def edit
+    @project = Project.find(params[:id])
+  end
+  def update
+      @project = Project.find(params[:id])
+      if @project.update(project_params)
+        @project.create_activity :update, owner: current_user, trackable: @project
+          redirect_to @project, notice: "Project successfully updated."
+      else
+          render :edit
+      end
   end
 
   def show
@@ -27,6 +40,8 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :category_id)
+    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :category_id, :implementing_office)
   end
+
+  
 end

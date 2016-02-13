@@ -1,0 +1,86 @@
+<div class="row">
+<div class="col-md-9 col-md-offset-1">
+<div class="box box-solid">
+<div class="box-body">
+<br>
+<h4 class="text-center">New Project Details</h4>
+<span class="help-block text-center"> </span>
+<hr>
+        
+ 
+                  <%= simple_form_for @project do |f| %>
+<%=f.error_notification %>
+
+  <div class="col-md-4 col-md-offset-1 col-sm-6">
+  <br> 
+  <h5 class="text-center text-muted">
+  <br>
+  <br>
+  <br>
+  PROJECT INFORMATION
+  </h5>
+       
+  </div> 
+  <div class="col-md-5 col-sm-6">
+  <%=f.input :name, as: :text, input_html: {rows: 6 }, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
+      <br>
+  
+  <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
+
+ 
+  <%=f.input :duration, label: "Duration (Number of Days)", as: :string, placeholder: "Contract Duration" %> 
+ 
+
+   <%= f.input :cost, label: "Contract Cost",  as: :string, placeholder: "Contract Cost"%>
+
+<%=f.input :address, label: "Contract Location", placeholder: "Contract Location" %>
+<%=f.input :implementing_office %>
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-md-4 col-md-offset-1 col-sm-6">
+<h5 class="text-center text-muted"> CATEGORY
+</h5>
+</div>
+<div class="col-md-7">
+<table class="table table-compressed">
+  <% Category.all.each do |category| %>
+        <tr height="60px">
+            <td width="20px"><input class="radio_buttons optional" value="<%=category.id%>" name="project[category_id]" id="project_category_id_<%=category.id%>" type="radio"></td>
+            <td width="45px"><%= image_tag attachment_url(category, :photo, :fill, 35, 35, fallback: 'default-xs-small.png'), class: 'img-rounded' %></td>
+            <td><%= category.name %></td>
+        </tr>
+       
+      <% end %>
+       </table>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-md-4 col-md-offset-1 col-sm-6">
+<h5 class="text-center text-muted"> MAIN CONTRACTOR
+</h5>
+</div>
+<div class="col-md-7">
+  <table class="table table-compressed">
+      <% Contractor.main_contractors.each do |main_contractor| %>
+        <tr height="60px">
+            <td width="20px"><input class="radio_buttons optional" value="<%=main_contractor.id%>" name="project[main_contractor_id]" id="project_main_contractor_id_<%=main_contractor.id%>" type="radio"></td>
+            <td width="45px"><%= image_tag attachment_url(main_contractor, :profile_image, :fill, 35, 35, fallback: 'default-small.png'), class: 'img-rounded' %></td>
+            <td><%= main_contractor.company %></td>
+        </tr>
+      <% end %>
+  </table>
+</div>
+</div>
+<div class="modal-footer">  
+<%=f.submit "Save Project", class: "btn btn-primary" %>
+</div>
+<% end %>
+</div>
+
+</div>
+  
+</div>

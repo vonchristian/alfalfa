@@ -16,7 +16,7 @@ class ProjectBillingsController < ApplicationController
 
 	private 
 	def project_billing_params
-		params.require(:project_billing).permit(billings_attributes: [:id, :quantity, :inventory_id, :_destroy])
+		params.require(:project_billing).permit(:contractor_id, billings_attributes: [:id, :quantity, :inventory_id, :_destroy])
 	end
 end
 

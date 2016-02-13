@@ -10,7 +10,7 @@ class ContractsController < ApplicationController
     if @contract.save
       @contract.create_activity :create, owner: current_user, recipient: @project
       
-      redirect_to @project, notice: "successfully"
+      redirect_to @project, notice: "Contractor added successfully to project."
     else
       render :new
     end

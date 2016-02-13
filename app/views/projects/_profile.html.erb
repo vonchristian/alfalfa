@@ -1,7 +1,54 @@
 
 <div class="active tab-pane" id="profile">
-<br>
- <div class="box-body">
+  <div class="row"> 
+     <div class="col-md-4">
+        <div class="pad box-pane-right bg-gray-light" style="min-height: 480px">
+           <div class="box-header">
+               <h5 class="text-muted"><b>PROJECT INFO</b></h5>
+           </div><!-- /.box-header -->
+           <div class="box-body">
+              <table class="table with-border">
+                 <tr>
+                     <td><span><i class="fa fa-clock-o"></i> Notice Of Award</span>
+                        <p class="text-muted"><%=@project.ntp %>
+                        <small class="pull-right"><%=link_to "Add NTP", new_project_notice_to_proceed_path(@project), class: "btn btn-xs btn-warning btn-flat" if @project.notice_to_proceed.blank? %></small>
+                        </p>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td><span><i class="fa fa-building"></i> Implementing Office</span>
+                        <p class="text-muted"><%=@project.implementing_office%></p>
+                     </td>
+                        
+                  </tr>
+                  <tr>
+                       
+                        <td><span><i class="fa fa-map-marker"></i> Location</span>
+                        <p class="text-muted"><%=@project.address %></p>
+                        
+                        </td>
+                        
+                  </tr>
+                 
+                 
+                  
+                  <tr>
+                      <td>
+                         <center>
+                            <%=link_to edit_project_path(@project), class: 'btn btn-sm btn-primary btn-flat' do %>
+                               <i class="fa fa-edit"> <span>Update Project Info</span></i>
+                             <% end %>
+                          </center>
+                      </td>
+                  </tr>
+                    
+              </table>
+                 
+           </div>
+        </div>
+     </div>
+  </div>
+  <div class="box-body">
                   <div class="row">
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
@@ -13,7 +60,7 @@
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
                         <span class="description-percentage text-yellow"></span>
-                        <h5 class="description-header text-yellow"><%=number_to_currency @project.total_expenses %></h5>
+                        <h5 class="description-header text-danger"><%=number_to_currency @project.total_expenses %></h5>
                         <span class="description-text">TOTAL EXPENSES</span>
                       </div><!-- /.description-block -->
                     </div><!-- /.col -->
@@ -34,107 +81,99 @@
                 </div><!-- /.box-footer -->
                 <hr>
                 <br>
-           <div class="row">
+           <div class="row"> 
              <div class="col-md-4">
-               <div class="box box-primary">
-                 <div class="box-header with-border">
-                   <h4 class="box-title">Sub Contractors</h4>
-                     <div class="box-tools pull-right">
-                       <span><%=link_to "Add Sub Contractor", new_project_contract_path(@project), class: "btn btn-primary btn-sm btn-flat" %>
-                       </span>
-                      </div>
+                <div class="box box-primary">
+                 <div class="box-header">
+                   <b class="text-info"><%=@project.contractors.count %> CONTRACTORS</b>
                     </div><!-- /.box-header -->
                     <div class="box-body">
+                      <table class="table with-border">
                       <%@project.contractors.each do |contractor| %>
-                        <%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
-                        <span class="text-muted"><%=contractor.full_name %></span>
-                        <span class="help-block"><%= contractor.company %></span>
-                        <hr>
+                         <tr>
+                        <td  width="55px"><%= image_tag attachment_url(contractor, :profile_image, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></td>
+                        <td><span class="text-primary"><b><%=contractor.full_name %></b></span>
+                        <span class="help-block text-muted"><%= contractor.company %></span>
+                        
+                        <!-- <div class="row">
+                        <div class="col-md-4">
+                        <span class="help-block"> Billings </span> 
+                        <small class="text-muted">900,000.00</small>
+                        </div>
+                        <div class="col-md-4">
+                         <span class="help-block"> Paid </span>
+                         <small class="text-success">100,000.00</small>
+                         </div>
+                         <div class="col-md-4">
+                         <span class="help-block"> Remaining </span>
+                         <small class="text-danger">800,000.00</small>
+                         </div>
+                         </div> -->
+                        </td>
+                        </tr>
                       <% end %>
-                    </div>
+                     </table>
+                      <br>
+                       <center><%=link_to new_project_contract_path(@project), class: "btn btn-default" do %><i class="fa fa-user-plus"></i> Add Contractor<%end%></center>
+                    </div> 
                   </div>
                 </div>
-             <div class="col-md-4">
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Latest Expenses</h3>
-                  <div class="box-tools pull-right">
+                 <div class="col-md-4">
+               <div class="box box-success">
+                 <div class="box-header">
+                   <b class="text-success"><%=@project.remarks.count %> Remarks</b>
+                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <div class="table-responsive">
-                    <table class="table no-margin">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Amount</th>
-                          <th>Account</th>
-                          <th>Description</th>
+                     </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <table class="table with-border">
+                      <%@project.remarks.limit(3).each do |remark| %>
+                         <tr>
+                        <td  width="55px"><%= image_tag attachment_url(remark.remarker, :profile_photo, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></td>
+                        <td><span class="text-success"><b><%=remark.title %></b></span>
+                        <small class="help-block text-muted">by: <%=remark.remarker.full_name if remark.remarker %> at <%=remark.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
+                        <span class="help-block text-muted"><%= remark.content %></span></td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        <% @project.expenses.limit(5).each do |expense| %>
-                        <tr>
-                          <td><%=expense.created_at.strftime("%D")%></td>
-                          <td><%=number_to_currency expense.debit_amounts.last.amount %></td>
-                          <td><%=expense.debit_amounts.last.account.name %></td>
-                          <td><%=expense.description %></td>
+                      <% end %>
+                      </table>
+                     
+                     <center><a href="#remarks" data-toggle="tab" title="View All Remarks">View All Remarks</i></a></center>
+            <br>          
+                       <center><%=link_to new_project_remark_path(@project), class: "btn btn-default" do %><i class="fa fa-plus-circle"></i> Add Remarks<%end%></center>
+                    </div> 
+                  </div>
+                </div>
+                <div class="col-md-4">
+               <div class="box box-danger">
+                 <div class="box-header">
+                   <b class="text-danger"><%=@project.expenses.count%> Expenses</b>
+                   <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                     </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <table class="table with-border">
+                      <%@project.expenses.each do |expense| %>
+                         <tr>
+                        
+                        <td><span class="text-danger"><b><%=expense.description %></b></span>
+                        <small class="help-block pull-right"><%=number_to_currency expense.debit_amounts.last.amount %></small>
+                        <span class="help-block text-muted"><%= expense.debit_amounts.last.account.name %></span></td>
                         </tr>
-                        <% end %>
-                      </tbody> 
-                    </table>
-                  </div><!-- /.table-responsive -->
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div><!-- /.col -->    
-            <div class="col-md-4">
-              <div class="info-box bg-aqua">
-                <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Notice of Award</span>
-                  <span class="info-box-number">
-                    <% if @project.notice_to_proceed.present? %>
-                      <%=@project.notice_to_proceed.date.strftime("%D") %>
-                    <% else %>
-                      <%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn" %>
-                    <% end %> 
-                  </span> 
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-              <div class="info-box bg-yellow">
-                <span class="info-box-icon"><i class="fa fa-calendar-o"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Duration</span>
-                  <span class="info-box-number"><%=@project.duration%> Days </span>
-                  <div class="progress">
-                    <div class="progress-bar" style="width: <%=@project.percent_actual_accomplished %>%"></div>
+                      <% end %>
+                      </table>
+               
+                        <center><a href="#expenses" data-toggle="tab" title="View All Expenses">View All Expenses</i></a></center>
+                               <br>
+                       <center><%=link_to new_project_expense_path(@project), class: "btn btn-default" do %><i class="fa fa-plus-circle"></i> Add Expense<%end%></center>
+                    </div> 
                   </div>
-                  <span class="progress-description">
-                    <%=@project.days_elapsed %> days elapsed
-                  </span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-             <div class="info-box bg-green">
-                <span class="info-box-icon"><i class="fa fa-check-square-o"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Accomplishment</span>
-                  <span class="info-box-number"><%=@project.accomplishments.total %> % </span>
-                  <div class="progress">
-                    <div class="progress-bar" style="width: <%=@project.accomplishments.total %>%"></div>
-                  </div>
-                  <span class="progress-description">
-                    <%=@project.accomplishments.total %> % progress in 30 Days
-                  </span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div>
-            
-
-
-                
-
-              </div>
+                </div>
+                </div>
+                <hr>
+           
 
             </div>
