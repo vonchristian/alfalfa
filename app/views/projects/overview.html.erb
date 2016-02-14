@@ -2,8 +2,6 @@
 <% breadcrumb :projects, @projects %>
 
 
-<div class="container">
-  <div class="row">
   <div class="col-md-4">
     <div class="box box-solid">
       <div class="box-header">
@@ -32,7 +30,7 @@
                   </div>
                   <br>
                   <% project.contractors.each do |contractor| %>
-             <span data-toggle="tooltip" title="<%=contractor.full_name %>"><%= image_tag attachment_url(contractor, :profile_image, :fill, 40, 40, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></span >
+             <span data-toggle="tooltip" title="<%=contractor.full_name %>"><%= image_tag attachment_url(contractor, :profile_image, :fill, 30, 30, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></span >
              <span class="help-block text-muted"><%#=entry.debit_amounts.last.account.name %></span >
              <span class="help-block text-muted"><%#=entry.commercial_document.try(:name) %></span >
 <% end %>
@@ -57,11 +55,11 @@
                <a href="/projects/<%=project.id%>">
               <div class="box-body">
              
-              <h5 class="text-muted"><%=project.name.truncate(150)%></h5>
+              <h5 class="text-info"><%=project.name.truncate(150)%></h5>
                 
  
               <hr> 
-  <small class="text-muted" title="Contract Amount"> <span class="text-muted"> <%=number_to_currency project.revised_contract_amount %></small>
+  <small class="text-muted" title="Contract Amount"> <span class="text-muted"> <%=number_to_currency project.revised_contract_amount %></span></small>
               &nbsp; &nbsp;
               <small class="text-muted" title="Days Elapsed"><i class="fa fa-calendar"></i> <span class="text-danger"> <%=project.days_elapsed%></span> /<%=project.revised_duration%></small>
               &nbsp; &nbsp;
@@ -83,5 +81,3 @@
     </div>
   </div>
   
-</div>
- 
