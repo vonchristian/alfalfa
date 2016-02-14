@@ -12,17 +12,17 @@
 <thead>   
 <tr>
   
-  <th style="width: 50%"><small>PROJECT NAME</small></th>
-  <th><small>TARGET ACC.</small></th>
-  <th><small>ACTUAL ACC.</small></th>
-<th style="width: 10%"><small>SLIPPAGE</small></th>
-  <th><small>AMOUNT</small></th>
+  <th style="width: 50%">PROJECT NAME</th>
+  <th>TARGET ACC.</th>
+  <th>ACTUAL ACC.</th>
+<th style="width: 10%">SLIPPAGE</th>
+  <th>AMOUNT</th>
   <!-- <th><small>CONTRACTORS</small></th> -->
-  <th><small>DURATION/EXPIRY</small></th> 
-  <th style="width: 20%">REMARKS</th>
+  <th>DURATION/EXPIRY</th> 
+  <th>REMARKS</th>
 </tr>
 </thead> 
-<tbody> 
+<tbody>  
  <% @projects.each do |project| %> 
  <tr>
   <td><%=link_to project.name.upcase, project %></td>
