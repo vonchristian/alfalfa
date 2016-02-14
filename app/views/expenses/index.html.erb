@@ -1,45 +1,54 @@
+<% breadcrumb :expenses, @expenses %>
+
 <div class="container">
-<div class="row">
-<%@expenses.each do |expense| %>
-<div class="col-md-4">
-                <div class="box box-solid">
-                 <div class="box-header">
-                   <b class="text-muted"><%=expense.name%></b>
-                    </div><!-- /.box-header -->
-                    <div class="box-body">
-                      <table class="table with-border">
-                      <%expense.debit_entries.each do |entry| %>
-                         <tr>
-                        <td  width="55px"><%= image_tag attachment_url(entry.owner, :profile_photo, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
-                        <small><%=entry.owner.full_name if entry.owner.present? %></small>
-                        </td>
+  <div class="row">
+  <div class="col-md-5">
+    <div class="box box-solid">
+      <div class="box-header">
+        <b class="text-muted">Expense Transactions</b>
+      </div>
+      <div class="box-body">
+      <table class="table">
+      <% @expenses.each do |expense| %>
+        <%expense.debit_entries.each do |entry| %>
+        <tr>
+        <td  width="80px"><%= image_tag attachment_url(entry.owner, :profile_photo, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
+                      <small class="text-muted"><%=entry.owner.full_name if entry.owner.present? %></small>
+                    </td>
 
-                        <td><small class="text-danger"><b><%=entry.description %></b></small>
-                        <span class="help-block text-muted"><%=number_to_currency entry.debit_amounts.last.amount %></span >
-                        <span class="help-block text-muted"><%=entry.debit_amounts.last.amount %></span >
+          <td><small class="text-danger"><b><%=entry.description %></b></small>
+          
+             <span class="help-block text-muted"><%=number_to_currency entry.debit_amounts.last.amount %></span >
+             <span class="help-block text-muted"><%=entry.debit_amounts.last.account.name %></span >
+             <span class="help-block text-muted"><%=entry.commercial_document.try(:name) %></span >
 
-                        
-                        <!-- <div class="row">
-                        <div class="col-md-4">
-                        <span class="help-block"> Billings </span> 
-                        <small class="text-muted">900,000.00</small>
-                        </div>
-                        <div class="col-md-4">
-                         <span class="help-block"> Paid </span>
-                         <small class="text-success">100,000.00</small>
-                         </div>
-                         <div class="col-md-4">
-                         <span class="help-block"> Remaining </span>
-                         <small class="text-danger">800,000.00</small>
-                         </div>
-                         </div> -->
-                        </td>
-                        </tr>
-                      <% end %>
-                     </table>
-                      <br>
-                    </div> 
-                  </div>
-                </div>
-<% end %>
+          </td> 
+          </tr>
+        <% end %>
+      <% end %>
+      </table> 
+      </div> 
+    </div>
+  </div>
+
+    <div class="col-md-7">
+      <%@expenses.each do |expense| %>
+        <div class="col-md-4">
+          <div class="box box-solid">
+            <div class="box-header">
+              <b class="text-danger"> <%=expense.name%></b>
+              </div>
+              <div class="box-body">
+              <h5 class="text-muted"><center><%=number_to_currency expense.balance %></center></h5>
+              <hr> 
+              <small class="text-danger" title="New Expense"><i class="fa fa-plus-circle"></i></small>
+            </div><!-- /.box-header -->
+            </div>
+            </div>
+            <% end %>
+            
+    </div>
+  </div>
+  
 </div>
+ 

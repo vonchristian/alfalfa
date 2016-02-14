@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
 
   
     validates :name,  :id_number, :duration, :cost, :address, presence: true
-  
+  validates :id_number, uniqueness: true
 
     after_create :add_main_contractor_to_contractors
     after_commit :add_to_accounts
@@ -105,7 +105,11 @@ end
     end
     
     def days_elapsed
+      if notice_to_proceed
       ((Time.zone.now.to_i - start_date.to_i)/86400).floor
+    else
+      0
+    end
     end
 
     def remaining_days

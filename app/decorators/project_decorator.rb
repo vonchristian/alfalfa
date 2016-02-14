@@ -25,6 +25,7 @@ end
       project.ntp 
     end
   end
+
   def slippage_sign
      if project.slippage.negative?
     'down'
@@ -32,6 +33,15 @@ end
     'up'
   end
 end
+
+ def box_status
+     if project.slippage.negative?
+    'danger'
+  else
+    'solid'
+  end
+end
+
 
   def slippage_color
     if project.slippage.negative?
@@ -50,13 +60,7 @@ end
     end
   end
 
-  def days_elapsed
-    if project.notice_to_proceed
-       ((notice_to_proceed.date.to_i - Time.zone.now.to_i)/86400).abs
-    else
-       "No NTP yet."
-    end
-  end
+  
 
   def percent_accomplished
     if project.accomplishments.any?

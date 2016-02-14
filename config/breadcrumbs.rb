@@ -20,6 +20,10 @@ crumb :contractor do |contractor|
   parent :contractors
 end
 
+crumb :expenses do
+  link "Expenses", expenses_path
+end
+
 # crumb :project_issues do |project|
 #   link "Issues", project_issues_path(project)
 #   parent :project, project
