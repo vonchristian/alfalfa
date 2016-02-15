@@ -1,6 +1,8 @@
 class Inventory < ActiveRecord::Base
   # after_create :add_to_accounts
   include PublicActivity::Common
+  include PgSearch
+  multisearchable :against => [:name]
   def current_inventory_quantity
     quantity
   end

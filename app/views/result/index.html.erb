@@ -1,5 +1,17 @@
-<ul>
-  <% @pg_search_documents.each do |pg_search_document| %>
-    <li><%= link_to pg_search_document.searchable.name, "../#{(pg_search_document.searchable.class).to_s.downcase!.pluralize}/#{pg_search_document.searchable.id}" %></li>
-  <% end %>
-</ul>
+<div class="container">
+	<div class="box box-solid">
+		<table class="table">
+			<% if @pg_search_documents.empty? %>
+				<tr>
+					<td>No results found!</td>
+				</tr>
+			<% else %>
+				  <% @pg_search_documents.each do |pg_search_document| %>
+					<tr>
+				    		<td><%= link_to pg_search_document.searchable.name, "../#{(pg_search_document.searchable.class).to_s.downcase!.pluralize}/#{pg_search_document.searchable.id}" %></td>
+					</tr>
+				  <% end %>
+			<% end %>
+		</table>
+	</div>
+</div>

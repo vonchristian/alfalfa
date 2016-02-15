@@ -21,9 +21,10 @@
          
         <%=render 'layouts/sidebar' %>
       <% end %>
+
       <div class="content-wrapper">
-      
-        <section class="content">
+        <section class="custom-content">
+<%=render 'layouts/navigation_top' %>
           <%=render 'layouts/flash' %>
           <div class="row">
           <%= yield %>
