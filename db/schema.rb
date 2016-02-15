@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213132536) do
+ActiveRecord::Schema.define(version: 20160215035424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20160213132536) do
     t.integer  "contractor_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.decimal  "amount"
   end
 
   add_index "contracts", ["contractor_id"], name: "index_contracts_on_contractor_id", using: :btree
@@ -139,7 +140,11 @@ ActiveRecord::Schema.define(version: 20160213132536) do
     t.string   "photo_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "position"
+    t.integer  "project_id"
   end
+
+  add_index "employees", ["project_id"], name: "index_employees_on_project_id", using: :btree
 
   create_table "equipment", force: :cascade do |t|
     t.string   "plate_number"
@@ -218,6 +223,7 @@ ActiveRecord::Schema.define(version: 20160213132536) do
     t.integer  "commercial_document_id"
     t.string   "commercial_document_type"
     t.integer  "owner_id"
+    t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -225,6 +231,7 @@ ActiveRecord::Schema.define(version: 20160213132536) do
   add_index "plutus_entries", ["commercial_document_id", "commercial_document_type"], name: "index_entries_on_commercial_doc", using: :btree
   add_index "plutus_entries", ["date"], name: "index_plutus_entries_on_date", using: :btree
   add_index "plutus_entries", ["owner_id"], name: "index_plutus_entries_on_owner_id", using: :btree
+  add_index "plutus_entries", ["recipient_id"], name: "index_plutus_entries_on_recipient_id", using: :btree
 
   create_table "project_billings", force: :cascade do |t|
     t.integer  "project_id"
@@ -303,6 +310,16 @@ ActiveRecord::Schema.define(version: 20160213132536) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "workers", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "workers", ["employee_id"], name: "index_workers_on_employee_id", using: :btree
+  add_index "workers", ["project_id"], name: "index_workers_on_project_id", using: :btree
+
   add_foreign_key "accomplishments", "projects"
   add_foreign_key "amount_revisions", "projects"
   add_foreign_key "bids", "projects"
@@ -322,4 +339,6 @@ ActiveRecord::Schema.define(version: 20160213132536) do
   add_foreign_key "requirements", "bids"
   add_foreign_key "requirements", "documents"
   add_foreign_key "time_extensions", "projects"
+  add_foreign_key "workers", "employees"
+  add_foreign_key "workers", "projects"
 end

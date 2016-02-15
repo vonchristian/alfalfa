@@ -2,16 +2,16 @@
 <div class="col-md-12">
    <div class="card">
       <div class="row">
-        <div class="col-md-2">
-         <h2><a href="/projects" data-toggle="tooltip" title="Return to Project Index"><i class="fa fa-angle-left"></i></a></h2>
+        <div class="col-md-1">
+         <h1><a href="/projects" data-toggle="tooltip" title="Return to Project Index"><i class="fa fa-angle-left"></i></a></h1>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-11">
           <h4 class="text-info"><%=@project.name.upcase %></h4>
         </div>
-      </div><hr>
+      </div>
       <ul class="nav nav-tabs" role="tablist">
 
-        <li  role="presentation" class="active">
+         <li  role="presentation" class="active">
            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
         </li>
         
@@ -27,17 +27,13 @@
            <a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a>
         </li>
        
-       <!--  <li role="presentation">
-           <a href="#budget" aria-controls="budget" role="tab" data-toggle="tab"></i> Budget</a>
-        </li>
+       
 
         <li role="presentation">
-           <a href="#inspection" aria-controls="inspection" role="tab" data-toggle="tab"></i> Inspections</a>
-        </li> -->
-       
-        <li role="presentation">
-           <a href="#billings" aria-controls="billings" role="tab" data-toggle="tab">Billings</a>
+           <a href="#workers" aria-controls="inspection" role="tab" data-toggle="tab"></i> Workers</a>
         </li>
+       
+       
 
         <li role="presentation">
            <a href="#collections" aria-controls="collections" role="tab" data-toggle="tab">Collections</a>
@@ -48,7 +44,7 @@
         </li>
 
         <li role="presentation">
-           <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+           <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Change Orders</a>
         </li>
 
         <li role="presentation">
@@ -69,6 +65,7 @@
           <%=render 'projects/billings/billings' %>
           <%=render 'contractors' %>
           <%=render 'collections' %>
+             <%=render 'workers' %>
 
           <%=render 'bidding' %>
            <%=render 'remarks' %>

@@ -22,6 +22,6 @@ class EntriesController < ApplicationController
   end
   private
   def entry_params
-    params.require(:entry).permit(:description, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
+    params.require(:entry).permit(:description, :commercial_document, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
   end
 end

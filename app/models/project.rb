@@ -1,11 +1,14 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Common
+  searchkick autocomplete: ['name']
    has_many :collections
    has_many :project_billings
     has_one :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category
-
+    has_many :workers
+    has_many :employees, through: :workers
+    
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
     has_many :bids
@@ -97,7 +100,9 @@ end
   end
 
     def start_date
+      if notice_to_proceed
       notice_to_proceed.date
+    end
     end
 
     def total_number_of_days_extended
@@ -120,17 +125,13 @@ end
     def expiry_date
         if notice_to_proceed.present?
         ((self.notice_to_proceed.date.to_date) + (self.duration))
-    else
-        "No NTP Yet"
     end
     end
 
     def revised_expiry_date
      if notice_to_proceed.present? && time_extensions.present?
         self.notice_to_proceed.date + self.revised_duration.days
-    else
-        "No Time Revisions "
-    end
+      end
     end
 
     def revised_duration

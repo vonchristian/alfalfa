@@ -1,7 +1,11 @@
 <div class="tab-pane" id="contractors">
 <br>
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-3">
+<h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span> </h4>
+<h4 class="text-danger">Contract: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount) %></span></h4>
+<hr>
+<h4>Remaining: <span class="pull-right"><%=number_to_currency (@project.cost) - (@project.contracts.sum(:amount)) %></span></h4>
 </div>
 <div class="col-md-4">
   <span class="pull-right"><%=link_to new_project_contract_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Subcontractor <%end%>
@@ -10,22 +14,25 @@
   </div>
 <hr>
 <div class="row">
- <% @project.contractors.each do |contractor| %>
+ <% @project.contracts.each do |contract| %>
              <div class="row">
-            <div class="col-md-1 col-md-offset-1  col-sm-3 col-xs-3">
-            <%= image_tag attachment_url(contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
+            <div class="col-md-1  col-sm-3 col-xs-3">
+            <%= image_tag attachment_url(contract.contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
             </div>
-            <div class="col-md-7 col-sm-9 col-xs-9">
-            <h4><%= link_to contractor.full_name.upcase, contractor %></h4>
-            <span class="help-block"><%=contractor.company %></span>
-            <span class="help-block"><%=link_to 'New Billing',new_project_billing_path(@project), class: "btn btn-danger btn-xs"%></span>
+            <div class="col-md-4 col-sm-9 col-xs-9">
+            <h4><%= contract.contractor %></h4>
+            <span class="help-block"><%=contract.contractor %></span>
+            <p class="text-danger"><%=link_to "New Expense", new_project_billing_path(@project), class: "text-danger" %></p>
+           
             </div>
             <div class="col-md-3">
-              dadas
+               <span><%=number_to_currency contract.amount %></span>
             </div>
             </div>
            <hr />
             <% end %>
             </div>
 </div><!-- /.tab-pane -->
+ 
+  
  

@@ -29,26 +29,28 @@
  
  </div>
  <hr />
- <% @project.expenses.each do |expense| %>
-             <div class="row">
-           
-<div class="col-md-2 col-md-offset-1">
-            <h5 class="text-danger"><%=number_to_currency expense.debit_amounts.last.amount %>
-            </h5>
-            </div>
-            <div class="col-md-5">
-            <span class="text-danger"><%=expense.description %></span>
-         
-</div>
-            <div class="col-md-4">
-<span class="help-block"><%=expense.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+ <table class="table table-striped">
+ <thead>
+   <tr>
+     <th>Amount</th>
+     <th>Description</th>
+     <th>Account</th>
+     <th>Date</th>
+   </tr>
+ </thead>
+  <tbody>   
+ <% @project.expenses.each do |expense| %> 
+   <tr>
+      <td><%=number_to_currency expense.debit_amounts.last.amount %></td>  
+      <td><%=expense.description %></td>
+      <td><%=expense.debit_amounts.last.account.name %></td>   
+      <td><%=expense.created_at.strftime("%B %d, %Y") %></td>
+</tr>
 
-               </div>
-            
-          
-         
-           </div>
-           <hr>
             <% end %> 
+</tbody>
+</table>
+              
+    
  <% end %>
   </div><!-- /.tab-pane -->

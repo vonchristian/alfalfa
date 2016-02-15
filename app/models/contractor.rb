@@ -4,6 +4,7 @@ class Contractor < ActiveRecord::Base
   has_many :contracts
   has_many :billings
   has_many :projects, through: :contracts
+  has_many :project_billings
  
 def billings_for(project)
     self.billings.where(project: project)

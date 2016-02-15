@@ -10,9 +10,9 @@
               <table class="table with-border">
                  <tr>
                      <td><span><i class="fa fa-clock-o"></i> Notice Of Award</span>
-                        <p class="text-muted"><%=@project.ntp %>
-                        <small class="pull-right"><%=link_to "Add NTP", new_project_notice_to_proceed_path(@project), class: "btn btn-xs btn-warning btn-flat" if @project.notice_to_proceed.blank? %></small>
-                        </p>
+                        <p class="text-muted"><%=@project.ntp if @project.notice_to_proceed %> </p>
+                        <small><%=link_to "Add NTP", new_project_notice_to_proceed_path(@project), class: "btn btn-sm btn-primary btn-flat" if @project.notice_to_proceed.blank? %></small>
+                       
                      </td>
                  </tr>
                  <tr>
@@ -20,35 +20,66 @@
                         <p class="text-muted"><%=@project.implementing_office%></p>
                      </td>
                         
-                  </tr>
+                  </tr>   
                   <tr>
                        
                         <td><span><i class="fa fa-map-marker"></i> Location</span>
                         <p class="text-muted"><%=@project.address %></p>
                         
+                        </td> 
+                        
+                  </tr>
+
+                   <tr>
+                       
+                        <td><span><i class="fa fa-calendar"></i> Duration</span>
+                        <p class="text-muted"><%=@project.revised_duration %> Days</p>
+                        
                         </td>
                         
                   </tr>
-                 
-                 
-                  
-                  <tr>
-                      <td>
-                         <center>
-                            <%=link_to edit_project_path(@project), class: 'btn btn-sm btn-primary btn-flat' do %>
-                               <i class="fa fa-edit"> <span>Update Project Info</span></i>
-                             <% end %>
-                          </center>
-                      </td>
+
+                   <tr>
+                       
+                        <td><span><i class="fa fa-calendar"></i> Start Date</span>
+                        <p class="text-muted"><%=@project.start_date %> </p>
+                        
+                        </td>
+                        
                   </tr>
-                    
+
+                   <tr>
+                       
+                        <td><span><i class="fa fa-calendar"></i> Expiry Date</span>
+                        <p class="text-muted"><%=@project.revised_expiry_date %> </p>
+                        
+                        </td>
+                        
+                  </tr>
+                  
+
+
+                     
               </table>
                  
            </div>
         </div>
      </div>
+<div class="col-md-4">
+<div class="box box-success">
+<div class="box-header with-border">
+<h4>Accomplishment: <small> As of <%=Time.zone.now.strftime("%b %e, %Y") %></small> 
+<span class="pull-right"><%=@project.actual_accomplishment %>%</span></h4>
+</div>
+<div class="box-body">
+<%=@project.accomplishments.each do |accomplishment| %>
+<% end %>
+</div>
+</div>
   </div>
-  <div class="box-body">
+</div>
+                <br>
+
                   <div class="row">
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
@@ -78,12 +109,12 @@
                       </div><!-- /.description-block -->
                     </div>
                   </div><!-- /.row -->
-                </div><!-- /.box-footer -->
                 <hr>
                 <br>
+
            <div class="row"> 
              <div class="col-md-4">
-                <div class="box box-primary">
+                <div class="box box-solid">
                  <div class="box-header">
                    <b class="text-info"><%=@project.contractors.count %> CONTRACTORS</b>
                     </div><!-- /.box-header -->
@@ -119,13 +150,10 @@
                   </div>
                 </div>
                  <div class="col-md-4">
-               <div class="box box-success">
+               <div class="box box-solid">
                  <div class="box-header">
                    <b class="text-success"><%=@project.remarks.count %> Remarks</b>
-                   <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
+                   
                      </div><!-- /.box-header -->
                     <div class="box-body">
                       <table class="table with-border">
@@ -146,13 +174,10 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-               <div class="box box-danger">
+               <div class="box box-solid">
                  <div class="box-header">
                    <b class="text-danger"><%=@project.expenses.count%> Expenses</b>
-                   <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
+                  
                      </div><!-- /.box-header -->
                     <div class="box-body">
                       <table class="table with-border">

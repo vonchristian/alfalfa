@@ -29,18 +29,15 @@
           <th style="width: 30%">Payee</th>
           <th>Description</th>
           <th>Category</th>
-          <th>Amount</th>
+          <th>Total</th>
           <th>Action</th>
         </tr>
       </thead> 
       <tbody> 
       <% @expenses.each do |expense| %>
         <%expense.debit_entries.each do |entry| %>
-      <% if entry.commercial_document.blank?%>
-        <tr class="text-danger">
-        <% else %>
+      
         <tr>
-        <% end %>
         <td><%=entry.created_at.strftime("%b %e, %Y") %></td>
         <td><%=entry.commercial_document.try(:name)  %></td>
         <td><%=entry.description %></td>

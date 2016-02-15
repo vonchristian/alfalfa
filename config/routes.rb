@@ -5,10 +5,13 @@ Rails.application.routes.draw do
   get 'reports/contract_summary_report', as: 'contract_summary_report'
   get 'reports/index', as: 'reports'
  devise_for :users, :controllers => { :registrations => "users" }
+get 'expenses/filtered_data' => 'expenses#filtered_data'
 
 
   mount Plutus::Engine => "/accounting", :as => "accounting"
 resources :activities
+resources :employees do 
+  end
 resources :categories
 resources :accounts
 resources :assets do 
@@ -45,9 +48,11 @@ resources :users
   resources :assets
 end
   resources :projects do
+  resources :workers
     resources :collections
     resources :project_billings
     match :overview, via: [:get], on: :collection
+      match :add_workers, via: [:get], on: :member
     
     resource :notice_to_proceed
     resources :time_extensions

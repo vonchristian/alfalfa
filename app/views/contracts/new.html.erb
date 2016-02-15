@@ -14,27 +14,15 @@
                             wrapper_mappings: {
                             check_boxes: :vertical_radio_and_checkboxes,
                             radio_buttons: :vertical_radio_and_checkboxes,
-                            file: :horizontal_file_input,
+                             file: :horizontal_file_input,
                             boolean: :horizontal_boolean
                             } do |f| %>
 <%=f.error_notification %>
-<div class="row">
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-9">
-<div class="col-md-6">
-  <table class="table table-compressed">
-      <% Contractor.all.each do |contractor| %>
-        <tr height="60px">
-            <td width="20px"><input class="radio_buttons optional" value="<%=contractor.id%>" name="contract[contractor_id]" id="contract_contractor_id_<%=contractor.id%>" type="radio"></td>
-            <td width="45px"><%= image_tag attachment_url(contractor, :profile_image, :fill, 35, 35, fallback: 'default-small.png'), class: 'img-rounded' %></td>
-            <td><%= contractor.company %></td>
-        </tr>
-      <% end %>
-  </table>
-</div>
+<%=f.input :contractor_id, collection: Contractor.all.map{|a| [a.company, a.id]}, as: :radio_buttons %>
+<%=f.input :amount %>
 <div class="modal-footer">
 <%=f.submit "Save", class: "btn btn-primary" %>
 </div>
 <% end %>
 </div>
+ 

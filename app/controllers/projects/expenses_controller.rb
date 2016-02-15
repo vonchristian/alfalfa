@@ -23,6 +23,6 @@ class Projects::ExpensesController < ApplicationController
   end
   private
   def entry_params
-    params.require(:entry).permit(:description, :owner_id, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
+    params.require(:entry).permit(:description, :owner_id, :recipient_id, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
   end
 end

@@ -39,3 +39,6 @@ Plutus::Expense.create(name: "Overhead")
 
 
 User.create!(first_name: 'Juan', last_name: 'Cruz', role: 0, email: 'vc.halip@gmail.com', password: '1111111111', password_confirmation: '1111111111')
+
+Category.create(name: "Building")
+Category.create(name: "Road Concreting")

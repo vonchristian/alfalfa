@@ -1,0 +1,5 @@
+<%=simple_form_for [@project, @worker]  do |f| %>
+<%=f.collection_check_boxes :employee_id, Employee.all, :id, :full_name %>
+<%=f.submit %>
+<% end %>
+ 

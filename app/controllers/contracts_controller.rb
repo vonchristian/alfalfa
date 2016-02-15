@@ -18,6 +18,6 @@ class ContractsController < ApplicationController
 
   private
   def contract_params
-    params.require(:contract).permit(:contractor_id)
+    params.require(:contract).permit(:contractor_id, :amount)
   end
 end

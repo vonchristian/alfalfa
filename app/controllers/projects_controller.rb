@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  def add_workers
+    @project = Project.find(params[:id])
+  end
   def index
     @projects =ProjectDecorator.decorate_collection(Project.all)
   end
@@ -40,7 +43,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :category_id, :implementing_office)
+    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :category_id, :implementing_office, { :employee_ids =>[] })
   end
 
   

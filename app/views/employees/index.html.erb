@@ -1,0 +1,39 @@
+
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border bg-gray-light">
+        <h4> List of Employees
+       <span class="pull-right"><%=link_to new_employee_path, class: "btn btn-default bg-blue" do %><i class="fa fa-user-plus"></i> New Employee <%end%></span>
+        </h4>
+      </div>
+      <div class="box-body">
+      
+      <hr>
+      <div class="table table-responsive">
+      <table class="table table-hover">
+      <thead> 
+        <tr class="text-uppercase">
+         <th style="width: 5%"></th>
+          <th>Name</th>
+          <th>Mobile Number</th>
+          <th>Position</th>
+          <th>Action</th>
+        </tr>
+      </thead> 
+      <tbody> 
+      <% @employees.each do |employee| %>
+      <td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-rounded" %>
+    </td>
+        <td><%=employee.full_name.upcase %></td>
+        <td><%=employee.mobile_number %></td>
+        <td><%=employee.position %></td>
+          </tr>
+ 
+      <% end %>
+      </table> 
+      </div> 
+    </div>
+  </div>
+ 
+  
+ 

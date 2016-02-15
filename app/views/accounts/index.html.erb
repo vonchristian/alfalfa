@@ -1,13 +1,31 @@
-<div class="container">
+<div class="col-md-12">
+  
 <div class="box box-solid">
-  <div class="box-body">
-  <table>
-    <% @accounts.each do |account| %>
-    <tr>
-    <td><%=link_to account.name, account %></td>
-     </tr>
-    <% end %>
-</table>
+<div class="box-header">
+<center>
+    <h1>General Ledger</h1>
+    <br>
+  </center>
   </div>
-</div>
+<div class="box-body">
+<table class="table table-hover">
+
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Credit Balance</th>
+    <th>Debit Balance</th>
+    <th>Balance</th>
+  </tr>
+
+<% @accounts.each do |account| %>
+  <tr>
+    <td><%= account.name %></td>
+    <td><%= account.type.sub('Plutus::','') %></td>
+    <td><%=number_to_currency account.credits_balance.round(2) %></td>
+    <td><%=number_to_currency account.debits_balance.round(2) %></td>
+    <td><%=number_to_currency account.balance.round(2) %></td>
+  </tr>
+<% end %>
+</table>
 </div>
