@@ -3,8 +3,9 @@
 <div class="box-body">
 <h4>Add Workers to Project</h4>
 <hr>
-<%=simple_form_for @project do |f| %>
-<%=f.collection_check_boxes :employee_ids, Employee.all, :id, :full_name, as: :check_boxes %>
+ <%= simple_form_for @project  do |f| %>
+
+<%=f.input :employee_ids, collection: Employee.all, as: :check_boxes %>
 <%=f.submit "Add Workers" %>
 </div>
 <% end %>
