@@ -18,7 +18,7 @@ class AccomplishmentsController < ApplicationController
 
   private 
   def accomplishment_params
-    params.require(:accomplishment).permit(:percent, :remarks)
+    params.require(:accomplishment).permit(:percent, :remarks,  images_files: [])
   end
 end
 

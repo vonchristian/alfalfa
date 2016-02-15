@@ -15,7 +15,8 @@
 
 <%=f.input :percent, as: :string, placeholder: "Percent of Accomplishment", autofocus: true %>
 <%=f.input :remarks, as: :text, input_html:{rows: 10} %>
-
+<%= f.label :images_files %><br>
+    <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %>
 <div class="modal-footer">
 <%=f.submit "Save Accomplishment", class: "btn btn-primary" %>
 

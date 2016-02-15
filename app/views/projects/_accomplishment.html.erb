@@ -44,11 +44,16 @@
 </div>
             <div class="col-md-6">
             <span class="pull-right text-muted"><%=accomplishment.remarks %></span>
-            </div>
-            
+             <% accomplishment.images.each do |i| %>
+    <span><%= attachment_image_tag(i, :file, :fill, 90, 90) %></span>
           
-         
+          
+        
+  <% end %>
+    </div>
+            
            </div>
+
            <hr>
             <% end %> 
             

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215063207) do
+ActiveRecord::Schema.define(version: 20160215140811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,15 @@ ActiveRecord::Schema.define(version: 20160215063207) do
 
   add_index "expenses", ["expensable_id"], name: "index_expenses_on_expensable_id", using: :btree
   add_index "expenses", ["expensable_type"], name: "index_expenses_on_expensable_type", using: :btree
+
+  create_table "images", force: :cascade do |t|
+    t.string   "file_id"
+    t.integer  "accomplishment_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "images", ["accomplishment_id"], name: "index_images_on_accomplishment_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|
     t.decimal  "cost"
@@ -341,6 +350,7 @@ ActiveRecord::Schema.define(version: 20160215063207) do
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"
+  add_foreign_key "images", "accomplishments"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "project_billings", "billings"
   add_foreign_key "project_billings", "contractors"
