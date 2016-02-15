@@ -1,4 +1,6 @@
 class Contractor < ActiveRecord::Base
+   include PgSearch
+  multisearchable :against => [:first_name, :last_name, :company]
   attachment :profile_image, type: :image
   belongs_to :bid
   has_many :contracts
@@ -6,10 +8,7 @@ class Contractor < ActiveRecord::Base
   has_many :projects, through: :contracts
   has_many :project_billings
  
-def billings_for(project)
-    self.billings.where(project: project)
-  end
- 
+
   def self.main_contractors
     self.where(:main_contractor => true)
   end
@@ -18,7 +17,7 @@ def billings_for(project)
   def self.sub_contractors
     self.where(:main_contractor => false)
   end
-  def full_name
+  def name
     "#{first_name} #{last_name}"
   end
   def to_s

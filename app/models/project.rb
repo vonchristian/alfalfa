@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Common
-  searchkick autocomplete: ['name']
+  include PgSearch
+  multisearchable :against => [:name],
+   :order_within_rank => "projects.created_at DESC"
    has_many :collections
    has_many :project_billings
     has_one :notice_to_proceed
@@ -8,7 +10,7 @@ class Project < ActiveRecord::Base
     belongs_to :category
     has_many :workers
     has_many :employees, through: :workers
-    
+
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
     has_many :bids

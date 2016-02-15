@@ -1,12 +1,13 @@
 <div class="tab-pane" id="workers">
 ]
   <span class="pull-right"><%=link_to add_workers_project_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Workers <%end%>
-
+  </span>
+<div class="box-body">
  <% @project.workers.each do |worker| %>
             
             <%=worker.employee.try(:full_name)%>
+            <hr>
             <% end %>
             </div>
-
- 
+</div>
  

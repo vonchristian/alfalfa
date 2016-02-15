@@ -28,7 +28,7 @@ resources :users
   get "projects/search"
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'entries/daily' => 'entries#daily'
-
+get 'result/index' => "result#index"
   resources :contractors
     
   resources :expenses do

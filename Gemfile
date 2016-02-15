@@ -6,14 +6,13 @@ gem "gretel"
 gem 'draper'
 gem 'cocoon'
 gem 'jquery-ui-rails'
-gem 'searchkick'
 gem 'public_activity'
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'plutus'
- 
+ gem 'pg_search'
   gem 'prawn'
   gem 'prawn-table'
   gem 'devise'
