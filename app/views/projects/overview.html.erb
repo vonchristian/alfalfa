@@ -31,8 +31,7 @@
                   <br>
                   <% project.contractors.each do |contractor| %>
              <span data-toggle="tooltip" title="<%=contractor.full_name %>"><%= image_tag attachment_url(contractor, :profile_image, :fill, 30, 30, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></span >
-             <span class="help-block text-muted"><%#=entry.debit_amounts.last.account.name %></span >
-             <span class="help-block text-muted"><%#=entry.commercial_document.try(:name) %></span >
+           
 <% end %>
           </td> 
           </tr> 

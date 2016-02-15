@@ -17,11 +17,15 @@ class Contractor < ActiveRecord::Base
   def self.sub_contractors
     self.where(:main_contractor => false)
   end
-  def name
+  def full_name
     "#{first_name} #{last_name}"
   end
   def to_s
     "#{company}"
+  end
+
+  def name
+    full_name
   end
   
 end
