@@ -3,7 +3,7 @@
 <div class="row">
 <div class="col-md-3">
 <h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span> </h4>
-<h4 class="text-danger">Contract: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount) %></span></h4>
+<h4 class="text-danger">Sub Contract: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount) %></span></h4>
 <hr>
 <h4>Remaining: <span class="pull-right"><%=number_to_currency (@project.cost) - (@project.contracts.sum(:amount)) %></span></h4>
 </div>
