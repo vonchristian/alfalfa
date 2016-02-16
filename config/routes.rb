@@ -30,7 +30,10 @@ resources :users
   get 'entries/daily' => 'entries#daily'
 get 'result/index' => "result#index"
   resources :contractors
-  resources :construction_equipments
+
+  resources :construction_equipments do
+    resources :depreciations, only:[:new, :create], module: :construction_equipments
+  end
   resources :lands
   resources :expenses do
     resources :entries
@@ -52,6 +55,7 @@ end
   resources :assets
 end
   resources :projects do
+    resources :invoices, only:[:new, :create], module: :projects
     resources :billable_materials
   resources :workers
     resources :collections

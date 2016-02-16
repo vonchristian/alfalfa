@@ -12,6 +12,7 @@ class Project < ActiveRecord::Base
     has_many :employees, through: :workers
 
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
+     has_many :invoices, as: :invoiceable
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
     has_many :bids
     has_many :billings
@@ -21,6 +22,8 @@ class Project < ActiveRecord::Base
     has_many :amount_revisions
     has_many :accomplishments
     has_many :remarks
+    has_many :purchase_orders
+
 
 
     validates :name,  :id_number, :duration, :cost, :address, presence: true
@@ -147,8 +150,8 @@ end
     end
 
      def add_to_accounts
-       Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: (self.cost), account: "Trade Payable"],
-                         credit_amounts_attributes:[amount: (self.cost), account: "Receivables"])
+       Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: (self.cost), account: "Accounts Receivable-Trade"],
+                         credit_amounts_attributes:[amount: (self.cost), account: "Accounts Payable-Trade"])
    end
 
 end

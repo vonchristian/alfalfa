@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216060815) do
+ActiveRecord::Schema.define(version: 20160216113507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 20160216060815) do
   add_index "collections", ["project_id"], name: "index_collections_on_project_id", using: :btree
 
   create_table "construction_equipments", force: :cascade do |t|
-    t.string   "purchase_price"
+    t.decimal  "purchase_price"
     t.integer  "equipment_type"
     t.string   "make"
     t.string   "model"
@@ -179,6 +179,17 @@ ActiveRecord::Schema.define(version: 20160216060815) do
 
   add_index "contracts", ["contractor_id"], name: "index_contracts_on_contractor_id", using: :btree
   add_index "contracts", ["project_id"], name: "index_contracts_on_project_id", using: :btree
+
+  create_table "depreciations", force: :cascade do |t|
+    t.decimal  "amount"
+    t.integer  "depreciationable_id"
+    t.string   "depreciationable_type"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "depreciations", ["depreciationable_id"], name: "index_depreciations_on_depreciationable_id", using: :btree
+  add_index "depreciations", ["depreciationable_type"], name: "index_depreciations_on_depreciationable_type", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"
@@ -250,6 +261,17 @@ ActiveRecord::Schema.define(version: 20160216060815) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string   "amount"
+    t.integer  "invoiceable_id"
+    t.string   "invoiceable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "invoices", ["invoiceable_id"], name: "index_invoices_on_invoiceable_id", using: :btree
+  add_index "invoices", ["invoiceable_type"], name: "index_invoices_on_invoiceable_type", using: :btree
 
   create_table "lands", force: :cascade do |t|
     t.decimal  "cost"

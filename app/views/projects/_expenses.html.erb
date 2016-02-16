@@ -1,56 +1,43 @@
 <div class="tab-pane" id="expenses">
-<br>
-<% if @project.expenses.blank? %>
-<div class="row">
-<div class="col-md-4 col-md-offset-4">
- <div class="pad box-pane-right bg-gray-light" style="min-height: 200px">
-    
-        <div class="alert alert-dismissable">
-          <h4><i class="fa fa-money"></i> Project Expenses Page.</h4> 
-          <hr>
-          <span>This is where you save expenses of this project. </span>
-          <br>
-          <span class="text-center"><%=link_to new_project_expense_path(@project), class: "btn btn-link bg-red-active pull-right" do %><i class="fa fa-plus-circle"></i> New Expense<%end%></span>
-        </div>
-      </div> 
-</div>
-</div>
-  <% else %>
-
   <div class="row">
-<div class="col-md-6 col-md-offset-1">
-<h4 class="text-danger">Total Expenses: <%=number_to_currency @project.total_expenses %> </h4>
-<span class="help-block">As of <%=@project.expenses.last.created_at.strftime("%B %e, %Y")%></span>
-</div>
-<div class="col-md-3">
- <span class="pull-right"><%=link_to new_project_expense_path(@project), class: "btn btn-danger" do %><i class="fa fa-plus-circle"></i> New Expense <%end%>
- </span>
- </div>
- 
- </div>
- <hr />
- <table class="table table-striped">
- <thead>
-   <tr>
-     <th>Amount</th>
-     <th>Description</th>
-     <th>Account</th>
-     <th>Date</th>
-   </tr>
- </thead>
-  <tbody>   
- <% @project.expenses.each do |expense| %> 
-   <tr>
-      <td><%=number_to_currency expense.debit_amounts.last.amount %></td>  
-      <td><%=expense.description %></td>
-      <td><%=expense.debit_amounts.last.account.name %></td>   
-      <td><%=expense.created_at.strftime("%B %d, %Y") %></td>
-</tr>
+    <div class="col-md-4">
+      <div class="box box-solid">
+        <div class="box box-header with-border">
+          <h4>Materials</h4>
 
-            <% end %> 
-</tbody>
-</table>
-              
-    
- <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box box-solid">
+        <div class="box box-header with-border">
+          <h4>Equipment</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box box-solid">
+        <div class="box box-header with-border">
+          <h4>Labor</h4>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="box box-solid">
+        <div class="box box-header with-border">
+          <h4>Subcontract</h4>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="box box-solid">
+        <div class="box box-header with-border">
+          <h4>Other Costs</h4>
+
+        </div>
+      </div>
+    </div>
+  </div>
   </div><!-- /.tab-pane -->

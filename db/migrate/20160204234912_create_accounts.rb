@@ -3,8 +3,6 @@ class CreateAccounts < ActiveRecord::Migration
     create_table :accounts do |t|
       t.string :name
       t.string :type
-
-
       t.timestamps null: false
     end
   end

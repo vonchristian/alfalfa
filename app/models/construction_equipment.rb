@@ -1,10 +1,19 @@
 class ConstructionEquipment < ActiveRecord::Base
   include PublicActivity::Common
+
   enum equipment_type:[:dump_truck, :excavator, :compressor, :other_construction_tools, :automobile, :pick_up_truck]
+
    has_many :images, as: :imageable, dependent: :destroy
+   has_many :depreciations, as: :depreciationable
+
   accepts_attachments_for :images, attachment: :file, append: true
+
   def make_and_model
-  "#{make}  #{model} - (#{plate_number})"
+    "#{make}  #{model} - (#{plate_number})"
+  end
+
+  def amount_after_depreciation
+    self.purchase_price - self.depreciations.sum(:amount)
   end
 
   def add_to_fixed_asset_accounts

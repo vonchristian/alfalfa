@@ -7,51 +7,34 @@
       <ul class="nav nav-tabs" role="tablist">
 
          <li  role="presentation" class="active">
-           <a href="#balance_sheet" aria-controls="balance_sheet" role="tab" data-toggle="tab">Balance Sheet</a>
+           <a href="#balance_sheet" aria-controls="balance_sheet" role="tab" data-toggle="tab">Profile</a>
         </li>
 
         <li role="presentation">
-           <a href="#accomplishment" aria-controls="accomplishment" role="tab" data-toggle="tab"></i> Accomplishments</a>
+           <a href="#depreciations" aria-controls="depreciations" role="tab" data-toggle="tab"></i> Depreciations</a>
         </li>
 
+      <li role="presentation">
+           <a href="#depreciations" aria-controls="depreciations" role="tab" data-toggle="tab"></i> Rent and Lease Payments</a>
+        </li>
         <li role="presentation">
-           <a href="#contractors" aria-controls="contractors" role="tab" data-toggle="tab"></i> Contractors</a>
+           <a href="#depreciations" aria-controls="depreciations" role="tab" data-toggle="tab"></i> Repairs and Maintenance</a>
         </li>
 
-        <li role="presentation">
-           <a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a>
+         <li role="presentation">
+           <a href="#depreciations" aria-controls="depreciations" role="tab" data-toggle="tab"></i> Fuel and Lubrication</a>
         </li>
-
-
-
-        <li role="presentation">
-           <a href="#workers" aria-controls="inspection" role="tab" data-toggle="tab"></i> Workers</a>
+         <li role="presentation">
+           <a href="#depreciations" aria-controls="depreciations" role="tab" data-toggle="tab"></i> Taxes, Licenses, and Insurance</a>
         </li>
-
-
-
-        <li role="presentation">
-           <a href="#collections" aria-controls="collections" role="tab" data-toggle="tab">Collections</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#remarks" aria-controls="remarks" role="tab" data-toggle="tab"> Remarks</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Change Orders</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Activities</a>
+         <li role="presentation">
+           <a href="#depreciations" aria-controls="depreciations" role="tab" data-toggle="tab"></i> Equipment Costs Allocated</a>
         </li>
       </ul>
 
       <div class="tab-content">
+      <%=render 'depreciations' %>
+      <%=@construction_equipment.amount_after_depreciation %>
         <% @construction_equipment.images.each do |i| %>
     <span><%= attachment_image_tag(i, :file, :fill, 90, 90) %></span>
     <% end %>

@@ -1,74 +1,52 @@
 <% breadcrumb :project, @project %>
 <div class="col-md-12">
    <div class="card">
-      <div class="row">
-        <div class="col-md-1">
-         <h1><a href="/projects" data-toggle="tooltip" title="Return to Project Index"><i class="fa fa-angle-left"></i></a></h1>
-        </div>
-        <div class="col-md-11">
-          <h4 class="text-info"><%=@project.name.upcase %></h4>
-        </div>
-      </div>
-      <ul class="nav nav-tabs" role="tablist">
 
+         <h1><a href="/projects" data-toggle="tooltip" title="Return to Project Index"><i class="fa fa-angle-left"></i></a></h1>
+
+          <h4 class="text-info"><%=@project.name.upcase %></h4>
+
+      <ul class="nav nav-tabs" role="tablist">
          <li  role="presentation" class="active">
            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
         </li>
-        
         <li role="presentation">
            <a href="#accomplishment" aria-controls="accomplishment" role="tab" data-toggle="tab"></i> Accomplishments</a>
         </li>
-
         <li role="presentation">
            <a href="#contractors" aria-controls="contractors" role="tab" data-toggle="tab"></i> Contractors</a>
         </li>
-
         <li role="presentation">
            <a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a>
         </li>
-       
-       
-
         <li role="presentation">
            <a href="#workers" aria-controls="inspection" role="tab" data-toggle="tab"></i> Workers</a>
         </li>
-       
-       
-
         <li role="presentation">
            <a href="#collections" aria-controls="collections" role="tab" data-toggle="tab">Collections</a>
         </li>
-      
         <li role="presentation">
            <a href="#remarks" aria-controls="remarks" role="tab" data-toggle="tab"> Remarks</a>
         </li>
-
         <li role="presentation">
            <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Change Orders</a>
         </li>
-
         <li role="presentation">
            <a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a>
         </li>
-
         <li role="presentation">
            <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Activities</a>
         </li>
       </ul>
-     
       <div class="tab-content">
         <%=render 'profile' %>
         <%=render 'accomplishment' %>
-
         <%=render 'expenses' %>
         <%=render 'timeline' %>
-          <%=render 'contractors' %>
-          <%=render 'collections' %>
-             <%=render 'workers' %>
-
-          <%=render 'bidding' %>
-           <%=render 'remarks' %>
-
+        <%=render 'contractors' %>
+        <%=render 'collections' %>
+        <%=render 'workers' %>
+        <%=render 'remarks' %>
         <%=render 'settings' %>
       </div><!-- /.tab-content -->
    </div><!-- /.col -->

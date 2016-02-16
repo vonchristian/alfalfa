@@ -1,7 +1,7 @@
 class CreateConstructionEquipments < ActiveRecord::Migration
   def change
     create_table :construction_equipments do |t|
-      t.string :purchase_price
+      t.decimal :purchase_price
       t.integer :equipment_type
       t.string :make
       t.string :model
