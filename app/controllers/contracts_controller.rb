@@ -1,4 +1,7 @@
 class ContractsController < ApplicationController
+  def index
+    @contracts = Contract.all
+  end
   def new
     @project = Project.find(params[:project_id])
     @contract = @project.contracts.build
@@ -9,7 +12,7 @@ class ContractsController < ApplicationController
     @contract = @project.contracts.build(contract_params)
     if @contract.save
       @contract.create_activity :create, owner: current_user, recipient: @project
-      
+
       redirect_to @project, notice: "Contractor added successfully to project."
     else
       render :new

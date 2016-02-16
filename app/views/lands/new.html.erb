@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h4 class="text-center">New Construction Equipment Details</h4>
+        <hr>
+      </div>
+      <div class="box-footer">
+        <%= simple_form_for @land, html: { class: 'form-horizontal' }, wrapper: :horizontal_form  do |f| %>
+            <%=f.error_notification %>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <%=f.input :cost %>
+                <%=f.input :area %>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <%=f.submit "Save Asset", class: "btn btn-primary btn-flat bg-blue-active" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

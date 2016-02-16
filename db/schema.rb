@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215140811) do
+ActiveRecord::Schema.define(version: 20160216060815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,21 @@ ActiveRecord::Schema.define(version: 20160215140811) do
 
   add_index "bids", ["project_id"], name: "index_bids_on_project_id", using: :btree
 
+  create_table "billable_materials", force: :cascade do |t|
+    t.integer  "contractor_id"
+    t.integer  "inventory_id"
+    t.decimal  "cost"
+    t.integer  "reference_number"
+    t.integer  "quantity"
+    t.integer  "project_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "billable_materials", ["contractor_id"], name: "index_billable_materials_on_contractor_id", using: :btree
+  add_index "billable_materials", ["inventory_id"], name: "index_billable_materials_on_inventory_id", using: :btree
+  add_index "billable_materials", ["project_id"], name: "index_billable_materials_on_project_id", using: :btree
+
   create_table "billings", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "contractor_id"
@@ -85,6 +100,24 @@ ActiveRecord::Schema.define(version: 20160215140811) do
   add_index "billings", ["inventory_id"], name: "index_billings_on_inventory_id", using: :btree
   add_index "billings", ["project_billing_id"], name: "index_billings_on_project_billing_id", using: :btree
   add_index "billings", ["project_id"], name: "index_billings_on_project_id", using: :btree
+
+  create_table "buildings", force: :cascade do |t|
+    t.decimal  "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cash_advances", force: :cascade do |t|
+    t.integer  "cash_advanceable_id"
+    t.string   "cash_advanceable_type"
+    t.decimal  "amount"
+    t.string   "purpose"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "cash_advances", ["cash_advanceable_id"], name: "index_cash_advances_on_cash_advanceable_id", using: :btree
+  add_index "cash_advances", ["cash_advanceable_type"], name: "index_cash_advances_on_cash_advanceable_type", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -102,6 +135,27 @@ ActiveRecord::Schema.define(version: 20160215140811) do
   end
 
   add_index "collections", ["project_id"], name: "index_collections_on_project_id", using: :btree
+
+  create_table "construction_equipments", force: :cascade do |t|
+    t.string   "purchase_price"
+    t.integer  "equipment_type"
+    t.string   "make"
+    t.string   "model"
+    t.string   "plate_number"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "contract_amount_revisions", force: :cascade do |t|
+    t.integer  "contract_id"
+    t.integer  "contractor_id"
+    t.decimal  "amount"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "contract_amount_revisions", ["contract_id"], name: "index_contract_amount_revisions_on_contract_id", using: :btree
+  add_index "contract_amount_revisions", ["contractor_id"], name: "index_contract_amount_revisions_on_contractor_id", using: :btree
 
   create_table "contractors", force: :cascade do |t|
     t.boolean  "main_contractor",  default: false
@@ -177,12 +231,14 @@ ActiveRecord::Schema.define(version: 20160215140811) do
 
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
-    t.integer  "accomplishment_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "images", ["accomplishment_id"], name: "index_images_on_accomplishment_id", using: :btree
+  add_index "images", ["imageable_id"], name: "index_images_on_imageable_id", using: :btree
+  add_index "images", ["imageable_type"], name: "index_images_on_imageable_type", using: :btree
 
   create_table "inventories", force: :cascade do |t|
     t.decimal  "cost"
@@ -195,6 +251,13 @@ ActiveRecord::Schema.define(version: 20160215140811) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "lands", force: :cascade do |t|
+    t.decimal  "cost"
+    t.integer  "area"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notice_to_proceeds", force: :cascade do |t|
     t.datetime "date"
     t.integer  "project_id"
@@ -203,6 +266,14 @@ ActiveRecord::Schema.define(version: 20160215140811) do
   end
 
   add_index "notice_to_proceeds", ["project_id"], name: "index_notice_to_proceeds_on_project_id", using: :btree
+
+  create_table "office_equipments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "purchase_price"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
@@ -342,15 +413,19 @@ ActiveRecord::Schema.define(version: 20160215140811) do
   add_foreign_key "accomplishments", "projects"
   add_foreign_key "amount_revisions", "projects"
   add_foreign_key "bids", "projects"
+  add_foreign_key "billable_materials", "contractors"
+  add_foreign_key "billable_materials", "inventories"
+  add_foreign_key "billable_materials", "projects"
   add_foreign_key "billings", "contractors"
   add_foreign_key "billings", "inventories"
   add_foreign_key "billings", "project_billings"
   add_foreign_key "billings", "projects"
   add_foreign_key "collections", "projects"
+  add_foreign_key "contract_amount_revisions", "contractors"
+  add_foreign_key "contract_amount_revisions", "contracts"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"
-  add_foreign_key "images", "accomplishments"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "project_billings", "billings"
   add_foreign_key "project_billings", "contractors"

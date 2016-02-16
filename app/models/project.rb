@@ -22,13 +22,15 @@ class Project < ActiveRecord::Base
     has_many :accomplishments
     has_many :remarks
 
-  
+
     validates :name,  :id_number, :duration, :cost, :address, presence: true
   validates :id_number, uniqueness: true
 
     after_create :add_main_contractor_to_contractors
     after_commit :add_to_accounts
-    
+    def remaining_uncontracted_amount
+      cost - contracts.sum(:amount)
+    end
    def total_collection
     self.collections.sum(:amount)
   end
@@ -59,7 +61,7 @@ class Project < ActiveRecord::Base
   end
   def latest_duration
     if time_extensions.present?
-      time_extensions.sum(:number_of_days) + duration 
+      time_extensions.sum(:number_of_days) + duration
     else
       duration
     end
@@ -97,7 +99,7 @@ end
     if  time_extensions.present?
        revised_expiry_date
     else
-      expiry_date 
+      expiry_date
     end
   end
 
@@ -110,7 +112,7 @@ end
     def total_number_of_days_extended
         self.time_extensions.sum(:number_of_days)
     end
-    
+
     def days_elapsed
       if notice_to_proceed
       ((Time.zone.now.to_i - start_date.to_i)/86400).floor
@@ -122,7 +124,7 @@ end
     def remaining_days
       revised_duration - days_elapsed
     end
-  
+
 
     def expiry_date
         if notice_to_proceed.present?

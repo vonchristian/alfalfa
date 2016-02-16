@@ -17,14 +17,16 @@
     <div class="wrapper">
       <% if user_signed_in? %>
         <%=render 'layouts/header' %>
-       
-         
+
+
         <%=render 'layouts/sidebar' %>
       <% end %>
 
       <div class="content-wrapper">
         <section class="custom-content">
+           <% if user_signed_in? %>
 <%=render 'layouts/navigation_top' %>
+<% end %>
           <%=render 'layouts/flash' %>
           <div class="row">
           <%= yield %>

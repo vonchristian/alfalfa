@@ -1,0 +1,8 @@
+<% @contracts.each do |contract| %>
+<%=contract.project.name %>
+<%=contract.contractor.name %>
+<%=link_to "New Amount Revision", new_contract_contract_amount_revision_path(@contract) %>
+<hr>
+<% end %>
+
+
