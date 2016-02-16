@@ -1,0 +1,11 @@
+<div id="nested-fields">
+<div class="row">
+<div class="col-md-6">
+  <%= f.input :inventory_id, collection: Inventory.all %>
+  </div>
+  <div class="col-md-6">
+  <%= f.input :quantity %>
+  </div>
+  </div>
+  <%= link_to_remove_association "remove billing", f %>
+</div>

@@ -1,17 +1,22 @@
 <div class="tab-pane" id="contractors">
-<br>
 <div class="row">
-<div class="col-md-3">
-<h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span> </h4>
-<h4 class="text-danger">Sub Contract: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount) %></span></h4>
-<hr>
-<h4>Remaining: <span class="pull-right"><%=number_to_currency (@project.cost) - (@project.contracts.sum(:amount)) %></span></h4>
-</div>
 <div class="col-md-4">
-  <span class="pull-right"><%=link_to new_project_contract_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Subcontractor <%end%>
-  </span>
+    <div class="box box-solid">
+      <div class="box-header">
+        <b class="text-muted">Project Details</b>
+        <span class="pull-right"><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> New Contractor<%end%></span>
+      </div>
+      <div class="box-body">
+
+      <h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span></h4>
+      <hr>
+      <h4 class="text-danger">Amount Subcontracted: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount) %></span></h4>
+      <hr>
+       <h4>Remaining: <span class="pull-right"><%=number_to_currency @project.remaining_uncontracted_amount %></span></h4>
+      </div>
+    </div>
   </div>
-  </div>
+
 <hr>
 <div class="row">
  <% @project.contracts.each do |contract| %>
@@ -23,16 +28,38 @@
             <h4><%= contract.contractor %></h4>
             <span class="help-block"><%=contract.contractor %></span>
             <p class="text-danger"><%=link_to "New Material Request", new_project_billing_path(@project), class: "text-danger" %></p>
-           
+
+
+
+    <div class="col-md-8">
+    <div class="row">
+      <%@project.contractors.each do |contractor| %>
+
+        <div class="col-md-6">
+          <div class="box box-<%#=project.box_status%>">
+            <div class="box-header">
+              <h4 class="text-primary" data="tooltip" title="<%=contractor.name%> dsf"><%=contractor.name%></h4>
+              </div>
+               <a href="/contractors/<%=contractor.id%>">
+              <div class="box-body">
+
+              <h5 class="text-info">Amount: <%=number_to_currency contractor.subcontracted_amount(@project)%></h5>
+
+
+              <hr>
+
+
             </div>
-            <div class="col-md-3">
-               <span><%=number_to_currency contract.amount %></span>
+
             </div>
+              </a>
             </div>
-           <hr />
             <% end %>
-            </div>
-</div><!-- /.tab-pane -->
- 
-  
- 
+
+           </div>
+    </div>
+  </div>
+
+</div>
+
+

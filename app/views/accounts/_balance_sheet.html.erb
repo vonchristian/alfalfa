@@ -1,0 +1,42 @@
+<div class="tab-pane active" id="balance_sheet">
+  <div class="container">
+  <center>
+    <h1>Balance Sheet</h1>
+
+    <%= form_tag({:action => 'balance_sheet'}, {:method => :get, :class => 'form-inline'}) do%>
+      <div class="form-group">
+      <%= label_tag :date, nil, class: 'sr-only'%>
+      <%= text_field_tag :date, @to_date, :class => 'datepicker form-control' %>
+      </div>
+      <button type="submit" class="btn btn-default">Get Report</button>
+    <% end %>
+  </center>
+
+  <br>
+<div class="table table-responsive">
+<table class="table table-compressed table-hover">
+<thead>
+  <tr>
+    <th>Assets</th>
+    <th>Current Year</th>
+    <th>Last Year</th>
+  </tr>
+</thead>
+<tbody>
+<h4>Current Assets</h4>
+<% @assets.each do |asset| %>
+<tr>
+  <td>
+    <%=asset.name %>
+  </td>
+  <td><%=asset.balance %></td>
+  <td></td>
+  <td></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>

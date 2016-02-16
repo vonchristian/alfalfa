@@ -1,0 +1,6 @@
+<div class="tab-pane" id="cash_advances">
+<%=@employee.cash_advances.each do |cash_advance| %>
+<%=cash_advance.amount %>
+<%=cash_advance.purpose %>
+<% end %>
+</div>

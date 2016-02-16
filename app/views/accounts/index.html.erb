@@ -1,31 +1,56 @@
+
 <div class="col-md-12">
-  
-<div class="box box-solid">
-<div class="box-header">
-<center>
-    <h1>General Ledger</h1>
-    <br>
-  </center>
-  </div>
-<div class="box-body">
-<table class="table table-hover">
+   <div class="card">
 
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Credit Balance</th>
-    <th>Debit Balance</th>
-    <th>Balance</th>
-  </tr>
+      <ul class="nav nav-tabs" role="tablist">
 
-<% @accounts.each do |account| %>
-  <tr>
-    <td><%= account.name %></td>
-    <td><%= account.type.sub('Plutus::','') %></td>
-    <td><%=number_to_currency account.credits_balance.round(2) %></td>
-    <td><%=number_to_currency account.debits_balance.round(2) %></td>
-    <td><%=number_to_currency account.balance.round(2) %></td>
-  </tr>
-<% end %>
-</table>
-</div>
+         <li  role="presentation" class="active">
+           <a href="#balance_sheet" aria-controls="balance_sheet" role="tab" data-toggle="tab">Balance Sheet</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#accomplishment" aria-controls="accomplishment" role="tab" data-toggle="tab"></i> Accomplishments</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#contractors" aria-controls="contractors" role="tab" data-toggle="tab"></i> Contractors</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a>
+        </li>
+
+
+
+        <li role="presentation">
+           <a href="#workers" aria-controls="inspection" role="tab" data-toggle="tab"></i> Workers</a>
+        </li>
+
+
+
+        <li role="presentation">
+           <a href="#collections" aria-controls="collections" role="tab" data-toggle="tab">Collections</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#remarks" aria-controls="remarks" role="tab" data-toggle="tab"> Remarks</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Change Orders</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a>
+        </li>
+
+        <li role="presentation">
+           <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Activities</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <%=render 'balance_sheet' %>
+      </div><!-- /.tab-content -->
+   </div><!-- /.col -->
+</div><!-- /.row -->

@@ -1,12 +1,20 @@
 <div class="container">
-<div class="col-md-8">
+<div class="col-md-10">
 <div class="box box-solid">
 <div class="box-body">
-<%=@project.name %>
+<h4><center>Requested Material Details</center></h4>
 <hr>
+<h4>Project: <span class="text-muted"><%=@project.name %></span></h4>
+<br>
 <%= simple_form_for [@project, @project_billing] do |f| %>
-<%=f.input :contractor_id, collection: @project.contractors %>
-<h4>Billing</h4>
+<div class="row">
+<div class="col-md-3">
+<%=f.input :contractor_id, collection: @project.contractors, label: "Requested By:"%>
+</div>
+<div class="col-md-3">
+</div>
+</div>
+<h4>Material Request</h4>
 <hr>
 <div class="billings">
   <%=f.simple_fields_for :billings do |billing| %>
@@ -14,10 +22,10 @@
       <% end %>
       </div>
       <div id="links">
-    <%=link_to_add_association 'add bill', f, :billings %>
+    <%=link_to_add_association 'add material', f, :billings %>
     </div>
     <div class="modal-footer">
-  <%=f.submit %>
+  <%=f.submit "Record Material Request", class: "btn btn-primary" %>
   </div>
 <% end %>
 </div>

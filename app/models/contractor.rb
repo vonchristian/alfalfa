@@ -7,12 +7,15 @@ class Contractor < ActiveRecord::Base
   has_many :billings
   has_many :projects, through: :contracts
   has_many :project_billings
- 
+
 
   def self.main_contractors
     self.where(:main_contractor => true)
   end
 
+  def subcontracted_amount(project)
+    project.contracts.sum(:amount)
+end
 
   def self.sub_contractors
     self.where(:main_contractor => false)
@@ -27,5 +30,5 @@ class Contractor < ActiveRecord::Base
   def name
     full_name
   end
-  
+
 end

@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   def index
       @accounts = Plutus::Account.all
+      @assets = Plutus::Asset.all
   end
 
   def new
@@ -16,12 +17,14 @@ class AccountsController < ApplicationController
     end
   end
 
+
+
   def show
     @account = Plutus::Account.find(params[:id])
   end
 
   private
   def account_params
-    params.require(:account).permit(:name, :type)
+    params.require(:account).permit(:name, :type, :contra)
   end
 end

@@ -1,5 +1,5 @@
 class Inventory < ActiveRecord::Base
-  # after_create :add_to_accounts
+   after_create :add_to_accounts
   include PublicActivity::Common
   include PgSearch
   multisearchable :against => [:name]
@@ -14,8 +14,8 @@ class Inventory < ActiveRecord::Base
   def total_cost
     quantity * cost
   end
-  # def add_to_accounts
-  #   Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: (self.total_cost), account: "Inventory"],
-  #                       credit_amounts_attributes:[amount: (self.total_cost), account: "Cash"])
-  # end
+   def add_to_accounts
+    Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: (self.total_cost), account: "Inventory"],
+                        credit_amounts_attributes:[amount: (self.total_cost), account: "Cash"])
+  end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- 
+
 
   get 'settings/index'
   get 'reports/contract_summary_report', as: 'contract_summary_report'
@@ -10,11 +10,12 @@ get 'expenses/filtered_data' => 'expenses#filtered_data'
 
   mount Plutus::Engine => "/accounting", :as => "accounting"
 resources :activities
-resources :employees do 
+resources :employees do
+  resources :cash_advances, module: :employees
   end
 resources :categories
 resources :accounts
-resources :assets do 
+resources :assets do
   resources :entries, module: :assets
 end
 resources :revenues
@@ -23,22 +24,25 @@ resources :equities
 resources :incomes
 
 resources :users
-
   root "projects#index"
   get "projects/search"
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'entries/daily' => 'entries#daily'
 get 'result/index' => "result#index"
   resources :contractors
-    
+  resources :construction_equipments
+  resources :lands
   resources :expenses do
     resources :entries
   end
   resources :equipment
   resources :entries
   resources :inventories
-
+resources :accounts do
+  match :balance_sheet, via: [:get], on: :collection
+end
   namespace :accounts do
+
   resources :expenses do
     resources :entries, module: :expenses
   end
@@ -48,12 +52,13 @@ get 'result/index' => "result#index"
   resources :assets
 end
   resources :projects do
+    resources :billable_materials
   resources :workers
     resources :collections
     resources :project_billings
     match :overview, via: [:get], on: :collection
       match :add_workers, via: [:get], on: :member
-    
+
     resource :notice_to_proceed
     resources :time_extensions
     resources :amount_revisions
@@ -65,5 +70,9 @@ end
     resources :billings, module: :projects
   end
   resources :requirements
+
+  resources :contracts do
+    resources :contract_amount_revisions
+  end
 
 end

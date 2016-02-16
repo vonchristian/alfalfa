@@ -1,4 +1,4 @@
-<div class="row">
+ <div class="row">
 <div class='col-md-4 col-md-offset-4'>
   <div class="panel panel-default">
     <div class="panel-body">
@@ -6,7 +6,7 @@
       <hr />
        <%= simple_form_for @contractor do |f| %>
       <%=f.error_notification %>
-     
+
       <%if @contractor.profile_image.blank? %>
         <%=image_tag("default-small.png", :class=>"img-square center-block ") %>
         <br>
