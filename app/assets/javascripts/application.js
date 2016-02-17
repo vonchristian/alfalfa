@@ -16,5 +16,4 @@
 //= require bootstrap-datepicker
 //= require refile
 //= require cocoon
-//= require typeahead.bundle
 //= require_tree .

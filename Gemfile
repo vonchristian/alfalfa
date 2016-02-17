@@ -22,11 +22,11 @@ gem 'plutus'
   gem 'sass-rails'
   gem 'autoprefixer-rails'
   gem 'uglifier'
- 
+
   gem 'jquery-rails'
    gem "coffee-rails"
   gem 'wicked'
- 
+
 group :production do
   gem 'pg',  group: :development
   gem 'rails_12factor'
@@ -55,5 +55,6 @@ end
   gem 'bullet', group: :development
   gem 'brakeman', :require => false, group: :development
   gem "rails_best_practices", group: :development
+  gem "bullet", group: :development
 ############################################
 

@@ -1,0 +1,27 @@
+<div class="tab-pane" id="equipment">
+<%=link_to "Add Equipment Cost", new_work_detail_equipment_cost_path(@work_detail) %>
+<div class="table table-responsive">
+<table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th style="width: 30%">Equipment</th>
+    <th>Number of Equipment</th>
+    <th>Number of Days</th>
+    <th>Daily Rate</th>
+    <th>Total Cost</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+  <% @work_detail.equipment_costs.each do |equipment_cost| %>
+  <td><%=equipment_cost.equipment %></td>
+  <td><%=equipment_cost.number_of_equipment %></td>
+  <td><%=equipment_cost.number_of_days %></td>
+  <td><%=number_to_currency equipment_cost.daily_rate %></td>
+  <td><%=number_to_currency equipment_cost.total_cost %></td>
+  </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+</div>

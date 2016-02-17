@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217020112) do
+ActiveRecord::Schema.define(version: 20160217144032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,6 +231,19 @@ ActiveRecord::Schema.define(version: 20160217020112) do
 
   add_index "equipment", ["project_id"], name: "index_equipment_on_project_id", using: :btree
 
+  create_table "equipment_costs", force: :cascade do |t|
+    t.string   "equipment"
+    t.decimal  "number_of_equipment"
+    t.decimal  "number_of_days"
+    t.decimal  "daily_rate"
+    t.decimal  "total_cost"
+    t.integer  "work_detail_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "equipment_costs", ["work_detail_id"], name: "index_equipment_costs_on_work_detail_id", using: :btree
+
   create_table "expenses", force: :cascade do |t|
     t.decimal  "amount"
     t.string   "description"
@@ -279,20 +292,6 @@ ActiveRecord::Schema.define(version: 20160217020112) do
   add_index "invoices", ["invoiceable_id"], name: "index_invoices_on_invoiceable_id", using: :btree
   add_index "invoices", ["invoiceable_type"], name: "index_invoices_on_invoiceable_type", using: :btree
 
-  create_table "item_budgets", force: :cascade do |t|
-    t.string   "unit"
-    t.string   "quantity"
-    t.decimal  "unit_price"
-    t.decimal  "amount"
-    t.integer  "project_id"
-    t.string   "item_code"
-    t.string   "item_description"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "item_budgets", ["project_id"], name: "index_item_budgets_on_project_id", using: :btree
-
   create_table "items", force: :cascade do |t|
     t.integer  "division_id"
     t.string   "code"
@@ -303,12 +302,39 @@ ActiveRecord::Schema.define(version: 20160217020112) do
 
   add_index "items", ["division_id"], name: "index_items_on_division_id", using: :btree
 
+  create_table "labor_costs", force: :cascade do |t|
+    t.string   "personnel"
+    t.decimal  "number_of_personnel"
+    t.decimal  "number_of_days"
+    t.decimal  "daily_rate"
+    t.decimal  "total_cost"
+    t.integer  "work_detail_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "labor_costs", ["work_detail_id"], name: "index_labor_costs_on_work_detail_id", using: :btree
+
   create_table "lands", force: :cascade do |t|
     t.decimal  "cost"
     t.integer  "area"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "materials", force: :cascade do |t|
+    t.string   "code"
+    t.string   "description"
+    t.string   "unit"
+    t.decimal  "quantity"
+    t.decimal  "unit_cost"
+    t.decimal  "total_cost"
+    t.integer  "work_detail_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "materials", ["work_detail_id"], name: "index_materials_on_work_detail_id", using: :btree
 
   create_table "notice_to_proceeds", force: :cascade do |t|
     t.datetime "date"
@@ -452,6 +478,16 @@ ActiveRecord::Schema.define(version: 20160217020112) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "work_details", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "code"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "work_details", ["project_id"], name: "index_work_details_on_project_id", using: :btree
+
   create_table "workers", force: :cascade do |t|
     t.integer  "employee_id"
     t.integer  "project_id"
@@ -478,8 +514,10 @@ ActiveRecord::Schema.define(version: 20160217020112) do
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"
-  add_foreign_key "item_budgets", "projects"
+  add_foreign_key "equipment_costs", "work_details"
   add_foreign_key "items", "divisions"
+  add_foreign_key "labor_costs", "work_details"
+  add_foreign_key "materials", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "project_billings", "billings"
   add_foreign_key "project_billings", "contractors"
@@ -488,6 +526,7 @@ ActiveRecord::Schema.define(version: 20160217020112) do
   add_foreign_key "requirements", "bids"
   add_foreign_key "requirements", "documents"
   add_foreign_key "time_extensions", "projects"
+  add_foreign_key "work_details", "projects"
   add_foreign_key "workers", "employees"
   add_foreign_key "workers", "projects"
 end

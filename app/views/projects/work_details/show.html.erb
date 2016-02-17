@@ -1,0 +1,30 @@
+
+<div class="col-md-10 col-md-offset-1">
+<div class="card">
+<div class="box-header with-border">
+<span class="pull-left"><%=link_to "Back to Project", project_path(@work_detail.project) %></span>
+<h4><center><%=@work_detail.description %></center></h4>
+<center><span class="help-block"><%=@work_detail.project.name %></center>
+<hr>
+<ul class="nav nav-tabs" role="tablist">
+         <li  role="presentation" class="active">
+           <a href="#materials" aria-controls="materials" role="tab" data-toggle="tab">Materials</a>
+        </li>
+         <li  role="presentation">
+           <a href="#labor" aria-controls="labor" role="tab" data-toggle="tab">Labor</a>
+        </li>
+          <li  role="presentation">
+           <a href="#equipment" aria-controls="equipment" role="tab" data-toggle="tab">Equipment</a>
+        </li>
+
+      </ul>
+      <div class="tab-content">
+      <%=render 'materials' %>
+      <%=render 'labor' %>
+      <%=render 'equipment' %>
+</div>
+      </div><!-- /.tab-content -->
+</div>
+</div>
+
+

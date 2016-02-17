@@ -2,6 +2,7 @@ class WorkersController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @worker = @project.workers.build
+    @worker.materials.build
   end
 
   def create
