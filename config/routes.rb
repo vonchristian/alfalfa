@@ -61,7 +61,7 @@ end
   resources :assets
 end
   resources :projects do
-
+    resources :item_budgets, module: :projects
     resources :invoices, only:[:new, :create], module: :projects
     resources :billable_materials
   resources :workers

@@ -1,10 +1,10 @@
 <div class="row">
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-10 col-md-offset-1">
   <!-- Widget: user widget style 1 -->
   <div class="box box-widget widget-user">
     <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-red-active">
-      <h3 class="widget-user-username">New Expense</h3>
+    <div class="widget-user-header bg-blue-active">
+      <h3 class="widget-user-username">New Budget</h3>
     </div>
     <div class="box-footer">
       <div class="row">
@@ -12,17 +12,34 @@
           <div>
 
 
- <%= simple_form_for [@item, @item_budget], url: item_item_budgets_path, html: { class: 'form-horizontal' },
-                            wrapper: :horizontal_form,
-                            wrapper_mappings: {
-                            check_boxes: :vertical_radio_and_checkboxes,
-                           radio_buttons: :vertical_radio_and_checkboxes,
-                            file: :horizontal_file_input,
-                            boolean: :horizontal_boolean
-                            } do |f| %>
-<%=f.input :amount %>
-<%=f.submit "Record Expense", class: "btn btn-danger" %>
 
-</div>
+                            <table class="table table-compressed">
+
+                               <%= simple_form_for [@project, @item_budget] do |f| %>
+                                <thead>
+
+                                <th style="width: 10%">Item Code</th>
+                                <th style="width: 30%">Item Descrption</th>
+                                <th style="width: 10%">Unit</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Amount</th>
+
+                            </thead>
+                            <tbody>
+                               <tr>
+                                 <td><%=f.input :item_code, label: false %></td>
+                                 <td><%=f.input :item_description, label: false %></td>
+                                 <td><%=f.input :unit, label: false %></td>
+                                 <td><%=f.input :quantity, label: false, input_html:{id: "quantity", oninput: "calculate()"} %></td>
+    <td><%=f.input :unit_price, label: false,  input_html:{id: "unit_price", oninput: "calculate()"}  %></td>
+    <td><%=f.input :amount, label: false,  readonly: true ,  input_html:{id: "amount"}%></td>
+
+                               </tr>
+                               </tbody>
+                               </table>
+<%=f.submit "Save Budget", class: "btn btn-danger" %>
+
 <% end %>
+
 

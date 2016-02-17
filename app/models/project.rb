@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
     has_many :workers
     has_many :employees, through: :workers
     has_many :cost_code_divisions, class_name: "CostCode::Division"
-has_many :items, class_name: "CostCode::Item", foreign_key: 'itemable_id'
+has_many :item_budgets
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
     has_many :invoices, as: :invoiceable
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
@@ -30,6 +30,9 @@ has_many :items, class_name: "CostCode::Item", foreign_key: 'itemable_id'
 
     after_create :add_main_contractor_to_contractors
     after_commit :add_to_accounts
+    def total_budget
+      item_budgets.sum(:amount)
+    end
     def remaining_uncontracted_amount
       cost - contracts.sum(:amount)
     end

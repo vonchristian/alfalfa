@@ -1,23 +1,30 @@
 
 <div class="tab-pane" id="budget">
+<%=link_to "Add Item", new_project_item_budget_path(@project) %>
 <table class="table table-striped">
 <thead>
   <tr>
-    <th>Item</th>
-    <th>Description</th>
-    <th>Budget Estimate</th>
-    <th>Actual</th>
+    <th>Item Code</th>
+    <th>Item Description</th>
+    <th>Unit</th>
+    <th>Quantity</th>
+    <th>Amount</th>
 
   </tr>
 </thead>
-<% @project.items.each do |item| %>
+<% @project.item_budgets.each do |item_budget| %>
 <tbody>
 <tr>
-<td><%=item.code %> </td>
-<td><%=item.description %></td>
+<td><%=item_budget.item_code%> </td>
+<td><%=item_budget.item_description %></td>
+<td><%=item_budget.unit %></td>
+<td><%=item_budget.quantity %></td>
+<td><%=number_to_currency item_budget.amount %></td>
+
 </tr>
 </tbody>
 <% end %>
+<h4>Total Budget: <%=number_to_currency @project.total_budget %></h4>
 </table>
 </div>
 
