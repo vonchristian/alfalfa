@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216113507) do
+ActiveRecord::Schema.define(version: 20160216145038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,12 @@ ActiveRecord::Schema.define(version: 20160216113507) do
   add_index "depreciations", ["depreciationable_id"], name: "index_depreciations_on_depreciationable_id", using: :btree
   add_index "depreciations", ["depreciationable_type"], name: "index_depreciations_on_depreciationable_type", using: :btree
 
+  create_table "divisions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "documents", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -272,6 +278,31 @@ ActiveRecord::Schema.define(version: 20160216113507) do
 
   add_index "invoices", ["invoiceable_id"], name: "index_invoices_on_invoiceable_id", using: :btree
   add_index "invoices", ["invoiceable_type"], name: "index_invoices_on_invoiceable_type", using: :btree
+
+  create_table "item_budgets", force: :cascade do |t|
+    t.decimal  "amount"
+    t.integer  "item_budgetable_id"
+    t.string   "item_budgetable_type"
+    t.integer  "project_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "item_budgets", ["project_id"], name: "index_item_budgets_on_project_id", using: :btree
+
+  create_table "items", force: :cascade do |t|
+    t.integer  "division_id"
+    t.string   "description"
+    t.string   "code"
+    t.integer  "itemable_id"
+    t.string   "itemable_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "items", ["division_id"], name: "index_items_on_division_id", using: :btree
+  add_index "items", ["itemable_id"], name: "index_items_on_itemable_id", using: :btree
+  add_index "items", ["itemable_type"], name: "index_items_on_itemable_type", using: :btree
 
   create_table "lands", force: :cascade do |t|
     t.decimal  "cost"
@@ -448,6 +479,8 @@ ActiveRecord::Schema.define(version: 20160216113507) do
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"
+  add_foreign_key "item_budgets", "projects"
+  add_foreign_key "items", "divisions"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "project_billings", "billings"
   add_foreign_key "project_billings", "contractors"

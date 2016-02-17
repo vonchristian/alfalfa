@@ -1,0 +1,24 @@
+
+<div class="tab-pane" id="budget">
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>Item</th>
+    <th>Description</th>
+    <th>Budget Estimate</th>
+    <th>Actual</th>
+
+  </tr>
+</thead>
+<% @project.items.each do |item| %>
+<tbody>
+<tr>
+<td><%=item.code %> </td>
+<td><%=item.description %></td>
+</tr>
+</tbody>
+<% end %>
+</table>
+</div>
+
+

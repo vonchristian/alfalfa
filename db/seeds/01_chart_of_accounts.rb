@@ -37,12 +37,12 @@ Plutus::Equity.create(:name => "Retained Earnings" )
 Plutus::Equity.create(:name => "Current Period Net Income" )
 
 Plutus::Revenue.create(:name => "Revenue")
+
 Plutus::Expense.create(:name => "Materials")
 Plutus::Expense.create(:name => "Labor")
 Plutus::Expense.create(:name => "Subcontract")
 Plutus::Expense.create(:name => "Equipment")
 Plutus::Expense.create(:name => "Other")
-
 Plutus::Expense.create(:name => "Rent and Lease Payments")
 Plutus::Expense.create(:name => "Depreciation")
 Plutus::Expense.create(:name => "Repairs and Maintenance")

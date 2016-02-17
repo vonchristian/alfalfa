@@ -9,48 +9,20 @@
         </li>
 
         <li role="presentation">
-           <a href="#accomplishment" aria-controls="accomplishment" role="tab" data-toggle="tab"></i> Accomplishments</a>
+           <a href="#income_statement" aria-controls="income_statement" role="tab" data-toggle="tab"></i> Income Statement</a>
         </li>
 
         <li role="presentation">
-           <a href="#contractors" aria-controls="contractors" role="tab" data-toggle="tab"></i> Contractors</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a>
+           <a href="#general_ledger" aria-controls="general_ledger" role="tab" data-toggle="tab"></i> General Ledger</a>
         </li>
 
 
-
-        <li role="presentation">
-           <a href="#workers" aria-controls="inspection" role="tab" data-toggle="tab"></i> Workers</a>
-        </li>
-
-
-
-        <li role="presentation">
-           <a href="#collections" aria-controls="collections" role="tab" data-toggle="tab">Collections</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#remarks" aria-controls="remarks" role="tab" data-toggle="tab"> Remarks</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Change Orders</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Activities</a>
-        </li>
       </ul>
 
       <div class="tab-content">
         <%=render 'balance_sheet' %>
+        <%=render 'income_statement' %>
+        <%=render 'general_ledger' %>
       </div><!-- /.tab-content -->
    </div><!-- /.col -->
 </div><!-- /.row -->

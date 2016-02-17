@@ -10,9 +10,10 @@ class Project < ActiveRecord::Base
     belongs_to :category
     has_many :workers
     has_many :employees, through: :workers
-
+    has_many :cost_code_divisions, class_name: "CostCode::Division"
+has_many :items, class_name: "CostCode::Item", foreign_key: 'itemable_id'
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
-     has_many :invoices, as: :invoiceable
+    has_many :invoices, as: :invoiceable
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
     has_many :bids
     has_many :billings
@@ -23,8 +24,6 @@ class Project < ActiveRecord::Base
     has_many :accomplishments
     has_many :remarks
     has_many :purchase_orders
-
-
 
     validates :name,  :id_number, :duration, :cost, :address, presence: true
   validates :id_number, uniqueness: true

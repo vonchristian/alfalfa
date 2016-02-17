@@ -1,0 +1,28 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-red-active">
+      <h3 class="widget-user-username">New Expense</h3>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+          <div>
+
+
+ <%= simple_form_for [@item, @item_budget], url: item_item_budgets_path, html: { class: 'form-horizontal' },
+                            wrapper: :horizontal_form,
+                            wrapper_mappings: {
+                            check_boxes: :vertical_radio_and_checkboxes,
+                           radio_buttons: :vertical_radio_and_checkboxes,
+                            file: :horizontal_file_input,
+                            boolean: :horizontal_boolean
+                            } do |f| %>
+<%=f.input :amount %>
+<%=f.submit "Record Expense", class: "btn btn-danger" %>
+
+</div>
+<% end %>
+

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :cost_code do
+    resources :divisions, except:[:destroy] do
+    resources :items, only:[:new, :create]
+  end
+  end
 
 
   get 'settings/index'
@@ -6,6 +11,7 @@ Rails.application.routes.draw do
   get 'reports/index', as: 'reports'
  devise_for :users, :controllers => { :registrations => "users" }
 get 'expenses/filtered_data' => 'expenses#filtered_data'
+get 'accounts/income_statement' => 'accounts#income_statement'
 
 
   mount Plutus::Engine => "/accounting", :as => "accounting"
@@ -55,13 +61,15 @@ end
   resources :assets
 end
   resources :projects do
+
     resources :invoices, only:[:new, :create], module: :projects
     resources :billable_materials
   resources :workers
     resources :collections
     resources :project_billings
-    match :overview, via: [:get], on: :collection
+      match :overview, via: [:get], on: :collection
       match :add_workers, via: [:get], on: :member
+      match :add_cost_code_items, via: [:get], on: :member
 
     resource :notice_to_proceed
     resources :time_extensions
@@ -78,5 +86,6 @@ end
   resources :contracts do
     resources :contract_amount_revisions
   end
+
 
 end

@@ -1,14 +1,20 @@
 <% breadcrumb :project, @project %>
 <div class="col-md-12">
    <div class="card">
-
+   <div class="row">
+<div class="col-md-1">
          <h1><a href="/projects" data-toggle="tooltip" title="Return to Project Index"><i class="fa fa-angle-left"></i></a></h1>
-
+</div>
+<div class="col-md-10">
           <h4 class="text-info"><%=@project.name.upcase %></h4>
-
+</div>
+</div>
       <ul class="nav nav-tabs" role="tablist">
          <li  role="presentation" class="active">
            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+        </li>
+         <li  role="presentation">
+           <a href="#budget" aria-controls="budget" role="tab" data-toggle="tab">Budget</a>
         </li>
         <li role="presentation">
            <a href="#accomplishment" aria-controls="accomplishment" role="tab" data-toggle="tab"></i> Accomplishments</a>
@@ -40,6 +46,7 @@
       </ul>
       <div class="tab-content">
         <%=render 'profile' %>
+        <%=render 'budget' %>
         <%=render 'accomplishment' %>
         <%=render 'expenses' %>
         <%=render 'timeline' %>

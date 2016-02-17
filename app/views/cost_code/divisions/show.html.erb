@@ -1,0 +1,6 @@
+<%=@division.name %>
+<%=link_to "Add Item", new_cost_code_division_item_path(@division) %>
+<% @division.items.each do |item| %>
+<%=item.code %>
+<%=item.description %>
+<% end %>

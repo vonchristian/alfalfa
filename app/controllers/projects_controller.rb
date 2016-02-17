@@ -2,6 +2,9 @@ class ProjectsController < ApplicationController
   def add_workers
     @project = Project.find(params[:id])
   end
+  def add_cost_code_items
+    @project = Project.find(params[:id])
+  end
   def index
     @projects =ProjectDecorator.decorate_collection(Project.all)
   end
@@ -19,8 +22,8 @@ class ProjectsController < ApplicationController
       if  @project.save
         @project.create_activity :create, owner: current_user, trackable: @project
       redirect_to @project, notice: "Project successfully saved."
-    else 
-      render :new 
+    else
+      render :new
     end
   end
 
@@ -43,8 +46,8 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :category_id, :implementing_office, { :employee_ids =>[] })
+    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :category_id, :implementing_office, {:item_ids=>[] }, { :employee_ids =>[] })
   end
 
-  
+
 end
