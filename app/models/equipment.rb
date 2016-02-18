@@ -1,6 +1,6 @@
 class Equipment < ActiveRecord::Base
   include PgSearch
-  multisearchable :against => [:name]
+  multisearchable :against => [:make_and_model]
   def make_and_model
     "#{make} - #{model}"
   end

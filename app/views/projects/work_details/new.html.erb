@@ -1,2 +1,5 @@
 <%=simple_form_for [@project, @work_detail] do |f| %>
+<%=f.input :code %>
+<%=f.input :description %>
+<%=f.submit data: { disable_with: "Creating New Account..." } %>
 <% end %>

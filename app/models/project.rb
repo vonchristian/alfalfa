@@ -30,7 +30,9 @@ class Project < ActiveRecord::Base
 
     after_create :add_main_contractor_to_contractors
     after_commit :add_to_accounts
-
+   def total_project_estimate
+    work_details.collect{|w| w.total_direct_cost}.sum
+   end
     def remaining_uncontracted_amount
       cost - contracts.sum(:amount)
     end

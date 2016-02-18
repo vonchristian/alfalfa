@@ -1,0 +1,43 @@
+
+<div class="tab-pane" id="work_details">
+<div class="row">
+<div class="col-md-6">
+<%=link_to "Add Item", new_project_work_detail_path(@project) %>
+<table class="table table-compressed">
+<thead>
+  <tr>
+    <th>Item Code</th>
+    <th>Item Description</th>
+    <th>Budget Estimate</th>
+    <th>Actual</th>
+  </tr>
+</thead>
+<% @project.work_details.each do |work_detail| %>
+<tbody>
+<tr>
+<td><%=work_detail.code%> </td>
+<td><%=link_to work_detail.description,[@project, work_detail] %></td>
+<td><%=number_to_currency work_detail.total_direct_cost %></td>
+</tr>
+</tbody>
+<% end %>
+</table>
+<h4>Total Cost: <%=number_to_currency @project.total_project_estimate %></h4>
+
+</div>
+<div class="col-md-6">
+
+<% @project.work_details.each do |work_detail|%>
+<div class="box">
+<div class="box-header with-border">
+  <h4>#<%=work_detail.code %> <%=work_detail.description %></h4>
+  <hr>
+  <span class="text-muted">Budget: <%=number_to_currency work_detail.total_direct_cost %></span>
+  </div>
+  </div>
+<% end %>
+
+</div>
+</div>
+</div>
+
