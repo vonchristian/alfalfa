@@ -20,6 +20,6 @@ class Projects::WorkDetailsController < ApplicationController
   end
   private
   def work_detail_params
-    params.require(:work_detail).permit(:code, :description, materials_attributes: [:id, :code, :description, :unit, :unit_cost, :quantity, :total_cost, :_destroy])
+    params.require(:work_detail).permit(:code, :description, :unit, :unit_cost, :quantity, :total_cost)
   end
   end

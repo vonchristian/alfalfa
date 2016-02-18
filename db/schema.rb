@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217144032) do
+ActiveRecord::Schema.define(version: 20160218080358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -478,12 +478,27 @@ ActiveRecord::Schema.define(version: 20160217144032) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "work_accomplishments", force: :cascade do |t|
+    t.decimal  "quantity"
+    t.integer  "work_detail_id"
+    t.datetime "date_accomplished"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "work_accomplishments", ["work_detail_id"], name: "index_work_accomplishments_on_work_detail_id", using: :btree
+
   create_table "work_details", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "code"
     t.string   "description"
+    t.decimal  "quantity"
+    t.string   "unit"
+    t.decimal  "total_cost"
+    t.decimal  "unit_cost"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "status"
   end
 
   add_index "work_details", ["project_id"], name: "index_work_details_on_project_id", using: :btree
@@ -526,6 +541,7 @@ ActiveRecord::Schema.define(version: 20160217144032) do
   add_foreign_key "requirements", "bids"
   add_foreign_key "requirements", "documents"
   add_foreign_key "time_extensions", "projects"
+  add_foreign_key "work_accomplishments", "work_details"
   add_foreign_key "work_details", "projects"
   add_foreign_key "workers", "employees"
   add_foreign_key "workers", "projects"

@@ -63,6 +63,7 @@ end
   resources :assets
 end
 resources :work_details do
+  resources :work_accomplishments, module: :projects
   resources :materials, module: :projects
   resources :labor_costs, module: :projects
   resources :equipment_costs, module: :projects
