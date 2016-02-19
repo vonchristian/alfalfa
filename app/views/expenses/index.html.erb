@@ -1,4 +1,4 @@
-<% breadcrumb :expenses, @expenses %>
+
 
   <div class="col-md-12">
     <div class="box box-solid">
@@ -23,7 +23,7 @@
       <hr>
       <div class="table table-responsive">
       <table class="table table-hover">
-      <thead> 
+      <thead>
         <tr class="text-uppercase">
           <th style="width: 10%">Date</th>
           <th style="width: 30%">Payee</th>
@@ -32,8 +32,8 @@
           <th>Amount</th>
           <th>Action</th>
         </tr>
-      </thead> 
-      <tbody> 
+      </thead>
+      <tbody>
       <% @expenses.each do |expense| %>
         <%expense.debit_entries.each do |entry| %>
       <% if entry.commercial_document.blank?%>
@@ -50,10 +50,7 @@
           </tr>
         <% end %>
       <% end %>
-      </table> 
-      </div> 
+      </table>
+      </div>
     </div>
   </div>
- 
-  
- 

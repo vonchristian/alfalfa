@@ -149,7 +149,7 @@ GEM
       jquery-rails (>= 3.0)
       jquery-ui-rails (>= 4.0)
       rails (~> 4.0)
-    prawn (2.0.2)
+    prawn (2.0.1)
       pdf-core (~> 0.6.0)
       ttfunk (~> 1.4.0)
     prawn-table (0.2.2)

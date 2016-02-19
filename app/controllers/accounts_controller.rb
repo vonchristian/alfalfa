@@ -1,6 +1,18 @@
 class AccountsController < ApplicationController
+  def index
+    @accounts = Plutus::Account.all
+     @assets = Plutus::Asset.all
+      @liabilities = Plutus::Liability.all
+      @equity = Plutus::Equity.all
+      @expenses = Plutus::Expense.all
+      @revenues = Plutus::Revenue.all
+
+    end
+
   def balance_sheet
-      first_entry = Plutus::Entry.order('date ASC').first
+    
+    
+        first_entry = Plutus::Entry.order('date ASC').first
       @from_date = first_entry ? first_entry.date: Date.today
       @to_date = params[:date] ? Date.parse(params[:date]) : Date.today
       @assets = Plutus::Asset.all

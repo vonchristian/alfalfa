@@ -10,14 +10,14 @@ class Projects::ExpensesController < ApplicationController
     @project = Project.find(params[:project_id])
     @entry = Plutus::Entry.new(entry_params)
     @entry.commercial_document = @project
-    @entry.owner = current_user
+    @entry.owner_id = current_user.id
     if @entry.save
       redirect_to @project, notice: "Expense Recorded successfully"
     else
       render :new
     end
   end
-  
+
   def show
     @entry = Plutus::Entry.find(params[:id])
   end

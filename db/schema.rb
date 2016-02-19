@@ -252,15 +252,14 @@ ActiveRecord::Schema.define(version: 20160219135520) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
-    t.string   "middle_name"
     t.string   "last_name"
     t.string   "mobile_number"
     t.string   "email"
     t.string   "photo_id"
-    t.integer  "position"
-    t.integer  "project_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "position"
+    t.integer  "project_id"
   end
 
   add_index "employees", ["project_id"], name: "index_employees_on_project_id", using: :btree
@@ -516,7 +515,6 @@ ActiveRecord::Schema.define(version: 20160219135520) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string   "first_name"
-    t.string   "middle_name"
     t.string   "last_name"
     t.integer  "role"
     t.string   "profile_photo_id"
