@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  require 'csv'
   include PublicActivity::Common
   include PgSearch
   multisearchable :against => [:name],
@@ -12,6 +13,7 @@ class Project < ActiveRecord::Base
     has_many :employees, through: :workers
     has_many :cost_code_divisions, class_name: "CostCode::Division"
     has_many :work_details
+    has_many :work_accomplishments, through: :work_details
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
     has_many :invoices, as: :invoiceable
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
@@ -30,6 +32,17 @@ class Project < ActiveRecord::Base
 
     after_create :add_main_contractor_to_contractors
     after_commit :add_to_accounts
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true, :col_sep => ',') do |row|
+
+      project_hash = row.to_hash # exclude the price field
+        Project.create!(project_hash)
+    end # end CSV.foreach
+  end # end self.import(file)
+
+
+
    def total_project_estimate
     work_details.collect{|w| w.total_direct_cost}.sum
    end
@@ -155,5 +168,7 @@ end
        Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: (self.cost), account: "Accounts Receivable-Trade"],
                          credit_amounts_attributes:[amount: (self.cost), account: "Accounts Payable-Trade"])
    end
+
+
 
 end

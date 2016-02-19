@@ -76,6 +76,7 @@ end
     resources :collections
     resources :project_billings
       match :overview, via: [:get], on: :collection
+      match :import, via: [:post], on: :collection
       match :add_workers, via: [:get], on: :member
       match :add_cost_code_items, via: [:get], on: :member
 

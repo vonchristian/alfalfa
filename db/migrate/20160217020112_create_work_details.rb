@@ -8,6 +8,7 @@ class CreateWorkDetails < ActiveRecord::Migration
       t.string :unit
       t.decimal :total_cost
       t.decimal :unit_cost
+      t.boolean :accomplished
       t.timestamps null: false
     end
   end

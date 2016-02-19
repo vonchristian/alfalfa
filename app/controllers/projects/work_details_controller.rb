@@ -14,9 +14,9 @@ class Projects::WorkDetailsController < ApplicationController
       render :new
     end
   end
+
   def show
-    @work_detail = WorkDetail.find(params[:id])
-    @materials = @work_detail.materials
+    @work_detail = WorkDetail.includes(:work_accomplishments).find(params[:id]).decorate
   end
   private
   def work_detail_params

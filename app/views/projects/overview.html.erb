@@ -2,81 +2,41 @@
 <% breadcrumb :projects, @projects %>
 
 
-  <div class="col-md-4">
-    <div class="box box-solid">
-      <div class="box-header">
-        <b class="text-muted">Projects</b>
-        <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> New Project <%end%></span>
-      </div>
-      <div class="box-body">
-      <table class="table">
-      <% @projects.each do |project| %>
-        
-        <tr> 
-        <td  width="80px"><%#= image_tag attachment_url(entry.owner, :profile_photo, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %>
-                      <small class="text-primary"><%=number_to_currency project.cost %></small>
-                     </td>
-
-          <td><small class="text-muted"><%=project.name.upcase.truncate(150) %></small>
-          
-           <div class="progress progress-xxs">
-
-                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-
-                      <span class="sr-only">60% Complete (warning)</span>
-
-                  
-                   </div>
-                  </div>
-                  <br>
-                  <% project.contractors.each do |contractor| %>
-             <span data-toggle="tooltip" title="<%=contractor.full_name %>"><%= image_tag attachment_url(contractor, :profile_image, :fill, 30, 30, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></span >
-           
-<% end %>
-          </td> 
-          </tr> 
-       
-      <% end %>
-      </table> 
-      </div> 
-    </div>
-  </div>  
-
-    <div class="col-md-8">
-    <div class="row">
+    <div class="col-md-12">
       <%@projects.each do |project| %>
-      
-        <div class="col-md-6">
+
+        <div class="col-md-4">
           <div class="box box-<%=project.box_status%>">
-            <div class="box-header">
-              <small class="text-primary" data="tooltip" title="<%=project.category%> dsf">#<%=project.id_number%></small>
+            <div class="box-header with-border">
+             <a href="/projects/<%=project.id%>">
+              <span class="text-primary" data="tooltip" title="<%=project.category%> dsf">#<%=project.id_number%></span>   <h4 class="text-info"><%=project.name.truncate(200)%></h4>
               </div>
-               <a href="/projects/<%=project.id%>">
+
               <div class="box-body">
-             
-              <h5 class="text-info"><%=project.name.truncate(150)%></h5>
-                
- 
-              <hr> 
-  <small class="text-muted" title="Contract Amount"> <span class="text-muted"> <%=number_to_currency project.revised_contract_amount %></span></small>
+
+
+
+
+
+  <span class="text-muted" title="Contract Amount"> <span class="text-muted"> <%=number_to_currency project.revised_contract_amount %></span></span>
               &nbsp; &nbsp;
-              <small class="text-muted" title="Days Elapsed"><i class="fa fa-calendar"></i> <span class="text-danger"> <%=project.days_elapsed%></span> /<%=project.revised_duration%></small>
+              <span class="text-muted" title="Days Elapsed"><i class="fa fa-calendar"></i> <span class="text-danger"> <%=project.days_elapsed%></span> /<%=project.revised_duration%></span>
               &nbsp; &nbsp;
-              
-               <small class="text-success" data="tooltip" title="<%=project.category%> dsf"><i class="fa fa-hand-paper-o"></i> <%=project.actual_accomplishment%> %</small>
+
+               <span class="text-success" data="tooltip" title="<%=project.category%> dsf"><i class="fa fa-hand-paper-o"></i> <%=project.actual_accomplishment%> %</span>
                   &nbsp; &nbsp;
-             
-               <small class="text-success" data="tooltip" title="<%=project.category%> dsf"><i class="fa fa-bookmark-o"></i> <%=project.target_accomplishment%> %</small>
-               <small class=" pull-right text-<%=project.slippage_color %> text-center"><i class="fa fa-caret-<%=project.slippage_sign %>"></i> <%=project.slippage%> %</small>
- 
+
+               <span class="text-success" data="tooltip" title="<%=project.category%> dsf"><i class="fa fa-bookmark-o"></i> <%=project.target_accomplishment%> %</span>
+               <span class=" pull-right text-<%=project.slippage_color %> text-center"><i class="fa fa-caret-<%=project.slippage_sign %>"></i> <%=project.slippage%> %</span>
+
             </div>
 
             </div>
               </a>
             </div>
             <% end %>
-            
+
            </div>
     </div>
   </div>
-  
+

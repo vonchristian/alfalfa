@@ -1,19 +1,23 @@
 
-        
-            <div class="col-xs-12">
+
+            <div class="container">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Contract Summary Report</h3>
-                  <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> New Project <%end%></span> 
+                  <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> New Project <%end%></span>
+                  <%= form_tag import_projects_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                 <div class="table table-responsive">
                   <table class="table table-striped table-bordered">
-<thead>  
+<thead>
 <tr class="bg-gray-light">
 
   <th>ID</th>
- 
+
   <th style="width: 30%" class="text-uppercase">Project Name</th>
   <th class="text-uppercase">Actual Acc.</th>
   <th class="text-uppercase">Target Acc.</th>
@@ -30,8 +34,8 @@
   </div>
 </tr>
 </thead>
-<tbody> 
- <% @projects.each do |project| %> 
+<tbody>
+ <% @projects.each do |project| %>
  <tr>
  <td><%=project.id_number %></td>
   <td><%=link_to project.name.upcase, project %></td>
@@ -44,7 +48,7 @@
  <td><%=number_to_currency project.revised_contract_amount%></td>
  <% else %>
  <td>No Revision</td>
- <% end %> 
+ <% end %>
  <td></td>
  <td></td>
  <td><%=number_to_currency project.total_collection %></td>
@@ -57,8 +61,8 @@
 
 </table>
   <hr>
- 
-  
+
+
 </div>
   </div>
 </div>

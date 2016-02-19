@@ -1,6 +1,7 @@
 class ProjectDecorator < Draper::Decorator
+ decorates_association :work_details
   delegate_all
- 
+
   def sign
     if project.road?
     'road'
@@ -22,7 +23,7 @@ end
     if project.notice_to_proceed.blank?
       link_to 'Enter NTP Date', new_project_notice_to_proceed_path(project)
     else
-      project.ntp 
+      project.ntp
     end
   end
 
@@ -50,7 +51,7 @@ end
     'green'
   end
 end
-  
+
 
   def ntp
     if project.notice_to_proceed
@@ -60,7 +61,7 @@ end
     end
   end
 
-  
+
 
   def percent_accomplished
     if project.accomplishments.any?

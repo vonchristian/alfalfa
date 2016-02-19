@@ -83,6 +83,11 @@ GEM
     colored (1.2)
     concurrent-ruby (1.0.0)
     database_cleaner (1.5.1)
+    delayed_job (4.1.1)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.1.0)
+      activerecord (>= 3.0, < 5)
+      delayed_job (>= 3.0, < 5)
     devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -155,7 +160,7 @@ GEM
       ttfunk (~> 1.4.0)
     prawn-table (0.2.2)
       prawn (>= 1.3.0, < 3.0.0)
-    public_activity (1.4.2)
+    public_activity (1.4.3)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
@@ -224,7 +229,10 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rspec-core (3.4.2)
+    roo (2.1.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
+    rspec-core (3.4.3)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -247,6 +255,7 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.7.3)
       sexp_processor (~> 4.1)
+    rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -313,6 +322,8 @@ DEPENDENCIES
   cocoon
   coffee-rails
   database_cleaner
+  delayed_job
+  delayed_job_active_record
   devise
   draper
   factory_girl_rails
@@ -335,6 +346,7 @@ DEPENDENCIES
   rails_best_practices
   refile
   refile-mini_magick
+  roo (~> 2.1.0)
   rspec-rails
   sass-rails
   shoulda-matchers (~> 3.0)

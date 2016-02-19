@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218080358) do
+ActiveRecord::Schema.define(version: 20160218081639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,22 @@ ActiveRecord::Schema.define(version: 20160218080358) do
 
   add_index "contracts", ["contractor_id"], name: "index_contracts_on_contractor_id", using: :btree
   add_index "contracts", ["project_id"], name: "index_contracts_on_project_id", using: :btree
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "depreciations", force: :cascade do |t|
     t.decimal  "amount"
@@ -496,9 +512,9 @@ ActiveRecord::Schema.define(version: 20160218080358) do
     t.string   "unit"
     t.decimal  "total_cost"
     t.decimal  "unit_cost"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "status"
+    t.boolean  "accomplished"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "work_details", ["project_id"], name: "index_work_details_on_project_id", using: :btree

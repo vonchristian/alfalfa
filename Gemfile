@@ -3,6 +3,7 @@ ruby '2.3.0'
 
 gem 'rails', '4.2.5.1'
 gem "gretel"
+gem 'roo', '~> 2.1.0'
 gem 'draper'
 gem 'cocoon'
 gem 'jquery-ui-rails'
@@ -22,6 +23,8 @@ gem 'plutus'
   gem 'sass-rails'
   gem 'autoprefixer-rails'
   gem 'uglifier'
+  gem 'delayed_job'
+  gem 'delayed_job_active_record'
 
   gem 'jquery-rails'
    gem "coffee-rails"
@@ -55,6 +58,5 @@ end
   gem 'bullet', group: :development
   gem 'brakeman', :require => false, group: :development
   gem "rails_best_practices", group: :development
-  gem "bullet", group: :development
 ############################################
 
