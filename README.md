@@ -1,12 +1,14 @@
-# README #
+# Construction Project Management System #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is the repository for Alfalfa Construction project management system.
 
-### What is this repository for? ###
+### It contains ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Accounting
+* Project Costing
+* Equipment Costing
+* Payroll
+* Project Tracking
 
 ### How do I get set up? ###
 
