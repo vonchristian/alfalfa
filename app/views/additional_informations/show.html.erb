@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @additional_information.sex %>
+</p>
+
+<p>
+  <strong>Birth date:</strong>
+  <%= @additional_information.birth_date %>
+</p>
+
+<p>
+  <strong>Birth place:</strong>
+  <%= @additional_information.birth_place %>
+</p>
+
+<p>
+  <strong>Civil status:</strong>
+  <%= @additional_information.civil_status %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @additional_information.nationality %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @additional_information.user %>
+</p>
+
+<%= link_to 'Edit', edit_additional_information_path(@additional_information) %> |
+<%= link_to 'Back', additional_informations_path %>

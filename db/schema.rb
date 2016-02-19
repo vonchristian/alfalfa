@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218081639) do
+ActiveRecord::Schema.define(version: 20160219135520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,37 @@ ActiveRecord::Schema.define(version: 20160218081639) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+
+  create_table "additional_informations", force: :cascade do |t|
+    t.string   "sex"
+    t.datetime "birth_date"
+    t.string   "birth_place"
+    t.string   "civil_status"
+    t.string   "nationality"
+    t.integer  "informeable_id"
+    t.string   "informeable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "additional_informations", ["informeable_id"], name: "index_additional_informations_on_informeable_id", using: :btree
+  add_index "additional_informations", ["user_id"], name: "index_additional_informations_on_user_id", using: :btree
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "sitio"
+    t.string   "barangay"
+    t.string   "municipality"
+    t.string   "province"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "addresses", ["addressable_id"], name: "index_addresses_on_addressable_id", using: :btree
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
 
   create_table "amount_revisions", force: :cascade do |t|
     t.integer  "project_id"
@@ -221,14 +252,15 @@ ActiveRecord::Schema.define(version: 20160218081639) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.string   "mobile_number"
     t.string   "email"
     t.string   "photo_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
     t.integer  "position"
     t.integer  "project_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "employees", ["project_id"], name: "index_employees_on_project_id", using: :btree
@@ -484,6 +516,7 @@ ActiveRecord::Schema.define(version: 20160218081639) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string   "first_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.integer  "role"
     t.string   "profile_photo_id"
@@ -530,6 +563,8 @@ ActiveRecord::Schema.define(version: 20160218081639) do
   add_index "workers", ["project_id"], name: "index_workers_on_project_id", using: :btree
 
   add_foreign_key "accomplishments", "projects"
+  add_foreign_key "additional_informations", "users"
+  add_foreign_key "addresses", "users"
   add_foreign_key "amount_revisions", "projects"
   add_foreign_key "bids", "projects"
   add_foreign_key "billable_materials", "contractors"

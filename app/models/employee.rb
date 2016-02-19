@@ -4,10 +4,10 @@ class Employee < ActiveRecord::Base
 
   attachment :photo
 
-  enum position:[:laborer, :operator, :wielder]
+  enum position:[:laborer, :skilled_laborer, :foreman, :operator, :welder]
 
-  has_many :project_workers
-  has_many :projects, through: :project_workers
+  has_many :workers
+  has_many :projects, through: :workers
   has_many :cash_advances, as: :cash_advanceable
 def full_name
     "#{first_name} #{last_name}"

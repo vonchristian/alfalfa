@@ -26,6 +26,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       t.string :first_name
+      t.string :middle_name
       t.string :last_name
       t.integer :role
       t.string :profile_photo_id

@@ -43,7 +43,9 @@ end
 private
   def user_params
     user_params = params[:user]
-    user_params ? user_params.permit(:profile_photo, :first_name, :last_name, :password, :password_confirmation, :email, :role, :mobile_number) : {}
+    user_params ? user_params.permit(:profile_photo, :first_name, :middle_name, :last_name, :password, :password_confirmation, :email, :role, :mobile_number,
+                                                            address_atttributes: [:sitio, :barangay, :municipality, :province],
+                                                            additional_information_attributes: [:sex, :birth_date, :birth_place, :civil_status, :nationality]) : {}
   end
   def load_users
     @users ||= user_scope.to_a
@@ -53,6 +55,8 @@ private
   end
   def build_user
     @user ||= user_scope.build
+    @user.build_address
+    @user.build_additional_information
     authorize @user
     @user.attributes = user_params
   end

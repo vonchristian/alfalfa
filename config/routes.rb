@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :additional_informations
   namespace :cost_code do
     resources :divisions, except:[:destroy] do
     resources :items, only:[:new, :create]
