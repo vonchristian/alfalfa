@@ -69,7 +69,9 @@ resources :work_details do
   resources :equipment_costs, module: :projects
 end
   resources :projects do
-    resources :work_details, module: :projects
+    resources :work_details, module: :projects do
+       match :import, via: [:post], on: :collection, module: :projects
+     end
     resources :invoices, only:[:new, :create], module: :projects
     resources :billable_materials
   resources :workers

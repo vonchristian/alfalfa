@@ -1,0 +1,7 @@
+<div class="tab-pane" id="reports">
+<h4>Statement of Work Accomplished</h4>
+<span class=help-block>Generate a report as of today <%=Time.zone.now.strftime("%B %e, %Y") %>.
+<span class="pull-right"><%=link_to "Statement of Work (PDF)", project_path(@project, format: 'pdf') %></span>
+</span>
+<hr>
+</div>

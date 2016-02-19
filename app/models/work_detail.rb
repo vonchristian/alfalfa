@@ -1,4 +1,5 @@
 class WorkDetail < ActiveRecord::Base
+  require 'csv'
   INDIRECT_COST_PERCENTAGE= BigDecimal('0.1550')
   VAT = BigDecimal('0.05')
 
@@ -11,9 +12,10 @@ class WorkDetail < ActiveRecord::Base
   has_many :equipment_costs
   has_many :work_accomplishments
   accepts_nested_attributes_for :materials, reject_if: :all_blank, allow_destroy: true
+  delegate :cost, to: :project, prefix: true
 
-def percent_of_work_detail_from_the_project_cost
-  self.total_direct_cost / self.total_cost
+def weight_percent
+  self.total_direct_cost / self.project_cost
 end
 
   def total_quantity_accomplished
@@ -64,6 +66,13 @@ end
     update_column :accomplished, true
   end
 
+def self.import(file)
+    CSV.foreach(file.path, headers: true, :col_sep => ',') do |row|
+
+      work_detail_hash = row.to_hash
+        WorkDetail.create!(work_detail_hash)
+    end
+  end
 
 
 end

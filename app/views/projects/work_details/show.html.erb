@@ -8,7 +8,10 @@
 <%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail) %>
 <hr>
 <ul class="nav nav-tabs" role="tablist">
-         <li  role="presentation" class="active">
+        <li  role="presentation" class="active">
+           <a href="#work_details_timeline" aria-controls="timeline" role="tab" data-toggle="tab">Timeline</a>
+        </li>
+         <li  role="presentation">
            <a href="#materials" aria-controls="materials" role="tab" data-toggle="tab">Materials</a>
         </li>
          <li  role="presentation">
@@ -31,6 +34,7 @@
 
       </ul>
       <div class="tab-content">
+      <%=render 'work_details_timeline' %>
       <%=render 'materials' %>
       <%=render 'labor' %>
       <%=render 'equipment' %>

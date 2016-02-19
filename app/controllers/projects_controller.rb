@@ -16,7 +16,6 @@ class ProjectsController < ApplicationController
   end
 
   def import
-
       Project.import(params[:file])
       redirect_to root_url, notice: "Products imported."
 
@@ -52,6 +51,18 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.includes(:work_accomplishments).find(params[:id]).decorate
+   respond_to do |format|
+    format.html
+    format.pdf do
+      if @project.has_no_change_orders?
+      pdf = StatementOfWorkAccomplishedPdf.new(@project, view_context)
+      send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Statement of Work for #{@project.id_number}.pdf"
+    else
+       pdf = StatementOfWorkAccomplishedWithChangeOrdersPdf.new(@project, view_context)
+      send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Statement of Work for #{@project.id_number}.pdf"
+    end
+    end
+   end
   end
 
   private

@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:name],
    :order_within_rank => "projects.created_at DESC"
+
+
    has_many :collections
    has_many :project_billings
     has_one :notice_to_proceed
@@ -40,7 +42,13 @@ class Project < ActiveRecord::Base
         Project.create!(project_hash)
     end # end CSV.foreach
   end # end self.import(file)
+  def previous_billings
+    0
+  end
 
+  def has_no_change_orders?
+    time_extensions.blank? && amount_revisions.blank?
+  end
 
 
    def total_project_estimate
@@ -159,7 +167,9 @@ end
     def revised_duration
       self.duration + self.total_number_of_days_extended
     end
+
     private
+
     def add_main_contractor_to_contractors
       Contract.create(contractor_id: self.main_contractor.id, project_id: self.id ) if self.new_record?
     end

@@ -2,10 +2,8 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 gem 'rails', '4.2.5.1'
-gem "gretel"
-gem 'roo', '~> 2.1.0'
 gem 'draper'
-gem 'cocoon'
+
 gem 'jquery-ui-rails'
 gem 'public_activity'
 gem "refile", require: "refile/rails"
@@ -28,7 +26,6 @@ gem 'plutus'
 
   gem 'jquery-rails'
    gem "coffee-rails"
-  gem 'wicked'
 
 group :production do
   gem 'pg',  group: :development
@@ -55,7 +52,7 @@ end
 ###########code optimization and cleanup####
   gem 'traceroute', group: :development
   gem 'rack-mini-profiler'
-  gem 'bullet', group: :development
+  # gem 'bullet', group: :development
   gem 'brakeman', :require => false, group: :development
   gem "rails_best_practices", group: :development
 ############################################

@@ -15,6 +15,13 @@ class Projects::WorkDetailsController < ApplicationController
     end
   end
 
+  def import
+  @project = Project.find(params[:project_id])
+      WorkDetail.import(params[:file])
+      redirect_to @project, notice: "Work Details imported."
+
+  end
+
   def show
     @work_detail = WorkDetail.includes(:work_accomplishments).find(params[:id]).decorate
   end
