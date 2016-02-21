@@ -1,13 +1,12 @@
 class ActivityDecorator < Draper::Decorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+def icon
+if object.trackable_type=="WorkDetail"
+  "fa fa-bookmark text-yellow"
+elsif object.trackable_type=="Contract"
+  " fa fa-circle-o text-success"
+end
+end
 
 end

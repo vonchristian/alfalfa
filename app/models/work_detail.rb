@@ -1,5 +1,7 @@
 class WorkDetail < ActiveRecord::Base
-  require 'csv'
+
+include PublicActivity::Common
+
   INDIRECT_COST_PERCENTAGE= BigDecimal('0.1550')
   VAT = BigDecimal('0.05')
 
@@ -11,6 +13,7 @@ class WorkDetail < ActiveRecord::Base
   has_many :labor_costs
   has_many :equipment_costs
   has_many :work_accomplishments
+  has_many :miscellaneous_costs
   accepts_nested_attributes_for :materials, reject_if: :all_blank, allow_destroy: true
   delegate :cost, to: :project, prefix: true
 

@@ -1,5 +1,4 @@
-<div class="row">
-<div class="col-md-9 col-md-offset-1">
+<div class="container">
 <div class="box box-solid">
 <div class="box-body">
 <br>
@@ -12,35 +11,28 @@
                             wrapper: :horizontal_form,
                             wrapper_mappings: {
                             check_boxes: :vertical_radio_and_checkboxes,
-                            radio_buttons: :vertical_radio_and_checkboxes,
+                            radio_buttons: :horizontal_radio_and_checkboxes,
                             file: :horizontal_file_input,
                             boolean: :horizontal_boolean
                             } do |f| %>
 <%=f.error_notification %>
 
-  <div class="col-md-3 col-md-offset-1 col-sm-6">
-  <br>
-  <h5 class="text-center text-muted">
-  <br>
-  <br>
-  <br>
-  PROJECT INFORMATION
-  </h5>
+  <div class="col-md-2 col-md-offset-1 col-sm-6">
 
   </div>
-  <div class="col-md-7 col-sm-6">
-  <%=f.input :name, as: :text, input_html: {rows: 6 }, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
+  <div class="col-md-8 col-sm-6">
+  <%=f.input :name, as: :text, input_html: {rows: 10, class: "input-lg"}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
       <br>
 
   <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
 
 
-  <%=f.input :duration, label: "Duration (Number of Days)", as: :string, placeholder: "Contract Duration" %>
+  <%=f.input :duration, label: "Duration", as: :string, placeholder: "Contract Duration" %>
 
 
 <%= f.input :cost, placeholder: "0.00" %>
 
-<%=f.input :address, label: "Contract Location", placeholder: "Contract Location" %>
+<%=f.input :address, label: "Location", placeholder: "Contract Location" %>
 <%=f.input :implementing_office, label: "implementing Office" %>
 
 </div>
@@ -48,20 +40,11 @@
 <hr>
 <div class="row">
 <div class="col-md-3 col-md-offset-1 col-sm-6">
-<h5 class="text-center text-muted"> CATEGORY
+<h5 class="text-center text-muted"> PROJECT TYPE
 </h5>
 </div>
-<div class="col-md-7">
-<table class="table table-compressed">
-  <% Category.all.each do |category| %>
-        <tr height="60px">
-            <td width="20px"><input class="radio_buttons optional" value="<%=category.id%>" name="project[category_id]" id="project_category_id_<%=category.id%>" type="radio"></td>
-            <td width="45px"><%= image_tag attachment_url(category, :photo, :fill, 35, 35, fallback: 'default-xs-small.png'), class: 'img-rounded' %></td>
-            <td><%= category.name %></td>
-        </tr>
-
-      <% end %>
-       </table>
+<div class="col-md-7 col-md-offset-1">
+<%=f.input :project_type, collection: Project.project_types.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons, label: false %>
 </div>
 </div>
 <hr>
@@ -70,16 +53,8 @@
 <h5 class="text-center text-muted"> MAIN CONTRACTOR
 </h5>
 </div>
-<div class="col-md-7">
-  <table class="table table-compressed">
-      <% Contractor.main_contractors.each do |main_contractor| %>
-        <tr height="60px">
-            <td width="20px"><input class="radio_buttons optional" value="<%=main_contractor.id%>" name="project[main_contractor_id]" id="project_main_contractor_id_<%=main_contractor.id%>" type="radio"></td>
-            <td width="45px"><%= image_tag attachment_url(main_contractor, :profile_image, :fill, 35, 35, fallback: 'default-small.png'), class: 'img-rounded' %></td>
-            <td><%= main_contractor.company %></td>
-        </tr>
-      <% end %>
-  </table>
+<div class="col-md-7 col-md-offset-1">
+  <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a]}, as: :radio_buttons, label: false %>
 </div>
 </div>
 <div class="modal-footer">

@@ -1,13 +1,16 @@
 <div class="container">
    <div class="card">
-   <div class="row">
-<div class="col-md-1">
-         <h1><a href="/projects" data-toggle="tooltip" title="Return to Project Index"><i class="fa fa-angle-left"></i></a></h1>
-</div>
-<div class="col-md-10">
+<div class="row">
+<div class="col-md-8">
           <h4 class="text-info"><%=@project.name.upcase %></h4>
-</div>
-</div>
+          <span class="text-muted">Project Engineer </span>
+          </div>
+          <div class="col-md-4">
+          <span class="pull-right"><%=link_to "Catch up", project_activities_path(@project)%>
+          <span class="help-block text-muted">on recent changes.</span>
+          </span>
+          </div>
+          </div>
       <ul class="nav nav-tabs" role="tablist">
          <li  role="presentation" class="active">
            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><small>Profile</small></a>

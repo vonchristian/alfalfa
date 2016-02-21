@@ -1,4 +1,4 @@
-<div class="container custom-nav-container">
+<div class="container">
 <nav class="navbar navbar-default">
     <div class="navbar-header">
     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
@@ -71,7 +71,7 @@
 <div>
       <%=form_tag result_index_path, class: 'nav-search', method: :get do %>
         <div class="input-group">
-          <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for Projects, Contractors, Employees...' %>
+          <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for  a Project, Contractor, Employee, Worker...' %>
           <span class="input-group-btn">
             <%= button_tag(type: 'submit', class: "btn btn-flat btn-default") do %>
               <i class="fa fa-search"></i>

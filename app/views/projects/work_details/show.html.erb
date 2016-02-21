@@ -1,11 +1,10 @@
-
-<div class="col-md-10 col-md-offset-1">
+<div class="container">
+<div class="row">
 <div class="card">
 <div class="box-header with-border">
-<span class="pull-left"><%=link_to "Back to Project", project_path(@work_detail.project) %></span>
+<span><%=link_to project_path(@work_detail.project), class: "btn btn-link" do %><i class="fa fa-chevron-left"></i> Back To Project<%end%></span>
 <h4><center><%=@work_detail.description %></center></h4>
-<center><span class="help-block"><%=@work_detail.project.name %></center>
-<%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail) %>
+<center><span class="help-block"><%=@work_detail.project.name %></span></center>
 <hr>
 <ul class="nav nav-tabs" role="tablist">
         <li  role="presentation" class="active">
@@ -43,5 +42,4 @@
       </div><!-- /.tab-content -->
 </div>
 </div>
-
 

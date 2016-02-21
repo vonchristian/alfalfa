@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219135520) do
+ActiveRecord::Schema.define(version: 20160221030933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,14 +252,15 @@ ActiveRecord::Schema.define(version: 20160219135520) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.string   "mobile_number"
     t.string   "email"
     t.string   "photo_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
     t.integer  "position"
     t.integer  "project_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "employees", ["project_id"], name: "index_employees_on_project_id", using: :btree
@@ -472,6 +473,7 @@ ActiveRecord::Schema.define(version: 20160219135520) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "implementing_office"
+    t.integer  "project_type"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
@@ -515,6 +517,7 @@ ActiveRecord::Schema.define(version: 20160219135520) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string   "first_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.integer  "role"
     t.string   "profile_photo_id"

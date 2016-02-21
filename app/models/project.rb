@@ -5,17 +5,18 @@ class Project < ActiveRecord::Base
   multisearchable :against => [:name],
    :order_within_rank => "projects.created_at DESC"
 
+  enum project_type:[:joint_venture, :subcontract_work, :sole_contractor]
 
     has_many :collections
     has_many :project_billings
-    has_one :notice_to_proceed
+    has_one    :notice_to_proceed
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category
-    has_many :workers
-    has_many :employees, through: :workers
-    has_many :cost_code_divisions, class_name: "CostCode::Division"
-    has_many :work_details
-    has_many :work_accomplishments, through: :work_details
+    has_many  :workers
+    has_many  :employees, through: :workers
+    has_many  :cost_code_divisions, class_name: "CostCode::Division"
+    has_many  :work_details
+    has_many  :work_accomplishments, through: :work_details
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
     has_many :invoices, as: :invoiceable
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"

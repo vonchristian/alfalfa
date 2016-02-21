@@ -9,7 +9,8 @@ class Projects::WorkDetailsController < ApplicationController
     @project = Project.find(params[:project_id])
     @work_detail = @project.work_details.create(work_detail_params)
     if @work_detail.save
-      redirect_to @project, notice: "Budget"
+      @work_detail.create_activity :create, owner: current_user, recipient: @project
+            redirect_to @project, notice: "Budget"
     else
       render :new
     end

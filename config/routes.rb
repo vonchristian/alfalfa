@@ -70,6 +70,7 @@ resources :work_details do
   resources :equipment_costs, module: :projects
 end
   resources :projects do
+    resources :activities, only:[:index], module: :projects
     resources :work_details, module: :projects do
        match :import, via: [:post], on: :collection, module: :projects
      end

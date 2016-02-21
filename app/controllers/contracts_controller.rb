@@ -11,7 +11,7 @@ class ContractsController < ApplicationController
     @project = Project.find(params[:project_id])
     @contract = @project.contracts.build(contract_params)
     if @contract.save
-      @contract.create_activity :create, owner: current_user, recipient: @project
+      @contract.create_activity :create, owner: current_user, trackable: @project
 
       redirect_to @project, notice: "Contractor added successfully to project."
     else

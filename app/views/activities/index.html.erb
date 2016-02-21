@@ -2,11 +2,11 @@
 <div class="col-md-9 col-md-offset-2">
 <div class="box box-solid">
 <div class="box-body">
-<h4>Activity Logs</h4>
+<h4><center>Here's what's been happening to your business.</center></h4>
 <hr>
 <% @activities.each do |activity| %>
 <div class="col-md-3">
-<span class="help-block"><i class="fa fa-clock-o"></i> <%=activity.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+<span class="help-block"><i class="fa fa-clock-o"></i> <%=activity.created_at.strftime("%B %d, %Y  at %I:%M%p") %></span>
 </div>
 <div class="col-md-8">
 <%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>

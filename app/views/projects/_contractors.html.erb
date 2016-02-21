@@ -4,7 +4,7 @@
       <div class="box box-solid">
         <div class="box-header">
           <b class="text-muted">Project Details</b>
-          <span class="pull-right"><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> New Contractor<%end%></span>
+          <span class="pull-right"><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa--user-plus"></i> Add Subcontractor<%end%></span>
         </div>
         <div class="box-body">
           <h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span></h4>
