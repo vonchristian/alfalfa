@@ -1,5 +1,14 @@
 
 <div class="active tab-pane" id="profile">
-
+<div class="row">
+<div class="col-md-4">
+<h4>Notice to Proceed</h4>
+<% if @project.notice_to_proceed.present? %>
+<%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%>
+<% else %>
+<%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn btn-primary btn-sm" %>
+<% end %>
+</div>
+</div>
 </div>
 

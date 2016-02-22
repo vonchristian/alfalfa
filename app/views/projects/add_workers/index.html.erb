@@ -1,0 +1,37 @@
+<div class="col-md-6 col-md-offset-3">
+
+    <%=simple_form_for @project do |f| %>
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <h4>Add Workers to this Project</h4>
+        </div>
+        <div class="box-body">
+          <table class="table">
+            <% Worker.all.each do |worker| %>
+              <tr>
+                <td style="width:10px">
+                    <br>
+                    <input class="check_boxes optional" type="checkbox" value="<%= worker.id%>" name="project[worker_ids][]" id="project_worker_ids_<%= worker.id%>">
+                </td>
+                <td style="width:65px">
+                  <%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-rounded" %>
+                </td>
+                <td>
+                  <%=worker.full_name%><br>
+                  <%=worker.position.capitalize %><br>
+                  <%=worker.mobile_number %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+          <%=f.input :worker_ids, collection: Worker.all, as: :check_boxes, label: false %>
+        </div>
+        <div class="box-footer">
+          <div class="pull-left">
+          <%= link_to 'Cancel', @project, class: 'btn btn-default' %>
+          </div>
+          <%=f.submit 'Save', class: 'btn btn-primary pull-right' %>
+        </div>
+    </div>
+  <% end%>
+</div>

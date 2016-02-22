@@ -11,7 +11,7 @@
 			</div>
 				  <% @pg_search_documents.each do |pg_search_document| %>
 					<tr>
-				    		<td><%= link_to pg_search_document.searchable.name, "../#{(pg_search_document.searchable.class).to_s.downcase!.pluralize}/#{pg_search_document.searchable.id}" %>
+				    		<td><%= link_to pg_search_document.searchable.name, "../#{(pg_search_document.searchable.class).to_s.titleize.downcase.parameterize.gsub("-", "_").pluralize}/#{pg_search_document.searchable.id}" %>
 				    		<span class="help-block"><%=pg_search_document.searchable.class %></span>
 				    		</td>
 					</tr>

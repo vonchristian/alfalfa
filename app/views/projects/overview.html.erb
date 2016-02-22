@@ -1,28 +1,12 @@
 <div class="container">
     <div class="row">
-    <div class="col-md-4">
-    <a href="/projects/new">
-    <div class="box box-solid">
 
-
-              <div class="box-body">
-
-<center><i class="fa fa-plus-circle fa-4x text-primary"></i>
-<h4>New Project</h4>
-</center>
-
-
-</div>
-            </div>
-            </a>
-</div>
-      <div class="row">
       <%@projects.each do |project| %>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="box box-<%=project.box_status%>">
             <div class="box-header with-border">
              <a href="/projects/<%=project.id%>">
-              <span class="text-primary" data="tooltip" title="<%=project.category%> dsf">#<%=project.id_number%></span>   <h4 class="text-info"><%=project.name.truncate(200)%></h4>
+              <span class="text-primary" data="tooltip" title="<%=project.category%> dsf"><h4>#<%=project.id_number%></h4></span>   <h4 class="text-muted"><%=project.name.truncate(200)%></h4>
               </div>
 
               <div class="box-body">
@@ -53,4 +37,5 @@
     </div>
   </div>
   </div>
+
 

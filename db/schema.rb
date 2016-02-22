@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221030933) do
+ActiveRecord::Schema.define(version: 20160221111014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -554,13 +554,21 @@ ActiveRecord::Schema.define(version: 20160221030933) do
   add_index "work_details", ["project_id"], name: "index_work_details_on_project_id", using: :btree
 
   create_table "workers", force: :cascade do |t|
-    t.integer  "employee_id"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "address"
+    t.string   "mobile_number"
+    t.string   "sex"
+    t.date     "birth_date"
+    t.string   "email"
+    t.integer  "position"
+    t.string   "photo_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
-  add_index "workers", ["employee_id"], name: "index_workers_on_employee_id", using: :btree
   add_index "workers", ["project_id"], name: "index_workers_on_project_id", using: :btree
 
   add_foreign_key "accomplishments", "projects"
@@ -595,6 +603,4 @@ ActiveRecord::Schema.define(version: 20160221030933) do
   add_foreign_key "time_extensions", "projects"
   add_foreign_key "work_accomplishments", "work_details"
   add_foreign_key "work_details", "projects"
-  add_foreign_key "workers", "employees"
-  add_foreign_key "workers", "projects"
 end

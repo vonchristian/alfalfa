@@ -1,13 +1,23 @@
 <div class="tab-pane" id="workers">
-
-  <span class="pull-right"><%=link_to add_workers_project_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Workers <%end%>
+<div class="box-header">
+  <span class="pull-right"><%=link_to project_add_workers_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Workers <%end%>
   </span>
+  </div>
 <div class="box-body">
- <% @project.workers.each do |worker| %>
-            
-            <%=worker.employee.try(:full_name)%>
-            <hr>
+
+    <table class="table">
+      <% @project.workers.each do |worker| %>
+        <tr>
+            <td style="width:65px"><%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-rounded" %></td>
+            <td>
+              <%=worker.full_name%><br>
+              <%=worker.position.capitalize %><br>
+              <%=worker.mobile_number %>
+            </td>
+        </tr>
             <% end %>
+      </table>
             </div>
 </div>
- 
+
+

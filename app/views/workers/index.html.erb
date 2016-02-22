@@ -2,7 +2,7 @@
     <div class="box box-solid">
       <div class="box-header with-border bg-gray-light">
         <h4> List of Workers
-       <span class="pull-right"><%=link_to new_employee_path, class: "btn btn-default bg-blue" do %><i class="fa fa-user-plus"></i> New Employee <%end%></span>
+       <span class="pull-right"><%=link_to new_worker_path, class: "btn btn-default bg-blue" do %><i class="fa fa-user-plus"></i> Add a New Worker <%end%></span>
         </h4>
       </div>
       <div class="box-body">
@@ -20,14 +20,13 @@
         </tr>
       </thead>
       <tbody>
-      <% @employees.each do |employee| %>
-      <td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-rounded" %>
+      <% @workers.each do |worker| %>
+      <td><%= image_tag attachment_url(worker, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-rounded" %>
     </td>
-        <td><%=link_to employee.full_name.upcase, employee %>
- <small><%=link_to "New Cash Advance", new_employee_cash_advance_path(employee)%></small>
+        <td><%=link_to worker.full_name.upcase %>
         </td>
-        <td><%=employee.mobile_number %></td>
-        <td><%=employee.position %></td>
+        <td><%=worker.mobile_number %></td>
+        <td><%=worker.position %></td>
 
           </tr>
 </tbody>

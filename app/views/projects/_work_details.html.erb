@@ -2,23 +2,22 @@
 <div class="tab-pane" id="work_details">
 <div class="col-row">
 <span><%=link_to new_project_work_detail_path(@project), class: "btn btn-default bg-blue-active" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%></span>
-<%= form_tag import_project_work_details_path(@project), multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>
+
 <hr>
 <table class="table table-compressed">
 <thead>
-  <tr>
+  <tr class="bg-gray-light text-uppercase">
 
-    <th>Item Code</th>
-    <th>Item Description</th>
+    <th>Code</th>
+    <th style="width: 30%">Description</th>
     <th>Budget Estimate</th>
     <th>Actual Cost Incurred</th>
     <th>Quantity</th>
-    <th>Accomplished</th>
+    <th>Qty. Accomplished</th>
     <th>Remaining</th>
-    <th></th>
+    <th>Target Acc. (%)</th>
+    <th>Actual Acc. (%)</th>
+    <th>Slippage</th>
   </tr>
 </thead>
 <% @project.work_details.each do |work_detail| %>
@@ -31,7 +30,10 @@
 <td><%=work_detail.quantity %></td>
 <td class="text-success"><%=work_detail.accomplished_quantity%></td>
 <td class="text-danger"><%=work_detail.remaining_quantity %></td>
-<td><i class="fa fa-<%=work_detail.accomplishment_icon%>-circle text-<%=work_detail.accomplishment_color%> fa-2x"></i> </td>
+<td><%=work_detail.target_accomplishment_percent %>%</td>
+<td><%=work_detail.actual_accomplishment_percent %>%</td>
+<td class="<%=work_detail.slippage_color %>"><i class="fa fa-chevron-<%=work_detail.slippage_sign %>"></i> <%=work_detail.slippage %>%</td>
+<td></td>
 
 </tr>
 </tbody>

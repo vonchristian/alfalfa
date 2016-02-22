@@ -5,10 +5,6 @@
                 <div class="box-header">
                   <h3 class="box-title">Contract Summary Report</h3>
                   <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> New Project <%end%></span>
-                  <%= form_tag import_projects_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                 <div class="table table-responsive">

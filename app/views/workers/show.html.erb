@@ -1,12 +1,13 @@
-
+<div class="container">
+<div class="row">
   <div class="col-md-3">
 
     <!-- Profile Image -->
     <div class="box box-primary">
       <div class="box-body box-profile">
-          <%= image_tag attachment_url(@employee, :photo, :fill, 60, 60, format: "jpg", fallback: "default.png"),  class: "profile-user-img img-responsive img-circle" %>
-        <h3 class="profile-username text-center"><%=@employee.full_name %></h3>
-        <p class="text-muted text-center"><%=@employee.position %></p>
+          <%= image_tag attachment_url(@worker, :photo, :fill, 60, 60, format: "jpg", fallback: "default.png"),  class: "profile-user-img img-responsive img-circle" %>
+        <h3 class="profile-username text-center"><%=@worker.full_name %></h3>
+        <p class="text-muted text-center"><%=@worker.position.titleize %></p>
 
         <ul class="list-group list-group-unbordered">
           <li class="list-group-item">
@@ -27,7 +28,7 @@
     <!-- About Me Box -->
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">employee Info</h3>
+        <h3 class="box-title">Worker Info</h3>
       </div><!-- /.box-header -->
       <div class="box-body">
         <strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
@@ -67,7 +68,7 @@
         <li><a href="#settings" data-toggle="tab">Settings</a></li>
       </ul>
       <div class="tab-content">
-        <%=render 'cash_advances' %>
+        <%#=render 'cash_advances' %>
 
         <%#=render 'settings' %>
       </div><!-- /.tab-content -->

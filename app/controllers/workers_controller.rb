@@ -1,23 +1,39 @@
 class WorkersController < ApplicationController
+  def index
+    @workers = Worker.all
+  end
   def new
-    @project = Project.find(params[:project_id])
-    @worker = @project.workers.build
-    @worker.materials.build
+    @worker = Worker.new
   end
 
   def create
-    @project = Project.find(params[:project_id])
-    @worker = @project.workers.build(worker_params)
+    @worker = Worker.create(worker_params)
     if @worker.save
-
-      redirect_to @project, notice: "workeror added successfully to project."
+      redirect_to @worker, notice: "Worker successfully saved."
     else
       render :new
     end
   end
 
+  def show
+    @worker = Worker.find(params[:id])
+  end
+
+  def edit
+    @worker = Worker.find(params[:id])
+  end
+
+  def update
+    @worker = Worker.find(params[:id])
+    if @worker.update(worker_params)
+      redirect_to @worker, notice: "Worker details updated successfully."
+    else
+      render :edit
+    end
+  end
+
   private
   def worker_params
-    params.require(:worker).permit(:employee_id)
+    params.require(:worker).permit(:first_name, :middle_name, :last_name, :photo, :address, :mobile_number, :position, :email, :sex, :birth_date )
   end
 end

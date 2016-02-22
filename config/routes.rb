@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :workers
   resources :additional_informations
   namespace :cost_code do
     resources :divisions, except:[:destroy] do
@@ -70,6 +71,7 @@ resources :work_details do
   resources :equipment_costs, module: :projects
 end
   resources :projects do
+    resources :add_workers, module: :projects
     resources :activities, only:[:index], module: :projects
     resources :work_details, module: :projects do
        match :import, via: [:post], on: :collection, module: :projects
@@ -81,9 +83,6 @@ end
     resources :project_billings
       match :overview, via: [:get], on: :collection
       match :import, via: [:post], on: :collection
-      match :add_workers, via: [:get], on: :member
-      match :add_cost_code_items, via: [:get], on: :member
-
     resource :notice_to_proceed
     resources :time_extensions
     resources :amount_revisions

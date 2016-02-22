@@ -1,21 +1,29 @@
 <div class="tab-pane" id="contractors">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="box box-solid">
-        <div class="box-header">
-          <b class="text-muted">Project Details</b>
-          <span class="pull-right"><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa--user-plus"></i> Add Subcontractor<%end%></span>
-        </div>
-        <div class="box-body">
+
+        <span><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active" do %><i class="fa fa--user-plus"></i> Add Subcontractor<%end%></span>
+
+<div class="row">
+<div class="col-md-4">
+
           <h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span></h4>
           <hr>
           <h4 class="text-danger">Amount Subcontracted: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount) %></span></h4>
           <hr>
           <h4>Remaining: <span class="pull-right"><%=number_to_currency @project.remaining_uncontracted_amount %></span></h4>
-        </div>
-      </div>
+
+    </div>
+    <div class="col-md-6 col-md-offset-1">
+
+    <%@project.contracts.each do |contract| %>
+
+    <h4> <span><%= image_tag attachment_url(contract.contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
+</span> <%=contract.contractor %>
+    <i class="help-block"><%=contract.contractor.full_name %></i>
+    </h4>
+    <hr>
+    <% end %>
     </div>
   </div>
-</div>
+  </div>
 
 
