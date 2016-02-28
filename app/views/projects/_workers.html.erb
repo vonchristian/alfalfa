@@ -4,7 +4,10 @@
   </span>
   </div>
 <div class="box-body">
-
+<h4>Project Engineers</h4>
+<span class="pull-right"><%=link_to project_assign_project_engineers_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Assign Project Engineers <%end%>
+  </span>
+<hr>
     <table class="table">
       <% @project.workers.each do |worker| %>
         <tr>

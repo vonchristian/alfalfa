@@ -14,7 +14,7 @@ class Contractor < ActiveRecord::Base
   end
 
   def subcontracted_amount(project)
-    project.contracts.sum(:amount)
+    project.contracts.sum(:amount_subcontrated)
 end
 
   def self.sub_contractors

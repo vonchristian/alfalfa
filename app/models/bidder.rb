@@ -1,3 +1,0 @@
-class Bidder < Contractor
-
-end

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="col-md-12">
 <div class="box box-solid">
 <div class="box-body">
 <br>
@@ -17,10 +17,9 @@
                             } do |f| %>
 <%=f.error_notification %>
 
-  <div class="col-md-2 col-md-offset-1 col-sm-6">
-
-  </div>
-  <div class="col-md-8 col-sm-6">
+<div class="col-md-3">
+</div>
+  <div class="col-md-6 col-sm-6">
   <%=f.input :name, as: :text, input_html: {rows: 10, class: "input-lg"}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
       <br>
 
@@ -33,21 +32,14 @@
 <%= f.input :cost, placeholder: "0.00" %>
 
 <%=f.input :address, label: "Location", placeholder: "Contract Location" %>
-<%=f.input :implementing_office, label: "implementing Office" %>
+<%=f.input :implementing_office, label: "Implementing Office" %>
 
 </div>
 </div>
 <hr>
 <div class="row">
-<div class="col-md-3 col-md-offset-1 col-sm-6">
-<h5 class="text-center text-muted"> PROJECT TYPE
-</h5>
-</div>
-<div class="col-md-7 col-md-offset-1">
-<%=f.input :project_type, collection: Project.project_types.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons, label: false %>
-</div>
-</div>
-<hr>
+
+
 <div class="row">
 <div class="col-md-3 col-md-offset-1 col-sm-6">
 <h5 class="text-center text-muted"> MAIN CONTRACTOR

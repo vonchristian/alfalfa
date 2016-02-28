@@ -10,6 +10,7 @@ class CreateProjects < ActiveRecord::Migration
       t.decimal :cost
       t.integer :category_id, :index => true
       t.string :status
+      t.string :implementing_office
       t.timestamps null: false
     end
   end

@@ -24,7 +24,7 @@
       <td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-rounded" %>
     </td>
         <td><%=link_to employee.full_name.upcase, employee %>
- <small><%=link_to "New Cash Advance", new_employee_cash_advance_path(employee)%></small>
+ <small><%#=link_to "New Cash Advance", new_employee_cash_advance_path(employee)%></small>
         </td>
         <td><%=employee.mobile_number %></td>
         <td><%=employee.position %></td>

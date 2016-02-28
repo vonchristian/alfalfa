@@ -11,27 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221111014) do
+ActiveRecord::Schema.define(version: 20160228034608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accomplishments", force: :cascade do |t|
-    t.integer  "project_id"
-    t.float    "percent"
-    t.string   "remarks"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "accomplishments", ["project_id"], name: "index_accomplishments_on_project_id", using: :btree
-
-  create_table "accounts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -50,37 +33,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "additional_informations", force: :cascade do |t|
-    t.string   "sex"
-    t.datetime "birth_date"
-    t.string   "birth_place"
-    t.string   "civil_status"
-    t.string   "nationality"
-    t.integer  "informeable_id"
-    t.string   "informeable_type"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "additional_informations", ["informeable_id"], name: "index_additional_informations_on_informeable_id", using: :btree
-  add_index "additional_informations", ["user_id"], name: "index_additional_informations_on_user_id", using: :btree
-
-  create_table "addresses", force: :cascade do |t|
-    t.string   "sitio"
-    t.string   "barangay"
-    t.string   "municipality"
-    t.string   "province"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "addresses", ["addressable_id"], name: "index_addresses_on_addressable_id", using: :btree
-  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
-
   create_table "amount_revisions", force: :cascade do |t|
     t.integer  "project_id"
     t.decimal  "amount"
@@ -90,16 +42,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   end
 
   add_index "amount_revisions", ["project_id"], name: "index_amount_revisions_on_project_id", using: :btree
-
-  create_table "bids", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "bidders_id"
-    t.integer  "documents_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "bids", ["project_id"], name: "index_bids_on_project_id", using: :btree
 
   create_table "billable_materials", force: :cascade do |t|
     t.integer  "contractor_id"
@@ -115,40 +57,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   add_index "billable_materials", ["contractor_id"], name: "index_billable_materials_on_contractor_id", using: :btree
   add_index "billable_materials", ["inventory_id"], name: "index_billable_materials_on_inventory_id", using: :btree
   add_index "billable_materials", ["project_id"], name: "index_billable_materials_on_project_id", using: :btree
-
-  create_table "billings", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "contractor_id"
-    t.integer  "inventory_id"
-    t.integer  "quantity"
-    t.decimal  "cost"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "project_billing_id"
-  end
-
-  add_index "billings", ["contractor_id"], name: "index_billings_on_contractor_id", using: :btree
-  add_index "billings", ["inventory_id"], name: "index_billings_on_inventory_id", using: :btree
-  add_index "billings", ["project_billing_id"], name: "index_billings_on_project_billing_id", using: :btree
-  add_index "billings", ["project_id"], name: "index_billings_on_project_id", using: :btree
-
-  create_table "buildings", force: :cascade do |t|
-    t.decimal  "cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "cash_advances", force: :cascade do |t|
-    t.integer  "cash_advanceable_id"
-    t.string   "cash_advanceable_type"
-    t.decimal  "amount"
-    t.string   "purpose"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  add_index "cash_advances", ["cash_advanceable_id"], name: "index_cash_advances_on_cash_advanceable_id", using: :btree
-  add_index "cash_advances", ["cash_advanceable_type"], name: "index_cash_advances_on_cash_advanceable_type", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -166,16 +74,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   end
 
   add_index "collections", ["project_id"], name: "index_collections_on_project_id", using: :btree
-
-  create_table "construction_equipments", force: :cascade do |t|
-    t.decimal  "purchase_price"
-    t.integer  "equipment_type"
-    t.string   "make"
-    t.string   "model"
-    t.string   "plate_number"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
 
   create_table "contract_amount_revisions", force: :cascade do |t|
     t.integer  "contract_id"
@@ -203,9 +101,9 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   create_table "contracts", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "contractor_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.decimal  "amount"
+    t.decimal  "amount_subcontracted"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "contracts", ["contractor_id"], name: "index_contracts_on_contractor_id", using: :btree
@@ -226,29 +124,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "depreciations", force: :cascade do |t|
-    t.decimal  "amount"
-    t.integer  "depreciationable_id"
-    t.string   "depreciationable_type"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  add_index "depreciations", ["depreciationable_id"], name: "index_depreciations_on_depreciationable_id", using: :btree
-  add_index "depreciations", ["depreciationable_type"], name: "index_depreciations_on_depreciationable_type", using: :btree
-
-  create_table "divisions", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "documents", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
@@ -292,21 +167,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
 
   add_index "equipment_costs", ["work_detail_id"], name: "index_equipment_costs_on_work_detail_id", using: :btree
 
-  create_table "expenses", force: :cascade do |t|
-    t.decimal  "amount"
-    t.string   "description"
-    t.string   "received_by"
-    t.string   "disbursed_by"
-    t.datetime "date"
-    t.integer  "expensable_id"
-    t.string   "expensable_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "expenses", ["expensable_id"], name: "index_expenses_on_expensable_id", using: :btree
-  add_index "expenses", ["expensable_type"], name: "index_expenses_on_expensable_type", using: :btree
-
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
     t.integer  "imageable_id"
@@ -329,26 +189,19 @@ ActiveRecord::Schema.define(version: 20160221111014) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "invoices", force: :cascade do |t|
-    t.string   "amount"
-    t.integer  "invoiceable_id"
-    t.string   "invoiceable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "invoices", ["invoiceable_id"], name: "index_invoices_on_invoiceable_id", using: :btree
-  add_index "invoices", ["invoiceable_type"], name: "index_invoices_on_invoiceable_type", using: :btree
-
-  create_table "items", force: :cascade do |t|
-    t.integer  "division_id"
+  create_table "issued_inventories", force: :cascade do |t|
     t.string   "code"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "unit"
+    t.decimal  "quantity"
+    t.decimal  "unit_cost"
+    t.decimal  "total_cost"
+    t.integer  "work_detail_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "items", ["division_id"], name: "index_items_on_division_id", using: :btree
+  add_index "issued_inventories", ["work_detail_id"], name: "index_issued_inventories_on_work_detail_id", using: :btree
 
   create_table "labor_costs", force: :cascade do |t|
     t.string   "personnel"
@@ -363,27 +216,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
 
   add_index "labor_costs", ["work_detail_id"], name: "index_labor_costs_on_work_detail_id", using: :btree
 
-  create_table "lands", force: :cascade do |t|
-    t.decimal  "cost"
-    t.integer  "area"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "materials", force: :cascade do |t|
-    t.string   "code"
-    t.string   "description"
-    t.string   "unit"
-    t.decimal  "quantity"
-    t.decimal  "unit_cost"
-    t.decimal  "total_cost"
-    t.integer  "work_detail_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "materials", ["work_detail_id"], name: "index_materials_on_work_detail_id", using: :btree
-
   create_table "notice_to_proceeds", force: :cascade do |t|
     t.datetime "date"
     t.integer  "project_id"
@@ -392,14 +224,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   end
 
   add_index "notice_to_proceeds", ["project_id"], name: "index_notice_to_proceeds_on_project_id", using: :btree
-
-  create_table "office_equipments", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "purchase_price"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
@@ -420,7 +244,7 @@ ActiveRecord::Schema.define(version: 20160221111014) do
     t.datetime "updated_at"
   end
 
-  add_index "plutus_accounts", ["name", "type"], name: "index_plutus_accounts_on_name_and_type", using: :btree
+  add_index "plutus_accounts", ["name", "type", "code"], name: "index_plutus_accounts_on_name_and_type_and_code", using: :btree
 
   create_table "plutus_amounts", force: :cascade do |t|
     t.string  "type"
@@ -449,18 +273,6 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   add_index "plutus_entries", ["owner_id"], name: "index_plutus_entries_on_owner_id", using: :btree
   add_index "plutus_entries", ["recipient_id"], name: "index_plutus_entries_on_recipient_id", using: :btree
 
-  create_table "project_billings", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "billing_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "contractor_id"
-  end
-
-  add_index "project_billings", ["billing_id"], name: "index_project_billings_on_billing_id", using: :btree
-  add_index "project_billings", ["contractor_id"], name: "index_project_billings_on_contractor_id", using: :btree
-  add_index "project_billings", ["project_id"], name: "index_project_billings_on_project_id", using: :btree
-
   create_table "projects", force: :cascade do |t|
     t.integer  "main_contractor_id"
     t.string   "id_number"
@@ -470,10 +282,10 @@ ActiveRecord::Schema.define(version: 20160221111014) do
     t.integer  "duration"
     t.decimal  "cost"
     t.integer  "category_id"
+    t.string   "implementing_office"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.string   "implementing_office"
-    t.integer  "project_type"
+    t.string   "build_status"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
@@ -481,24 +293,15 @@ ActiveRecord::Schema.define(version: 20160221111014) do
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "project_id"
+    t.string   "title"
     t.text     "content"
+    t.integer  "remarker_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "title"
-    t.integer  "remarker_id"
   end
 
   add_index "remarks", ["project_id"], name: "index_remarks_on_project_id", using: :btree
-
-  create_table "requirements", force: :cascade do |t|
-    t.integer  "bid_id"
-    t.integer  "document_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "requirements", ["bid_id"], name: "index_requirements_on_bid_id", using: :btree
-  add_index "requirements", ["document_id"], name: "index_requirements_on_document_id", using: :btree
+  add_index "remarks", ["remarker_id"], name: "index_remarks_on_remarker_id", using: :btree
 
   create_table "time_extensions", force: :cascade do |t|
     t.integer  "project_id"
@@ -553,36 +356,10 @@ ActiveRecord::Schema.define(version: 20160221111014) do
 
   add_index "work_details", ["project_id"], name: "index_work_details_on_project_id", using: :btree
 
-  create_table "workers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "address"
-    t.string   "mobile_number"
-    t.string   "sex"
-    t.date     "birth_date"
-    t.string   "email"
-    t.integer  "position"
-    t.string   "photo_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "project_id"
-  end
-
-  add_index "workers", ["project_id"], name: "index_workers_on_project_id", using: :btree
-
-  add_foreign_key "accomplishments", "projects"
-  add_foreign_key "additional_informations", "users"
-  add_foreign_key "addresses", "users"
   add_foreign_key "amount_revisions", "projects"
-  add_foreign_key "bids", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"
   add_foreign_key "billable_materials", "projects"
-  add_foreign_key "billings", "contractors"
-  add_foreign_key "billings", "inventories"
-  add_foreign_key "billings", "project_billings"
-  add_foreign_key "billings", "projects"
   add_foreign_key "collections", "projects"
   add_foreign_key "contract_amount_revisions", "contractors"
   add_foreign_key "contract_amount_revisions", "contracts"
@@ -590,16 +367,10 @@ ActiveRecord::Schema.define(version: 20160221111014) do
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"
   add_foreign_key "equipment_costs", "work_details"
-  add_foreign_key "items", "divisions"
+  add_foreign_key "issued_inventories", "work_details"
   add_foreign_key "labor_costs", "work_details"
-  add_foreign_key "materials", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
-  add_foreign_key "project_billings", "billings"
-  add_foreign_key "project_billings", "contractors"
-  add_foreign_key "project_billings", "projects"
   add_foreign_key "remarks", "projects"
-  add_foreign_key "requirements", "bids"
-  add_foreign_key "requirements", "documents"
   add_foreign_key "time_extensions", "projects"
   add_foreign_key "work_accomplishments", "work_details"
   add_foreign_key "work_details", "projects"

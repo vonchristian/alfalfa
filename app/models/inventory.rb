@@ -1,5 +1,5 @@
 class Inventory < ActiveRecord::Base
-   after_create :add_to_accounts
+   # after_create :add_to_accounts
   include PublicActivity::Common
   include PgSearch
   multisearchable :against => [:name]

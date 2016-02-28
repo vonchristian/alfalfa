@@ -3,7 +3,6 @@ ruby '2.3.0'
 
 gem 'rails', '4.2.5.1'
 gem 'draper'
-
 gem 'jquery-ui-rails'
 gem 'public_activity'
 gem "refile", require: "refile/rails"

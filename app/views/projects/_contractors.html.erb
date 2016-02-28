@@ -7,9 +7,9 @@
 
           <h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span></h4>
           <hr>
-          <h4 class="text-danger">Amount Subcontracted: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount) %></span></h4>
+          <h4 class="text-danger">Amount Subcontracted: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount_subcontracted) %></span></h4>
           <hr>
-          <h4>Remaining: <span class="pull-right"><%=number_to_currency @project.remaining_uncontracted_amount %></span></h4>
+          <h4>Remaining: <span class="pull-right"><%#=number_to_currency @project.remaining_uncontracted_amount %></span></h4>
 
     </div>
     <div class="col-md-6 col-md-offset-1">

@@ -4,7 +4,7 @@ class Employee < ActiveRecord::Base
 
   attachment :photo
 
-  enum position:[:laborer, :skilled_laborer, :foreman, :operator, :welder]
+  enum position:[:laborer, :skilled_laborer, :foreman, :operator, :welder, :project_engineer]
 
   has_many :workers
   has_many :projects, through: :workers

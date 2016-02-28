@@ -1,48 +1,29 @@
 class Project < ActiveRecord::Base
-  require 'csv'
   include PublicActivity::Common
   include PgSearch
   multisearchable :against => [:name],
    :order_within_rank => "projects.created_at DESC"
 
-  enum project_type:[:joint_venture, :subcontract_work, :sole_contractor]
 
     has_many :collections
-    has_many :project_billings
-    has_one    :notice_to_proceed
+    has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id'
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category
     has_many  :workers
     has_many  :employees, through: :workers
-    has_many  :cost_code_divisions, class_name: "CostCode::Division"
     has_many  :work_details
-    has_many  :work_accomplishments, through: :work_details
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
-    has_many :invoices, as: :invoiceable
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
-    has_many :bids
-    has_many :billings
     has_many :contracts
     has_many :contractors, through: :contracts
-    has_many :time_extensions
-    has_many :amount_revisions
-    has_many :accomplishments
+    has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
+    has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
+    has_many :work_accomplishments
+    has_many :workers, class_name: "Employee"
     has_many :remarks
     has_many :purchase_orders
 
-    validates :name,  :id_number, :duration, :cost, :address, presence: true
-  validates :id_number, uniqueness: true
 
-    after_create :add_main_contractor_to_contractors
-    after_commit :add_to_accounts
-
-  def self.import(file)
-    CSV.foreach(file.path, headers: true, :col_sep => ',') do |row|
-
-      project_hash = row.to_hash # exclude the price field
-        Project.create!(project_hash)
-    end # end CSV.foreach
-  end # end self.import(file)
   def previous_billings
     0
   end
@@ -169,15 +150,23 @@ end
       self.duration + self.total_number_of_days_extended
     end
 
-    private
+
 
     def add_main_contractor_to_contractors
       Contract.create(contractor_id: self.main_contractor.id, project_id: self.id ) if self.new_record?
     end
 
+    def retention_amount
+      self.cost * 0.10
+    end
+
+    def trade_amount
+      self.cost - self.retention_amount
+    end
+
      def add_to_accounts
-       Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[amount: (self.cost), account: "Accounts Receivable-Trade"],
-                         credit_amounts_attributes:[amount: (self.cost), account: "Accounts Payable-Trade"])
+       Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[{amount: (self.trade_amount), account: "Accounts Receivable-Trade"},{amount: (self.retention_amount), account: "Accounts Receivable-Retention"}],
+                         credit_amounts_attributes:[amount: (self.cost), account: "Cost of Projects"])
    end
 
 

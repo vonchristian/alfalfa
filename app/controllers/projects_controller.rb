@@ -22,35 +22,25 @@ class ProjectsController < ApplicationController
   end
 
 
-  def new
+   def new
     @project = Project.new
   end
 
+  # POST /pets
+  # POST /pets.json
   def create
-    @project = Project.create(project_params)
-      if  @project.save
-        @project.create_activity :create, owner: current_user, trackable: @project, recipient: @project
-      redirect_to @project, notice: "Project successfully saved."
-    else
-      render :new
-    end
+    @project = Project.new
+    @project.save(validate: false)
+    redirect_to project_step_path(@project, Project.form_steps.first)
   end
 
   def edit
     @project = Project.find(params[:id])
   end
-  def update
-      @project = Project.find(params[:id])
-      if @project.update(project_params)
-        @project.create_activity :update, owner: current_user, trackable: @project, recipient: @project
-          redirect_to @project, notice: "Project successfully updated."
-      else
-          render :edit
-      end
-  end
+
 
   def show
-    @project = Project.includes(:work_accomplishments).find(params[:id]).decorate
+    @project = Project.find(params[:id]).decorate
    respond_to do |format|
     format.html
     format.pdf do
