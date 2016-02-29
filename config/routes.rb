@@ -7,13 +7,14 @@ Rails.application.routes.draw do
  devise_for :users, :controllers => { :registrations => "users" }
 get 'expenses/filtered_data' => 'expenses#filtered_data'
 get 'accounts/income_statement' => 'accounts#income_statement'
-
+resources :payroll, only:[:index, :show]
 resources :materials do
   get "delete"
 end
   mount Plutus::Engine => "/accounting", :as => "accounting"
 resources :activities
 resources :employees do
+  resources :cash_advances, :module => :employees
 
   end
 resources :categories

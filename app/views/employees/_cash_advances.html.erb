@@ -1,6 +1,18 @@
 <div class="tab-pane" id="cash_advances">
-<%=@employee.cash_advances.each do |cash_advance| %>
-<%=cash_advance.amount %>
-<%=cash_advance.purpose %>
+<div class="row">
+<div class="col-md-12">
+<%=link_to "New Cash Advance", new_employee_cash_advance_path(@employee) %>
+</div>
+<% @employee.cash_advances.each do |cash_advance| %>
+<div class="col-md-6 col-md-offset-2">
+<h4><%=number_to_currency cash_advance.amount %>
+<span class="pull-right text-muted"><%=cash_advance.date_disbursed.strftime("%b %e, %Y") %></span>
+</h4>
+
+</div>
+
+
 <% end %>
+
+</div>
 </div>

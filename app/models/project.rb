@@ -166,7 +166,7 @@ end
 
      def add_to_accounts
        Plutus::Entry.create!(description: self.name, debit_amounts_attributes:[{amount: (self.trade_amount), account: "Accounts Receivable-Trade"},{amount: (self.retention_amount), account: "Accounts Receivable-Retention"}],
-                         credit_amounts_attributes:[amount: (self.cost), account: "Cost of Projects"])
+                         credit_amounts_attributes:[amount: (self.cost), account: "Cost of Contracts"])
    end
 
 

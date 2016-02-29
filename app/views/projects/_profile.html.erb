@@ -8,7 +8,76 @@
 <% else %>
 <%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn btn-primary btn-sm" %>
 <% end %>
+<br>
+<strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
+          <p class="text-muted">
+            B.S. in Computer Science from the University of Tennessee at Knoxville
+          </p>
+          <r>
+<strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
+          <p class="text-muted">
+            B.S. in Computer Science from the University of Tennessee at Knoxville
+          </p>
+
+</div>
+<div class="col-md-4">
+
+<h4>REMARKS (<%=@project.remarks.count %>)</h4>
+<table class="table">
+<tbody>
+<% @project.remarks.each do |remark| %>
+<tr>
+<td style="width: 5%"><%= image_tag attachment_url(remark.remarker, :profile_photo, :fill, 50, 40, fallback: "default-xs-small.png"),  class: "img-rounded" %></td>
+<td><b class="text-muted"><%=remark.remarker.full_name %> -> <%=remark.title %></b>
+
+<small class="pull-right text-muted"> <i class="fa fa-clock-o"></i> <%=remark.created_at.strftime("%e %b, %H:%M") %></small>
+
+
+<p><span class="text-muted"><%=remark.content %></span></p>
+<br>
+
+
+</td>
+
+</tr>
+<% end %>
+</tbody>
+
+</table>
+<br>
+<br>
+</div>
+<div class="col-md-3 col-md-offset-1">
+<div class="well">
+<h4>At a Glance</h4>
+<hr>
+<h3><center class="text-primary"><%=@project.slippage %>%</center></h3>
+<span class="text-muted"><center>Slippage</center> </span>
+<hr>
+<h4><%=number_to_currency @project.cost %></h4>
+<span class="text-muted">PROJECT COST </span>
+<hr>
+<div class="row">
+<div class="col-md-4">
+<h4><%=@project.duration %> Days</h4>
+<span class="text-uppercase text-muted">Duration </span>
+</div>
+<div class="col-md-4">
+<h4><%=@project.days_elapsed %> Days</h4>
+<span class="text-uppercase text-muted">Days Elapsed </span>
+</div>
+<div class="col-md-4">
+<h4><%=@project.duration %> Days</h4>
+<span class="text-uppercase text-muted">Days Left </span>
+</div>
+</div>
+<hr>
 </div>
 </div>
 </div>
+<div class="box-header bg-gray-light">
+<h4>Accomplishments</h4>
+</div>
+</div>
+
 

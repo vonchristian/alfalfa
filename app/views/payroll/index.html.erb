@@ -1,0 +1,25 @@
+<div class="col-md-12">
+<div class="box box-solid">
+<div class="box-header with-border bg-olive">
+<h4>Payroll</h4>
+</div>
+<div class="box-body">
+<div class="table table-responsive">
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th>Employee</th>
+    <th>Rate</th>
+    <th>Hours</th>
+    <th>Gross Pay</th>
+  </tr>
+</thead>
+<tbody>
+<% Employee.all.each do |employee| %>
+<tr>
+<td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-circle" %> <b><%=link_to employee.full_name.upcase, payroll_path(employee) %></b></td>
+<td><%=number_to_currency employee.rate %></td>
+<% end %>
+</tbody>
+</table>
+</div>

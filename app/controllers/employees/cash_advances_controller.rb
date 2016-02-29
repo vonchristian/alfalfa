@@ -16,7 +16,7 @@ class Employees::CashAdvancesController < ApplicationController
 
   private
   def cash_advance_params
-    params.require(:cash_advance).permit(:amount, :purpose)
+    params.require(:cash_advance).permit(:amount, :date_disbursed)
   end
 end
 

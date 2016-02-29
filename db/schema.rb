@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228034608) do
+ActiveRecord::Schema.define(version: 20160228062839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,18 @@ ActiveRecord::Schema.define(version: 20160228034608) do
   add_index "billable_materials", ["contractor_id"], name: "index_billable_materials_on_contractor_id", using: :btree
   add_index "billable_materials", ["inventory_id"], name: "index_billable_materials_on_inventory_id", using: :btree
   add_index "billable_materials", ["project_id"], name: "index_billable_materials_on_project_id", using: :btree
+
+  create_table "cash_advances", force: :cascade do |t|
+    t.integer  "cash_advanceable_id"
+    t.string   "cash_advanceable_type"
+    t.decimal  "amount"
+    t.datetime "date_disbursed"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "cash_advances", ["cash_advanceable_id"], name: "index_cash_advances_on_cash_advanceable_id", using: :btree
+  add_index "cash_advances", ["cash_advanceable_type"], name: "index_cash_advances_on_cash_advanceable_type", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"

@@ -1,0 +1,51 @@
+<div class="col-md-6 col-md-offset-3">
+<div class="box box-solid card">
+<div class="box-header with-border">
+<h4>Pay Slip Detail
+<span class="pull-right"><%=Time.zone.now.strftime("%B %e, %Y") %></span>
+</h4>
+</div>
+<div class="box-body">
+<div class="row">
+<div class="col-md-6">
+<h4 class="text-muted">PERSONAL INFO</h4>
+<h4><%=@employee.full_name %></h4>
+<span class="help-block"><%=@employee.position.titleize %></span>
+</div>
+<div class="col-md-6">
+<h4 class="text-muted">PAY PERIOD</h4>
+<p><%=Time.zone.now.beginning_of_month.strftime("%B %e")  %> - <%=Time.zone.now.end_of_month.strftime("%e, %Y")  %></p>
+<br>
+<br>
+<br>
+<div class="row">
+<h4 class="text-muted">NET PAY ALLOCATION</h4>
+<div class="col-md-4">
+<h5 class="text-success">DESCRIPTION</h5>
+</div>
+<div class="col-md-4">
+<h5 class="text-success">THIS PERIOD</h5>
+</div>
+
+<div class="col-md-4">
+<h5 class="text-success">AMOUNT</h5>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-md-3">
+<h4 class="text-muted">EARNINGS</h4>
+</div>
+<div class="col-md-3">
+<h5 class="text-success"> EARNINGS</h5>
+</div>
+<div class="col-md-3">
+<h4 class="text-muted">EARNINGS</h4>
+</div>
+</div>
+<hr>
+<button class="btn btn-primary">Print</button>
+</div>
+
