@@ -20,17 +20,10 @@ Plutus::Asset.create(:name => "Accumulated Depreciation-Trucks and Autos", contr
 
 Plutus::Liability.create(:name => "Accounts Payable-Trade")
 Plutus::Liability.create(:name => "Accounts Payable-Retension")
-Plutus::Liability.create(:name => "Billings in Excess of Costs and Profits")
 Plutus::Liability.create(:name => "Loans Payable")
 Plutus::Liability.create(:name => "Accrued Payroll")
 Plutus::Liability.create(:name => "Accrued Payables")
 Plutus::Liability.create(:name => "Accrued Taxes")
-# Plutus::Liability.create(:name => "Accrued Insurance")
-# Plutus::Liability.create(:name => "Accrued Vacation")
-# Plutus::Liability.create(:name => "Capital Leases Payable")
-# Plutus::Liability.create(:name => "Warranty Reserves")
-# Plutus::Liability.create(:name => "Other Current Liabilities")
-# Plutus::Liability.create(:name => "Long-Term Liabilities")
 
 Plutus::Equity.create(:name => "Owner's Capital" )
 Plutus::Equity.create(:name => "Owner's Drawing", contra: true )
@@ -94,6 +87,9 @@ Plutus::Expense.create(:name => "Overhead Charged to Jobs")
 
 Plutus::Expense.create(:name => "Other Expense")
 Plutus::Expense.create(:name => "Income Tax")
+Plutus::Expense.create(:name => "PAG-IBIG Contributions")
+Plutus::Expense.create(:name => "PhilHealth Contributions")
+
 
 
 

@@ -3,6 +3,7 @@ class Inventory < ActiveRecord::Base
   include PublicActivity::Common
   include PgSearch
   multisearchable :against => [:name]
+  has_many :issued_inventories, as: :inventoriable
   def current_inventory_quantity
     quantity
   end

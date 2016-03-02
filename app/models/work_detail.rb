@@ -10,9 +10,9 @@ include PgSearch
   validates :quantity, numericality: {greater_than: 0.1}, presence: true
   belongs_to :project
   validates :code, :description, presence: true, uniqueness: {scope: :project}
-  has_many :issued_materials
+  has_many :issued_inventories, class_name: "WorkDetailCosts::IssuedInventories"
   has_many :labor_costs, class_name: "WorkDetailCosts::LaborCost"
-  has_many :equipment_costs
+  has_many :equipment_costs, class_name: "WorkDetailCosts::EquipmentCost"
   has_many :work_accomplishments
   has_many :miscellaneous_costs
   delegate :cost, to: :project, prefix: true

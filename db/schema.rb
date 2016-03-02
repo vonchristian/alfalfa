@@ -202,18 +202,22 @@ ActiveRecord::Schema.define(version: 20160228062839) do
   end
 
   create_table "issued_inventories", force: :cascade do |t|
+    t.integer  "inventoriable_id"
+    t.string   "inventoriable_type"
     t.string   "code"
     t.string   "description"
     t.string   "unit"
     t.decimal  "quantity"
     t.decimal  "unit_cost"
     t.decimal  "total_cost"
-    t.integer  "work_detail_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "inventory_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
-  add_index "issued_inventories", ["work_detail_id"], name: "index_issued_inventories_on_work_detail_id", using: :btree
+  add_index "issued_inventories", ["inventoriable_id"], name: "index_issued_inventories_on_inventoriable_id", using: :btree
+  add_index "issued_inventories", ["inventoriable_type"], name: "index_issued_inventories_on_inventoriable_type", using: :btree
+  add_index "issued_inventories", ["inventory_id"], name: "index_issued_inventories_on_inventory_id", using: :btree
 
   create_table "labor_costs", force: :cascade do |t|
     t.string   "personnel"
@@ -379,7 +383,6 @@ ActiveRecord::Schema.define(version: 20160228062839) do
   add_foreign_key "contracts", "projects"
   add_foreign_key "equipment", "projects"
   add_foreign_key "equipment_costs", "work_details"
-  add_foreign_key "issued_inventories", "work_details"
   add_foreign_key "labor_costs", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "remarks", "projects"

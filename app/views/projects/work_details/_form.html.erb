@@ -1,0 +1,19 @@
+<%= simple_form_for ([@project, @project.work_details.build]) do |f| %>
+  <%=f.error_notification %>
+  <table class="table">
+    <tbody>
+    <tr>
+      <td style="width: 10%"><%=f.input :code, label: false, placeholder: 'Code' %></td>
+      <td style="width: 30%"><%=f.input :description, label: false, placeholder: 'Descrption' %></td>
+      <td><%=f.input :unit, label: false, placeholder: 'Unit' %></td>
+      <td><%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %></td>
+      <td><%=f.input :unit_cost, label: false, placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %></td>
+      <td><%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%></td>
+    </tr>
+    </tbody>
+    </table>
+    <div class="modal-footer">
+      <%=f.submit "Add this Work Detail", class: "btn btn-primary" %>
+      <%=link_to "or I'm done adding Work Details",project_path(@project) %>
+    </div>
+<% end %>

@@ -40,6 +40,7 @@ get 'result/index' => "result#index"
 
   resources :entries
   resources :inventories
+  resources :issued_inventories
 
   namespace :accounts do
 
@@ -53,7 +54,7 @@ get 'result/index' => "result#index"
 end
 resources :work_details do
   resources :work_accomplishments, module: :projects
-  resources :issued_materials, module: :projects
+  resources :issued_inventories, module: :projects
   resources :labor_costs, module: :projects
   resources :equipment_costs, module: :projects
 end

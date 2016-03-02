@@ -26,26 +26,11 @@
 <tr>
 <td><%=work_detail.code%></td>
 
-<td><p><%=link_to work_detail.description.upcase,[@project, work_detail] %></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>Cost Code Totals</p>
+<td><%=link_to work_detail.description.upcase,[@project, work_detail] %>
 </td>
 <td>
-<p class="text-muted">Labor</p>
-<p>Material</p>
-<p>Equipment</p>
-<p>Subcontract</p>
-<p>Overhead</p>
-</td>
-<td><p><%=number_to_currency work_detail.labor_costs.sum(:total_cost) %></p>
-<p>0.00</p>
-<p></p>
-<p></p>
-<p></p>
-</td>
+
+<td><%=number_to_currency work_detail.labor_costs.sum(:total_cost) %></td>
 
 <td><%#=number_to_currency work_detail.actual_cost_incurred %></td>
 <td><%=work_detail.quantity %></td>

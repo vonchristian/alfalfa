@@ -2,7 +2,6 @@ class Projects::WorkDetailsController < ApplicationController
 
   def new
     @project = Project.find(params[:project_id])
-    @work_detail = @project.work_details.build
   end
 
   def create
@@ -14,6 +13,13 @@ class Projects::WorkDetailsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @project = Project.find(params[:project_id])
+    @work_detail = WorkDetail.find(params[:id])
+    @work_detail.destroy
+    redirect_to root_path, notice: "Work Detail has been deleted."
   end
 
   def import

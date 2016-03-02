@@ -1,0 +1,43 @@
+<div class="col-md-8 col-md-offset-2">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-blue-active">
+      <h3 class="widget-user-username">Issue Inventory</h3>
+    </div>
+    <div class="box-footer">
+      <div class="row">
+        <div class="col-sm-12 border-right">
+          <div>
+            <table class="table table-compressed table-hover">
+
+                   <thead>
+                            <tr>
+                                <th style="width: 10%">Issued To</th>
+                                <th style="width: 30%">Inventory Name</th>
+                                <th>Quantity</th>
+                                <th><span class="pull-right">Unit Cost</span></th>
+                                <th><span class="pull-right">Total Cost</span></th>
+                                <th style="width:60px"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <% if @issued_inventories.present? %>
+                               <% @issued_inventories.each do |issued_inventory| %>
+                                <tr>
+                                  <td><%=issued_inventory.inventoriable_id %></td>
+                                  <td><%= issued_inventory.inventory %></td>
+                                </tr>
+                               <% end %>
+                            <% end %>
+                            </tbody>
+                            </table>
+                                <%= render 'form' %>
+
+
+              </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
