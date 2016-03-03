@@ -1,12 +1,5 @@
 class ProjectsController < ApplicationController
   decorates_assigned :project
-  def add_workers
-    @project = Project.find(params[:id])
-  end
-
-  def add_cost_code_items
-    @project = Project.find(params[:id])
-  end
 
   def index
     @projects =ProjectDecorator.decorate_collection(Project.all.includes(:amount_revisions))
@@ -15,11 +8,7 @@ class ProjectsController < ApplicationController
    @projects =ProjectDecorator.decorate_collection(Project.all)
   end
 
-  def import
-      Project.import(params[:file])
-      redirect_to root_url, notice: "Products imported."
 
-  end
 
 
    def new
@@ -29,13 +18,25 @@ class ProjectsController < ApplicationController
   # POST /pets
   # POST /pets.json
   def create
-    @project = Project.new
-    @project.save(validate: false)
-    redirect_to project_step_path(@project, Project.form_steps.first)
+    @project = Project.create(project_params)
+    if @project.save
+    redirect_to @project, notice: "Project was successfully saved."
+  else
+    render :new
+  end
   end
 
   def edit
     @project = Project.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    if @project.update(project_params)
+      redirect_to @project, notice: "Project updated successfully."
+    else
+      render :edit
+    end
   end
 
 
@@ -55,9 +56,20 @@ class ProjectsController < ApplicationController
    end
   end
 
+  def payroll
+     @project = Project.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+         pdf = ProjectPayrollPdf.new(@project, @project.employees, view_context)
+        send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Payroll.pdf"
+        end
+  end
+end
+
   private
   def project_params
-    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :project_type, :implementing_office, {:item_ids=>[] }, { :worker_ids =>[] })
+    params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :project_type, :implementing_office, {:item_ids=>[] }, { :employee_ids =>[] })
   end
 
 

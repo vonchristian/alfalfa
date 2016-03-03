@@ -57,9 +57,12 @@
 <h4><%=number_to_currency @project.cost %></h4>
 <span class="text-muted">PROJECT COST </span>
 <hr>
+<h4><%=number_to_currency @project.mobilization_fund %></h4>
+<span class="text-muted"> MOBILIZATION </span>
+<hr>
 <div class="row">
 <div class="col-md-4">
-<h4><%=@project.duration %> Days</h4>
+<h4><%=@project.revised_duration %> Days</h4>
 <span class="text-uppercase text-muted">Duration </span>
 </div>
 <div class="col-md-4">
@@ -67,7 +70,7 @@
 <span class="text-uppercase text-muted">Days Elapsed </span>
 </div>
 <div class="col-md-4">
-<h4><%=@project.duration %> Days</h4>
+<h4><%=@project.remaining_days%> Days</h4>
 <span class="text-uppercase text-muted">Days Left </span>
 </div>
 </div>

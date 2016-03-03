@@ -2,11 +2,9 @@ class Contractor < ActiveRecord::Base
    include PgSearch
   multisearchable :against => [:first_name, :last_name, :company]
   attachment :profile_image, type: :image
-  belongs_to :bid
   has_many :contracts
-  has_many :billings
   has_many :projects, through: :contracts
-  has_many :project_billings
+  has_many :issued_materials
 
 
   def self.main_contractors

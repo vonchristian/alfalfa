@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228062839) do
+ActiveRecord::Schema.define(version: 20160302032630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,15 @@ ActiveRecord::Schema.define(version: 20160228062839) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "educational_attainments", force: :cascade do |t|
+    t.string   "degree"
+    t.integer  "employee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "educational_attainments", ["employee_id"], name: "index_educational_attainments_on_employee_id", using: :btree
+
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
     t.string   "middle_name"
@@ -145,12 +154,23 @@ ActiveRecord::Schema.define(version: 20160228062839) do
     t.string   "email"
     t.string   "photo_id"
     t.integer  "position"
+    t.decimal  "rate"
     t.integer  "project_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
   add_index "employees", ["project_id"], name: "index_employees_on_project_id", using: :btree
+
+  create_table "employments", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "employee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "employments", ["employee_id"], name: "index_employments_on_employee_id", using: :btree
+  add_index "employments", ["project_id"], name: "index_employments_on_project_id", using: :btree
 
   create_table "equipment", force: :cascade do |t|
     t.string   "plate_number"
@@ -240,6 +260,19 @@ ActiveRecord::Schema.define(version: 20160228062839) do
   end
 
   add_index "notice_to_proceeds", ["project_id"], name: "index_notice_to_proceeds_on_project_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.decimal  "amount"
+    t.integer  "paymentable_id"
+    t.string   "paymentable_type"
+    t.integer  "payment_type"
+    t.datetime "date"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "payments", ["paymentable_id"], name: "index_payments_on_paymentable_id", using: :btree
+  add_index "payments", ["paymentable_type"], name: "index_payments_on_paymentable_type", using: :btree
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
@@ -372,6 +405,18 @@ ActiveRecord::Schema.define(version: 20160228062839) do
 
   add_index "work_details", ["project_id"], name: "index_work_details_on_project_id", using: :btree
 
+  create_table "worked_days", force: :cascade do |t|
+    t.decimal  "number_of_days"
+    t.integer  "employee_id"
+    t.integer  "project_id"
+    t.integer  "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "worked_days", ["employee_id"], name: "index_worked_days_on_employee_id", using: :btree
+  add_index "worked_days", ["project_id"], name: "index_worked_days_on_project_id", using: :btree
+
   add_foreign_key "amount_revisions", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"
@@ -381,6 +426,9 @@ ActiveRecord::Schema.define(version: 20160228062839) do
   add_foreign_key "contract_amount_revisions", "contracts"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
+  add_foreign_key "educational_attainments", "employees"
+  add_foreign_key "employments", "employees"
+  add_foreign_key "employments", "projects"
   add_foreign_key "equipment", "projects"
   add_foreign_key "equipment_costs", "work_details"
   add_foreign_key "labor_costs", "work_details"
@@ -389,4 +437,6 @@ ActiveRecord::Schema.define(version: 20160228062839) do
   add_foreign_key "time_extensions", "projects"
   add_foreign_key "work_accomplishments", "work_details"
   add_foreign_key "work_details", "projects"
+  add_foreign_key "worked_days", "employees"
+  add_foreign_key "worked_days", "projects"
 end

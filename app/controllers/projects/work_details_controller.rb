@@ -15,18 +15,24 @@ class Projects::WorkDetailsController < ApplicationController
     end
   end
 
+  def edit
+     @work_detail = WorkDetail.find(params[:id])
+   end
+
+   def update
+     @work_detail = WorkDetail.find(params[:id])
+     if @work_detail.update(work_detail_params)
+      redirect_to project_path(@work_detail.project), notice: "Work detail updated successfully."
+    else
+      render :new
+    end
+  end
+
   def destroy
     @project = Project.find(params[:project_id])
     @work_detail = WorkDetail.find(params[:id])
     @work_detail.destroy
     redirect_to root_path, notice: "Work Detail has been deleted."
-  end
-
-  def import
-  @project = Project.find(params[:project_id])
-      WorkDetail.import(params[:file])
-      redirect_to @project, notice: "Work Details imported."
-
   end
 
   def show

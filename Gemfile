@@ -42,7 +42,7 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'shoulda-matchers', require: false
   gem 'database_cleaner'
   gem 'faker'
 end

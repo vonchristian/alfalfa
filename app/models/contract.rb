@@ -3,11 +3,7 @@ class Contract < ActiveRecord::Base
   include PgSearch
   belongs_to :project
   belongs_to :contractor
-  validates :contractor, presence: true
-  validates :amount, numericality: true
-
-  def update_accounts
-  Plutus::Entry.create!(description: "Subcontracted Amount", debit_amounts_attributes:[amount: (self.amount), account: "Accounts Payable-Trade"],
-                         credit_amounts_attributes:[amount: (self.amount), account: "Accounts Receivable-Trade"])
-  end
+  validates :contractor_id, presence: true, uniqueness: {scope: :project, message: "Already added"}
+  validates :amount_subcontracted, presence: true, numericality: {less_than: :remaining_uncontracted_amount }
+  delegate :remaining_uncontracted_amount, to: :project
 end

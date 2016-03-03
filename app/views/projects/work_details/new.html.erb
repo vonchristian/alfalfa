@@ -34,7 +34,7 @@
                                   <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
                                   <td>
                                     <div class="tools">
-                                      <%= link_to [@project, work_detail], title: 'Edit' do %>
+                                      <%= link_to edit_project_work_detail_path(@project, work_detail), method: :get, title: 'Edit' do %>
                                         <span class="fa fa-edit"></span>
                                       <% end %> | <%= link_to [@project, work_detail], method: :delete, data: { confirm: 'Are you sure?'}, title: 'Delete' do %>
                                         <span class="text-danger fa fa-trash-o"></span>

@@ -13,7 +13,7 @@ class ContractsController < ApplicationController
     if @contract.save
       @contract.create_activity :create, owner: current_user, trackable: @project
 
-      redirect_to @project, notice: "Contractor added successfully to project."
+      redirect_to new_project_contract_url(@project), notice: "Contractor added successfully."
     else
       render :new
     end
@@ -21,6 +21,6 @@ class ContractsController < ApplicationController
 
   private
   def contract_params
-    params.require(:contract).permit(:contractor_id, :amount)
+    params.require(:contract).permit(:contractor_id, :amount_subcontracted)
   end
 end

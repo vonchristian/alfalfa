@@ -6,11 +6,11 @@
       <div class="box-body box-profile">
           <%= image_tag attachment_url(@employee, :photo, :fill, 60, 60, format: "jpg", fallback: "default.png"),  class: "profile-user-img img-responsive img-circle" %>
         <h3 class="profile-username text-center"><%=@employee.full_name %></h3>
-        <p class="text-muted text-center"><%=@employee.position %></p>
+        <p class="text-muted text-center"><%=@employee.position.titleize %></p>
 
         <ul class="list-group list-group-unbordered">
           <li class="list-group-item">
-            <b>Cost</b> <a class="pull-right"><%#=number_to_currency @project.cost %></a>
+            <b>Projects</b> <a class="pull-right"><%=@employee.projects.count %></a>
           </li>
           <li class="list-group-item">
             <b>Following</b> <a class="pull-right">543</a>
@@ -20,20 +20,28 @@
           </li>
         </ul>
 
-        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+        <a href="/employees/<%=@employee.id %>/edit" class="btn btn-primary btn-block"><b>Update Info</b></a>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
 
     <!-- About Me Box -->
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">employee Info</h3>
+        <h3 class="box-title">About <%=@employee.first_name %></h3>
       </div><!-- /.box-header -->
       <div class="box-body">
         <strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
-        <p class="text-muted">
-          B.S. in Computer Science from the University of Tennessee at Knoxville
-        </p>
+
+        <% if @employee.educational_attainments.present? %>
+         <%@employee.educational_attainments.each do |educational_attainment| %>
+           <p class="text-muted"><%=educational_attainment.degree %></p>
+         <% end %>
+          <% else %>
+           <p class="text-muted">
+          <%=link_to "Add Education", new_employee_educational_attainment_path(@employee) %>
+           </p>
+          <% end %>
+
 
         <hr>
 
@@ -64,12 +72,14 @@
         <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
         <li><a href="#projects" data-toggle="tab">Projects</a></li>
         <li><a href="#cash_advances" data-toggle="tab">Cash Advances</a></li>
+        <li><a href="#worked_days" data-toggle="tab">Days Worked</a></li>
+
         <li><a href="#settings" data-toggle="tab">Settings</a></li>
       </ul>
       <div class="tab-content">
         <%=render 'cash_advances' %>
-
-        <%#=render 'settings' %>
+        <%=render 'projects' %>
+        <%=render 'worked_days' %>
       </div><!-- /.tab-content -->
     </div><!-- /.nav-tabs-custom -->
   </div><!-- /.col -->

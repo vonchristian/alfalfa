@@ -11,7 +11,7 @@
         <%=image_tag("default-small.png", :class=>"img-square center-block ") %>
         <br>
         <% else %>
-        <%= image_tag attachment_url(@employee, :profile_image, :fill, 150, 150), class: 'center-block img-responsive img-rounded'%>
+        <%= image_tag attachment_url(@employee, :photo, :fill, 150, 150), class: 'center-block img-responsive img-rounded'%>
         <% end %>
         <%= f.file_field :photo, class: 'center-block'%>
 
@@ -35,10 +35,11 @@
         </div>
    <%=f.input :position, label: false,  collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }  %>
         <div class="modal-footer">
-          <%=f.submit 'Save Contractor', class: 'btn btn-primary' %>
+          <%=f.submit 'Save', class: 'btn btn-primary' %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
 </div>
+

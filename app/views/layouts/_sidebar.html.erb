@@ -60,7 +60,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/expenses"><i class="fa fa-circle-o"></i> Expenses</a></li>
+                <li><a href="/entries"><i class="fa fa-circle-o"></i> Entries</a></li>
                 <li><a href="/banks"><i class="fa fa-circle-o"></i> Bank</a></li>
                 <li><a href="/revenues"><i class="fa fa-circle-o"></i> Revenue</a></li>
               </ul>
@@ -81,18 +81,16 @@
   </a>
 </li>
 <li class="header">SETTINGS</li>
-<li class="treeview">
-              <a href="#">
-                <i class="fa fa-users"></i>
-                <span>Employees</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="/employees"><i class="fa fa-circle-o"></i> Employees</a></li>
-                <li><a href="/workers"><i class="fa fa-circle-o"></i> Workers</a></li>
-              </ul>
-            </li>
+
             <li>
+  <%= link_to employees_path do %>
+
+  <i class="fa fa-users"></i>
+
+    </i> <span>Employees</span>
+  <%end%>
+</li>
+<li>
   <%= link_to settings_index_path do %>
 
   <i class="fa fa-cog"></i>

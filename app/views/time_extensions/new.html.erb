@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-sm-12 border-right">
           <div>
-                  <%= simple_form_for [@project, @time_extension], html: { class: 'form-horizontal' },
+                  <%= simple_form_for [@project, @time_extension], url: :project_time_extensions, html: { class: 'form-horizontal' },
                             wrapper: :horizontal_form,
                             wrapper_mappings: {
                             check_boxes: :vertical_radio_and_checkboxes,

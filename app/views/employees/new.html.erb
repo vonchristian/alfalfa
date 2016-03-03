@@ -6,7 +6,7 @@
       <hr />
        <%= simple_form_for @employee do |f| %>
       <%=f.error_notification %>
-     
+
       <%if @employee.photo.blank? %>
         <%=image_tag("default-small.png", :class=>"img-square center-block ") %>
         <br>
@@ -17,13 +17,13 @@
 
       <hr>
 <div class="row">
-<div class="col-md-6">
+    <div class="col-md-6">
         <%=f.input :first_name, autofocus: true, label: false, placeholder: "First Name" %>
         </div>
         <div class="col-md-6">
         <%=f.input :last_name, label: false, placeholder: "Last Name"  %>
         </div>
-        </div>   
+        </div>
 
         <div class="row">
 <div class="col-md-6">
@@ -32,10 +32,10 @@
         <div class="col-md-6">
         <%=f.input :email, label: false, placeholder: "Email"  %>
         </div>
-        </div>   
+        </div>
    <%=f.input :position, label: false,  collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }  %>
         <div class="modal-footer">
-          <%=f.submit 'Save Contractor', class: 'btn btn-primary' %>
+          <%=f.submit 'Save Employee', class: 'btn btn-primary' %>
         </div>
       <% end %>
     </div>

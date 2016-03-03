@@ -12,9 +12,13 @@ resources :materials do
   get "delete"
 end
   mount Plutus::Engine => "/accounting", :as => "accounting"
+
 resources :activities
 resources :employees do
   resources :cash_advances, :module => :employees
+  resources :worked_days, :module => :employees
+  resources :educational_attainments, module: :employee_details
+  resources :payments, module: :employees
 
   end
 resources :categories
@@ -33,8 +37,10 @@ resources :users
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'entries/daily' => 'entries#daily'
 get 'result/index' => "result#index"
-  resources :contractors
 
+  resources :contractors do
+    resources :issued_inventories, module: :contractors
+  end
 
 
 
@@ -62,15 +68,14 @@ end
     resources :add_workers, module: :projects
     resources :assign_project_engineers, module: :projects
     resources :activities, only:[:index], module: :projects
-    resources :work_details, module: :projects do
-       match :import, via: [:post], on: :collection, module: :projects
-     end
+    resources :work_details, module: :projects
     resources :invoices, only:[:new, :create], module: :projects
-    resources :billable_materials
-  resources :workers
+    resources :employments, module: :projects
+    resources :employees
     resources :collections
       match :overview, via: [:get], on: :collection
-    resource :notice_to_proceed, module: :projects
+      match :payroll, via: [:get], on: :member
+    resource :notice_to_proceed, module: :project_details
     resources :time_extensions
     resources :amount_revisions
     resources :remarks
@@ -81,5 +86,5 @@ end
     resources :contract_amount_revisions
   end
 
-
+resources :entries
 end

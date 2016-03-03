@@ -1,12 +1,12 @@
 class ExpensesController < ApplicationController
   def index
-    @expenses = Plutus::Expense.all.order('created_at DESC')
+    @expenses = Plutus::Entry.all.order('created_at DESC')
   end
   def new
     @expense = Plutus::Expense.new
   end
 
- 
+
   def show
     @expense = Plutus::Expense.find(params[:id])
   end

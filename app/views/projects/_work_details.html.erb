@@ -1,16 +1,18 @@
 
 <div class="tab-pane" id="work_details">
-<div class="col-row">
-<span><%=link_to new_project_work_detail_path(@project), class: "btn btn-default bg-blue-active" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%></span>
-
-<hr>
+<div class="row">
+    <div class="col-md-12">
+        <span><%=link_to new_project_work_detail_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%></span>
+    </div>
+    <hr>
+    <div class="col-md-12">
 <table class="table table-compressed">
 <thead>
   <tr class="bg-gray-light text-uppercase">
 
     <th>Cost Code</th>
     <th style="width: 30%">Description</th>
-    <th></th>
+    <!-- <th></th> -->
     <th>Original Budget</th>
     <th>Budget Adjustments</th>
     <th>Revised Budget</th>
@@ -21,29 +23,28 @@
 
   </tr>
 </thead>
-<% @project.work_details.each do |work_detail| %>
+
 <tbody>
+<% @project.work_details.each do |work_detail| %>
 <tr>
 <td><%=work_detail.code%></td>
 
 <td><%=link_to work_detail.description.upcase,[@project, work_detail] %>
 </td>
-<td>
 
 <td><%=number_to_currency work_detail.labor_costs.sum(:total_cost) %></td>
 
-<td><%#=number_to_currency work_detail.actual_cost_incurred %></td>
+<!-- <td> --><%#=number_to_currency work_detail.actual_cost_incurred %><!-- </td> -->
 <td><%=work_detail.quantity %></td>
 <td class="text-success"><%=work_detail.accomplished_quantity%></td>
 <td class="text-danger"><%=work_detail.remaining_quantity %></td>
 <td><%=work_detail.actual_accomplishment_percent %>%</td>
-<td></td>
 
 </tr>
-</tbody>
 <% end %>
+</tbody>
 </table>
-
+</div>
 </div>
 </div>
 

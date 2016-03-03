@@ -9,8 +9,8 @@ class Project < ActiveRecord::Base
     has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id'
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category
-    has_many  :workers
-    has_many  :employees, through: :workers
+    has_many  :employments
+    has_many :employees, through: :employments
     has_many  :work_details
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
@@ -18,12 +18,15 @@ class Project < ActiveRecord::Base
     has_many :contractors, through: :contracts
     has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
     has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
-    has_many :work_accomplishments
+    has_many :work_accomplishments, through: :work_details
     has_many :workers, class_name: "Employee"
     has_many :remarks
-    has_many :purchase_orders
 
+    validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
 
+  def mobilization_fund
+    self.cost * 0.15
+  end
   def previous_billings
     0
   end
@@ -36,9 +39,11 @@ class Project < ActiveRecord::Base
    def total_project_estimate
     work_details.collect{|w| w.total_direct_cost}.sum
    end
+
     def remaining_uncontracted_amount
-      cost - contracts.sum(:amount)
+      cost - contracts.sum(:amount_subcontracted)
     end
+
    def total_collection
     self.collections.sum(:amount)
   end
@@ -76,8 +81,8 @@ class Project < ActiveRecord::Base
   end
 
     def actual_accomplishment
-      if self.accomplishments.present?
-        self.accomplishments.sum(:percent)
+      if self.work_accomplishments.present?
+        self.work_accomplishments.sum(:percent)
       else
         0
       end

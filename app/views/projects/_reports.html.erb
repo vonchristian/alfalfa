@@ -4,4 +4,10 @@
 <span class="pull-right"><%=link_to "Statement of Work Accomplished (PDF)", project_path(@project, format: 'pdf') %></span>
 </span>
 <hr>
+
+<h4>Project Payroll</h4>
+<span class=help-block>Generate Payroll for this month <%=Time.zone.now.strftime("%B %e, %Y") %>.
+<span class="pull-right"><%=link_to "Project Payroll",payroll_project_path(@project) %></span>
+</span>
+<hr>
 </div>

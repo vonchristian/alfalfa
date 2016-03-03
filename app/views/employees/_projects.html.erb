@@ -1,0 +1,13 @@
+<div class="tab-pane" id="projects">
+<div class="container">
+<div class="box-header">
+<h4>Assigned Projects (<%=@employee.projects.count %>) </h4>
+</div>
+<div class="box-body">
+<% @employee.projects.each do |project| %>
+<h4><%=link_to project.name, project %></h4>
+<hr>
+<% end %>
+</div>
+</div>
+</div>

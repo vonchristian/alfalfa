@@ -1,13 +1,16 @@
-<div class="container">
-<%=link_to "New Category", new_category_path %>
 
-</div>
+<div class="col-md-12">
+<div class="box box-solid">
+<div class="box-body">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
+
+<div class="row">
+<div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><i class="fa fa-home fa-fw"></i>Home</a></li>
+            <li  role="presentation" class="active">
+           <a href="#human-resources" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-home fa-fw"></i> HR Settings</a>
+        </li>
+
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-list-alt fa-fw"></i>Widgets</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-file-o fa-fw"></i>Pages</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-bar-chart-o fa-fw"></i>Charts</a></li>
@@ -16,11 +19,13 @@
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-calendar fa-fw"></i>Calender</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-book fa-fw"></i>Library</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-pencil fa-fw"></i>Applications</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-cogs fa-fw"></i>Settings</a></li>
+                <li><a href="/settings/human_resources"><i class="fa fa-cogs fa-fw"></i>HR Settings</a></li>
             </ul>
-        </div>
-        <div class="col-md-9 well">
-            Vertical admin menu
+</div>
+        <div class="col-md-9 col-md-offset-1">
+            <div class="tab-content">
+            <%=render 'human_resources' %>
         </div>
     </div>
+</div>
 </div>

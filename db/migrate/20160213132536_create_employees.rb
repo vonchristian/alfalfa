@@ -8,6 +8,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :email
       t.string :photo_id
       t.integer :position
+      t.decimal :rate
       t.integer :project_id, index: true
 
       t.timestamps null: false

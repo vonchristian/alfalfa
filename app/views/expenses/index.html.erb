@@ -34,13 +34,7 @@
         </tr>
       </thead>
       <tbody>
-      <% @expenses.each do |expense| %>
-        <%expense.debit_entries.each do |entry| %>
-      <% if entry.commercial_document.blank?%>
-        <tr class="text-danger">
-        <% else %>
-        <tr>
-        <% end %>
+      <% @expenses.each do |entry| %>
         <td><%=entry.created_at.strftime("%b %e, %Y") %></td>
         <td><%=entry.commercial_document.try(:name)  %></td>
         <td><%=entry.description %></td>
@@ -48,7 +42,6 @@
         <td><%=number_to_currency entry.debit_amounts.last.amount %></td>
         <td></td>
           </tr>
-        <% end %>
       <% end %>
       </table>
       </div>

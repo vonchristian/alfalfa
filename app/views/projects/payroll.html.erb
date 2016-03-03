@@ -1,0 +1,46 @@
+
+<div class="container">
+<div class="box box-solid">
+<div class="box-header">
+<h4>List of Workers
+  <span class="pull-right"><%=link_to new_project_employment_path(@project), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Workers <%end%>
+  </span>
+  </h4>
+  </div>
+  <br>
+<div class="box-body">
+
+    <table class="table">
+    <thead>
+      <tr>
+      <th></th>
+        <th>Employee</th>
+        <th>Days Worked</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+      <% @project.employees.each do |employee| %>
+        <tr>
+            <td style="width:65px"><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-square" %></td>
+            <td>
+              <b class="text-primary"><%=link_to employee.full_name.upcase, employee%></b><br>
+              <span class="text-block"><%=employee.position.titleize %>
+
+
+            </td>
+            <td><%=employee.unpaid_worked_days_for(@project)%> Days <br>
+             <span><%=link_to "Add Days Worked", new_employee_worked_day_path(employee) %></span>
+
+           </td>
+
+
+        </tr>
+            <% end %>
+      </table>
+            </div>
+            </div>
+</div>
+
+
+
+
