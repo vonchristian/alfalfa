@@ -2,23 +2,33 @@
 <div class="active tab-pane" id="profile">
 <div class="row">
 <div class="col-md-4">
-<h4>Notice to Proceed</h4>
+<strong><i class="fa fa-map-marker margin-r-5"></i>  Contract ID:</strong>
+          <p class="text-muted">
+            #<%=@project.id_number %>
+          </p>
+          <hr>
+<strong><i class="fa fa-calendar margin-r-5"></i>  Notice to Proceed</strong>
 <% if @project.notice_to_proceed.present? %>
-<%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%>
+<p><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%></p>
 <% else %>
-<%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn btn-primary btn-sm" %>
+<p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project) %></p>
 <% end %>
-<br>
-<strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
+<hr>
+<strong><i class="fa fa-map-marker margin-r-5"></i>  Location</strong>
           <p class="text-muted">
-            B.S. in Computer Science from the University of Tennessee at Knoxville
+            <%=@project.address %>
           </p>
-          <r>
-<strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
+          <hr>
+<strong><i class="fa fa-book margin-r-5"></i>  Implementing Office</strong>
           <p class="text-muted">
-            B.S. in Computer Science from the University of Tennessee at Knoxville
+           <%=@project.implementing_office %>
           </p>
-
+<hr>
+<strong><i class="fa fa-book margin-r-5"></i>  Main Contractor</strong>
+          <p class="text-muted">
+           <%=@project.main_contractor %>
+          </p>
+<hr>
 </div>
 <div class="col-md-4">
 

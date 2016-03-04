@@ -22,7 +22,9 @@ gem 'plutus'
   gem 'uglifier'
   gem 'delayed_job'
   gem 'delayed_job_active_record'
-
+  gem 'capistrano', '~> 3.1.0'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rails', '~> 1.1.1'
   gem 'jquery-rails'
    gem "coffee-rails"
 
@@ -32,9 +34,12 @@ group :production do
   gem 'puma', group: :development
 end
 group :development, :test do
-  gem 'rspec-rails'
+gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'guard-rspec'
+  gem 'spring-commands-rspec'
+  gem 'vcr'
 end
 
 group :development do
@@ -42,9 +47,12 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
 end
 
 

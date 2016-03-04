@@ -41,7 +41,7 @@
           <h5 class="text-center text-muted"> MAIN CONTRACTOR</h5>
         </div>
         <div class="col-md-8">
-          <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a]}, as: :radio_buttons, label: "" %>
+          <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a]}, as: :radio_buttons, label: false%>
         </div>
     </div>
 </div>

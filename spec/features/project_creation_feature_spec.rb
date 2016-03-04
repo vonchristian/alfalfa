@@ -1,24 +1,31 @@
-require "rails_helper"
+require 'rails_helper'
+include Warden::Test::Helpers
+Warden.test_mode!
 
-RSpec.feature "Project management", :type => :feature do
-  before(:each) do
-    user = FactoryGirl.create(:user)
-    login_as(user, :scope => :user)
-  end
+RSpec.feature "Project management", type: :feature  do
+  context "when logged in" do
 
-  scenario "User creates a new project" do
-    visit "/projects/new"
+    before(:each) do
+      admin = create(:user)
+      login_as(admin , :scope => :user)
+    end
 
-    fill_in "Name", :with => "Road Widening"
-    fill_in "Contract ID", with: "1231322"
-    fill_in "Duration", with: '120'
-    fill_in "Cost", with: '12000000'
-    fill_in "Location", with: 'Kiangan, Ifugao'
-    fill_in "Implementing Office", with: 'DPWH'
-    click_button "Save Project"
+    scenario "then i can see the project index page" do
+      project1 = create(:project, name: 'Road')
+      project2 = create(:project, name: 'Building')
 
-    expect(page).to have_content("Project was successfully saved.")
+      visit projects_path
+      expect(page.body).to     have_content 'ROAD'
+       expect(page.body).to    have_content 'BUILDING'
+    end
+
+    scenario "then i can save a project" do
+      visit projects_path
+      click_link "Add Project"
+
+      click_on 'Save Project'
+
+    expect(page).to have_content "blank"
+    end
   end
 end
-
-
