@@ -22,11 +22,11 @@ set :branch, 'master'
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
-
+set :rail_env, 'production'
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
-#   set :forward_agent, true     # SSH forward_agent.
+set :forward_agent, true     # SSH forward_agent.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
