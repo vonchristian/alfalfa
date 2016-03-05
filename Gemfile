@@ -27,6 +27,7 @@ gem 'plutus', git: 'https://github.com/vonchristian/plutus.git'
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'jquery-rails'
    gem "coffee-rails"
+   gem 'mina-puma', :require => false
 
 group :production do
   gem 'pg',  group: :development

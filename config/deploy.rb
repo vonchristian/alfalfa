@@ -2,6 +2,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+require 'mina/puma'
 
 set :domain, '192.168.254.102'
 set :deploy_to, '/var/www/alfalfa-construction'
