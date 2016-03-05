@@ -3,7 +3,7 @@ workers 4
 
 environment ENV['RAILS_ENV'] || 'production'
 
-daemonize true
+daemonize false
 
 pidfile "/var/www/alfalfa-construction/shared/tmp/pids/puma.pid"
 stdout_redirect "/var/www/alfalfa-construction/shared/tmp/log/stdout", "/var/www/alfalfa-construction/shared/tmp/log/stderr"
