@@ -6,10 +6,10 @@ require 'mina/puma'
 
 set :domain, '192.168.254.102'
 set :deploy_to, '/var/www/alfalfa-construction'
-set :repository, 'https://github.com/vonchristian/alfalfa'
+set :repository, 'https://github.com/vonchristian/alfalfa.git'
 set :branch, 'master'
 set :user, 'deploy'
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'tmp/pids', 'tmp/sockets']
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'alfalfa-construction/shared/tmp/pids', 'alfalfa-construction/shared/tmp/sockets']
 set :forward_agent, true     # SSH forward_agent.
 set :term_mode, nil
 
