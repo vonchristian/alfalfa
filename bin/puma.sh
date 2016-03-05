@@ -3,7 +3,6 @@
 PUMA_CONFIG_FILE=/var/www/alfalfa-construction/current/config/puma.rb
 PUMA_PID_FILE=/var/www/alfalfa-construction/shared/tmp/pids/puma.pid
 PUMA_SOCKET=/var/www/alfalfa-construction/shared/tmp/sockets/puma.sock
-#! /bin/sh
 
 # check if puma process is running
 puma_is_running() {
@@ -62,7 +61,7 @@ case "$1" in
     fi
 
     echo "Trying cold reboot"
-    script/puma.sh start
+    bin/puma.sh start
     ;;
 
   *)
