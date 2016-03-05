@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/vonchristian/plutus.git
+  revision: 8298a6633006b68b99a86ac0c5b74572a226fe80
+  specs:
+    plutus (0.12.2)
+      jquery-rails (= 4.1.0)
+      jquery-ui-rails (= 5.0.5)
+      rails (~> 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -187,10 +196,6 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
-    plutus (0.12.2)
-      jquery-rails (>= 3.0)
-      jquery-ui-rails (>= 4.0)
-      rails (~> 4.0)
     prawn (2.1.0)
       pdf-core (~> 0.6.1)
       ttfunk (~> 1.4.0)
@@ -394,7 +399,7 @@ DEPENDENCIES
   jquery-ui-rails
   pg
   pg_search
-  plutus
+  plutus!
   prawn
   prawn-table
   public_activity
