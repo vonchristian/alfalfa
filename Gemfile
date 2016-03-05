@@ -9,7 +9,7 @@ gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
-gem 'plutus'
+gem 'plutus', git: 'https://github.com/vonchristian/plutus.git'
  gem 'pg_search'
   gem 'prawn'
   gem 'prawn-table'
