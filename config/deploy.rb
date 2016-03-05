@@ -2,6 +2,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
@@ -13,6 +14,7 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 set :domain, '192.168.254.102'
 set :deploy_to, '/var/www/alfalfa-construction'
 set :repository, 'https://github.com/vonchristian/alfalfa.git'
+set :app_path, lambda { "#{deploy_to}/#{current_path}" }
 set :branch, 'master'
 set :term_mode, nil
 set :user, 'deploy'
@@ -43,26 +45,40 @@ end
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
+  queue! %[mkdir -p "#{deploy_to}/shared/log"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
+  queue! %[mkdir -p "#{deploy_to}/shared/config"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
-  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml' and 'secrets.yml'."]
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/pids"]
 
-  if repository
-    repo_host = repository.split(%r{@|://}).last.split(%r{:|\/}).first
-    repo_port = /:([0-9]+)/.match(repository) && /:([0-9]+)/.match(repository)[1] || '22'
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/sockets"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/sockets"]
 
-    queue %[
-      if ! ssh-keygen -H  -F #{repo_host} &>/dev/null; then
-        ssh-keyscan -t rsa -p #{repo_port} -H #{repo_host} >> ~/.ssh/known_hosts
-      fi
-    ]
-  end
+  queue! %[mkdir -p "#{deploy_to}/shared/public/uploads"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/public/uploads"]
+
+  # database.yml
+  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+
+  # puma.rb
+  queue! %[touch "#{deploy_to}/shared/config/puma.rb"]
+  queue  %[echo "-----> Be sure to edit 'shared/config/puma.rb'."]
+
+  # tmp/sockets/puma.state
+  queue! %[touch "#{deploy_to}/shared/tmp/sockets/puma.state"]
+  queue  %[echo "-----> Be sure to edit 'shared/tmp/sockets/puma.state'."]
+
+  # log/puma.stdout.log
+  queue! %[touch "#{deploy_to}/shared/log/puma.stdout.log"]
+  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stdout.log'."]
+
+  # log/puma.stdout.log
+  queue! %[touch "#{deploy_to}/shared/log/puma.stderr.log"]
+  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stderr.log'."]
 end
 desc "Deploys the current version to the server."
 task :deploy => :environment do
@@ -86,18 +102,18 @@ namespace :puma do
   desc "Start the application"
   task :start do
     queue 'echo "-----> Start Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start", :pty => false
+    queue "cd #{app_path} && RAILS_ENV=#{production} && bin/puma.sh start", :pty => false
   end
 
   desc "Stop the application"
   task :stop do
     queue 'echo "-----> Stop Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop"
+    queue "cd #{app_path} && RAILS_ENV=#{production} && bin/puma.sh stop"
   end
 
   desc "Restart the application"
   task :restart do
     queue 'echo "-----> Restart Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh restart"
+    queue "cd #{app_path} && RAILS_ENV=#{production} && bin/puma.sh restart"
   end
 end
