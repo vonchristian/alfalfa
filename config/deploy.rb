@@ -9,7 +9,7 @@ set :deploy_to, '/var/www/alfalfa-construction'
 set :repository, 'https://github.com/vonchristian/alfalfa'
 set :branch, 'master'
 set :user, 'deploy'
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'tmp/pids', 'tmp/sockets']
 set :forward_agent, true     # SSH forward_agent.
 set :term_mode, nil
 
@@ -56,6 +56,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
+      invoke :'puma:phased_restart'
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
     end
