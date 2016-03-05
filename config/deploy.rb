@@ -10,9 +10,9 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'foobar.com'
-set :deploy_to, '/var/www/foobar.com'
-set :repository, 'git://...'
+set :domain, 192.168.254.102
+set :deploy_to, '/var/www/alfalfa-construction.com'
+set :repository, 'https://github.com/vonchristian/alfalfa.git'
 set :branch, 'master'
 
 # For system-wide RVM install.
