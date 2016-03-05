@@ -32,14 +32,6 @@
         <%=f.input :password_confirmation %>
         <%= f.input :role, collection: User.roles.keys.to_a.map{|role| [role.titleize, role]}, as: :radio_buttons %>
 
-        <%= f.fields_for :additional_information do |ai| %>
-          <%= render 'additional_information_fields', f: ai %>
-        <% end %>
-        <hr>
-        <%= f.fields_for :address do |a| %>
-          <%= render 'address_fields', f: a %>
-        <% end %>
-        </div>
         <div class="modal-footer">
           <%=f.submit 'Save Employee', class: 'btn btn-primary' %>
         </div>

@@ -13,12 +13,14 @@ class ProjectsController < ApplicationController
 
    def new
     @project = Project.new
+    authorize @project
   end
 
   # POST /pets
   # POST /pets.json
   def create
     @project = Project.create(project_params)
+    authorize @project
     if @project.save
     redirect_to @project, notice: "Project was successfully saved."
   else

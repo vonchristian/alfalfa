@@ -88,9 +88,36 @@
 </div>
 </div>
 </div>
-<div class="box-header bg-gray-light">
-<h4>Accomplishments</h4>
+<div class="row">
+<div class="col-md-6">
+<h4>Recent Work Accomplishments</h4>
+
+<span class="help-block">Here's what you've accomplished for this project recently.</span>
+<table class="table">
+<tbody>
+<%@project.work_accomplishments.recent(10).each do |work_accomplishment| %>
+
+<div class="row">
+<div class="col-md-1">
+<h4><center><%=work_accomplishment.quantity %> <%=work_accomplishment.work_detail.unit %> </center></h4>
+</div>
+<div class="col-md-10">
+<h4 class="text-success"><%=work_accomplishment.work_detail.description %></h4>
+<span class"text-muted"><%=work_accomplishment.remarks %></span><br>
+<span class="text-muted"><%=work_accomplishment.date_accomplished.strftime("%B %e, %Y") %></span>
+
 </div>
 </div>
+<hr>
+<% end %>
+</tbody>
+</table>
+</div>
+<div class="col-md-6">
+<h4>Personnel</h4>
+</div>
+</div>
+</div>
+
 
 

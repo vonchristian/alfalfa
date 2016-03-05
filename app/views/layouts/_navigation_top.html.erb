@@ -1,4 +1,5 @@
 <div class="container">
+<div class="row">
 <nav class="navbar navbar-default">
     <div class="navbar-header">
     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
@@ -68,10 +69,12 @@
                 </li>
                 </ul>
       </ul>
+      </li>
+</ul>
 <div>
       <%=form_tag result_index_path, class: 'nav-search', method: :get do %>
         <div class="input-group">
-          <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for  a Project, Contractor, Employee, Worker...' %>
+          <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'What do you want to find?' %>
           <span class="input-group-btn">
             <%= button_tag(type: 'submit', class: "btn btn-flat btn-default") do %>
               <i class="fa fa-search"></i>
@@ -87,5 +90,7 @@
     </div>
   </div><!-- /.nav-collapse -->
 </nav>
+
+</div>
 
 </div>

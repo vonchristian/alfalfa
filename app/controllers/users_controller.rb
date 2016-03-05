@@ -55,8 +55,6 @@ private
   end
   def build_user
     @user ||= user_scope.build
-    @user.build_address
-    @user.build_additional_information
     authorize @user
     @user.attributes = user_params
   end

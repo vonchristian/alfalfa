@@ -1,17 +1,21 @@
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-4 col-md-offset-4">
   <!-- Widget: user widget style 1 -->
   <div class="box box-widget widget-user">
     <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
-      <h3 class="widget-user-username">New Work Accomplishment</h3>
+    <div class="widget-user-header">
+      <h4 class="text-muted"><%=@work_detail.description %></h4>
+      <span class="text-success">Remaining Quantity: <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %></span>
     </div>
     <div class="box-footer">
       <div class="row">
         <div class="col-sm-12 border-right">
           <div>
-
+ <h3><center>New Work Accomplishment</center></h3>
+ <hr>
                   <%= simple_form_for [@work_detail, @work_accomplishment] do |f| %>
                    <%=f.input :quantity %>
+                   <%=f.input :remarks %>
+                   <%=f.input :date_accomplished,  as: :string, input_html:{:class => 'datepicker'} %>
 <div class="modal-footer">
 <%=f.submit "Save Work Accomplishment", class: "btn btn-primary" %>
 <%=link_to "Close",project_work_detail_path(@work_detail.project.id, @work_detail)%>
@@ -19,4 +23,5 @@
 </div>
 <% end %>
 </div>
+
 

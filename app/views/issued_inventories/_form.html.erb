@@ -1,18 +1,19 @@
+<div class="well">
 <%= simple_form_for @issued_inventory do |f| %>
   <%=f.error_notification %>
   <table class="table">
     <tbody>
-    <tr>
-      <td style="width: 10%"><%=f.input :inventoriable_id, label: false, collection: Project.all, prompt: "Please Select" %></td>
-      <td style="width: 30%"><%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Please Select" %></td>
-      <td><%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %></td>
-      <td><%=f.input :unit_cost, label: false, placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %></td>
-      <td><%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%></td>
-    </tr>
-    </tbody>
-    </table>
+   <%=f.input :inventoriable_id  %>
+    <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Please Select" %>
+      <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+      <%=f.input :unit_cost, label: false, placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
+     <%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
+
     <div class="modal-footer">
       <%=f.submit "Issue Inventory", class: "btn btn-primary" %>
       <%=link_to "or I'm done issuing inventories", issued_inventories_path %>
     </div>
+    </tbody>
+</table>
 <% end %>
+</div>

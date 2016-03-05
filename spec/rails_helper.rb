@@ -8,7 +8,6 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require 'capybara/rails'
 require 'shoulda/matchers'
-require "pundit/rspec"
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :webkit
 RSpec.configure do |config|
@@ -33,7 +32,6 @@ end
    end
    config.after(:each) do
      DatabaseCleaner.clean
-     Warden.test_reset!
    end
    Capybara::Webkit.configure do |config|
   # Enable debug mode. Prints a log of everything the driver is doing.

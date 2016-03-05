@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
 
   private
         def permission_denied
-          redirect_to root_path, alert: 'Access denied.'
+          redirect_to root_path, alert: 'You are not allowed to access this feature.'
         end
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
- 
+
 end
