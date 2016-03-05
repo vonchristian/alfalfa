@@ -27,6 +27,9 @@ class Project < ActiveRecord::Base
   def mobilization_fund
     self.cost * 0.15
   end
+  def total_cost_of_work_details
+    self.work_details.sum(:total_cost)
+  end
   def previous_billings
     0
   end

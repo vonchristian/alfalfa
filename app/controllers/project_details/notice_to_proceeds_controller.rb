@@ -2,14 +2,16 @@ class ProjectDetails::NoticeToProceedsController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @notice_to_proceed = @project.build_notice_to_proceed
+    authorize @notice_to_proceed
   end
 
   def create
     @project = Project.find(params[:project_id])
     @notice_to_proceed = @project.create_notice_to_proceed(notice_to_proceed_params)
+    authorize @notice_to_proceed
     if @notice_to_proceed.save
      @notice_to_proceed.create_activity :create, owner: current_user, recipient: @project
-      redirect_to @project, notice: "success"
+      redirect_to @project, notice: "Notice to Proceed date of award saved successfully."
     else
       render :new
     end

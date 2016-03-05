@@ -2,7 +2,9 @@
 <div class="tab-pane" id="work_details">
 <div class="row">
     <div class="col-md-12">
+    <%if policy(WorkDetail.new).create? %>
         <span><%=link_to new_project_work_detail_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%></span>
+        <% end %>
     </div>
     <hr>
     <div class="col-md-12">

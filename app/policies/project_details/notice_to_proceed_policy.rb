@@ -1,13 +1,19 @@
-class ProjectPolicy < ApplicationPolicy
-  attr_reader :user, :project
+class ProjectDetails::NoticeToProceedPolicy < ApplicationPolicy
+  attr_reader :user, :notice_to_proceed
 
-  def initialize(user, project)
+  def initialize(user, notice_to_proceed)
     @user = user
-    @project = project
+    @notice_to_proceed = notice_to_proceed
+  end
+
+
+
+  def index?
+    true
   end
 
   def show?
-    true
+   true
   end
 
   def create?
@@ -19,25 +25,22 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def edit?
-    create?
+    user.project_engineer? || user.monitoring_officer?
   end
 
   def update?
-    create?
+    edit?
   end
 
   def destroy?
-    false
+    user.project_engineer?
   end
 
   class Scope
-    attr_reader :user, :scope
-
     def initialize(user, scope)
       @user = user
       @scope = scope
     end
-
     def resolve
       scope
     end

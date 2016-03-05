@@ -9,9 +9,12 @@
           <hr>
 <strong><i class="fa fa-calendar margin-r-5"></i>  Notice to Proceed</strong>
 <% if @project.notice_to_proceed.present? %>
-<p><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%></p>
+<p class="text-muted"><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%></p>
 <% else %>
+<p class="text-muted">No NTP Date of Award yet.</p>
+<% if policy(ProjectDetails::NoticeToProceed.new).create? %>
 <p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project) %></p>
+<% end %>
 <% end %>
 <hr>
 <strong><i class="fa fa-map-marker margin-r-5"></i>  Location</strong>
@@ -98,7 +101,7 @@
 <%@project.work_accomplishments.recent(10).each do |work_accomplishment| %>
 
 <div class="row">
-<div class="col-md-1">
+<div class="col-md-2">
 <h4><center><%=work_accomplishment.quantity %> <%=work_accomplishment.work_detail.unit %> </center></h4>
 </div>
 <div class="col-md-10">

@@ -9,7 +9,9 @@
       <div class="row">
         <div class="col-sm-12 border-right">
           <div>
+
             <table class="table table-compressed table-hover">
+
 
                    <thead>
                             <tr>
@@ -32,24 +34,17 @@
                                   <td><%=work_detail.quantity %></td>
                                   <td><span class="pull-right"><%=number_to_currency work_detail.unit_cost %></span></td>
                                   <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
-                                  <td>
-                                    <div class="tools">
-                                      <%= link_to edit_project_work_detail_path(@project, work_detail), method: :get, title: 'Edit' do %>
-                                        <span class="fa fa-edit"></span>
-                                      <% end %> | <%= link_to [@project, work_detail], method: :delete, data: { confirm: 'Are you sure?'}, title: 'Delete' do %>
-                                        <span class="text-danger fa fa-trash-o"></span>
-                                      <% end %>
-                                    </div>
-                                  </td>
+
                                 </tr>
                                <% end %>
                                <tr>
                                  <td colspan="5"><h4 class="pull-right">Total of Amounts: </h4></td>
-                                 <td><h4 class="pull-right"><%= number_to_currency @project.work_details.sum(:total_cost) %></h4></td>
+                                 <td><h4 class="pull-right"><%= number_to_currency @project.total_cost_of_work_details%></h4></td>
                                </tr>
                             <% end %>
                             </tbody>
                             </table>
+
                                 <%= render 'form' %>
 
 
