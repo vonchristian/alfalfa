@@ -9,9 +9,10 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   deploy_to    - Path to deploy into.
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
-
-set :domain, 192.168.254.102
-set :deploy_to, '/var/www/alfalfa-construction.com'
+set :user, 'deploy'
+set :term_mode, nil
+set :domain, '192.168.254.102'
+set :deploy_to, '/var/www/alfalfa-construction'
 set :repository, 'https://github.com/vonchristian/alfalfa.git'
 set :branch, 'master'
 
@@ -32,7 +33,7 @@ set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
 task :environment do
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  # invoke :'rbenv:load'
+   invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
   # invoke :'rvm:use[ruby-1.9.3-p125@default]'
