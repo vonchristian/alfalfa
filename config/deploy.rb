@@ -15,7 +15,7 @@ set :domain, '192.168.254.102'
 set :deploy_to, '/var/www/alfalfa-construction'
 set :repository, 'https://github.com/vonchristian/alfalfa.git'
 set :branch, 'master'
-
+set :app_path, lambda { "#{deploy_to}/#{current_path}" }
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 
@@ -83,10 +83,29 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      invoke :'puma:restart'
     end
   end
 end
+namespace :puma do
+  desc "Start the application"
+  task :start do
+    queue 'echo "-----> Start Puma"'
+    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start", :pty => false
+  end
 
+  desc "Stop the application"
+  task :stop do
+    queue 'echo "-----> Stop Puma"'
+    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop"
+  end
+
+  desc "Restart the application"
+  task :restart do
+    queue 'echo "-----> Restart Puma"'
+    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh restart"
+  end
+end
 # For help in making your deploy script, see the Mina documentation:
 #
 #  - http://nadarei.co/mina
