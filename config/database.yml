@@ -83,7 +83,7 @@ production:
   encoding: unicode
   pool: 5
   database: alfalfa_construction_production
-  host: 192.168.254.102
+  host: localhost
   username: deploy
   password: alfalfaconstruction
 

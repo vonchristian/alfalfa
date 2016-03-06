@@ -1,62 +1,26 @@
 class AccountsController < ApplicationController
   def index
-    @accounts = Plutus::Account.all
-     @assets = Plutus::Asset.all
-      @liabilities = Plutus::Liability.all
-      @equity = Plutus::Equity.all
-      @expenses = Plutus::Expense.all
-      @revenues = Plutus::Revenue.all
-
-    end
-
-  def balance_sheet
-    
-    
-        first_entry = Plutus::Entry.order('date ASC').first
-      @from_date = first_entry ? first_entry.date: Date.today
-      @to_date = params[:date] ? Date.parse(params[:date]) : Date.today
-      @assets = Plutus::Asset.all
-      @liabilities = Plutus::Liability.all
-      @equity = Plutus::Equity.all
-
-      respond_to do |format|
-        format.html # index.html.erb
-      end
-    end
-
-    # @example
-    #   GET /reports/income_statement
-    def income_statement
-      @from_date = params[:from_date] ? Date.parse(params[:from_date]) : Date.today.at_beginning_of_month
-      @to_date = params[:to_date] ? Date.parse(params[:to_date]) : Date.today
-      @revenues = Plutus::Revenue.all
-      @expenses = Plutus::Expense.all
-
-      respond_to do |format|
-        format.html # index.html.erb
-      end
-    end
-
+    @accounts = Account.all
+  end
   def new
-    @account = Plutus::Account.new
+    @account = Account.new
   end
 
   def create
-    @account = Plutus::Account.create(account_params)
+    @account = Account.create(account_params)
     if @account.save
-      redirect_to @account, notice: "Created successfully"
+      redirect_to account_path(@account), notice: "Account created successfully."
     else
       render :new
     end
   end
 
-
-
-
-
+  def show
+    @account = Account.find(params[:id])
+  end
 
   private
   def account_params
-    params.require(:account).permit(:name, :type, :contra)
+    params.require(:account).permit(:code, :name, :type)
   end
-end
+  end

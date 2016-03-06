@@ -8,10 +8,7 @@ Rails.application.routes.draw do
 get 'expenses/filtered_data' => 'expenses#filtered_data'
 get 'accounts/income_statement' => 'accounts#income_statement'
 resources :payroll, only:[:index, :show]
-resources :materials do
-  get "delete"
-end
-  mount Plutus::Engine => "/accounting", :as => "accounting"
+
 
 resources :activities
 resources :employees do
@@ -22,14 +19,6 @@ resources :employees do
 
   end
 resources :categories
-resources :accounts
-resources :assets do
-  resources :entries, module: :assets
-end
-resources :revenues
-resources :liabilities
-resources :equities
-resources :incomes
 
 resources :users
   root "projects#index"
@@ -85,6 +74,12 @@ end
   resources :contracts do
     resources :contract_amount_revisions
   end
-
-resources :entries
+  resources :petty_cash, only:[:index] do
+    resources :disbursements, module: :petty_cash
+    resources :fund_transfers, module: :petty_cash
+  end
+  resources :accounts do
+    resources :entries
+  end
+  resources :fund_transfers
 end

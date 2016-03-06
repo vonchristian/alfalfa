@@ -23,17 +23,17 @@
       <% end %>
 
       <div class="content-wrapper">
-        <section class="custom-content">
+
            <% if user_signed_in? %>
-<%=render 'layouts/navigation_top' %>
 <% end %>
           <%=render 'layouts/flash' %>
-          <div class="row">
+
+          <section class="content">
           <%= yield %>
-          </div>
-        </section>
+          </section>
       </div>
       <%=render 'layouts/footer' %>
     </div>
   </body>
 </html>
+

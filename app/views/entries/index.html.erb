@@ -1,5 +1,4 @@
-<div class="row">
-<div class="col-md-9 col-md-offset-2">
+<div class="container">
 <div class="box box-solid">
 <div class="box-body">
 <h4>Entries Logs</h4>
@@ -15,11 +14,9 @@
 <%=entry.description %>
 <%=number_to_currency entry.debit_amounts.last.amount %>
 <%=entry.debit_amounts.last.account.type.sub("Plutus::","") %>
-<%=entry.commercial_document.name if entry.commercial_document %>
+<%=entry.entriable if entry.entriable %>
 <hr>
 </div>
-
-
 <% end %>
  </div>
-</div> 
+</div>

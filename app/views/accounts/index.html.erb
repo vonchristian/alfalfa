@@ -1,28 +1,34 @@
-
-<div class="col-md-12">
-   <div class="card">
-
-      <ul class="nav nav-tabs" role="tablist">
-
-         <li  role="presentation" class="active">
-           <a href="#balance_sheet" aria-controls="balance_sheet" role="tab" data-toggle="tab">Balance Sheet</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#income_statement" aria-controls="income_statement" role="tab" data-toggle="tab"></i> Income Statement</a>
-        </li>
-
-        <li role="presentation">
-           <a href="#general_ledger" aria-controls="general_ledger" role="tab" data-toggle="tab"></i> General Ledger</a>
-        </li>
-
-
-      </ul>
-
-      <div class="tab-content">
-        <%=render 'balance_sheet' %>
-        <%=render 'income_statement' %>
-        <%=render 'general_ledger' %>
-      </div><!-- /.tab-content -->
-   </div><!-- /.col -->
-</div><!-- /.row -->
+<%=link_to "New Account", new_account_path %>
+<div class="container">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+    <h4>Accounts</h4>
+    </div>
+    <div class="box-body">
+      <div class="table table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Credit Balance</th>
+              <th>Debit Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @accounts.each do |account| %>
+              <tr>
+                <td><%=account.code %></td>
+                <td><%=link_to account.name, account_path(account) %></td>
+                <td><%=account.type %></td>
+                <td><%=account.credits_balance %></td>
+                <td><%=account.debits_balance %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

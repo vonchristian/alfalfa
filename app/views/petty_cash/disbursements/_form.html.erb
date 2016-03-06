@@ -1,0 +1,42 @@
+<div class="container">
+         <div class="box box-solid">
+         <div class="box-header with-border">
+         <h4><center> New Entry</center></h4>
+         </div>
+         <div class="box-body">
+
+                  <%= simple_form_for @entry, url: :petty_cash_disbursements do |f| %>
+  <div class="row">
+  <div class="col-md-6">
+
+  </div>
+  <div class="col-md-5">
+  <br>
+<%=f.input :recipient_id, collection: Employee.all.map{|a| [a.name, a.id]} %>
+<%=f.input :description, as: :text %>
+
+<%=f.simple_fields_for :credit_amounts do |d| %>
+<%=d.input :amount, as: :string %>
+
+<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
+
+
+<% end %>
+
+<%=f.simple_fields_for :debit_amounts do |c| %>
+<%=c.input :amount,  read_only: true, as: :hidden %>
+
+<%=c.input :account, collection: Expense.all.pluck(:name)%>
+<% end %>
+<%= f.input :date, as: :string, input_html: { class: 'datepicker'} %>
+</div>
+</div>
+<div class="modal-footer">
+<%=f.submit "Record Entry", class: "btn btn-danger" %>
+<%=link_to "I'm done adding Entries", petty_cash_index_path, class: "pull-left" %>
+</div>
+<% end %>
+</div>
+</div>
+
+

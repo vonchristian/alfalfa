@@ -1,1 +1,10 @@
-<%= @account.name %>
+<div class="container">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+    <h4><%=@account.name %></h4>
+    </div>
+    <div class="box-body">
+    <%=link_to "New Entry", new_account_entry_path(@account) %>
+    </div>
+  </div>
+</div>

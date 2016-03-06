@@ -5,6 +5,8 @@ class Employee < ActiveRecord::Base
   attachment :photo
 
   enum position:[:laborer, :skilled_laborer, :project_foreman, :operator, :welder, :project_engineer, :bookkeeper, :liason_officer]
+  validates :first_name, :last_name, :email, :mobile_number, :position, presence: true
+  # validates :full_name, uniqueness: true
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
   has_many :payments, as: :paymentable
