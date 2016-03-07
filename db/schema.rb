@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306135401) do
+ActiveRecord::Schema.define(version: 20160307145352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -304,6 +304,16 @@ ActiveRecord::Schema.define(version: 20160306135401) do
 
   add_index "labor_costs", ["work_detail_id"], name: "index_labor_costs_on_work_detail_id", using: :btree
 
+  create_table "miscellaneous_costs", force: :cascade do |t|
+    t.string   "description"
+    t.decimal  "amount"
+    t.integer  "work_detail_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "miscellaneous_costs", ["work_detail_id"], name: "index_miscellaneous_costs_on_work_detail_id", using: :btree
+
   create_table "notice_to_proceeds", force: :cascade do |t|
     t.datetime "date"
     t.integer  "project_id"
@@ -364,6 +374,19 @@ ActiveRecord::Schema.define(version: 20160306135401) do
 
   add_index "remarks", ["project_id"], name: "index_remarks_on_project_id", using: :btree
   add_index "remarks", ["remarker_id"], name: "index_remarks_on_remarker_id", using: :btree
+
+  create_table "subcontract_costs", force: :cascade do |t|
+    t.decimal  "amount"
+    t.integer  "contractor_id"
+    t.string   "quantity"
+    t.integer  "work_detail_id"
+    t.string   "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "subcontract_costs", ["contractor_id"], name: "index_subcontract_costs_on_contractor_id", using: :btree
+  add_index "subcontract_costs", ["work_detail_id"], name: "index_subcontract_costs_on_work_detail_id", using: :btree
 
   create_table "time_extensions", force: :cascade do |t|
     t.integer  "project_id"
@@ -446,8 +469,11 @@ ActiveRecord::Schema.define(version: 20160306135401) do
   add_foreign_key "equipment", "projects"
   add_foreign_key "equipment_costs", "work_details"
   add_foreign_key "labor_costs", "work_details"
+  add_foreign_key "miscellaneous_costs", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "remarks", "projects"
+  add_foreign_key "subcontract_costs", "contractors"
+  add_foreign_key "subcontract_costs", "work_details"
   add_foreign_key "time_extensions", "projects"
   add_foreign_key "work_accomplishments", "work_details"
   add_foreign_key "work_details", "projects"

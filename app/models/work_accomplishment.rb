@@ -7,4 +7,7 @@ class WorkAccomplishment < ActiveRecord::Base
     has_many :images, as: :imageable, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
 
+  def self.total
+    self.all.sum(:quantity)
+  end
 end

@@ -8,21 +8,20 @@
     </div>
     <hr>
     <div class="col-md-12">
-<table class="table table-compressed">
+<table class="table table-hover">
 <thead>
-  <tr class="bg-gray-light text-uppercase">
+  <tr class="text-uppercase">
 
     <th>Cost Code</th>
     <th style="width: 30%">Description</th>
     <!-- <th></th> -->
-    <th>Original Budget</th>
-    <th>Budget Adjustments</th>
-    <th>Revised Budget</th>
-    <th>Actual Cost</th>
+    <th>Budget</th>
+    <th>Quantity</th>
+    <th>Target Accomplished</th>
 
 
-    <th>Accomplished (%)</th>
-
+    <th>Actual Accomplished</th>
+  <th></th>
   </tr>
 </thead>
 
@@ -34,13 +33,12 @@
 <td><%=link_to work_detail.description.upcase,[@project, work_detail] %>
 </td>
 
-<td><%=number_to_currency work_detail.labor_costs.sum(:total_cost) %></td>
-
-<!-- <td> --><%#=number_to_currency work_detail.actual_cost_incurred %><!-- </td> -->
+<td><%=number_to_currency work_detail.total_cost %></td>
 <td><%=work_detail.quantity %></td>
-<td class="text-success"><%=work_detail.accomplished_quantity%></td>
-<td class="text-danger"><%=work_detail.remaining_quantity %></td>
-<td><%=work_detail.actual_accomplishment_percent %>%</td>
+<td><%=number_to_currency(work_detail.target_accomplishment_percent, unit: '') %> %</td>
+<td class="text-success"><%=number_to_currency(work_detail.actual_accomplishment_percent, unit: '')%> %</td>
+<td class="text-danger"><%=number_to_currency(work_detail.slippage, unit: '')%></td>
+
 
 </tr>
 <% end %>

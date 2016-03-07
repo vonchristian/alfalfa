@@ -85,7 +85,7 @@ class Project < ActiveRecord::Base
 
     def actual_accomplishment
       if self.work_accomplishments.present?
-        self.work_accomplishments.sum(:percent)
+        self.work_accomplishments.sum(:quantity)
       else
         0
       end

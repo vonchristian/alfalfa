@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :equipment_cost do
+  factory :equipment_cost, class: "WorkDetailCosts::EquipmentCost" do
     equipment "MyString"
     number_of_equipment "9.99"
     number_of_days "9.99"

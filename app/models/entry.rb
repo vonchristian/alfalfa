@@ -24,6 +24,10 @@ validates_associated :credit_amounts, :debit_amounts
     delegate :name, to: :recipient, prefix: true, allow_nil: true
 
     before_save :set_default_date
+
+def name
+  description
+end
 def self.today
     where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
