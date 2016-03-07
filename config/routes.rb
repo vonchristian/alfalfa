@@ -82,4 +82,6 @@ end
     resources :entries
   end
   resources :fund_transfers
+
+  resources :equipment
 end

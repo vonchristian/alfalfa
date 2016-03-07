@@ -1,4 +1,6 @@
 class ConstructionEquipmentsController < ApplicationController
+  def index
+  end
   def new
     @construction_equipment = ConstructionEquipment.new
   end
