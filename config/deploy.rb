@@ -11,7 +11,7 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, '192.168.254.102'
+set :domain, '192.168.254.100'
 set :deploy_to, '/var/www/alfalfa-construction'
 set :repository, 'https://github.com/vonchristian/alfalfa.git'
 set :app_path, lambda { "#{deploy_to}/#{current_path}" }
