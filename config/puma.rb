@@ -14,7 +14,7 @@ stdout_redirect "#{application_path}/shared/log/puma.stdout.log", "#{application
 bind "unix://#{application_path}/shared/tmp/sockets/#{app_name}.sock"
 activate_control_app "unix://#{application_path}/shared/tmp/sockets/pumactl.sock"
 
-daemonize true
+daemonize false
 on_restart do
   puts 'On restart...'
 end
