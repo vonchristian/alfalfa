@@ -17,6 +17,7 @@ set :branch, 'master'
 set :user, 'deploy'
 set :term_mode, nil
 set :forward_agent, true
+set :app_path, lambda { "#{deploy_to}/#{current_path}" }
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 
