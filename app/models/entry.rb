@@ -1,5 +1,7 @@
 class Entry < ActiveRecord::Base
-before_save :set_default_date
+  include PublicActivity::Common
+  include PgSearch
+  multisearchable :against => [:description, :recipient_name]
     belongs_to :entriable, :polymorphic => true
     belongs_to :recipient, class_name: 'Employee', foreign_key: 'recipient_id'
     has_many :credit_amounts, :extend => AmountsExtension, :class_name => 'CreditAmount', :inverse_of => :entry
@@ -15,7 +17,9 @@ before_save :set_default_date
     # Support construction using 'credits' and 'debits' keys
     accepts_nested_attributes_for :credit_amounts, :debit_amounts
 
+    delegate :name, to: :recipient, prefix: true
 
+    before_save :set_default_date
 
     private
       def set_default_date

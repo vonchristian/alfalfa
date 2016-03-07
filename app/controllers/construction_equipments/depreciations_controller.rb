@@ -10,7 +10,7 @@ class ConstructionEquipments::DepreciationsController < ApplicationController
     if @depreciation.valid?
       @depreciation.depreciate_asset
       @depreciation.save
-      redirect_to @construction_equipment, notice: "Depreciation recorded successfully."
+      redirect_to construction_equipments_path, notice: "Depreciation recorded successfully."
     else
       render :new
     end

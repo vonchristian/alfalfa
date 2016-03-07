@@ -34,9 +34,10 @@ class Employee < ActiveRecord::Base
     self.cash_advances.sum(:amount)
   end
 
-  def gross_pay(project)
+  def gross_pay_for(project)
     self.unpaid_worked_days_amount_for(project) - self.unpaid_cash_advances
   end
+
 #find the number of days that an employee worked for a project but are not paid
   def unpaid_worked_days_amount_for(project)
     self.unpaid_worked_days_for(project) * self.rate

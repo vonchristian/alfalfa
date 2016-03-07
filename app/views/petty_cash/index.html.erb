@@ -3,34 +3,36 @@
     <div class="box-header with-border">
       <h4>Petty Cash Account</h4>
         <span><%=link_to "Generate Report(PDF)", petty_cash_index_path(format: 'pdf') %></span>
+
     </div>
   <div class="box-body">
 
 <div class="row">
     <div class="col-md-7">
+    <h4>Disbursements</h4>
     <div class="table table-responsive">
       <table class="table table-compressed">
         <thead>
           <tr class="text-uppercase">
             <th style="width: 30%">Recipient</th>
             <th>Description</th>
-            <th>Date</th>
+<!--             <th>Date</th> -->
             <th>Amount</th>
           </tr>
         </thead>
         <tbody>
           <%@petty_cash.credit_entries.each do |entry| %>
             <tr>
-              <td><%=entry.recipient.try(:name) %></td>
+              <td><%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"),  class: "img-circle" %> <%=entry.recipient.try(:name) %></td>
               <td><%=entry.description %></td>
-              <td><%=entry.date.strftime("%B %e, %Y") %></td>
+              <!-- <td><%#=entry.date.strftime("%B %e, %Y") %></td> -->
                <td class="pull-right"><%=number_to_currency entry.credit_amounts.last.amount %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
-    </div>
+</div>
     <div class="col-md-4 col-md-offset-1">
 <h3><center><%=number_to_currency @petty_cash.balance %></center></h3>
 <span class="help-block"><center class="text-uppercase">Balance</center></span>
@@ -50,14 +52,20 @@
 <br>
 <h4>Fund Transfers</h4>
 <hr>
+<table class="table">
+<tbody>
 <% FundTransfer.where(recipient_account: @petty_cash).each do |fund_transfer| %>
-
-  <h5><%=number_to_currency fund_transfer.amount %>
-  <span class="text-muted pull-right"><%=fund_transfer.date.strftime("%b %e, %Y") %> </span>
+<tr>
+  <td><%=fund_transfer.source_account.try(:name) %></td>
+ <td><%=fund_transfer.date.strftime("%b %e, %Y") %></td>
+  <td><span class="pull-right"><%=number_to_currency fund_transfer.amount %></span></td>
   </h5>
-<hr>
+</tr>
 <% end %>
+</tbody>
+</table>
   </div>
   </div>
 </div>
+
 

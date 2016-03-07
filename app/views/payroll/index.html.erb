@@ -22,7 +22,7 @@
 <td><%=number_to_currency employee.rate %></td>
 <td><%=employee.unpaid_worked_days %> Days</td>
 <td><%=number_to_currency employee.unpaid_cash_advances %></td>
-<td><%=number_to_currency employee.gross_pay %></td>
+<td><%#=number_to_currency employee.total_gross_pay %></td>
 <% if employee.gross_pay.positive? %>
 <td><%=link_to "Pay Slip", new_employee_payment_path(employee) %></td>
 <% end %>

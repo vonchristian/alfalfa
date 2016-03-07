@@ -11,14 +11,15 @@
 
   </div>
   <div class="col-md-5">
-<%=f.input :source_account_id, collection: Asset.all.map{|a| [a.name.titleize, a.id]} %>
+<%=f.input :source_account_id, collection: Account.fund_transfer_sources.map{|a| [a.name.titleize, a.id]}, as: :radio_buttons %>
 <%=f.input :amount %>
 <%=f.input :recipient_account_id, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
 <%= f.input :date, as: :string, input_html: { class: 'datepicker'} %>
+<%=f.input :description, as: :text %>
 </div>
 <div class="modal-footer">
-<%=f.submit "Transfer Amount to Petty Cash", class: "btn btn-danger" %>
-<%=link_to "I'm done adding Entries", petty_cash_index_path, class: "pull-left" %>
+<%=f.submit "Transfer Amount", class: "btn btn-danger" %>
+<%=link_to "Cancel", petty_cash_index_path, class: "btn btn-default pull-left" %>
 </div>
 <% end %>
 </div>

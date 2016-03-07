@@ -22,6 +22,6 @@ class PettyCash::FundTransfersController < ApplicationController
   end
   private
   def fund_transfer_params
-    params.require(:fund_transfer).permit(:source_account_id, :recipient_account_id, :date, :amount)
+    params.require(:fund_transfer).permit(:description, :source_account_id, :recipient_account_id, :date, :amount)
   end
 end

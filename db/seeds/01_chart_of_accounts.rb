@@ -1,5 +1,7 @@
 
-Asset.create(code: 110, :name => "Cash")
+Asset.create(code: 110, :name => "Cash on Hand")
+Asset.create(code: 111, :name => "Petty Cash")
+Asset.create(code: 112, :name => "Cash in Bank")
 Asset.create(code: 120, :name => "Accounts Receivable-Trade")
 Asset.create(code: 121, :name => "Accounts Receivable-Retention")
 Asset.create(code: 130, :name => "Inventory")

@@ -4,6 +4,7 @@ class EntriesController < ApplicationController
   end
   def new
     @entry = Entry.new
+    authorize @entry
     @entry.credit_amounts.build
     @entry.debit_amounts.build
   end

@@ -6,6 +6,7 @@ class CreateFundTransfers < ActiveRecord::Migration
       t.integer :fund_transfer_type
       t.decimal :amount
       t.datetime :date
+      t.string :description
 
       t.timestamps null: false
     end

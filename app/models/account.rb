@@ -9,7 +9,9 @@ class Account < ActiveRecord::Base
 
     validates_presence_of :type
     validates :code, :name, presence: true, uniqueness: true
-
+  def self.fund_transfer_sources
+self.where(name: FundTransfer::FUND_SOURCE)
+  end
     def balance(options={})
       if self.class == Account
         raise(NoMethodError, "undefined method 'balance'")

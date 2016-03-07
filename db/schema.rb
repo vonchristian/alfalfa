@@ -201,13 +201,14 @@ ActiveRecord::Schema.define(version: 20160306135401) do
     t.integer  "entriable_id"
     t.string   "entriable_type"
     t.string   "description"
+    t.integer  "recipient_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "recipient_id"
   end
 
   add_index "entries", ["entriable_id"], name: "index_entries_on_entriable_id", using: :btree
   add_index "entries", ["entriable_type"], name: "index_entries_on_entriable_type", using: :btree
+  add_index "entries", ["recipient_id"], name: "index_entries_on_recipient_id", using: :btree
 
   create_table "equipment", force: :cascade do |t|
     t.string   "plate_number"
@@ -242,6 +243,7 @@ ActiveRecord::Schema.define(version: 20160306135401) do
     t.integer  "fund_transfer_type"
     t.decimal  "amount"
     t.datetime "date"
+    t.string   "description"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -324,11 +326,6 @@ ActiveRecord::Schema.define(version: 20160306135401) do
   add_index "payments", ["paymentable_id"], name: "index_payments_on_paymentable_id", using: :btree
   add_index "payments", ["paymentable_type"], name: "index_payments_on_paymentable_type", using: :btree
 
-  create_table "petty_cashes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -338,44 +335,6 @@ ActiveRecord::Schema.define(version: 20160306135401) do
   end
 
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
-
-  create_table "plutus_accounts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.string   "type"
-    t.boolean  "contra"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "plutus_accounts", ["name", "type", "code"], name: "index_plutus_accounts_on_name_and_type_and_code", using: :btree
-
-  create_table "plutus_amounts", force: :cascade do |t|
-    t.string  "type"
-    t.integer "account_id"
-    t.integer "entry_id"
-    t.decimal "amount",     precision: 20, scale: 10
-  end
-
-  add_index "plutus_amounts", ["account_id", "entry_id"], name: "index_plutus_amounts_on_account_id_and_entry_id", using: :btree
-  add_index "plutus_amounts", ["entry_id", "account_id"], name: "index_plutus_amounts_on_entry_id_and_account_id", using: :btree
-  add_index "plutus_amounts", ["type"], name: "index_plutus_amounts_on_type", using: :btree
-
-  create_table "plutus_entries", force: :cascade do |t|
-    t.string   "description"
-    t.date     "date"
-    t.integer  "commercial_document_id"
-    t.string   "commercial_document_type"
-    t.integer  "owner_id"
-    t.integer  "recipient_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "plutus_entries", ["commercial_document_id", "commercial_document_type"], name: "index_entries_on_commercial_doc", using: :btree
-  add_index "plutus_entries", ["date"], name: "index_plutus_entries_on_date", using: :btree
-  add_index "plutus_entries", ["owner_id"], name: "index_plutus_entries_on_owner_id", using: :btree
-  add_index "plutus_entries", ["recipient_id"], name: "index_plutus_entries_on_recipient_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.integer  "main_contractor_id"
@@ -389,7 +348,6 @@ ActiveRecord::Schema.define(version: 20160306135401) do
     t.string   "implementing_office"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.string   "build_status"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
@@ -436,12 +394,12 @@ ActiveRecord::Schema.define(version: 20160306135401) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "work_accomplishments", force: :cascade do |t|
+    t.text     "remarks"
     t.decimal  "quantity"
     t.integer  "work_detail_id"
     t.datetime "date_accomplished"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.text     "remarks"
   end
 
   add_index "work_accomplishments", ["work_detail_id"], name: "index_work_accomplishments_on_work_detail_id", using: :btree
