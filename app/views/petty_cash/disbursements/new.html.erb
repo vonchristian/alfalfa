@@ -1,1 +1,26 @@
+<div class="container">
+  <div class="box box-solid">
+  <div class="box-header">
+  <h4><center>New Disbursement</center></h4>
+  </div>
+  <div class="box-body">
+  <div class="row">
+  <div class="col-md-5">
+  <h4>Disbursements for today</h4>
+  <table class="table table-compressed">
+  <tbody>
+ <%@petty_cash.credit_entries.today.each do |entry| %>
+<tr>
+<td><%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"),  class: "img-circle" %> <%=entry.recipient.try(:name) %></td>
+              <!-- <td><%#=entry.date.strftime("%B %e, %Y") %></td> -->
+               <td class="pull-right"><%=number_to_currency entry.credit_amounts.last.amount %></td>
+ </tr>
+ <%end %>
+ </tbody>
+ </table>
+</div>
+<div class="col-md-5 col-md-offset-1 well">
 <%=render 'form' %>
+</div>
+</div>
+</div>

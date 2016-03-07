@@ -7,7 +7,7 @@ class Amount < ActiveRecord::Base
 
     # Assign an account by name
     def account_name=(name)
-      self.account = Account.find_by_name!(name)
+      self.account = Account.find_by_name(name)
     end
 
     protected
