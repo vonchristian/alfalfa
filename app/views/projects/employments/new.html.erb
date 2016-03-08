@@ -1,32 +1,35 @@
 <div class="col-md-8 col-md-offset-2">
   <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
+  <div class="box box-solid">
     <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
-      <h3 class="widget-user-username">Add Workers</h3>
-    </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-            <table class="table">
-      <% @project.employees.each do |worker| %>
-        <tr>
-            <td style="width:65px"><%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-square" %></td>
-            <td>
-              <b><%=worker.full_name.upcase%></b><br>
-              <%=worker.position.capitalize %><br>
-              <%=worker.mobile_number %>
-            </td>
-        </tr>
-            <% end %>
-      </table>
-                                <%= render 'form' %>
-
-
-              </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box-header">
+          <h4>List of Workers for this project</h4>
         </div>
+        <div class="box-body">
+          <table class="table">
+            <% @project.employees.each do |worker| %>
+              <tr>
+                  <td style="width:65px"><%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-square" %></td>
+                  <td>
+                    <b><%=worker.full_name.upcase%></b><br>
+                    <%=worker.position.capitalize %><br>
+                    <%=worker.mobile_number %>
+                  </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box-header">
+          <h4>Add Workers</h4>
+        </div>
+        <div class="box-body">
+          <%= render 'form' %>
+        </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </div>

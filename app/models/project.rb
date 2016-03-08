@@ -12,6 +12,7 @@ class Project < ActiveRecord::Base
     has_many  :employments
     has_many :employees, through: :employments
     has_many  :work_details
+    has_many :equipment_costs, through: :work_details
     has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
     has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
     has_many :contracts

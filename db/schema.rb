@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308031841) do
+ActiveRecord::Schema.define(version: 20160308061405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -306,6 +306,24 @@ ActiveRecord::Schema.define(version: 20160308031841) do
 
   add_index "labor_costs", ["work_detail_id"], name: "index_labor_costs_on_work_detail_id", using: :btree
 
+  create_table "maintenances", force: :cascade do |t|
+    t.integer  "equipment_id"
+    t.date     "date"
+    t.string   "description"
+    t.decimal  "quantity"
+    t.string   "unit"
+    t.decimal  "amount"
+    t.string   "remarks"
+    t.integer  "employee_id"
+    t.integer  "work_detail_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "maintenances", ["employee_id"], name: "index_maintenances_on_employee_id", using: :btree
+  add_index "maintenances", ["equipment_id"], name: "index_maintenances_on_equipment_id", using: :btree
+  add_index "maintenances", ["work_detail_id"], name: "index_maintenances_on_work_detail_id", using: :btree
+
   create_table "miscellaneous_costs", force: :cascade do |t|
     t.string   "description"
     t.decimal  "amount"
@@ -473,6 +491,9 @@ ActiveRecord::Schema.define(version: 20160308031841) do
   add_foreign_key "equipment", "projects"
   add_foreign_key "equipment_costs", "work_details"
   add_foreign_key "labor_costs", "work_details"
+  add_foreign_key "maintenances", "employees"
+  add_foreign_key "maintenances", "equipment"
+  add_foreign_key "maintenances", "work_details"
   add_foreign_key "miscellaneous_costs", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "remarks", "projects"

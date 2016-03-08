@@ -5,6 +5,10 @@ class Equipment < ActiveRecord::Base
     "#{make} - #{model}"
   end
 
+  def to_s
+    make_and_model
+  end
+
   private
 
   # def add_to_accounts

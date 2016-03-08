@@ -12,7 +12,7 @@ class WorkDetail < ActiveRecord::Base
   has_many :work_accomplishments
   has_many :issued_inventories, as: :inventoriable
   has_many :labor_costs, class_name: "WorkDetailCosts::LaborCost"
-  has_many :equipment_costs, class_name: "WorkDetailCosts::EquipmentCost"
+  has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :miscellaneous_costs, class_name: "WorkDetailCosts::MiscellaneousCost"
   has_many :subcontract_costs, class_name: "WorkDetailCosts::SubcontractCost"
 

@@ -10,7 +10,7 @@
         <div class="col-sm-12 border-right">
           <div>
             <table class="table table-compressed">
-                  <%= simple_form_for [@work_detail, @equipment_cost] do |f| %>
+                  <%= simple_form_for [@project, @equipment_cost], url: :project_equipment_costs do |f| %>
                    <thead>
 
 
@@ -37,4 +37,3 @@
 </div>
 <% end %>
 </div>
-

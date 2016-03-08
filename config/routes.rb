@@ -51,9 +51,10 @@ resources :work_details do
   resources :work_accomplishments, module: :projects
   resources :issued_inventories, module: :projects
   resources :labor_costs, module: :projects
-  resources :equipment_costs, module: :projects
+  resources :equipment_maintenances, module: :work_details
 end
   resources :projects do
+    resources :equipment_costs, module: :projects
     resources :add_workers, module: :projects
     resources :assign_project_engineers, module: :projects
     resources :activities, only:[:index], module: :projects
@@ -83,5 +84,7 @@ end
   end
   resources :fund_transfers
 
-  resources :equipment
+  resources :equipment do
+
+  end
 end

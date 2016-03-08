@@ -1,12 +1,6 @@
 <%= simple_form_for ([@project, @employment]) do |f| %>
   <%=f.error_notification %>
-  <table class="table">
-    <tbody>
-    <tr>
-      <td style="width: 10%"><%=f.input :employee_id, collection: Employee.all, label: false, placeholder: 'Employee' %></td>
-</tr>
-    </tbody>
-    </table>
+  <%=f.input :employee_id, collection: Employee.all, label: false, placeholder: 'Employee' %>
     <div class="modal-footer">
       <%=f.submit "Add this Employee", class: "btn btn-primary" %>
       <%=link_to "or I'm done adding Employees",project_path(@project) %>
