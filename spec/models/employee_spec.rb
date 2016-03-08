@@ -30,12 +30,35 @@ RSpec.describe Employee, type: :model do
     expect(employee.name).to eql(employee.full_name)
   end
 
-  it ".unpaid_worked_days_for(project)" do
+  # it "pending.unpaid_worked_days_for(project)" do
+  #   # employee = create(:employee)
+  #   # project = create(:project)
+  #   # worked_day1 = create(:worked_day, number_of_days: 2, project_id: project.id, employee: employee, status: 'unpaid')
+  #   # worked_day2 = create(:worked_day, number_of_days: 2, project_id: project.id, employee: employee, status: 'unpaid')
+  #   #
+  #   # expect(employee.unpaid_worked_days_for(project)).to eql(4)
+  # end
+  it "unpaid_worked_days" do
     employee = create(:employee)
-    project = create(:project)
-    worked_day1 = create(:worked_day, number_of_days: 2, project: project, employee: employee, status: 'unpaid')
-    worked_day2 = create(:worked_day, number_of_days: 2, project: project, employee: employee, status: 'unpaid')
+    worked_day1 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
+    worked_day2 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
 
-    expect(employee.unpaid_worked_days_for(project)).to eql(4)
+    expect(employee.unpaid_worked_days).to eql(4)
   end
+
+  # it ".unpaid_cash_advances" do
+  #   employee = create(:employee)
+  #   cash_advance = create(:cash_advance, cash_advanceable_id: employee.id, amount: 1000)
+  #   expect(employee.unpaid_cash_advances).to eql(100)
+  # end
+  # #
+  # it ".gross_pay" do
+  #   employee = create(:employee)
+  #   worked_day1 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
+  #   worked_day2 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
+  #
+  #
+  # end
+
+
 end

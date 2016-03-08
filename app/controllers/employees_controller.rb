@@ -33,6 +33,6 @@ end
 	end
    private
    def employee_params
-   	params.require(:employee).permit(:first_name, :last_name, :mobile_number, :email, :position, :photo)
+   	params.require(:employee).permit(:rate, :first_name, :last_name, :mobile_number, :email, :position, :photo)
    end
 end

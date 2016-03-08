@@ -3,7 +3,7 @@ require 'rails_helper'
 describe EntryPolicy do
   subject { EntryPolicy.new(user, entry) }
 
-  let(:entry) { create(:entry_with_debit_and_credit) }
+  let(:entry) { create(:entry_with_credit_and_debit) }
 
 
 

@@ -14,29 +14,31 @@ class Employee < ActiveRecord::Base
   has_many :employments
   has_many :projects, through: :employments
 
+  def paid!
+    self.worked_days.unpaid.set_to_paid!
+    self.cash_advances.unpaid.set_to_paid!
+  end
   def unpaid_worked_days_for(project)
     self.worked_days.where(project_id: project, status: 'unpaid').sum(:number_of_days)
   end
 
-  def set_unpaid_worked_days_to_paid!
-    self.worked_days.unpaid.each {|a| a.paid!}
-  end
-
   def unpaid_worked_days
-    self.worked_days.unpaid.sum(:number_of_days)
+    self.worked_days.unpaid.total
   end
 
-  def earned_income
-    self.unpaid_worked_days_amount - self.unpaid_cash_advances
+  def unpaid_worked_days_amount
+    unpaid_worked_days * rate
   end
 
   def unpaid_cash_advances
-    self.cash_advances.sum(:amount)
+    self.cash_advances.unpaid_amounts
   end
 
   def gross_pay
     self.unpaid_worked_days_amount - self.unpaid_cash_advances
   end
+
+
 
 #find the number of days that an employee worked for a project but are not paid
   def unpaid_worked_days_amount_for(project)

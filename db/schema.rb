@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307145352) do
+ActiveRecord::Schema.define(version: 20160308031841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 20160307145352) do
     t.datetime "date_disbursed"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "status"
+    t.string   "description"
   end
 
   add_index "cash_advances", ["cash_advanceable_id"], name: "index_cash_advances_on_cash_advanceable_id", using: :btree
@@ -449,6 +451,8 @@ ActiveRecord::Schema.define(version: 20160307145352) do
     t.integer  "status"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
   end
 
   add_index "worked_days", ["employee_id"], name: "index_worked_days_on_employee_id", using: :btree

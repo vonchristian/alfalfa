@@ -17,6 +17,6 @@ class Employees::WorkedDaysController < ApplicationController
 
   private
   def worked_day_params
-    params.require(:worked_day).permit(:number_of_days)
+    params.require(:worked_day).permit(:number_of_days, :start_date, :end_date)
   end
 end

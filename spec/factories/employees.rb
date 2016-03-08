@@ -5,5 +5,6 @@ FactoryGirl.define do
     mobile_number "MyString"
     email "MyString"
     photo_id "MyString"
+    position "project_foreman"
   end
 end

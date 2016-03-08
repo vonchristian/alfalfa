@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="container">
 <div class="box box-solid">
 <div class="box-header with-border">
 <h4>Payroll</h4>
@@ -8,11 +8,11 @@
 <table class="table table-hover">
 <thead>
   <tr>
-    <th>Employee</th>
+    <th style="width: 20%">Employee</th>
     <th>Rate</th>
     <th>Days Worked</th>
-    <th>Cash Advance</th>
-    <th>Gross Pay</th>
+    <th style="width: 30%">Cash Advances</th>
+    <th><span class="pull-right">Gross Pay</span></th>
   </tr>
 </thead>
 <tbody>
@@ -21,13 +21,20 @@
 <td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-circle" %> <b><%=link_to employee.full_name.upcase, payroll_path(employee) %></b></td>
 <td><%=number_to_currency employee.rate %></td>
 <td><%=employee.unpaid_worked_days %> Days</td>
-<td><%=number_to_currency employee.unpaid_cash_advances %></td>
-<td><%#=number_to_currency employee.total_gross_pay %></td>
-<% if employee.gross_pay.positive? %>
+<td>
+  <% employee.cash_advances.each do |cash_advance| %>
+  <p>
+  <%=cash_advance.date_disbursed.strftime("%B %e, %Y") %>
+  <span class="pull-right"><%=number_to_currency cash_advance.amount %></span>
+  </p>
+  <% end %>
+</td>
+<td><span class="pull-right"><%=number_to_currency employee.gross_pay %></span></td>
+<% if employee.worked_days.unpaid.present? %>
 <td><%=link_to "Pay Slip", new_employee_payment_path(employee) %></td>
 <% end %>
+
 <% end %>
 </tbody>
 </table>
 </div>
-

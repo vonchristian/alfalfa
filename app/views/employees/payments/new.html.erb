@@ -14,28 +14,31 @@
 </div>
 <div class="col-md-6">
 <h4 class="text-muted">PAY PERIOD</h4>
-<p><%=Time.zone.now.beginning_of_month.strftime("%B %e")  %> - <%=Time.zone.now.end_of_month.strftime("%e, %Y")  %></p>
+<% if @employee.worked_days.unpaid.present? %>
+<p><%=@employee.worked_days.unpaid.first.created_at.strftime("%B %e")  %> - <%= @employee.worked_days.unpaid.last.created_at.strftime("%B %e, %Y") %></p>
+<% else %>
+<h4>No Unpaid Worked Days </h4>
+<% end %>
 </div>
 </div>
 <hr>
 <h4 class="text-muted">Days Worked<span class="pull-right"><%=@employee.unpaid_worked_days%> Days </h4>
 <h4 class="text-muted">Rate <span class="pull-right"><%=number_to_currency @employee.rate%></h4>
-<h4 class="text-danger">Cash Advances <span class="pull-right"> - <%=number_to_currency @employee.unpaid_cash_advances %></h4>
-<h4>Earned Income <span class="pull-right"><%=number_to_currency @employee.earned_income %></h4>
 <hr>
+<h4>Earned Income <span class="pull-right"><%=number_to_currency @employee.unpaid_worked_days_amount %></h4>
+<br>
+<h5>Deductions </h5>
+<h4 class="text-danger">Cash Advances <span class="pull-right"> - <%=number_to_currency @employee.unpaid_cash_advances %></h4>
 
+<hr>
+<h4 class="text-muted">Gross Pay<span class="pull-right"><%= number_to_currency @employee.gross_pay %></h4>
+<hr>
 <%=simple_form_for [@employee, @payment] do |f| %>
-<div class="row">
-<div class="col-md-8">
-<h4 class="pull-right">Gross Pay:</h4>
-</div>
-<div class="col-md-4">
-<h3><%=f.input :amount, label: false, input_html: {value: @employee.gross_pay, class: "input-lg" }, readonly: true %></h3>
-</div>
+<%=f.input :amount,input_html: {value: @employee.gross_pay, class: "input-lg text-right" }, as: :hidden  %></h3>
+<label class="text-muted">Date</label>
+<%=f.input :date, label: false, as: :string, input_html:{class: "datepicker"} %>
 </div>
 <div class="modal-footer">
 <%=f.submit "Pay Employee", class: "btn btn-primary" %>
 </div>
 <% end %>
-
-

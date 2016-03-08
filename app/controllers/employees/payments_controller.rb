@@ -8,7 +8,6 @@ class Employees::PaymentsController < ApplicationController
     @employee = Employee.find(params[:employee_id])
     @payment = @employee.payments.create(payment_params)
     if @payment.save
-      @employee.set_unpaid_worked_days_to_paid!
       @payment.create_entry
       redirect_to @employee, notice: "Employee paid successfully."
     else
@@ -18,6 +17,6 @@ class Employees::PaymentsController < ApplicationController
 
   private
   def payment_params
-    params.require(:payment).permit(:amount, :date_disbursed)
+    params.require(:payment).permit(:amount, :date)
   end
 end

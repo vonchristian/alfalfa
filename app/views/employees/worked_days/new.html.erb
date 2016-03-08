@@ -15,6 +15,14 @@
  <%= simple_form_for [@employee, @worked_day] do |f| %>
 <%=f.error_notification %>
 <%=f.input :number_of_days, autofocus: true %>
+<div class="row">
+  <div class="col-md-6">
+<%=f.input :start_date, as: :string, input_html:{class: "datepicker"}, label: "From" %>
+</div>
+<div class="col-md-6"
+<%=f.input :end_date, as: :string, input_html:{class: "datepicker"}, label: "To" %>
+</div>
+</div>
 <div class="modal-footer">
 <%=f.submit "Save", class: "btn btn-primary" %>
 </div>
