@@ -46,11 +46,11 @@ RSpec.describe Employee, type: :model do
     expect(employee.unpaid_worked_days).to eql(4)
   end
 
-  # it ".unpaid_cash_advances" do
-  #   employee = create(:employee)
-  #   cash_advance = create(:cash_advance, cash_advanceable_id: employee.id, amount: 1000)
-  #   expect(employee.unpaid_cash_advances).to eql(100)
-  # end
+  it ".unpaid_cash_advances" do
+    employee = create(:employee_with_cash_advances)
+
+    expect(employee.unpaid_cash_advances).to eql(100)
+  end
   # #
   # it ".gross_pay" do
   #   employee = create(:employee)
