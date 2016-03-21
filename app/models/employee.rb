@@ -4,19 +4,21 @@ class Employee < ActiveRecord::Base
 
   attachment :photo
 
-  enum position:[:laborer, :skilled_laborer, :project_foreman, :operator, :welder, :project_engineer, :bookkeeper, :liason_officer]
+  enum position:[:laborer, :skilled_laborer, :project_foreman, :operator, :welder, :project_engineer, :bookkeeper, :liason_officer, :supply_officer, :accounting_officer, :monitoring_officer, :mechanical_engineer]
   validates :first_name, :last_name, :email, :mobile_number, :position, presence: true
   # validates :full_name, uniqueness: true
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
   has_many :payments, as: :paymentable
-  has_many :cash_advances, as: :cash_advanceable
+  
   has_many :employments
   has_many :projects, through: :employments
-
+  
+  def cash_advances
+    Account.find_by_name("Cash Advances").debit_entries.where(recipient: self)
+  end
   def paid!
     self.worked_days.unpaid.set_to_paid!
-    self.cash_advances.unpaid.set_to_paid!
   end
   def unpaid_worked_days_for(project)
     self.worked_days.where(project_id: project, status: 'unpaid').sum(:number_of_days)
@@ -31,7 +33,7 @@ class Employee < ActiveRecord::Base
   end
 
   def unpaid_cash_advances
-    self.cash_advances.unpaid_amounts
+    self.cash_advances.sum(:amount)
   end
 
   def gross_pay

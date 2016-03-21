@@ -1,12 +1,13 @@
 class EmployeesController < ApplicationController
 	def index
 		@employees = Employee.all
-
-end
+	end
 	def new
 		@employee = Employee.new
+		authorize @employee
 	end
 	def create
+		authorize @employee
 		@employee = Employee.create(employee_params)
 		if @employee.save
 			redirect_to @employee, notice: "Employee added successfully."
@@ -17,9 +18,11 @@ end
 
 	def edit
 		@employee = Employee.find(params[:id])
+		authorize @employee
 	end
 
 	def update
+		authorize @employee
 		@employee = Employee.find(params[:id])
 		if @employee.update(employee_params)
 			redirect_to @employee, notice: "Updated successfully."

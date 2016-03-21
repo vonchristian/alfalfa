@@ -1,18 +1,26 @@
-    <div class="container">
-      <div class="box">
-      <div class="box-header">
-      <h3>List of Inventories
-               <span><%=link_to new_issued_inventory_path, class: "btn btn-link bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Issue Inventory <%end%></span>
-
+<div class="container">
+  <div class="box">
+    <div class="box-header with-border">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>List of Inventories</h3>
+        </div>
+        <div class="col-md-6">
+          <div class="pull-right">
+            <%= link_to new_inventory_path, class: 'btn btn-link bg-blue-active' do %><i class="fa fa-plus-circle"></i> New Inventory <%end%>
+            &nbsp<%=link_to new_issued_inventory_path, class: "btn btn-link bg-blue-active" do %><i class="fa fa-plus-circle"></i> Issue Inventory <%end%>
           </div>
-          <hr>
-
-          <div class="box-body">
-                  <% @inventories.each do |inventory| %>
-                    <h5><%= link_to inventory.name.upcase, inventory %>
-                      <span class="pull-right"><%= inventory.quantity %> <%= inventory.unit %></span>
-                    </h5>
-                    <hr />
-                  <% end %>
-                </div><!-- /.description-block -->
+        </div>
+      </div>
+    </div>
+    <div class="box-body">
+      <% @inventories.each do |inventory| %>
+        <h5><%= link_to inventory.name.upcase, inventory %>
+          <span class="pull-right"><%= inventory.quantity %> <%= inventory.unit %></span>
+        </h5>
+        <hr />
+      <% end %>
+    </div>
+  </div>
+</div>
 

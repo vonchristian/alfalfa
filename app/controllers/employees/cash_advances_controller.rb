@@ -9,6 +9,7 @@ class Employees::CashAdvancesController < ApplicationController
     @cash_advance = @employee.cash_advances.create(cash_advance_params)
     if @cash_advance.save
       @cash_advance.unpaid!
+      @cash_advance.update_accounts
       redirect_to @employee, notice: "Cash Advance recorded successfully."
     else
       render :new

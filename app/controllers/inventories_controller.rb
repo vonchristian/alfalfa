@@ -5,9 +5,11 @@ class InventoriesController < ApplicationController
 
   def new
     @inventory = Inventory.new
+    authorize @inventory
   end
 
   def create
+    authorize @inventory
     @inventory = Inventory.create(inventory_params)
     if @inventory.save
       @inventory.create_activity :create, owner: current_user
@@ -19,6 +21,20 @@ class InventoriesController < ApplicationController
 
   def show
     @inventory = Inventory.find(params[:id])
+  end
+
+  def edit
+    @inventory = Inventory.find(params[:id])
+  end
+
+  def update
+    @inventory = Inventory.find(params[:id])
+    authorize @inventory
+    if @inventory.update
+      redirect_to inventories_url, notice: 'Inventory updated successfully.'
+    else
+      render :edit
+    end
   end
 
   private

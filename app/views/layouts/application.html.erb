@@ -13,26 +13,21 @@
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
-    <body class="sidebar-mini skin-blue-light sidebar-collapse">
+  <body class="sidebar-mini skin-blue-light">
     <div class="wrapper">
       <% if user_signed_in? %>
         <%=render 'layouts/header' %>
-
-
         <%=render 'layouts/sidebar' %>
       <% end %>
-
       <div class="content-wrapper">
-
-           <% if user_signed_in? %>
-<% end %>
+        <section class="content">
           <%=render 'layouts/flash' %>
-
-          <section class="content">
           <%= yield %>
-          </section>
+        </section>
       </div>
-      <%=render 'layouts/footer' %>
+      <% if user_signed_in? %>
+        <%=render 'layouts/footer' %>
+      <% end %>
     </div>
   </body>
 </html>

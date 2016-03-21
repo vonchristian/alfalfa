@@ -4,12 +4,14 @@ class EquipmentController < ApplicationController
   end
   def new
     @equipment = Equipment.new
+    authorize @equipment
   end
 
   def create
     @equipment = Equipment.create(equipment_params)
+    authorize @equipment
     if @equipment.save
-      redirect_to @equipment, notice: "Equipment saved successfully."
+      redirect_to equipments_path, notice: "Equipment saved successfully."
     else
       render :new
     end
@@ -17,6 +19,20 @@ class EquipmentController < ApplicationController
 
   def show
     @equipment = Equipment.find(params[:id])
+  end
+
+  def edit
+    @equipment = Equipment.find(params[:id])
+  end
+
+  def update
+    @equipment = Equipment.find(params[:id])
+    authorize @equipment
+    if @equipment.update
+      redirect_to equipments_path, notice: 'Equipment updated successfully.'
+    else
+      render :edit
+    end
   end
 
   private

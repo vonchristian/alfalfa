@@ -1,7 +1,5 @@
 <div class="tab-pane" id="cash_advances">
 
-<%=link_to "New Cash Advance", new_employee_cash_advance_path(@employee) %>
-
 <table class="table">
   <thead>
     <tr>
@@ -14,9 +12,9 @@
 <% @employee.cash_advances.each do |cash_advance| %>
 <tr>
 
-<td><%=number_to_currency cash_advance.amount %></td>
-<td><%=cash_advance.date_disbursed.strftime("%b %e, %Y") %></td>
-<td><%=cash_advance.status %></td>
+<td><%=number_to_currency cash_advance.debit_amounts.last.amount %></td>
+<td><%=cash_advance.date.strftime("%b %e, %Y") %></td>
+<td></td>
 </tr>
 
 <% end %>

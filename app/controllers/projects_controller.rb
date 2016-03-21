@@ -30,10 +30,12 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    authorize @project
   end
 
   def update
     @project = Project.find(params[:id])
+    authorize @project
     if @project.update(project_params)
       redirect_to @project, notice: "Project updated successfully."
     else

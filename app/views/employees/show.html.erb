@@ -1,4 +1,4 @@
-
+<div class="row">
   <div class="col-md-3">
 
     <!-- Profile Image -->
@@ -7,65 +7,45 @@
           <%= image_tag attachment_url(@employee, :photo, :fill, 60, 60, format: "jpg", fallback: "default.png"),  class: "profile-user-img img-responsive img-circle" %>
         <h3 class="profile-username text-center"><%=@employee.full_name %></h3>
         <p class="text-muted text-center"><%=@employee.position.titleize %></p>
-
-        <ul class="list-group list-group-unbordered">
-          <li class="list-group-item">
-            <b>Projects</b> <a class="pull-right"><%=@employee.projects.count %></a>
-          </li>
-          <li class="list-group-item">
-            <b>Following</b> <a class="pull-right">543</a>
-          </li>
-          <li class="list-group-item">
-            <b>Friends</b> <a class="pull-right">13,287</a>
-          </li>
-        </ul>
-
+        <hr>
+        <table class="table">
+          <tr>
+            <td>
+              <strong>Email</strong>
+              <p class="text-muted"><%= @employee.email %></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Mobile Number</strong>
+              <p class="text-muted"><%= @employee.mobile_number %></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
+              <% if @employee.educational_attainments.present? %>
+                <%@employee.educational_attainments.each do |educational_attainment| %>
+                  <p class="text-muted"><%=educational_attainment.degree %></p>
+                <% end %>
+              <% else %>
+                <p class="text-muted">
+                  <%=link_to "Add Education", new_employee_educational_attainment_path(@employee) %>
+                </p>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
+              <p class="text-muted">No address added yet.</p>
+            </td>
+          </tr>
+        </table>
         <a href="/employees/<%=@employee.id %>/edit" class="btn btn-primary btn-block"><b>Update Info</b></a>
-      </div><!-- /.box-body -->
-    </div><!-- /.box -->
-
-    <!-- About Me Box -->
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">About <%=@employee.first_name %></h3>
-      </div><!-- /.box-header -->
-      <div class="box-body">
-        <strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
-
-        <% if @employee.educational_attainments.present? %>
-         <%@employee.educational_attainments.each do |educational_attainment| %>
-           <p class="text-muted"><%=educational_attainment.degree %></p>
-         <% end %>
-          <% else %>
-           <p class="text-muted">
-          <%=link_to "Add Education", new_employee_educational_attainment_path(@employee) %>
-           </p>
-          <% end %>
-
-
-        <hr>
-
-        <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-        <p class="text-muted">Malibu, California</p>
-
-        <hr>
-
-        <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-        <p>
-          <span class="label label-danger">UI Design</span>
-          <span class="label label-success">Coding</span>
-          <span class="label label-info">Javascript</span>
-          <span class="label label-warning">PHP</span>
-          <span class="label label-primary">Node.js</span>
-        </p>
-
-        <hr>
-
-        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-      </div><!-- /.box-body -->
-    </div><!-- /.box -->
-  </div><!-- /.col -->
+      </div>
+    </div>
+  </div>
   <div class="col-md-9">
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
@@ -80,7 +60,7 @@
         <%=render 'cash_advances' %>
         <%=render 'projects' %>
         <%=render 'worked_days' %>
-      </div><!-- /.tab-content -->
-    </div><!-- /.nav-tabs-custom -->
-  </div><!-- /.col -->
-</div><!-- /.row -->
+      </div>
+    </div>
+  </div>
+</div>

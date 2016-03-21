@@ -2,16 +2,18 @@ class PettyCash::FundTransfersController < ApplicationController
 
   def new
     @petty_cash = Asset.find_by_name!("Petty Cash")
-    @fund_transfer = FundTransfer.new
+    @entry = Entry.new
+    authorize @entry
+    @entry.credit_amounts.build
+    @entry.debit_amounts.build
   end
 
   def create
     @petty_cash = Asset.find_by_name!("Petty Cash")
-    @fund_transfer =FundTransfer.create(fund_transfer_params)
-    @fund_transfer.recipient_account_id = @petty_cash.id
-    if @fund_transfer.save
-      @fund_transfer.update_accounts
-      redirect_to petty_cash_index_path, notice: "Fund transfer recorded successfully"
+    @entry = Entry.new(entry_params)
+    authorize @entry
+    if @entry.save
+      redirect_to petty_cash_index_path, notice: "entry Recorded successfully"
     else
       render :new
     end
@@ -21,7 +23,7 @@ class PettyCash::FundTransfersController < ApplicationController
     @entry = Entry.find(params[:id])
   end
   private
-  def fund_transfer_params
-    params.require(:fund_transfer).permit(:description, :source_account_id, :recipient_account_id, :date, :amount)
+  def entry_params
+    params.require(:entry).permit(:date, :description, :recipient_id, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
   end
 end

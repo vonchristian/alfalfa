@@ -3,6 +3,7 @@ class PettyCash::DisbursementsController < ApplicationController
   def new
     @petty_cash = Asset.find_by_name!("Petty Cash")
     @entry = Entry.new
+    authorize @entry
     @entry.credit_amounts.build
     @entry.debit_amounts.build
   end
@@ -10,6 +11,7 @@ class PettyCash::DisbursementsController < ApplicationController
   def create
     @petty_cash = Asset.find_by_name!("Petty Cash")
     @entry = Entry.new(entry_params)
+    authorize @entry
     if @entry.save
       redirect_to new_petty_cash_disbursement_path(@petty_cash), notice: "entry Recorded successfully"
     else

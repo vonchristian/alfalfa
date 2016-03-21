@@ -1,28 +1,39 @@
 <div class="container">
-         <div class="box box-solid">
-         <div class="box-header with-border">
-         <h4><center> Fund Transfer Details</center></h4>
-         </div>
-         <div class="box-body">
+<div class="box box-solid">
+<div class="box-header with-border">
+<h4>New Fund Transfer Details</h4>
+</div>
+<div class="box-body">
+<div class="row">
+<div class="col-md-6">
+</div>
+<div class="col-md-5">
+<%= simple_form_for @entry, url: :petty_cash_fund_transfers do |f| %>
+<%=f.error_notification %>
+ <%= f.input :date, as: :string, input_html: { class: 'datepicker'}, label: "Date Transferred:" %>
 
-                  <%= simple_form_for  @fund_transfer, url: :petty_cash_fund_transfers do |f| %>
-  <div class="row">
-  <div class="col-md-6">
+<%=f.input :recipient_id, collection: Employee.all.map{|a| [a.name, a.id]} %> 
+ <%=f.simple_fields_for :credit_amounts do |d| %>
+    <%=d.input :amount, input_html:{autocomplete: "off"} %>
+    <%=d.input :account, collection: Account.fund_transfer_sources.map{|a| [a.name.titleize, a.name]}, as: :radio_buttons %>
+  <% end %>
 
+  <%=f.simple_fields_for :debit_amounts do |c| %>
+    <%=c.input :amount,  read_only: true, as: :hidden %>
+    <%=c.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
+    
+  <% end %>
+<%=f.input :description, as: :text, placeholder:"Describe the transaction e.g. Check Number if Cash from Bank" %>
+
+ 
+  <div class="modal-footer">
+    
+    <%=f.submit "Save Fund Transfer", data: {disable_with: 'Transfering Fund...'}, class: "btn btn-danger" %>
   </div>
-  <div class="col-md-5">
-<%=f.input :source_account_id, collection: Account.fund_transfer_sources.map{|a| [a.name.titleize, a.id]}, as: :radio_buttons %>
-<%=f.input :amount %>
-<%=f.input :recipient_account_id, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
-<%= f.input :date, as: :string, input_html: { class: 'datepicker'} %>
-<%=f.input :description, as: :text %>
-</div>
-<div class="modal-footer">
-<%=f.submit "Transfer Amount", class: "btn btn-danger" %>
-<%=link_to "Cancel", petty_cash_index_path, class: "btn btn-default pull-left" %>
-</div>
 <% end %>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 

@@ -1,39 +1,66 @@
 
 <div class="active tab-pane" id="profile">
 <div class="row">
-<div class="col-md-4">
-<strong><i class="fa fa-map-marker margin-r-5"></i>  Contract ID:</strong>
-          <p class="text-muted">
-            #<%=@project.id_number %>
-          </p>
-          <hr>
-<strong><i class="fa fa-calendar margin-r-5"></i>  Notice to Proceed</strong>
-<% if @project.notice_to_proceed.present? %>
-<p class="text-muted"><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%></p>
-<% else %>
-<p class="text-muted">No NTP Date of Award yet.</p>
-<% if policy(ProjectDetails::NoticeToProceed.new).create? %>
-<p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project) %></p>
-<% end %>
-<% end %>
-<hr>
-<strong><i class="fa fa-map-marker margin-r-5"></i>  Location</strong>
-          <p class="text-muted">
-            <%=@project.address %>
-          </p>
-          <hr>
-<strong><i class="fa fa-book margin-r-5"></i>  Implementing Office</strong>
-          <p class="text-muted">
-           <%=@project.implementing_office %>
-          </p>
-<hr>
-<strong><i class="fa fa-book margin-r-5"></i>  Main Contractor</strong>
-          <p class="text-muted">
-           <%=@project.main_contractor %>
-          </p>
-<hr>
+<div class="col-md-3">
+  <table class="table"> 
+    <tr>
+      <td>
+        <strong><i class="fa fa-map-marker margin-r-5"></i>  Contract ID:</strong>
+        <p class="text-muted">
+          #<%=@project.id_number %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong><i class="fa fa-calendar margin-r-5"></i>  Notice to Proceed</strong>
+        <% if @project.notice_to_proceed.present? %>
+          <div class="pull-left">
+            <p class="text-muted"><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%></p>
+          </div>
+            <div class="pull-right">
+              <%= link_to "Edit", edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed.id) %>
+            </div>
+        <% else %>
+          <p class="text-muted">No NTP Date of Award yet.</p>
+          <% if policy(ProjectDetails::NoticeToProceed.new).create? %>
+            <p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project) %></p>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong><i class="fa fa-map-marker margin-r-5"></i>  Location</strong>
+        <p class="text-muted">
+          <%=@project.address.capitalize %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong><i class="fa fa-book margin-r-5"></i>  Implementing Office</strong>
+        <p class="text-muted">
+         <%=@project.implementing_office %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong><i class="fa fa-book margin-r-5"></i>  Main Contractor</strong>
+        <p class="text-muted">
+         <%=@project.main_contractor %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= link_to "Update", edit_project_path(@project), class: 'btn btn-block btn-primary' %>
+      </td>
+    </tr>
+  </table>
 </div>
-<div class="col-md-4">
+<div class="col-md-5">
 
 <h4>REMARKS (<%=@project.remarks.count %>)</h4>
 <table class="table">
@@ -60,7 +87,7 @@
 <br>
 <br>
 </div>
-<div class="col-md-3 col-md-offset-1">
+<div class="col-md-4">
 <div class="well">
 <h4>At a Glance</h4>
 <hr>

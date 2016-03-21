@@ -15,6 +15,13 @@ class Projects::EmploymentsController < ApplicationController
     end
   end
 
+  def destroy
+    @project = Project.find(params[:project_id])
+    @employment = Employment.find(params[:id])
+    @employment.destroy
+    redirect_to @employment.project, notice: 'Employee has been removed succesfully.'
+  end
+
   private
     def employment_params
       params.require(:employment).permit(:employee_id)

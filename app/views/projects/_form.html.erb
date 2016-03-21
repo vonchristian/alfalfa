@@ -41,12 +41,12 @@
           <h5 class="text-center text-muted"> MAIN CONTRACTOR</h5>
         </div>
         <div class="col-md-8">
-          <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a]}, as: :radio_buttons, label: false%>
+          <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: false%>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-<%=f.submit "Save Project", class: "btn btn-primary" %>
+<%=f.submit "Save Project", class: "btn btn-primary", data: {disable_with: 'Saving Project...'} %> or <%= link_to "Cancel", @project %>
 </div>
 <% end %>
 </div>
