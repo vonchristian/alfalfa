@@ -14,7 +14,7 @@
                 </div>
                 <div class="box-body">
                 <h3><center><%=link_to "##{project.id_number}", project %></center></h3>
-<p class="text-muted"><%=project.name %></p>
+<p class="text-uppercase"><%=link_to project.name, project %></p>
  <br>
  <br>
  <center><%=link_to "View Project", project_path(project), class: "btn btn-primary img-rounded" %></center>
