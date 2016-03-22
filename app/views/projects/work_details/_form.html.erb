@@ -4,7 +4,7 @@
     <tbody>
     <tr>
       <td style="width: 10%"><%=f.input :code, label: false, placeholder: 'Code' %></td>
-      <td style="width: 30%"><%=f.input :description, label: false, placeholder: 'Descrption' %></td>
+      <td style="width: 30%"><%=f.input :description, label: false, placeholder: 'Descrption', as: :text %></td>
       <td><%=f.input :unit, label: false, placeholder: 'Unit' %></td>
       <td><%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %></td>
       <td><%=f.input :unit_cost, label: false, placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %></td>

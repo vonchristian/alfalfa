@@ -12,7 +12,7 @@
   <%=f.error_notification %>
 
    <%=f.input :code %>
-  <%=f.input :description %>
+  <%=f.input :description, as: :text %>
      <%=f.input :unit %>
      <%=f.input :quantity, input_html:{id: "quantity", oninput: "calculate()"} %>
       <%=f.input :unit_cost, input_html:{id: "unit_price", oninput: "calculate()"}  %>
