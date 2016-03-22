@@ -2,5 +2,24 @@
         <ul class="timeline timeline-inverse">
         <%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail) %>
                    </ul>
-<hr>
+<div class="row">
+<div class="col-md-4">
+
+          <h4>Accomplishments</h4>
+
+          <%@work_detail.work_accomplishments.each do |accomplishment| %>
+          <%=accomplishment.inspect %>
+          <% end %>
+
+          </div>
+
+          <div class="col-md-4">
+          <h4>Expenses</h4>
+          <p><strong>Materials </strong></p>
+          <p><strong>Labor</strong></p>
+          <p><strong>Equipment</strong></p>
+          </div>
+          </div>
+
 </div>
+

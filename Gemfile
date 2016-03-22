@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
+
 ruby '2.3.0'
 
-gem 'rails', '4.2.5.2'
+gem 'rails'
 gem 'draper'
 gem 'jquery-ui-rails'
 gem 'public_activity'

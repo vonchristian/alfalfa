@@ -3,10 +3,17 @@
 <br>
 <br>
 <br>
+<h2 class="text-primary"><center>ALFALFA CONSTRUCTION</center></h2>
+
+<br>
+<br>
+<br>
 <div class="col-md-4 col-md-offset-4">
 
 <div class="panel panel-default">
 <div class="panel-body">
+
+<h4><center class="text-muted">Sign in to your Account.</center></h4>
 <br>
 <br>
 <%= simple_form_for(resource, as: resource_name, :url => session_path(resource_name),
@@ -14,11 +21,11 @@
 
  <%=image_tag("default.png", height: 100, width: 100, class: 'img-circle img-responsive center-block') %>
 <br>
- <%= f.input :email, placeholder: "Email", input_html:{class: "form-control input-lg"}, label: false %>
+ <%= f.input :email, placeholder: "Email", input_html:{class: "form-control input-lg"}, label: "Enter your email:" %>
 
 
 
-    <%= f.input :password, placeholder: "Password",  input_html:{class: "form-control input-lg"}, label: false  %>
+    <%= f.input :password, placeholder: "Password",  input_html:{class: "form-control input-lg"}, label: "Enter your password:"  %>
 
 
 

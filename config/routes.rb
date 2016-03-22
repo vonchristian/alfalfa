@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'settings/index'
   get 'reports/contract_summary_report', as: 'contract_summary_report'
   get 'reports/index', as: 'reports'
- devise_for :users, :controllers => { :registrations => "users" }
+ devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
 get 'expenses/filtered_data' => 'expenses#filtered_data'
 get 'accounts/income_statement' => 'accounts#income_statement'
 resources :payroll, only:[:index, :show]

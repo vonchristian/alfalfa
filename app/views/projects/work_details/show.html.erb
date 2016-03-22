@@ -1,15 +1,25 @@
-<div class="container">
+
 <div class="row">
-<div class="card">
+<div class="col-md-12">
+<div class="col-md-3">
+<div class="box box-default">
 <div class="box-header with-border">
 <span><%=link_to project_path(@work_detail.project), class: "btn btn-link" do %><i class="fa fa-chevron-left"></i> Back To Project<%end%></span>
-<span class="pull-right"><%=link_to "Edit Work Detail", edit_project_work_detail_path(id: @work_detail.id), class: "btn btn-warning" %></span>
 <h4><center><%=@work_detail.description.upcase %></center></h4>
 <center><span class="help-block">Project: <%=@work_detail.project.id_number%></span></center>
 <hr>
+<span><%=link_to "Edit Work Detail", edit_project_work_detail_path(id: @work_detail.id), class: "btn btn-warning btn-block" %></span>
+
+</div>
+</div>
+</div>
+<div class="col-md-9">
+<div class="box box-primary">
+<br>
+<div class="box-body">
 <ul class="nav nav-tabs" role="tablist">
         <li  role="presentation" class="active">
-           <a href="#work_details_timeline" aria-controls="timeline" role="tab" data-toggle="tab">Timeline</a>
+           <a href="#work_details_timeline" aria-controls="timeline" role="tab" data-toggle="tab">Summary</a>
         </li>
          <li  role="presentation">
            <a href="#materials" aria-controls="materials" role="tab" data-toggle="tab">Materials</a>
@@ -44,4 +54,4 @@
 </div>
 </div>
 
-
+</div>
