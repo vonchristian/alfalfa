@@ -2,7 +2,7 @@
 <div class="active tab-pane" id="profile">
 <div class="row">
 <div class="col-md-3">
-  <table class="table"> 
+  <table class="table">
     <tr>
       <td>
         <strong><i class="fa fa-map-marker margin-r-5"></i>  Contract ID:</strong>
@@ -15,12 +15,11 @@
       <td>
         <strong><i class="fa fa-calendar margin-r-5"></i>  Notice to Proceed</strong>
         <% if @project.notice_to_proceed.present? %>
-          <div class="pull-left">
-            <p class="text-muted"><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%></p>
-          </div>
-            <div class="pull-right">
-              <%= link_to "Edit", edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed.id) %>
-            </div>
+
+            <p class="text-muted"><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%>
+            <span class="pull-right">
+              <%= link_to "Edit", edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed.id) %></span>
+            </p>
         <% else %>
           <p class="text-muted">No NTP Date of Award yet.</p>
           <% if policy(ProjectDetails::NoticeToProceed.new).create? %>
