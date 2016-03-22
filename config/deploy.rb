@@ -10,7 +10,7 @@ require 'mina/puma'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, '192.168.254.116'
+set :domain, '192.168.254.100'
 set :deploy_to, '/var/www/alfalfa-construction'
 set :repository, 'https://github.com/vonchristian/alfalfa.git'
 set :branch, 'master'
