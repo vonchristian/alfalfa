@@ -1,19 +1,26 @@
+<div class="container">
+<div class="box box-solid">
+<div class="box-header with-border">
+<h4>Edit Work Details</h4>
+</div>
+  <div class="box-body">
+   <div class="row">
+<div class="col-md-6">
+</div>
+<div class="col-md-5">
 <%= simple_form_for @work_detail, url: :project_work_detail do |f| %>
   <%=f.error_notification %>
-  <table class="table">
-    <tbody>
-    <tr>
-      <td style="width: 10%"><%=f.input :code, label: false, placeholder: 'Code' %></td>
-      <td style="width: 30%"><%=f.input :description, label: false, placeholder: 'Descrption' %></td>
-      <td><%=f.input :unit, label: false, placeholder: 'Unit' %></td>
-      <td><%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %></td>
-      <td><%=f.input :unit_cost, label: false, placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %></td>
-      <td><%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%></td>
-    </tr>
-    </tbody>
-    </table>
+
+   <%=f.input :code %>
+  <%=f.input :description %>
+     <%=f.input :unit %>
+     <%=f.input :quantity, input_html:{id: "quantity", oninput: "calculate()"} %>
+      <%=f.input :unit_cost, input_html:{id: "unit_price", oninput: "calculate()"}  %>
+   <%=f.input :total_cost, readonly: true ,  input_html:{id: "amount"}%>
+
     <div class="modal-footer">
       <%=f.submit "Update this Work Detail", class: "btn btn-primary" %>
 
     </div>
 <% end %>
+</div>

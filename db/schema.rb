@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308061405) do
+ActiveRecord::Schema.define(version: 20160318125328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,27 @@ ActiveRecord::Schema.define(version: 20160308061405) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer  "inventory_id"
+    t.integer  "employee_id"
+    t.integer  "deliverable_id"
+    t.string   "deliverable_type"
+    t.decimal  "quantity"
+    t.decimal  "cost"
+    t.decimal  "total_cost"
+    t.string   "unit"
+    t.string   "remarks"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "work_detail_id"
+  end
+
+  add_index "deliveries", ["deliverable_id"], name: "index_deliveries_on_deliverable_id", using: :btree
+  add_index "deliveries", ["deliverable_type"], name: "index_deliveries_on_deliverable_type", using: :btree
+  add_index "deliveries", ["employee_id"], name: "index_deliveries_on_employee_id", using: :btree
+  add_index "deliveries", ["inventory_id"], name: "index_deliveries_on_inventory_id", using: :btree
+  add_index "deliveries", ["work_detail_id"], name: "index_deliveries_on_work_detail_id", using: :btree
 
   create_table "educational_attainments", force: :cascade do |t|
     t.string   "degree"
@@ -324,6 +345,19 @@ ActiveRecord::Schema.define(version: 20160308061405) do
   add_index "maintenances", ["equipment_id"], name: "index_maintenances_on_equipment_id", using: :btree
   add_index "maintenances", ["work_detail_id"], name: "index_maintenances_on_work_detail_id", using: :btree
 
+  create_table "material_costs", force: :cascade do |t|
+    t.integer  "work_detail_id"
+    t.string   "material"
+    t.decimal  "cost"
+    t.decimal  "quantity"
+    t.string   "unit"
+    t.string   "date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "material_costs", ["work_detail_id"], name: "index_material_costs_on_work_detail_id", using: :btree
+
   create_table "miscellaneous_costs", force: :cascade do |t|
     t.string   "description"
     t.decimal  "amount"
@@ -356,6 +390,16 @@ ActiveRecord::Schema.define(version: 20160308061405) do
   add_index "payments", ["paymentable_id"], name: "index_payments_on_paymentable_id", using: :btree
   add_index "payments", ["paymentable_type"], name: "index_payments_on_paymentable_type", using: :btree
 
+  create_table "payslips", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.datetime "month"
+    t.decimal  "amount"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "payslips", ["employee_id"], name: "index_payslips_on_employee_id", using: :btree
+
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -365,44 +409,6 @@ ActiveRecord::Schema.define(version: 20160308061405) do
   end
 
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
-
-  create_table "plutus_accounts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.string   "type"
-    t.boolean  "contra"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "plutus_accounts", ["name", "type", "code"], name: "index_plutus_accounts_on_name_and_type_and_code", using: :btree
-
-  create_table "plutus_amounts", force: :cascade do |t|
-    t.string  "type"
-    t.integer "account_id"
-    t.integer "entry_id"
-    t.decimal "amount",     precision: 20, scale: 10
-  end
-
-  add_index "plutus_amounts", ["account_id", "entry_id"], name: "index_plutus_amounts_on_account_id_and_entry_id", using: :btree
-  add_index "plutus_amounts", ["entry_id", "account_id"], name: "index_plutus_amounts_on_entry_id_and_account_id", using: :btree
-  add_index "plutus_amounts", ["type"], name: "index_plutus_amounts_on_type", using: :btree
-
-  create_table "plutus_entries", force: :cascade do |t|
-    t.string   "description"
-    t.date     "date"
-    t.integer  "commercial_document_id"
-    t.string   "commercial_document_type"
-    t.integer  "owner_id"
-    t.integer  "recipient_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "plutus_entries", ["commercial_document_id", "commercial_document_type"], name: "index_entries_on_commercial_doc", using: :btree
-  add_index "plutus_entries", ["date"], name: "index_plutus_entries_on_date", using: :btree
-  add_index "plutus_entries", ["owner_id"], name: "index_plutus_entries_on_owner_id", using: :btree
-  add_index "plutus_entries", ["recipient_id"], name: "index_plutus_entries_on_recipient_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.integer  "main_contractor_id"
@@ -416,11 +422,23 @@ ActiveRecord::Schema.define(version: 20160308061405) do
     t.string   "implementing_office"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.string   "build_status"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
   add_index "projects", ["main_contractor_id"], name: "index_projects_on_main_contractor_id", using: :btree
+
+  create_table "purchase_orders", force: :cascade do |t|
+    t.integer  "inventory_id"
+    t.decimal  "quantity"
+    t.string   "unit"
+    t.string   "description"
+    t.decimal  "cost"
+    t.decimal  "amount"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "purchase_orders", ["inventory_id"], name: "index_purchase_orders_on_inventory_id", using: :btree
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "project_id"
@@ -476,6 +494,7 @@ ActiveRecord::Schema.define(version: 20160308061405) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "work_accomplishments", force: :cascade do |t|
+    t.text     "remarks"
     t.decimal  "quantity"
     t.integer  "work_detail_id"
     t.datetime "date_accomplished"
@@ -523,6 +542,8 @@ ActiveRecord::Schema.define(version: 20160308061405) do
   add_foreign_key "contract_amount_revisions", "contracts"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
+  add_foreign_key "deliveries", "employees"
+  add_foreign_key "deliveries", "inventories"
   add_foreign_key "educational_attainments", "employees"
   add_foreign_key "employments", "employees"
   add_foreign_key "employments", "projects"
@@ -532,8 +553,10 @@ ActiveRecord::Schema.define(version: 20160308061405) do
   add_foreign_key "maintenances", "employees"
   add_foreign_key "maintenances", "equipment"
   add_foreign_key "maintenances", "work_details"
+  add_foreign_key "material_costs", "work_details"
   add_foreign_key "miscellaneous_costs", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
+  add_foreign_key "payslips", "employees"
   add_foreign_key "remarks", "projects"
   add_foreign_key "subcontract_costs", "contractors"
   add_foreign_key "subcontract_costs", "work_details"

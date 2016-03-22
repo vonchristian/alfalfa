@@ -3,6 +3,7 @@
 <div class="card">
 <div class="box-header with-border">
 <span><%=link_to project_path(@work_detail.project), class: "btn btn-link" do %><i class="fa fa-chevron-left"></i> Back To Project<%end%></span>
+<span class="pull-right"><%=link_to "Edit Work Detail", edit_project_work_detail_path(id: @work_detail.id), class: "btn btn-warning" %></span>
 <h4><center><%=@work_detail.description.upcase %></center></h4>
 <center><span class="help-block">Project: <%=@work_detail.project.id_number%></span></center>
 <hr>
@@ -42,4 +43,5 @@
       </div><!-- /.tab-content -->
 </div>
 </div>
+
 
