@@ -131,7 +131,7 @@ end
     end
 
     def days_elapsed
-      if notice_to_proceed
+      if self.notice_to_proceed.present?
       ((Time.zone.now.to_i - start_date.to_i)/86400).floor
     else
       0
