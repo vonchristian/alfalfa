@@ -13,12 +13,18 @@
 </thead>
 <tbody>
 <tr>
-  <% @work_detail.equipment_costs.each do |equipment_cost| %>
-  <td><%=equipment_cost.equipment %></td>
-  <td><%=equipment_cost.number_of_equipment %></td>
-  <td><%=equipment_cost.number_of_days %></td>
-  <td><%=number_to_currency equipment_cost.daily_rate %></td>
-  <td><%=number_to_currency equipment_cost.total_cost %></td>
+  <% @work_detail.equipment_maintenances.each do |maintenance| %>
+  <td><%=maintenance.equipment %></td>
+  <td><%=maintenance.date %></td>
+  <td><%=maintenance.description %></td>
+  <td><%=number_to_currency equipment_quantity%></td>
+  <td><%=number_to_currency maintenance.unit %></td>
+  <td><%=number_to_currency maintenance.amount %></td>
+  <td><%=number_to_currency maintenance.remarks%></td>
+  <td><%=number_to_currency maintenance.employee %></td>
+
+
+
   </tr>
   <% end %>
 </tbody>
