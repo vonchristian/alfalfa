@@ -41,6 +41,7 @@ gem 'rspec-rails'
 end
 
 group :development do
+  gem 'rake'
   gem 'spring'
 end
 

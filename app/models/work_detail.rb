@@ -17,7 +17,36 @@ class WorkDetail < ActiveRecord::Base
   has_many :subcontract_costs, class_name: "WorkDetailCosts::SubcontractCost"
 
   delegate :cost, to: :project, prefix: true
+  def total_quantity_approved_in_previous_billing
+    self.work_accomplishments.paid.sum(:quantity)
+  end
 
+  def quantity_approved_in_this_billing
+    self.work_accomplishments.unpaid.sum(:quantity)
+  end
+
+  def total_quantity_to_this_date
+    self.total_quantity_approved_in_previous_billing + self.quantity_approved_in_this_billing
+  end
+
+  def balance_of_quantity
+    self.quantity - self.total_quantity_to_this_date
+  end
+
+  def cost_of_previous_billing
+    self.total_quantity_approved_in_previous_billing * self.unit_cost
+  end
+
+  def cost_of_this_billing
+    self.quantity_approved_in_this_billing * self.unit_cost
+  end
+
+  def cost_to_date
+    self.cost_of_previous_billing + cost_of_this_billing
+  end
+  def balance_of_cost
+    self.total_cost - self.cost_to_date
+  end
   def name
     description
   end
