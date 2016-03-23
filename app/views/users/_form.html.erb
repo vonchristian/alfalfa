@@ -1,9 +1,13 @@
-<div class="row">
-<div class='col-md-6 col-md-offset-3'>
-  <div class="panel panel-default">
-    <div class="panel-body">
+<div class="container">
+<div class='box box-solid'>
+  <div class="box-header with-footer">
       <h4 class="text-center">Employee Details </h4>
-      <hr />
+      </div>
+      <div class="box-body">
+      <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-5">
        <%= simple_form_for @user do |f| %>
       <%=f.error_notification %>
 
@@ -15,27 +19,23 @@
         <% end %>
         <%= f.file_field :profile_photo, class: 'center-block'%>
 
-      <hr>
-      <div class="row">
-        <div class="col-md-4">
+
           <%=f.input :first_name, autofocus: true  %>
-        </div>
-        <div class="col-md-4">
+
           <%=f.input :middle_name %>
-        </div>
-        <div class="col-md-4">
+
           <%=f.input :last_name %>
-        </div>
-      </div>
+
         <%=f.input :email %>
         <%=f.input :password %>
         <%=f.input :password_confirmation %>
         <%= f.input :role, collection: User.roles.keys.to_a.map{|role| [role.titleize, role]}, as: :radio_buttons %>
 
         <div class="modal-footer">
-          <%=f.submit 'Save Employee', class: 'btn btn-primary' %>
+          <%=f.submit 'Save Employee', class: 'btn btn-primary', data: {disable_with: "Saving Employee..."} %>
         </div>
       <% end %>
+    </div>
     </div>
   </div>
 </div>

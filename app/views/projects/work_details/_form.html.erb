@@ -1,19 +1,17 @@
 <%= simple_form_for ([@project, @work_detail]) do |f| %>
   <%=f.error_notification %>
-  <table class="table">
-    <tbody>
-    <tr>
-      <td style="width: 10%"><%=f.input :code, label: false, placeholder: 'Code' %></td>
-      <td style="width: 30%"><%=f.input :description, label: false, placeholder: 'Descrption', as: :text %></td>
-      <td><%=f.input :unit, label: false, placeholder: 'Unit' %></td>
-      <td><%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %></td>
-      <td><%=f.input :unit_cost, label: false, placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %></td>
-      <td><%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%></td>
-    </tr>
-    </tbody>
-    </table>
+
+  <%=f.input :code,  placeholder: 'Code' %>
+      <%=f.input :description, placeholder: 'Descrption', as: :text, input_html:{rows: 5} %>
+      <%=f.input :unit, placeholder: 'Unit' %>
+      <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+      <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %>
+      <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
+
     <div class="modal-footer">
-      <%=f.submit "Add this Work Detail", class: "btn btn-primary" %>
-      <%=link_to "or I'm done adding Work Details",project_path(@project) %>
+      <%=f.submit "Add this Work Detail", class: "btn btn-primary btn-block" %>
+      <hr>
+      <span><%=link_to " or Back to Project",project_path(@project) , class: "btn btn-default btn-block"%>
     </div>
 <% end %>
+

@@ -1,0 +1,3 @@
+class JointVenture < Project
+
+end

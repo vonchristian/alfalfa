@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   multisearchable :against => [:name],
    :order_within_rank => "projects.created_at DESC"
 
+  scope :joint_ventures, -> { where(type: 'JointVenture') }
 
     has_many :collections
     has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id'
@@ -24,7 +25,13 @@ class Project < ActiveRecord::Base
     has_many :remarks
 
     validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
+  def self.types
+    ["JointVenture", "SubcontractWork"]
+  end
 
+  def approved_change_orders
+    self.work_details.map {|w| w.change_orders.addition.sum(:amount)}
+  end
   def mobilization_fund
     self.cost * 0.15
   end

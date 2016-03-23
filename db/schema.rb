@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322060638) do
+ActiveRecord::Schema.define(version: 20160323033558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,20 +82,6 @@ ActiveRecord::Schema.define(version: 20160322060638) do
   add_index "billable_materials", ["inventory_id"], name: "index_billable_materials_on_inventory_id", using: :btree
   add_index "billable_materials", ["project_id"], name: "index_billable_materials_on_project_id", using: :btree
 
-  create_table "cash_advances", force: :cascade do |t|
-    t.integer  "cash_advanceable_id"
-    t.string   "cash_advanceable_type"
-    t.decimal  "amount"
-    t.datetime "date_disbursed"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "status"
-    t.string   "description"
-  end
-
-  add_index "cash_advances", ["cash_advanceable_id"], name: "index_cash_advances_on_cash_advanceable_id", using: :btree
-  add_index "cash_advances", ["cash_advanceable_type"], name: "index_cash_advances_on_cash_advanceable_type", using: :btree
-
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.string   "photo_id"
@@ -162,27 +148,6 @@ ActiveRecord::Schema.define(version: 20160322060638) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "deliveries", force: :cascade do |t|
-    t.integer  "inventory_id"
-    t.integer  "employee_id"
-    t.integer  "deliverable_id"
-    t.string   "deliverable_type"
-    t.decimal  "quantity"
-    t.decimal  "cost"
-    t.decimal  "total_cost"
-    t.string   "unit"
-    t.string   "remarks"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "work_detail_id"
-  end
-
-  add_index "deliveries", ["deliverable_id"], name: "index_deliveries_on_deliverable_id", using: :btree
-  add_index "deliveries", ["deliverable_type"], name: "index_deliveries_on_deliverable_type", using: :btree
-  add_index "deliveries", ["employee_id"], name: "index_deliveries_on_employee_id", using: :btree
-  add_index "deliveries", ["inventory_id"], name: "index_deliveries_on_inventory_id", using: :btree
-  add_index "deliveries", ["work_detail_id"], name: "index_deliveries_on_work_detail_id", using: :btree
 
   create_table "educational_attainments", force: :cascade do |t|
     t.string   "degree"
@@ -260,20 +225,6 @@ ActiveRecord::Schema.define(version: 20160322060638) do
 
   add_index "equipment_costs", ["work_detail_id"], name: "index_equipment_costs_on_work_detail_id", using: :btree
 
-  create_table "fund_transfers", force: :cascade do |t|
-    t.integer  "source_account_id"
-    t.integer  "recipient_account_id"
-    t.integer  "fund_transfer_type"
-    t.decimal  "amount"
-    t.datetime "date"
-    t.string   "description"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "fund_transfers", ["recipient_account_id"], name: "index_fund_transfers_on_recipient_account_id", using: :btree
-  add_index "fund_transfers", ["source_account_id"], name: "index_fund_transfers_on_source_account_id", using: :btree
-
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
     t.integer  "imageable_id"
@@ -345,19 +296,6 @@ ActiveRecord::Schema.define(version: 20160322060638) do
   add_index "maintenances", ["equipment_id"], name: "index_maintenances_on_equipment_id", using: :btree
   add_index "maintenances", ["work_detail_id"], name: "index_maintenances_on_work_detail_id", using: :btree
 
-  create_table "material_costs", force: :cascade do |t|
-    t.integer  "work_detail_id"
-    t.string   "material"
-    t.decimal  "cost"
-    t.decimal  "quantity"
-    t.string   "unit"
-    t.string   "date"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "material_costs", ["work_detail_id"], name: "index_material_costs_on_work_detail_id", using: :btree
-
   create_table "miscellaneous_costs", force: :cascade do |t|
     t.string   "description"
     t.decimal  "amount"
@@ -390,16 +328,6 @@ ActiveRecord::Schema.define(version: 20160322060638) do
   add_index "payments", ["paymentable_id"], name: "index_payments_on_paymentable_id", using: :btree
   add_index "payments", ["paymentable_type"], name: "index_payments_on_paymentable_type", using: :btree
 
-  create_table "payslips", force: :cascade do |t|
-    t.integer  "employee_id"
-    t.datetime "month"
-    t.decimal  "amount"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "payslips", ["employee_id"], name: "index_payslips_on_employee_id", using: :btree
-
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -422,23 +350,25 @@ ActiveRecord::Schema.define(version: 20160322060638) do
     t.string   "implementing_office"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "type"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
   add_index "projects", ["main_contractor_id"], name: "index_projects_on_main_contractor_id", using: :btree
 
   create_table "purchase_orders", force: :cascade do |t|
-    t.integer  "inventory_id"
+    t.integer  "work_detail_id"
     t.decimal  "quantity"
     t.string   "unit"
     t.string   "description"
-    t.decimal  "cost"
+    t.decimal  "unit_cost"
     t.decimal  "amount"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "purchase_orders", ["inventory_id"], name: "index_purchase_orders_on_inventory_id", using: :btree
+  add_index "purchase_orders", ["work_detail_id"], name: "index_purchase_orders_on_work_detail_id", using: :btree
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "project_id"
@@ -543,8 +473,6 @@ ActiveRecord::Schema.define(version: 20160322060638) do
   add_foreign_key "contract_amount_revisions", "contracts"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
-  add_foreign_key "deliveries", "employees"
-  add_foreign_key "deliveries", "inventories"
   add_foreign_key "educational_attainments", "employees"
   add_foreign_key "employments", "employees"
   add_foreign_key "employments", "projects"
@@ -554,10 +482,9 @@ ActiveRecord::Schema.define(version: 20160322060638) do
   add_foreign_key "maintenances", "employees"
   add_foreign_key "maintenances", "equipment"
   add_foreign_key "maintenances", "work_details"
-  add_foreign_key "material_costs", "work_details"
   add_foreign_key "miscellaneous_costs", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
-  add_foreign_key "payslips", "employees"
+  add_foreign_key "purchase_orders", "work_details"
   add_foreign_key "remarks", "projects"
   add_foreign_key "subcontract_costs", "contractors"
   add_foreign_key "subcontract_costs", "work_details"

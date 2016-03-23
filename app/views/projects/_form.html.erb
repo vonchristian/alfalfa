@@ -2,26 +2,18 @@
 <div class="box box-solid">
 <div class="box-body">
 <br>
-<h4 class="text-center">New Project Details</h4>
+<h4 class="text-center">Project Details</h4>
 <span class="help-block text-center"> </span>
 <hr>
 
 
-                  <%= simple_form_for @project, html: { class: 'form-horizontal' },
-                            wrapper: :horizontal_form,
-                            wrapper_mappings: {
-                            check_boxes: :vertical_radio_and_checkboxes,
-                            radio_buttons: :horizontal_radio_and_checkboxes,
-                            file: :horizontal_file_input,
-                            boolean: :horizontal_boolean
-                            } do |f| %>
+                  <%= simple_form_for @project do |f| %>
     <%=f.error_notification %>
     <div class="row">
-        <div class="col-md-3 col-md-offset-1">
-          <h5 class="text-muted text-center">PROJECT DETAILS</h5>
+        <div class="col-md-6">
         </div>
-        <div class="col-md-6 col-md-2">
-          <%=f.input :name, as: :text, input_html: {rows: 10, class: "input-lg"}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
+        <div class="col-md-5">
+          <%=f.input :name, as: :text, input_html: {rows: 10}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
               <br>
 
           <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
@@ -33,20 +25,11 @@
           <%=f.input :address, label: "Location", placeholder: "Contract Location" %>
           <%=f.input :implementing_office, label: "Implementing Office" %>
 
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-3 col-md-offset-1">
-          <h5 class="text-center text-muted"> MAIN CONTRACTOR</h5>
-        </div>
-        <div class="col-md-8">
-          <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: false%>
-        </div>
-    </div>
-</div>
+          <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
+
 <div class="modal-footer">
 <%=f.submit "Save Project", class: "btn btn-primary", data: {disable_with: 'Saving Project...'} %> or <%= link_to "Cancel", @project %>
+</div>
 </div>
 <% end %>
 </div>

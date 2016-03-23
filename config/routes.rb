@@ -50,9 +50,11 @@ end
 resources :work_details do
   resources :work_accomplishments, module: :projects
   resources :issued_inventories, module: :projects
+  resources :purchase_orders, module: :work_details
   resources :labor_costs, module: :projects
   resources :equipment_maintenances, module: :work_details
 end
+resources :joint_ventures, controller: 'projects', type: 'JointVenture'
   resources :projects do
     resources :equipment_costs, module: :projects
     resources :add_workers, module: :projects
@@ -65,7 +67,7 @@ end
     resources :collections
       match :overview, via: [:get], on: :collection
       match :payroll, via: [:get], on: :member
-    resources :notice_to_proceeds, module: :project_details
+    resource :notice_to_proceed, module: :project_details
     resources :time_extensions
     resources :amount_revisions
     resources :remarks

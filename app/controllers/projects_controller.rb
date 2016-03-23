@@ -1,8 +1,10 @@
 class ProjectsController < ApplicationController
+  before_action :set_project_type
   decorates_assigned :project
 
+
   def index
-    @projects =ProjectDecorator.decorate_collection(Project.all.includes(:amount_revisions))
+    @projects =ProjectDecorator.decorate_collection(type_class.all)
   end
   def overview
    @projects =ProjectDecorator.decorate_collection(Project.all)
@@ -76,6 +78,17 @@ end
     params.require(:project).permit(:name, :cost, :id_number, :duration, :address, :main_contractor_id, :project_type, :implementing_office, {:item_ids=>[] }, { :employee_ids =>[] })
   end
 
+  def set_project_type
+    @project_type = type
+  end
+
+  def type
+    Project.types.include?(params[:type]) ? params[:type] : "Project"
+  end
+
+  def type_class
+    type.constantize
+  end
 
 
 end

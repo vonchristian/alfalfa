@@ -1,46 +1,51 @@
 <div class="container">
   <div class="box box-solid">
-    <div class="box-body">
+  <div class="box-header with-border">
+   </span> <h4>Work Details</h4>
+  </div>
 
-            <table class="table table-compressed table-hover">
+    <div class="box-body">
+<div class="row">
+<div class="col-md-7">
+            <table class="table table-hover">
 
 
                    <thead>
-                            <tr>
-                                <th style="width: 10%">Code</th>
+                            <tr class="text-uppercase">
+
                                 <th style="width: 30%">Descrption</th>
-                                <th>Unit</th>
-                                <th>Quantity</th>
-                                <th><span class="pull-right">Unit Cost</span></th>
+
                                 <th><span class="pull-right">Total Cost</span></th>
-                                <th style="width:60px"></th>
+                               <th></th>
                               </tr>
                             </thead>
                             <tbody>
+
                             <% if @project.work_details.present? %>
                                <% @project.work_details.each do |work_detail| %>
-                                <tr>
-                                  <td><%=work_detail.code %></td>
-                                  <td><b><%=work_detail.description %></b></td>
-                                  <td><%=work_detail.unit %></td>
-                                  <td><%=work_detail.quantity %></td>
-                                  <td><span class="pull-right"><%=number_to_currency work_detail.unit_cost %></span></td>
+
+                                  <td  style="width: 30%" class="text-uppercase"><%=work_detail.description %></td>
+
+
                                   <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
 
                                 </tr>
                                <% end %>
                                <tr>
-                                 <td colspan="5"><h4 class="pull-right">Total of Amounts: </h4></td>
+                                 <td><h4 class="pull-right">Total of Amounts: </h4></td>
                                  <td><h4 class="pull-right"><%= number_to_currency @project.total_cost_of_work_details%></h4></td>
                                </tr>
                             <% end %>
                             </tbody>
                             </table>
+</div>
 
-                                <%= render 'form' %>
-
+<div class="col-md-4 well">
+<%= render 'form' %>
+</div>
 
               </div>
+
         </div>
     </div>
 </div>

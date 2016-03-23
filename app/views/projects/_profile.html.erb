@@ -24,7 +24,7 @@
         <% else %>
           <p class="text-muted">No NTP Date of Award yet.</p>
           <% if policy(ProjectDetails::NoticeToProceed.new).create? %>
-            <p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project) %></p>
+            <p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn btn-primary btn-sm" %></p>
           <% end %>
         <% end %>
       </td>
