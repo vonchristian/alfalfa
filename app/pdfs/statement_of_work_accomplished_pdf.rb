@@ -42,9 +42,9 @@ def project_info
   end
   def table_data
     move_down 5
-     [["ITEM", "DESCRIPTION", "UNIT", "TOTAL CONTRACT QUANTITY", "UNIT PRICE", "TOTAL CONTRACT COST", "TOTAL QTY. APPROVED (Previous Billing)",
-      "TOTAL QTY APPROVED (in this billing)", "BALANCE OF QUANTITY", "COST OF PREVIOUS BILLINGS", "COST OF THIS BILLING", "COST TO DATE"]] +
-    @table_data ||= @project.work_details.map { |e| [e.code, e.description, e.unit, e.quantity, price(e.unit_cost), price(e.total_cost), price(e.total_cost),
+     [["ITEM", "DESCRIPTION", "UNIT", "TOTAL CONTRACT QUANTITY", "UNIT PRICE", "TOTAL CONTRACT COST", "Wt. %", "TOTAL QTY. APPROVED IN PREVIOUS BILLING",
+      "TOTAL QUANTITY APPROVED IN THIS BILLING", "BALANCE OF QUANTITY", "COST OF PREVIOUS BILLINGS", "COST OF THIS BILLING", "COST TO DATE", "BALANCE OF COST"]] +
+    @table_data ||= @project.work_details.map { |e| [e.code, e.description, e.unit, e.quantity, price(e.unit_cost), "", "#{e.weighted_percent} %", price(e.total_cost), price(e.total_cost),
       e.code, e.remaining_quantity, e.total_cost, e.total_cost, e.total_cost] } +
         @table_data ||= [["TOTAL", "", "", "", "", "#{price(@project.cost)}", "", "", "", "", "", ""]]
   end

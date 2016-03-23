@@ -17,6 +17,10 @@ class WorkDetail < ActiveRecord::Base
   has_many :subcontract_costs, class_name: "WorkDetailCosts::SubcontractCost"
 
   delegate :cost, to: :project, prefix: true
+
+  def material_costs_incurred
+    self.issued_inventories.sum(:total_cost)
+  end
   def total_quantity_approved_in_previous_billing
     self.work_accomplishments.paid.sum(:quantity)
   end

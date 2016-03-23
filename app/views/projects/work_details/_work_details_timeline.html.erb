@@ -1,23 +1,38 @@
 <div class="tab-pane active" id="work_details_timeline">
-        <ul class="timeline timeline-inverse">
-        <%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail) %>
-                   </ul>
+
+
 <div class="row">
 <div class="col-md-4">
 
           <h4>Accomplishments</h4>
-
+<%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail) %>
           <%@work_detail.work_accomplishments.each do |accomplishment| %>
           <%=accomplishment.inspect %>
           <% end %>
 
           </div>
-
+<div class="col-md-4">
+</div>
           <div class="col-md-4">
-          <h4>Expenses</h4>
-          <p><strong>Materials </strong></p>
-          <p><strong>Labor</strong></p>
-          <p><strong>Equipment</strong></p>
+          <h4>Costs Incurred</h4>
+
+          <span class="text-muted">As of <%=Time.zone.now.strftime("%B %e %Y") %></span>
+             <br>
+             <br>
+          <h4>Material <span class="pull-right text-muted"><%=number_to_currency @work_detail.material_costs_incurred %></span></h4>
+          <hr>
+          <h4>Labor</h4>
+          <hr>
+          <h4>Equipment</h4>
+          <hr>
+          <h4>Subcontract</h4>
+          <hr>
+          <h4>Overhead</h4>
+          <hr>
+          <h4>Other Costs</h4>
+
+          <hr>
+          <h4><strong>TOTAL</strong></h4>
           </div>
           </div>
 
