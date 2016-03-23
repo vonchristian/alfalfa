@@ -1,0 +1,26 @@
+<div class="container">
+<%= simple_form_for @sale do |f| %>
+<%= f.error_notification %>
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+    <h3>New Sale</h3>
+    </div>
+   <div class="box-body">
+     <div class="col-md-6">
+     </div>
+     <div class="col-md-6">
+       <%= f.input :inventory_id, collection: Inventory.all, prompt: 'Select Inventory' %>
+       <%= f.input :quantity %>
+       <%= f.input :amount, label: "Amount Paid" %>
+       <%= f.input :date, as: :string, input_html: {class: "datepicker"} %>
+       <b id="total_amount"></b>
+     </div>
+  </div>
+    <div class="box-footer">
+    <%= f.submit 'Record Sale', class: 'btn btn-primary pull-right' %>
+    </div>
+  </div>
+<% end %>
+</div>
+

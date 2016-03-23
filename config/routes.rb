@@ -35,6 +35,7 @@ get 'result/index' => "result#index"
 
   resources :entries
   resources :inventories
+    resources :sales, module: :inventories
   resources :issued_inventories
 
   namespace :accounts do

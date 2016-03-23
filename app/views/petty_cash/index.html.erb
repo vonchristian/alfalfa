@@ -50,8 +50,7 @@
         </div>
       </div>
       <div class="col-md-5">
-        <% balance = @petty_cash.balance(:from_date => @petty_cash.created_at, :to_date => @to_date) %>
-        <h3><center><%= number_to_currency balance %></center></h3>
+        <h3><center><%= number_to_currency @petty_cash.balance(:from_date => @from_date, :to_date => @to_date)  %></center></h3>
         <span class="help-block"><center class="text-uppercase">Balance</center></span>
         <br>
         <div class="col-md-6 col-sm-12">
