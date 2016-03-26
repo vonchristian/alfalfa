@@ -18,6 +18,38 @@ class WorkDetail < ActiveRecord::Base
 
   delegate :cost, to: :project, prefix: true
 
+  def self.total
+    self.all.sum(:total_cost)
+  end
+  def total_quantity_approved_in_previous_billing
+    if self.work_accomplishments.present?
+      2
+    else
+      0
+    end
+  end
+  def total_quantity_approved_in_this_billing
+    self.work_accomplishments.unpaid.total * self.unit_cost
+  end
+
+  def balance_of_quantity
+    self.quantity - self.work_accomplishments.paid.total
+  end
+
+  def cost_of_previous_billings
+    self.total_quantity_approved_in_previous_billing * self.unit_cost
+  end
+
+  def cost_of_this_billing
+    self.total_quantity_approved_in_this_billing * unit_cost
+  end
+  def cost_to_date
+    self.cost_of_previous_billings + self.cost_of_this_billing
+  end
+
+  def balance_of_cost
+    self.total_cost - self.cost_to_date
+  end
   def material_costs_incurred
     self.issued_inventories.sum(:total_cost)
   end
@@ -64,11 +96,19 @@ class WorkDetail < ActiveRecord::Base
   end
 
   def actual_accomplishment_percent
-    (self.accomplished_quantity / self.quantity)  * 100
+    (self.accomplished_quantity / self.quantity.to_f)  * 100
+  end
+
+  def remaining_accomplishment_percent
+    if self.work_accomplishments.present?
+   100 - actual_accomplishment_percent
+ else
+  0
+end
   end
 
   def weighted_percent
-    (total_cost / project_cost) * 100
+    ((total_cost / project_cost) * 100)
   end
 
 
@@ -96,5 +136,9 @@ class WorkDetail < ActiveRecord::Base
     if accomplished_quantity >= quantity
       update_column :accomplished, true
     end
+  end
+
+  def self.amount_to_be_collected
+    self.all.map{|a| a.cost_of_this_billing}.sum
   end
 end

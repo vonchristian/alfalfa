@@ -24,6 +24,7 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'jquery-rails'
 gem "coffee-rails"
+gem "select2-rails"
 gem 'mina-puma', :require => false
 
 group :production do

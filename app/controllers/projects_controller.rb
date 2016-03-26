@@ -24,7 +24,8 @@ class ProjectsController < ApplicationController
     @project = Project.create(project_params)
     authorize @project
     if @project.save
-    redirect_to @project, notice: "Project was successfully saved."
+      @project.create_contract
+     redirect_to @project, notice: "Project was successfully saved."
   else
     render :new
   end
@@ -39,6 +40,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     authorize @project
     if @project.update(project_params)
+      @project.update_contract
       redirect_to @project, notice: "Project updated successfully."
     else
       render :edit

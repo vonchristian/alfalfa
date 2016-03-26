@@ -20,17 +20,17 @@
       </div>
       <div class="col-md-12">
         <div class="box-header with-border">
-          <h4>List of Workers for this project</h4>
+          <h4 class="text-uppercase">List of Workers for this project</h4>
         </div>
         <div class="box-body">
           <div class="col-md-10 col-md-offset-1">
             <table class="table">
               <% @project.employees.each do |worker| %>
                 <tr>
-                    <td style="width:65px"><%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-square" %></td>
+                    <td style="width:65px"><%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-circle" %></td>
                     <td>
                       <b><%=worker.full_name.upcase%></b><br>
-                      <%=worker.position.capitalize %><br>
+                      <span class="text-uppercase text-muted"><%=worker.position.titleize %></span><br>
                       <%=worker.mobile_number %>
                     </td>
                 </tr>

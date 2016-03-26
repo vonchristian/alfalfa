@@ -7,9 +7,8 @@ class Projects::InvoicesController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @invoice = @project.invoices.create(invoice_params)
-    if @invoice.valid?
-      @invoice.update_accounts
-      @invoice.save
+    if @invoice.save
+      @project.update_work_detail_accomplishments_status
       redirect_to @project, notice: "Invoice saved successfully"
     else
       render :new

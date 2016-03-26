@@ -1,21 +1,23 @@
 class RemarksController < ApplicationController
-  def new 
+  def new
     @project = Project.find(params[:project_id])
     @remark = @project.remarks.build
+    authorize @remark
   end
 
   def create
     @project = Project.find(params[:project_id])
     @remark = @project.remarks.build(remark_params)
+    authorize @remark
     @remark.remarker = current_user
-      if @remark.save 
+      if @remark.save
       redirect_to @project, notice: "Remarks added successfully."
     else
-      render :new 
+      render :new
     end
   end
 
-  private 
+  private
   def remark_params
     params.require(:remark).permit(:content, :title)
   end

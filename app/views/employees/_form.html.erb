@@ -1,11 +1,11 @@
+<%= simple_form_for @employee do |f| %>
+<%=f.error_notification %>
 <div class="container">
   <div class="box box-solid">
     <div class="box-header with-border">
       <h4 class="text-center">Employee Details </h4>
     </div>
     <div class="box-body">
-      <%= simple_form_for @employee do |f| %>
-        <%=f.error_notification %>
         <div class="row">
           <div class="col-md-4 col-md-offset-1">
             <%if @employee.photo.blank? %>
@@ -23,16 +23,16 @@
             <%=f.input :last_name, placeholder: "Last Name"  %>
             <%=f.input :mobile_number,  placeholder: "Mobile Number" %>
             <%=f.input :email, placeholder: "Email"  %>
-            <% if current_user.system_administrator? %>
+            <% if current_user.accounting_officer? %>
               <%=f.input :position, collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }, prompt: '-- Select --'  %>
             <% end %>
             <%=f.input :rate  %>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="box-footer">
           <%=f.submit 'Save Employee', class: 'btn btn-primary' %>
         </div>
-      <% end %>
     </div>
   </div>
 </div>
+<% end %>

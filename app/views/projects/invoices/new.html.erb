@@ -3,11 +3,40 @@
   <!-- Widget: user widget style 1 -->
 <div class="box box-solid">
 <div class="box-header with-border">
-      <h4>New Invoice</h4>
-</div>
+      <h4 class="text-uppercase"><center>New Invoice</center></h4>
+
+<div class="col-md-8 col-md-offset-2">
 <div class="box-body">
 <h4>Project: <span class="text-muted"><%=@project.name %></span></h4>
 <hr>
+<table class="table">
+<thead>
+  <tr class="text-uppercase">
+    <th>Item</th>
+    <th>Description</th>
+    <th>Quantity Accomplished</th>
+    <th>Amount</th>
+  </tr>
+</thead>
+<tbody>
+<% @project.work_details.each do |work_detail| %>
+<tr>
+<td><%=work_detail.code %></td>
+<td><%=work_detail.description %></td>
+<td><span class="pull-right"><%=work_detail.accomplished_quantity %></span></td>
+<td><span class="pull-right"><%=number_to_currency work_detail.cost_of_this_billing %></span></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+<hr>
+<h4 class="text-uppercase">Amount to be collected
+<span class="pull-right"><%=number_to_currency @project.work_details.amount_to_be_collected %></span>
+</h4>
+<br>
+<hr>
+
  <%= simple_form_for [@project, @invoice], html: { class: 'form-horizontal' },
                             wrapper: :horizontal_form,
                             wrapper_mappings: {
@@ -17,9 +46,11 @@
                              boolean: :horizontal_boolean
                             } do |f| %>
 <%=f.error_notification %>
-<%=f.input :amount %>
+<%=f.input :amount, readonly:true, input_html:{ value: @project.work_details.amount_to_be_collected } %>
 <div class="modal-footer">
-<%=f.submit "Save and Print", class: "btn btn-danger" %>
+<%=f.submit "Save Invoice", class: "btn btn-danger" %>
+<%=link_to "or Cancel", project_path(@project), class: "btn" %>
 
 </div>
 <% end %>
+

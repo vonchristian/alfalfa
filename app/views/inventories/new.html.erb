@@ -12,8 +12,8 @@
               <div class="col-md-10 col-md-offset-1">
                 <%=f.input :name, as: :text, autofocus: true %>
                 <%=f.input :description, as: :text %>
-                <%=f.input :cost, as: :string %>
-                <%=f.input :quantity, as: :string %>
+                <%=f.input :cost, as: :string, input_html: {autocomplete: "off"} %>
+                <%=f.input :quantity, as: :string, input_html: {autocomplete: "off"} %>
                 <%=f.input :unit %>
               </div>
             </div>

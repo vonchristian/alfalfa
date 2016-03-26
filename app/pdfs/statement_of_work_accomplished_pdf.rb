@@ -1,5 +1,5 @@
 class StatementOfWorkAccomplishedPdf < Prawn::Document
-  TABLE_WIDTHS = [40, 200, 30, 55, 70, 70, 70, 70,]
+  TABLE_WIDTHS = [40, 200, 30, 55, 60, 80, 60, 60, 60, 60, 60, 60,60]
 def initialize(project, view_context)
   super(margin: 30, page_size: [612, 1008], page_layout: :landscape)
   @project = project
@@ -36,7 +36,7 @@ def project_info
       table table_data,
 
         header: true,
-        cell_style: { size: 8, font: "Helvetica"},
+        cell_style: { size: 7, font: "Helvetica"},
         column_widths: TABLE_WIDTHS
     end
   end
@@ -44,8 +44,20 @@ def project_info
     move_down 5
      [["ITEM", "DESCRIPTION", "UNIT", "TOTAL CONTRACT QUANTITY", "UNIT PRICE", "TOTAL CONTRACT COST", "Wt. %", "TOTAL QTY. APPROVED IN PREVIOUS BILLING",
       "TOTAL QUANTITY APPROVED IN THIS BILLING", "BALANCE OF QUANTITY", "COST OF PREVIOUS BILLINGS", "COST OF THIS BILLING", "COST TO DATE", "BALANCE OF COST"]] +
-    @table_data ||= @project.work_details.map { |e| [e.code, e.description, e.unit, e.quantity, price(e.unit_cost), "", "#{e.weighted_percent} %", price(e.total_cost), price(e.total_cost),
-      e.code, e.remaining_quantity, e.total_cost, e.total_cost, e.total_cost] } +
+    @table_data ||= @project.work_details.map { |e| [e.code,
+                                                                                      e.description,
+                                                                                      e.unit, e.quantity,
+                                                                                      price(e.unit_cost),
+                                                                                      price(e.total_cost),
+                                                                                       "#{e.weighted_percent.round(3)} %",
+                                                                                      price(e.total_quantity_approved_in_previous_billing),
+                                                                                      price(e.total_quantity_approved_in_this_billing),
+                                                                                      e.balance_of_quantity,
+                                                                                      price(e.cost_of_previous_billings),
+                                                                                      price(e.cost_of_this_billing),
+                                                                                      price(e.cost_to_date),
+                                                                                      price(e.balance_of_cost)
+                                                                                        ] } +
         @table_data ||= [["TOTAL", "", "", "", "", "#{price(@project.cost)}", "", "", "", "", "", ""]]
   end
 

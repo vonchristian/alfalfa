@@ -3,8 +3,8 @@
   <%=f.error_notification %>
   <table class="table">
     <tbody>
-   <%=f.input :inventoriable_id  %>
-    <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Please Select" %>
+   <%=f.input :inventoriable_id, label:  false, placeholder: 'Inventory ID' %>
+    <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Item", input_html: {style: 'width:100%'} %>
       <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
       <%=f.input :unit_cost, label: false, placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
      <%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
@@ -17,3 +17,10 @@
 </table>
 <% end %>
 </div>
+<script>
+    $(document).ready(function() {
+        $("#issued_inventory_inventory_id").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>

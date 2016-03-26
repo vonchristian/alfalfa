@@ -1,12 +1,16 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Common
   include PgSearch
-  multisearchable :against => [:name],
+  multisearchable :against => [:name, :id_number],
    :order_within_rank => "projects.created_at DESC"
 
   scope :joint_ventures, -> { where(type: 'JointVenture') }
 
+  before_save :create_contract
+  before_update :update_contract
+
     has_many :collections
+    has_many :invoices, as: :invoiceable, foreign_key: 'invoiceable_id'
     has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id'
     belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
     belongs_to :category
@@ -185,6 +189,20 @@ end
                          credit_amounts_attributes:[amount: (self.cost), account: "Cost of Contracts"])
    end
 
+   def update_work_detail_accomplishments_status
+    self.work_details.each do |work_detail|
+      work_detail.work_accomplishments.unpaid.each do |work_accomplishment|
+        work_accomplishment.payment_requested!
+      end
+    end
+  end
 
+  def create_contract
+    Contract.create(contractor_id: self.main_contractor.id, project_id: self.id) if self.new_record?
+  end
+
+  def update_contract
+    Contract.create(contractor_id: self.main_contractor.id, project_id: self.id)
+  end
 
 end

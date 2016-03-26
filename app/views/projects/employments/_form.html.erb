@@ -3,6 +3,6 @@
   <%=f.input :employee_id, collection: Employee.all, label: false, placeholder: 'Employee' %>
     <div class="modal-footer">
       <%=f.submit "Add this Employee", class: "btn btn-primary" %>
-      <%=link_to "or I'm done adding Employees",project_path(@project) %>
+      <%=link_to "or I'm done adding Employees",project_path(@project), class: "btn"%>
     </div>
 <% end %>

@@ -7,14 +7,34 @@
     <h3>New Sale</h3>
     </div>
    <div class="box-body">
-     <div class="col-md-6">
+     <div class="col-md-7">
+       <h3>Sales</h3>
+       <table class="table">
+         <thead>
+           <tr>
+             <td>Item</td>
+             <td>Quantity</td>
+             <td><span class="pull-right">Amount</span></td>
+             <td><span class="pull-right">Date</span></td>
+           </tr>
+         </thead>
+         <tbody>
+           <% @sales.each do |sale| %>
+             <tr>
+               <td><%= sale.inventory.name %></td>
+               <td><%= sale.quantity %> <%= sale.inventory.unit %></td>
+               <td><span class="pull-right"><%= number_to_currency sale.amount %></span></td>
+               <td><span class="pull-right"><%= sale.date.strftime("%B %e, %Y") if sale.date.present? %></span></td>
+             </tr>
+           <% end %>
+         </tbody>
+       </table>
      </div>
-     <div class="col-md-6">
-       <%= f.input :inventory_id, collection: Inventory.all, prompt: 'Select Inventory' %>
-       <%= f.input :quantity %>
-       <%= f.input :amount, label: "Amount Paid" %>
+     <div class="col-md-5">
+       <%= f.input :inventory_id, collection: Inventory.all, prompt: 'Select Item' %>
+       <%= f.input :quantity, input_html: {autocomplete: "off"} %>
+       <%= f.input :amount, label: "Amount Paid", input_html: {autocomplete: "off"} %>
        <%= f.input :date, as: :string, input_html: {class: "datepicker"} %>
-       <b id="total_amount"></b>
      </div>
   </div>
     <div class="box-footer">

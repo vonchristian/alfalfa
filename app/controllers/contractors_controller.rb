@@ -4,10 +4,12 @@ class ContractorsController < ApplicationController
   end
   def new
     @contractor = Contractor.new
+    authorize @contractor
   end
 
   def create
     @contractor = Contractor.create(contractor_params)
+    authorize @contractor
     if @contractor.save
       redirect_to @contractor, notice: "Contractor added successfully."
     else
@@ -17,11 +19,13 @@ class ContractorsController < ApplicationController
 
   def edit
     @contractor = Contractor.find(params[:id])
+    authorize @contractor
   end
 
   def update
      @contractor = Contractor.find(params[:id])
       @contractor.update(contractor_params)
+      authorize @contractor
     if @contractor.save
       redirect_to @contractor, notice: "Contractor updated successfully."
     else

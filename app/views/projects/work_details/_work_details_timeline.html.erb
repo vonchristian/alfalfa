@@ -1,19 +1,37 @@
 <div class="tab-pane active" id="work_details_timeline">
-
-
 <div class="row">
 <div class="col-md-4">
+<h4><center><%=@work_detail.quantity %></center>
+<h4 class="text-muted text-uppercase"><center>Quantity </center></h4>
+</div>
 
-          <h4>Accomplishments</h4>
-<%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail) %>
+<div class="col-md-4 border-left border-right">
+<h4><center class="text-green"><%=@work_detail.accomplished_quantity%></center>
+<h4 class="text-muted text-uppercase"><center class="text-success">Accomplished </center></h4>
+</div>
+<div class="col-md-4">
+<h4><center class="text-danger"><%=@work_detail.remaining_quantity%></center>
+<h4 class="text-muted text-uppercase"><center class="text-danger">Remaining</center></h4>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-md-6">
+
+          <h4>Accomplishments
+<span class="pull-right"><%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail), class: "btn btn-primary btn-sm" %></span>
+</h4>
+<hr>
           <%@work_detail.work_accomplishments.each do |accomplishment| %>
-          <%=accomplishment.inspect %>
+          <h4><%=accomplishment.quantity %>
+          <span class="pull-right"><%=accomplishment.date_accomplished.strftime("%B %e, %Y") %></span>
+          <span><%=accomplishment.payment_status %></span>
+          </h4>
           <% end %>
 
           </div>
-<div class="col-md-4">
-</div>
-          <div class="col-md-4">
+<div class="col-md-4 col-md-offset-1 border-left border-right">
+
           <h4>Costs Incurred</h4>
 
           <span class="text-muted">As of <%=Time.zone.now.strftime("%B %e %Y") %></span>

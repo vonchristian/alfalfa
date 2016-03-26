@@ -7,8 +7,9 @@ class EmployeesController < ApplicationController
 		authorize @employee
 	end
 	def create
-		authorize @employee
+
 		@employee = Employee.create(employee_params)
+		authorize @employee
 		if @employee.save
 			redirect_to @employee, notice: "Employee added successfully."
 		else
