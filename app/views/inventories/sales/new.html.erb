@@ -1,46 +1,54 @@
-<div class="container">
+<div class="col-md-12">
 <%= simple_form_for @sale do |f| %>
 <%= f.error_notification %>
-
 <div class="box box-solid">
-    <div class="box-header with-border">
+  <div class="box-header with-border">
     <h3>New Sale</h3>
-    </div>
-   <div class="box-body">
-     <div class="col-md-7">
-       <h3>Sales</h3>
-       <table class="table">
-         <thead>
-           <tr>
-             <td>Item</td>
-             <td>Quantity</td>
-             <td><span class="pull-right">Amount</span></td>
-             <td><span class="pull-right">Date</span></td>
-           </tr>
-         </thead>
-         <tbody>
-           <% @sales.each do |sale| %>
-             <tr>
-               <td><%= sale.inventory.name %></td>
-               <td><%= sale.quantity %> <%= sale.inventory.unit %></td>
-               <td><span class="pull-right"><%= number_to_currency sale.amount %></span></td>
-               <td><span class="pull-right"><%= sale.date.strftime("%B %e, %Y") if sale.date.present? %></span></td>
-             </tr>
-           <% end %>
-         </tbody>
-       </table>
-     </div>
-     <div class="col-md-5">
-       <%= f.input :inventory_id, collection: Inventory.all, prompt: 'Select Item' %>
-       <%= f.input :quantity, input_html: {autocomplete: "off"} %>
-       <%= f.input :amount, label: "Amount Paid", input_html: {autocomplete: "off"} %>
-       <%= f.input :date, as: :string, input_html: {class: "datepicker"} %>
-     </div>
   </div>
-    <div class="box-footer">
-    <%= f.submit 'Record Sale', class: 'btn btn-primary pull-right' %>
+  <div class="box-body">
+    <div class="col-md-7">
+      <h3>Sales</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th><span class="pull-right">Amount</span></th>
+              <th><span class="pull-right">Date</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sales.each do |sale| %>
+              <tr>
+                <td><%= sale.inventory.name %></td>
+                <td><%= sale.quantity %> <%= sale.inventory.unit %></td>
+                <td><span class="pull-right"><%= number_to_currency sale.amount %></span></td>
+                <td><span class="pull-right"><%= sale.date.strftime("%B %e, %Y") if sale.date.present? %></span></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-5 well">
+        <%= f.input :inventory_id, collection: Inventory.all, prompt: 'Select Item' %>
+        <%= f.input :quantity, input_html: {autocomplete: "off"} %>
+        <%= f.input :amount, label: "Amount Paid", input_html: {autocomplete: "off"} %>
+        <%= f.input :date, as: :string, input_html: {class: "datepicker"} %>
+        <div class="modal-footer">
+          <%= f.submit 'Record Sale', class: 'btn btn-primary pull-right' %>
+          
+        </div>
+      </div>
     </div>
   </div>
+</div>
 <% end %>
 </div>
+<script>
+    $(document).ready(function() {
+        $("#sale_inventory_id").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>
 

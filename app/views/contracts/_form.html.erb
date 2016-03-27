@@ -3,8 +3,8 @@
   <table class="table">
     <tbody>
     <tr>
-      <td style="width: 30%"><%=f.input :contractor_id, collection: Contractor.all,  label: false, placeholder: 'Contractor', prompt: '-- select contractor --' %></td>
-      <td style="width: 10%"><%=f.input :amount_subcontracted, label: false, placeholder: 'Amount' %></td>
+      <td style="width: 70%"><%=f.input :contractor_id, collection: Contractor.all,  label: false, prompt: '-- select contractor --' %></td>
+      <td style="width: 30%"><%=f.input :amount_subcontracted, label: false, placeholder: 'Amount' %></td>
 
     </tr>
     </tbody>
@@ -14,3 +14,10 @@
     <%=link_to "or I'm done adding Sub Contractors",project_path(@project) %>
   </div>
 <% end %>
+<script>
+    $(document).ready(function() {
+        $("#contract_contractor_id").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>

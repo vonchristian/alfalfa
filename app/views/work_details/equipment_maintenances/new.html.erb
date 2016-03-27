@@ -1,28 +1,47 @@
-<div class="container">
+<div class="col-md-12">
   <div class="box box-solid">
   <div class="box box-header">
     <h4>New Maintenace </h4>
   </div>
   <div class="box-body">
-
-    <%=simple_form_for @maintenance, url: :equipment_maintenances do |f| %>
+    <%=simple_form_for @maintenance, url: :work_detail_equipment_maintenances do |f| %>
     <%=f.error_notification %>
-<div class="row">
+  <div class="row">
     <div class="col-md-6">
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 well">
       <%=f.input :equipment, collection: Equipment.all %>
       <%=f.input :employee, collection: Employee.operator %>
-      <%=f.input :description %>
-      <%=f.input :quantity %>
-      <%=f.input :unit %>
+      <%=f.input :description, as: :text %>
+      <div class="row">
+        <div class="col-md-6">
+          <%=f.input :quantity %>
+        </div>
+        <div class="col-md-6">
+          <%=f.input :unit %>
+        </div>
+      </div>
       <%=f.input :amount %>
-      <%=f.input :remarks %>
+      <%=f.input :remarks, as: :text %>
+      <div class="modal-footer">
+        <%=f.submit "Save Maintenace Expense", class: "btn btn-primary" %>
+      </div>
     </div>
-  </div>
-  <div class="modal-footer">
-    <%=f.submit "Save Maintenace Expense", class: "btn btn-primary" %>
   </div>
     <% end %>
   </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $("#maintenance_equipment").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $("#maintenance_employee").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

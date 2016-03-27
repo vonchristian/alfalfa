@@ -1,17 +1,17 @@
 <%= simple_form_for ([@project, @work_detail]) do |f| %>
   <%=f.error_notification %>
-
-  <%=f.input :code,  placeholder: 'Code' %>
-      <%=f.input :description, placeholder: 'Descrption', as: :text, input_html:{rows: 5} %>
-      <%=f.input :unit, placeholder: 'Unit' %>
-      <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
-      <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %>
-      <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
-
+  <div class="well">
+    <%=f.input :code,  placeholder: 'Code' %>
+    <%=f.input :description, placeholder: 'Descrption', as: :text, input_html:{rows: 5} %>
+    <%=f.input :unit, placeholder: 'Unit' %>
+    <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+    <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %>
+    <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
     <div class="modal-footer">
       <%=f.submit "Add this Work Detail", class: "btn btn-primary btn-block" %>
       <hr>
-      <span><%=link_to " or Back to Project",project_path(@project) , class: "btn btn-default btn-block"%>
+      <%=link_to " or Back to Project",project_path(@project) , class: "btn btn-default btn-block"%>
     </div>
+  </div>
 <% end %>
 

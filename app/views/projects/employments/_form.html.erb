@@ -6,3 +6,10 @@
       <%=link_to "or I'm done adding Employees",project_path(@project), class: "btn"%>
     </div>
 <% end %>
+<script>
+    $(document).ready(function() {
+        $("#employment_employee_id").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>

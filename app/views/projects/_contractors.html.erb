@@ -1,32 +1,31 @@
 <div class="tab-pane" id="contractors">
-    <div class="row">
-        <div class="col-md-12">
-            <span><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa--user-plus"></i> Add Subcontractor<%end%></span>
-        </div>
+  <div class="row">
+    <span><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa--user-plus"></i> Add Subcontractor<%end%></span>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-4">
+      <h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span></h4>
+      <hr>
+      <h4 class="text-danger">Amount Subcontracted: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount_subcontracted) %></span></h4>
+      <hr>
+      <h4>Remaining: <span class="pull-right"><%=number_to_currency @project.remaining_uncontracted_amount %></span></h4>
     </div>
-
-<div class="row">
-<div class="col-md-4">
-
-          <h4>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span></h4>
-          <hr>
-          <h4 class="text-danger">Amount Subcontracted: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount_subcontracted) %></span></h4>
-          <hr>
-          <h4>Remaining: <span class="pull-right"><%=number_to_currency @project.remaining_uncontracted_amount %></span></h4>
-
-    </div>
-    <div class="col-md-6 col-md-offset-1">
-
-    <%@project.contracts.each do |contract| %>
-
-    <h4> <span><%= image_tag attachment_url(contract.contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
-</span> <%=contract.contractor %>
-    <i class="help-block"><%=contract.contractor.full_name %></i>
-    </h4>
-    <hr>
-    <% end %>
+    <div class="col-md-7 col-md-offset-1">
+      <table class="table">
+        <%@project.contracts.each do |contract| %>
+          <tr>
+            <td width="65px"><%= image_tag attachment_url(contract.contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %></td>
+            <td><h4>
+              <p><%=contract.contractor %></p>
+              <i class="help-block"><%=contract.contractor.full_name %></i></h4>
+            </td>
+            <td><h4 class="text-danger"><%= number_to_currency contract.amount_subcontracted%></h4></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
   </div>
-  </div>
+</div>
 
 

@@ -1,11 +1,12 @@
 <%= simple_form_for @employee do |f| %>
 <%=f.error_notification %>
-<div class="container">
-  <div class="box box-solid">
-    <div class="box-header with-border">
-      <h4 class="text-center">Employee Details </h4>
-    </div>
-    <div class="box-body">
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h4 class="text-center">Employee Details </h4>
+      </div>
+      <div class="box-body">
         <div class="row">
           <div class="col-md-4 col-md-offset-1">
             <%if @employee.photo.blank? %>
@@ -29,9 +30,10 @@
             <%=f.input :rate  %>
           </div>
         </div>
-        <div class="box-footer">
-          <%=f.submit 'Save Employee', class: 'btn btn-primary' %>
-        </div>
+      </div>
+      <div class="box-footer">
+        <%=f.submit 'Save Employee', class: 'btn btn-primary pull-right' %>
+      </div>
     </div>
   </div>
 </div>

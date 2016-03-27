@@ -1,53 +1,41 @@
-<div class="container">
-  <div class="box box-solid">
-  <div class="box-header with-border">
-   </span> <h4>Work Details</h4>
-  </div>
-
-    <div class="box-body">
 <div class="row">
-<div class="col-md-7">
-            <table class="table table-hover">
-
-
-                   <thead>
-                            <tr class="text-uppercase">
-
-                                <th style="width: 60%">Description</th>
-
-                                <th><span class="pull-right">Total Cost</span></th>
-                               <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                            <% if @project.work_details.present? %>
-                               <% @project.work_details.each do |work_detail| %>
-
-                                  <td  style="width: 30%" ><%=link_to work_detail.description, [@project, work_detail] %></td>
-
-
-                                  <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
-                                </tr>
-                               <% end %>
-                               <tr>
-                                 <td><h4 class="pull-right">Total of Amounts: </h4></td>
-                                 <td><h4 class="pull-right"><%= number_to_currency @project.work_details.total%></h4></td>
-
-                               </tr>
-                            <% end %>
-                            </tbody>
-                            </table>
-</div>
-
-<div class="col-md-4">
-<%= render 'form' %>
-</div>
-
-              </div>
-
-        </div>
+<div class="col-md-12">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+     </span> <h4>Work Details</h4>
     </div>
-</div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-7">
+          <table class="table table-hover">
+            <thead>
+              <tr class="text-uppercase">
+                <th style="width: 60%">Description</th>
+                <th><span class="pull-right">Total Cost</span></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @project.work_details.present? %>
+                <% @project.work_details.each do |work_detail| %>
+                  <tr>
+                    <td style="width: 30%" ><%=link_to work_detail.description, [@project, work_detail] %></td>
+                    <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td><h4 class="pull-right">Total of Amounts: </h4></td>
+                  <td><h4 class="pull-right"><%= number_to_currency @project.work_details.total%></h4></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </div>

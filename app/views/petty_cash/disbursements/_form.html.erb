@@ -16,8 +16,9 @@
   <%=f.input :description, as: :text %>
 
 	<div class="modal-footer">
-		<%=link_to "I'm done adding Entries", petty_cash_index_path %>
 		<%=f.submit "Record Entry", data: {disable_with: 'Saving Entry...'}, class: "btn btn-danger" %>
+		<hr>
+		<%=link_to "I'm done adding Entries", petty_cash_index_path %>
 	</div>
 <% end %>
 
