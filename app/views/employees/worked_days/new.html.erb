@@ -7,7 +7,8 @@
     </div>
     <div class="box-body">
       <div class="col-md-6 col-md-offset-3">
-        <%=f.input :number_of_days, autofocus: true %>
+      <%=f.input :project_id, collection: @employee.employments.map{ |a| [a.project.name, a.project.id]} %>
+        <%=f.input :number_of_days%>
         <div class="row">
           <div class="col-md-6">
             <label>Date</label>

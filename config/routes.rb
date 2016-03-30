@@ -88,10 +88,12 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
   resources :accounts do
     resources :entries
   end
-  
+
   resources :fund_transfers
 
   resources :equipment do
 
   end
+
+
 end
