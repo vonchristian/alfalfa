@@ -30,7 +30,7 @@ class Employee < ActiveRecord::Base
   end
 
   def unpaid_worked_days_amount
-    unpaid_worked_days * rate
+    self.unpaid_worked_days * rate
   end
 
   def unpaid_cash_advances
@@ -39,6 +39,10 @@ class Employee < ActiveRecord::Base
 
   def gross_pay
     self.unpaid_worked_days_amount - self.unpaid_cash_advances
+  end
+
+  def gross_pay(project)
+    (self.unpaid_worked_days_for(project) * self. rate) - self.unpaid_cash_advances
   end
 
 
