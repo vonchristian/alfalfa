@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
-  attachment :profile_photo
-    enum role: [:system_administrator, :accounting_officer, :project_engineer, :project_manager, :supply_officer, :owner, :liason_officer, :monitoring_officer, :mechanical_engineer]
 
+  enum role: [:system_administrator, :accounting_officer, :project_engineer, :project_manager, :supply_officer, :owner, :liason_officer, :monitoring_officer, :mechanical_engineer]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_attached_file :profile_photo, styles: { large: "120x120>", medium: "70x70>", thumb: "40x40>", small: "30x30>", x_small: "20x20>" }, default_url: "/images/:style/missing.png"
+  validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   def full_name
     "#{first_name.titleize} #{last_name.titleize}"

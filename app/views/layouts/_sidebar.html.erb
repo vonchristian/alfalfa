@@ -3,9 +3,7 @@
   <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-
-           <%=link_to (image_tag attachment_url(current_user, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle'), user_path(current_user) %>
-
+        <%=link_to (image_tag current_user.profile_photo.url(:thumb), class: 'img-circle'), user_path(current_user) %>
       </div>
       <div class="pull-left info">
         <p><%= link_to current_user.first_name, user_path(current_user) %></p>

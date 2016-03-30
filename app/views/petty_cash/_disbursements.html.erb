@@ -1,11 +1,11 @@
 <div class="active tab-pane" id="disbursements">
   <div class="row">
-    <table class="table table-compressed">
+    <table class="table table-compressed table-hover">
       <thead>
         <tr class="text-uppercase">
-          <th style="width: 70px">Recipient</th>
+          <th style="width: 130px"><center>Recipient</center></th>
           <th><center>Description</center></th>
-          <th style="width: 20%">Date</th>
+          <th style="width: 20%"><center>Date</center></th>
           <th style="width: 20%"><center>Amount</center></th>
         </tr>
       </thead>
@@ -13,14 +13,12 @@
         <%@petty_cash.credit_entries.entered_on(:from_date => @from_date, :to_date => @to_date).each do |entry| %>
           <tr>
             <td>
-              <center>
-                <%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"),  class: "img-circle" %><br>
-                <%=entry.recipient.try(:name) %>
-              </center>
+              <%= image_tag entry.recipient.profile_photo.url(:x_small), class: "img-rounded" %> 
+              <%=entry.recipient.try(:name) %>
             </td>
-            <td style="line-height: 40px"><center><%=entry.description %></center></td>
-            <td style="line-height: 40px"><%=entry.date.strftime("%B %e, %Y") %></td>
-            <td style="line-height: 40px">
+            <td><center><%=entry.description %></center></td>
+            <td><center><%=entry.date.strftime("%B %e, %Y") %></center></td>
+            <td>
               <span class="pull-right">
                 <%=number_to_currency entry.credit_amounts.last.amount %>
               </span>

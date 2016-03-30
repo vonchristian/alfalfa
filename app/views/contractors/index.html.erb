@@ -14,7 +14,7 @@
             <% @contractors.main_contractors.each do |contractor| %>
               <div class="row">
                 <div class="col-md-2 col-md-offset-1  col-sm-3 col-xs-3">
-                  <%= image_tag attachment_url(contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-square" %>
+                  <%= image_tag contractor.profile_photo.url(:medium), class: "img-rounded" %>
                 </div>
                 <div class="col-md-7 col-sm-9 col-xs-9">
                   <h4><%= link_to contractor.full_name.upcase, contractor %></h4>
@@ -28,7 +28,7 @@
             <% @contractors.sub_contractors.each do |contractor| %>
               <div class="row">
                 <div class="col-md-2 col-md-offset-1  col-sm-3 col-xs-3">
-                  <%= image_tag attachment_url(contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %>
+                  <%= image_tag contractor.profile_photo.url(:medium),  class: "img-rounded" %>
                 </div>
                 <div class="col-md-7 col-sm-9 col-xs-9">
                   <h4><%= link_to contractor.full_name.upcase, contractor %></h4>

@@ -1,15 +1,16 @@
 <div class="col-md-12">
 	<div class="box box-solid">
 		<div class="box-header with-border">
-			<h4>User Access<span class="pull-right"><%=link_to "New Employee", new_user_path, class: "btn btn-primary" %></span></h4>
+			<h4>User Access<span class="pull-right"><%=link_to "New User", new_user_path, class: "btn btn-primary" %></span></h4>
 		</div>
 		<div class="box-body">
 			<%@users.each do |user| %>
 				<div class="col-md-2">
-					<%=link_to (image_tag attachment_url(user, :profile_photo, :fill, 150, 150, fallback: "default-small.png"),  class: "img-square center-block"), user %>
-					<h4><center><%=link_to user.full_name.upcase %></center></h4>
-					<span class="text-muted"><center><%=user.try(:role).titleize %></center></span>
-					<br>
+					<%= link_to user do %>
+						<%= image_tag user.profile_photo.url(:large),  class: "img-rounded center-block" %>
+						<h5><center><%= user.full_name.upcase %></center></h5>
+						<span class="text-muted"><center><%=user.try(:role).titleize %></center></span>
+					<% end %>
 				</div>
 			<% end %>
 		</div>

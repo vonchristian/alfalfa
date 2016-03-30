@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327125933) do
+ActiveRecord::Schema.define(version: 20160330154714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,15 +67,18 @@ ActiveRecord::Schema.define(version: 20160327125933) do
   add_index "amounts", ["entry_id", "account_id"], name: "index_amounts_on_entry_id_and_account_id", using: :btree
   add_index "amounts", ["type"], name: "index_amounts_on_type", using: :btree
 
-  create_table "attachments", force: :cascade do |t|
+  create_table "attachment_files", force: :cascade do |t|
     t.integer  "project_id"
-    t.string   "attachment_file_id"
     t.text     "description"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "attachment_report_file_name"
+    t.string   "attachment_report_content_type"
+    t.integer  "attachment_report_file_size"
+    t.datetime "attachment_report_updated_at"
   end
 
-  add_index "attachments", ["project_id"], name: "index_attachments_on_project_id", using: :btree
+  add_index "attachment_files", ["project_id"], name: "index_attachment_files_on_project_id", using: :btree
 
   create_table "billable_materials", force: :cascade do |t|
     t.integer  "contractor_id"
@@ -121,15 +124,19 @@ ActiveRecord::Schema.define(version: 20160327125933) do
   add_index "contract_amount_revisions", ["contractor_id"], name: "index_contract_amount_revisions_on_contractor_id", using: :btree
 
   create_table "contractors", force: :cascade do |t|
-    t.boolean  "main_contractor",  default: false
+    t.boolean  "main_contractor",            default: false
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "company"
     t.string   "position"
     t.string   "profile_image_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "profile_photo_file_name"
+    t.string   "profile_photo_content_type"
+    t.integer  "profile_photo_file_size"
+    t.datetime "profile_photo_updated_at"
   end
 
   create_table "contracts", force: :cascade do |t|
@@ -178,8 +185,12 @@ ActiveRecord::Schema.define(version: 20160327125933) do
     t.integer  "position"
     t.decimal  "rate"
     t.integer  "project_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "profile_photo_file_name"
+    t.string   "profile_photo_content_type"
+    t.integer  "profile_photo_file_size"
+    t.datetime "profile_photo_updated_at"
   end
 
   add_index "employees", ["project_id"], name: "index_employees_on_project_id", using: :btree
@@ -441,8 +452,8 @@ ActiveRecord::Schema.define(version: 20160327125933) do
   add_index "time_extensions", ["project_id"], name: "index_time_extensions_on_project_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                      default: "", null: false
+    t.string   "encrypted_password",         default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -451,8 +462,12 @@ ActiveRecord::Schema.define(version: 20160327125933) do
     t.string   "last_name"
     t.integer  "role"
     t.string   "profile_photo_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "profile_photo_file_name"
+    t.string   "profile_photo_content_type"
+    t.integer  "profile_photo_file_size"
+    t.datetime "profile_photo_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -500,7 +515,7 @@ ActiveRecord::Schema.define(version: 20160327125933) do
   add_index "worked_days", ["project_id"], name: "index_worked_days_on_project_id", using: :btree
 
   add_foreign_key "amount_revisions", "projects"
-  add_foreign_key "attachments", "projects"
+  add_foreign_key "attachment_files", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"
   add_foreign_key "billable_materials", "projects"

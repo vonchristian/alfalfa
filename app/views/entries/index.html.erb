@@ -4,20 +4,23 @@
 				<h4>Entries Logs</h4>
 			</div>
 			<div class="box-body">
-				<% @entries.each do |entry| %>
-					<div class="col-md-3">
-						<span class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
-					</div>
-					<div class="col-md-9">
-						<%#=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
-						<%=entry.recipient.try(:name) %> - 
-						<%=number_to_currency entry.debit_amounts.last.try(:amount) %> - 
-						<%=entry.description %> - 
-						<%#=entry.debit_amounts.last.account.type.sub("Plutus::","") %> 
-						<%=entry.entriable if entry.entriable %>
-						<hr>
-					</div>
-				<% end %>
+				<table class="table table-hover">
+					<% @entries.each do |entry| %>
+						<tr>
+							<td width="20%">
+								<span class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+							</td>
+							<td>
+								<%#=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+							<td><%=entry.recipient.try(:name) %></td>
+							<td width="10%"><span class="pull-right"><%=number_to_currency entry.debit_amounts.last.try(:amount) %></span></td>
+							<td width="30%"><center><%=entry.description %></center></td>
+							<td><%=entry.debit_amounts.last.account.type.sub("Plutus::","") %> </td>
+							<td><%=entry.entriable if entry.entriable %></td>
+							</td>
+						</tr>
+					<% end %>
+				</table>
 			</div>
 		</div>
 	</div>

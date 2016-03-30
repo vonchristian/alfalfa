@@ -72,13 +72,13 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <%= image_tag attachment_url(current_user, :profile_photo, :fill, 20, 20, fallback: "default-xs-small.png"), class: 'user-image' %>
+                  <%= image_tag current_user.profile_photo.url(:thumb), class: 'user-image' %>
                 <span class="hidden-xs"><%=current_user.full_name %></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <%= image_tag attachment_url(current_user, :profile_photo, :fill, 150, 150, fallback: "default-small.png") %>
+                  <%= image_tag current_user.profile_photo.url(:medium) %>
                   <p>
                     <%=current_user.full_name %>
                     <small><%=current_user.role.to_s.titleize %></small>

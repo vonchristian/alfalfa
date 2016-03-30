@@ -8,13 +8,13 @@
       </div>
       <div class="box-body">
         <div class="col-md-6 col-md-offset-3">
-          <%if @employee.photo.blank? %>
+          <%if @employee.profile_photo.blank? %>
             <%=image_tag("default-small.png", :class=>"img-square center-block ") %>
             <br>
           <% else %>
-            <%= image_tag attachment_url(@employee, :photo, :fill, 150, 150), class: 'center-block img-responsive img-rounded'%>
+            <%= image_tag @employee.profile_photo.url(:medium), class: 'center-block img-responsive img-rounded'%>
           <% end %>
-          <%= f.file_field :photo, class: 'center-block'%>
+          <%= f.input :profile_photo, class: 'center-block', as: :file %>
           <hr>
           <div class="row">
             <div class="col-md-6">

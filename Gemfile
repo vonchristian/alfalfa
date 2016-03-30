@@ -6,10 +6,9 @@ gem 'rails'
 gem 'draper'
 gem 'jquery-ui-rails'
 gem 'public_activity'
-gem "refile", require: "refile/rails"
-gem "refile-mini_magick"
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
+gem 'paperclip', '~> 4.3.2'
 gem 'pg_search'
 gem 'prawn'
 gem 'prawn-table'

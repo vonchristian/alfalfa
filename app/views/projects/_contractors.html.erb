@@ -2,10 +2,12 @@
   <div class="box-header with-border">
     <div class="row">
       <div class="col-md-6">
-        <h4>List of Contractors for this Project</h4>
+        <h4>List of Contractors on this Project</h4>
       </div>
       <div class="col-md-6">
-        <span><%=link_to new_project_contract_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa--user-plus"></i> Add Subcontractor<%end%></span>
+        <%if policy(Contract.new).create? %>
+          <%=link_to new_project_contract_path(@project), class: "btn btn-primary pull-right" do %><i class="fa fa--user-plus"></i> Add Subcontractor<%end%>
+        <%end%>
       </div>
     </div>
   </div>
@@ -15,11 +17,11 @@
       <table class="table">
         <%@project.contracts.each do |contract| %>
           <tr>
-            <td width="65px"><%= image_tag attachment_url(contract.contractor, :profile_image, :fill, 60, 60, format: "jpg", fallback: "default-small.png"),  class: "img-circle" %></td>
+            <td width="65px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
             <td>
               <%= link_to contract.contractor do %>
                 <h5><p><%=contract.contractor %></p>
-                <i class="help-block"><%=contract.contractor.full_name %></i></h5>
+                <p class="help-block"><%=contract.contractor.full_name %></p></h5>
               <% end %>
             </td>
             <td><h5 class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></h5></td>
@@ -28,11 +30,14 @@
       </table>
     </div>
     <div class="col-md-4 col-md-offset-1">
-      <h5>Project Amount: <span class="pull-right"><%=number_to_currency @project.cost %></span></h5>
+      <h4 class="text-success text-center"><%=number_to_currency @project.cost %></h4>
+      <span class="help-block text-center">Project Amount</span>
       <hr>
-      <h5 class="text-danger">Amount Subcontracted: <span class="pull-right"><%=number_to_currency @project.contracts.sum(:amount_subcontracted) %></span></h5>
+      <h4 class="text-danger text-center"><%=number_to_currency @project.contracts.sum(:amount_subcontracted) %></h4>
+      <span class="help-block text-center">Amount Subcontracted</span>
       <hr>
-      <h5>Remaining: <span class="pull-right"><%=number_to_currency @project.remaining_uncontracted_amount %></span></h5>
+      <h4 class="text-success text-center"><%=number_to_currency @project.remaining_uncontracted_amount %></h4>
+      <span class="help-block text-center">Remaining Amount</span>
     </div>
   </div>
 </div>

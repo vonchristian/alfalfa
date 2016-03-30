@@ -1,7 +1,6 @@
 class Worker < ActiveRecord::Base
   enum position:[:laborer, :skilled_laborer, :foreman, :operator, :welder, :driver]
   enum sex:[:male, :female]
-  attachment :photo
 
   def to_s
     full_name

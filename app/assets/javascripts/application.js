@@ -15,5 +15,4 @@
 //= require select2
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
-//= require refile
 //= require_tree .

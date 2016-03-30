@@ -1,0 +1,35 @@
+<div class="tab-pane" id="attachments">
+  <div class="box-header with-border">
+    <div class="pull-right">
+      <%if policy(AttachmentFile.new).create? %>
+        <%=link_to new_project_attachment_file_path(@project), class: "btn btn-default bg-blue-active" do %><i class="fa fa-user-plus"></i> Add Attachment <%end%>
+      <% end %>
+    </div>
+  </div>
+  <div class="box-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Description</th>
+          <th>Attached on</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.attachment_files.each do |attachment| %>
+          <tr>
+            <td>
+              <%= link_to attachment.attachment_report_file_name, project_attachment_file_path(@project, attachment.id) %>
+            </td>
+            <%= attachment.attachment_report.path %>
+            <td><%= attachment.description %></td>
+            <td><%= attachment.created_at.strftime("%B %e, %Y") %></td>
+            <td><%= link_to 'Remove', project_attachment_file_path(@project, attachment.id), method: :delete, data: { confirm: 'Are you sure you want to remove this attachment from this project?' }, class: "btn btn-danger btn-xs" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

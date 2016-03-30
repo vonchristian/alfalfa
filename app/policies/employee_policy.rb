@@ -12,7 +12,7 @@ class EmployeePolicy < ApplicationPolicy
   end
 
   def create?
-  user.accounting_officer?
+    user.accounting_officer?
   end
 
   def edit?

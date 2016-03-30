@@ -17,13 +17,13 @@
             <% if @project.notice_to_proceed.present? %>
               <p class="text-muted"><%=@project.notice_to_proceed.date.strftime("%b %e, %Y")%>
                 <span class="pull-right">
-                  <%= link_to "Edit", edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed.id) if current_user.project_engineer? || current_user.project_manager? || current_user.monitoring_officer? %>
+                  <%= link_to "Edit", edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed.id), class: 'btn btn-primary btn-xs' if current_user.project_engineer? || current_user.project_manager? || current_user.monitoring_officer? %>
                 </span>
               </p>
             <% else %>
-              <p class="text-muted">No NTP Date of Award yet.</p>
+              <p class="text-muted">No NTP Date yet.</p>
               <% if current_user.project_engineer? || current_user.project_manager? || current_user.monitoring_officer? %>
-                <p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn btn-primary btn-sm" %></p>
+                <p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn btn-primary btn-xs" %></p>
               <% else %>
               <% end %>
             <% end %>
@@ -55,7 +55,9 @@
         </tr>
         <tr>
           <td>
-            <%= link_to "Update", edit_project_path(@project), class: 'btn btn-block btn-primary' %>
+            <% if current_user.project_engineer? || current_user.project_manager? || current_user.monitoring_officer? %>
+              <%= link_to "Update", edit_project_path(@project), class: 'btn btn-block btn-primary' %>
+            <% end %>
           </td>
         </tr>
       </table>
@@ -70,7 +72,7 @@
             <tbody>
               <% @project.remarks.each do |remark| %>
                 <tr>
-                  <td style="width: 5%"><%= image_tag attachment_url(remark.remarker, :profile_photo, :fill, 50, 40, fallback: "default-xs-small.png"),  class: "img-rounded" %></td>
+                  <td style="width: 5%"><%= image_tag remark.remarker.profile_photo.url(:thumb),  class: "img-rounded" %></td>
                   <td>
                     <b class="text-muted"><%=remark.remarker.full_name %> -> <%=remark.title %></b>
                     <small class="pull-right text-muted"> <i class="fa fa-clock-o"></i> <%=remark.created_at.strftime("%e %b, %H:%M") %></small>

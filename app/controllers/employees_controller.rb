@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+	
 	def index
 		@employees = Employee.all
 	end
@@ -23,8 +24,8 @@ class EmployeesController < ApplicationController
 	end
 
 	def update
-		authorize @employee
 		@employee = Employee.find(params[:id])
+		authorize @employee
 		if @employee.update(employee_params)
 			redirect_to @employee, notice: "Updated successfully."
 		else
@@ -37,6 +38,6 @@ class EmployeesController < ApplicationController
 	end
    private
    def employee_params
-   	params.require(:employee).permit(:rate, :first_name, :last_name, :mobile_number, :email, :position, :photo)
+   	params.require(:employee).permit(:rate, :first_name, :last_name, :mobile_number, :email, :position, :profile_photo)
    end
 end

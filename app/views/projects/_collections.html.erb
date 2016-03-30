@@ -1,32 +1,36 @@
 <div class="tab-pane" id="collections">
   <div class="box-header with-border">
-    <div class="pull-right">
-      <%=link_to new_project_collection_path(@project), class: "btn btn-defualt bg-blue-active" do %>
-        <i class="fa fa-plus-circle"></i> New Collection 
-      <% end %>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>List of Collections on this Project</h4>
+      </div>
+      <div class="col-md-6">
+        <%if policy(Collection.new).create? %>
+          <%=link_to new_project_collection_path(@project), class: "btn btn-primary pull-right" do %>
+            <i class="fa fa-plus-circle"></i> New Collection 
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="box-body">
-    <div class="col-md-10 col-md-offset-1">
-      <div class="col-md-4">
-        <h4 class="text-success text-center"><%=number_to_currency @project.total_collection %></h4>
-        <span class="help-block text-center">Collected</span>
-      </div>
-      <div class="col-md-4">
-        <h4 class="text-danger text-center"><%=number_to_currency @project.remaining_collection %> </h4>
-        <span class="help-block text-center">Remaining </span>
-      </div>
-      <div class="col-md-4">
-      </div>
+    <div class="col-md-6 border-right">
+      <table class="table">
+        <% @project.collections.each do |collection| %>
+          <tr>
+            <td><h5><%= number_to_currency collection.amount %></h5></td>
+            <td><span class="pull-right"><%=collection.date.strftime("%B %e, %Y") %></span></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
-    <table class="table">
-      <% @project.collections.each do |collection| %>
-        <tr>
-          <td><h5><%= number_to_currency collection.amount %></h5></td>
-          <td><span class="pull-right"><%=collection.date.strftime("%B %e, %Y") %></span></td>
-        </tr>
-      <% end %>
-    </table>
+    <div class="col-md-4 col-md-offset-1">
+      <h4 class="text-success text-center"><%=number_to_currency @project.total_collection %></h4>
+      <span class="help-block text-center">Collected</span>
+      <hr>
+      <h4 class="text-danger text-center"><%=number_to_currency @project.remaining_collection %> </h4>
+      <span class="help-block text-center">Remaining </span>
+    </div>
   </div>
 </div>
 

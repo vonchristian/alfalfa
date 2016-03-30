@@ -11,8 +11,8 @@
           <%@petty_cash.credit_entries.today.each do |entry| %>
             <tr>
               <td>
-                <%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: "img-circle" %><br>
-                <%=entry.recipient.try(:name) %>
+                <%= image_tag entry.recipient.profile_photo.url(:x_small), class: "img-rounded" %> 
+              <%=entry.recipient.try(:name) %>
               </td>
               <!-- <td><%#=entry.date.strftime("%B %e, %Y") %></td> -->
               <td><span class="pull-right"><%=number_to_currency entry.credit_amounts.last.amount %></span></td>

@@ -24,7 +24,7 @@ class Project < ActiveRecord::Base
   has_many :work_accomplishments, through: :work_details
   has_many :workers, class_name: "Employee"
   has_many :remarks
-  has_many :attachments
+  has_many :attachment_files
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   

@@ -19,7 +19,7 @@
             <tbody>
               <% @employees.each do |employee| %>
                 <tr>
-                  <td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-circle center-block" %></td>
+                  <td><%= image_tag employee.profile_photo.url(:thumb), class: "img-circle center-block" %></td>
                   <td>
                     <b><%=link_to employee.full_name.upcase, employee %></b><br>
                     <%=employee.position.titleize %><br>

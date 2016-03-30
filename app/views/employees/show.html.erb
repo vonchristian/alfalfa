@@ -3,7 +3,7 @@
     <div class="box-body">
       <div class="col-md-3 border-right">
         <div class="box-body box-profile">
-          <%= image_tag attachment_url(@employee, :photo, :fill, 60, 60, format: "jpg", fallback: "default.png"),  class: "profile-user-img img-responsive img-circle" %>
+          <%= image_tag @employee.profile_photo.url(:medium),  class: "profile-user-img img-responsive img-circle" %>
           <h3 class="profile-username text-center"><%=@employee.full_name %></h3>
           <p class="text-muted text-center"><%=@employee.position.titleize %></p>
           <br>
@@ -29,7 +29,7 @@
                   <% end %>
                 <% else %>
                   <p class="text-muted">
-                    <%=link_to "Add Education", new_employee_educational_attainment_path(@employee) %>
+                    <%=link_to "Add Education", new_employee_educational_attainment_path(@employee) if @user == current_user || current_user.accounting_officer? %>
                   </p>
                 <% end %>
               </td>
@@ -41,7 +41,9 @@
               </td>
             </tr>
           </table>
-          <a href="/employees/<%=@employee.id %>/edit" class="btn btn-primary btn-block"><b>Update Info</b></a>
+          <% if @user == current_user || current_user.accounting_officer? %>
+            <a href="/employees/<%=@employee.id %>/edit" class="btn btn-primary btn-block"><b>Update Info</b></a>
+          <% end %>
         </div>
       </div>
       <div class="col-md-9">
@@ -49,7 +51,7 @@
           <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
           <li><a href="#projects" data-toggle="tab">Projects</a></li>
           <li><a href="#cash_advances" data-toggle="tab">Cash Advances</a></li>
-          <li><a href="#worked_days" data-toggle="tab">Days Worked</a></li>
+          <li><a href="#worked_days" data-toggle="tab">Days of Work</a></li>
           <li><a href="#settings" data-toggle="tab">Settings</a></li>
         </ul>
         <div class="tab-content">

@@ -58,7 +58,7 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
   resources :projects do
     resources :equipment_costs, module: :projects
     resources :add_workers, module: :projects
-    resources :attachments, module: :projects
+    resources :attachment_files, module: :projects
     resources :assign_project_engineers, module: :projects
     resources :activities, only:[:index], module: :projects
     resources :work_details, module: :projects
