@@ -3,7 +3,7 @@ class PettyCashPdf < Prawn::Document
   TABLE_WIDTHS = [150, 200, 100, 100]
   
   def initialize(petty_cash, from_date, to_date, view_context)
-    super(margin: 30, page_size: [612, 1008], page_layout: :portrait)
+    super(margin: 30, page_size: [612, 948], page_layout: :portrait)
     @petty_cash = petty_cash
     @from_date = from_date
     @to_date = to_date
@@ -21,22 +21,29 @@ class PettyCashPdf < Prawn::Document
   def heading
     text "Petty Cash Summary", align: :center
     move_down 5
-    text "Alfalfa Construction", align: :center, size: 10
+    text "Alfalfa Construction", align: :center, size: 11
     move_down 5
-    text "#{@from_date.strftime("%B %e, %Y")} - #{@to_date.strftime("%B %e, %Y")}", align: :center, size: 10
+    text "#{@from_date.strftime("%B %e, %Y")} - #{@to_date.strftime("%B %e, %Y")}", align: :center, size: 11
     move_down 15
   end
 
-  def data_summary 
-    [["Beginning Balance:", "#{(price @petty_cash.balance({from_date: @petty_cash.created_at, to_date: @from_date }))}"],
-      ["Fund Transfers:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
-      ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
-      ["Outstanding Balance:", "#{(price @petty_cash.balance({from_date: @petty_cash.created_at, to_date: @to_date}))}"]]
+  def data_summary
+    if Entry.first.date.beginning_of_day >= @from_date
+      [["Beginning Balance:", "P 0"],
+        ["Fund Transfer:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
+        ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
+        ["Outstanding Balance:", "#{(price @petty_cash.balance({from_date: @from_date, to_date: @to_date}))}"]]
+    elsif Entry.first.date.beginning_of_day <= @from_date
+      [["Beginning Balance:", "#{(price @petty_cash.balance)}"],
+        ["Fund Transfer:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
+        ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
+        ["Outstanding Balance:", "#{(price @petty_cash.balance - @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"]]
+    end
 
   end
 
   def summary
-    table(data_summary, :cell_style => {size: 10, :padding => [2, 2, 2, 2]}) do
+    table(data_summary, :cell_style => {size: 11, :padding => [2, 2, 2, 2]}) do
       cells.borders = []
     end
   end

@@ -1,27 +1,23 @@
 <div class="tab-pane" id="remarks">
-<div class="row">
- <div class="col-md-6 col-md-offset-2">
-             
-                    <div class="box-body">
-                     <center><%=link_to new_project_remark_path(@project), class: "btn btn-default" do %><i class="fa fa-plus-circle"></i> Add Remarks<%end%></center>
-                      <br>
-                      <table class="table with-border">
-
-                      <%@project.remarks.each do |remark| %>
-
-                         <tr>
-                        <td  width="55px"><%= image_tag attachment_url(remark.remarker, :profile_photo, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></td>
-                        <td><span class="text-success"><b><%=remark.title %></b></span>
-                        <small class="help-block text-muted">by: <%=remark.remarker.full_name if remark.remarker %> at <%=remark.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
-                        <span class="help-block text-muted"><%= remark.content %></span></td>
-                        </tr>
-                      <% end %>
-                      </table>
-                      <br>
-                      
-                       
-                    
-                  </div>
-                  </div>
-                  </div>
+  <div class="box-header with-border">
+    <div class="pull-right">
+      <%=link_to new_project_remark_path(@project), class: "btn btn-default bg-blue-active" do %><i class="fa fa-plus-circle"></i> Add Remarks<%end%>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="col-md-6 col-md-offset-2">
+      <table class="table with-border">
+        <%@project.remarks.each do |remark| %>
+          <tr>
+            <td  width="55px"><%= image_tag attachment_url(remark.remarker, :profile_photo, :fill, 50, 50, format: "jpg", fallback: "default-xs-small.png"),  class: "img-circle" %></td>
+            <td>
+              <span class="text-success"><b><%=remark.title %></b></span>
+              <small class="help-block text-muted">by: <%=remark.remarker.full_name if remark.remarker %> at <%=remark.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
+              <span class="help-block text-muted"><%= remark.content %></span>
+            </td>
+          </tr>
+        <% end %>
+      </table>          
+    </div>
+  </div>
 </div>

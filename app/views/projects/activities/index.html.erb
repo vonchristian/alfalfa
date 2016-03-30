@@ -1,28 +1,24 @@
 <div class="col-md-12">
-<div class="box box-solid">
-<div class="box-body">
-<h4><small class="pull-left"><%=link_to "Back to Project", project_path(@project) %></small><center class="text-muted">Here's whats been happening to this project</center></h4>
-<hr>
-<% @activities.each do |activity| %>
-<div class="col-md-1">
-<center><i class="<%=activity.icon %>"></i></center>
+	<div class="box box-solid">
+		<div class="box-header with-border">
+			<h4><small class="pull-left"><%=link_to "Back to Project", project_path(@project) %></small><center class="text-muted">Here's whats been happening to this project</center></h4>
+		</div>
+		<div class="box-body">
+			<% @activities.each do |activity| %>
+				<div class="col-md-1">
+					<center><i class="<%=activity.icon %>"></i></center>
+				</div>
+				<div class="col-md-11">
+					<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 30, 30, fallback: "default-xs-small.png"), class: 'img-circle')%>
+					<b><%= link_to activity.owner.full_name  if activity.owner %></b>
+					<span class="text-muted pull-right"><%=activity.created_at.strftime("%b %d, %Y %I:%M%p") %></span>
+					<%= render_activity activity %>
+					<hr>
+				</div>
+			<% end %>
+ 		</div>
+	</div>
 </div>
-<div class="col-md-11">
-
-<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 30, 30, fallback: "default-xs-small.png"), class: 'img-circle')%>
-<b><%= link_to activity.owner.full_name  if activity.owner %></b>
-<span class="text-muted pull-right"><%=activity.created_at.strftime("%b %d, %Y %I:%M%p") %></span>
-<%= render_activity activity %>
-
-<hr>
-</div>
-
-
-<% end %>
-
- </div>
-</div>
-</span>
 
 
 

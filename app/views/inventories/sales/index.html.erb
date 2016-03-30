@@ -1,0 +1,38 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <div class="row">
+        <div class="col-md-4">
+          <h3>List of Sales</h3>
+        </div>
+        <div class="col-md-8">
+          <div class="pull-right">
+            <%= link_to new_sale_path, class: 'btn btn-link bg-blue-active' do %><i class="fa fa-plus-circle"></i> New Sale <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th><span class="pull-right">Amount</span></th>
+            <th><span class="pull-right">Date</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sales.each do |sale| %>
+            <tr>
+              <td><%= sale.inventory.name %> - <%= sale.inventory.description %></td>
+              <td><%= sale.quantity %> <%= sale.inventory.unit %></td>
+              <td><span class="pull-right"><%= number_to_currency sale.amount %></span></td>
+              <td><span class="pull-right"><%= sale.date.strftime("%B %e, %Y") if sale.date.present? %></span></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

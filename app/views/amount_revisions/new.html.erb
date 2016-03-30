@@ -1,31 +1,22 @@
-
-<div class="col-md-5 col-md-offset-4">
-  <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
-      <h3 class="widget-user-username">New Amount Revision</h3>
-    </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-                  <%= simple_form_for [@project, @amount_revision], html: { class: 'form-horizontal' },
-                            wrapper: :horizontal_form,
-                            wrapper_mappings: {
-                            check_boxes: :vertical_radio_and_checkboxes,
-                            radio_buttons: :vertical_radio_and_checkboxes,
-                            file: :horizontal_file_input,
-                            boolean: :horizontal_boolean
-                            } do |f| %>
+<%= simple_form_for [@project, @amount_revision], url: :project_amount_revisions do |f| %>
 <%=f.error_notification %>
-
-<%=f.input :amount, label: "Additional Amount", as: :string %>
-<%=f.input :remarks %>
-
-<div class="modal-footer">
-<%=f.submit "Record Amount Revision", class: "btn btn-primary" %>
-
-</div>
+  <div class="col-md-5 col-md-offset-4">
+    <div class="box box-widget widget-user">
+      <div class="widget-user-header bg-blue-active">
+        <h3 class="widget-user-username">New Amount Revision</h3>
+      </div>
+      <div class="box-body">
+        <div class="col-sm-12 border-right">
+          <%=f.input :amount, label: "Additional Amount", as: :string %>
+          <%=f.input :remarks, as: :text %>
+        </div>
+      </div>
+      <div class="box-footer">
+        <div class="pull-right">
+          <%= link_to 'Cancel', @project %> |
+          <%=f.submit "Save Amount Revision", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
-</div>

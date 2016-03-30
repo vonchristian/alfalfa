@@ -40,87 +40,75 @@
           <i class="fa fa-male"></i> <span>Contractors</span>
         </a>
       </li>
-      <li>
-        <a href="/inventories">
-          <i class="fa fa-cubes"></i> <span>Inventory</span>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-cubes"></i>
+          <span>Inventory</span>
+          <i class="fa fa-angle-left pull-right"></i>
         </a>
-      </li>
-
-      <li>
-        <a href="/equipment">
-          <i class="fa fa-truck"></i> <span>Equipment</span>
-        </a>
-      </li>
-      <li>
-  <a href="/reports/index">
-    <i class="fa fa-file-text"></i> <span>Reports</span>
-  </a>
-</li>
-
-<li class="header">ACCOUNTING</li>
- <li class="treeview">
-              <a href="#">
-                <i class="fa fa-credit-card"></i>
-                <span>Transactions</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-               <li><a href="/petty_cash"><i class="fa fa-circle-o"></i> Petty Cash</a></li>
-                <li><a href="/entries"><i class="fa fa-circle-o"></i> Entries</a></li>
-                <li><a href="/banks"><i class="fa fa-circle-o"></i> Bank</a></li>
-                <li><a href="/revenues"><i class="fa fa-circle-o"></i> Revenue</a></li>
-              </ul>
-            </li>
-<li>
-  <a href="/accounts">
-    <i class="fa fa-bar-chart"></i> <span>Accounts</span>
-  </a>
-</li>
-<li>
-  <a href="/reports/index">
-    <i class="fa fa-file-text"></i> <span>Reports</span>
-  </a>
-</li>
-<li>
-  <a href="/payroll">
-    <i class="fa fa-file-text"></i> <span>Payroll</span>
-  </a>
-</li>
-<li class="header">SETTINGS</li>
-
-            <li>
-  <%= link_to employees_path do %>
-
-  <i class="fa fa-users"></i>
-
-    </i> <span>Employees</span>
-  <%end%>
-</li>
-<li>
-  <%= link_to settings_index_path do %>
-
-  <i class="fa fa-cog"></i>
-
-    </i> <span>Settings</span>
-  <%end%>
-</li>
-
-<li>
-  <%= link_to activities_path do %>
-
-  <i class="fa fa-list"></i>
-
-    </i> <span>Activity Logs</span>
-  <%end%>
-</li>
-<li>
-  <a href="/users">
-    <i class="fa fa-alert"></i> <span>User Access</span>
-  </a>
-</li>
-<li>
+        <ul class="treeview-menu">
+          <li><a href="/inventories"><i class="fa fa-circle-o"></i> Materials</a></li>
+          <li><a href="/issued_inventories"><i class="fa fa-circle-o"></i> Issued Materials</a></li>
+          <li><a href="/equipment"><i class="fa fa-circle-o"></i> Equipment</a></li>
         </ul>
       </li>
+      <li>
+        <a href="/reports/index">
+          <i class="fa fa-file-text"></i> <span>Reports</span>
+        </a>
+      </li>
+      <li class="header">ACCOUNTING</li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-credit-card"></i>
+          <span>Transactions</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/petty_cash"><i class="fa fa-circle-o"></i> Petty Cash</a></li>
+          <li><a href="/sales"><i class="fa fa-circle-o"></i> Sales</a></li>
+          <li><a href="/entries"><i class="fa fa-circle-o"></i> Entries</a></li>
+          <li><a href="/banks"><i class="fa fa-circle-o"></i> Bank</a></li>
+          <li><a href="/revenues"><i class="fa fa-circle-o"></i> Revenue</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/accounts">
+          <i class="fa fa-bar-chart"></i> <span>Accounts</span>
+        </a>
+      </li>
+      <li>
+        <a href="/reports/index">
+          <i class="fa fa-file-text"></i> <span>Reports</span>
+        </a>
+      </li>
+      <li>
+        <a href="/payroll">
+          <i class="fa fa-file-text"></i> <span>Payroll</span>
+        </a>
+      </li>
+      <li class="header">SETTINGS</li>
+      <li>
+        <%= link_to employees_path do %>
+          <i class="fa fa-users"></i> <span>Employees</span>
+        <%end%>
+      </li>
+      <li>
+        <%= link_to settings_index_path do %>
+          <i class="fa fa-cog"></i> <span>Settings</span>
+        <%end%>
+      </li>
+      <li>
+        <%= link_to activities_path do %>
+          <i class="fa fa-list"></i> <span>Activity Logs</span>
+        <%end%>
+      </li>
+      <li>
+        <a href="/users">
+          <i class="fa fa-alert"></i> <span>User Access</span>
+        </a>
+      </li>
+      <li>
     </ul>
   </section>
 </aside>

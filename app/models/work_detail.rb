@@ -15,6 +15,7 @@ class WorkDetail < ActiveRecord::Base
   has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :miscellaneous_costs, class_name: "WorkDetailCosts::MiscellaneousCost"
   has_many :subcontract_costs, class_name: "WorkDetailCosts::SubcontractCost"
+  has_many :purchase_orders
 
   delegate :cost, to: :project, prefix: true
 
@@ -101,10 +102,10 @@ class WorkDetail < ActiveRecord::Base
 
   def remaining_accomplishment_percent
     if self.work_accomplishments.present?
-   100 - actual_accomplishment_percent
- else
-  0
-end
+      100 - actual_accomplishment_percent
+    else
+      0
+    end
   end
 
   def weighted_percent

@@ -1,43 +1,40 @@
-<div class="col-md-8 col-md-offset-2">
-  <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
-      <h3 class="widget-user-username">Issue Inventory</h3>
+<div class="col-md-12">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h3 class="widget-user-username">Issue Inventory to Work Detail</h3>
     </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-            <table class="table table-compressed table-hover">
-
-                   <thead>
-                            <tr>
-                                <th style="width: 10%">Issued To</th>
-                                <th style="width: 30%">Inventory Name</th>
-                                <th>Quantity</th>
-                                <th><span class="pull-right">Unit Cost</span></th>
-                                <th><span class="pull-right">Total Cost</span></th>
-                                <th style="width:60px"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <% if @work_detail.issued_inventories.present? %>
-                               <% @work_detail.issued_inventories.each do |issued_inventory| %>
-                                <tr>
-                                  <td><%=issued_inventory.inventoriable_id %></td>
-                                  <td><%= issued_inventory.inventory %></td>
-                                </tr>
-                               <% end %>
-                            <% end %>
-                            </tbody>
-                            </table>
-                                <%= render 'form' %>
-
-
-              </div>
-        </div>
+    <div class="box-body">
+      <div class="col-md-8">
+        <table class="table table-compressed table-hover">
+          <thead>
+            <tr>
+              <th style="width: 20%">Issued To</th>
+              <th style="width: 30%">Inventory Name</th>
+              <th>Quantity</th>
+              <th><span class="pull-right">Unit Cost</span></th>
+              <th><span class="pull-right">Total Cost</span></th>
+              <th style="width:60px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @work_detail.issued_inventories.present? %>
+               <% @work_detail.issued_inventories.each do |issued_inventory| %>
+                <tr>
+                  <td><%= issued_inventory.inventoriable_id %></td>
+                  <td><%= issued_inventory.inventory %></td>
+                  <td><%= issued_inventory.quantity %></td>
+                  <td><span class="pull-right"><%= number_to_currency issued_inventory.unit_cost %></span></td>
+                  <td><span class="pull-right"><%= number_to_currency issued_inventory.total_cost %></span></td>
+                  <td></td>
+                </tr>
+               <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <%= render 'form' %>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </div>

@@ -1,27 +1,31 @@
 <div class="tab-pane" id="labor">
-<%=link_to "Add Labor Cost", new_work_detail_labor_cost_path(@work_detail) %>
-<div class="table table-responsive">
-<table class="table table-striped table-hover">
-<thead>
-  <tr>
-    <th style="width: 30%">Personnel</th>
-    <th>Number of Personnels</th>
-    <th>Number of Days</th>
-    <th>Daily Rate</th>
-    <th>Total Cost</th>
-  </tr>
-</thead>
-<tbody>
-<tr>
-  <% @work_detail.labor_costs.each do |labor_cost| %>
-  <td><%=labor_cost.personnel %></td>
-  <td><%=labor_cost.number_of_personnel %></td>
-  <td><%=labor_cost.number_of_days %></td>
-  <td><%=number_to_currency labor_cost.daily_rate %></td>
-  <td><%=number_to_currency labor_cost.total_cost %></td>
-  </tr>
-  <% end %>
-</tbody>
-</table>
-</div>
+  <div class="box-header with-border">
+    <%=link_to "Add Labor Cost", new_work_detail_labor_cost_path(@work_detail), class: 'btn btn-default bg-blue-active pull-right' %>
+  </div>
+  <div class="box-body">
+    <div class="table table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th style="width: 30%">Personnel</th>
+            <th>Number of Personnels</th>
+            <th>Number of Days</th>
+            <th>Daily Rate</th>
+            <th>Total Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @work_detail.labor_costs.each do |labor_cost| %>
+            <tr>
+              <td><%=labor_cost.personnel %></td>
+              <td><%=labor_cost.number_of_personnel %></td>
+              <td><%=labor_cost.number_of_days %></td>
+              <td><%=number_to_currency labor_cost.daily_rate %></td>
+              <td><%=number_to_currency labor_cost.total_cost %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

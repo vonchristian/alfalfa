@@ -1,8 +1,8 @@
 class PettyCashController < ApplicationController
-  def index
+  def index 
     @petty_cash = Account.find_by_name("Petty Cash")
-  	@from_date = params[:from_date] ? Date.parse(params[:from_date]) : Date.today.yesterday
-  	@to_date = params[:to_date] ? Date.parse(params[:to_date]) : Date.today
+  	@from_date = params[:from_date] ? Date.parse(params[:from_date]) : Date.today.beginning_of_day
+  	@to_date = params[:to_date] ? Date.parse(params[:to_date]) : Date.today.end_of_day
     respond_to do |format|
       format.html
       format.pdf do

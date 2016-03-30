@@ -1,41 +1,39 @@
 <div class="col-md-10 col-md-offset-1">
-    <div class="box box-solid">
-      <div class="box-header with-border bg-gray-light">
-        <h4> List of Employees
-       <span class="pull-right"><%=link_to new_employee_path, class: "btn btn-default bg-blue" do %><i class="fa fa-user-plus"></i> New Employee <%end%></span>
-        </h4>
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>List of Employees</h4>
+        </div>
+        <div class="col-md-6">
+          <span class="pull-right">
+            <%=link_to new_employee_path, class: "btn btn-default bg-blue" do %><i class="fa fa-user-plus"></i> New Employee <%end%>
+          </span>
+        </div>
       </div>
-      <div class="box-body">
-
-      <hr>
-      <div class="table table-responsive">
-      <table class="table table-hover">
-      <thead>
-        <tr class="text-uppercase">
-         <th style="width: 25%">Employee</th>
-
-          <th>Mobile Number</th>
-          <th>Position</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @employees.each do |employee| %>
-      <td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-circle" %>
-
-       <b><%=link_to employee.full_name.upcase, employee %></b></td>
- <small><%#=link_to "New Cash Advance", new_employee_cash_advance_path(employee)%></small>
-        </td>
-        <td><%=employee.mobile_number %></td>
-        <td><%=employee.position.titleize %></td>
-
-          </tr>
-</tbody>
-      <% end %>
-      </table>
+    </div>
+    <div class="box-body">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <tbody>
+              <% @employees.each do |employee| %>
+                <tr>
+                  <td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-circle center-block" %></td>
+                  <td>
+                    <b><%=link_to employee.full_name.upcase, employee %></b><br>
+                    <%=employee.position.titleize %><br>
+                    <%=employee.mobile_number %>
+                  </td>
+                </tr>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-
+</div>
 
 
 

@@ -5,7 +5,7 @@ class Projects::LaborCostsController < ApplicationController
   end
 
   def create
-     @work_detail = WorkDetail.find(params[:work_detail_id])
+    @work_detail = WorkDetail.find(params[:work_detail_id])
     @labor_cost = @work_detail.labor_costs.create(labor_cost_params)
     if @labor_cost.save
       redirect_to project_work_detail_path(@work_detail.project, @work_detail), notice: "Labor cost added successfully."

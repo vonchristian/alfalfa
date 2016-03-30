@@ -3,6 +3,7 @@ class EquipmentController < ApplicationController
     @equipments = Equipment.all
   end
   def new
+    @equipments = Equipment.all
     @equipment = Equipment.new
     authorize @equipment
   end
@@ -11,7 +12,7 @@ class EquipmentController < ApplicationController
     @equipment = Equipment.create(equipment_params)
     authorize @equipment
     if @equipment.save
-      redirect_to equipments_path, notice: "Equipment saved successfully."
+      redirect_to equipment_index_path, notice: "Equipment saved successfully."
     else
       render :new
     end

@@ -1,12 +1,22 @@
-<div class="row">
 <div class="col-md-12">
   <div class="box box-solid">
     <div class="box-header with-border">
-     </span> <h4>Work Details</h4>
+      <span><%=link_to project_path(@work_detail.project), class: "btn btn-link" do %><i class="fa fa-chevron-left"></i> Back To Project<%end%></span>
     </div>
     <div class="box-body">
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-8">
+          <div class="box-header with-border">
+            <div class="row">
+              <div class="col-md-9">
+                <h4>List of Work Details</h4>
+              </div>
+              <div class="col-md-3">
+                <h5 class="text-muted">Total of Amounts:
+                <h4 class="text-primary"><%= number_to_currency @project.work_details.total%></h4>
+              </div>
+            </div>
+          </div>
           <table class="table table-hover">
             <thead>
               <tr class="text-uppercase">
@@ -19,7 +29,7 @@
               <% if @project.work_details.present? %>
                 <% @project.work_details.each do |work_detail| %>
                   <tr>
-                    <td style="width: 30%" ><%=link_to work_detail.description, [@project, work_detail] %></td>
+                    <td style="width: 30%" ><%= work_detail.description %></td>
                     <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
                   </tr>
                 <% end %>
@@ -37,5 +47,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

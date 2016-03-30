@@ -9,6 +9,8 @@ class Equipment < ActiveRecord::Base
     make_and_model
   end
 
+  has_many :equipment_maintenances, class_name: "Maintenance"
+
   private
 
   # def add_to_accounts

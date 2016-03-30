@@ -1,0 +1,18 @@
+<%= simple_form_for @sale do |f| %>
+<%= f.error_notification %>
+  <div class="well">
+    <h4>Make Sale</h4>
+    <hr>
+    <%= f.input :inventory_id, label: false, collection: Inventory.all, prompt: 'Select Inventory' %>
+    <%= f.input :quantity, label: false, input_html: {autocomplete: "off"}, placeholder: 'Quantity' %>
+    <%= f.input :amount, label: false, input_html: {autocomplete: "off"}, placeholder: 'Amount Paid' %>
+    <%= f.input :date, label: false, as: :string, input_html: {class: "datepicker"}, placeholder: 'Date' %>
+    <div class="row">
+      <div class="modal-footer">
+        <%= f.submit 'Record Sale', class: 'btn btn-primary' %>
+        <hr>
+        <%= link_to "I'm done selling inventories.", sales_path %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,34 +1,18 @@
 <div class="col-md-12">
   <div class="box box-solid">
-  <div class="box box-header">
-    <h4>New Maintenace </h4>
-  </div>
-  <div class="box-body">
-    <%=simple_form_for @maintenance, url: :work_detail_equipment_maintenances do |f| %>
-    <%=f.error_notification %>
-  <div class="row">
-    <div class="col-md-6">
+    <div class="box box-header">
+      <h4>New Maintenace </h4>
     </div>
-    <div class="col-md-5 well">
-      <%=f.input :equipment, collection: Equipment.all %>
-      <%=f.input :employee, collection: Employee.operator %>
-      <%=f.input :description, as: :text %>
+    <div class="box-body">
       <div class="row">
-        <div class="col-md-6">
-          <%=f.input :quantity %>
+        <div class="col-md-8">
+          fgefgfgsdfg
         </div>
-        <div class="col-md-6">
-          <%=f.input :unit %>
+        <div class="col-md-4">
+          <%= render 'form' %>
         </div>
-      </div>
-      <%=f.input :amount %>
-      <%=f.input :remarks, as: :text %>
-      <div class="modal-footer">
-        <%=f.submit "Save Maintenace Expense", class: "btn btn-primary" %>
       </div>
     </div>
-  </div>
-    <% end %>
   </div>
 </div>
 <script>

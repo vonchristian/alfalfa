@@ -1,0 +1,27 @@
+<%=simple_form_for @maintenance, url: :work_detail_equipment_maintenances do |f| %>
+<%=f.error_notification %>
+	<div class="well">
+		<h4>Issue Equipment</h4>
+		<hr>
+	  <%=f.input :equipment, collection: Equipment.all, label: false, prompt: '- Select Equipment -' %>
+	  <%=f.input :employee, collection: Employee.operator, label: false, prompt: '- Select Operator -' %>
+	  <%=f.input :description, as: :text, label: false, placeholder: 'Description' %>
+	  <div class="row">
+	    <div class="col-md-6">
+	      <%=f.input :quantity, label: false, placeholder: 'Quantity' %>
+	    </div>
+	    <div class="col-md-6">
+	      <%=f.input :unit, label: false, placeholder: 'Unit' %>
+	    </div>
+	  </div>
+	  <%=f.input :amount, label: false, placeholder: 'Amount' %>
+	  <%=f.input :remarks, as: :text, label: false, placeholder: 'Remarks' %>
+	  <div class="row">
+		  <div class="modal-footer">
+		  	<%=f.submit "Save Maintenace Expense", class: "btn btn-primary" %>
+		  	<hr>
+		  	<%= link_to "I'm done issuing equipment.", @work_detail %>
+		  </div>
+		</div>
+	</div>
+<% end %>

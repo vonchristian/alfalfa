@@ -1,42 +1,39 @@
-<div class="row">
-<div class="col-md-8 col-md-offset-1">
-  <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-blue-active">
-      <h3 class="widget-user-username">New Equipment</h3>
-    </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-                  <%= simple_form_for @equipment, html: { class: 'form-horizontal' },
-                            wrapper: :horizontal_form,
-                            wrapper_mappings: {
-                            check_boxes: :vertical_radio_and_checkboxes,
-                            radio_buttons: :vertical_radio_and_checkboxes,
-                            file: :horizontal_file_input,
-                            boolean: :horizontal_boolean
-                            } do |f| %>
+<%= simple_form_for @equipment do |f| %>
 <%=f.error_notification %>
-<div class="row">
-  <div class="col-md-5">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="widget-user-username">New Equipment</h3>
+      </div>
+      <div class="box-body">
+        <div class="col-md-7 border-right">
+          <div class="box-header with-border">
+            <h4>List of Equipments</h4>
+          </div>
+          <% @equipments.each do |equipment| %>
+            <h4><%=link_to equipment.make_and_model, equipment %>
+            <span class="pull-right"><%= number_to_currency equipment.acquisition_cost %></span></h4>
+            <span class="help-block"><i class="fa fa-truck"></i> Available </span>
+            <hr />
+          <% end %>
+        </div>
+        <div class="col-md-5">
+          <div class="well">
+            <h4>Details</h4>
+            <hr>
+            <%= f.input :make, label: false, placeholder: 'Equipment Name' %>
+            <%=f.input :model, label: false, placeholder: 'Model' %>
+            <%=f.input :plate_number, label: false, placeholder: 'Plate Number' %>
+            <%=f.input :acquisition_cost, label: false, placeholder: 'Acquisition Cost' %>
+            <hr>
+            <div class="modal-footer">
+              <%=f.submit "Save Equipment", class: "btn btn-primary" %>
+              <hr>
+              <%= link_to "I'm done adding equipments.", equipment_index_path %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-5">
-    <h4>Details</h4>
-    <hr>
-<%= f.input :make %>
-<%=f.input :model %>
-<%=f.input :plate_number %>
-<%=f.input :acquisition_cost %>
-
-
-
-<div class="modal-footer">
-<%=f.submit "Save", class: "btn btn-primary" %>
-</div>
 <% end %>
-</div>
-<div class="col-md-2">
-</div>
-</div>

@@ -22,7 +22,9 @@
       <div class="content-wrapper">
         <section class="content">
           <%=render 'layouts/flash' %>
-          <%= yield %>
+          <div class="row">
+            <%= yield %>
+          </div>
         </section>
       </div>
       <% if user_signed_in? %>

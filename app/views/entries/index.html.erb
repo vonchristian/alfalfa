@@ -1,22 +1,23 @@
-<div class="col-md-12">
-<div class="box box-solid">
-<div class="box-body">
-<h4>Entries Logs</h4>
-<hr>
-<% @entries.each do |entry| %>
-<div class="col-md-3">
-<span class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
-</div>
-<div class="col-md-8">
-<%#=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
-
-
-<%=entry.description %>
-<%=number_to_currency entry.debit_amounts.last.amount %>
-<%=entry.debit_amounts.last.account.type.sub("Plutus::","") %>
-<%=entry.entriable if entry.entriable %>
-<hr>
-</div>
-<% end %>
- </div>
-</div>
+	<div class="col-md-12">
+		<div class="box box-solid">
+			<div class="box-header with-border">
+				<h4>Entries Logs</h4>
+			</div>
+			<div class="box-body">
+				<% @entries.each do |entry| %>
+					<div class="col-md-3">
+						<span class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+					</div>
+					<div class="col-md-9">
+						<%#=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
+						<%=entry.recipient.try(:name) %> - 
+						<%=number_to_currency entry.debit_amounts.last.try(:amount) %> - 
+						<%=entry.description %> - 
+						<%#=entry.debit_amounts.last.account.type.sub("Plutus::","") %> 
+						<%=entry.entriable if entry.entriable %>
+						<hr>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>

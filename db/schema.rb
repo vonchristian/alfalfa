@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325103733) do
+ActiveRecord::Schema.define(version: 20160327125933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 20160325103733) do
   add_index "amounts", ["account_id", "entry_id"], name: "index_amounts_on_account_id_and_entry_id", using: :btree
   add_index "amounts", ["entry_id", "account_id"], name: "index_amounts_on_entry_id_and_account_id", using: :btree
   add_index "amounts", ["type"], name: "index_amounts_on_type", using: :btree
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "attachment_file_id"
+    t.text     "description"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "attachments", ["project_id"], name: "index_attachments_on_project_id", using: :btree
 
   create_table "billable_materials", force: :cascade do |t|
     t.integer  "contractor_id"
@@ -490,6 +500,7 @@ ActiveRecord::Schema.define(version: 20160325103733) do
   add_index "worked_days", ["project_id"], name: "index_worked_days_on_project_id", using: :btree
 
   add_foreign_key "amount_revisions", "projects"
+  add_foreign_key "attachments", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"
   add_foreign_key "billable_materials", "projects"

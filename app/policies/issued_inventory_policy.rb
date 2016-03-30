@@ -6,8 +6,6 @@ class IssuedInventoryPolicy < ApplicationPolicy
     @issued_inventory = issued_inventory
   end
 
-
-
   def index?
     true
   end
@@ -17,7 +15,7 @@ class IssuedInventoryPolicy < ApplicationPolicy
   end
 
   def create?
-  user.supply_officer?
+    user.supply_officer?
   end
 
   def new?

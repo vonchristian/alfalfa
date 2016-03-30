@@ -1,7 +1,23 @@
 class Projects::IssuedInventoriesController < ApplicationController
+
   def new
     @work_detail = WorkDetail.find(params[:work_detail_id])
-    @issued_inventory = @work_detail.issued_inventories.build
-    authorize @issued_inventory
   end
+
+  def create
+    @work_detail = WorkDetail.find(params[:work_detail_id])
+    @issued_inventory = @work_detail.issued_inventories.create(issued_inventory_params)
+    if @issued_inventory.save
+      @issued_inventory.update_quantity_of_inventory_on_save
+      redirect_to project_work_detail_path(@work_detail.project, @work_detail), notice: "Labor cost added successfully."
+    else
+      render :new
+    end
+  end
+
+  private
+  def issued_inventory_params
+    params.require(:issued_inventory).permit(:inventoriable_id, :code, :description, :unit, :quantity, :unit_cost, :total_cost, :inventory_id)
+  end
+
 end

@@ -1,21 +1,14 @@
-<div class="container">
-<div class="box box-solid">
-<div class="box-body">
-<br>
-<h4 class="text-center">Project Details</h4>
-<span class="help-block text-center"> </span>
-<hr>
-
-
-                  <%= simple_form_for @project do |f| %>
-    <%=f.error_notification %>
-    <div class="row">
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-5">
-          <%=f.input :name, as: :text, input_html: {rows: 10}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
-              <br>
-
+<%= simple_form_for @project do |f| %>
+<%=f.error_notification %>
+  <div class="col-md-10 col-md-offset-1">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="text-center">Project Details</h3>
+        <span class="help-block text-center"> </span>
+      </div>         
+      <div class="box-body">
+        <div class="col-md-6 col-md-offset-3">
+          <%=f.input :name, as: :text, input_html: {rows: 5}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
           <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
 
           <%=f.input :duration, label: "Duration", as: :string, placeholder: "Contract Duration" %>
@@ -26,13 +19,13 @@
           <%=f.input :implementing_office, label: "Implementing Office" %>
 
           <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
-
-<div class="modal-footer">
-<%=f.submit "Save Project", class: "btn btn-primary", data: {disable_with: 'Saving Project...'} %> or <%= link_to "Cancel", @project %>
-</div>
-</div>
+        </div>
+      </div>
+      <div class="box-footer">
+        <div class="pull-right">
+          <%=f.submit "Save Project", class: "btn btn-primary", data: {disable_with: 'Saving Project...'} %> or <%= link_to "Cancel", @project %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
-</div>
-</div>
-
-</div>

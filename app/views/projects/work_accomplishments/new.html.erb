@@ -1,28 +1,24 @@
-<div class="container">
-  <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header">
-      <h4 class="text-uppercase"><%=@work_detail.description %></h4>
-      <h4 class="text-uppercase">Remaining Quantity: <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %></h4>
+<%= simple_form_for [@work_detail, @work_accomplishment] do |f| %>
+<%= f.error_notification %>
+  <div class="col-md-12">
+    <div class="box box-widget widget-user">
+      <div class="box-header with-border">
+        <h3>New Work Accomplishment</h3>
+        <h5 class="text-uppercase"><%=@work_detail.description %></h5>
+        <h5 class="text-uppercase">Remaining Quantity: <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %></h5>
+      </div>
+      <div class="box-body">
+        <div class="col-md-6 col-md-offset-3">
+          <%=f.input :quantity %>
+          <%=f.input :remarks %>
+          <%=f.input :date_accomplished,  as: :string, input_html:{:class => 'datepicker'} %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%=f.submit "Save Work Accomplishment", class: "btn btn-default bg-blue-active" %>
+        <%=link_to "Cancel",project_work_detail_path(@work_detail.project.id, @work_detail), class: "btn btn-default"%>
+      </div>
     </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-md-6 border-left col-md-offset-3">
-          <div>
- <h3><center>New Work Accomplishment</center></h3>
- <hr>
-                  <%= simple_form_for [@work_detail, @work_accomplishment] do |f| %>
-                   <%=f.input :quantity %>
-                   <%=f.input :remarks %>
-                   <%=f.input :date_accomplished,  as: :string, input_html:{:class => 'datepicker'} %>
-
-<div class="modal-footer">
-<%=f.submit "Save Work Accomplishment", class: "btn btn-primary" %>
-<%=link_to "or Cancel",project_work_detail_path(@work_detail.project.id, @work_detail), class: "btn btn-default"%>
-
-</div>
+  </div>
 <% end %>
-</div>
-
 

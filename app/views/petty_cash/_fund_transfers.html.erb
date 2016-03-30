@@ -1,22 +1,33 @@
 <div class="tab-pane" id="fund_transfers">
-  <table class="table">
-    <thead>
-      <tr class="text-uppercase">
-        <th style="width: 30%">Recipient</th>
-        <th>Description</th>
-        <th>Date</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @petty_cash.debit_entries.entered_on(:from_date => @from_date, :to_date => @to_date).each do |entry| %>
-        <tr>
-          <td><center><%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"),  class: "img-circle" %><br><%=entry.recipient.try(:name) %></center></td>
-          <td style="line-height: 35px"><%=entry.description %></td>
-          <td style="line-height: 35px"><%=entry.date.strftime("%B %e, %Y") %></td>
-          <td style="line-height: 35px"><span class="pull-right"><%=number_to_currency entry.debit_amounts.last.amount %></span></td>
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-uppercase">
+          <th style="width: 100px"><center>Recipient</center></th>
+          <th><center>Description</center></th>
+          <th style="width: 20%">Date</th>
+          <th style="width: 20%"><center>Amount</center></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @petty_cash.debit_entries.entered_on(:from_date => @from_date, :to_date => @to_date).each do |entry| %>
+          <tr>
+            <td>
+              <center>
+                <%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"),  class: "img-circle" %><br>
+                <%=entry.recipient.try(:name) %>
+              </center>
+            </td>
+            <td style="line-height: 61px"><center><%=entry.description %></center></td>
+            <td style="line-height: 61px"><%=entry.date.strftime("%B %e, %Y") %></td>
+            <td style="line-height: 61px">
+              <span class="pull-right">
+                <%=number_to_currency entry.debit_amounts.last.amount %>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

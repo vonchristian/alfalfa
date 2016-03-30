@@ -22,6 +22,7 @@ class PettyCash::DisbursementsController < ApplicationController
   def show
     @entry = Entry.find(params[:id])
   end
+  
   private
   def entry_params
     params.require(:entry).permit(:date, :description, :recipient_id, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])

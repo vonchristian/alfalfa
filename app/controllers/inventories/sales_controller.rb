@@ -1,4 +1,9 @@
 class Inventories::SalesController < ApplicationController
+  
+  def index
+    @sales = Sale.all
+  end
+
   def new
     @sales = Sale.all
     @sale = Sale.new
@@ -9,6 +14,8 @@ class Inventories::SalesController < ApplicationController
     @sale = Sale.create(sale_params)
     authorize @sale
     if @sale.save
+      @sale.update_quantity_of_inventory_on_save
+      @sale.update_accounts
       redirect_to new_sale_path, notice: "Sale recorded successfully."
     else
       render :new

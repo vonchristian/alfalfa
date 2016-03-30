@@ -9,7 +9,7 @@ class AmountRevisionsController < ApplicationController
     @project = Project.find(params[:project_id])
     @amount_revision = @project.amount_revisions.create(amount_revision_params)
     authorize @amount_revision
-      if @amount_revision.save
+    if @amount_revision.save
       redirect_to @project, notice: "Successfully added."
     else
       render :new
@@ -18,6 +18,6 @@ class AmountRevisionsController < ApplicationController
 
   private
   def amount_revision_params
-    params.require(:amount_revision).permit(:amount)
+    params.require(:change_orders_amount_revision).permit(:amount, :remarks)
   end
 end

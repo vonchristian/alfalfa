@@ -4,6 +4,7 @@ class InventoriesController < ApplicationController
   end
 
   def new
+    @inventories = Inventory.all
     @inventory = Inventory.new
     authorize @inventory
   end
@@ -12,7 +13,7 @@ class InventoriesController < ApplicationController
     @inventory = Inventory.create(inventory_params)
     authorize @inventory
     if @inventory.save
-      @inventory.update_accounts
+      # @inventory.update_accounts
       @inventory.create_activity :create, owner: current_user
       redirect_to inventories_url, notice: "Inventory saved successfully."
     else

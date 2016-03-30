@@ -1,10 +1,10 @@
 class Contractor < ActiveRecord::Base
-   include PgSearch
+  include PgSearch
   multisearchable :against => [:first_name, :last_name, :company]
   attachment :profile_image, type: :image
   has_many :contracts
   has_many :projects, through: :contracts
-  has_many :issued_materials
+  has_many :issued_inventories
 
 
   def self.main_contractors
@@ -13,14 +13,16 @@ class Contractor < ActiveRecord::Base
 
   def subcontracted_amount(project)
     project.contracts.sum(:amount_subcontrated)
-end
+  end
 
   def self.sub_contractors
     self.where(:main_contractor => false)
   end
+
   def full_name
     "#{first_name} #{last_name}"
   end
+  
   def to_s
     "#{company}"
   end

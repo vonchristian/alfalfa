@@ -19,14 +19,14 @@ class Projects::WorkDetailsController < ApplicationController
   end
 
   def edit
-     @work_detail = WorkDetail.find(params[:id])
-         authorize @work_detail
-   end
+    @work_detail = WorkDetail.find(params[:id])
+    authorize @work_detail
+  end
 
-   def update
-     @work_detail = WorkDetail.find(params[:id])
-         authorize @work_detail
-     if @work_detail.update(work_detail_params)
+  def update
+    @work_detail = WorkDetail.find(params[:id])
+    authorize @work_detail
+    if @work_detail.update(work_detail_params)
       redirect_to project_path(@work_detail.project), notice: "Work detail updated successfully."
     else
       render :new
@@ -45,8 +45,9 @@ class Projects::WorkDetailsController < ApplicationController
     @work_detail = WorkDetail.includes(:work_accomplishments).find(params[:id]).decorate
     authorize @work_detail
   end
+
   private
   def work_detail_params
     params.require(:work_detail).permit(:code, :description, :unit, :unit_cost, :quantity, :total_cost)
   end
-  end
+end

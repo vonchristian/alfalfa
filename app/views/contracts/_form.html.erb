@@ -1,23 +1,19 @@
 <%= simple_form_for ([@project, @contract]) do |f| %>
   <%=f.error_notification %>
-  <table class="table">
-    <tbody>
-    <tr>
-      <td style="width: 70%"><%=f.input :contractor_id, collection: Contractor.all,  label: false, prompt: '-- select contractor --' %></td>
-      <td style="width: 30%"><%=f.input :amount_subcontracted, label: false, placeholder: 'Amount' %></td>
-
-    </tr>
-    </tbody>
-  </table>
+  <h4>New Sub-Contractor</h4>
+  <hr>
+  <%=f.input :contractor_id, collection: Contractor.all,  label: false, prompt: '- Select Contractor -' %>
+  <%=f.input :amount_subcontracted, label: false, placeholder: 'Amount' %>
   <div class="modal-footer">
     <%=f.submit "Add this Sub Contractor", class: "btn btn-primary" %>
-    <%=link_to "or I'm done adding Sub Contractors",project_path(@project) %>
+    <hr>
+    <%=link_to "I'm done adding Sub Contractors",project_path(@project) %>
   </div>
 <% end %>
 <script>
-    $(document).ready(function() {
-        $("#contract_contractor_id").select2({
-            theme: "bootstrap"
-        });
+  $(document).ready(function() {
+    $("#contract_contractor_id").select2({
+        theme: "bootstrap"
     });
+  });
 </script>

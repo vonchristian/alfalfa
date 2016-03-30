@@ -1,23 +1,22 @@
 <div class="tab-pane" id="cash_advances">
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Amount</th>
-      <th>Date</th>
-      <th>Status </th>
-    </tr>
-  </thead>
-  <tbody>
-<% @employee.cash_advances.each do |cash_advance| %>
-<tr>
-
-<td><%=number_to_currency cash_advance.debit_amounts.last.amount %></td>
-<td><%=cash_advance.date.strftime("%b %e, %Y") %></td>
-<td></td>
-</tr>
-
-<% end %>
-</tbody>
-</table>
+	<table class="table table-hover">
+	  <thead>
+	    <tr>
+	      <th width="20%"><span class="pull-right">Amount</span></th>
+	      <th width="10%"></th>
+	      <th>Date</th>
+	      <th>Status </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+			<% @employee.cash_advances.each do |cash_advance| %>
+				<tr>
+					<td><span class="pull-right"><%=number_to_currency cash_advance.debit_amounts.last.amount %></span></td>
+					<td></td>
+					<td><%=cash_advance.date.strftime("%b %e, %Y") %></td>
+					<td></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>

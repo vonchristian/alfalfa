@@ -1,40 +1,51 @@
-<div class="container">
-<div class="box box-solid">
-<div class="box-header with-border">
-<h4>Payroll</h4>
-</div>
-<div class="box-body">
-<div class="table table-responsive">
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th style="width: 20%">Employee</th>
-    <th>Rate</th>
-    <th>Days Worked</th>
-    <th style="width: 30%">Cash Advances</th>
-    <th><span class="pull-right">Gross Pay</span></th>
-  </tr>
-</thead>
-<tbody>
-<% Employee.all.each do |employee| %>
-<tr>
-<td><%= image_tag attachment_url(employee, :photo, :fill, 40, 40, fallback: "default-small.png"),  class: "img-circle" %> <b><%=link_to employee.full_name.upcase, payroll_path(employee) %></b></td>
-<td><%=number_to_currency employee.rate %></td>
-<td><%=employee.unpaid_worked_days %> Days</td>
-<td>
-  <% employee.cash_advances.each do |cash_advance| %>
-  <p>
-  <%=cash_advance.date_disbursed.strftime("%B %e, %Y") %>
-  <span class="pull-right"><%=number_to_currency cash_advance.amount %></span>
-  </p>
-  <% end %>
-</td>
-<td><span class="pull-right"><%=number_to_currency employee.gross_pay %></span></td>
-<% if employee.worked_days.unpaid.present? %>
-<td><%=link_to "Pay Slip", new_employee_payment_path(employee) %></td>
-<% end %>
-
-<% end %>
-</tbody>
-</table>
+<div class="col-md-12">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h4>Payroll</h4>
+    </div>
+    <div class="box-body">
+      <div class="table table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th style="width: 20%"><center>Employee</center></th>
+              <th>Rate</th>
+              <th>Days Worked</th>
+              <th style="width: 30%">Cash Advances</th>
+              <th><span class="pull-right">Gross Pay</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Employee.all.each do |employee| %>
+              <tr>
+                <td width="60px">
+                  <center>
+                    <%=link_to payroll_path(employee) do %>
+                      <%= image_tag attachment_url(employee, :photo, :fill, 35, 35, fallback: "default-small.png"),  class: "img-circle" %><br>
+                      <%=employee.full_name.camelize %>
+                    <% end %>
+                  </center>
+                </td>
+                <td style="line-height: 81px"><%=number_to_currency employee.rate %></td>
+                <td style="line-height: 81px"><%=employee.unpaid_worked_days %> Days</td>
+                <td style="line-height: 81px">
+                  <% employee.cash_advances.each do |cash_advance| %>
+                    <p><%=cash_advance.date_disbursed.strftime("%B %e, %Y") %>
+                    <span class="pull-right"><%=number_to_currency cash_advance.amount %></span>
+                    </p>
+                  <% end %>
+                </td>
+                <td style="line-height: 81px"><span class="pull-right"><%=number_to_currency employee.gross_pay %></span></td>
+                <td style="line-height: 81px">
+                  <% if employee.worked_days.unpaid.present? %>
+                    <%=link_to "Pay Slip", new_employee_payment_path(employee) %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

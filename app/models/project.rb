@@ -13,7 +13,7 @@ class Project < ActiveRecord::Base
   belongs_to :category
   has_many  :employments
   has_many :employees, through: :employments
-  has_many  :work_details
+  has_many :work_details
   has_many :equipment_costs, through: :work_details
   has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
   has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
@@ -24,6 +24,7 @@ class Project < ActiveRecord::Base
   has_many :work_accomplishments, through: :work_details
   has_many :workers, class_name: "Employee"
   has_many :remarks
+  has_many :attachments
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   
@@ -114,7 +115,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-
   def no_amount_revisions?
       amount_revisions.empty?
   end
@@ -147,10 +147,10 @@ class Project < ActiveRecord::Base
 
   def days_elapsed
     if self.notice_to_proceed.present?
-    ((Time.zone.now.to_i - start_date.to_i)/86400).floor
-  else
-    0
-  end
+      ((Time.zone.now.to_i - start_date.to_i)/86400).floor
+    else
+      0
+    end
   end
 
   def remaining_days

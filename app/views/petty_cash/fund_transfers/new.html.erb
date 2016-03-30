@@ -1,38 +1,30 @@
 <div class="col-md-10 col-md-offset-1">
-<div class="box box-solid">
-<div class="box-header with-border">
-<h4>New Fund Transfer Details</h4>
-</div>
-<div class="box-body">
-<div class="col-md-7">
-</div>
-<div class="col-md-5 well">
-  <%= simple_form_for @entry, url: :petty_cash_fund_transfers do |f| %>
-  <%=f.error_notification %>
-  <%= f.input :date, as: :string, input_html: { class: 'datepicker'}, label: "Date Transferred:" %>
-
-  <%=f.input :recipient_id, collection: Employee.all.map{|a| [a.name, a.id]} %> 
-  <%=f.simple_fields_for :credit_amounts do |d| %>
-    <%=d.input :amount, input_html:{autocomplete: "off"} %>
-    <%=d.input :account, collection: Account.fund_transfer_sources.map{|a| [a.name.titleize, a.name]}, as: :radio_buttons %>
-  <% end %>
-
-  <%=f.simple_fields_for :debit_amounts do |c| %>
-    <%=c.input :amount,  read_only: true, as: :hidden %>
-    <%=c.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
-    
-  <% end %>
-  <%=f.input :description, as: :text, placeholder:"Describe the transaction e.g. Check Number if Cash from Bank" %>
-
- 
-  <div class="modal-footer">
-    <%=f.submit "Save Fund Transfer", data: {disable_with: 'Transfering Fund...'}, class: "btn btn-danger" %>
-    <hr>
-    <%= link_to "I'm done transferring fund", petty_cash_index_path %>
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h4>New Fund Transfer</h4>
+    </div>
+    <div class="box-body">
+      <div class="col-md-7">
+        <h4>Today's Fund Transfer</h4>
+        <table class="table table-compressed">
+          <tbody>
+            <%@petty_cash.debit_entries.today.each do |entry| %>
+              <tr>
+                <td>
+                  <%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: "img-circle" %><br>
+                  <%=entry.recipient.try(:name) %>
+                </td>
+                <!-- <td><%#=entry.date.strftime("%B %e, %Y") %></td> -->
+                <td><span class="pull-right"><%=number_to_currency entry.debit_amounts.last.amount %></span></td>
+              </tr>
+            <%end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-5">
+        <%= render 'form' %>
+      </div>
+    </div>
   </div>
-<% end %>
-</div>
-</div>
-</div>
 </div>
 

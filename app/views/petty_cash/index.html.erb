@@ -1,4 +1,4 @@
-
+<div class="col-md-12">
   <div class="box box-primary">
     <div class="box-header with-border">
       <div class="row">
@@ -10,11 +10,11 @@
             <%= form_tag({:action => 'index'}, {:method => :get, class: 'form-inline'}) do %>
               <div class="form-group">
                 <%= label_tag :from_date, nil, class: 'sr-only' %>
-                <%= text_field_tag :from_date, @from_date, class: 'datepicker form-control', placeholder: 'Date' %>
+                <%= text_field_tag :from_date, @from_date.beginning_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
               </div>
               <div class="form-group">
                 <%= label_tag :to_date, nil, class: 'sr-only' %>
-                <%= text_field_tag :to_date, @to_date, class: 'datepicker form-control', placeholder: 'Date' %>
+                <%= text_field_tag :to_date, @to_date.end_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
               </div>
               <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
             <% end %>
@@ -22,10 +22,13 @@
         </div>
       </div>
     </div>
+    
     <div class="box-body">
       <div class="col-md-8">
-        <div class="col-md-12">
-          <%=link_to "Print Report(PDF)", petty_cash_index_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm pull-right' %>
+        <div class="box-header">
+          <div class="pull-right">
+            <%=link_to "Print Report(PDF)", petty_cash_index_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm' %>
+          </div>
         </div>
         <ul class="nav nav-tabs" role="tablist">
           <li  role="presentation" class="active">
@@ -43,13 +46,26 @@
       <div class="col-md-4">
         <div class="row">
           <div class="well">
-            <h3><center><%= number_to_currency @petty_cash.balance(:from_date => @from_date, :to_date => @to_date)  %></center></h3>
+            <h3 class="text-center">
+              <% if @petty_cash.credit_entries.blank? && @petty_cash.debit_entries.blank? %>
+                <%= number_to_currency @petty_cash.balance %>
+              <% else %>
+                <% if Entry.first.date.beginning_of_day >= @from_date %>
+                  <%= number_to_currency @petty_cash.balance %>
+                <% elsif Entry.first.date.beginning_of_day <= @from_date %>
+                  <%= number_to_currency @petty_cash.balance - @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %>
+                <% end %>
+              <% end %>
+            </h3>
             <span class="help-block"><center class="text-uppercase">Balance</center></span>
             <br>
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
-                <%=link_to "New Disbursement", new_petty_cash_disbursement_path(@petty_cash), class: "btn btn-danger btn-block" %>
-                <%=link_to "New Fund Transfer", new_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success btn-block" %>
+                <% if current_user.accounting_officer? %>
+                  <%=link_to "New Fund Transfer", new_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success btn-block" %>
+                  <br>
+                  <%=link_to "New Disbursement", new_petty_cash_disbursement_path(@petty_cash), class: "btn btn-danger btn-block" %>
+                <% end %>
               </div>
             </div>
           </div>
@@ -57,5 +73,5 @@
       </div>
     </div>
   </div>
-
+</div>
 

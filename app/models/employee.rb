@@ -10,13 +10,14 @@ class Employee < ActiveRecord::Base
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
   has_many :payments, as: :paymentable
-  
+  has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :employments
   has_many :projects, through: :employments
   
   def cash_advances
     Account.find_by_name("Cash Advances").debit_entries.where(recipient: self)
   end
+
   def paid!
     self.worked_days.unpaid.set_to_paid!
   end
@@ -52,6 +53,6 @@ class Employee < ActiveRecord::Base
   end
 
   def name
-  	full_name
+  	"#{first_name.titleize} #{last_name.first.capitalize}."
   end
 end

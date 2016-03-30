@@ -1,40 +1,36 @@
-<div class="col-md-8 col-md-offset-2">
-  <!-- Widget: user widget style 1 -->
+<div class="col-md-10 col-md-offset-1">
   <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
     <div class="widget-user-header bg-blue-active">
       <h3 class="widget-user-username">New Labor Cost</h3>
     </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-            <table class="table table-compressed">
-                  <%= simple_form_for @labor_cost, url: :work_detail_labor_costs do |f| %>
-                   <thead>
-
-
-                                <th style="width: 30%">Personnel</th>
-                                <th>Number of Personnel</th>
-                                <th>Number of Days</th>
-                                <th>Daily Rate</th>
-                                <th>Total Cost</th>
-                            </thead>
-                            <tbody>
-                               <tr>
-<%=f.error_notification %>
-<td><%=f.input :personnel, label: false %></td>
-<td><%=f.input :number_of_personnel, label: false, input_html:{id: "number_of_personnel", oninput: "calculate_labor_cost()"}   %></td>
-<td><%=f.input :number_of_days, label: false, input_html:{id: "number_of_days", oninput: "calculate_labor_cost()"}  %></td>
-<td><%=f.input :daily_rate, label: false, placeholder: 'Quantity', input_html:{id: "daily_rate", oninput: "calculate_labor_cost()"} %></td>
-<td><%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "total_cost"}%></td>
-</tr>
-                               </tbody>
-                               </table>
-<div class="modal-footer">
-<%=f.submit "Save Labor Cost", class: "btn btn-primary" %>
-
-</div>
-<% end %>
+    <div class="box-body">
+      <%= simple_form_for [@work_detail, @labor_cost], url: :work_detail_labor_costs do |f| %>
+        <table class="table table-compressed">
+          <thead>
+            <tr>
+              <th style="width: 30%">Personnel</th>
+              <th>Number of Personnel</th>
+              <th>Number of Days</th>
+              <th>Daily Rate</th>
+              <th>Total Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <%=f.error_notification %>
+              <td><%=f.input :personnel, label: false %></td>
+              <td><%=f.input :number_of_personnel, label: false, input_html:{id: "number_of_personnel", oninput: "calculate_labor_cost()"}   %></td>
+              <td><%=f.input :number_of_days, label: false, input_html:{id: "number_of_days", oninput: "calculate_labor_cost()"}  %></td>
+              <td><%=f.input :daily_rate, label: false, input_html:{id: "daily_rate", oninput: "calculate_labor_cost()"} %></td>
+              <td><%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "total_cost"}%></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <%=f.submit "Save Labor Cost", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 

@@ -1,5 +1,4 @@
-
-
+<div class="col-md-12">
   <div class="box box-primary">
     <div class="box-header with-border">
       <div class="row">
@@ -27,7 +26,7 @@
             <% @accounts.each do |account| %>
               <tr>
                 <td><%=account.code %></td>
-                <td><%=link_to account.name, account_path(account) %></td>
+                <td><%= account.name %></td>
                 <td><%=account.type %></td>
                 <td><%=account.credits_balance %></td>
                 <td><%=account.debits_balance %></td>
@@ -38,3 +37,4 @@
       </div>
     </div>
   </div>
+</div>

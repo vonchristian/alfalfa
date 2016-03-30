@@ -1,52 +1,44 @@
 
 <div class="tab-pane" id="work_details">
-<div class="row">
-    <div class="col-md-12">
+  <div class="box-header with-border">
     <%if policy(WorkDetail.new).create? %>
-        <span><%=link_to new_project_work_detail_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%></span>
+      <span>
+        <%=link_to new_project_work_detail_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%>
+      </span>
+    <% end %>
+  </div>
+  <div class="box-body">
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-uppercase">
+          <th>Item No.</th>
+          <th style="width: 30%">Description</th>
+          <th><span class="pull-right">Quantity</span></th>
+          <th><span class="pull-right">Unit Cost</span></th>
+          <th><span class="pull-right">Total Cost</span></th>
+          <th>Wt. %</th>
+          <th>Accomplished</th>
+          <th>Remaining</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.work_details.each do |work_detail| %>
+          <tr>
+            <td><%=work_detail.code%></td>
+            <td><%=link_to work_detail.description.upcase,[@project, work_detail] %>
+            </td>
+            <td><span class="pull-right"><%=work_detail.quantity %> <%=work_detail.unit %></span></td>
+            <td><span class="pull-right"><%=number_to_currency work_detail.unit_cost %></span></td>
+            <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
+            <td><%=work_detail.weighted_percent.round(3) %> %</td>
+            <td class="text-success"><%=number_to_currency(work_detail.actual_accomplishment_percent, unit: '')%> %</td>
+            <td class="text-muted"><%=number_to_currency(work_detail.remaining_accomplishment_percent, unit: '')%> %</td>
+            <td class="text-danger"><%=number_to_currency(work_detail.slippage, unit: '')%></td>
+          </tr>
         <% end %>
-    </div>
-    <hr>
-    <div class="col-md-12">
-<table class="table table-hover">
-<thead>
-  <tr class="text-uppercase">
-
-    <th>Item No.</th>
-    <th style="width: 30%">Description</th>
-    <th><span class="pull-right">Quantity</span></th>
-    <th><span class="pull-right">Unit Cost</span></th>
-    <th><span class="pull-right">Total Cost</span></th>
-    <th>Wt. %</th>
-
-  <th>Accomplished</th>
-  <th>Remaining</th>
-  </tr>
-</thead>
-
-<tbody>
-<% @project.work_details.each do |work_detail| %>
-<tr>
-<td><%=work_detail.code%></td>
-
-<td><%=link_to work_detail.description.upcase,[@project, work_detail] %>
-</td>
-<td><span class="pull-right"><%=work_detail.quantity %> <%=work_detail.unit %></span></td>
-<td><span class="pull-right"><%=number_to_currency work_detail.unit_cost %></span></td>
-<td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
-
-<td><%=work_detail.weighted_percent.round(3) %> %</td>
-<td class="text-success"><%=number_to_currency(work_detail.actual_accomplishment_percent, unit: '')%> %</td>
-<td class="text-muted"><%=number_to_currency(work_detail.remaining_accomplishment_percent, unit: '')%> %</td>
-<td class="text-danger"><%=number_to_currency(work_detail.slippage, unit: '')%></td>
-
-
-</tr>
-<% end %>
-</tbody>
-</table>
-</div>
-</div>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 

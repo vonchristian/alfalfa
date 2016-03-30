@@ -22,7 +22,7 @@
             </li>
           </ul>
 
-          <%=link_to "Update", edit_user_path(@user), class: "btn btn-primary btn-block" %>
+          <%=link_to "Update", edit_user_path(@user), class: "btn btn-primary btn-block" if @user == current_user %>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
 

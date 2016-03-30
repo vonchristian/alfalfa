@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  PETTY_CASH_EXPENSES = ["Cash Advances", "Repairs and Maintenance"]
+  PETTY_CASH_EXPENSES = Account.all
   FUND_TRANSFER_SOURCES = ["Owner's Capital", "Cash on Hand", "Cash in Bank"]
   class_attribute :normal_credit_balance
     has_many :credit_amounts, :extend => AmountsExtension, class_name: "CreditAmount"
