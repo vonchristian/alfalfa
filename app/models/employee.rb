@@ -14,7 +14,7 @@ class Employee < ActiveRecord::Base
   has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :employments
   has_many :projects, through: :employments
-  
+
   def cash_advances
     Account.find_by_name("Cash Advances").debit_entries.where(recipient: self)
   end
@@ -23,7 +23,7 @@ class Employee < ActiveRecord::Base
     self.worked_days.unpaid.set_to_paid!
   end
   def unpaid_worked_days_for(project)
-    self.worked_days.where(project_id: project, status: 'unpaid').sum(:number_of_days)
+    self.worked_days.unpaid.where(project: project).sum(:number_of_days)
   end
 
   def unpaid_worked_days
@@ -31,7 +31,7 @@ class Employee < ActiveRecord::Base
   end
 
   def unpaid_worked_days_amount
-    unpaid_worked_days * rate
+    self.unpaid_worked_days * rate
   end
 
   def unpaid_cash_advances
@@ -40,6 +40,10 @@ class Employee < ActiveRecord::Base
 
   def gross_pay
     self.unpaid_worked_days_amount - self.unpaid_cash_advances
+  end
+
+  def gross_pay(project)
+    (self.unpaid_worked_days_for(project) * self. rate) - self.unpaid_cash_advances
   end
 
 
