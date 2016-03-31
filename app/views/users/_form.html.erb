@@ -12,7 +12,7 @@
               <%if @user.profile_photo.blank? %>
                 <center><%=image_tag("default-small.png", :class=>"img-square center-block ") %></center>
               <% else %>
-                <center><%= image_tag attachment_url(@user, :profile_photo, :fill, 150, 150), class: 'center-block img-responsive img-rounded'%></center>
+                <center><%= image_tag @user.profile_photo.url(:medium), class: 'center-block img-responsive img-rounded'%></center>
               <% end %>
               <br>
               <%= f.input :profile_photo, class: 'center-block', as: :file %>
