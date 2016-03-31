@@ -8,35 +8,36 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th style="width: 20%"><center>Employee</center></th>
-              <th>Rate</th>
-              <th>Days Worked</th>
-              <th style="width: 30%">Cash Advances</th>
-              <th><span class="pull-right">Gross Pay</span></th>
+              <th rowspan="2"><center>Employee</center></th>
+              <th rowspan="2">Rate</th>
+              <th rowspan="2">Days Worked</th>
+              <th style="width: 30%" colspan="2"><center>Cash Advances</center></th>
+              <th rowspan="2"><span class="pull-right">Gross Pay</span></th>
+            </tr>
+            <tr>
+              <th><center>Date</center></th>
+              <th><center>Amount</center></th>
             </tr>
           </thead>
           <tbody>
             <% Employee.all.each do |employee| %>
               <tr>
-                <td width="60px">
-                  <center>
-                    <%=link_to payroll_path(employee) do %>
-                      <%= image_tag attachment_url(employee, :photo, :fill, 35, 35, fallback: "default-small.png"),  class: "img-circle" %><br>
-                      <%=employee.full_name.camelize %>
-                    <% end %>
-                  </center>
-                </td>
-                <td style="line-height: 81px"><%=number_to_currency employee.rate %></td>
-                <td style="line-height: 81px"><%=employee.unpaid_worked_days %> Days</td>
-                <td style="line-height: 81px">
+                <td style="width:70px"><%= image_tag employee.profile_photo.url(:thumb), class: "img-rounded" %></td>
+                <td><%=number_to_currency employee.rate %></td>
+                <td><%=employee.unpaid_worked_days %> Days</td>
+                <% if employee.cash_advances.present? %>
                   <% employee.cash_advances.each do |cash_advance| %>
-                    <p><%=cash_advance.date_disbursed.strftime("%B %e, %Y") %>
-                    <span class="pull-right"><%=number_to_currency cash_advance.amount %></span>
-                    </p>
+                    <td><%=cash_advance.date.strftime("%B %e, %Y") %></td>
+                    <td>
+                      <span class="pull-right"><%=number_to_currency cash_advance.debit_amounts.last.amount %></span>
+                    </td>
                   <% end %>
-                </td>
-                <td style="line-height: 81px"><span class="pull-right"><%=number_to_currency employee.gross_pay %></span></td>
-                <td style="line-height: 81px">
+                <% else %>
+                  <td></td>
+                  <td></td>
+                <% end %>
+                <td><span class="pull-right"><%=number_to_currency employee.total_gross_pay %></span></td>
+                <td>
                   <% if employee.worked_days.unpaid.present? %>
                     <%=link_to "Pay Slip", new_employee_payment_path(employee) %>
                   <% end %>

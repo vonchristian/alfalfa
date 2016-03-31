@@ -14,7 +14,7 @@ def price(number)
 end
 
 def heading
-  text "#{@project.name}", align: :center
+  text "#{@project.name}", align: :center, size: 10
   move_down 5
   text "PAYROLL", align: :center
   move_down 5

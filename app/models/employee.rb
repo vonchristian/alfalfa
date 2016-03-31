@@ -6,7 +6,7 @@ class Employee < ActiveRecord::Base
   validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   enum position:[:laborer, :skilled_laborer, :project_foreman, :operator, :welder, :project_engineer, :bookkeeper, :liason_officer, :supply_officer, :accounting_officer, :monitoring_officer, :mechanical_engineer]
-  validates :first_name, :last_name, :email, :mobile_number, :position, presence: true
+  validates :first_name, :last_name, :email, :mobile_number, :position, :rate, presence: true
   # validates :full_name, uniqueness: true
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
@@ -38,12 +38,12 @@ class Employee < ActiveRecord::Base
     self.cash_advances.sum(:amount)
   end
 
-  def gross_pay
+  def total_gross_pay
     self.unpaid_worked_days_amount - self.unpaid_cash_advances
   end
 
   def gross_pay(project)
-    (self.unpaid_worked_days_for(project) * self. rate) - self.unpaid_cash_advances
+    (self.unpaid_worked_days_for(project) * self.rate) - self.unpaid_cash_advances
   end
 
 

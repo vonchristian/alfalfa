@@ -36,12 +36,12 @@
 			</div>
 		</div>
 		<div class="box-header with-border">
-			<h5 class="text-muted">Gross Pay<span class="pull-right"><%= number_to_currency @employee.gross_pay %></span>
+			<h5 class="text-muted">Gross Pay<span class="pull-right"><%= number_to_currency @employee.total_gross_pay %></span>
 			</h5>
 		</div>
 		<div class="box-header">
 			<%=simple_form_for [@employee, @payment] do |f| %>
-				<%=f.input :amount,	input_html: {value: @employee.gross_pay, class: "input-lg text-right" }, as: :hidden  %></h3>
+				<%=f.input :amount,	input_html: {value: @employee.total_gross_pay, class: "input-lg text-right" }, as: :hidden  %></h3>
 				<label class="text-muted">Date: </label>
 				<%=f.input :date, label: false, as: :string, input_html:{class: "datepicker input-sm"} %>
 				<div class="modal-footer">

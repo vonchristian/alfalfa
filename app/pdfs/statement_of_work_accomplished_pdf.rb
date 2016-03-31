@@ -15,7 +15,7 @@ class StatementOfWorkAccomplishedPdf < Prawn::Document
   end
 
   def heading
-    text "CONTRACTOR'S STATEMENT OF WORK ACCOMPLISHED", align: :center
+    text "CONTRACTOR'S STATEMENT OF WORK ACCOMPLISHED", align: :center, size: 10
     move_down 5
     text "From: #{Time.zone.now.strftime("%B %e, %Y")} To: #{Time.zone.now.next_month.strftime("%B %e, %Y")}", align: :center, size: 10
   end
@@ -25,7 +25,7 @@ class StatementOfWorkAccomplishedPdf < Prawn::Document
     [["NAME OF PROJECT:", "#{@project.name.upcase}"],
       ["LOCATION:", "#{@project.address.upcase}"],
       ["PROJECT DURATION:", "#{@project.duration} DAYS"],
-      ["CONTRACTOR:", "#{@project.main_contractor.company.upcase}"]]
+      ["CONTRACTOR:", "#{@project.main_contractor.company.upcase if @project.main_contractor.present?}"]]
   end
 
   def project_info
