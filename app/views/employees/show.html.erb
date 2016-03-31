@@ -3,7 +3,7 @@
     <div class="box-body">
       <div class="col-md-3 border-right">
         <div class="box-body box-profile">
-          <%= image_tag @employee.profile_photo.url(:medium),  class: "profile-user-img img-responsive img-circle" %>
+          <%= image_tag @employee.profile_photo.url(:large),  class: "profile-user-img img-responsive img-circle" %>
           <h3 class="profile-username text-center"><%=@employee.full_name %></h3>
           <p class="text-muted text-center"><%=@employee.position.titleize %></p>
           <br>

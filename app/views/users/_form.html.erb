@@ -12,7 +12,7 @@
               <%if @user.profile_photo.blank? %>
                 <center><%=image_tag("default-small.png", :class=>"img-square center-block ") %></center>
               <% else %>
-                <center><%= image_tag @user.profile_photo.url(:medium), class: 'center-block img-responsive img-rounded'%></center>
+                <center><%= image_tag @user.profile_photo.url(:large), class: 'center-block img-responsive img-rounded'%></center>
               <% end %>
               <br>
               <%= f.input :profile_photo, class: 'center-block', as: :file %>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <%=f.submit 'Save Employee', class: 'btn btn-primary', data: {disable_with: "Saving Employee..."} %>
+          <%=f.submit 'Save Employee', class: 'btn btn-primary', data: {disable_with: "Saving Employee..."} %> or <%= link_to "Cancel", @user %>
         </div>
       </div>
     </div>

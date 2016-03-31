@@ -3,30 +3,36 @@
   <div class="col-md-10 col-md-offset-1">
     <div class="box box-solid">
       <div class="box-header with-border">
-        <h3 class="widget-user-username">New Inventory</h3>
+        <h3 class="widget-user-username">List of Materials</h3>
       </div>
       <div class="box-body">
         <div class="col-md-7 border-right">
-          <div class="box-header with-border">
-            <h4>List of Inventories</h4>
-          </div>
-          <% @inventories.each do |inventory| %>
-            <h4><%=link_to inventory.name, inventory %>
-            <span class="pull-right"><%= number_to_currency inventory.cost %></span></h4>
-            <span class="help-block"><%= inventory.quantity %> - <%= inventory.unit %></span>
-            <hr />
+          <table class="table table-hover">
+            <tr>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th><span class="pull-right">Unit Cost</span></th>
+            </tr>
+            <% @inventories.each do |inventory| %>
+              <tr>
+                <td><%=link_to inventory.name, inventory %> - <%= inventory.description %></td>
+                <td><%= inventory.quantity %> - <%= inventory.unit %></td>
+                <td><span class="pull-right"><%= number_to_currency inventory.cost %></span></td>
+              </tr>
           <% end %>
+          </table>
+          
         </div>
         <div class="col-md-5">
           <div class="well">
-            <h4>Details</h4>
+            <h4>New Material Details</h4>
             <hr>
             <%=f.input :name, as: :text, autofocus: true, label: false, placeholder: 'Inventory Name' %>
             <%=f.input :description, as: :text, label: false, placeholder: 'Description' %>
             <%=f.input :cost, as: :string, input_html: {autocomplete: "off"}, label: false, placeholder: 'Cost' %>
             <div class="row">
               <div class="col-md-6">
-                <%=f.input :quantity, as: :string, input_html: {autocomplete: "off"}, label: false, placeholder: 'Quantity' %>
+                <%=f.input :quantity, input_html: {autocomplete: "off"}, label: false, placeholder: 'Quantity' %>
               </div>
               <div class="col-md-6">
                 <%=f.input :unit, label: false, placeholder: 'Unit' %>

@@ -18,6 +18,10 @@ class Inventory < ActiveRecord::Base
     "#{name} - #{cost}"
   end
 
+  def name_description
+    "#{name} - #{description}"
+  end
+
   def total_cost
     quantity * cost
   end

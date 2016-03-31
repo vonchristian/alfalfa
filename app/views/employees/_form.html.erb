@@ -12,7 +12,8 @@
             <%=image_tag("default-small.png", :class=>"img-square center-block ") %>
             <br>
           <% else %>
-            <%= image_tag @employee.profile_photo.url(:medium), class: 'center-block img-responsive img-rounded'%>
+            <%= image_tag @employee.profile_photo.url(:large), class: 'center-block img-responsive img-rounded'%>
+            <br>
           <% end %>
           <%= f.input :profile_photo, class: 'center-block', as: :file %>
           <hr>
@@ -39,7 +40,9 @@
         </div>
       </div>
       <div class="box-footer">
-        <%=f.submit 'Save Employee', class: 'btn btn-primary pull-right' %>
+        <div class="pull-right">
+          <%=f.submit 'Save Employee', class: 'btn btn-primary' %> or <%= link_to "Cancel", @employee %>
+        </div>
       </div>
     </div>
   </div>
