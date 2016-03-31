@@ -8,11 +8,12 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th rowspan="2"><center>Employee</center></th>
+              <th rowspan="2" style="width:130px"><center>Employee</center></th>
               <th rowspan="2">Rate</th>
               <th rowspan="2">Days Worked</th>
               <th style="width: 30%" colspan="2"><center>Cash Advances</center></th>
               <th rowspan="2"><span class="pull-right">Gross Pay</span></th>
+              <th rowspan="2"></th>
             </tr>
             <tr>
               <th><center>Date</center></th>
@@ -22,7 +23,9 @@
           <tbody>
             <% Employee.all.each do |employee| %>
               <tr>
-                <td style="width:70px"><%= image_tag employee.profile_photo.url(:thumb), class: "img-rounded" %></td>
+                <td>
+                  <%= image_tag employee.profile_photo.url(:x_small), class: "img-rounded" %> <%= employee.try(:name) %>
+                </td>
                 <td><%=number_to_currency employee.rate %></td>
                 <td><%=employee.unpaid_worked_days %> Days</td>
                 <% if employee.cash_advances.present? %>
@@ -36,10 +39,9 @@
                   <td></td>
                   <td></td>
                 <% end %>
-                <td><span class="pull-right"><%=number_to_currency employee.total_gross_pay %></span></td>
-                <td>
+                <td><span class="pull-right"><%=number_to_currency employee.total_gross_pay %></span><td>
                   <% if employee.worked_days.unpaid.present? %>
-                    <%=link_to "Pay Slip", new_employee_payment_path(employee) %>
+                    <%=link_to "Pay Slip", new_employee_payment_path(employee), class: 'pull-right' %>
                   <% end %>
                 </td>
               </tr>
