@@ -10,6 +10,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
-/tmp
+/tmp/cache
+/tmp/miniprofiler
+/tmp/sessions
+/tmp/uploads
 /app/config/secrets.yml
 /app/public/system
