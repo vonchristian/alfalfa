@@ -1,33 +1,18 @@
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-12">
   <!-- Widget: user widget style 1 -->
   <div class="box box-solid">
     <!-- Add the bg color to the header using any of the bg-* classes -->
     <div class="row">
       <div class="col-md-12">
         <div class="box-header with-border">
-          <h4>Add Workers</h4>
-        </div>
-        <div class="box-body">
-          <div class="col-md-8 col-md-offset-2">
-            <%= render 'form' %>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <hr>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="box-header with-border">
           <h4 class="text-uppercase">List of Workers for this project</h4>
         </div>
         <div class="box-body">
-          <div class="col-md-10 col-md-offset-1">
+          <div class="col-md-7">
             <table class="table">
               <% @project.employees.each do |worker| %>
                 <tr>
-                    <td style="width:65px"><%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-circle" %></td>
+                    <td style="width:65px"><%= image_tag worker.profile_photo.url(:medium), class: "img-rounded" %></td>
                     <td>
                       <b><%=worker.full_name.upcase%></b><br>
                       <span class="text-uppercase text-muted"><%=worker.position.titleize %></span><br>
@@ -36,6 +21,9 @@
                 </tr>
               <% end %>
             </table>
+          </div>
+          <div class="col-md-5">
+            <%= render 'form' %>
           </div>
         </div>
       </div>

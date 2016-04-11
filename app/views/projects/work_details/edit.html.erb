@@ -17,7 +17,8 @@
 			</div>
 	    <div class="box-footer">
 	    	<div class="pull-right">
-	      	<%=f.submit "Update this Work Detail", class: "btn btn-primary" %> or <%= link_to 'Cancel', @work_detail %>
+	    		<%= link_to 'Cancel', @work_detail, class: 'btn btn-warning' %>
+	      	<%=f.submit "Update this Work Detail", class: "btn btn-primary" %>
 	      </div>
 	    </div>
 		</div>

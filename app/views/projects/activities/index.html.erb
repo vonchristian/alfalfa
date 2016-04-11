@@ -4,18 +4,22 @@
 			<h4><small class="pull-left"><%=link_to "Back to Project", project_path(@project) %></small><center class="text-muted">Here's whats been happening to this project</center></h4>
 		</div>
 		<div class="box-body">
-			<% @activities.each do |activity| %>
-				<div class="col-md-1">
-					<center><i class="<%=activity.icon %>"></i></center>
-				</div>
-				<div class="col-md-11">
-					<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 30, 30, fallback: "default-xs-small.png"), class: 'img-circle')%>
-					<b><%= link_to activity.owner.full_name  if activity.owner %></b>
-					<span class="text-muted pull-right"><%=activity.created_at.strftime("%b %d, %Y %I:%M%p") %></span>
-					<%= render_activity activity %>
-					<hr>
-				</div>
-			<% end %>
+			<table class="table">
+				<% @activities.each do |activity| %>
+					<tr>
+						<td width="20%">
+							<span class="help-block"><i class="fa fa-clock-o"></i> <%=activity.created_at.strftime("%B %d, %Y  at %I:%M%p") %></span>
+						</td>
+						<td width="40px">
+							<%= image_tag activity.owner.profile_photo.url(:x_small), class: "img-rounded", alt: "User profile picture" %>
+						</td>
+						<td>
+							<b><%= link_to activity.owner.full_name  if activity.owner %></b>
+							<%= render_activity activity %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
  		</div>
 	</div>
 </div>

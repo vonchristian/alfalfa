@@ -1,69 +1,56 @@
-
-
-            <div class="col-md-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Contract Summary Report</h3>
-<%if policy(Project.new).create?%>
-                  <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Add Project <%end%></span>
-                  <% end%>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                <div class="table table-responsive">
-                  <table class="table table-striped table-bordered">
-<thead>
-<tr>
-
-  <th>ID</th>
-
-  <th style="width: 30%" class="text-uppercase">Project Name</th>
-  <th class="text-uppercase">Actual Acc.</th>
-  <th class="text-uppercase">Target Acc.</th>
-  <th class="text-uppercase">Slippage</th>
-  <th style="width: 10%" class="text-uppercase">Approved Contract</th>
-  <th style="width: 20%" class="text-uppercase">Approved Change Orders</th>
-  <th style="width: 20%" class="text-uppercase">Revised Contract</th>
-  <th style="width: 20%" class="text-uppercase">Pending Change Orders</th>
-  <th style="width: 10%" class="text-uppercase">Payment Applications</th>
-  <th style="width: 10%" class="text-uppercase">Payment Received</th>
-  <th style="width: 10%" class="text-uppercase">Remaining</th>
-  <th style="width: 10%" class="text-uppercase">Expiry Date</th>
-  <th></th>
+<div class="col-md-12">
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Contract Summary Report</h3>
+      <%if policy(Project.new).create?%>
+        <span class="pull-right"><%=link_to new_project_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Add Project <%end%></span>
+      <% end%>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+      <div class="table table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th style="width:5%; font-size:12px">ID</th>
+              <th style="width:50%; font-size:12px" class="text-uppercase">Project Name</th>
+              <th style="font-size:12px" class="text-uppercase">Actual Acc.</th>
+              <th style="font-size:12px" class="text-uppercase">Target Acc.</th>
+              <th style="font-size:12px" class="text-uppercase">Slippage</th>
+              <th style="font-size:12px" class="text-uppercase">Approved Contract</th>
+              <th style="font-size:12px" class="text-uppercase">Approved Change Orders</th>
+              <th style="font-size:12px" class="text-uppercase">Revised Contract</th>
+              <th style="font-size:12px" class="text-uppercase">Pending Change Orders</th>
+              <th style="font-size:12px" class="text-uppercase">Payment Applications</th>
+              <th style="font-size:12px" class="text-uppercase">Payment Received</th>
+              <th style="font-size:12px" class="text-uppercase">Remaining</th>
+              <th style="font-size:12px" class="text-uppercase">Expiry Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @projects.each do |project| %>
+              <tr>
+                <td style="width:5%; font-size:12px"><%=project.id_number %></td>
+                <td style="width:50%; font-size:11px"><%=link_to project.name.upcase, project %></td>
+                <td style="font-size:12px"></td>
+                <td style="font-size:12px"></td>
+                <td style="font-size:12px"></td>
+                <td style="font-size:12px"><%=number_to_currency project.cost %></td>
+                <td style="font-size:12px"><%=number_to_currency project.total_amount_revision %></td>
+                <% if project.amount_revisions.present? %>
+                  <td style="font-size:12px"><%=number_to_currency project.revised_contract_amount%></td>
+                <% else %>
+                  <td style="font-size:12px">No Revision</td>
+                <% end %>
+                <td style="font-size:12px"></td>
+                <td style="font-size:12px"></td>
+                <td style="font-size:12px"><%=number_to_currency project.total_collection %></td>
+                <td style="font-size:12px"><%=number_to_currency project.remaining_collection %></td>
+                <td style="font-size:12px"></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
   </div>
-</tr>
-</thead>
-<tbody>
- <% @projects.each do |project| %>
- <tr>
- <td><%=project.id_number %></td>
-  <td><%=link_to project.name.upcase, project %></td>
-  <td></td>
-  <td></td>
-  <td></td>
- <td><%=number_to_currency project.cost %></td>
- <td><%=number_to_currency project.total_amount_revision %></td>
- <% if project.amount_revisions.present? %>
- <td><%=number_to_currency project.revised_contract_amount%></td>
- <% else %>
- <td>No Revision</td>
- <% end %>
- <td></td>
- <td></td>
- <td><%=number_to_currency project.total_collection %></td>
- <td><%=number_to_currency project.remaining_collection %></td>
- <td></td>
-
-  </tr>
-  </tbody>
-  <% end %>
-
-</table>
-  <hr>
-
-
-</div>
-  </div>
-</div>
-</div>
-</div>
 </div>

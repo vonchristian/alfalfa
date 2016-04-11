@@ -15,10 +15,10 @@
   </div>
   <div class="box-body">
     <div class="col-md-6 border-right">
-      <table class="table">
+      <table class="table table-hover">
         <% @project.collections.each do |collection| %>
           <tr>
-            <td><h5><%= number_to_currency collection.amount %></h5></td>
+            <td><%= number_to_currency collection.amount %></td>
             <td><span class="pull-right"><%=collection.date.strftime("%B %e, %Y") %></span></td>
           </tr>
         <% end %>

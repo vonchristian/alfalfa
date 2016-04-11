@@ -20,9 +20,8 @@
         <% @project.attachment_files.each do |attachment| %>
           <tr>
             <td>
-              <%= link_to attachment.attachment_report_file_name, project_attachment_file_path(@project, attachment.id) %>
+              <%= link_to attachment.attachment_report_file_name, project_attachment_file_path(@project, attachment.id), data: {target: '_blank'} %>
             </td>
-            <%= attachment.attachment_report.path %>
             <td><%= attachment.description %></td>
             <td><%= attachment.created_at.strftime("%B %e, %Y") %></td>
             <td><%= link_to 'Remove', project_attachment_file_path(@project, attachment.id), method: :delete, data: { confirm: 'Are you sure you want to remove this attachment from this project?' }, class: "btn btn-danger btn-xs" %></td>

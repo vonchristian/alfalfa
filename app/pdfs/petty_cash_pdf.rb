@@ -45,9 +45,8 @@ class PettyCashPdf < Prawn::Document
       [["Starting Balance:", "#{(price @petty_cash.balance)}"],
         ["Fund Transfer:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
-        ["Outstanding Balance:", "#{(price @petty_cash.balance - @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"]]
+        ["Outstanding Balance:", "#{(price @petty_cash.balance + @petty_cash.balance({from_date: @from_date, to_date: @to_date}))}"]]
     end
-
   end
 
   def summary

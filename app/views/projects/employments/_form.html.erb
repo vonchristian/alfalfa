@@ -1,10 +1,14 @@
 <%= simple_form_for ([@project, @employment]) do |f| %>
   <%=f.error_notification %>
-  <%=f.input :employee_id, collection: Employee.all, label: false, placeholder: 'Employee' %>
+  <div class="well">
+    <h4>Add Workers</h4>
+    <hr>
+    <%=f.input :employee_id, collection: Employee.all, label: false, placeholder: 'Employee' %>
     <div class="modal-footer">
-      <%=f.submit "Add this Employee", class: "btn btn-primary" %>
-      <%=link_to "or I'm done adding Employees",project_path(@project), class: "btn"%>
+      <%=f.submit "Add this Employee", class: "btn btn-primary btn-block" %>
+      <%=link_to "or I'm done adding Employees",project_path(@project), class: "btn btn-block"%>
     </div>
+  </div>
 <% end %>
 <script>
     $(document).ready(function() {

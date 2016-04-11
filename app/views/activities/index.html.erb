@@ -1,27 +1,25 @@
-<div class="row">
-	<div class="col-md-12">
-		<div class="box box-solid">
-			<div class="box-header with-border">
-				<h4><center>Here's what's been happening to your business.</center></h4>
-			</div>
-			<div class="box-body">
-				<table class="table">
-					<% @activities.each do |activity| %>
-						<tr>
-							<td width="20%">
-								<span class="help-block"><i class="fa fa-clock-o"></i> <%=activity.created_at.strftime("%B %d, %Y  at %I:%M%p") %></span>
-							</td>
-							<td width="40px">
-								<%=(image_tag attachment_url(activity.owner, :profile_photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: 'img-circle')%>
-							</td>
-							<td>
-								<b><%= link_to activity.owner.full_name  if activity.owner %></b>
-								<%= render_activity activity %>
-							</td>
-						</tr>
-					<% end %>
-				</table>
- 			</div>
+<div class="col-md-12">
+	<div class="box box-solid">
+		<div class="box-header with-border">
+			<h4><center>Here's what's been happening to your business.</center></h4>
+		</div>
+		<div class="box-body">
+			<table class="table">
+				<% @activities.each do |activity| %>
+					<tr>
+						<td width="20%">
+							<span class="help-block"><i class="fa fa-clock-o"></i> <%=activity.created_at.strftime("%B %d, %Y  at %I:%M%p") %></span>
+						</td>
+						<td width="40px">
+							<%= image_tag activity.owner.profile_photo.url(:x_small), class: "img-rounded", alt: "User profile picture" %>
+						</td>
+						<td>
+							<b><%= link_to activity.owner.full_name  if activity.owner %></b>
+							<%= render_activity activity %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
 		</div>
 	</div>
 </div>
