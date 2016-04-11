@@ -38,7 +38,7 @@ case "$1" in
 
   stop)
     echo "Stopping puma..."
-      kill -s TERM `cat $PUMA_PID_FILE`
+      kill -s SIGTERM `cat $PUMA_PID_FILE`
       rm -f $PUMA_PID_FILE
       rm -f $PUMA_SOCKET
 
@@ -48,7 +48,7 @@ case "$1" in
   restart)
     if puma_is_running ; then
       echo "Hot-restarting puma..."
-      kill -s USR2 `cat $PUMA_PID_FILE`
+      kill -s SIGUSR2 `cat $PUMA_PID_FILE`
 
       echo "Doublechecking the process restart..."
       sleep 5
