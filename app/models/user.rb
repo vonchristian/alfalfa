@@ -7,7 +7,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_attached_file :profile_photo, styles: { large: "120x120>", medium: "70x70>", thumb: "40x40>", small: "30x30>", x_small: "20x20>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :profile_photo, 
+                    styles: { large: "120x120>", 
+                    medium: "70x70>", 
+                    thumb: "40x40>", 
+                    small: "30x30>", 
+                    x_small: "20x20>" }, 
+                    default_url: "/images/:style/missing.png",
+                    :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+                    :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   def full_name

@@ -2,7 +2,13 @@ class Employee < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:first_name, :last_name]
 
-  has_attached_file :profile_photo, styles: { large: "120x120>", medium: "70x70>", thumb: "40x40>", small: "30x30>", x_small: "20x20>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :profile_photo, 
+                    styles: { large: "120x120>", 
+                    medium: "70x70>", thumb: "40x40>", 
+                    small: "30x30>", x_small: "20x20>" }, 
+                    default_url: "/images/:style/missing.png",
+                    :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+                    :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   enum position:[:laborer, :skilled_laborer, :project_foreman, :operator, :welder, :project_engineer, :bookkeeper, :liason_officer, :supply_officer, :accounting_officer, :monitoring_officer, :mechanical_engineer]

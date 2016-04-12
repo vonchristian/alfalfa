@@ -54,8 +54,8 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/system/public"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/system/public"]
+  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/public/system"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/system"]
 
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
