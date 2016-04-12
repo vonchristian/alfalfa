@@ -18,12 +18,13 @@ set :user, 'deploy'
 set :term_mode, nil
 set :forward_agent, true
 set :app_path, lambda { "#{deploy_to}/#{current_path}" }
+set :stage, 'production'
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'public/system']
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'tmp/log', 'public/system']
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
@@ -47,6 +48,9 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
 
+  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/tmp/log"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/log"]
+
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
 
@@ -60,6 +64,10 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/sockets"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/sockets"]
 
+  queue! %[touch "#{deploy_to}/#{shared_path}/tmp/log/stdout"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/tmp/log/stderr"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/tmp/pids/puma.pid"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/tmp/sockets/puma.sock"]
   queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
   queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml' and 'secrets.yml'."]
@@ -99,7 +107,7 @@ namespace :puma do
   desc "Start the application"
   task :start do
     queue 'echo "-----> Start Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start"
+    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start", :pty => false
   end
 
   desc "Stop the application"
