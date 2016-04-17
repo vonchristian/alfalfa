@@ -1,0 +1,19 @@
+<div class="container">
+<div class="box box-solid">
+<div class="box-header with-border">
+<h4>Restocking Details</h4>
+</div>
+<div class="box-body">
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+<%=simple_form_for [@inventory, @restocking] do |f| %>
+  <%=f.input :quantity %>
+  <%=f.input :price %>
+  <div class="modal-footer">
+  <%=f.submit "Restock Inventory", class: "btn btn-primary" %>
+  </div>
+  </div>
+<% end %>
+

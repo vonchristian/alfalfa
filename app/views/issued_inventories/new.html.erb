@@ -22,7 +22,7 @@
             <% if @issued_inventories.present? %>
               <% @issued_inventories.each do |issued_inventory| %>
                 <tr>
-                  <td><%= issued_inventory.inventoriable.try(:name) %></td>
+                  <td><%= issued_inventory.inventoriable.try(:name).truncate(40) %></td>
                   <td><%= issued_inventory.inventory.name %></td>
                   <td><%= issued_inventory.quantity %></td>
                   <td><span class="pull-right"><%= number_to_currency issued_inventory.inventory.cost %></span></td>

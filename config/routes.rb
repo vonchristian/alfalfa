@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   end
 
   resources :entries
-  resources :inventories
+  resources :inventories do
+    resources :restockings, module: :inventories
+  end
   resources :sales, module: :inventories
   resources :issued_inventories
 

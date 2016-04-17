@@ -23,7 +23,6 @@ class IssuedInventoriesController < ApplicationController
     @issued_inventory = IssuedInventory.create(issued_inventory_params)
     authorize @issued_inventory
     if @issued_inventory.save
-      @issued_inventory.update_quantity_of_inventory_on_save
       redirect_to new_issued_inventory_url, notice: "Inventory issued successfully."
     else
       render :new
@@ -32,6 +31,6 @@ class IssuedInventoriesController < ApplicationController
 
   private
   def issued_inventory_params
-    params.require(:issued_inventory).permit(:inventoriable_id, :inventoriable_type, :inventory_id, :quantity, :total_cost, :date_issued)
+    params.require(:issued_inventory).permit( :inventory_id, :quantity, :total_cost, :date_issued)
   end
 end

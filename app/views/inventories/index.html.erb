@@ -1,39 +1,18 @@
 <div class="col-md-12">
   <div class="box">
     <div class="box-header with-border">
-      <div class="row">
-        <div class="col-md-4">
-          <h3>List of Inventories</h3>
+          <h4>List of Inventories
+          <span class="pull-right"><%=link_to "New Inventory", new_inventory_path, class: "btn  btn-primary" %></span>
+          </h4>
         </div>
-        <div class="col-md-8">
-          <div class="pull-right">
-            <%= form_tag({:action => 'index'}, {:method => :get, class: 'form-inline'}) do %>
-              <div class="form-group">
-                <%= label_tag :from_date, nil, class: 'sr-only' %>
-                <%#= text_field_tag :from_date, @from_date.beginning_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
-              </div>
-              <div class="form-group">
-                <%= label_tag :to_date, nil, class: 'sr-only' %>
-                <%#= text_field_tag :to_date, @to_date.end_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
-              </div>
-              <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <div class="box-body">
-      <div class="col-md-8">
-        <div class="box-header with-border">
-          <div class="pull-right">
-            <%=link_to "Print Report(PDF)", petty_cash_index_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm' %>
-          </div>
-        </div>
+
         <table class="table">
           <thead>
-            <tr>
+            <tr class="text-uppercase">
               <th>Description</th>
-              <th>Quantity</th>
+              <th>Remaining Quantity</th>
               <th>Unit Cost</th>
             </tr>
           </thead>
@@ -41,32 +20,12 @@
             <% @inventories.each do |inventory| %>
               <tr>
                 <td><%= link_to inventory.name_description, inventory %></td>
-                <td><%= inventory.quantity %> <%= inventory.unit %></td>
-                <td><%= number_to_currency inventory.cost %></td>
+                <td><%= inventory.remaining_quantity %> <%= inventory.unit %></td>
+               <td><%= number_to_currency inventory.restockings.last.try(:price)%></td>
               </tr>
             <% end %>
           </tbody>
         </table>
       </div>
-      <div class="col-md-4">
-        <div class="row">
-          <div class="well">
-            <h3 class="text-center">
-              
-            </h3>
-            <span class="help-block"><center class="text-uppercase">Balance</center></span>
-            <br>
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <% if current_user.supply_officer? %>
-                  <%= link_to new_inventory_path, class: 'btn btn-success btn-block' do %><i class="fa fa-plus-circle"></i> New Inventory <%end%>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 

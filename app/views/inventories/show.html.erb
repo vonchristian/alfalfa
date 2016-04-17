@@ -1,17 +1,38 @@
-<div class="row">
-<div class="col-md-5 col-md-offset-3">
-  <!-- Widget: user widget style 1 -->
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-gray-active">
-      <h3 class="widget-user-username"><%=@inventory.name.upcase %></h3>
-    </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-                <%=@inventory.name %>
+<div class="container">
+  <div class="box box-solid">
+    <div class="box-header with-border">
 
+    <h4><%=@inventory.name %>
+
+<div class="pull-right">
+    <%=link_to "Restock", new_inventory_restocking_path(@inventory), class: "btn btn-success" %>
+
+    <%=link_to "Edit Inventory", edit_inventory_path, class: "btn btn-primary" %>
 </div>
+</h4>
+    </div>
+    <div class="box-body">
+    <h4>Issued <%=@inventory.name %> History</h4>
+    <table class="table table-hover">
+    <thead>
+      <tr class="text-uppercase">
+      <th>Date Issued</th>
+      <th>Quantity</th>
+      <th>Issued To</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @inventory.issued_inventories.each do |issued_inventory| %>
+    <tr>
+    <td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>
+    <td><%=issued_inventory.quantity %> <%=issued_inventory.inventory.unit %></td>
+    <td><%=issued_inventory.inventoriable.name %></td>
+    </tr>
+
+    <% end %>
+    </tbody>
+    </table>
+    </div>
+  </div>
 </div>
-</row>
+

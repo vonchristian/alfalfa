@@ -6,6 +6,7 @@ class InventoriesController < ApplicationController
   def new
     @inventories = Inventory.all
     @inventory = Inventory.new
+    @inventory.restockings.build
     authorize @inventory
   end
 
@@ -32,7 +33,7 @@ class InventoriesController < ApplicationController
   def update
     @inventory = Inventory.find(params[:id])
     authorize @inventory
-    if @inventory.update
+    if @inventory.update(inventory_params)
       redirect_to inventories_url, notice: 'Inventory updated successfully.'
     else
       render :edit
@@ -41,6 +42,6 @@ class InventoriesController < ApplicationController
 
   private
   def inventory_params
-    params.require(:inventory).permit(:cost, :quantity, :name, :description, :unit)
+    params.require(:inventory).permit(  :name, :description, :unit, restockings_attributes:[:price, :quantity])
   end
 end

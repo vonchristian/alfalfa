@@ -1,7 +1,7 @@
 <div class="tab-pane active" id="work_details_timeline">
-  
+
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <div class="box-header with-border">
         <div class="col-md-4">
           <h4><center><%=@work_detail.quantity %></center>
@@ -16,11 +16,14 @@
           <h5 class="text-muted text-uppercase"><center class="text-danger">Remaining</center></h5>
         </div>
       </div>
+      <br>
+      <br>
+
+      <div class="col-md-12">
       <h4>Accomplishments
       <span class="pull-right"><%=link_to "Update Accomplishment", new_work_detail_work_accomplishment_path(@work_detail), class: "btn btn-primary btn-sm" %></span>
       </h4>
       <hr>
-      <div class="col-md-10 col-md-offset-1">
         <%@work_detail.work_accomplishments.each do |accomplishment| %>
           <h5><%=accomplishment.quantity %>
           <span class="pull-right"><%=accomplishment.date_accomplished.strftime("%B %e, %Y") %></span>
@@ -30,36 +33,36 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-4 border-left">
+    <div class="col-md-4 col-md-offset-1 border-left">
       <div class="row">
         <div class="box-header">
-          <h4>Costs Incurred</h4>
-          <span class="text-muted">As of <%=Time.zone.now.strftime("%B %e %Y") %></span>
+          <h4>COSTS INCURRED</h4>
+          <span class="text-muted">As of today ( <%=Time.zone.now.strftime("%B %e, %Y") %>)</span>
         </div>
       </div>
       <table class="table table-hover">
         <tr>
-          <td><h5>Material</h5></td>
-          <td><h5 class="pull-right text-muted"><%=number_to_currency @work_detail.material_costs_incurred %></h5></td>
+          <td><h4>Material</h4></td>
+          <td><h4 class="pull-right text-danger"><%=number_to_currency @work_detail.material_costs_incurred %></h4></td>
         </tr>
         <tr>
-          <td><h5>Labor</h5></td>
+          <td><h4>Labor</h4></td>
           <td></td>
         </tr>
         <tr>
-          <td><h5>Equipment</h5></td>
+          <td><h4>Equipment</h4></td>
           <td></td>
         </tr>
         <tr>
-          <td><h5>Subcontract</h5></td>
+          <td><h4>Subcontract</h4></td>
           <td></td>
         </tr>
         <tr>
-          <td><h5>Overhead</h5></td>
+          <td><h4>Overhead</h4></td>
           <td></td>
         </tr>
         <tr>
-          <td><h5>Other Costs</h5></td>
+          <td><h4>Other Costs</h4></td>
           <td></td>
         </tr>
         <tr>

@@ -10,23 +10,21 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th style="width: 10%">Code</th>
-            <th style="width: 30%">Description</th>
+            <th style="width: 30%">Inventory Name</th>
             <th>Quantity</th>
-            <th>Unit</th>
             <th>Unit Cost</th>
             <th>Total Cost</th>
+            <th>Date Issued</th>
           </tr>
         </thead>
         <tbody>
           <% @work_detail.issued_inventories.each do |material| %>
             <tr>
-              <td><%=material.code %></td>
               <td><%= material.inventory.name %> - <%=material.description %></td>
-              <td><%=material.quantity %></td>
-              <td><%=material.unit %></td>
+              <td><%=material.quantity %> <%=material.inventory.unit %></td>
               <td><%=number_to_currency material.unit_cost %></td>
               <td><%=number_to_currency material.total_cost %></td>
+              <td><%=material.date_issued.strftime("%B %e, %Y") %></td>
             </tr>
           <% end %>
         </tbody>

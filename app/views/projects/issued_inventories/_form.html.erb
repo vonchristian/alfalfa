@@ -3,20 +3,12 @@
   <div class="well">
     <h4>Issue Material to Work Detail</h4>
     <hr>
-    <%=f.input :inventoriable_id, label:  false, placeholder: 'Inventory ID' %>
-    <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Item", input_html: {style: 'width:100%'} %>
-    <%=f.input :code, label: false, placeholder: 'Code' %>
-    <%=f.input :description, label: false, placeholder: 'Description' %>
-    <div class="row">
-      <div class="col-md-6">
-        <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
-      </div>
-      <div class="col-md-6">
-        <%=f.input :unit, label: false, placeholder: 'Unit' %>
-      </div>
-    </div>
-    <%=f.input :unit_cost, label: false, placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
-    <%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
+
+    <%=f.input :inventory_id,  collection: Inventory.all, prompt: "Select Item", input_html: {style: 'width:100%'} %>
+    <%=f.input :date_issued, as: :string, input_html:{class: "datepicker"} %>
+    <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+    <%=f.input :unit_cost,  placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
+    <%=f.input :total_cost,   placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
     <div class="row">
       <div class="modal-footer">
         <%=f.submit "Issue Inventory", class: "btn btn-primary" %>

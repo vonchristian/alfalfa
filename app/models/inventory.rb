@@ -1,21 +1,30 @@
 class Inventory < ActiveRecord::Base
-   # after_create :add_to_accounts
   include PublicActivity::Common
   include PgSearch
   multisearchable :against => [:name]
-  has_many :issued_inventories, as: :inventoriable
+  has_many :issued_inventories
+  has_many :restockings
   has_many :sales
+  accepts_nested_attributes_for :restockings
+  def remaining_quantity
+    self.restockings.sum(:quantity) - self.total_issued_inventories
+  end
+
+  def total_issued_inventories
+    IssuedInventory.where(inventory_id: self.id).sum(:quantity)
+  end
+
 
   def self.types
     ["PurchasedInventory", "RawMaterial"]
   end
 
   def current_inventory_quantity
-    quantity
+    remaining_quantity
   end
 
   def to_s
-    "#{name} - #{cost}"
+    "#{name} - #{description}"
   end
 
   def name_description

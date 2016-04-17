@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417093121) do
+ActiveRecord::Schema.define(version: 20160417141808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -271,8 +271,6 @@ ActiveRecord::Schema.define(version: 20160417093121) do
   add_index "images", ["imageable_type"], name: "index_images_on_imageable_type", using: :btree
 
   create_table "inventories", force: :cascade do |t|
-    t.decimal  "cost"
-    t.integer  "quantity"
     t.string   "name"
     t.string   "description"
     t.string   "unit"
@@ -431,6 +429,16 @@ ActiveRecord::Schema.define(version: 20160417093121) do
   add_index "remarks", ["project_id"], name: "index_remarks_on_project_id", using: :btree
   add_index "remarks", ["remarker_id"], name: "index_remarks_on_remarker_id", using: :btree
 
+  create_table "restockings", force: :cascade do |t|
+    t.decimal  "quantity"
+    t.decimal  "price"
+    t.integer  "inventory_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "restockings", ["inventory_id"], name: "index_restockings_on_inventory_id", using: :btree
+
   create_table "sales", force: :cascade do |t|
     t.decimal  "quantity"
     t.integer  "inventory_id"
@@ -553,6 +561,7 @@ ActiveRecord::Schema.define(version: 20160417093121) do
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "purchase_orders", "work_details"
   add_foreign_key "remarks", "projects"
+  add_foreign_key "restockings", "inventories"
   add_foreign_key "sales", "inventories"
   add_foreign_key "subcontract_costs", "contractors"
   add_foreign_key "subcontract_costs", "work_details"
