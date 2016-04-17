@@ -68,7 +68,7 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
     resources :collections
       match :overview, via: [:get], on: :collection
       match :payroll, via: [:get], on: :member
-    resources :notice_to_proceeds, module: :project_details
+    resource :notice_to_proceed, module: :project_details
     resources :time_extensions
     resources :amount_revisions
     resources :remarks

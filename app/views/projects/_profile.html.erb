@@ -24,7 +24,6 @@
               <p class="text-muted">No NTP Date yet.</p>
               <% if current_user.project_engineer? || current_user.project_manager? || current_user.monitoring_officer? %>
                 <p><%=link_to "Add NTP Date", new_project_notice_to_proceed_path(@project), class: "btn btn-primary btn-xs" %></p>
-              <% else %>
               <% end %>
             <% end %>
           </td>
