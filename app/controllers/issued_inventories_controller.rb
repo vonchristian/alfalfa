@@ -1,5 +1,5 @@
 class IssuedInventoriesController < ApplicationController
-  
+
   def index
     @issued_inventories = IssuedInventory.all
     @from_date = params[:from_date] ? Date.parse(params[:from_date]) : Date.today.beginning_of_day
@@ -32,6 +32,6 @@ class IssuedInventoriesController < ApplicationController
 
   private
   def issued_inventory_params
-    params.require(:issued_inventory).permit(:inventoriable_id, :inventory_id, :quantity, :total_cost)
+    params.require(:issued_inventory).permit(:inventoriable_id, :inventory_id, :quantity, :total_cost, :date_issued)
   end
 end

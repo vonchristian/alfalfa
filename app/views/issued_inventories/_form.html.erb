@@ -5,6 +5,7 @@
     <hr>
     <%=f.input :inventoriable_id, label:  false, collection: Project.all %>
     <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Item", input_html: {style: 'width:100%'} %>
+    <%=f.input :date_issued, as: :string, input_html: {class: "datepicker"} %>
     <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
     <%=f.input :unit_cost, label: false, placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
     <%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
