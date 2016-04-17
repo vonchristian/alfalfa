@@ -14,6 +14,7 @@
               <th>Quantity</th>
               <th><span class="pull-right">Unit Cost</span></th>
               <th><span class="pull-right">Total Cost</span></th>
+              <th>Date Issued</th>
               <th style="width:60px"></th>
             </tr>
           </thead>
@@ -26,6 +27,7 @@
                   <td><%= issued_inventory.quantity %></td>
                   <td><span class="pull-right"><%= number_to_currency issued_inventory.inventory.cost %></span></td>
                   <td><span class="pull-right"><%= number_to_currency issued_inventory.total_cost %></span></td>
+                  <td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>
                   <td></td>
                 </tr>
               <% end %>
