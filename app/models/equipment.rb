@@ -1,6 +1,8 @@
 class Equipment < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:make_and_model]
+  has_many :equipment_maintenances, class_name: "Maintenance"
+
   def make_and_model
     "#{make} - #{model}"
   end
@@ -9,7 +11,6 @@ class Equipment < ActiveRecord::Base
     make_and_model
   end
 
-  has_many :equipment_maintenances, class_name: "Maintenance"
 
   private
 

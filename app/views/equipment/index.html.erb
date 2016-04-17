@@ -1,72 +1,34 @@
 <div class="col-md-12">
   <div class="box">
     <div class="box-header with-border">
-      <div class="row">
-        <div class="col-md-4">
-          <h3>List of Equipment</h3>
-        </div>
-        <div class="col-md-8">
-          <div class="pull-right">
-            <%= form_tag({:action => 'index'}, {:method => :get, class: 'form-inline'}) do %>
-              <div class="form-group">
-                <%= label_tag :from_date, nil, class: 'sr-only' %>
-                <%#= text_field_tag :from_date, @from_date.beginning_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
-              </div>
-              <div class="form-group">
-                <%= label_tag :to_date, nil, class: 'sr-only' %>
-                <%#= text_field_tag :to_date, @to_date.end_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
-              </div>
-              <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+          <h4>List of Equipment
+<span class="pull-right"><%=link_to "New Equipment", new_equipment_path, class: "btn btn-primary"%></span>
+</h4>
+</div>
     <div class="box-body">
-      <div class="col-md-8">
-        <div class="box-header with-border">
-          <div class="pull-right">
-            <%=link_to "Print Report(PDF)", petty_cash_index_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm' %>
-          </div>
-        </div>
-        <table class="table">
+
+        <table class="table table-hover">
           <thead>
-            <tr>
-              <th>Plate Number</th>
+            <tr class="text-uppercase">
+              <th>Equipment</th>
               <th>Description</th>
               <th>Acquisition Cost</th>
-              <th>Status</th>
+
             </tr>
           </thead>
           <tbody>
             <% @equipments.each do |equipment| %>
               <tr>
-                <td><%= equipment.plate_number %></td>
                 <td><%= link_to equipment.make_and_model, equipment %></td>
+                <td><%= equipment.plate_number %></td>
                 <td><%= number_to_currency equipment.acquisition_cost %></td>
-                <td><%= number_to_currency equipment.status %></td>
+
               </tr>
             <% end %>
           </tbody>
         </table>
       </div>
-      <div class="col-md-4">
-        <div class="row">
-          <div class="well">
-            <h3 class="text-center">
-              
-            </h3>
-            <span class="help-block"><center class="text-uppercase">Balance</center></span>
-            <br>
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <% if current_user.supply_officer? %>
-                  <%=link_to new_equipment_path, class: "btn btn-primary btn-block" do %><i class="fa fa-truck"></i> New Equipment <%end%>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>

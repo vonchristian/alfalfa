@@ -204,8 +204,6 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (1.6.4)
-    rack-mini-profiler (0.9.9.2)
-      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.6)
@@ -370,7 +368,6 @@ DEPENDENCIES
   public_activity
   puma
   pundit
-  rack-mini-profiler
   rails
   rails_12factor
   rails_best_practices

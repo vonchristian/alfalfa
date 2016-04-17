@@ -1,0 +1,13 @@
+<div class="tab-pane active" id="profile">
+<div class="row">
+<div class="col-md-3">
+<p><strong>Plate Number</strong></p>
+<span class="text-muted"><%=@equipment.plate_number %></span>
+<hr>
+<p><strong>Acquisition Cost</strong></p>
+<span class="text-muted"><%=number_to_currency @equipment.acquisition_cost %></span>
+<hr>
+<%=link_to "Update Equipment", edit_equipment_path(@equipment), class: "btn btn-primary btn-block" %>
+</div>
+</div>
+</div>

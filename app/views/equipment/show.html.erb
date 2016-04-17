@@ -13,23 +13,28 @@
         <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
       </li>
       <li  role="presentation">
-        <a href="#work_details" aria-controls="work_details" role="tab" data-toggle="tab">Rent and Lease Payments</a>
+        <a href="#rent_and_lease_payments" aria-controls="rent_and_lease_payments" role="tab" data-toggle="tab">Rent and Lease Payments</a>
       </li>
       <li role="presentation">
-        <a href="#accomplishment" aria-controls="accomplishment" role="tab" data-toggle="tab"></i> Depreciation</a>
+        <a href="#depreciation" aria-controls="depreciation" role="tab" data-toggle="tab"></i> Depreciation</a>
       </li>
       <li role="presentation">
-        <a href="#contractors" aria-controls="contractors" role="tab" data-toggle="tab"></i> Repairs and Maintenace</a>
+        <a href="#repairs_and_maintenance" aria-controls="repairs_and_maintenance" role="tab" data-toggle="tab"></i> Repairs and Maintenace</a>
       </li>
       <li role="presentation">
-        <a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Fuel and Lubrication</a>
+        <a href="#fuel_and_lubrication" aria-controls="fuel_and_lubrication" role="tab" data-toggle="tab">Fuel and Lubrication</a>
       </li>
       <li role="presentation">
-        <a href="#workers" aria-controls="inspection" role="tab" data-toggle="tab"></i> Taxes, Licenses and Insurance</a>
+        <a href="#taxes_licenses_and_insurance" aria-controls="taxes_licenses_and_insurance" role="tab" data-toggle="tab"></i> Taxes, Licenses and Insurance</a>
       </li>
     </ul>
     <div class="tab-content">
-
+<%=render "profile" %>
+<%=render "rent_and_lease_payments" %>
+<%=render "depreciation" %>
+<%=render "repairs_and_maintenance" %>
+<%=render "fuel_and_lubrication" %>
+<%=render "taxes_licenses_and_insurance" %>
     </div>
    </div>
 </div>
