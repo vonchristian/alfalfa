@@ -32,6 +32,6 @@ class IssuedInventoriesController < ApplicationController
 
   private
   def issued_inventory_params
-    params.require(:issued_inventory).permit(:inventoriable_id, :inventory_id, :quantity, :total_cost, :date_issued)
+    params.require(:issued_inventory).permit(:inventoriable, :inventory_id, :quantity, :total_cost, :date_issued)
   end
 end
