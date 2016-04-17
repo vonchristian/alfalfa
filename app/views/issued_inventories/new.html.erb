@@ -27,7 +27,7 @@
                   <td><%= issued_inventory.quantity %></td>
                   <td><span class="pull-right"><%= number_to_currency issued_inventory.inventory.cost %></span></td>
                   <td><span class="pull-right"><%= number_to_currency issued_inventory.total_cost %></span></td>
-                  <td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>
+                  <td><%=issued_inventory.try(:date_issued) %></td>
                   <td></td>
                 </tr>
               <% end %>
