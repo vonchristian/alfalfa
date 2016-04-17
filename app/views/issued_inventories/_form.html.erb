@@ -3,7 +3,8 @@
   <div class="well">
     <h4>Details</h4>
     <hr>
-    <%=f.input :inventoriable, label:  false, collection: Project.all.map{|a| [a.name, a.id]} %>
+    <%=f.input :inventoriable_id, label:  false, collection: Project.all.map{ |a| [a.name, a.id]} %>
+    <%=f.input :inventoriable_type, input_html: {value: "Project"}, as: :hidden %>
     <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Item", input_html: {style: 'width:100%'} %>
     <%=f.input :date_issued, as: :string, input_html:{class: "datepicker"} %>
     <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
