@@ -3,7 +3,7 @@
   <div class="well">
     <h4>Details</h4>
     <hr>
-    <%=f.input :inventoriable_id, label:  false, placeholder: 'Inventory ID' %>
+    <%=f.input :inventoriable_id, label:  false, collection: Project.all %>
     <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Item", input_html: {style: 'width:100%'} %>
     <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
     <%=f.input :unit_cost, label: false, placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
