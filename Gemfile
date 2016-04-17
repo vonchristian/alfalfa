@@ -58,7 +58,7 @@ end
 
 ###########code optimization and cleanup####
   gem 'traceroute', group: :development
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   # gem 'bullet', group: :development
   gem 'brakeman', :require => false, group: :development
   gem "rails_best_practices", group: :development

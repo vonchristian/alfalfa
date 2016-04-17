@@ -11,5 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+/tmp/miniprofiler
 /app/config/secrets.yml
 /app/public/system
