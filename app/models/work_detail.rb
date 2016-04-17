@@ -16,6 +16,8 @@ class WorkDetail < ActiveRecord::Base
   has_many :miscellaneous_costs, class_name: "WorkDetailCosts::MiscellaneousCost"
   has_many :subcontract_costs, class_name: "WorkDetailCosts::SubcontractCost"
   has_many :purchase_orders
+  has_many :equipment_schedules
+  has_many :equipment_fuel_costs
 
   delegate :cost, to: :project, prefix: true
 
