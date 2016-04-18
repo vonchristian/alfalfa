@@ -1,10 +1,8 @@
-<%=simple_form_for @maintenance, url: :work_detail_equipment_maintenances do |f| %>
+<%=simple_form_for [@work_detail, @maintenance], url: :work_detail_equipment_maintenances do |f| %>
 <%=f.error_notification %>
-	<div class="well">
-		<h4>Issue Equipment</h4>
+		<h4>Maintenance Details</h4>
 		<hr>
-	  <%=f.input :equipment, collection: Equipment.all, label: false, prompt: '- Select Equipment -' %>
-	  <%=f.input :employee, collection: Employee.operator, label: false, prompt: '- Select Operator -' %>
+	  <%=f.input :equipment_id, collection: Equipment.all%>
 	  <%=f.input :description, as: :text, label: false, placeholder: 'Description' %>
 	  <div class="row">
 	    <div class="col-md-6">

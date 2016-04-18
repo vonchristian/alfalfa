@@ -61,7 +61,7 @@ class WorkDetail < ActiveRecord::Base
     self.total_cost - self.cost_to_date
   end
   def equipment_costs_incurred
-    self.equipment_fuelcosts.sum(:total_cost) + self.equipment_costs.sum(:total_cost)
+    self.equipment_fuelcosts.sum(:total_cost) + self.equipment_costs.sum(:total_cost) + self.equipment_maintenances.sum(:amount)
   end
   def material_costs_incurred
     self.material_costs.sum(:total_cost)
