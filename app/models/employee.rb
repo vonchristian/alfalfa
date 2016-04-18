@@ -20,6 +20,7 @@ class Employee < ActiveRecord::Base
   has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :employments
   has_many :work_details, through: :employments
+  has_many :projects, through: :work_details
 
   def cash_advances
     Account.find_by_name("Cash Advances").debit_entries.where(recipient: self)

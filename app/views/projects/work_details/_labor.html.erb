@@ -1,31 +1,35 @@
 <div class="tab-pane" id="labor">
   <div class="box-header with-border">
-    <%=link_to "Add Labor Cost", new_work_detail_labor_cost_path(@work_detail), class: 'btn btn-default bg-blue-active pull-right' %>
+    <%=link_to new_work_detail_employment_path(@work_detail), class: "btn btn-primary" do %><i class="fa fa-user-plus"></i> Add Workers <%end%>
   </div>
   <div class="box-body">
-    <div class="table table-responsive">
-      <table class="table table-striped table-hover">
-        <thead>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Employee</th>
+          <th>Days of Work</th>
+          <th>Status</th>
+          <th width="100px"><center>Action</center></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @work_detail.employments.each do |employee| %>
           <tr>
-            <th style="width: 30%">Personnel</th>
-            <th>Number of Personnels</th>
-            <th>Number of Days</th>
-            <th>Daily Rate</th>
-            <th>Total Cost</th>
+            <td style="width:70px"><%= image_tag employee.employee.profile_photo.url(:thumb), class: "img-rounded" %></td>
+            <td>
+              <b class="text-primary"><%=link_to employee.full_name.upcase, @employee%></b><br>
+              <span class="text-block"><%=employee.position.titleize %></span>
+            </td>
+            <td>
+              <%= employee.unpaid_worked_days_for(@project)%> Days <br>
+              <span><%=link_to "Add Worked Days", new_employee_worked_day_path(employee.employee), class: "btn btn-xs" %></span>
+            </td>
+            <td></td>
+            <td><span class="pull-right"><%= link_to 'Remove', work_detail_employment_path(@work_detail, employee.id), method: :delete, data: { confirm: 'Are you sure you want to remove this employee from this work detail?' }, class: "btn btn-danger btn-xs" %></span></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @work_detail.labor_costs.each do |labor_cost| %>
-            <tr>
-              <td><%=labor_cost.personnel %></td>
-              <td><%=labor_cost.number_of_personnel %></td>
-              <td><%=labor_cost.number_of_days %></td>
-              <td><%=number_to_currency labor_cost.daily_rate %></td>
-              <td><%=number_to_currency labor_cost.total_cost %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -10,7 +10,7 @@
         <div class="box-body">
           <div class="col-md-7">
             <table class="table">
-              <% @project.employees.each do |worker| %>
+              <% @work_detail.employees.each do |worker| %>
                 <tr>
                     <td style="width:65px"><%= image_tag worker.profile_photo.url(:medium), class: "img-rounded" %></td>
                     <td>

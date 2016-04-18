@@ -9,7 +9,7 @@
         </div>
         <div class="box-body">
           <table class="table">
-            <% @project.employees.each do |worker| %>
+            <% @work_detail.employees.each do |worker| %>
               <tr>
                   <td style="width:65px"><%= image_tag attachment_url(worker, :photo, :fill, 60, 60, fallback: "default-small.png"),  class: "img-square" %></td>
                   <td>

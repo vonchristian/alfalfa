@@ -1,12 +1,13 @@
-<%= simple_form_for ([@project, @employment]) do |f| %>
+<%= simple_form_for ([@work_detail, @employment]) do |f| %>
   <%=f.error_notification %>
   <div class="well">
     <h4>Add Workers</h4>
     <hr>
+    <%=f.input :project_id, label: false,  input_html: {value:  @work_detail.project.id, type: "hidden" }  %>
     <%=f.input :employee_id, collection: Employee.all, label: false, placeholder: 'Employee' %>
     <div class="modal-footer">
       <%=f.submit "Add this Employee", class: "btn btn-primary btn-block" %>
-      <%=link_to "or I'm done adding Employees",project_path(@project), class: "btn btn-block"%>
+      <%=link_to "or I'm done adding Employees",work_detail_path(@work_detail), class: "btn btn-block"%>
     </div>
   </div>
 <% end %>

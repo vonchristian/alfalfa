@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417232850) do
+ActiveRecord::Schema.define(version: 20160418040940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,8 +198,9 @@ ActiveRecord::Schema.define(version: 20160417232850) do
   create_table "employments", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "employee_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "work_detail_id"
   end
 
   add_index "employments", ["employee_id"], name: "index_employments_on_employee_id", using: :btree
