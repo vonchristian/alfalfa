@@ -6,8 +6,5 @@ class Sale < ActiveRecord::Base
                         credit_amounts_attributes:[amount: (self.amount), account: "Inventory"])
   end
 
-  def update_quantity_of_inventory_on_save
-    self.inventory.update_attributes(:quantity => self.inventory.quantity - self.quantity)
-  end
 
 end

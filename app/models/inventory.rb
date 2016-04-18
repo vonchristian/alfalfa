@@ -6,8 +6,9 @@ class Inventory < ActiveRecord::Base
   has_many :restockings
   has_many :sales
   accepts_nested_attributes_for :restockings
+
   def remaining_quantity
-    self.restockings.sum(:quantity) - self.total_issued_inventories
+    self.restockings.sum(:quantity) - self.total_issued_inventories - self.sales.sum(:quantity)
   end
 
   def total_issued_inventories
