@@ -36,7 +36,7 @@
             <td><%=work_detail.weighted_percent.round(3) %> %</td>
             <td class="text-success"><%=number_to_currency(work_detail.actual_accomplishment_percent, unit: '')%> %</td>
             <td class="text-muted"><%=number_to_currency(work_detail.remaining_accomplishment_percent, unit: '')%> %</td>
-            <td class="text-danger"><%=number_to_currency(work_detail.slippage, unit: '')%></td>
+            <td class="text-danger"><%#=number_to_currency(work_detail.slippage, unit: '')%></td>
           </tr>
         <% end %>
       </tbody>
