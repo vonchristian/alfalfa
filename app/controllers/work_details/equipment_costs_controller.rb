@@ -1,13 +1,13 @@
-class WorkDetails::EquipmentSchedulesController < ApplicationController
+class WorkDetails::EquipmentCostsController < ApplicationController
   def new
     @work_detail = WorkDetail.find(params[:work_detail_id])
-    @equipment_schedule = @work_detail.equipment_schedules.build
+    @equipment_cost = @work_detail.equipment_costs.build
   end
 
   def create
      @work_detail = WorkDetail.find(params[:work_detail_id])
-    @equipment_schedule = @work_detail.equipment_schedules.create(equipment_schedule_params)
-    if @equipment_schedule.save
+    @equipment_cost = @work_detail.equipment_costs.create(equipment_schedule_params)
+    if @equipment_cost.save
       redirect_to @work_detail, notice: "Equipment Schedule saved successfully."
     else
       render :new

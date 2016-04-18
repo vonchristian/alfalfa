@@ -1,33 +1,53 @@
 <div class="tab-pane" id="equipment">
   <div class="box-header with-border">
     <div class="pull-right">
-    <%=link_to "Add Equipment Schedule", new_work_detail_equipment_schedule_path(@work_detail), class: "btn btn-primary" %>
       <%=link_to "Add Maintenance Expense", new_work_detail_equipment_maintenance_path(@work_detail), class: "btn btn-default bg-blue-active" %>
     </div>
   </div>
   <div class="box-body">
-    <div class="table table-responsive">
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th style="width: 30%">Equipment</th>
-            <th>Number of Equipment</th>
-            <th>Number of Days</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @work_detail.equipment_maintenances.each do |maintenance| %>
-            <tr>
-              <td><%=maintenance.equipment %></td>
-              <td><%=maintenance.quantity%></td>
-              <td><%=maintenance.description %></td>
-              <td><%=maintenance.unit %></td>
-              <td><%=number_to_currency maintenance.amount %></td>
-            </tr>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h4>Fuel Costs
+          <span class="pull-right"><%=link_to "Add Fuel Cost", new_work_detail_equipment_fuel_cost_path(@work_detail), class: "btn btn-primary" %>
+          </span>
+          </h4>
+          </div>
+          <div class="box-body">
+          <%@work_detail.equipment_fuelcosts.each do |fuel_cost| %>
+
+             <p><strong><%=fuel_cost.date_issued.strftime("%B %e, %Y")%></strong></p>
+             <span class="text-muted"><%=fuel_cost.quantity %> <%=fuel_cost.inventory.unit %></span>
+             <span class="pull-right"><%=number_to_currency fuel_cost.total_cost %></span>
+             <hr>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+          </div>
+        </div>
+        </div>
+         <div class="col-md-4">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h4>Equipment Costs
+          <span class="pull-right"><%=link_to "Add Equipment Cost", new_work_detail_equipment_cost_path(@work_detail), class: "btn btn-primary" %>
+          </span>
+          </h4>
+          </div>
+          <div class="box-body">
+          <%@work_detail.equipment_costs.each do |equipment_cost| %>
+<p><strong><%=equipment_cost.equipment %></strong></p>
+<p class="text-muted"><%=equipment_cost.start_date.strftime("%B %e, %Y") %> - <%=equipment_cost.end_date.strftime("%B %e, %Y") %></p>
+             <span class="text-muted"><%=equipment_cost.number_of_hours %> Hours </span>
+             <span class="pull-right"><%=number_to_currency equipment_cost.total_cost %></span>
+             <hr>
+          <% end %>
+          </div>
+        </div>
+
 </div>
+</div>
+</div>
+</div>
+
+
+

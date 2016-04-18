@@ -53,7 +53,8 @@ resources :work_details do
   resources :purchase_orders, module: :work_details
   resources :labor_costs, module: :projects
   resources :equipment_maintenances, module: :work_details
-  resources :equipment_schedules, module: :work_details
+  resources :equipment_costs, module: :work_details
+  resources :equipment_fuel_costs, only:[:new, :create], module: :work_details
 end
 
 resources :joint_ventures, controller: 'projects', type: 'JointVenture'
@@ -95,6 +96,7 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
   resources :fund_transfers
 
   resources :equipment do
+    resources :fuel_expenses, module: :equipment
 
   end
 

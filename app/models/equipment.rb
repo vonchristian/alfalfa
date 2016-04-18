@@ -2,7 +2,8 @@ class Equipment < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:make_and_model]
   has_many :equipment_maintenances, class_name: "Maintenance"
-
+  has_many :fuel_expenses, as: :inventoriable, class_name: "IssuedInventory"
+  has_many :equipment_schedules
   def make_and_model
     "#{make} - #{model}"
   end

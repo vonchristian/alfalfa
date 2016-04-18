@@ -9,5 +9,20 @@
 <hr>
 <%=link_to "Update Equipment", edit_equipment_path(@equipment), class: "btn btn-primary btn-block" %>
 </div>
+<div class="col-md-9">
+  <h4>Equipment Jobs</h4>
+  <hr>
+  <% @equipment.equipment_schedules.each do |equipment_schedule| %>
+  <p><%=equipment_schedule.work_detail.project.name %></p>
+  <p><%=equipment_schedule.work_detail.name %></p>
+  <span class="text-muted"><%=equipment_schedule.start_date.strftime("%B %e, %Y") %> - <%=equipment_schedule.end_date.strftime("%B %e, %Y") %> (<%=equipment_schedule.number_of_hours %> Hours)</span><br>
+  <span class="text-muted"> </span>
+  <h4><%=number_to_currency equipment_schedule.total_cost %></h4>
+  <hr>
+  <% end %>
 </div>
 </div>
+</div>
+
+
+

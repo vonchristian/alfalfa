@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @work_detail.issued_inventories.each do |material| %>
+          <% @work_detail.material_costs.each do |material| %>
             <tr>
               <td><%= material.inventory.name %> - <%=material.description %></td>
               <td><%=material.quantity %> <%=material.inventory.unit %></td>

@@ -16,11 +16,16 @@ class WorkDetail < ActiveRecord::Base
   has_many :miscellaneous_costs, class_name: "WorkDetailCosts::MiscellaneousCost"
   has_many :subcontract_costs, class_name: "WorkDetailCosts::SubcontractCost"
   has_many :purchase_orders
-  has_many :equipment_schedules
-  has_many :equipment_fuel_costs
+  has_many :equipment_costs, class_name: "EquipmentSchedule"
+  has_many :equipment_fuel_costs,  as: :inventoriable, class_name: "IssuedInventory"
 
   delegate :cost, to: :project, prefix: true
-
+  def equipment_fuelcosts
+    IssuedInventory.where(inventoriable_id: self.id, inventory_id: Inventory.find_by_name("Fuel").id )
+  end
+  def material_costs
+    IssuedInventory.where(inventoriable_id: self.id).where.not(inventory_id: Inventory.find_by_name("Fuel").id)
+  end
   def self.total
     self.all.sum(:total_cost)
   end
@@ -53,8 +58,11 @@ class WorkDetail < ActiveRecord::Base
   def balance_of_cost
     self.total_cost - self.cost_to_date
   end
+  def equipment_costs_incurred
+    self.equipment_fuelcosts.sum(:total_cost) + self.equipment_costs.sum(:total_cost)
+  end
   def material_costs_incurred
-    self.issued_inventories.sum(:total_cost)
+    self.material_costs.sum(:total_cost)
   end
   def total_quantity_approved_in_previous_billing
     self.work_accomplishments.paid.sum(:quantity)

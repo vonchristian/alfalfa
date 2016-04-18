@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="box box-default">
+  <div class="box-body">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-5">
+<%= simple_form_for [@work_detail, @fuel_expense], url: :work_detail_equipment_fuel_costs do |f| %>
+<%=f.error_notification %>
+    <h4>Details</h4>
+    <hr>
+    <%=f.input :inventory_id, input_html: {value: Inventory.find_by_name("Fuel").id}, as: :hidden  %>
+    <%=f.input :date_issued, as: :string, input_html:{class: "datepicker"} %>
+    <%=f.input :quantity, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+    <%=f.input :unit_cost,  placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
+    <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
+
+      <div class="modal-footer">
+        <%=f.submit "Save Fuel Cost", class: "btn btn-primary" %>
+
+        <%=link_to "Cancel", inventories_path, class: "btn btn-default pull-left" %>
+
+    </div>
+  </div>
+<% end %>
+
