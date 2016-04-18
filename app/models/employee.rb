@@ -2,10 +2,10 @@ class Employee < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:first_name, :last_name]
 
-  has_attached_file :profile_photo, 
-                    styles: { large: "120x120>", 
-                    medium: "70x70>", thumb: "40x40>", 
-                    small: "30x30>", x_small: "20x20>" }, 
+  has_attached_file :profile_photo,
+                    styles: { large: "120x120>",
+                    medium: "70x70>", thumb: "40x40>",
+                    small: "30x30>", x_small: "20x20>" },
                     default_url: "/images/:style/missing.png",
                     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
                     :url => "/system/:attachment/:id/:style/:filename"
@@ -19,7 +19,7 @@ class Employee < ActiveRecord::Base
   has_many :payments, as: :paymentable
   has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :employments
-  has_many :projects, through: :employments
+  has_many :work_details, through: :employments
 
   def cash_advances
     Account.find_by_name("Cash Advances").debit_entries.where(recipient: self)

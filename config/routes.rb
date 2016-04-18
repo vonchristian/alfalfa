@@ -51,7 +51,7 @@ resources :work_details do
   resources :work_accomplishments, module: :projects
   resources :issued_inventories, module: :projects
   resources :purchase_orders, module: :work_details
-  resources :labor_costs, module: :projects
+  resources :labor_costs, module: :work_details
   resources :equipment_maintenances, module: :work_details
   resources :equipment_costs, module: :work_details
   resources :equipment_fuel_costs, only:[:new, :create], module: :work_details

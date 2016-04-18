@@ -9,6 +9,8 @@ class WorkDetail < ActiveRecord::Base
   validates :unit, presence: true
 
   belongs_to :project
+  has_many :employments
+  has_many :employees, through: :employments
   has_many :work_accomplishments
   has_many :issued_inventories, as: :inventoriable
   has_many :labor_costs, class_name: "WorkDetailCosts::LaborCost"
