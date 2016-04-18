@@ -13,7 +13,6 @@
         <%@petty_cash.credit_entries.entered_on(:from_date => @from_date, :to_date => @to_date).each do |entry| %>
           <tr>
             <td>
-              <%= image_tag entry.recipient.profile_photo.url(:x_small), class: "img-rounded" %> 
               <%=entry.recipient.try(:name) %>
             </td>
             <td><center><%=entry.description %></center></td>

@@ -11,7 +11,6 @@
             <%@petty_cash.debit_entries.today.each do |entry| %>
               <tr>
                 <td>
-                  <%= image_tag attachment_url(entry.recipient, :photo, :fill, 35, 35, fallback: "default-xs-small.png"), class: "img-circle" %><br>
                   <%=entry.recipient.try(:name) %>
                 </td>
                 <!-- <td><%#=entry.date.strftime("%B %e, %Y") %></td> -->

@@ -4,7 +4,7 @@
 	<div class="well">
 		<h4>Disbursement Details</h4>
 		<hr>
-		<%= f.input :date, as: :string, input_html: { class: 'datepicker'} %>
+		<%= f.input :date, as: :string, input_html: { class: 'datetimepicker'} %>
 	  <%=f.input :recipient_id, collection: Employee.all.map{|a| [a.full_name, a.id]} %>	
 
 	  <%=f.simple_fields_for :credit_amounts do |d| %>

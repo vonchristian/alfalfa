@@ -28,25 +28,18 @@ class PettyCashPdf < Prawn::Document
   end
 
   def set_date
-    if (@to_date - @from_date).to_i == 1
+    if (@to_date.strftime("%B %e, %Y") == @from_date.strftime("%B %e, %Y"))
       @to_date.strftime("%B %e, %Y")
     else
-      @from_date.next_day.strftime("%B %e, %Y") + " - " + @to_date.strftime("%B %e, %Y")
+      @from_date.strftime("%B %e, %Y") + " - " + @to_date.strftime("%B %e, %Y")
     end
   end
 
   def data_summary
-    if Entry.first.date.beginning_of_day >= @from_date
-      [["Starting Balance:", "P 0"],
+      [["Starting Balance:", "#{(price @petty_cash.balance({from_date: @from_date.beginning_of_year, to_date: @from_date.end_of_day}))}"],
         ["Fund Transfer:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Outstanding Balance:", "#{(price @petty_cash.balance({from_date: @from_date, to_date: @to_date}))}"]]
-    elsif Entry.first.date.beginning_of_day <= @from_date
-      [["Starting Balance:", "#{(price @petty_cash.balance)}"],
-        ["Fund Transfer:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
-        ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
-        ["Outstanding Balance:", "#{(price @petty_cash.balance + @petty_cash.balance({from_date: @from_date, to_date: @to_date}))}"]]
-    end
   end
 
   def summary

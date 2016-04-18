@@ -42,6 +42,6 @@ class InventoriesController < ApplicationController
 
   private
   def inventory_params
-    params.require(:inventory).permit(  :name, :description, :unit, restockings_attributes:[:price, :quantity])
+    params.require(:inventory).permit( :name, :description, :unit, restockings_attributes:[:price, :quantity])
   end
 end

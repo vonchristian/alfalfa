@@ -3,7 +3,7 @@
   <div class="well">
     <h4>Fund Transfer Details</h4>
     <hr>
-    <%= f.input :date, as: :string, input_html: { class: 'datepicker'}, label: "Date Transferred:" %>
+    <%= f.input :date, as: :string, input_html: { class: 'datetimepicker'}, label: "Date Transferred:" %>
 
     <%=f.input :recipient_id, input_html: { value: Employee.find_by(first_name: current_user.first_name).id }, as: :hidden %> 
     <%=f.simple_fields_for :credit_amounts do |d| %>
