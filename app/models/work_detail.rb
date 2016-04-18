@@ -32,18 +32,9 @@ class WorkDetail < ActiveRecord::Base
     self.all.sum(:total_cost)
   end
   def total_quantity_approved_in_previous_billing
-    if self.work_accomplishments.present?
-      2
-    else
-      0
-    end
   end
   def total_quantity_approved_in_this_billing
     self.work_accomplishments.unpaid.total * self.unit_cost
-  end
-
-  def balance_of_quantity
-    self.quantity - self.work_accomplishments.paid.total
   end
 
   def cost_of_previous_billings
@@ -126,11 +117,7 @@ class WorkDetail < ActiveRecord::Base
 
 
   def actual_total_costs
-    issued_inventories.total +
-    labor_costs.total +
-    equipment_costs.total +
-    miscellaneous_costs.total +
-    subcontract_costs.total
+   self.material_costs_incurred + self.equipment_costs_incurred
   end
 
   def profit
