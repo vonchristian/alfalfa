@@ -9,7 +9,7 @@
     <h4>Details</h4>
     <hr>
     <%=f.input :inventory_id, input_html: {value: Inventory.find_by_name("Fuel").id}, as: :hidden  %>
-    <%=f.input :date_issued, as: :string, input_html:{class: "datepicker"} %>
+    <%=f.input :date_issued, as: :string, input_html:{class: "datetimepicker"} %>
     <%=f.input :quantity, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
     <%=f.input :unit_cost,  placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
     <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>

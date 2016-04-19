@@ -2,6 +2,11 @@ class IssuedInventory < ActiveRecord::Base
   belongs_to :inventoriable, polymorphic: true
   belongs_to :inventory
   delegate :cost, :name, to: :inventory, prefix: true
+  validates :quantity, numericality: {less_than: :current_inventory_quantity, message: 'Quantity exceeded the current inventory quantity.'}
+  validates :unit_cost, presence: true, numericality: true
+  validates :inventory_id, presence: true
+  validates :date_issued, presence: true
+  delegate :current_inventory_quantity, to: :inventory
 
   def self.total
     self.all.sum(:total_cost)

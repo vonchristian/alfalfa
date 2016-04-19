@@ -3,10 +3,10 @@
   <div class="well">
     <h4>Details</h4>
     <hr>
-    <%=f.input :inventoriable_id, label:  false, collection: Project.all.map{ |a| [a.name, a.id]} %>
-    <%=f.input :inventoriable_type, input_html: {value: "Project"}, as: :hidden %>
-    <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Item", input_html: {style: 'width:100%'} %>
-    <%=f.input :date_issued, as: :string, input_html:{class: "datepicker"} %>
+    <%=f.input :inventoriable_id, label:  false, collection: Project.all.map{ |a| [a.name, a.id]}, prompt: "Select Project" %>
+    <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Material", input_html: {style: 'width:100%'} %>
+    <%=f.input :contractor_id, label:  false, collection: Contractor.all.map{ |a| [a.name, a.id]}, prompt: "Select Contractor" %>
+    <%=f.input :date_issued, label: false, as: :string, placeholder: 'Issue Date', input_html:{class: "datetimepicker"} %>
     <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
     <%=f.input :unit_cost, label: false, placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
     <%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
@@ -22,6 +22,20 @@
 <script>
     $(document).ready(function() {
         $("#issued_inventory_inventory_id").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#issued_inventory_inventoriable_id").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#issued_inventory_contractor_id").select2({
             theme: "bootstrap"
         });
     });

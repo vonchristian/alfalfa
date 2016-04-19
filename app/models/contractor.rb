@@ -7,7 +7,7 @@ class Contractor < ActiveRecord::Base
   
   has_many :contracts
   has_many :projects, through: :contracts
-  has_many :issued_inventories
+  has_many :issued_inventories, as: :inventoriable
 
 
   def self.main_contractors

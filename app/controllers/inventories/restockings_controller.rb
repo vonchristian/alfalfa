@@ -16,6 +16,6 @@ class Inventories::RestockingsController < ApplicationController
 
   private
   def restocking_params
-    params.require(:restocking).permit(:quantity, :price)
+    params.require(:restocking).permit(:quantity, :price, :total_cost)
   end
 end

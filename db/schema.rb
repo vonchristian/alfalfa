@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418101815) do
+ActiveRecord::Schema.define(version: 20160419085311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(version: 20160418101815) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.datetime "date_issued"
+    t.integer  "contractor_id"
   end
 
   add_index "issued_inventories", ["inventoriable_id"], name: "index_issued_inventories_on_inventoriable_id", using: :btree
@@ -439,6 +440,7 @@ ActiveRecord::Schema.define(version: 20160418101815) do
     t.integer  "inventory_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.decimal  "total_cost"
   end
 
   add_index "restockings", ["inventory_id"], name: "index_restockings_on_inventory_id", using: :btree

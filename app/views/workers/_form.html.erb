@@ -34,7 +34,7 @@
 <%=f.input :mobile_number %>
 <%=f.input :address %>
 <%=f.input :email %>
-<%=f.input :birth_date, as: :string, input_html:{:class => 'datepicker'} %>
+<%=f.input :birth_date, as: :string, input_html:{:class => 'datetimepicker'} %>
 <%=f.input :sex, collection: Worker.sexes.keys.to_a.map{|a| [a.titleize, a]}, prompt: "Please Select Gender" %>
 
 <div class="modal-footer">

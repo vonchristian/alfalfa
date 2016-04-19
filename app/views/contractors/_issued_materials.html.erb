@@ -1,3 +1,31 @@
 <div class="tab-pane" id ='issued_materials'>
-<%=link_to "New Issued Materials", new_contractor_issued_inventory_path(@contractor) %>
+	<div class="box-header with-border">
+		<div class="pull-right">
+			<%=link_to "New Issued Materials", new_contractor_issued_inventory_path(@contractor), class: 'btn btn-sm btn-primary' %>
+		</div>
+	</div>
+	<div class="box-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Material</th>
+					<th>Date</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th>Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@contractor.issued_inventories.each do |issued_inventory| %>
+					<tr>
+						<td><%=issued_inventory.inventory.try(:name) %></td>
+						<td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>
+						<td><%=issued_inventory.quantity %></td>
+						<td><%=number_to_currency issued_inventory.unit_cost %></td>
+						<td><%=number_to_currency issued_inventory.total_cost %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 </div>

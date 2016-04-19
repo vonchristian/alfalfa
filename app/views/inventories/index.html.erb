@@ -1,31 +1,37 @@
 <div class="col-md-12">
   <div class="box">
     <div class="box-header with-border">
-          <h4>List of Inventories
-          <span class="pull-right"><%=link_to "New Inventory", new_inventory_path, class: "btn  btn-primary" %></span>
-          </h4>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>List of Inventories</h4>
         </div>
-
-    <div class="box-body">
-
-        <table class="table">
-          <thead>
-            <tr class="text-uppercase">
-              <th>Description</th>
-              <th>Remaining Quantity</th>
-              <th>Unit Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @inventories.each do |inventory| %>
-              <tr>
-                <td><%= link_to inventory.name_description, inventory %></td>
-                <td><%= inventory.remaining_quantity %> <%= inventory.unit %></td>
-               <td><%= number_to_currency inventory.restockings.last.try(:price)%></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="col-md-6">
+          <div class="pull-right">
+            <%=link_to "Issue Inventory", new_issued_inventory_path, class: "btn btn-sm btn-primary" %> <%=link_to "New Inventory", new_inventory_path, class: "btn btn-sm btn-primary" %>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="box-body">
+      <table class="table">
+        <thead>
+          <tr class="text-uppercase">
+            <th>Description</th>
+            <th>Remaining Quantity</th>
+            <th>Unit Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @inventories.each do |inventory| %>
+            <tr>
+              <td><%= link_to inventory.name_description, inventory %></td>
+              <td><%= inventory.remaining_quantity %> <%= inventory.unit %></td>
+              <td><%= number_to_currency inventory.restockings.last.try(:price)%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
