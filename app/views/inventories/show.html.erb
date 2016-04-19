@@ -7,8 +7,10 @@
         </div>
         <div class="col-md-6">
           <div class="pull-right">
+          <% if current_user.supply_officer? %>
             <%=link_to "Restock", new_inventory_restocking_path(@inventory), class: "btn btn-sm btn-success" %>
             <%=link_to "Edit Inventory", edit_inventory_path, class: "btn btn-primary btn-sm" %>
+          <% end %>
           </div>
         </div>
       </div>

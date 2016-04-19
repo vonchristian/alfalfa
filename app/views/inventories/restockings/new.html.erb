@@ -5,8 +5,9 @@
 				<h4>Restocking Details</h4>
 			</div>
 			<div class="box-body">
-			  <%=f.input :quantity %>
-			  <%=f.input :price %>
+			  <%=f.input :quantity, input_html:{id: "quantity", oninput: "calculate()"} %>
+			  <%=f.input :price, input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"} %>
+			  <%=f.input :total_cost, label: false,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
 			</div>
 		  <div class="box-footer">
 		  	<div class="pull-right">

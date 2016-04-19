@@ -12,11 +12,11 @@ class AttachmentFilePolicy < ApplicationPolicy
   end
 
   def create?
-    user.project_engineer? || user.monitoring_officer? || user.liason_officer?
+    user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
   end
 
   def edit?
-    user.project_engineer? || user.monitoring_officer? || user.liason_officer?
+    user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
   end
 
   def update?
@@ -28,6 +28,6 @@ class AttachmentFilePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.project_engineer? || user.monitoring_officer? || user.liason_officer?
+    user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
   end
 end

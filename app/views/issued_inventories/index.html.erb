@@ -2,19 +2,23 @@
   <div class="box">
     <div class="box-header with-border">
       <div class="row">
-        <div class="col-md-4">
-          <h3>List of Issued Inventories</h3>
+        <div class="col-md-12">
+          <h4>List of Issued Inventories</h4>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="pull-right">
             <%= form_tag({:action => 'index'}, {:method => :get, class: 'form-inline'}) do %>
               <div class="form-group">
                 <%= label_tag :from_date, nil, class: 'sr-only' %>
-                <%= text_field_tag :from_date, @from_date.beginning_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
+                <%= select_tag :contractor_id, options_for_select(Contractor.all.collect{ |e| [e.name, e.id] }), class: 'form-control', prompt: 'Select Contractor' %>
+              </div>
+              <div class="form-group">
+                <%= label_tag :from_date, nil, class: 'sr-only' %>
+                <%= text_field_tag :from_date, @from_date, class: 'datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
               </div>
               <div class="form-group">
                 <%= label_tag :to_date, nil, class: 'sr-only' %>
-                <%= text_field_tag :to_date, @to_date.end_of_day, class: 'datepicker form-control', placeholder: 'Date' %>
+                <%= text_field_tag :to_date, @to_date, class: 'datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
               </div>
               <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
             <% end %>
@@ -23,7 +27,7 @@
       </div>
     </div>
     <div class="box-body">
-      <div class="col-md-8">
+      <div class="col-md-9">
         <div class="box-header with-border">
           <div class="pull-right">
             <%=link_to "Print Report(PDF)", issued_inventories_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm' %>
@@ -44,10 +48,10 @@
             <% if @issued_inventories.present? %>
               <% @issued_inventories.entered_on(:from_date => @from_date, :to_date => @to_date).each do |issued_inventory| %>
                 <tr>
-                  <td><%= issued_inventory.inventoriable_id %></td>
-                  <td><%= issued_inventory.inventory.name %></td>
+                  <td><%= issued_inventory.contractor.name %></td>
+                  <td><%= issued_inventory.inventory.try(:name) %></td>
                   <td><%= issued_inventory.quantity %></td>
-                  <td><span class="pull-right"><%= number_to_currency issued_inventory.inventory.cost %></span></td>
+                  <td><span class="pull-right"><%= number_to_currency issued_inventory.unit_cost %></span></td>
                   <td><span class="pull-right"><%= number_to_currency issued_inventory.total_cost %></span></td>
                   <td></td>
                 </tr>
@@ -56,7 +60,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="row">
           <div class="well">
             <h3 class="text-center">
@@ -65,7 +69,7 @@
             <span class="help-block"><center class="text-uppercase">Total</center></span>
             <br>
             <div class="row">
-              <div class="col-md-10 col-md-offset-1">
+              <div class="col-md-12">
                 <% if current_user.supply_officer? %>
                   <%=link_to new_issued_inventory_path, class: "btn btn-danger btn-block" do %><i class="fa fa-plus-circle"></i> Issue Inventory <%end%>
                 <% end %>

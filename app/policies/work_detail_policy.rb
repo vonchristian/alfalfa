@@ -17,7 +17,7 @@ class WorkDetailPolicy < ApplicationPolicy
   end
 
   def create?
-  user.project_engineer? || user.monitoring_officer?
+  user.project_engineer? || user.monitoring_officer? || user.project_manager? || user.liason_officer?
   end
 
   def new?
@@ -25,7 +25,7 @@ class WorkDetailPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.project_engineer? || user.monitoring_officer?
+    user.project_engineer? || user.monitoring_officer? || user.project_manager? || user.liason_officer?
   end
 
   def update?

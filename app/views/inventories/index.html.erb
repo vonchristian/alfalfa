@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div class="box">
+  <div class="box box-solid">
     <div class="box-header with-border">
       <div class="row">
         <div class="col-md-6">
@@ -7,7 +7,10 @@
         </div>
         <div class="col-md-6">
           <div class="pull-right">
-            <%=link_to "Issue Inventory", new_issued_inventory_path, class: "btn btn-sm btn-primary" %> <%=link_to "New Inventory", new_inventory_path, class: "btn btn-sm btn-primary" %>
+            <% if current_user.supply_officer? %>
+              <%=link_to "Issue Inventory", new_issued_inventory_path, class: "btn btn-sm btn-primary" %>
+              <%=link_to "New Inventory", new_inventory_path, class: "btn btn-sm btn-primary" %>
+            <% end %>
           </div>
         </div>
       </div>
