@@ -3,7 +3,9 @@
     <div class="widget-user-header bg-blue-active">
       <h4 class="widget-user-username">Contractors
       <span class="pull-right">
-        <%=link_to new_contractor_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Contractor <%end%>
+        <%if policy(Contractor.new).create? %>
+          <%=link_to new_contractor_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Contractor <%end%>
+        <% end %>
       </span>
     </h4>
     </div>

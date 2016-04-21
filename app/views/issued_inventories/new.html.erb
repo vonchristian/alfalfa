@@ -20,7 +20,7 @@
             <% if @issued_inventories.present? %>
               <% @issued_inventories.each do |issued_inventory| %>
                 <tr>
-                  <td><%= issued_inventory.inventoriable.try(:name) %></td>
+                  <td><%= issued_inventory.contractor.try(:name) %></td>
                   <td><%= issued_inventory.inventory.try(:name) %></td>
                   <td><%= issued_inventory.quantity %></td>
                   <td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>

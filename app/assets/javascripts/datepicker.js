@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $('.datetimepicker').datetimepicker({
-  	format: 'YYYY-MM-DD hh:mm:ss A'
+  	format: 'YYYY-MM-DD hh:mm:ss A',
+  	showClose: true
   });
 });
 

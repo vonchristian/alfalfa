@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419085311) do
+ActiveRecord::Schema.define(version: 20160421054657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -311,6 +311,8 @@ ActiveRecord::Schema.define(version: 20160419085311) do
     t.datetime "updated_at",         null: false
     t.datetime "date_issued"
     t.integer  "contractor_id"
+    t.integer  "project_id"
+    t.integer  "work_detail_id"
   end
 
   add_index "issued_inventories", ["inventoriable_id"], name: "index_issued_inventories_on_inventoriable_id", using: :btree

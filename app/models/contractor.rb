@@ -9,6 +9,16 @@ class Contractor < ActiveRecord::Base
   has_many :projects, through: :contracts
   has_many :issued_inventories, as: :inventoriable
 
+  def self.entered_on(hash={})
+    if hash[:from_date] && hash[:to_date] && params[:project_id]
+      from_date = hash[:from_date].kind_of?(Time) ? hash[:from_date] : Time.parse(hash[:from_date].strftime('%Y-%m-%d 12:00:00'))
+      to_date = hash[:to_date].kind_of?(Time) ? hash[:to_date] : Time.parse(hash[:to_date].strftime('%Y-%m-%d 12:59:59'))
+      project_id = params[:inventoriable_id]
+      self.issued_inventories.where('date_issued' => from_date..to_date).where('project_id' => project_id)
+    else
+      self.issued_inventories.all
+    end
+  end
 
   def self.main_contractors
     self.where(:main_contractor => true)

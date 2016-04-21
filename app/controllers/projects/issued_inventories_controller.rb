@@ -16,7 +16,7 @@ class Projects::IssuedInventoriesController < ApplicationController
 
   private
   def issued_inventory_params
-    params.require(:issued_inventory).permit( :date_issued,  :quantity, :unit_cost, :total_cost, :inventory_id)
+    params.require(:issued_inventory).permit(:date_issued, :contractor_id, :quantity, :unit_cost, :total_cost, :inventory_id)
   end
 
 end

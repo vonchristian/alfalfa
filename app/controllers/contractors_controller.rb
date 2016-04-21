@@ -17,6 +17,21 @@ class ContractorsController < ApplicationController
     end
   end
 
+  def show
+    @contractor = Contractor.find(params[:id])
+    @issued_inventories = @contractor.issued_inventories.all
+    @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.zone.now.beginning_of_day
+    @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.zone.now.end_of_day
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ContractorMaterialsPdf.new(@issued_inventories, @contractor, @project, @from_date, @to_date, view_context)
+          send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "IssuedMaterials.pdf"
+      end
+    end
+  end
+
   def edit
     @contractor = Contractor.find(params[:id])
     authorize @contractor
@@ -31,9 +46,6 @@ class ContractorsController < ApplicationController
     else
       render :new
     end
-  end
-  def show
-    @contractor = Contractor.find(params[:id])
   end
 
   private

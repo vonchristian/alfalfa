@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
   has_many :workers, class_name: "Employee"
   has_many :remarks
   has_many :attachment_files
+  has_many :issued_inventories
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
