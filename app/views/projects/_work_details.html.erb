@@ -3,7 +3,7 @@
   <div class="box-header with-border">
     <%if policy(WorkDetail.new).create? %>
       <span>
-        <%=link_to new_project_work_detail_path(@project), class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%>
+        <%=link_to new_project_work_detail_path(@project), class: "btn btn-primary btn-sm pull-right" do %><i class="fa fa-plus-circle"></i> Add Work Detail <%end%>
       </span>
     <% end %>
   </div>

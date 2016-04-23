@@ -2,7 +2,7 @@
   <div class="box-header with-border">
     <div class="pull-right">
       <%if policy(Remark.new).create? %>
-        <%=link_to new_project_remark_path(@project), class: "btn btn-default bg-blue-active" do %><i class="fa fa-plus-circle"></i> Add Remarks<%end%>
+        <%=link_to new_project_remark_path(@project), class: "btn btn-primary btn-sm" do %><i class="fa fa-plus-circle"></i> Add Remarks<%end%>
       <%end%>
     </div>
   </div>

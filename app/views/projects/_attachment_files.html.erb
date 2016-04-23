@@ -2,7 +2,7 @@
   <div class="box-header with-border">
     <div class="pull-right">
       <%if policy(AttachmentFile.new).create? %>
-        <%=link_to new_project_attachment_file_path(@project), class: "btn btn-default bg-blue-active" do %><i class="fa fa-user-plus"></i> Add Attachment <%end%>
+        <%=link_to new_project_attachment_file_path(@project), class: "btn btn-primary btn-sm" do %><i class="fa fa-user-plus"></i> Add Attachment <%end%>
       <% end %>
     </div>
   </div>

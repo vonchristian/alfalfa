@@ -8,14 +8,14 @@
           </div>
           <div class="col-md-5">
             <div class="box-header with-border">
-              <h4>Details</h4>
+              <h4>Equipment Details</h4>
             </div>
             <div class="box-body">
               <%= f.input :make,  placeholder: 'Equipment Name' %>
               <%=f.input :model,  placeholder: 'Model' %>
-              <%=f.input :plate_number,  placeholder: 'Plate Number' %>
+              <%=f.input :acquisition_date, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>
               <%=f.input :acquisition_cost, placeholder: 'Acquisition Cost' %>
-              <%=f.input :acquisition_date, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datepicker"} %>
+              <%=f.input :plate_number,  placeholder: 'Plate Number' %>
             </div>
             <div class="box-footer">
               <div class="pull-right">
