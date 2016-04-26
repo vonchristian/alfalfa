@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421054657) do
+ActiveRecord::Schema.define(version: 20160426131837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -473,14 +473,14 @@ ActiveRecord::Schema.define(version: 20160421054657) do
   add_index "subcontract_costs", ["work_detail_id"], name: "index_subcontract_costs_on_work_detail_id", using: :btree
 
   create_table "time_extensions", force: :cascade do |t|
-    t.integer  "project_id"
     t.integer  "number_of_days"
     t.string   "remarks"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "work_detail_id"
   end
 
-  add_index "time_extensions", ["project_id"], name: "index_time_extensions_on_project_id", using: :btree
+  add_index "time_extensions", ["work_detail_id"], name: "index_time_extensions_on_work_detail_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                      default: "", null: false
@@ -574,7 +574,7 @@ ActiveRecord::Schema.define(version: 20160421054657) do
   add_foreign_key "sales", "inventories"
   add_foreign_key "subcontract_costs", "contractors"
   add_foreign_key "subcontract_costs", "work_details"
-  add_foreign_key "time_extensions", "projects"
+  add_foreign_key "time_extensions", "work_details"
   add_foreign_key "work_accomplishments", "work_details"
   add_foreign_key "work_details", "projects"
   add_foreign_key "worked_days", "employees"
