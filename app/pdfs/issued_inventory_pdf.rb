@@ -1,16 +1,15 @@
 class IssuedInventoryPdf < Prawn::Document
 
-  TABLE_WIDTHS = [130, 180, 50, 50, 70, 70]
-  
-  def initialize(issued_inventories, contractor_id, from_date, to_date, view_context)
-    super(margin: 30, page_size: [612, 948], page_layout: :portrait)
+  TABLE_WIDTHS = [270, 100, 100, 60, 40, 70, 70]
+
+  def initialize(issued_inventories,  from_date, to_date, view_context)
+    super( page_layout: :landscape)
     @issued_inventories = issued_inventories
     @from_date = from_date
     @to_date = to_date
     @view_context = view_context
     heading
-    summary
-    display_petty_cash_table
+    display_issued_materials_table
   end
 
   def price(number)
@@ -34,32 +33,23 @@ class IssuedInventoryPdf < Prawn::Document
     end
   end
 
-  def contractor
-    [["Contractor:", "#{(price @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost))}"]]
-  end
-
-  def summary
-    table(contractor, :cell_style => {size: 11, :padding => [2, 2, 2, 2]}) do
-      cells.borders = []
-    end
-  end
-  
-  def display_petty_cash_table
-    if table_data.empty?
+  def display_issued_materials_table
+    if issued_materials_data.empty?
       text "No Issued Materials.", align: :center
     else
       move_down 10
-      table(table_data, header: true, cell_style: { size: 8, font: "Helvetica"}, column_widths: TABLE_WIDTHS) do
+      table(issued_materials_data, header: true, cell_style: { size: 9, font: "Helvetica", inline_format: true}, column_widths: TABLE_WIDTHS) do
         row(0).font_style = :bold
         row(0).background_color = 'DDDDDD'
+        row(0).align = :center
       end
     end
   end
-  
-  def table_data
+
+  def issued_materials_data
     move_down 5
-    [["RECIPIENT", "INVENTORY NAME", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
-    @table_data ||= @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.contractor.name, e.inventory.name, e.quantity, e.inventory.unit, (price e.unit_cost), (price e.total_cost)]} +
-    @table_data ||= [["", "", "", "", "TOTAL", "#{(price @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost))}"]]
+    [["PROJECT", "CONTRACTOR", "INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
+    @issued_materials_data ||= @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.project.name, e.inventoriable.name, e.inventory.name, e.quantity, e.inventory.unit, (price e.unit_cost), (price e.total_cost)]} +
+    @issued_materials_data ||= [["", "", "", "", "", "<b>TOTAL</b>", "<b>#{(price @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost))}</b>"]]
   end
 end

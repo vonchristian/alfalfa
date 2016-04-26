@@ -1,7 +1,7 @@
 class ContractorMaterialsPdf < Prawn::Document
 
   TABLE_WIDTHS = [210, 70, 70, 100, 100]
-  
+
   def initialize(issued_inventories, contractor, project, from_date, to_date, view_context)
     super(margin: 30, page_size: [612, 948], page_layout: :portrait)
     @issued_inventories = issued_inventories
@@ -46,19 +46,19 @@ class ContractorMaterialsPdf < Prawn::Document
       cells.borders = []
     end
   end
-  
+
   def display_petty_cash_table
     if table_data.empty?
       text "No Issued Materials.", align: :center
     else
       move_down 10
-      table(table_data, header: true, cell_style: { size: 8, font: "Helvetica"}, column_widths: TABLE_WIDTHS) do
+      table(table_data, header: true, cell_style: { size: 9, font: "Helvetica"}, column_widths: TABLE_WIDTHS) do
         row(0).font_style = :bold
         row(0).background_color = 'DDDDDD'
       end
     end
   end
-  
+
   def table_data
     move_down 5
     [["INVENTORY NAME", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
