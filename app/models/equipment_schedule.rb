@@ -1,4 +1,4 @@
 class EquipmentSchedule < ActiveRecord::Base
   belongs_to :equipment
-  belongs_to :work_detail
+  belongs_to :operator, class_name: 'Employee'
 end

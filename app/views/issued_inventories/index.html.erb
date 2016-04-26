@@ -1,27 +1,38 @@
 <div class="col-md-12">
-  <div class="box">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h4>List of Issued Materials</h4>
+    </div>
     <div class="box-header with-border">
       <div class="row">
-        <div class="col-md-12">
-          <h4>List of Issued Materials</h4>
-          <br>
-        </div>
         <div class="col-md-8">
-          <label class="text-muted">Date Filter:</label>
-            <%= form_tag({:action => 'index'}, {:method => :get, class: 'form-inline'}) do %>
-              <div class="form-group">
-                <%= label_tag :from_date, nil, class: 'sr-only' %>
-                <%= text_field_tag :from_date, @from_date, class: 'datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
-              </div>
-              <div class="form-group">
-                <%= label_tag :to_date, nil, class: 'sr-only' %>
-                <%= text_field_tag :to_date, @to_date, class: 'datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
-              </div>
-              <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
-            <% end %>
-        </div>
-        <div class="col-md-4">
-          <%=link_to "Print Report(PDF)", issued_inventories_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm pull-right' %>
+          <label class="text-muted">Report Filter:</label>
+          <%= form_tag({:action => 'index'}, {:method => :get, class: 'form-inline'}) do %>
+            <table>
+              <tr>
+                <td>
+                  <div class="col-md-12">
+                    <%= label_tag :from_date, nil, class: 'sr-only' %>
+                    <%= text_field_tag :from_date, @from_date, class: 'datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
+                  </div>
+                </td>
+                <td>
+                  <div class="col-md-12"> - </div>
+                </td>
+                <td>
+                  <div class="col-md-12">
+                    <%= label_tag :to_date, nil, class: 'sr-only' %>
+                    <%= text_field_tag :to_date, @to_date, class: 'datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
+                  </div>
+                </td>
+                <td>
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          <% end %>
         </div>
       </div>
     </div>
@@ -63,6 +74,8 @@
               <%= number_to_currency @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost) %>
             </h3>
             <span class="help-block"><center class="text-uppercase">Total</center></span>
+            <hr>
+            <%=link_to "Print Report(PDF)", issued_inventories_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm btn-block' %>
           </div>
         </div>
       </div>

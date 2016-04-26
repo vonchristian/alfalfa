@@ -11,17 +11,17 @@
               <h4>Equipment Details</h4>
             </div>
             <div class="box-body">
-              <%= f.input :make,  placeholder: 'Equipment Name' %>
-              <%=f.input :model,  placeholder: 'Model' %>
-              <%=f.input :acquisition_date, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>
-              <%=f.input :acquisition_cost, placeholder: 'Acquisition Cost' %>
-              <%=f.input :plate_number,  placeholder: 'Plate Number' %>
+              <%= f.input :make, label: false, placeholder: 'Equipment Name' %>
+              <%=f.input :model, label: false, placeholder: 'Model' %>
+              <%=f.input :acquisition_date, label: false, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>
+              <%=f.input :acquisition_cost, label: false, placeholder: 'Acquisition Cost' %>
+              <%=f.input :plate_number, label: false, placeholder: 'Plate Number' %>
             </div>
             <div class="box-footer">
               <div class="pull-right">
                 <%=f.submit "Save Equipment", class: "btn btn-primary btn-sm" %>
                 <br><br>
-                <%= link_to "I'm done adding equipments.", equipment_index_path %>
+                <%= link_to "I'm done adding equipments", equipment_index_path, class: 'btn btn-sm btn-default' %>
               </div>
             </div>
           </div>

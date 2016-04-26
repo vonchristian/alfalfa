@@ -1,7 +1,7 @@
 <div class="tab-pane" id="materials">
   <div class="box-header with-border">
     <div class="pull-right">
-      <%=link_to "Add Issued Inventories", new_work_detail_issued_inventory_path(@work_detail), class: "btn btn-default bg-blue-active" %>
+      <%=link_to "Issue Inventories", new_work_detail_issued_inventory_path(@work_detail), class: "btn btn-default bg-blue-active" %>
       <%=link_to "Add Purchases", new_work_detail_purchase_order_path(@work_detail), class: "btn btn-default bg-blue-active" %>
     </div>
   </div>
@@ -20,7 +20,7 @@
         <tbody>
           <% @work_detail.material_costs.each do |material| %>
             <tr>
-              <td><%= material.inventory.name %> - <%=material.description %></td>
+              <td><%= material.inventory.name_description %></td>
               <td><%=material.quantity %> <%=material.inventory.unit %></td>
               <td><%=number_to_currency material.unit_cost %></td>
               <td><%=number_to_currency material.total_cost %></td>
