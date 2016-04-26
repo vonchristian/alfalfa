@@ -13,6 +13,7 @@ class WorkDetail < ActiveRecord::Base
   has_many :employees, through: :employments
   has_many :work_accomplishments
   has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
+  has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
   has_many :issued_inventories, as: :inventoriable
   has_many :labor_costs, class_name: "WorkDetailCosts::LaborCost"
   has_many :equipment_maintenances, class_name: "Maintenance"
@@ -24,6 +25,7 @@ class WorkDetail < ActiveRecord::Base
 
   delegate :cost, to: :project, prefix: true
   delegate :total, to: :time_extensions, prefix: true
+  delegate :total, to: :amount_revisions, prefix: true
   def equipment_fuelcosts
     IssuedInventory.where(inventoriable_id: self.id, inventory_id: Inventory.find_by_name("Fuel").id )
   end

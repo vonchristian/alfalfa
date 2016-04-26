@@ -19,8 +19,6 @@ class Project < ActiveRecord::Base
   has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
   has_many :contracts
   has_many :contractors, through: :contracts
-  has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
-  has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
   has_many :work_accomplishments, through: :work_details
   has_many :workers, class_name: "Employee"
   has_many :remarks
@@ -79,8 +77,9 @@ class Project < ActiveRecord::Base
     expenses.joins(:debit_amounts).sum(:amount)
   end
 
-  def total_amount_revision
-    amount_revisions.sum(:amount)
+
+   def total_amount_revision
+      self.work_details.collect{|a| a.amount_revisions_total}.sum
   end
 
   def self.total_amount_revisions
@@ -124,14 +123,14 @@ class Project < ActiveRecord::Base
   end
 
   def no_amount_revisions?
-      amount_revisions.empty?
+      self.total_amount_revision.zero?
   end
 
   def revised_contract_amount
     if no_amount_revisions?
       cost
     else
-      cost + amount_revisions.sum(:amount)
+      cost + total_amount_revision
     end
   end
 

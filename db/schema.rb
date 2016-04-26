@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426135427) do
+ActiveRecord::Schema.define(version: 20160426224430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,14 +47,15 @@ ActiveRecord::Schema.define(version: 20160426135427) do
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "amount_revisions", force: :cascade do |t|
-    t.integer  "project_id"
     t.decimal  "amount"
     t.string   "remarks"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.datetime "date"
+    t.integer  "work_detail_id"
   end
 
-  add_index "amount_revisions", ["project_id"], name: "index_amount_revisions_on_project_id", using: :btree
+  add_index "amount_revisions", ["work_detail_id"], name: "index_amount_revisions_on_work_detail_id", using: :btree
 
   create_table "amounts", force: :cascade do |t|
     t.string  "type"
@@ -546,7 +547,6 @@ ActiveRecord::Schema.define(version: 20160426135427) do
   add_index "worked_days", ["employee_id"], name: "index_worked_days_on_employee_id", using: :btree
   add_index "worked_days", ["project_id"], name: "index_worked_days_on_project_id", using: :btree
 
-  add_foreign_key "amount_revisions", "projects"
   add_foreign_key "attachment_files", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"
