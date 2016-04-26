@@ -4,13 +4,11 @@ class ContractsController < ApplicationController
   end
   def new
     @project = Project.find(params[:project_id])
-    @contract = @project.contracts.build
-    authorize @contract
   end
 
   def create
     @project = Project.find(params[:project_id])
-    @contract = @project.contracts.build(contract_params)
+    @contract = @project.contracts.create(contract_params)
     authorize @contract
     if @contract.save
       @contract.create_activity :create, owner: current_user, trackable: @project

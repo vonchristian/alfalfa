@@ -26,7 +26,7 @@
               <% if @project.contracts.present? %>
                 <% @project.contracts.each do |contract| %>
                   <tr>
-                    <td><%=contract.contractor %></td>
+                    <td><%=contract.contractor.full_name if contract.contractor %> - <%=contract.contractor %></td>
                     <td><b class="pull-right"><%=number_to_currency contract.amount_subcontracted %></b></td>
                     <td></td>
                   </tr>

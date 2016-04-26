@@ -1,4 +1,4 @@
-<%= simple_form_for ([@project, @contract]) do |f| %>
+<%= simple_form_for ([@project, @project.contracts.build]) do |f| %>
   <%=f.error_notification %>
   <h4>New Sub-Contractor</h4>
   <hr>
