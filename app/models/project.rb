@@ -29,7 +29,11 @@ class Project < ActiveRecord::Base
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
-  
+
+  def id_number_and_location
+    "#{id_number} - #{address}"
+  end
+
   def self.types
     ["JointVenture", "SubcontractWork"]
   end

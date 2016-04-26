@@ -6,7 +6,7 @@
                   <div class="form-group">
                     <%= text_field_tag :from_date, @from_date, class: 'datetimepicker form-control', placeholder: 'Date From', :as => :datetime_picker %>
                     <%= text_field_tag :to_date, @to_date, class: 'datetimepicker form-control', placeholder: 'Date To', :as => :datetime_picker %>
-                    <%= select_tag :project_id, options_for_select(@contractor.projects.all.collect{ |e| [e.id_number, e.id] }), class: 'form-control', prompt: 'Select Project' %>
+                    <%= select_tag :project_id, options_for_select(@contractor.projects.all.collect{ |e| [e.id_number_and_location, e.id] }), class: 'form-control', prompt: 'Select Project' %>
                     <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
                   </div>
                 <% end %>
