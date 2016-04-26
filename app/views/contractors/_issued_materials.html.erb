@@ -1,26 +1,26 @@
 <div class="tab-pane active" id ='issued_materials'>
 	<div class="box-header with-border">
-		<div class="row">
-			<% if current_user.supply_officer? %>
-				<%=link_to "Issue Materials", new_contractor_issued_inventory_path(@contractor), class: 'btn btn-sm btn-primary pull-right' %>
-			<% end %>
-		</div>
+              <div class="col-md-8">
+                <label class="text-muted">Report Filter:</label>
+                <%= form_tag({:action => 'show'}, {:method => :get, class: 'form-inline'}) do %>
+                  <div class="form-group">
+                    <%= text_field_tag :from_date, @from_date, class: 'datetimepicker form-control', placeholder: 'Date From', :as => :datetime_picker %>
+                    <%= text_field_tag :to_date, @to_date, class: 'datetimepicker form-control', placeholder: 'Date To', :as => :datetime_picker %>
+                    <%= select_tag :project_id, options_for_select(@contractor.projects.all.collect{ |e| [e.id_number, e.id] }), class: 'form-control', prompt: 'Select Project' %>
+                    <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
+                  </div>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                  <%=link_to "Print Report(PDF)", contractor_path(@contractor, format: 'pdf', :from_date => @from_date, :to_date => @to_date, :project_id => @project), class: 'btn btn-primary btn-sm pull-right' %>
+              </div>
 	</div>
 	<div class="box-header with-border">
-		<div class="pull-right">
-			<div class="row">
-        <%= form_tag({:action => 'show'}, {:method => :get, class: 'form-inline'}) do %>
-          <div class="form-group">
-            <%= select_tag :project_id, options_for_select(@contractor.projects.all.collect{ |e| [e.id_number, e.id] }), class: 'form-control', prompt: 'Select Project' %>
-            <%= text_field_tag :from_date, @from_date, class: 'datetimepicker form-control', placeholder: 'Date From', :as => :datetime_picker %>
-            <%= text_field_tag :to_date, @to_date, class: 'datetimepicker form-control', placeholder: 'Date To', :as => :datetime_picker %>
-          	<button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
-          </div>
-        <% end %>
-        <br>
-        <%=link_to "Print Report(PDF)", contractor_path(@contractor, format: 'pdf', :from_date => @from_date, :to_date => @to_date, :project_id => @project), class: 'btn btn-primary btn-sm pull-right' %>
-      </div>
-		</div>
+        <div class="row">
+          <% if current_user.supply_officer? %>
+            <%=link_to "Issue Materials", new_contractor_issued_inventory_path(@contractor), class: 'btn btn-sm btn-primary' %>
+          <% end %>
+        </div>
 	</div>
 	<div class="box-body">
 		<div class="row">

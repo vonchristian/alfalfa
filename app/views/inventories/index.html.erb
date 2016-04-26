@@ -3,13 +3,12 @@
     <div class="box-header with-border">
       <div class="row">
         <div class="col-md-6">
-          <h4>List of Inventories</h4>
+          <h4>List of Materials</h4>
         </div>
         <div class="col-md-6">
           <div class="pull-right">
             <% if current_user.supply_officer? %>
-              <%=link_to "Issue Inventory", new_issued_inventory_path, class: "btn btn-sm btn-primary" %>
-              <%=link_to "New Inventory", new_inventory_path, class: "btn btn-sm btn-primary" %>
+              <%=link_to "New Material", new_inventory_path, class: "btn btn-sm btn-primary" %>
             <% end %>
           </div>
         </div>
