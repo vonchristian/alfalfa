@@ -55,6 +55,8 @@ resources :work_details do
   resources :equipment_maintenances, module: :work_details
   resources :equipment_costs, module: :work_details
   resources :equipment_fuel_costs, only:[:new, :create], module: :work_details
+  resources :time_extensions,  only:[:new, :create], module: :work_details
+
 end
 
 resources :joint_ventures, controller: 'projects', type: 'JointVenture'
@@ -73,7 +75,6 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
       match :overview, via: [:get], on: :collection
       match :payroll, via: [:get], on: :member
     resource :notice_to_proceed, module: :project_details
-    resources :time_extensions
     resources :amount_revisions
     resources :remarks
     resources :expenses,         module: :projects

@@ -30,6 +30,8 @@ class Project < ActiveRecord::Base
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
 
+  delegate :time_extensions_total, to: :work_details, prefix: true
+
   def id_number_and_location
     "#{id_number} - #{address}"
   end
@@ -148,7 +150,7 @@ class Project < ActiveRecord::Base
   end
 
   def total_number_of_days_extended
-      self.time_extensions.sum(:number_of_days)
+      self.work_details.collect{|a| a.time_extensions_total}.sum
   end
 
   def days_elapsed
