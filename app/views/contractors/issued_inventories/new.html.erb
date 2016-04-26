@@ -5,7 +5,7 @@
   <div class="well">
     <h4>Issue Material Details</h4>
     <hr>
-    <%=f.input :project_id, label: false, collection: @contractor.projects.all.map{ |a| [a.id_number, a.id]}, prompt: "Select Project", input_html: {style: 'width:100%'} %>
+    <%=f.input :project_id, label: false, collection: @contractor.projects.all.map{ |a| [a.id_number_and_location, a.id]}, prompt: "Select Project", input_html: {style: 'width:100%'} %>
     <%=f.input :inventory_id, label: false, collection: Inventory.all, prompt: "Select Material", input_html: {style: 'width:100%'} %>
     <%=f.input :date_issued, as: :string, input_html:{class: "datetimepicker"}, placeholder: 'Issue Date', label: false %>
     <%=f.input :quantity, label: false, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
