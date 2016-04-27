@@ -3,7 +3,10 @@ class IssuedInventory < ActiveRecord::Base
   belongs_to :inventory
   belongs_to :contractor
   belongs_to :project
+  belongs_to :equipment
   delegate :cost, :name, to: :inventory, prefix: true
+  validates :equipment_id, presence: true
+  validates :quantity, presence: true
   validates :quantity, numericality: {less_than: :current_inventory_quantity, message: 'Quantity exceeded the current inventory quantity.'}
   validates :unit_cost, presence: true, numericality: true
   validates :inventory_id, presence: true

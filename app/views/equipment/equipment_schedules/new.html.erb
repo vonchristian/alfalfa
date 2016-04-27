@@ -1,0 +1,31 @@
+<%= simple_form_for [@equipment, @equipment_schedule] do |f| %>
+<%=f.error_notification %>
+  <div class="col-md-5 col-md-offset-3">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h4>Fuel Cost Details</h4>
+      </div>
+      <div class="box-body">
+        <%=f.input :project_id, collection: Project.all.map{ |a| [a.id_number_and_location, a.id]}  %>
+        <%=f.input :employee_id, collection: Employee.all.operator %>
+      </div>
+      <div class="box-footer">
+        <%=link_to "Cancel", @equipment, class: "btn btn-default btn-sm" %>
+        <%=f.submit "Save Schedule", class: "btn btn-primary btn-sm pull-right" %>
+    </div>
+  </div>
+<% end %>
+<script>
+  $(document).ready(function() {
+    $("#equipment_schedule_project_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $("#equipment_schedule_employee_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

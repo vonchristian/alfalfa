@@ -29,16 +29,20 @@ class WorkDetail < ActiveRecord::Base
   def equipment_fuelcosts
     IssuedInventory.where(inventoriable_id: self.id, inventory_id: Inventory.find_by_name("Fuel").id )
   end
+
   def material_costs
     if Inventory.find_by_name("Fuel").present?
-    IssuedInventory.where(inventoriable_id: self.id).where.not(inventory_id: Inventory.find_by_name("Fuel").id)
+      IssuedInventory.where(inventoriable_id: self.id).where.not(inventory_id: Inventory.find_by_name("Fuel").id)
+    end
   end
-  end
+
   def self.total
     self.all.sum(:total_cost)
   end
+
   def total_quantity_approved_in_previous_billing
   end
+
   def total_quantity_approved_in_this_billing
     self.work_accomplishments.unpaid.total * self.unit_cost
   end
@@ -50,6 +54,7 @@ class WorkDetail < ActiveRecord::Base
   def cost_of_this_billing
     self.total_quantity_approved_in_this_billing * unit_cost
   end
+
   def cost_to_date
     self.cost_of_previous_billings + self.cost_of_this_billing
   end
@@ -57,12 +62,15 @@ class WorkDetail < ActiveRecord::Base
   def balance_of_cost
     self.total_cost - self.cost_to_date
   end
+
   def equipment_costs_incurred
     self.equipment_fuelcosts.sum(:total_cost) + self.equipment_costs.sum(:total_cost) + self.equipment_maintenances.sum(:amount)
   end
+
   def material_costs_incurred
     self.material_costs.sum(:total_cost)
   end
+
   def total_quantity_approved_in_previous_billing
     self.work_accomplishments.paid.sum(:quantity)
   end
@@ -90,9 +98,11 @@ class WorkDetail < ActiveRecord::Base
   def cost_to_date
     self.cost_of_previous_billing + cost_of_this_billing
   end
+  
   def balance_of_cost
     self.total_cost - self.cost_to_date
   end
+
   def name
     description
   end

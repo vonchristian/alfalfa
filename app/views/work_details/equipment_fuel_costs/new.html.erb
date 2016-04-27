@@ -6,11 +6,13 @@
         <h4>Fuel Cost Details</h4>
       </div>
       <div class="box-body">
+        <%=f.input :equipment_id, collection: Equipment.all, prompt: '-- select --' %>
+        <%=f.input :project_id, input_html: {value: @work_detail.project.id}, as: :hidden  %>
         <%=f.input :inventory_id, input_html: {value: Inventory.find_by_name("Fuel").id}, as: :hidden  %>
         <%=f.input :date_issued, as: :string, input_html:{class: "datetimepicker"} %>
         <%=f.input :quantity, placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
-        <%=f.input :unit_cost,  placeholder: 'Inventory Cost', input_html:{id: "unit_price", value: :inventory_cost, oninput: "calculate()"}  %>
-        <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
+        <%=f.input :unit_cost, placeholder: 'Inventory Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %>
+        <%=f.input :total_cost, placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
       </div>
       <div class="box-footer">
         <%=link_to "Cancel", @work_detail, class: "btn btn-default btn-sm" %>
@@ -18,4 +20,10 @@
     </div>
   </div>
 <% end %>
-
+<script>
+  $(document).ready(function() {
+    $("#issued_inventory_equipment_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

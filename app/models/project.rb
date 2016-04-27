@@ -24,6 +24,8 @@ class Project < ActiveRecord::Base
   has_many :remarks
   has_many :attachment_files
   has_many :issued_inventories
+  has_many :equipment_schedules
+  has_many :equipments, through: :equipment_schedules
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true

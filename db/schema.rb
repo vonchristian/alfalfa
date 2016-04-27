@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426224430) do
+ActiveRecord::Schema.define(version: 20160427005127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160426224430) do
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "amount_revisions", force: :cascade do |t|
+    t.integer  "project_id"
     t.decimal  "amount"
     t.string   "remarks"
     t.datetime "created_at",     null: false
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 20160426224430) do
     t.integer  "work_detail_id"
   end
 
+  add_index "amount_revisions", ["project_id"], name: "index_amount_revisions_on_project_id", using: :btree
   add_index "amount_revisions", ["work_detail_id"], name: "index_amount_revisions_on_work_detail_id", using: :btree
 
   create_table "amounts", force: :cascade do |t|
@@ -251,18 +253,17 @@ ActiveRecord::Schema.define(version: 20160426224430) do
 
   create_table "equipment_schedules", force: :cascade do |t|
     t.integer  "equipment_id"
-    t.integer  "work_detail_id"
-    t.decimal  "number_of_hours"
-    t.decimal  "rate"
-    t.decimal  "total_cost"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "employee_id"
+    t.integer  "project_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "start_date"
     t.datetime "end_date"
   end
 
+  add_index "equipment_schedules", ["employee_id"], name: "index_equipment_schedules_on_employee_id", using: :btree
   add_index "equipment_schedules", ["equipment_id"], name: "index_equipment_schedules_on_equipment_id", using: :btree
-  add_index "equipment_schedules", ["work_detail_id"], name: "index_equipment_schedules_on_work_detail_id", using: :btree
+  add_index "equipment_schedules", ["project_id"], name: "index_equipment_schedules_on_project_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
@@ -314,6 +315,7 @@ ActiveRecord::Schema.define(version: 20160426224430) do
     t.integer  "contractor_id"
     t.integer  "project_id"
     t.integer  "work_detail_id"
+    t.integer  "equipment_id"
   end
 
   add_index "issued_inventories", ["inventoriable_id"], name: "index_issued_inventories_on_inventoriable_id", using: :btree
@@ -547,6 +549,7 @@ ActiveRecord::Schema.define(version: 20160426224430) do
   add_index "worked_days", ["employee_id"], name: "index_worked_days_on_employee_id", using: :btree
   add_index "worked_days", ["project_id"], name: "index_worked_days_on_project_id", using: :btree
 
+  add_foreign_key "amount_revisions", "projects"
   add_foreign_key "attachment_files", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"
@@ -561,8 +564,9 @@ ActiveRecord::Schema.define(version: 20160426224430) do
   add_foreign_key "employments", "projects"
   add_foreign_key "equipment", "projects"
   add_foreign_key "equipment_costs", "work_details"
+  add_foreign_key "equipment_schedules", "employees"
   add_foreign_key "equipment_schedules", "equipment"
-  add_foreign_key "equipment_schedules", "work_details"
+  add_foreign_key "equipment_schedules", "projects"
   add_foreign_key "labor_costs", "work_details"
   add_foreign_key "maintenances", "employees"
   add_foreign_key "maintenances", "equipment"

@@ -1,26 +1,37 @@
 <div class="tab-pane active" id="profile">
-<div class="row">
-<div class="col-md-3">
-<p><strong>Plate Number</strong></p>
-<span class="text-muted"><%=@equipment.plate_number %></span>
-<hr>
-<p><strong>Acquisition Cost</strong></p>
-<span class="text-muted"><%=number_to_currency @equipment.acquisition_cost %></span>
-<hr>
-<%=link_to "Update Equipment", edit_equipment_path(@equipment), class: "btn btn-primary btn-block" %>
-</div>
-<div class="col-md-9">
-  <h4>Equipment Jobs</h4>
-  <hr>
-  <% @equipment.equipment_schedules.each do |equipment_schedule| %>
-  <p><%=equipment_schedule.work_detail.project.name %></p>
-  <p><%=equipment_schedule.work_detail.name %></p>
-  <span class="text-muted"><%=equipment_schedule.start_date.strftime("%B %e, %Y") %> - <%=equipment_schedule.end_date.strftime("%B %e, %Y") %> (<%=equipment_schedule.number_of_hours %> Hours)</span><br>
-  <span class="text-muted"> </span>
-  <h4><%=number_to_currency equipment_schedule.total_cost %></h4>
-  <hr>
-  <% end %>
-</div>
+  <div class="row">
+    <div class="col-md-3">
+      <p><strong>Plate Number</strong></p>
+      <span class="text-muted"><%=@equipment.plate_number %></span>
+      <hr>
+      <p><strong>Acquisition Cost</strong></p>
+      <span class="text-muted"><%=number_to_currency @equipment.acquisition_cost %></span>
+      <hr>
+      <%=link_to "Update Equipment", edit_equipment_path(@equipment), class: "btn btn-primary btn-block btn-sm" %>
+    </div>
+    <div class="col-md-9">
+      <div class="box-header with-border">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Equipment Jobs</h4>
+          </div>
+          <div class="col-md-6">
+          <%=link_to "New Equipment Schedule", new_equipment_equipment_schedule_path(@equipment), class: "btn btn-primary btn-sm pull-right" %>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <table class="table table-hover">
+          <% @equipment.equipment_schedules.each do |equipment_schedule| %>
+            <tr>
+              <td width="20px"><%= image_tag equipment_schedule.operator.profile_photo(:x_small), class: 'img-rounded' %></td>
+              <td><%=equipment_schedule.operator.full_name %></td>
+              <td><p class="pull-right"><%=equipment_schedule.project.id_number_and_location %></p></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
 </div>
 </div>
 

@@ -4,6 +4,8 @@ class Equipment < ActiveRecord::Base
   has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :fuel_expenses, as: :inventoriable, class_name: "IssuedInventory"
   has_many :equipment_schedules
+  has_many :employees, through: :equipment_schedules
+  delegate :full_name, to: :employee
   def make_and_model
     "#{make} - #{model}"
   end

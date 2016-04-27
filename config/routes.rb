@@ -57,7 +57,6 @@ resources :work_details do
   resources :equipment_fuel_costs, only:[:new, :create], module: :work_details
   resources :time_extensions,     only:[:new, :create], module: :work_details
   resources :amount_revisions,   only:[:new, :create], module: :work_details
-
 end
 
 resources :joint_ventures, controller: 'projects', type: 'JointVenture'
@@ -98,7 +97,7 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
 
   resources :equipment do
     resources :fuel_expenses, module: :equipment
-
+    resources :equipment_schedules, module: :equipment
   end
 
 

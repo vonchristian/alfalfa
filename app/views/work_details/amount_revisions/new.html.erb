@@ -7,14 +7,14 @@
       </div>
       <div class="box-body">
         <div class="col-sm-12 border-right">
+          <%=f.input :date, as: :string, input_html: {class: "datetimepicker"} %>
           <%=f.input :amount, label: "Additional Amount", as: :string %>
           <%=f.input :remarks, as: :text %>
-          <%=f.input :date, as: :string, input_html: {class: "datetimepicker"} %>
         </div>
       </div>
-      <div class="modal-footer">
-          <%= link_to 'Cancel', @project, class: 'btn btn-warning pull-left' %>
-          <%=f.submit "Save Amount Revision", class: "btn btn-primary" %>
+      <div class="box-footer">
+          <%= link_to 'Cancel', @work_detail, class: 'btn btn-warning btn-sm' %>
+          <%=f.submit "Save", class: "btn btn-primary pull-right btn-sm" %>
       </div>
     </div>
   </div>

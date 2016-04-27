@@ -6,7 +6,7 @@ class WorkDetails::EquipmentFuelCostsController < ApplicationController
 
   def create
     @work_detail = WorkDetail.find(params[:work_detail_id])
-    @fuel_expense = @work_detail.equipment_fuel_costs.create(fuel_expense_params)
+    @fuel_expense = @work_detail.equipment_fuel_costs.create!(fuel_expense_params)
     if @fuel_expense.save
       redirect_to @work_detail, notice: "Equipment Fuel Cost saved successfully."
     else
@@ -16,7 +16,7 @@ class WorkDetails::EquipmentFuelCostsController < ApplicationController
 
   private
   def fuel_expense_params
-    params.require(:issued_inventory).permit( :inventory_id, :quantity, :total_cost, :date_issued)
+    params.require(:issued_inventory).permit(:project_id, :equipment_id, :inventory_id, :quantity, :unit_cost, :total_cost, :date_issued)
   end
 
 

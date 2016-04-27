@@ -13,7 +13,7 @@
           </div>
           <div class="box-body">
             <%@work_detail.equipment_fuelcosts.each do |fuel_cost| %>
-              <p><strong><%=fuel_cost.date_issued.strftime("%B %e, %Y")%></strong></p>
+              <span><strong><%=fuel_cost.date_issued.strftime("%B %e, %Y")%></strong></span><br>
               <span class="text-muted"><%=fuel_cost.quantity %> <%=fuel_cost.inventory.unit %></span>
               <span class="pull-right"><%=number_to_currency fuel_cost.total_cost %></span>
               <hr>
@@ -33,8 +33,8 @@
           </div>
           <div class="box-body">
             <%@work_detail.equipment_costs.each do |equipment_cost| %>
-              <p><strong><%=equipment_cost.equipment %></strong></p>
-              <p class="text-muted"><%=equipment_cost.start_date.strftime("%B %e, %Y") %> - <%=equipment_cost.end_date.strftime("%B %e, %Y") %></p>
+              <span><b><%=equipment_cost.equipment %></b></span><br>
+              <span class="text-muted"><%=equipment_cost.start_date.strftime("%B %e, %Y") %> - <%=equipment_cost.end_date.strftime("%B %e, %Y") %></span><br>
               <span class="text-muted"><%=equipment_cost.number_of_hours %> Hours </span>
               <span class="pull-right"><%=number_to_currency equipment_cost.total_cost %></span>
               <hr>
@@ -54,10 +54,10 @@
           </div>
           <div class="box-body">
             <%@work_detail.equipment_maintenances.each do |equipment_maintenance| %>
-              <p><strong><%=equipment_maintenance.equipment %></strong></p>
-              <span class="text-muted"><%=equipment_maintenance.quantity %> <%=equipment_maintenance.unit %> <%=equipment_maintenance.description %></span>
-              <span class="pull-right"><%=number_to_currency equipment_maintenance.amount %></span><br>
+              <span><strong><%=equipment_maintenance.equipment %></strong></span><br>
+              <span class="text-muted"><%=equipment_maintenance.quantity %> <%=equipment_maintenance.unit %> <%=equipment_maintenance.description %></span><br>
               <span class="text-muted"><%=equipment_maintenance.remarks %></span>
+              <span class="pull-right"><%=number_to_currency equipment_maintenance.amount %></span><br>
               <hr>
             <% end %>
           </div>
