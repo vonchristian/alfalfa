@@ -1,0 +1,31 @@
+<%= simple_form_for [@equipment, @equipment_status] do |f| %>
+<%=f.error_notification %>
+  <div class="col-md-4 col-md-offset-4">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h4>Equipment Status</h4>
+      </div>
+      <div class="box-body">
+        <%=f.input :status, collection: EquipmentStatus.statuses.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
+        <%=f.input :description, as: :text, label: 'Remarks' %>
+      </div>
+      <div class="box-footer">
+        <%=link_to "Cancel", equipment_path(id: @equipment), class: "btn btn-default btn-sm" %>
+        <%=f.submit "Save Status", class: "btn btn-primary btn-sm pull-right" %>
+    </div>
+  </div>
+<% end %>
+<script>
+  $(document).ready(function() {
+    $("#equipment_schedule_project_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $("#equipment_schedule_employee_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

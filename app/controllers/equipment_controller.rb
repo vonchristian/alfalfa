@@ -11,6 +11,7 @@ class EquipmentController < ApplicationController
     @equipment = Equipment.create(equipment_params)
     authorize @equipment
     if @equipment.save
+      @equipment.set_equipment_status
       redirect_to @equipment, notice: "Equipment saved successfully."
     else
       render :new

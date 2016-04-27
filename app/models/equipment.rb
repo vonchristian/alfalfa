@@ -6,6 +6,7 @@ class Equipment < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :employees, through: :equipment_schedules
   delegate :full_name, to: :employee
+  has_one :equipment_status
   def make_and_model
     "#{make} - #{model}"
   end
@@ -14,6 +15,17 @@ class Equipment < ActiveRecord::Base
     make_and_model
   end
 
+  def set_equipment_status
+    EquipmentStatus.create(equipment_id: self.id, status: 0, description: "Ready")
+  end
+
+  def inactive?
+    self.equipment_status.inactive?
+  end
+  
+  def active?
+    self.equipment_status.active?
+  end
 
   private
 

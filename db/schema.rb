@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427005127) do
+ActiveRecord::Schema.define(version: 20160427055508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,6 +264,16 @@ ActiveRecord::Schema.define(version: 20160427005127) do
   add_index "equipment_schedules", ["employee_id"], name: "index_equipment_schedules_on_employee_id", using: :btree
   add_index "equipment_schedules", ["equipment_id"], name: "index_equipment_schedules_on_equipment_id", using: :btree
   add_index "equipment_schedules", ["project_id"], name: "index_equipment_schedules_on_project_id", using: :btree
+
+  create_table "equipment_statuses", force: :cascade do |t|
+    t.integer  "status"
+    t.text     "description"
+    t.integer  "equipment_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "equipment_statuses", ["equipment_id"], name: "index_equipment_statuses_on_equipment_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
@@ -567,6 +577,7 @@ ActiveRecord::Schema.define(version: 20160427005127) do
   add_foreign_key "equipment_schedules", "employees"
   add_foreign_key "equipment_schedules", "equipment"
   add_foreign_key "equipment_schedules", "projects"
+  add_foreign_key "equipment_statuses", "equipment"
   add_foreign_key "labor_costs", "work_details"
   add_foreign_key "maintenances", "employees"
   add_foreign_key "maintenances", "equipment"

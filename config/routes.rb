@@ -98,7 +98,9 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
   resources :equipment do
     resources :fuel_expenses, module: :equipment
     resources :equipment_schedules, module: :equipment
+    resources :equipment_statuses, module: :equipment
   end
 
+  resources :equipment_statuses, only: [:edit, :update]
 
 end

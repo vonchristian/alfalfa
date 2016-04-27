@@ -2,7 +2,11 @@ class Equipment::EquipmentSchedulesController < ApplicationController
 
   def new
     @equipment = Equipment.find(params[:equipment_id])
-    @equipment_schedule = @equipment.equipment_schedules.build
+    if @equipment.inactive?
+      redirect_to @equipment, alert: 'Cannot create schedule. Equipment is Inactive!'
+    else
+      @equipment_schedule = @equipment.equipment_schedules.build
+    end
   end
 
   def create
