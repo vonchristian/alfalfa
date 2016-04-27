@@ -19,8 +19,6 @@ class Project < ActiveRecord::Base
   has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
   has_many :contracts
   has_many :contractors, through: :contracts
-  has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
-  has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
   has_many :work_accomplishments, through: :work_details
   has_many :workers, class_name: "Employee"
   has_many :remarks
@@ -29,6 +27,8 @@ class Project < ActiveRecord::Base
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
+
+  delegate :time_extensions_total, to: :work_details, prefix: true
 
   def id_number_and_location
     "#{id_number} - #{address}"
@@ -77,8 +77,9 @@ class Project < ActiveRecord::Base
     expenses.joins(:debit_amounts).sum(:amount)
   end
 
-  def total_amount_revision
-    amount_revisions.sum(:amount)
+
+   def total_amount_revision
+      self.work_details.collect{|a| a.amount_revisions_total}.sum
   end
 
   def self.total_amount_revisions
@@ -122,14 +123,14 @@ class Project < ActiveRecord::Base
   end
 
   def no_amount_revisions?
-      amount_revisions.empty?
+      self.total_amount_revision.zero?
   end
 
   def revised_contract_amount
     if no_amount_revisions?
       cost
     else
-      cost + amount_revisions.sum(:amount)
+      cost + total_amount_revision
     end
   end
 
@@ -148,7 +149,7 @@ class Project < ActiveRecord::Base
   end
 
   def total_number_of_days_extended
-      self.time_extensions.sum(:number_of_days)
+      self.work_details.collect{|a| a.time_extensions_total}.sum
   end
 
   def days_elapsed

@@ -36,11 +36,7 @@
                 <td style="font-size:12px"></td>
                 <td style="font-size:12px"><%=number_to_currency project.cost %></td>
                 <td style="font-size:12px"><%=number_to_currency project.total_amount_revision %></td>
-                <% if project.amount_revisions.present? %>
-                  <td style="font-size:12px"><%=number_to_currency project.revised_contract_amount%></td>
-                <% else %>
-                  <td style="font-size:12px">No Revision</td>
-                <% end %>
+                <td style="font-size:12px"><%=number_to_currency project.revised_contract_amount%></td>
                 <td style="font-size:12px"></td>
                 <td style="font-size:12px"></td>
                 <td style="font-size:12px"><%=number_to_currency project.total_collection %></td>

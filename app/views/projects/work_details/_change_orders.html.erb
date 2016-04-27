@@ -1,0 +1,28 @@
+<div class="tab-pane" id="change_orders">
+<div class="row">
+<div class="col-md-5 col-md-offset-3">
+<h4 class="text-uppercase">Time Extensions
+<%=link_to "New Time Extension", new_work_detail_time_extension_path(@work_detail), class: "btn btn-primary pull-right" %>
+</h4>
+<span class="text-muted">Here's the time extesions for this work detail.</span>
+<hr>
+
+
+<%@work_detail.time_extensions.each do |time_extension| %>
+<p><b><%=time_extension.number_of_days%> Days</b><span class="pull-right"><i class="fa fa-clock-o"></i> <%=time_extension.date.strftime("%b %e, %Y") %></span></p>
+<span class="text-muted"><%=time_extension.remarks %></span>
+<hr>
+<% end %>
+<br>
+<h4 class="text-uppercase">Amount Revisions
+<%=link_to "New Time Extension", new_work_detail_amount_revision_path(@work_detail), class: "btn btn-primary pull-right" %>
+</h4>
+<span class="text-muted">Here's the amount revisions for this work detail.</span>
+<hr>
+<%@work_detail.amount_revisions.each do |amount_revision| %>
+<p><b><%=number_to_currency amount_revision.amount %> </b><span class="pull-right"><i class="fa fa-clock-o"></i> <%=amount_revision.date.strftime("%b %e, %Y") %></span></p>
+<span class="text-muted"><%=amount_revision.remarks %></span>
+<hr>
+<% end %>
+</div>
+</div>

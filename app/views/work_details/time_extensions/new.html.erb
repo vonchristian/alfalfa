@@ -1,6 +1,6 @@
-<%= simple_form_for [@project, @time_extension], url: :project_time_extensions do |f| %>
+<%= simple_form_for [@work_detail, @time_extension], url: :work_detail_time_extensions do |f| %>
 <%=f.error_notification %>
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-4 col-md-offset-4">
     <div class="box box-widget widget-user">
       <div class="widget-user-header bg-blue-active">
         <h3 class="widget-user-username">New Time Extension</h3>
@@ -9,11 +9,12 @@
         <div class="col-sm-12 border-right">
           <%=f.input :number_of_days %>
           <%=f.input :remarks, as: :text %>
+          <%=f.input :date, as: :string, input_html:{ class: "datetimepicker" } %>
         </div>
       </div>
       <div class="modal-footer">
         <div class="pull-right">
-          <%= link_to 'Cancel', @project, class: 'btn btn-warning' %>
+          <%= link_to 'Cancel', @work_detail, class: 'btn btn-warning' %>
           <%=f.submit "Save Time Extension", class: "btn btn-primary" %>
         </div>
       </div>
