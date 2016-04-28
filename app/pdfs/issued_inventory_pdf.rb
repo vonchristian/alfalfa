@@ -1,14 +1,16 @@
 class IssuedInventoryPdf < Prawn::Document
 
-  TABLE_WIDTHS = [270, 100, 100, 60, 40, 70, 70]
+  TABLE_WIDTHS = [210, 70, 70, 100, 100]
 
-  def initialize(issued_inventories,  from_date, to_date, view_context)
-    super( page_layout: :landscape)
+  def initialize(issued_inventories, project, from_date, to_date, view_context)
+    super(margin: 30, page_size: [612, 948], page_layout: :portrait)
     @issued_inventories = issued_inventories
+    @project = project
     @from_date = from_date
     @to_date = to_date
     @view_context = view_context
     heading
+    summary if @project.present?
     display_issued_materials_table
   end
 
@@ -33,6 +35,16 @@ class IssuedInventoryPdf < Prawn::Document
     end
   end
 
+  def summary_table
+    [["Project: ", "#{(@project.name)}"]]
+  end
+
+  def summary
+    table(summary_table, :cell_style => {size: 11, :padding => [2, 2, 2, 2]}) do
+      cells.borders = []
+    end
+  end
+
   def display_issued_materials_table
     if issued_materials_data.empty?
       text "No Issued Materials.", align: :center
@@ -48,8 +60,8 @@ class IssuedInventoryPdf < Prawn::Document
 
   def issued_materials_data
     move_down 5
-    [["PROJECT", "CONTRACTOR", "INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
-    @issued_materials_data ||= @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.project.name, e.inventoriable.name, e.inventory.name, e.quantity, e.inventory.unit, (price e.unit_cost), (price e.total_cost)]} +
-    @issued_materials_data ||= [["", "", "", "", "", "<b>TOTAL</b>", "<b>#{(price @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost))}</b>"]]
+    [["INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
+    @table_data ||= @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date, :project_id => @project}).map { |e| [e.inventory.name, e.quantity, e.inventory.unit, (price e.unit_cost), (price e.total_cost)]} +
+    @table_data ||= [["", "", "", "TOTAL", "#{(price @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost))}"]]
   end
 end

@@ -61,7 +61,7 @@ class ContractorMaterialsPdf < Prawn::Document
 
   def table_data
     move_down 5
-    [["INVENTORY NAME", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
+    [["INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
     @table_data ||= @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date, :project_id => @project}).map { |e| [e.inventory.name, e.quantity, e.inventory.unit, (price e.unit_cost), (price e.total_cost)]} +
     @table_data ||= [["", "", "", "TOTAL", "#{(price @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost))}"]]
   end
