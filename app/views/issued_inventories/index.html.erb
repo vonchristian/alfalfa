@@ -41,8 +41,13 @@
         </div>
       </div>
     </div>
+    <div class="box-header with-border">
+      <div class="col-md-10 col-md-offset-1">
+        <%=link_to "Print Report(PDF)", issued_inventories_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm pull-right' %>
+      </div>
+    </div>
     <div class="box-body">
-      <div class="col-md-9">
+      <div class="col-md-10 col-md-offset-1">
         <div class="box-header with-border">
         </div>
         <table class="table table-compressed table-hover">
@@ -58,7 +63,7 @@
           </thead>
           <tbody>
             <% if @issued_inventories.present? %>
-              <% @issued_inventories.entered_on(:from_date => @from_date, :to_date => @to_date).each do |issued_inventory| %>
+              <% @issued_inventories.entered_on(:from_date => @from_date, :to_date => @to_date, :project_id => @project).each do |issued_inventory| %>
                 <tr>
                   <td><%= issued_inventory.inventoriable.try(:name) %></td>
                   <td><%= issued_inventory.inventory.try(:name) %></td>
@@ -71,20 +76,6 @@
             <% end %>
           </tbody>
         </table>
-      </div>
-      <div class="col-md-3">
-        <div class="row">
-          <div class="well">
-            <h3 class="text-center">
-              <%= number_to_currency @issued_inventories.entered_on({from_date: @from_date, to_date: @to_date}).sum(:total_cost) %>
-            </h3>
-            <span class="help-block"><center class="text-uppercase">Total</center></span>
-            <hr>
-            <%=link_to "Print Report(PDF)", issued_inventories_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm btn-block' %>
-            <hr>
-            <%= link_to 'Issue Material', new_issued_inventory_path, class: 'btn btn-warning btn-sm btn-block' %>
-          </div>
-        </div>
       </div>
     </div>
   </div>
