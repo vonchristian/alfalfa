@@ -24,7 +24,7 @@ class Contractors::IssuedInventoriesController < ApplicationController
 		@issued_inventory = @contractor.issued_inventories.create(issued_inventory_params)
 		@issued_inventory.inventoriable = @contractor
 		if @issued_inventory.save
-			redirect_to @contractor, notice: "Issued inventory saved successfully."
+			redirect_to new_contractor_issued_inventory_path(@contractor), notice: "Issued inventory saved successfully."
 		else
 			render :new
 		end

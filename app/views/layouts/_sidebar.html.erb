@@ -105,17 +105,18 @@
           <i class="fa fa-cog"></i> <span>Settings</span>
         <%# end %>
       </li> -->
-<!--       <li>
+<!--  <li>
         <%#= link_to activities_path do %>
           <i class="fa fa-list"></i> <span>Activity Logs</span>
         <%#end%>
-      </li>
-      <li>
-        <a href="/users">
-          <i class="fa fa-alert"></i> <span>User Access</span>
-        </a>
       </li> -->
-      <li>
+      <% if current_user.system_administrator? %>
+        <li>
+          <a href="/users">
+            <i class="fa fa-alert"></i> <span>User Access</span>
+          </a>
+        </li>
+      <% end %>
     </ul>
   </section>
 </aside>
