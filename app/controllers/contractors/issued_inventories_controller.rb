@@ -4,7 +4,7 @@ class Contractors::IssuedInventoriesController < ApplicationController
     @issued_inventories = IssuedInventory.all
     @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_day
     @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_day
-    @project = params[:inventoriable_id]
+    @project = params[:project_id]
     respond_to do |format|
       format.html
       format.pdf do

@@ -43,7 +43,7 @@
     </div>
     <div class="box-header with-border">
       <div class="col-md-10 col-md-offset-1">
-        <%=link_to "Print Report(PDF)", issued_inventories_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date), class: 'btn btn-primary btn-sm pull-right' %>
+        <%=link_to "Print Report(PDF)", issued_inventories_path(format: 'pdf', :from_date => @from_date, :to_date => @to_date, :project_id => @project), class: 'btn btn-primary btn-sm pull-right' %>
       </div>
     </div>
     <div class="box-body">
