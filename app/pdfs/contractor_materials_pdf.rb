@@ -38,7 +38,7 @@ class ContractorMaterialsPdf < Prawn::Document
 
   def summary_table
     [["Contractor: ", "#{(@contractor.name)}"],
-    ["Project: ", "#{(@project.name)}"]]
+    ["Project: ", "#{(@project.try(:name))}"]]
   end
 
   def summary
