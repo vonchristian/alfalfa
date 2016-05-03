@@ -1,4 +1,5 @@
 class Projects::WorkAccomplishmentsController < ApplicationController
+  layout "projects"
   def new
     @work_detail = WorkDetail.find(params[:work_detail_id])
     @work_accomplishment = @work_detail.work_accomplishments.build
