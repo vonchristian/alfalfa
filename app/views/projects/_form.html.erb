@@ -1,13 +1,15 @@
-<%= simple_form_for @project do |f| %>
-<%=f.error_notification %>
-  <div class="col-md-10 col-md-offset-1">
-    <div class="box box-solid">
-      <div class="box-header with-border">
-        <h3 class="text-center">Project Details</h3>
-        <span class="help-block text-center"> </span>
-      </div>         
-      <div class="box-body">
-        <div class="col-md-6 col-md-offset-3">
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> Project Details </h4>
+    </div>
+    <div class="content">
+      <%= simple_form_for @project do |f| %>
+        <%=f.error_notification %>
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-5">
           <%=f.input :name, as: :text, input_html: {rows: 5}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
           <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
 
@@ -19,13 +21,13 @@
           <%=f.input :implementing_office, label: "Implementing Office" %>
 
           <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
-        </div>
-      </div>
-      <div class="box-footer">
+
+      <div class="modal-footer">
         <div class="pull-right">
           <%=f.submit "Save Project", class: "btn btn-primary", data: {disable_with: 'Saving Project...'} %> or <%= link_to "Cancel", @project %>
         </div>
       </div>
+      <% end %>
+
     </div>
   </div>
-<% end %>

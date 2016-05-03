@@ -18,3 +18,5 @@
 //= require bootstrap-datetimepicker
 //= require pickers
 //= require supplies/admin
+//= require work_detail
+//= require labor_cost
