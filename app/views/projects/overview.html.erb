@@ -1,37 +1,25 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="col-md-4">
-      <div class="box box-solid">
-        <div class="box-body">
-          <br>
-          <br>
-          <%= link_to new_project_path do %>
-            <%= image_tag "plus.png", size: "150x150", class: "center-block" %>
-          <% end %>
-          <%=link_to "Add A new Project", new_project_path, class: "btn btn-link btn-block" %>
-          <br>
-          <br>
-        </div>
-      </div>
+<div class="col-md-12">
+  <div class="card">
+    <div class="content">
+      <%=link_to "New Project", new_project_path, class: "btn btn-primary" %>
     </div>
+  </div>
+</div>
     <%@projects.each do |project| %>
       <div class="col-md-4">
-        <div class="box box-solid">
-          <div class="box-header with-border">
-            <h3><center><%=link_to "##{project.id_number_and_location}", project %></center></h3>
+        <div class="card">
+          <div class="header">
+            <h4 class="title"><center><%=link_to "##{project.id_number_and_location}", project %></center></h4>
+            <hr>
           </div>
-          <div class="box-body">
+          <div class="content">
             <p class="text-uppercase"><%=link_to project.name, project %></p>
           </div>
-          <div class="box-footer">
+
             <center><%=link_to "View Project", project_path(project), class: "btn btn-primary img-rounded" %></center>
-          </div>
+        <br>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-
-
-
-

@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  layout "projects"
   before_action :set_project_type
   decorates_assigned :project
 

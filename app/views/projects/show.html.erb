@@ -1,52 +1,195 @@
-  <div class="col-md-12">
+<div class="row">
+  <div class="col-md-4">
     <div class="card">
-      <div class="row">
-        <div class="col-md-8">
-          <h4 class="text-info"><%=@project.name.upcase %></h4>
-        </div>
-        <div class="col-md-4">
-          <span class="pull-right"><%=link_to "Catch up", project_activities_path(@project)%>
-          <span class="help-block text-muted">on recent changes.</span>
-          </span>
+      <div class="header">
+        <h4 class="title">Project Info</h4>
+        <hr>
+      </div>
+      <div class="content">
+        <p><%=@project.name %></p><hr>
+        <ul class="list-unstyled team-members">
+          <li>
+            <div class="row">
+              <div class="col-xs-5">
+                <i class="fa fa-clock-o text-success"></i> &nbsp; Notice to Proceed
+              </div>
+              <div class="col-xs-5">
+                <%=@project.notice_to_proceed.date.strftime("%B %e, %Y")  if @project.notice_to_proceed.present?%>
+              </div>
+              <div class="col-xs-2">
+                <% if @project.notice_to_proceed.blank? %>
+                  <%=link_to new_project_notice_to_proceed_path(@project) do %>
+                    <span class="btn btn-success btn-icon btn-xs"><i class="fa fa-pencil"></i> </span>
+                  <% end %>
+                <% else %>
+                  <%=link_to edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Update NTP' do %>
+                    <span class="btn btn-warning btn-icon btn-xs"><i class="fa fa-pencil"></i> </span>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-5">
+                <i class="fa fa-money text-success"></i>  &nbsp; Contract Amount
+              </div>
+              <div class="col-xs-7 text-right">
+                <%= number_to_currency @project.cost %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-5">
+                  <i class="fa fa-map-marker text-success"></i>  &nbsp; Location
+              </div>
+              <div class="col-xs-7 text-right">
+                <%= @project.address %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-5">
+                  <i class="fa fa-calendar text-success"></i>  &nbsp; Duration
+              </div>
+              <div class="col-xs-7 text-right">
+                <%= @project.duration %> Days
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-5">
+                  <i class="fa fa-building text-success"></i>  &nbsp; Implementing Office
+              </div>
+              <div class="col-xs-7 text-right">
+                <%= @project.implementing_office %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-5">
+                  <i class="fa fa-user text-success"></i>  &nbsp; Main Contractor
+              </div>
+              <div class="col-xs-7 text-right">
+                <%= @project.main_contractor %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <br>
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <%=link_to "Update", edit_project_path(@project), class: "btn btn-primary btn-block" %>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Work Details
+          <span class="pull-right"><%=link_to "New Work Detail", new_project_work_detail_path(@project), class: "btn btn-primary" %></span>
+        </h4>
+        <hr>
+      </div>
+      <div class="content">
+        <ul class="list-unstyled team-members">
+        <%@project.work_details.each do |work_detail| %>
+        <li>
+          <div class="row">
+            <div class="col-xs-4">
+              <p><%=link_to work_detail.description, work_detail %></p>
+            </div>
+            <div class="col-xs-2">
+              <%=work_detail.quantity %> <%=work_detail.unit %>
+              <br />
+
+            </div>
+            <div class="col-xs-2">
+              <span class="text-success"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
+              <br />
+              <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
+            </div>
+
+            <div class="col-xs-2">
+                <span class="text-danger"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
+              <br />
+              <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
+            </div>
+
+            <div class="col-xs-1">
+                <span class="text-info">60 %</span>
+              <br />
+
+            </div>
+
+            <div class="col-xs-1">
+              <%=link_to new_work_detail_work_accomplishment_path(work_detail) do %>
+                <btn class="btn btn-info btn-icon" title="New Accomplishment"><i class="fa fa-plus"></i></span>
+              <% end %>
+                </div>
+          </div>
+        </li>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Contractors
+              <span class="pull-right">
+                <%=link_to new_project_contract_path(@project) do %>
+                  <btn class="btn btn-info btn-icon" title="New Accomplishment"><i class="fa fa-user-plus"></i> New Contractor </span>
+                <% end %>
+              </span>
+            </h4>
+            <br>
+          </div>
+          <div class="content">
+            <table class="table table-striped">
+              <%@project.contracts.each do |contract| %>
+                <tr>
+                  <td width="65px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
+                  <td>
+                    <%= link_to contract.contractor do %>
+                      <p><%=contract.contractor %><br>
+                      <small class="text-info"><%=contract.contractor.full_name %></small></p>
+                    <% end %>
+                  </td>
+                  <td><small class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></small></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
         </div>
       </div>
-      <hr>
-      <ul class="nav nav-tabs" role="tablist">
-        <li  role="presentation" class="active">
-          <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
-        </li>
-        <li  role="presentation">
-          <a href="#work_details" aria-controls="work_details" role="tab" data-toggle="tab">Work Detail</a>
-        </li>
-
-        <li role="presentation">
-          <a href="#contractors" aria-controls="contractors" role="tab" data-toggle="tab">Contractors</a>
-        </li>
-
-        <li role="presentation">
-          <a href="#collections" aria-controls="collections" role="tab" data-toggle="tab">Collections</a>
-        </li>
-        <li role="presentation">
-          <a href="#remarks" aria-controls="remarks" role="tab" data-toggle="tab"> Remarks</a>
-        </li>
-        <li role="presentation">
-          <a href="#attachments" aria-controls="attachments" role="tab" data-toggle="tab">Attachments</a>
-        </li>
-        <li role="presentation">
-          <a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <%=render 'profile' %>
-        <%=render 'work_details' %>
-        <%=render 'contractors' %>
-        <%=render 'collections' %>
-
-
-        <%=render 'remarks' %>
-        <%=render 'attachment_files' %>
-        <%=render 'reports' %>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Accomplishments</h4>
+            <hr>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Collections</h4>
+            <hr>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

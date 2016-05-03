@@ -1,5 +1,5 @@
 class Projects::WorkDetailsController < ApplicationController
-
+  layout "projects"
   def new
     @project = Project.find(params[:project_id])
     @work_detail = @project.work_details.build

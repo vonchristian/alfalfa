@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 
              if current_user.is_a?(User) && current_user.supply_officer?
                supplies_url
+             elsif current_user.is_a?(User) && current_user.projec_engineer?
+               projects_url
              end
          end
   private
