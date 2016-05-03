@@ -1,76 +1,75 @@
 <div class="col-md-12">
-  <div class="box box-solid">
-    <div class="box-header with-border">
+  <div class="card">
+    <div class="header">
       <div class="row">
         <div class="col-md-6">
           <h4><%=@inventory.name %></h4>
         </div>
         <div class="col-md-6">
           <div class="pull-right">
-          <% if current_user.supply_officer? %>
-            <%=link_to "Restock", new_inventory_restocking_path(@inventory), class: "btn btn-sm btn-success" %>
-            <%=link_to "Edit Inventory", edit_inventory_path, class: "btn btn-primary btn-sm" %>
-          <% end %>
+            <% if current_user.supply_officer? %>
+              <%=link_to "Restock", new_inventory_stock_path(@inventory), class: "btn btn-success" %>
+              <%=link_to "Edit Inventory", edit_inventory_path(@inventory), class: "btn btn-primary" %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
-    <div class="box-body">
-      <div class="col-md-6 border-right">
-        <div class="box-header with-border">
-          <h4>Issued <%=@inventory.name %> History</h4>
+    <hr>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-6 border-right">
+          <div class="header">
+            <h4 class="title">Issued <%=@inventory.name %> History</h4>
+          </div>
+          <div class="content">
+            <table class="table table-hover">
+              <thead>
+                <tr class="text-uppercase">
+                <th>Date Issued</th>
+                <th>Quantity</th>
+                <th>Issued To</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @inventory.line_items.each do |inventory| %>
+                  <tr>
+                    <td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>
+                    <td><%=issued_inventory.quantity %> <%=issued_inventory.inventory.unit %></td>
+                    <td><%=issued_inventory.customer %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <table class="table table-hover">
-          <thead>
-            <tr class="text-uppercase">
-            <th>Date Issued</th>
-            <th>Quantity</th>
-            <th>Issued To</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @inventory.issued_inventories.each do |issued_inventory| %>
-              <tr>
-                <td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>
-                <td><%=issued_inventory.quantity %> <%=issued_inventory.inventory.unit %></td>
-                <td><%=issued_inventory.inventoriable.try(:name) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-6">
-        <div class="box-header with-border">
-          <h4>Re-stocked <%=@inventory.name %> History</h4>
+        <div class="col-md-6">
+          <div class="header">
+            <h4 class="title">Stocks History</h4>
+          </div>
+          <div class="content">
+            <table class="table table-hover">
+              <thead>
+                <tr class="text-uppercase">
+                  <th>Date</th>
+                  <th>Quantity</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <% @inventory.stocks.each do |restock| %>
+                  <tr>
+                    <td><%=restock.date.strftime("%B %e, %Y") %></td>
+                    <td><%=restock.quantity %> <%=restock.inventory.unit %></td>
+
+                  </tr>
+                <% end %>
+              </tbody>
+
+            </table>
+          </div>
         </div>
-        <table class="table table-hover">
-          <thead>
-            <tr class="text-uppercase">
-              <th>Date</th>
-              <th>Quantity</th>
-              <th>Unit Cost</th>
-              <th>Total Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @inventory.restockings.each do |restock| %>
-              <tr>
-                <td><%=restock.created_at.strftime("%B %e, %Y") %></td>
-                <td><%=restock.quantity %> <%=restock.inventory.unit %></td>
-                <td><%=number_to_currency restock.price%></td>
-                <td><%= number_to_currency restock.try(:total_cost) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th colspan="3"><span class="pull-right">Total Cost:</span></th>
-              <th><%= number_to_currency @inventory.restockings.sum(:total_cost) %></th>
-            </tr>
-          </tfoot>
-        </table>
       </div>
     </div>
   </div>
 </div>
-

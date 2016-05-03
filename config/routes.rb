@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'entries/daily' => 'entries#daily'
   get 'result/index' => "result#index"
-
+  get 'supplies/inventories' => "supplies/inventories#index"
   resources :contractors do
     resources :issued_inventories, module: :contractors
   end
@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :entries
   resources :inventories do
     resources :restockings, module: :inventories
+    resources :stocks, module: :inventories
   end
   resources :sales, module: :inventories
   resources :issued_inventories
@@ -102,5 +103,16 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
   end
 
   resources :equipment_statuses, only: [:edit, :update]
+  resources :supplies
+
+
+  resources :orders, module: :supplies
+
+  namespace :supplies do
+    resources :line_items
+    resources :inventories
+    resources :carts
+  end
+
 
 end

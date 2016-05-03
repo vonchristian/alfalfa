@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Order Details </h4>
+      <hr>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-5">
+          <%=render @cart.line_items %>
+        <hr>
+            <span class="pull-left"><b>Total</b></span>
+            <span class="pull-right"><%=number_to_currency @cart.line_items.total_price %></span>
+
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+          <%=simple_form_for @order, url: :orders do |f| %>
+            <%=f.error_notification %>
+            <%=f.input :customer_type, collection: Supplies::Order.customers %>
+            <%= f.input :customer_id, collection: Project.all %>
+            <div class="modal-footer">
+              <%= link_to 'Add more items', supplies_path, class: 'btn btn-warning pull-left' %>
+              <%=f.submit "Place Order", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,15 +1,25 @@
 class Inventory < ActiveRecord::Base
   include PublicActivity::Common
   include PgSearch
-  multisearchable :against => [:name]
+  pg_search_scope :search_by_name, :against => :name
   has_many :issued_inventories
-  has_many :restockings
   has_many :sales
-  accepts_nested_attributes_for :restockings
+  has_many :stocks
+  has_many :line_items, class_name: 'Supplies::LineItem'
+  has_many :orders, through: :line_items, class_name: 'Supplies::Order'
+  accepts_nested_attributes_for :stocks
 
-  def remaining_quantity
-    self.restockings.sum(:quantity) - self.total_issued_inventories - self.sales.sum(:quantity)
+  def quantity
+    stocks.all.sum(:quantity) - line_items.all.sum(:quantity)
   end
+
+  def quantity_and_unit
+    "#{quantity} #{unit}"
+  end
+  def out_of_stock?
+    quantity.zero? || quantity.negative?
+  end
+
 
   def total_issued_inventories
     IssuedInventory.where(inventory_id: self.id).sum(:quantity)

@@ -1,12 +1,12 @@
 class InventoriesController < ApplicationController
+  layout 'supplies'
   def index
     @inventories = Inventory.all
   end
 
   def new
-    @inventories = Inventory.all
     @inventory = Inventory.new
-    @inventory.restockings.build
+    @inventory.stocks.build
     authorize @inventory
   end
 
@@ -16,7 +16,7 @@ class InventoriesController < ApplicationController
     if @inventory.save
       # @inventory.update_accounts
       @inventory.create_activity :create, owner: current_user
-      redirect_to inventories_url, notice: "Inventory saved successfully."
+      redirect_to supplies_inventories_url, notice: "Inventory saved successfully."
     else
       render :new
     end
@@ -34,7 +34,7 @@ class InventoriesController < ApplicationController
     @inventory = Inventory.find(params[:id])
     authorize @inventory
     if @inventory.update(inventory_params)
-      redirect_to inventories_url, notice: 'Inventory updated successfully.'
+      redirect_to supplies_inventories_url, notice: 'Inventory updated successfully.'
     else
       render :edit
     end
@@ -42,6 +42,6 @@ class InventoriesController < ApplicationController
 
   private
   def inventory_params
-    params.require(:inventory).permit( :name, :description, :unit, restockings_attributes:[:price, :quantity])
+    params.require(:inventory).permit( :name, :description, :price, :unit, stocks_attributes:[:date, :quantity])
   end
 end

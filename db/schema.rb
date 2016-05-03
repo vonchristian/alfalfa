@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427055508) do
+ActiveRecord::Schema.define(version: 20160502165018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,11 @@ ActiveRecord::Schema.define(version: 20160427055508) do
   add_index "billable_materials", ["contractor_id"], name: "index_billable_materials_on_contractor_id", using: :btree
   add_index "billable_materials", ["inventory_id"], name: "index_billable_materials_on_inventory_id", using: :btree
   add_index "billable_materials", ["project_id"], name: "index_billable_materials_on_project_id", using: :btree
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -294,6 +299,7 @@ ActiveRecord::Schema.define(version: 20160427055508) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "type"
+    t.decimal  "price"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -345,6 +351,19 @@ ActiveRecord::Schema.define(version: 20160427055508) do
 
   add_index "labor_costs", ["work_detail_id"], name: "index_labor_costs_on_work_detail_id", using: :btree
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "inventory_id"
+    t.integer  "cart_id"
+    t.decimal  "quantity",     default: 1.0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "order_id"
+  end
+
+  add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
+  add_index "line_items", ["inventory_id"], name: "index_line_items_on_inventory_id", using: :btree
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
+
   create_table "maintenances", force: :cascade do |t|
     t.integer  "equipment_id"
     t.date     "date"
@@ -381,6 +400,16 @@ ActiveRecord::Schema.define(version: 20160427055508) do
   end
 
   add_index "notice_to_proceeds", ["project_id"], name: "index_notice_to_proceeds_on_project_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.string   "customer_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+  add_index "orders", ["customer_type"], name: "index_orders_on_customer_type", using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.decimal  "amount"
@@ -471,6 +500,16 @@ ActiveRecord::Schema.define(version: 20160427055508) do
   end
 
   add_index "sales", ["inventory_id"], name: "index_sales_on_inventory_id", using: :btree
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer  "inventory_id"
+    t.decimal  "quantity"
+    t.datetime "date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "stocks", ["inventory_id"], name: "index_stocks_on_inventory_id", using: :btree
 
   create_table "subcontract_costs", force: :cascade do |t|
     t.decimal  "amount"
@@ -579,6 +618,8 @@ ActiveRecord::Schema.define(version: 20160427055508) do
   add_foreign_key "equipment_schedules", "projects"
   add_foreign_key "equipment_statuses", "equipment"
   add_foreign_key "labor_costs", "work_details"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "inventories"
   add_foreign_key "maintenances", "employees"
   add_foreign_key "maintenances", "equipment"
   add_foreign_key "maintenances", "work_details"
@@ -588,6 +629,7 @@ ActiveRecord::Schema.define(version: 20160427055508) do
   add_foreign_key "remarks", "projects"
   add_foreign_key "restockings", "inventories"
   add_foreign_key "sales", "inventories"
+  add_foreign_key "stocks", "inventories"
   add_foreign_key "subcontract_costs", "contractors"
   add_foreign_key "subcontract_costs", "work_details"
   add_foreign_key "time_extensions", "work_details"
