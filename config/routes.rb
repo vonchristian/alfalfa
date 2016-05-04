@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-
+  namespace :accounting do
+    resources :reports, only:[:index]
+    resources :balance_sheet, only:[:index]
+  end
 
   get 'settings/index'
   get 'reports/contract_summary_report', as: 'contract_summary_report'

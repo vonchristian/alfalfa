@@ -1,21 +1,15 @@
-<%= simple_form_for @contractor do |f| %>
-<%=f.error_notification %>
-  <div class="row">
-    <div class='col-md-10 col-md-offset-1'>
-      <div class="box box-default">
-        <div class="box-header with-border">
-          <h4 class="text-center">Contractor Details </h4>
-        </div>
-        <div class="box-body">
-          <div class="col-md-6 col-md-offset-3">
-            <%if @contractor.profile_photo.blank? %>
-              <%=image_tag("default-small.png", :class=>"img-square center-block ") %>
-              <br>
-            <% else %>
-              <%= image_tag @contractor.profile_photo.url(:medium), class: 'center-block img-responsive img-rounded'%>
-            <% end %>
-            <%= f.input :profile_photo, class: 'center-block', as: :file %>
-            <hr>
+<div class="col-md-8 col-md-offset-2">
+  <div class="card">
+    <div class="header">
+      <h4 class="Contractor Details" </h4>
+        <hr>
+      </div>
+      <div class="content">
+        <%= simple_form_for @contractor do |f| %>
+          <%=f.error_notification %>
+          <%= image_tag @contractor.profile_photo.url(:thumb), class: 'center-block img-responsive img-circle'%>
+          <center><%= f.input :profile_photo, class: 'center-block', as: :file %></center>
+          <hr>
             <div class="row">
               <div class="col-md-6">
                 <%=f.input :first_name, autofocus: true, label: false, placeholder: "First Name" %>

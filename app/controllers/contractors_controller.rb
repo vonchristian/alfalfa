@@ -1,4 +1,5 @@
 class ContractorsController < ApplicationController
+  layout "projects"
   def index
     @contractors = Contractor.all
   end

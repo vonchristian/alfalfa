@@ -1,48 +1,36 @@
-<div class="col-md-10 col-md-offset-1">
-  <div class="box box-widget widget-user">
-    <div class="widget-user-header bg-blue-active">
-      <h4 class="widget-user-username">Contractors
-      <span class="pull-right">
-        <%if policy(Contractor.new).create? %>
-          <%=link_to new_contractor_path, class: "btn btn-default bg-blue-active pull-right" do %><i class="fa fa-user-plus"></i> New Contractor <%end%>
+<div class="col-md-12">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> List of Contractors
+        <%=link_to new_contractor_path do %>
+          <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New Contractor </span>
         <% end %>
-      </span>
-    </h4>
+      </h4>
     </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-12 border-right">
-          <div>
-            <% @contractors.main_contractors.each do |contractor| %>
-              <div class="row">
-                <div class="col-md-2 col-md-offset-1  col-sm-3 col-xs-3">
-                  <%= image_tag contractor.profile_photo.url(:medium), class: "img-rounded" %>
-                </div>
-                <div class="col-md-7 col-sm-9 col-xs-9">
-                  <h4><%= link_to contractor.full_name.upcase, contractor %></h4>
-                  <span class="pull-right"><%=contractor.contracts.count %> Projects </span>
-                  <span class="help-block"><%=contractor.company %></span>
-                </div>
-              </div>
-              <hr />
-            <% end %>
-
-            <% @contractors.sub_contractors.each do |contractor| %>
-              <div class="row">
-                <div class="col-md-2 col-md-offset-1  col-sm-3 col-xs-3">
-                  <%= image_tag contractor.profile_photo.url(:medium),  class: "img-rounded" %>
-                </div>
-                <div class="col-md-7 col-sm-9 col-xs-9">
-                  <h4><%= link_to contractor.full_name.upcase, contractor %></h4>
-                  <span class="pull-right"><%=contractor.contracts.count %> Projects </span>
-                  <span class="help-block"><%=contractor.company %></span>
-                </div>
-              </div>
-              <hr />
-            <% end %>
-          </div>
-        </div>
-      </div>
+    <div class="content">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Contractor </th>
+            <th>Company</th>
+            <th>Position</th>
+            <th> Projects
+          </tr>
+        </thead>
+        <tbody>
+          <%@contractors.each do |contractor| %>
+            <tr>
+              <td><%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle img-responsive") %></td>
+              <td> <%=link_to contractor.full_name, contractor %></td>
+              <td> <%= contractor.company %> </td>
+              <td> <%= contractor.position %> </td>
+              <td> <%= contractor.contracts.count %> </td>
+            </tr>
+          <%end %>
+        </tbody>
+      </table>
+    </div>
     </div>
   </div>
 </div>

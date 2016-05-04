@@ -7,30 +7,60 @@
 
    <div class="sidebar-wrapper">
          <div class="logo">
-             <a href="/supplies" class="simple-text">
-                Inventories
+             <a href="/petty_cash" class="simple-text">
+                accounting
              </a>
          </div>
 
          <ul class="nav">
-            <li class="<%="active" if current_page? supplies_path %>">
-                 <a href="/supplies">
-                     <i class="fa fa-home"></i>
-                     <p>Supplies</p>
+           <li class="<%="active" if current_page? petty_cash_index_path %>">
+                <a href="/petty_cash">
+                    <i class="fa fa-rub"></i>
+                    <p>Petty Cash</p>
+                </a>
+            </li>
+            <li class="<%="active" if current_page? accounts_path %>">
+                 <a href="/accounts">
+                     <i class="fa fa-server"></i>
+                     <p>Accounts</p>
                  </a>
              </li>
-             <li class="<%="active" if current_page? supplies_inventories_path %>">
-                 <a href="/supplies/inventories">
-                     <i class="fa fa-cubes"></i>
-                     <p>Inventories</p>
-                 </a>
-               </li>
-               <li class="<%="active" if current_page? orders_path %>">
-                   <a href="/orders">
-                       <i class="fa fa-cart"></i>
-                       <p>Orders</p>
+
+             <li class="<%="active" if current_page? entries_path %>">
+                  <a href="/entries">
+                      <i class="fa fa-certificate"></i>
+                      <p>Entries</p>
+                  </a>
+              </li>
+
+              <li class="<%="active" if current_page? accounts_income_statement_path %>">
+                   <a href="/accounts/income_statement">
+                       <i class="fa fa-bar-chart"></i>
+                       <p>Income Statement</p>
                    </a>
+               </li>
+
+               <li class="<%="active" if current_page? accounting_balance_sheet_index_path %>">
+                    <a href="/accounting/balance_sheet">
+                        <i class="fa fa-pie-chart"></i>
+                        <p>Balance Sheet</p>
+                    </a>
+                </li>
+
+                <li class="<%="active" if current_page? payroll_index_path %>">
+                     <a href="/payroll">
+                         <i class="fa fa-users"></i>
+                         <p>Payroll</p>
+                     </a>
                  </li>
+
+                 <li class="<%="active" if current_page? accounting_reports_path %>">
+                      <a href="/accounting/reports">
+                          <i class="fa fa-file-text"></i>
+                          <p>Reports</p>
+                      </a>
+                  </li>
+
          </ul>
    </div>
  </div>
@@ -73,7 +103,7 @@
                              <li><a href="#">Notification 2</a></li>
                              <li><a href="#">Notification 3</a></li>
                              <li><a href="#">Notification 4</a></li>
-                            <li><%=link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+                            <li><%=link_to "Sign out", destroy_user_session_path, method: :delete %></li>
                            </ul>
                      </li>
                  </ul>

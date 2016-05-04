@@ -16,8 +16,9 @@
         <div class="col-md-5 col-md-offset-1">
           <%=simple_form_for @order, url: :orders do |f| %>
             <%=f.error_notification %>
-            <%=f.input :customer_type, collection: Supplies::Order.customers %>
-            <%= f.input :customer_id, collection: Project.all %>
+            <%=f.input :customer_type, collection: Supplies::Order.customer_types %>
+            <%= f.input :customer_id, collection: Supplies::Order.customers %>
+            <%= f.input :payment_status, collection: Supplies::Order.payment_statuses.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons %>
             <div class="modal-footer">
               <%= link_to 'Add more items', supplies_path, class: 'btn btn-warning pull-left' %>
               <%=f.submit "Place Order", class: "btn btn-primary" %>

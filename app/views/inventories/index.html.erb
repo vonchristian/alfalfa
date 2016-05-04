@@ -27,8 +27,8 @@
           <% @inventories.each do |inventory| %>
             <tr>
               <td><%= link_to inventory.name_description, inventory %></td>
-              <td><%= inventory.remaining_quantity %> <%= inventory.unit %></td>
-              <td><%= number_to_currency inventory.restockings.last.try(:price)%></td>
+              <td><%= inventory.quantity %> <%= inventory.unit %></td>
+              <td><%= number_to_currency inventory.price %></td>
             </tr>
           <% end %>
         </tbody>
@@ -36,4 +36,3 @@
     </div>
   </div>
 </div>
-

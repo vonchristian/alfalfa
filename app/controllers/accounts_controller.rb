@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  layout "accounting"
   def index
     @accounts = Account.all
   end
@@ -17,6 +18,9 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
+  end
+
+  def income_statement
   end
 
   private

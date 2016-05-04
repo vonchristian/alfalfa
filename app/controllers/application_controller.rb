@@ -5,13 +5,14 @@ class ApplicationController < ActionController::Base
      protect_from_forgery with: :exception
      rescue_from Pundit::NotAuthorizedError, with: :permission_denied
      def after_sign_in_path_for(current_user)
-
-             if current_user.is_a?(User) && current_user.supply_officer?
-               supplies_url
-             elsif current_user.is_a?(User) && current_user.project_engineer?
-               projects_url
-             end
-         end
+       if current_user.is_a?(User) && current_user.supply_officer?
+         supplies_url
+       elsif current_user.is_a?(User) && current_user.project_engineer?
+         projects_url
+       elsif current_user.is_a?(User) && current_user.accounting_officer?
+         petty_cash_index_url
+       end
+     end
   private
         def permission_denied
           redirect_to root_path, alert: 'You are not allowed to access this feature.'

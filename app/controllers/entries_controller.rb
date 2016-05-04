@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  layout "accounting"
   def index
     @entries = Entry.all.order('created_at DESC')
   end

@@ -1,4 +1,5 @@
 class PayrollController < ApplicationController
+  layout "accounting"
 def index
 end
 

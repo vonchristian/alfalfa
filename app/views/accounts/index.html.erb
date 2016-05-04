@@ -1,40 +1,32 @@
 <div class="col-md-12">
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <div class="row">
-        <div class="col-md-6">
-          <h4>Accounts</h4>
-        </div>
-        <div class="col-md-6">
-          <%=link_to "New Account", new_account_path, class: 'btn btn-sm btn-primary pull-right' %>
-        </div>
-      </div>
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Accounts</h4>
+      <%=link_to "New Account", new_account_path, class: 'btn btn-sm btn-primary pull-right' %>
     </div>
-    <div class="box-body">
-      <div class="table table-responsive">
-        <table class="table table-hover">
-          <thead>
+    <div class="content">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Credit Balance</th>
+            <th>Debit Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @accounts.each do |account| %>
             <tr>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Credit Balance</th>
-              <th>Debit Balance</th>
+              <td><%=account.code %></td>
+              <td><%= account.name %></td>
+              <td><%=account.type %></td>
+              <td><%=account.credits_balance %></td>
+              <td><%=account.debits_balance %></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @accounts.each do |account| %>
-              <tr>
-                <td><%=account.code %></td>
-                <td><%= account.name %></td>
-                <td><%=account.type %></td>
-                <td><%=account.credits_balance %></td>
-                <td><%=account.debits_balance %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
