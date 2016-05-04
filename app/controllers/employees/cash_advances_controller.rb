@@ -1,23 +1,31 @@
 class Employees::CashAdvancesController < ApplicationController
+  layout "accounting"
   def new
-    @employee = Employee.find(params[:employee_id])
-    @cash_advance = @employee.cash_advances.build
+  @employee = Employee.find(params[:employee_id])
+    @entry = Entry.new
+    authorize @entry
+    @entry.credit_amounts.build
+    @entry.debit_amounts.build
   end
 
   def create
     @employee = Employee.find(params[:employee_id])
-    @cash_advance = @employee.cash_advances.create(cash_advance_params)
-    if @cash_advance.save
-      @cash_advance.unpaid!
-      @cash_advance.update_accounts
+    @entry = Entry.create(entry_params)
+    authorize @entry
+    @entry.entriable = @employee
+    if @entry.save
       redirect_to @employee, notice: "Cash Advance recorded successfully."
     else
       render :new
     end
   end
 
+  def show
+    @entry = Entry.find(params[:id])
+  end
+
   private
-  def cash_advance_params
-    params.require(:cash_advance).permit(:amount, :date_disbursed, :description)
+  def entry_params
+    params.require(:entry).permit(:date, :description, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
   end
 end

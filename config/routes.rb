@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :users
-  root "projects#index"
+   root "projects#index"
   get "projects/search"
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'entries/daily' => 'entries#daily'

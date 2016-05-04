@@ -35,10 +35,9 @@ class Employee < ActiveRecord::Base
   has_many :projects, through: :work_details
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
-  has_many :cash_advances, as: :entriable
 
   def cash_advances
-    Account.find_by_name("Cash Advances").debit_entries.where(recipient: self)
+    Account.find_by_name("Advances to Employees").debit_entries.where(entriable: self)
   end
 
   def paid!
