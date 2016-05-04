@@ -17,6 +17,7 @@ Asset.create(code: 240, :name => "Office Equipment")
 Asset.create(code: 250, :name => "Less Accumulated Depreciation")
 Asset.create(code: 260, :name => "Capital Leases")
 Asset.create(code: 299, :name => "Other Assets")
+Asset.create(code: 170, :name => "Advances to Employees")
 
 Liability.create(code: 310, :name => "Accounts Payable-Trade")
 Liability.create(code: 311, :name => "Accounts Payable-Retention")
@@ -88,47 +89,3 @@ Expense.create(code: 892, :name => "Unallocated Materials")
 Expense.create(code: 893, :name => "Warranty Expense")
 Expense.create(code: 898, :name => "Miscellaneous")
 Expense.create(code: 899, :name => "Overhead Charged to Jobs")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
