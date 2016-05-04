@@ -104,33 +104,33 @@
         <%@project.work_details.each do |work_detail| %>
         <li>
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-md-4 col-xs-8">
               <p><%=link_to work_detail.description, work_detail %></p>
             </div>
-            <div class="col-xs-2">
+            <div class="col-md-2 hidden-xs">
               <%=work_detail.quantity %> <%=work_detail.unit %>
               <br />
 
             </div>
-            <div class="col-xs-2">
+            <div class="col-md-2 hidden-xs">
               <span class="text-success"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
               <br />
               <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
             </div>
 
-            <div class="col-xs-2">
-                <span class="text-danger"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
+            <div class="col-md-2 hidden-xs">
+                <span class="text-danger"><%=work_detail.remaining_quantity %> <%=work_detail.unit %></span>
               <br />
               <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
             </div>
 
-            <div class="col-xs-1">
-                <span class="text-info">60 %</span>
+            <div class="col-md-1 col-xs-2">
+                <span class="text-info"><%=work_detail.actual_accomplishment_percent %> %</span>
               <br />
 
             </div>
 
-            <div class="col-xs-1">
+            <div class="col-md-1 col-xs-2">
               <%=link_to new_work_detail_work_accomplishment_path(work_detail) do %>
                 <btn class="btn btn-info btn-icon" title="New Accomplishment"><i class="fa fa-plus"></i></span>
               <% end %>
@@ -189,7 +189,21 @@
           </div>
         </div>
       </div>
-
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Expenses </h4>
+        </div>
+        <div class="content">
+          <p> Materials </p>
+          <p> Equipment </p>
+          <p> Labor </p>
+          <p> Overhead <p>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 </div>

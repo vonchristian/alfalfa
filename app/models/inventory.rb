@@ -31,7 +31,7 @@ class Inventory < ActiveRecord::Base
   end
 
   def current_inventory_quantity
-    remaining_quantity
+    quantity
   end
 
   def to_s

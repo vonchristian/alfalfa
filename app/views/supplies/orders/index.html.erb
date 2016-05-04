@@ -12,7 +12,7 @@
             <li>
               <div class="row">
                 <div class="col-xs-4">
-                    <%= order.customer.name %>
+                    <%=link_to order.customer.try(:name), order_path(order) %>
                 </div>
                 <div class="col-xs-2">
                   <p><%=number_to_currency order.line_items.total_price %></p>

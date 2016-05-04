@@ -3,7 +3,7 @@ class Supplies::LineItem < ActiveRecord::Base
   belongs_to :cart, class_name: "Supplies::Cart"
   belongs_to :order, class_name: "Supplies::Order"
 
-  validates :quantity, numericality: {less_than: :inventory_quantity }
+  validates :quantity, numericality: {less_than_or_equal_to: :inventory_quantity }
   delegate :quantity, to: :inventory, prefix: true
   def total_price
       inventory.price * quantity

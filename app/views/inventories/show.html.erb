@@ -3,7 +3,7 @@
     <div class="header">
       <div class="row">
         <div class="col-md-6">
-          <h4><%=@inventory.name %></h4>
+          <h4 class="title"><%=@inventory.name %></h4>
         </div>
         <div class="col-md-6">
           <div class="pull-right">
@@ -32,11 +32,11 @@
                 </tr>
               </thead>
               <tbody>
-                <% @inventory.line_items.each do |inventory| %>
+                <% @inventory.orders.each do |order| %>
                   <tr>
-                    <td><%=issued_inventory.date_issued.strftime("%B %e, %Y") %></td>
-                    <td><%=issued_inventory.quantity %> <%=issued_inventory.inventory.unit %></td>
-                    <td><%=issued_inventory.customer %></td>
+                    <td><%=order.created_at.strftime("%B %e, %Y") %></td>
+                    <td><%=order.line_items.where(:inventory_id => @inventory.id).pluck(:quantity).sum %> <%=@inventory.unit %></td>
+                    <td><%=order.customer.try(:name)%></td>
                   </tr>
                 <% end %>
               </tbody>

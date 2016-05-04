@@ -8,7 +8,7 @@ class Supplies::LineItemsController < ApplicationController
         format.html { redirect_to supplies_url }
         format.js   { @current_item = @line_item }
       else
-        format.html { redirect_to supplies_url, alert: "Quantity exceeded remaining inventory quantity" }
+        format.html { redirect_to supplies_url }
       end
     end
   end
