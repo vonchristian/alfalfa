@@ -7,15 +7,12 @@
       </div>
       <div class="content">
         <%=f.input :name, autofocus: true%>
-        <%=f.input :unit %>
-        <%=f.input :price %>
         <%=f.simple_fields_for :stocks do |ff| %>
           <%=ff.input :date, as: :string, input_html: {class: "datepicker"} %>
           <%=ff.input :quantity%>
         <% end %>
-
-
-
+        <%=f.input :unit %>
+        <%=f.input :price %>
         <div class="modal-footer">
           <%= link_to "I'm done adding inventories.", supplies_inventories_path, class: 'pull-left' %>
           <%=f.submit "Save Inventory", class: "btn btn-primary" %>
