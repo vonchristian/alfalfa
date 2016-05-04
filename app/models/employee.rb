@@ -6,12 +6,24 @@ class Employee < ActiveRecord::Base
                     styles: { large: "120x120>",
                     medium: "70x70>", thumb: "40x40>",
                     small: "30x30>", x_small: "20x20>" },
-                    default_url: "/images/:style/missing.png",
+                    default_url: ":style/profile_default.jpg",
                     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
                     :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
-  enum position:[:laborer, :skilled_laborer, :project_foreman, :operator, :welder, :project_engineer, :bookkeeper, :liason_officer, :supply_officer, :accounting_officer, :monitoring_officer, :mechanical_engineer]
+  enum position:[:laborer,
+                 :skilled_laborer,
+                 :project_foreman,
+                 :operator,
+                 :welder,
+                 :project_engineer,
+                 :bookkeeper,
+                 :liason_officer,
+                 :supply_officer,
+                 :accounting_officer,
+                 :monitoring_officer,
+                 :mechanical_engineer]
+
   validates :first_name, :last_name, :email, :mobile_number, :position, :rate, presence: true
   # validates :full_name, uniqueness: true
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
@@ -23,6 +35,7 @@ class Employee < ActiveRecord::Base
   has_many :projects, through: :work_details
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
+  has_many :cash_advances, as: :entriable
 
   def cash_advances
     Account.find_by_name("Cash Advances").debit_entries.where(recipient: self)
@@ -67,6 +80,6 @@ class Employee < ActiveRecord::Base
   end
 
   def name
-  	"#{first_name.titleize} #{last_name.first.capitalize}."
+  	"#{first_name.titleize} #{last_name.titleize}"
   end
 end

@@ -1,39 +1,36 @@
-<div class="col-md-10 col-md-offset-1">
-  <div class="box box-solid">
-    <div class="box-header with-border">
-      <div class="row">
-        <div class="col-md-6">
-          <h4>List of Employees</h4>
-        </div>
-        <div class="col-md-6">
-          <span class="pull-right">
-            <%=link_to new_employee_path, class: "btn btn-default bg-blue" do %><i class="fa fa-user-plus"></i> New Employee <%end%>
-          </span>
-        </div>
-      </div>
+<div class="col-md-12">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> List of Employees
+        <%=link_to new_employee_path do %>
+          <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
+        <% end %>
+      </h4>
     </div>
-    <div class="box-body">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="table table-responsive">
-          <table class="table table-hover">
-            <tbody>
-              <% @employees.each do |employee| %>
-                <tr>
-                  <td><%= image_tag employee.profile_photo.url(:thumb), class: "img-circle center-block" %></td>
-                  <td>
-                    <b><%=link_to employee.full_name.upcase, employee %></b><br>
-                    <%=employee.position.titleize %><br>
-                    <%=employee.mobile_number %>
-                  </td>
-                </tr>
-              </tbody>
-            <% end %>
-          </table>
-        </div>
-      </div>
+    <div class="content">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>employee </th>
+            <th>Position</th>
+            <th>Rate</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <%@employees.each do |employee| %>
+            <tr>
+              <td><%=image_tag(employee.profile_photo.url(:small), class: "img-circle img-responsive") %></td>
+              <td> <%=link_to employee.full_name, employee %></td>
+              <td> <%= employee.position.try(:titleize) %> </td>
+              <td> <%= number_to_currency employee.rate %> </td>
+
+            </tr>
+          <%end %>
+        </tbody>
+      </table>
+    </div>
     </div>
   </div>
 </div>
-
-
-

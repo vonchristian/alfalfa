@@ -21,3 +21,4 @@
 //= require work_detail
 //= require labor_cost
 //= require supplies/bootstrap-checkbox-radio
+//= require entries

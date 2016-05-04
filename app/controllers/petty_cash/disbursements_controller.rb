@@ -1,5 +1,5 @@
 class PettyCash::DisbursementsController < ApplicationController
-
+  layout "accounting"
   def new
     @petty_cash = Asset.find_by_name!("Petty Cash")
     @entry = Entry.new
@@ -13,7 +13,7 @@ class PettyCash::DisbursementsController < ApplicationController
     @entry = Entry.new(entry_params)
     authorize @entry
     if @entry.save
-      redirect_to new_petty_cash_disbursement_path(@petty_cash), notice: "entry Recorded successfully"
+      redirect_to petty_cash_index_url, notice: "entry Recorded successfully"
     else
       render :new
     end
@@ -22,9 +22,9 @@ class PettyCash::DisbursementsController < ApplicationController
   def show
     @entry = Entry.find(params[:id])
   end
-  
+
   private
   def entry_params
-    params.require(:entry).permit(:date, :description, :recipient_id, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
+    params.require(:entry).permit(:date, :entriable_id, :entriable_type, :description, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
   end
 end

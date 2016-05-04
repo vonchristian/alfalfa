@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-	
+	layout "accounting"
 	def index
 		@employees = Employee.all
 	end
