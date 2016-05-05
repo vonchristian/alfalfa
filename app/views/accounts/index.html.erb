@@ -1,8 +1,10 @@
 <div class="col-md-12">
   <div class="card">
     <div class="header">
-      <h4 class="title">Accounts</h4>
-      <%=link_to "New Account", new_account_path, class: 'btn btn-sm btn-primary pull-right' %>
+      <h4 class="title">Accounts
+        <span class="pull-right"><%=link_to "New Account", new_account_path, class: 'btn btn-primary' %></span>
+      </h4>
+      <hr />
     </div>
     <div class="content">
       <table class="table table-hover">
@@ -21,8 +23,8 @@
               <td><%=account.code %></td>
               <td><%= account.name %></td>
               <td><%=account.type %></td>
-              <td><%=account.credits_balance %></td>
-              <td><%=account.debits_balance %></td>
+              <td><%=number_to_currency account.credits_balance %></td>
+              <td><%=number_to_currency account.debits_balance %></td>
             </tr>
           <% end %>
         </tbody>

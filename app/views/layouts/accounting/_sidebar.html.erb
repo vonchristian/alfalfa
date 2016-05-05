@@ -1,4 +1,4 @@
-<div class="sidebar" data-background-color="white" data-active-color="warning">
+<div class="sidebar" data-background-color="white" data-active-color="success">
 
  <!--
  Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -13,12 +13,18 @@
          </div>
 
          <ul class="nav">
-           <li class="<%="active" if current_page? petty_cash_index_path %>">
-                <a href="/petty_cash">
+           <li class="<%="active" if current_page? accounting_petty_cash_index_path %>">
+                <a href="/accounting/petty_cash">
                     <i class="fa fa-rub"></i>
                     <p>Petty Cash</p>
                 </a>
             </li>
+            <li class="<%="active" if current_page? accounting_bank_account_index_path %>">
+                 <a href="/accounting/bank_account">
+                     <i class="fa fa-building"></i>
+                     <p>Bank Account</p>
+                 </a>
+             </li>
             <li class="<%="active" if current_page? accounts_path %>">
                  <a href="/accounts">
                      <i class="fa fa-server"></i>
@@ -26,15 +32,15 @@
                  </a>
              </li>
 
-             <li class="<%="active" if current_page? entries_path %>">
-                  <a href="/entries">
-                      <i class="fa fa-certificate"></i>
+             <li class="<%="active" if current_page? accounting_entries_path %>">
+                  <a href="/accounting/entries">
+                      <i class="fa fa-credit-card"></i>
                       <p>Entries</p>
                   </a>
               </li>
 
-              <li class="<%="active" if current_page? accounts_income_statement_path %>">
-                   <a href="/accounts/income_statement">
+              <li class="<%="active" if current_page? accounting_income_statement_index_path %>">
+                   <a href="/accounting/income_statement">
                        <i class="fa fa-bar-chart"></i>
                        <p>Income Statement</p>
                    </a>
@@ -46,7 +52,7 @@
                         <p>Balance Sheet</p>
                     </a>
                 </li>
-                <li class="<%="active" if current_page? payroll_index_path %>">
+                <li class="<%="active" if current_page? employees_path %>">
                      <a href="/employees">
                          <i class="fa fa-users"></i>
                          <p>Employees</p>
@@ -82,7 +88,7 @@
                      <span class="icon-bar bar3"></span>
                  </button>
                  <a class="navbar-brand" href="#">
-                   <%#="Dashboard" if current_page?(dashboard_path) %>
+                   <%="Petty Cash" if current_page?(accounting_petty_cash_index_path) %>
                    <%#="Taxpayers" if current_page?(taxpayers_path) %>
                    <%#="Businesses" if current_page?(businesses_path) %>
                    <%#="Settings" if current_page?(settings_path) %>
@@ -98,17 +104,15 @@
                  <ul class="nav navbar-nav navbar-right">
                      <li class="dropdown">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                 <i class="fa fa-user"></i>
+                                <%=image_tag(current_user.profile_photo.url(:x_small), class: "img-circle") %>
 
                <p><%=current_user.email %></p>
 
                <b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                             <li><a href="#">Notification 1</a></li>
-                             <li><a href="#">Notification 2</a></li>
-                             <li><a href="#">Notification 3</a></li>
-                             <li><a href="#">Notification 4</a></li>
+                             <li><%=link_to "Profile", user_path(current_user) %></li>
+
                             <li><%=link_to "Sign out", destroy_user_session_path, method: :delete %></li>
                            </ul>
                      </li>

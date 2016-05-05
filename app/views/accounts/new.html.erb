@@ -1,22 +1,24 @@
-<%= simple_form_for @account, url: :accounts do |f| %>
-<%=f.error_notification %>
-<div class="col-md-12">
-  <div class="box box-solid">
-    <div class="box-header with-border">
-      <h4>New Account Details</h4>
-		</div>
- 		<div class="box-body">
-			<div class="col-md-6">
-			</div>
-			<div class="col-md-6 well">
-				<%=f.input :code %>
-				<%=f.input :name %>
-				<%=f.input :type, collection: ["Asset", "Liability", "Equity", "Expense", "Revenue"], as: :radio_buttons %>
-				<hr>
-				<%=f.submit "Save", class: "btn btn-primary pull-right" %>
-			</div>
-		</div>
-	</div>
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> Account Details </h4>
+    </div>
+    <div class="content">
+      <%= simple_form_for @account, url: :accounts do |f| %>
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-5">
+            <%=f.error_notification %>
+    				<%=f.input :code %>
+    				<%=f.input :name %>
+    				<%=f.input :type, collection: ["Asset", "Liability", "Equity", "Expense", "Revenue"], as: :radio_buttons %>
+    				<div class="modal-footer">
+    				  <%=f.submit "Save Account", class: "btn btn-primary pull-right" %>
+    			  </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-<% end %>
-

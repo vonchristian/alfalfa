@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 gem 'sass-rails'
+gem "bootstrap-datepicker-rails"
 gem 'autoprefixer-rails'
 gem 'uglifier'
 gem 'delayed_job'

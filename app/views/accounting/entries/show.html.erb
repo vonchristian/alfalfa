@@ -1,0 +1,46 @@
+<div class="container">
+
+<div class="card">
+<div class="header">
+<h4 class="title">Entry Details</h4>
+</div>
+<div class="content">
+<div class="row">
+<div class="col-md-6 col-md-offset-2">
+<p><strong>Description</strong></p>
+<span><%=@entry.description %></span><br>
+
+<hr>
+<p><strong>Date</strong></p>
+<span><%=@entry.date.strftime("%B %e, %Y") %></span>
+<hr>
+
+<p><strong>Reference Number</strong></p>
+<span><%=@entry.reference_number%></span>
+<hr>
+<p><strong>Debited Account(s)</strong></p>
+<%@entry.debit_amounts.each do |d|%>
+<div class="row">
+<div class="col-md-8">
+<p><%=d.account.name %> <span class="pull-right"><%=number_to_currency d.amount %></span></p>
+</div>
+</div>
+<%end %>
+<hr>
+<p><strong>Credited Account(s)</strong></p>
+<%@entry.credit_amounts.each do |d|%>
+<div class="row">
+<div class="col-md-8">
+<p><%=d.account.name %> <span class="pull-right"><%=number_to_currency d.amount %></span></p>
+</div>
+</div>
+<% end %>
+<div class="modal-footer">
+<%=link_to "Edit Entry", edit_accounting_entry_path(@entry), class: "btn btn-primary" %>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>

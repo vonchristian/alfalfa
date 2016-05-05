@@ -28,18 +28,16 @@ class Employee < ActiveRecord::Base
   # validates :full_name, uniqueness: true
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
-  has_many :payments, as: :paymentable
+  has_many :salaries, as: :entriable
   has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :employments
   has_many :work_details, through: :employments
   has_many :projects, through: :work_details
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
-
   def cash_advances
-    Account.find_by_name("Advances to Employees").debit_entries.where(entriable: self)
-  end
-
+      Transactions::CashAdvance.where(entriable: self)
+    end
   def paid!
     self.worked_days.unpaid.set_to_paid!
   end
@@ -48,19 +46,19 @@ class Employee < ActiveRecord::Base
   end
 
   def unpaid_worked_days
-    self.worked_days.unpaid.total
+    worked_days.unpaid.total
   end
 
   def unpaid_worked_days_amount
-    self.unpaid_worked_days * rate
+    unpaid_worked_days * rate
   end
 
   def unpaid_cash_advances
-    self.cash_advances.sum(:amount)
+    Transactions::CashAdvance.unpaid_amount_for(self)
   end
 
   def total_gross_pay
-    self.unpaid_worked_days_amount - self.unpaid_cash_advances
+  unpaid_worked_days_amount - unpaid_cash_advances
   end
 
   def gross_pay(project)

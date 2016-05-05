@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
        elsif current_user.is_a?(User) && current_user.project_engineer?
          projects_url
        elsif current_user.is_a?(User) && current_user.accounting_officer?
-         petty_cash_index_url
+         accounting_petty_cash_index_url
        end
      end
   private

@@ -11,8 +11,8 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th></th>
-            <th>employee </th>
+            <th width="70px"></th>
+            <th>Employee </th>
             <th>Position</th>
             <th>Rate</th>
 
@@ -21,8 +21,8 @@
         <tbody>
           <%@employees.each do |employee| %>
             <tr>
-              <td><%=image_tag(employee.profile_photo.url(:small), class: "img-circle img-responsive") %></td>
-              <td> <%=link_to employee.full_name, employee %></td>
+              <td><%=image_tag(employee.profile_photo.url(:thumb), class: "img-circle img-responsive") %></td>
+              <td><%=link_to employee.full_name, employee %></td>
               <td> <%= employee.position.try(:titleize) %> </td>
               <td> <%= number_to_currency employee.rate %> </td>
 
@@ -33,4 +33,3 @@
     </div>
     </div>
   </div>
-</div>

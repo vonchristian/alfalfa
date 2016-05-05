@@ -1,5 +1,5 @@
 class Amount < ActiveRecord::Base
-    belongs_to :entry, :class_name => 'Entry'
+    belongs_to :entry, :class_name => 'Accounting::Entry'
     belongs_to :account, :class_name => 'Account'
 
     validates_presence_of :type, :amount, :entry, :account
@@ -23,4 +23,3 @@ class Amount < ActiveRecord::Base
     end
     alias_method_chain :account=, :name_lookup
   end
-

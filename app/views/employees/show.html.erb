@@ -103,14 +103,14 @@
                                   <h4 class="title">Cash Advances
                                   <span class="pull-right">
                                     <%=link_to new_employee_cash_advance_path(@employee) do %>
-                                        <span class="btn btn-info btn-icon"><i class="fa fa-plus"></i> New Cash Advance </span>
+                                        <span class="btn btn-danger btn-icon"><i class="fa fa-plus"></i> New Cash Advance </span>
                                     <% end %>
 
                                   </h4>
                                   <hr>
                               </div>
                               <div class="content">
-                                <% @employee.cash_advances.each do |cash_advance| %>
+                                <% @employee.cash_advances.order(:date).reverse.each do |cash_advance| %>
                                 <div class="row">
                                   <div class="col-xs-6">
                                     <%=cash_advance.date.strftime("%B %e, %Y") %>
@@ -119,7 +119,7 @@
                                     <%=number_to_currency cash_advance.debit_amounts.sum(:amount) %>
                                   </div>
                                   <div class="col-xs-2">
-                                    <span class="btn btn-success btn-icon"><i class="fa fa-check"></i></span>
+
                                   </div>
                                 </div>
                                 <hr>
@@ -127,4 +127,36 @@
                               </div>
                           </div>
                         </div>
-                      
+                        <div class="col-md-4">
+                          <div class="card">
+                              <div class="header">
+                                  <h4 class="title">Days Worked
+                                  <span class="pull-right">
+                                    <%=link_to new_employee_worked_day_path(@employee) do %>
+                                        <span class="btn btn-info btn-icon"><i class="fa fa-plus"></i> Add Days Worked </span>
+                                    <% end %>
+
+                                  </h4>
+                                  <hr>
+                              </div>
+                              <div class="content">
+                                <% @employee.worked_days.each do |work| %>
+                                <div class="row">
+                                  <div class="col-xs-3">
+                                    <%=work.number_of_days %> Days
+                                  </div>
+                                  <div class="col-xs-6">
+                                    <%=work.start_date.strftime("%b %e, %Y")%>- <%=work.end_date.strftime("%b %e, %Y") %>
+                                  </div>
+                                  <div class="col-xs-2">
+                                    <% if work.paid? %>
+                                    <span class="btn btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></span>
+                                    <% end %>
+                                  </div>
+                                </div>
+                                <hr>
+                                <% end %>
+                              </div>
+                          </div>
+                        </div>
+                      </div>

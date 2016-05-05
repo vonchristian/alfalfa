@@ -14,9 +14,8 @@
 //= require jquery_ujs
 //= require select2
 //= require bootstrap-sprockets
-//= require moment
-//= require bootstrap-datetimepicker
-//= require pickers
+//= require bootstrap-datepicker
+//= require supplies/datepicker
 //= require supplies/admin
 //= require work_detail
 //= require labor_cost

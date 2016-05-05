@@ -20,6 +20,6 @@ class WorkedDay < ActiveRecord::Base
   end
 
   def self.total
-    self.all.sum(:number_of_days)
+    all.sum(:number_of_days)
   end
 end

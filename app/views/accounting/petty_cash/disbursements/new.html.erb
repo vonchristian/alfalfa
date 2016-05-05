@@ -1,0 +1,60 @@
+<div class="col-md-8 col-md-offset-2">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Disbursement Details</h4>
+    </div>
+    <div class="content">
+      <%= simple_form_for @entry, url: :accounting_petty_cash_disbursements do |f| %>
+        <%=f.error_notification %>
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-5">
+            <%=f.input :date, as: :string, input_html: { class: "datepicker" } %>
+            <%=f.input :description, as: :text %>
+            <%=f.input :reference_number %>
+            <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
+            <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]} %>
+
+
+            <%=f.simple_fields_for :debit_amounts do |c| %>
+              <%=c.input :amount, input_html: {id: "entry_debit_amounts_attributes_0_amount"}%>
+              <%=c.input :account, collection: Expense.all.pluck(:name), input_html: {class: "entry_debit_amounts_attributes_0_amount"}%>
+            <% end %>
+            <%=f.simple_fields_for :credit_amounts do |d| %>
+              <%=d.input :amount, input_html: { autocomplete: 'off', id: "entry_credit_amounts_attributes_0_amount" } %>
+              <%=d.input :account, input_html: { value: "Petty Cash" }, as: :hidden %>
+            <% end %>
+
+            <div class="modal-footer">
+              <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $("#entry_debit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#entry_entriable_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#entry_debit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

@@ -1,38 +1,36 @@
 <div class="col-md-8 col-md-offset-2">
-<%= simple_form_for [@employee,@entry], url: :employee_cash_advances do |f| %>
-<%=f.error_notification %>
-	<div class="well">
-		<h4>Disbursement Details</h4>
-		<hr>
-		<%= f.input :date, as: :string, input_html: { class: 'datetimepicker'} %>
-
-	  <%=f.simple_fields_for :credit_amounts do |d| %>
-			<%=d.input :amount, input_html:{autocomplete: "off"} %>
-			<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
-		<% end %>
-
-		<%=f.simple_fields_for :debit_amounts do |c| %>
-			<%=c.input :amount,  read_only: true %>
-			<%=c.input :account,input_html: { value: "Advances to Employees" } %>
-		<% end %>
-
-	  <%=f.input :description, as: :text %>
-	  <div class="row">
-			<div class="modal-footer">
-				<%=f.submit "Record Entry", data: {disable_with: 'Saving Entry...'}, class: "btn btn-danger" %>
-				<hr>
-				<%=link_to "I'm done adding Entries", petty_cash_index_path %>
-			</div>
+	<div class="card">
+		<div class="header">
+			<h4 class="title">Cash Advance Details</h4>
+		</div>
+		<div class="content">
+      <%= simple_form_for [@employee,@cash_advance], url: :employee_cash_advances do |f| %>
+        <%=f.error_notification %>
+				<div class="row">
+					<div class="col-md-6">
+					</div>
+					<div class="col-md-5">
+						<%= f.input :date, as: :string, input_html: { class: 'datepicker'} %>
+						<%= f.input :description, input_html: { value: "Cash Advance of #{@employee.name}"}, as: :hidden  %>
+						<%=f.simple_fields_for :debit_amounts do |c| %>
+							<%=c.input :amount, input_html: { id: "accounting_entry_debit_amounts_attributes_0_amount"}  %>
+							<%=c.input :account,input_html: { value: "Advances to Employees" } %>
+						<% end %>
+						<%=f.simple_fields_for :credit_amounts do |d| %>
+							<%=d.input :amount, input_html:{autocomplete: "off", id: "accounting_entry_credit_amounts_attributes_0_amount" }%>
+							<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true %>
+						<% end %>
+            <%=f.input :reference_number %>
+						<div class="modal-footer">
+							<%=f.submit "Save Cash Advance", data: {disable_with: 'Saving Entry...'}, class: "btn btn-danger" %>
+				    </div>
+          </div>
+				</div>
+			<% end %>
 		</div>
 	</div>
-<% end %>
-<script>
-  $(document).ready(function() {
-    $("#entry_recipient_id").select2({
-      theme: "bootstrap"
-    });
-  });
-</script>
+</div>
+
 
 <script>
   $(document).ready(function() {

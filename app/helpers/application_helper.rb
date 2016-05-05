@@ -49,21 +49,23 @@ def site_name
   end
 
   def root_path
-    if user_signed_in? && user.project_engineer?
+    if user_signed_in? && current_user.project_engineer?
       projects_url
-    elsif user_signed_in? && user.accounting_officer?
-      petty_cash_idex_url
-    end
-    root_url
+    elsif user_signed_in? && current_user.accounting_officer?
+      accounting_petty_cash_index_url
+    else
+    dashboard_url
+  end
   end
 
-  def root_url
-    if user_signed_in? && user.project_engineer?
-      projects_url
-    elsif user_signed_in? && user.accounting_officer?
-      petty_cash_idex_url
-    end
-    root_url
-  end
 
+    def root_url
+      if user_signed_in? && current_user.project_engineer?
+        projects_url
+      elsif user_signed_in? && current_user.accounting_officer?
+        accounting_petty_cash_index_url
+      else
+      dashboard_url
+    end
+  end
 end

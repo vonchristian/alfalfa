@@ -1,12 +1,25 @@
 Rails.application.routes.draw do
+  
+
+  ####Accounting Department
   namespace :accounting do
+    resources :bank_account
+    resources :petty_cash, only: [:index] do
+      resources :disbursements, module: :petty_cash
+      resources :fund_transfers, module: :petty_cash
+    end
     resources :reports, only:[:index]
     resources :balance_sheet, only:[:index]
+    resources :income_statement, only:[:index]
+    resources :entries
   end
+
+  resources :accounts
 
   get 'settings/index'
   get 'reports/contract_summary_report', as: 'contract_summary_report'
   get 'reports/index', as: 'reports'
+
   devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
   get 'expenses/filtered_data' => 'expenses#filtered_data'
   get 'accounts/income_statement' => 'accounts#income_statement'
@@ -17,7 +30,7 @@ Rails.application.routes.draw do
     resources :cash_advances, :module => :employees
     resources :worked_days, :module => :employees
     resources :educational_attainments, module: :employee_details
-    resources :payments, module: :employees
+    resources :salaries, module: :employees
   end
 
   resources :categories
@@ -25,14 +38,12 @@ Rails.application.routes.draw do
    root "projects#index"
   get "projects/search"
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
-  get 'entries/daily' => 'entries#daily'
   get 'result/index' => "result#index"
   get 'supplies/inventories' => "supplies/inventories#index"
   resources :contractors do
     resources :issued_inventories, module: :contractors
   end
 
-  resources :entries
   resources :inventories do
     resources :restockings, module: :inventories
     resources :stocks, module: :inventories
@@ -42,9 +53,6 @@ Rails.application.routes.draw do
 
   namespace :accounts do
 
-    resources :expenses do
-      resources :entries, module: :expenses
-    end
     resources :liabilities
     resources :equities
     resources :revenue
@@ -88,14 +96,9 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
     resources :contract_amount_revisions
   end
 
-  resources :petty_cash, only:[:index] do
-    resources :disbursements, module: :petty_cash
-    resources :fund_transfers, module: :petty_cash
-  end
 
-  resources :accounts do
-    resources :entries
-  end
+
+
 
   resources :fund_transfers
 

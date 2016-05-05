@@ -1,13 +1,12 @@
-<%= simple_form_for [@employee, @worked_day] do |f| %>
-<%=f.error_notification %>
-<div class="col-md-8 col-md-offset-2">
-  <div class="box box-solid">
-    <div class="box-header with-border">
-      <h3 class="widget-user-username">Worked Days Detail</h3>
+<div class="col-md-6">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> Days Worked Details </h4>
     </div>
-    <div class="box-body">
-      <div class="col-md-6 col-md-offset-3">
-        <%=f.input :project_id, collection: @employee.employments.map{ |a| [a.project.id_number, a.project.id]} %>
+    <div class="content">
+      <%= simple_form_for [@employee, @worked_day] do |f| %>
+        <%=f.error_notification %>
+        <%#=f.input :project_id, collection: @employee.employments.map{ |a| [a.project.id_number, a.project.id]} %>
         <%=f.input :number_of_days%>
         <div class="row">
           <div class="col-md-6">
@@ -19,12 +18,11 @@
             <%=f.input :end_date, label: false, placeholder: 'To', as: :string, input_html:{class: "datepicker"} %>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="box-footer">
-      <%= link_to 'Cancel', @employee , class: 'btn btn-default' %>
-      <%=f.submit "Save", class: "btn btn-primary pull-right" %>
+        <div class="box-footer">
+          <%= link_to 'Cancel', @employee , class: 'btn btn-default' %>
+          <%=f.submit "Save", class: "btn btn-primary pull-right" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-<% end %>

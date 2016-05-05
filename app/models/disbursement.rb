@@ -1,2 +1,0 @@
-class Disbursement < Entry
-end

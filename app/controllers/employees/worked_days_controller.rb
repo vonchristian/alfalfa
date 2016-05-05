@@ -1,4 +1,5 @@
 class Employees::WorkedDaysController < ApplicationController
+  layout "accounting"
   def new
     @employee = Employee.find(params[:employee_id])
     @worked_day = @employee.worked_days.build

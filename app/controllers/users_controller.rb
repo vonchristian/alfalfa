@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout "accounting"
 before_action :authenticate_user!
 
   def index

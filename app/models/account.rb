@@ -1,12 +1,13 @@
 class Account < ActiveRecord::Base
-  PETTY_CASH_EXPENSES = Account.all
+
   FUND_TRANSFER_SOURCES = ["Owner's Capital", "Cash on Hand", "Cash in Bank"]
   class_attribute :normal_credit_balance
+    has_many :amounts
     has_many :credit_amounts, :extend => AmountsExtension, class_name: "CreditAmount"
     has_many :debit_amounts, :extend => AmountsExtension, class_name: "DebitAmount"
     has_many :credit_entries, :through => :credit_amounts, :source => :entry
     has_many :debit_entries, :through => :debit_amounts, :source => :entry
-
+    has_many :entries, through: :amounts, source: :entry
     validates_presence_of :type
     validates :code, :name, presence: true, uniqueness: true
 
@@ -17,7 +18,7 @@ class Account < ActiveRecord::Base
   def self.petty_cash_expenses
     self.all.select{|a| Account::PETTY_CASH_EXPENSES.include?(a.name)}
   end
-  
+
   def balance(options={})
     if self.class == Account
       raise(NoMethodError, "undefined method 'balance'")

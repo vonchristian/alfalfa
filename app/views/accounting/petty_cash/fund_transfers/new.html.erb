@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> Fund Transfer Details </h4>
+    </div>
+    <div class="content">
+      <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-5">
+      <%= simple_form_for @entry, url: :accounting_petty_cash_fund_transfers do |f| %>
+      <%=f.error_notification %>
+      <%= f.input :date, as: :string, input_html: { class: 'datepicker'}, label: "Date Transferred:" %>
+      <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
+      <%=f.input :entriable_id, input_html: { value: Employee.find_by(first_name: "Joydee", last_name: "Ngayawon").id }, as: :hidden  %>
+      <%=f.simple_fields_for :debit_amounts do |c| %>
+        <%=c.input :amount,  read_only: true, input_html: { id: "accounting_entry_debit_amounts_attributes_0_amount"} %>
+        <%=c.input :account, input_html: { value: "Petty Cash" }, readonly: true %>
+
+      <% end %>
+      <%=f.simple_fields_for :credit_amounts do |d| %>
+        <%=d.input :amount, input_html:{autocomplete: "off", id: "accounting_entry_credit_amounts_attributes_0_amount"}, as: :hidden %>
+        <%=d.input :account, collection: Account.fund_transfer_sources.map{|a| [a.name.titleize, a.name]}, as: :radio_buttons %>
+    <% end %>
+
+
+    <%=f.input :description, as: :text, placeholder:"Describe the transaction e.g. Check Number if Cash from Bank" %>
+    <%=f.input :reference_number %>
+      <div class="modal-footer">
+        <%=f.submit "Save Fund Transfer", data: {disable_with: 'Transfering Fund...'}, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>

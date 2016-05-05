@@ -13,7 +13,7 @@ validates :role, :first_name, :last_name, presence: true
                     thumb: "40x40>",
                     small: "30x30>",
                     x_small: "20x20>" },
-                    default_url: "/images/:style/missing.png",
+                      default_url: ":style/profile_default.jpg",
                     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
                     :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
@@ -22,4 +22,3 @@ validates :role, :first_name, :last_name, presence: true
     "#{first_name.titleize} #{last_name.titleize}"
   end
 end
-

@@ -1,1 +1,27 @@
-Balance
+<div class="col-md-12">
+  <div class="card">
+  <div class="header">
+  <center>
+    <h4 class="title">Balance Sheet</h4>
+    <br>
+    <br>
+
+    <%= form_tag({:action => 'index'}, {:method => :get, :class => 'form-inline'}) do%>
+      <div class="form-group">
+      <%= label_tag :date, nil, class: 'sr-only'%>
+      <%= text_field_tag :date, @to_date, :class => 'datepicker form-control border-input' %>
+      </div>
+      <button type="submit" class="btn btn-primary">Get Report</button>
+    <% end %>
+  </center>
+
+  <hr>
+</div>
+<div class="content">
+
+  <%= render 'accounting/account', :name => "Assets", :accounts => @assets %>
+  <%= render 'accounting/account', :name => "Liabilities", :accounts => @liabilities %>
+  <%= render 'accounting/account', :name => "Equity", :accounts => @equity %>
+
+
+</div>
