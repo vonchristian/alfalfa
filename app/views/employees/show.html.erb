@@ -140,7 +140,7 @@
                                   <hr>
                               </div>
                               <div class="content">
-                                <% @employee.worked_days.each do |work| %>
+                                <% @employee.worked_days.order(:created_at).reverse.each do |work| %>
                                 <div class="row">
                                   <div class="col-xs-3">
                                     <%=work.number_of_days %> Days

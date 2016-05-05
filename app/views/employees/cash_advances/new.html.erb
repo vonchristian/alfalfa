@@ -14,11 +14,11 @@
 						<%= f.input :description, input_html: { value: "Cash Advance of #{@employee.name}"}, as: :hidden  %>
 						<%=f.simple_fields_for :debit_amounts do |c| %>
 							<%=c.input :amount, input_html: { id: "accounting_entry_debit_amounts_attributes_0_amount"}  %>
-							<%=c.input :account,input_html: { value: "Advances to Employees" } %>
+							<%=c.input :account,input_html: { value: "Advances to Employees" }, as: :hidden %>
 						<% end %>
 						<%=f.simple_fields_for :credit_amounts do |d| %>
-							<%=d.input :amount, input_html:{autocomplete: "off", id: "accounting_entry_credit_amounts_attributes_0_amount" }%>
-							<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true %>
+							<%=d.input :amount, input_html:{autocomplete: "off", id: "accounting_entry_credit_amounts_attributes_0_amount" }, as: :hidden %>
+							<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
 						<% end %>
             <%=f.input :reference_number %>
 						<div class="modal-footer">

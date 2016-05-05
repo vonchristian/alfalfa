@@ -10,7 +10,7 @@
           <li>
             <div class="row">
               <div class="col-xs-4">
-                <h4 class="title"><center><%=number_to_currency @petty_cash.balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
+                <h4 class="title"><center><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
                 <span class="text-muted"><small><center> BALANCE </center></small></span>
               </div>
               <div class="col-xs-4">
