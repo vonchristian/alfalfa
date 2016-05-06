@@ -4,10 +4,14 @@ class Supplies::LineItem < ActiveRecord::Base
   belongs_to :order, class_name: "Supplies::Order"
 
   validates :quantity, numericality: {less_than_or_equal_to: :inventory_quantity }
-  delegate :quantity, to: :inventory, prefix: true
+
   delegate :paid?, :unpaid?, to: :order
   def total_price
       inventory.price * quantity
+    end
+
+    def inventory_quantity
+      inventory.quantity
     end
 
     def self.total_price
