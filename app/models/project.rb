@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Common
   include PgSearch
+  pg_search_scope :search_by_name, :against => [:name, :id_number, :address]
   multisearchable :against => [:name, :id_number],
    :order_within_rank => "projects.created_at DESC"
 
@@ -26,7 +27,7 @@ class Project < ActiveRecord::Base
   has_many :issued_inventories
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
-  
+
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true

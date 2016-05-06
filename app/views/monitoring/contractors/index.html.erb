@@ -1,0 +1,38 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="content">
+      <div class="row">
+      <div class="col-md-6">
+      <%=form_tag monitoring_contractors_path, class: 'sidebar-form', method: :get do %>
+        <div class="input-group">
+          <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search...' %>
+          <span class="input-group-btn">
+            <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
+              <i class="fa fa-search"></i>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+</div>
+</div>
+  </div>
+</div>
+    <%@contractors.each do |contractor| %>
+    <%=link_to monitoring_contractor_path(contractor) do %>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="header">
+            <h4 class="title"><center></center></h4>
+            <hr>
+          </div>
+          <div class="content">
+            <p class="text-uppercase"><%=contractor.name %></p>
+
+
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

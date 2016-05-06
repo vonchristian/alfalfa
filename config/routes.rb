@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  
-
+  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'monitoring_officer' }, as: :monitoring_root
+  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' }, as: :projects_root
+  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'accounting_officer' }, as: :accounting_root
+  root :to => "home#index"
   ####Accounting Department
   namespace :accounting do
     resources :bank_account
@@ -12,6 +14,12 @@ Rails.application.routes.draw do
     resources :balance_sheet, only:[:index]
     resources :income_statement, only:[:index]
     resources :entries
+  end
+
+  namespace :monitoring do
+    resources :projects, only:[:index, :show]
+    resources :collections, only:[:index]
+    resources :contractors, only: [:index, :show]
   end
 
   resources :accounts
@@ -35,7 +43,7 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :users
-   root "projects#index"
+
   get "projects/search"
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'result/index' => "result#index"

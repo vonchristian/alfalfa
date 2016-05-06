@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">List of Projects </h4>
+
+            </div>
+      <div class="content">
+        <table class="table">
+          <thead>
+            <tr class="text-uppercase">
+              <th>Name</th>
+              <th>Contract Amount</th>
+              <th>Collected </th>
+              <th> Remaining </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @projects.each do |project| %>
+              <tr>
+                <td><%= link_to project.name, project %></td>
+                <td><%= number_to_currency project.cost %> </td>
+                <td><%= number_to_currency project.cost %></td>
+                <td><%= number_to_currency project.cost %></td>
+
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

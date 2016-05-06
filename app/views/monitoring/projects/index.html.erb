@@ -1,0 +1,53 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="content">
+      <div class="row">
+      <div class="col-md-6">
+      <%=form_tag monitoring_projects_path, class: 'sidebar-form', method: :get do %>
+        <div class="input-group">
+          <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search...' %>
+          <span class="input-group-btn">
+            <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
+              <i class="fa fa-search"></i>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+</div>
+</div>
+  </div>
+</div>
+    <%@projects.each do |project| %>
+    <%=link_to monitoring_project_path(project) do %>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="header">
+            <h4 class="title"><center><%="##{project.id_number_and_location}"%></center></h4>
+            <hr>
+          </div>
+          <div class="content">
+            <p class="text-uppercase"><%=project.name %></p>
+
+            <% project.contractors.each do |contractor| %>
+            <%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle", title: "#{contractor.name}") %>
+            <% end %>
+            <hr>
+            <span class="text-success"><i class="fa fa-map-marker"></i><%=project.address %></span> |
+            <span class="text-success"><i class="fa fa-rub"></i><%=number_to_currency project.cost %></span> |
+            <span class="text-success"><i class="fa fa-calendar"></i><%=number_to_currency project.duration.to_i %> Days</span>
+            <br>
+            <br>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                60%
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
