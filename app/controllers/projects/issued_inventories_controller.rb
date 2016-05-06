@@ -1,4 +1,14 @@
 class Projects::IssuedInventoriesController < ApplicationController
+  def index
+    @project = Project.find(:id)
+    respond_to do |format|
+      format.pdf do
+        pdf = IssuedInventorytoProjectPdf.new(@project, view_context)
+          send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "IssuedMaterials.pdf"
+      end
+    end
+  end
+end
 
   def new
     @work_detail = WorkDetail.find(params[:work_detail_id])

@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:name, :id_number],
    :order_within_rank => "projects.created_at DESC"
-
+   pg_search_scope :search_by_name, :against => :name
   scope :joint_ventures, -> { where(type: 'JointVenture') }
 
   has_many :collections
@@ -26,7 +26,8 @@ class Project < ActiveRecord::Base
   has_many :issued_inventories
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
-  
+  has_many :orders, foreign_key: "project_id", class_name: "Supplies::Order"
+  has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true

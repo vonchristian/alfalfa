@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
   get 'result/index' => "result#index"
   get 'supplies/inventories' => "supplies/inventories#index"
+  get 'supplies/reports' => "supplies/reports#index"
+
   resources :contractors do
     resources :issued_inventories, module: :contractors
   end
@@ -90,6 +92,7 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
     resources :remarks
     resources :expenses,         module: :projects
     resources :contracts
+    resources :line_items, only: [:index], module: :projects
   end
 
   resources :contracts do
@@ -118,6 +121,7 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
     resources :line_items
     resources :inventories
     resources :carts
+    resources :issued_inventories
   end
 
 

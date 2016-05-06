@@ -1,0 +1,35 @@
+<div class="col-md-12">
+	<div class="card">
+		<div class="header">
+			<div class="row">
+				<div class="col-md-5">
+					<h4 class="title">List of Projects</h4>
+				</div>
+				<div class="col-md-7">
+					<div class="pull-right">
+						<%=form_tag supplies_reports_path, class: 'sidebar-form', method: :get do %>
+				      <div class="input-group">
+				        <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search Project...' %>
+				        <span class="input-group-btn">
+				          <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
+				            <i class="fa fa-search"></i>
+				          <% end %>
+				        </span>
+				      </div>
+				    <% end %>
+				  </div>
+			  </div>
+			 </div>
+		</div>
+		<div class="content">
+			<table class="table table-hover">
+				<% @projects.all.each do |project| %>
+					<tr>
+						<td><%=project.name %></td>
+						<td><%=link_to "Print Report", project_line_items_path(project, format: 'pdf') %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
