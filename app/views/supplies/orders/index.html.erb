@@ -1,10 +1,44 @@
 <div class="col-md-12">
   <div class="card">
       <div class="header">
-          <h4 class="title">Orders
-            <span class="pull-right"> <%#=link_to "New Contractor", new_contractor_path, class: "btn btn-primary" %></span>
-          </h4>
-          <hr>
+        <h4 class="title">Orders
+          <span class="pull-right"> <%#=link_to "New Contractor", new_contractor_path, class: "btn btn-primary" %></span>
+        </h4>
+        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="text-muted">Report Filter:</label>
+            <%= form_tag({:action => 'index'}, {:method => :get, class: 'form-inline'}) do %>
+              <table>
+                <tr>
+                  <td>
+                    <div class="col-md-12">
+                      <%= label_tag :from_date, nil, class: 'sr-only' %>
+                      <%= text_field_tag :from_date, @from_date, class: 'datetimepicker form-control', placeholder: 'From', :as => :datetime_picker %>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="col-md-12">
+                      <%= label_tag :to_date, nil, class: 'sr-only' %>
+                      <%= text_field_tag :to_date, @to_date, class: 'datetimepicker form-control', placeholder: 'To', :as => :datetime_picker %>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="col-md-12">
+                      <%= select_tag :project_id, options_for_select(Project.all.collect{ |e| [e.id_number_and_location, e.id] }), class: 'form-control', prompt: 'Select Project' %>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="col-md-12">
+                      <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            <% end %>
+          </div>
+        </div>
+        <hr>
       </div>
       <div class="content">
         <table class="table table-striped">
