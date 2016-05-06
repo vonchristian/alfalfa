@@ -15,6 +15,12 @@
          <ul class="nav">
            <li class="<%="active" if current_page? accounting_petty_cash_index_path %>">
                 <a href="/accounting/petty_cash">
+                    <i class="fa fa-dashboard"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+           <li class="<%="active" if current_page? accounting_petty_cash_index_path %>">
+                <a href="/accounting/petty_cash">
                     <i class="fa fa-rub"></i>
                     <p>Petty Cash</p>
                 </a>
@@ -52,6 +58,12 @@
                         <p>Balance Sheet</p>
                     </a>
                 </li>
+                <li class="<%="active" if current_page? accounting_balance_sheet_index_path %>">
+                     <a href="/accounting/balance_sheet">
+                         <i class="fa fa-money"></i>
+                         <p>Cash Flow </p>
+                     </a>
+                 </li>
                 <li class="<%="active" if current_page? employees_path %>">
                      <a href="/employees">
                          <i class="fa fa-users"></i>
