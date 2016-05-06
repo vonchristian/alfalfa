@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :reports, only:[:index]
     resources :balance_sheet, only:[:index]
     resources :income_statement, only:[:index]
-    resources :entries, only: [:index]
+    resources :entries
     resources :cash_flow, only: [:index]
   end
 
