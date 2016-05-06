@@ -1,11 +1,11 @@
 <div class="col-md-12">
   <div class="card">
       <div class="header">
-          <h4 class="title">Orders
-            <span class="pull-right"> <%#=link_to "New Contractor", new_contractor_path, class: "btn btn-primary" %></span>
-          </h4>
-          <hr>
-      </div>
+        <h4 class="title">Orders
+          
+        </h4>
+        <hr>
+       </div>
       <div class="content">
         <table class="table table-striped">
           <thead>
@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @orders.each do |order| %>
+            <% @orders.entered_on(:from_date => @from_date, :to_date => @to_date, :project_id => @project).each do |order| %>
             <tr>
               <td><%=link_to order.customer.try(:name), order_path(order) %></td>
               <td><%=number_to_currency order.line_items.total_price %></td>
@@ -28,3 +28,10 @@
       </div>
     </div>
   </div>
+<script>
+    $(document).ready(function() {
+        $("#project_id").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>

@@ -1,16 +1,13 @@
-class IssuedInventoryPdf < Prawn::Document
+class ProjectLineItemsPdf < Prawn::Document
 
   TABLE_WIDTHS = [210, 70, 70, 100, 100]
 
-  def initialize(orders, project, from_date, to_date, view_context)
+  def initialize(project, view_context)
     super(margin: 30, page_size: [612, 948], page_layout: :portrait)
-    @orders = orders
     @project = project
-    @from_date = from_date
-    @to_date = to_date
     @view_context = view_context
     heading
-    summary if @project.present?
+    summary
     display_issued_materials_table
   end
 
@@ -23,17 +20,11 @@ class IssuedInventoryPdf < Prawn::Document
     move_down 5
     text "Alfalfa Construction", align: :center, size: 11
     move_down 5
-    text set_date, align: :center, size: 11
+    
     move_down 15
   end
 
-  def set_date
-    if (@to_date.strftime("%B %e, %Y") == @from_date.strftime("%B %e, %Y"))
-      @to_date.strftime("%B %e, %Y")
-    else
-      @from_date.strftime("%B %e, %Y") + " - " + @to_date.strftime("%B %e, %Y")
-    end
-  end
+  
 
   def summary_table
     [["Project: ", "#{(@project.name)}"]]
@@ -61,7 +52,7 @@ class IssuedInventoryPdf < Prawn::Document
   def issued_materials_data
     move_down 5
     [["INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
-    @table_data ||= Supplies::Order.where({:project_id => @project}).map{|a| a.line_items}.map{ |e| [e.inventory.try(:name)]}
+    @table_data ||= @project.line_items.map{ |e| [e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_price)]}
     
   end
 end
