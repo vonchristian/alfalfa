@@ -15,7 +15,7 @@ class Supplies::OrdersController < ApplicationController
     @order = Supplies::Order.new(order_params)
     @order.add_line_items_from_cart(current_cart)
     respond_to do |format|
-      if @order.save
+      if @order.save!
         Supplies::Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         format.html { redirect_to supplies_url, notice:
@@ -24,7 +24,7 @@ class Supplies::OrdersController < ApplicationController
         location: @order }
       else
         @cart = current_cart
-        format.html { render action: "new" }
+        format.html { render action: :new }
         format.json { render json: @order.errors,
         status: :unprocessable_entity }
       end
@@ -37,6 +37,7 @@ class Supplies::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:supplies_order).permit(:customer_id, :customer_type)
+    params.require(:supplies_order).permit(:customer_id, :customer_type, :payment_status,
+      entry_attributes: [:description, :reference_number, :entriable_id, :entriable_type, :type, :date, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account]])
   end
 end

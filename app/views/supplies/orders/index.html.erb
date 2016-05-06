@@ -7,22 +7,24 @@
           <hr>
       </div>
       <div class="content">
-        <% @orders.each do |order| %>
-          <ul class="list-unstyled team-members">
-            <li>
-              <div class="row">
-                <div class="col-xs-4">
-                    <%=link_to order.customer.try(:name), order_path(order) %>
-                </div>
-                <div class="col-xs-2">
-                  <p><%=number_to_currency order.line_items.total_price %></p>
-                </div>
-                <div class="col-sm-3">
-
-              </div>
-            </li>
-          </ul>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Order </th>
+              <th> Amount </th>
+              <th> Payment Status </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @orders.each do |order| %>
+            <tr>
+              <td><%=link_to order.customer.try(:name), order_path(order) %></td>
+              <td><%=number_to_currency order.line_items.total_price %></td>
+              <td><%=order.payment_status %></td>
+              <td><%=order.customer_type %>
         <% end %>
+      </tbody>
+    </table>
       </div>
     </div>
   </div>
