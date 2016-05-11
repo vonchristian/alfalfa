@@ -10,7 +10,7 @@
       <div class="col-md-5">
       <%= simple_form_for @entry, url: :accounting_petty_cash_fund_transfers do |f| %>
       <%=f.error_notification %>
-      <%= f.input :date, as: :string, input_html: { class: 'datepicker'}, label: "Date Transferred:" %>
+      <%= f.input :date, as: :string, input_html: { class: 'datetimepicker'}, label: "Date Transferred:" %>
       <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
       <%=f.input :entriable_id, input_html: { value: Employee.find_by(first_name: "Joydee", last_name: "Ngayawon").id }, as: :hidden  %>
       <%=f.simple_fields_for :debit_amounts do |c| %>

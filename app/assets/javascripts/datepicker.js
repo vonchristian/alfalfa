@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 // $(document).ready(function() {
-//   $('.datepicker_report').datepicker({
+//   $('.datepicker').datepicker({
 //   format: "yyyy-mm-dd",
 //   orientation: "bottom right",
 //   autoclose: true

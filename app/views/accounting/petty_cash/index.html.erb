@@ -24,24 +24,6 @@
             </div>
           </li>
         </ul>
-        <hr>
-        <p> Generate Report </p>
-        <%= form_tag({:action => 'index'}, {:method => :get, :class => 'form-inline'}) do%>
-          <div class="form-group">
-            <%= label_tag :from_date, nil, class: 'sr-only'%>
-            <%= text_field_tag :from_date, @from_date, :class => 'datepicker form-control border-input', :placeholder => "Date" %>
-          </div>
-          <div class="form-group">
-            <%= label_tag :to_date, nil, class: 'sr-only'%>
-            <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datepicker', :placeholder => "Date" %>
-          </div>
-          <br>
-          <br>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary active pull-right">Get Report</button>
-            <%=link_to "Print Report (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-default pull-left"%>
-          </div>
-        <% end %>
       </div>
     </div>
     <div class="card">
@@ -52,8 +34,8 @@
         <hr>
       </div>
       <div class="content">
-        <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
-          <ul class="list-unstyled team-members">
+        <ul class="list-unstyled team-members">
+          <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
             <li>
               <div class="row">
                 <div class="col-xs-4">
@@ -69,8 +51,8 @@
                 </div>
               </div>
             </li>
-          </ul>
-        <% end %>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
@@ -85,6 +67,28 @@
           </span>
         </h4>
         <hr />
+        <div class="row">
+          <div class="col-md-12">
+            <p> Generate Report </p>
+            <%= form_tag({:action => 'index'}, {:method => :get, :class => 'form-inline'}) do%>
+              <div class="col-md-4">
+                <%= label_tag :from_date, nil, class: 'sr-only'%>
+                <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control border-input', :placeholder => "Date" %>
+              </div>
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-4">
+                <%= label_tag :to_date, nil, class: 'sr-only'%>
+                <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "Date" %>
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-primary active pull-right">Get Report</button>
+              </div>
+            <% end %>
+              <%=link_to "Print Report (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-default pull-right"%>
+          </div>
+        </div>
+        <hr>
       </div>
       <div class="content">
         <table class="table table-striped">
