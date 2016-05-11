@@ -8,10 +8,10 @@
       </div>
       <div class="content">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <span class="text-info"><%=@work_detail.code %>: </span>
           </div>
-          <div class="col-md-10">
+          <div class="col-md-9">
             <p><%=@work_detail.description.upcase %></p>
           </div>
         </div>
@@ -106,15 +106,15 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <div class="col-md-4">
     <div class="card">
       <div class="header">
-        <h4 class="text-title">Time Extensions
+        <h4 class="title">Time Extensions</h4>
+        <span class="pull-right">
           <%=link_to "New Time Extension", new_work_detail_time_extension_path(@work_detail), class: "btn btn-primary pull-right" %>
-        </h4>
+        </span>
       </div>
       <div class="content">
       </div>
