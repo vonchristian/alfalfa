@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> <center>Cash Flow Statement </center></h4>
+      <br>
+      <center>
+      <%= form_tag({:action => 'index'}, {:method => :get, :class => 'form-inline'}) do%>
+        <div class="form-group">
+        <%= label_tag :from_date, nil, class: 'sr-only'%>
+        <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control border-input', :placeholder => "Date" %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :to_date, nil, class: 'sr-only'%>
+        <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "Date" %>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Report</button>
+        <%=link_to "Print Report (PDF)", accounting_income_statement_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-info"%>
+      <% end %>
+    </center>
+      <hr>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <p> Cash at the Beginning of the Month</p>
+        </div>
+        <div class="col-md-5">
+          <p> <%=number_to_currency Asset.balance %></p>
+        </div>
+      </div>
+      <br>
+      <p><b>Cash Received </b></p>
+      <p> Cash received from Operating Activities </p>
+      <p> Cash Sales </p>
+      <p> Collection of Accounts Receivable </p>
+      <p><b> Total cash received from Operating activities </b> </p>
+      <br>
+
+      <p> Cash received from Asset activities </p>
+      <p> Cash received from Asset sales </p>
+      <p> <b> Total Cash Received from Asset Activities </b> </p>
+      <br>
+      <p>Cash Received from Financing Activities </p>
+      <p> Owner's Investment </p>
+      <p> Loans and other Borrowings </p>
+      <p> <b> Total Cash Received from Financing Activities </b> </p>
+      <br>
+      <p> <b> Total Cash Received </b> </p>
+      <hr>
+      <p> <b> Cash Paid </b> </p>
+      <p> Cash used in Operating Activities </p>
+      <p> Inventory Purchases </p>
+      <p> Raw Material Purchases </p>
+      <p> Payment of Accounts Payable </p>
+      <p> General and Administrative Expenses </p>
+      <p> <b> Total Cash used in Operating Activities </b></p>
+        <br>
+      <p> Cash used for Asset Activities </p>
+      <p> Equipment Purchases </p>
+      <p> Other Asset Purchase </p>
+      <p> <b> Total cash used for Asset Activities </b> </p>
+      <br>
+      <p> Cash used for Financing Activities </p>
+      <p> Interest Payments on Loans </p>
+      <p> Principal Payments on Loans </p>
+      <p> Payment to Owners </p>
+      <p> <b> Total Cash used for Financing Activities </b></p>
+      <br>
+      <p> <b> Total Cash Paid </b> </p>
+      <br>
+
+      <p> <b> Cash at the End of the Month </b> </p>
+    </div>
+  </div>
+</div>
