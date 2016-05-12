@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  root :to => 'projects#index', as: :home_root
-  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'monitoring_officer' }, as: :monitoring_root
-  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' }, as: :projects_root
-  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'accounting_officer' }, as: :accounting_root
+  devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
+
+authenticated :user do
+  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.nil? }, as: :unauthenticated_root
+end
+
+  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'monitoring_officer' if request.env['warden'].user }, as: :monitoring_root
+  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' if request.env['warden'].user }, as: :projects_root
+  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'accounting_officer' if request.env['warden'].user }, as: :accounting_root
 
   ####Accounting Department
   namespace :accounting do
@@ -30,8 +35,7 @@ Rails.application.routes.draw do
   get 'reports/contract_summary_report', as: 'contract_summary_report'
   get 'reports/index', as: 'reports'
 
-  devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
-  get 'expenses/filtered_data' => 'expenses#filtered_data'
+    get 'expenses/filtered_data' => 'expenses#filtered_data'
   get 'accounts/income_statement' => 'accounts#income_statement'
   resources :payroll, only:[:index, :show]
 
