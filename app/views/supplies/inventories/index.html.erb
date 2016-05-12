@@ -1,51 +1,40 @@
 
 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">List of Inventories
-                                  <span class="pull-right"><%=link_to "New inventory", new_inventory_path, class: "btn btn-primary" %>
-</span>                                </h4>
-                                <p class="category"></p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <th>Name</th>
-                                        <th>Quantity</th>
-
-                                        <th>Unit</th>
-                                        <th>Price</th>
-                                        <th></th>
-                                    </thead>
-                                    <tbody>
-                                    <% @inventories.each do |inventory| %>
-                                        <tr class="<%="text-danger" if inventory.out_of_stock?%>">
-                                            <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
-                                            <td><%=inventory.quantity%></td>
-                                            <td><%=inventory.unit %></td>
-                                            <td><span><%=number_to_currency inventory.price%></span></td>
-                                            <td><%=link_to "New Stock", new_inventory_stock_path(inventory), class: "btn btn-info" %></td>
-                                            <td>
-                                              <% if inventory.out_of_stock? %>
-                                              <span class="btn btn-danger btn-icon"> Out of Stock </span>
-                                              <% end %>
-
-                                            </td>
-                                        </tr>
-
-                                        </tr>
-                                        <% end %>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">List of Inventories
+          <span class="pull-right"><%=link_to "New inventory", new_inventory_path, class: "btn btn-primary" %></span>
+        </h4>
+        <hr>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+          <thead>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @inventories.each do |inventory| %>
+              <tr class="<%="text-danger" if inventory.out_of_stock?%>">
+                <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
+                <td><%=inventory.quantity%> <%=inventory.unit %></td>
+                <td><span><%=number_to_currency inventory.price%></span></td>
+                <td><%=link_to "New Stock", new_inventory_stock_path(inventory), class: "btn btn-info btn-xs" %></td>
+                <td><%=link_to "Edit", edit_inventory_path(inventory), class: "btn btn-info btn-xs" %></td>
+                <td>
+                  <% if inventory.out_of_stock? %>
+                  <span class="label label-danger pull-right"> Out of Stock </span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+</div>

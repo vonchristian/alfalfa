@@ -28,7 +28,7 @@ class Project < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
 
-  has_many :orders, foreign_key: "project_id", class_name: "Supplies::Order"
+  has_many :orders, as: :customer, class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
 
 

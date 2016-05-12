@@ -1,4 +1,5 @@
 class EquipmentController < ApplicationController
+  layout "supplies"
   def index
     @equipments = Equipment.all
   end

@@ -17,11 +17,11 @@
                   <%=@project.notice_to_proceed.date.strftime("%B %e, %Y")  if @project.notice_to_proceed.present?%>
                   <% if @project.notice_to_proceed.blank? %>
                     <%=link_to new_project_notice_to_proceed_path(@project) do %>
-                      <span class="btn btn-success btn-icon btn-xs"><i class="fa fa-pencil"></i> </span>
+                      <span class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> </span>
                     <% end %>
                   <% else %>
                     <%=link_to edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Update NTP' do %>
-                      <span class="btn btn-warning btn-icon btn-xs"><i class="fa fa-pencil"></i> </span>
+                      <span class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </span>
                     <% end %>
                   <% end %>
                 </span>
@@ -96,7 +96,7 @@
     <div class="card">
       <div class="header">
         <h4 class="title">Work Details
-          <span class="pull-right"><%=link_to "New Work Detail", new_project_work_detail_path(@project), class: "btn btn-primary" %></span>
+          <span class="pull-right"><%=link_to "New Work Detail", new_project_work_detail_path(@project), class: "btn btn-primary btn-sm" %></span>
         </h4>
         <hr>
       </div>
@@ -138,7 +138,7 @@
             <h4 class="title">Contractors
               <span class="pull-right">
                 <%=link_to new_project_contract_path(@project) do %>
-                  <span class="btn btn-info btn-icon" title="New Accomplishment"><i class="fa fa-user-plus"></i> New Contractor </span>
+                  <span class="btn btn-info btn-sm" title="New Accomplishment"><i class="fa fa-user-plus"></i> New Contractor </span>
                 <% end %>
               </span>
             </h4>

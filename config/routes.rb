@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   resources :contractors do
     resources :issued_inventories, module: :contractors
+    resources :line_items, only: [:index], module: :contractors
   end
 
   resources :inventories do
