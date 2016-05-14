@@ -3,6 +3,7 @@
     <div class="card">
       <div class="header">
         <h4 class="title"> Bank Account Details </h4>
+        <hr class="with-padding">
       </div>
       <div class="content">
       </div>
@@ -12,6 +13,7 @@
     <div class="card">
       <div class="header">
         <h4 class="title">Deposits </h4>
+        <hr class="with-padding">
       </div>
       <div class="content">
         <% @bank_account.debit_entries.each do |entry| %>
@@ -43,6 +45,7 @@
     <div class="card">
       <div class="header">
         <h4 class="title">Withdraws </h4>
+        <hr>
       </div>
       <div class="content">
         <% @bank_account.credit_entries.each do |credit| %>
@@ -53,7 +56,7 @@
                   <%=number_to_currency credit.debit_amounts.sum(:amount) %>
                 </div>
                 <div class="col-xs-6">
-                  <%=credit.description %>
+                  #<%=credit.description %>
                   <br />
                   <span class="text-success"><small><%=credit.date.strftime("%B %e, %Y") %></small></span>
                 </div>

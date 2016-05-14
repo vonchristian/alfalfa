@@ -1,3 +1,4 @@
+<div class="row">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="header">
@@ -22,40 +23,39 @@
 					<% @entries.each do |entry| %>
 						<tr>
 							<td width="20%">
-								<span class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></span>
+								<small class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
 							</td>
-              <td><%=link_to entry.description, accounting_entry_path(entry) %></td>
-							<td><%=entry.entriable.try(:name) %></td>
+              <td><small><%=link_to entry.description, accounting_entry_path(entry) %></small></td>
+							<td><small><%=entry.entriable.try(:name) %></small></td>
 							<td>
 								<div class="row">
-									<div class="col-md-6">
-								<% entry.debit_amounts.each do |debit| %>
-								  <%=debit.account.name %><br>
-								<% end %>
-							</div>
-							<div class="col-md-5">
-								<% entry.debit_amounts.each do |debit| %>
-									<span class="pull-right"> <%=number_to_currency debit.amount %></span>
-								<% end %>
-							</div>
-						</div>
-
+									<div class="col-md-8">
+										<% entry.debit_amounts.each do |debit| %>
+										  <small><%=debit.account.name %></small><br>
+										<% end %>
+									</div>
+									<div class="col-md-4">
+										<% entry.debit_amounts.each do |debit| %>
+											<small><%=number_to_currency debit.amount %></small>
+										<% end %>
+									</div>
+								</div>
 							</td>
 							<td>
 								<div class="row">
-									<div class="col-md-6">
-								<% entry.credit_amounts.each do |credit| %>
-									<%=credit.account.name %><br>
-								<% end %>
-							</div>
-							<div class="col-md-5">
-								<% entry.credit_amounts.each do |credit| %>
-									<span class="pull-right"> <%=number_to_currency credit.amount %></span>
-								<% end %>
-							</div>
-						</div>
+									<div class="col-md-7">
+										<% entry.credit_amounts.each do |credit| %>
+											<small><%=credit.account.name %></small>
+										<% end %>
+									</div>
+									<div class="col-md-4">
+										<% entry.credit_amounts.each do |credit| %>
+											<small><%=number_to_currency credit.amount %></small>
+										<% end %>
+									</div>
+								</div>
 							</td>
-							<td> <%=entry.type.sub("Transactions::", "") if entry.type %></td>
+							<td><small><%=entry.type.sub("Transactions::", "") if entry.type %></small></td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -63,3 +63,4 @@
 			</div>
 		</div>
 	</div>
+</div>

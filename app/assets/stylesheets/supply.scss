@@ -616,6 +616,11 @@ hr {
   padding: 7px;
 }
 
+.btn.btn-icon-sm,
+.navbar .navbar-nav > li > a.btn.btn-icon-sm {
+  padding: 3px;
+}
+
 .btn-group .btn + .btn,
 .btn-group .btn + .btn-group,
 .btn-group .btn-group + .btn,

@@ -1,42 +1,36 @@
-<div class="col-md-8 col-md-offset-2">
-  <div class="card">
-    <div class="header">
-      <h4 class="title">Entry Details</h4>
-    </div>
-    <div class="content">
-      <%= simple_form_for @entry, url: :accounting_entries do |f| %>
-        <%=f.error_notification %>
-        <div class="row">
-          <div class="col-md-6">
-          </div>
-          <div class="col-md-5">
-            <%=f.input :date, as: :string, input_html: { class: "datepicker" } %>
-            <%=f.input :description, as: :text %>
-            <%=f.input :reference_number %>
-            <%=f.input :type, collection: Accounting::Entry.types %>
-            <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
-            <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]} %>
-            <h4 class="title"> Debit </h4>
-            <%=f.simple_fields_for :debit_amounts do |c| %>
-              <%=c.input :amount %>
-              <%=c.input :account, collection: Account.all.pluck(:name)%>
-            <% end %>
-            <h4 class="title"> Credit </h4>
-            <%=f.simple_fields_for :credit_amounts do |d| %>
-              <%=d.input :amount, input_html: { autocomplete: 'off' } %>
-              <%=d.input :account, collection: Account.all.pluck(:name)%>
-            <% end %>
-
-
-            <div class="modal-footer">
-              <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
-            </div>
-          </div>
+<%= simple_form_for @entry, url: :accounting_entries do |f| %>
+  <%=f.error_notification %>
+  <div class="col-md-4 col-md-offset-4">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Entry Details</h4>
+        <hr>
+      </div>
+      <div class="content">
+        <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
+        <%=f.input :description, as: :text %>
+        <%=f.input :reference_number %>
+        <%=f.input :type, collection: Accounting::Entry.types %>
+        <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
+        <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]} %>
+        <h4 class="title"> Debit </h4>
+        <%=f.simple_fields_for :debit_amounts do |c| %>
+          <%=c.input :amount %>
+          <%=c.input :account, collection: Account.all.pluck(:name)%>
+        <% end %>
+        <h4 class="title"> Credit </h4>
+        <%=f.simple_fields_for :credit_amounts do |d| %>
+          <%=d.input :amount, input_html: { autocomplete: 'off' } %>
+          <%=d.input :account, collection: Account.all.pluck(:name)%>
+        <% end %>
+        <div class="modal-footer">
+          <%= link_to "Cancel", accounting_entries_path, class: 'btn btn-xs pull-left' %>
+          <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 <script>
   $(document).ready(function() {
     $("#accounting_entry_debit_amounts_attributes_0_account").select2({

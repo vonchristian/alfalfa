@@ -35,11 +35,56 @@ class PettyCashPdf < Prawn::Document
     end
   end
 
+  def oldest?
+    @from_date < Transactions::FundTransfer.first.date
+  end
+
+  def previous_debit_balance
+    @petty_cash.debits_balance({from_date: Transactions::FundTransfer.first.date, to_date: @from_date})
+  end
+
+  def previous_credit_balance
+    @petty_cash.credits_balance({from_date: Transactions::Disbursement.first.date, to_date: @from_date})
+  end
+
+  def current_debit_balance
+    @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date})
+  end
+
+  def current_credit_balance
+    @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date})
+  end
+
+  def starting_balance
+    previous_debit_balance - previous_credit_balance if previous_debit_balance.present?
+  end
+
+  def outstanding_balance
+    if previous_debit_balance.present? && previous_credit_balance.present? && oldest?
+      "#{(price current_debit_balance - current_credit_balance)}"
+
+    elsif previous_debit_balance.present? && current_debit_balance.present?
+      "#{(price starting_balance - current_credit_balance)}"
+
+    elsif previous_debit_balance.blank? && previous_credit_balance.blank?
+      "#{(price current_debit_balance - current_credit_balance)}"
+
+    elsif previous_debit_balance.blank? && current_debit_balance.blank?
+      "#{(price starting_balance - current_credit_balance)}"
+
+    elsif previous_debit_balance.blank? && current_debit_balance.present?
+      "#{(price current_debit_balance - current_credit_balance)}"
+
+    elsif previous_debit_balance.present? && current_debit_balance.blank?
+      "#{(price starting_balance - current_credit_balance)}"
+    end
+  end
+
   def data_summary
-      [["Starting Balance:", "#{(price @petty_cash.balance({from_date: @from_date.beginning_of_year, to_date: @from_date.yesterday}))}"],
+      [["Starting Balance:", "#{(price starting_balance)}"],
         ["Fund Transfer:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
-        ["Outstanding Balance:", "#{(price @petty_cash.balance({from_date: @from_date.beginning_of_year, to_date: @to_date}))}"]]
+        ["Outstanding Balance:", outstanding_balance]]
   end
 
   def summary

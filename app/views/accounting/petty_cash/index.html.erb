@@ -1,119 +1,114 @@
 <div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="header">
-        <h4 class="title"> Details </h4>
-        <hr>
-      </div>
-      <div class="content">
-        <ul class="list-unstyled team-members">
-          <li>
-            <div class="row">
-              <div class="col-xs-4">
-                <h4 class="title"><center><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
-                <span class="text-muted"><small><center> BALANCE </center></small></span>
-              </div>
-              <div class="col-xs-4">
-                <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
-                <span class="text-danger"><small><center>DISBURSED</center></small></span>
-              </div>
-              <div class="col-xs-4">
-                <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %><center></span></h4>
-                <span class="text-success"><small><center> FUND TRANSFERS </center></small></span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Fund Transfers
-          <span class="pull-right"> <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-primary" %></span>
-        </h4>
-        <hr>
-      </div>
-      <div class="content">
-        <ul class="list-unstyled team-members">
-          <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
-            <li>
-              <div class="row">
-                <div class="col-xs-4">
-                  <%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %>
-                </div>
-                <div class="col-xs-6">
-                  <%=fund_transfer.credit_amounts.last.account.name %>
-                  <br />
-                  <span class="text-muted"><small><%=fund_transfer.date.strftime("%B %e, %Y") %></small></span>
-                </div>
-                <div class="col-xs-2 text-right">
-                  <btn class="btn btn-sm btn-success btn-icon" title="Transferred"><i class="fa fa-check"></i></btn>
-                </div>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
+  <div class="col-md-12">
     <div class="card">
       <div class="header">
         <h4 class="title"> Entries
           <span class="pull-right">
-            <%=link_to new_accounting_petty_cash_disbursement_path(@petty_cash) do %>
-            <span class="btn btn-primary btn-icon"><i class="fa fa-plus-circle"></i> New Entry </span>
-            <% end %>
+            <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success active btn-icon" %>
+            <%=link_to "New Disbursement", new_accounting_petty_cash_disbursement_path(@petty_cash), class: "btn btn-danger active btn-icon"%>
           </span>
         </h4>
-        <hr />
+
+        <div class="row"><hr></div>
+
         <div class="row">
           <div class="col-md-12">
-            <p> Generate Report </p>
+            <label>Report Filter:</label>
             <%= form_tag({:action => 'index'}, {:method => :get, :class => 'form-inline'}) do%>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <%= label_tag :from_date, nil, class: 'sr-only'%>
                 <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control border-input', :placeholder => "Date" %>
               </div>
-              <div class="col-md-1">
-              </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <%= label_tag :to_date, nil, class: 'sr-only'%>
                 <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "Date" %>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <button type="submit" class="btn btn-primary active pull-right">Get Report</button>
               </div>
+              <div class="col-,d-3">
+                <%=link_to "Print Report (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-default pull-right"%>
+              </div>
             <% end %>
-              <%=link_to "Print Report (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-default pull-right"%>
           </div>
         </div>
-        <hr>
-      </div>
-      <div class="content">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th> Description </th>
-              <th> Recipient </th>
-              <th> Amount </th>
-              <th> Date </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
-              <tr>
-                <td><%=link_to disbursement.description, accounting_entry_path(disbursement) %></td>
-                <td><%=disbursement.entriable.try(:name) %> </td>
-                <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
-                <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+
+        <div class="row"><hr class="with-padding"></div>
+
+        <div class="row">
+          <div class="col-xs-4">
+            <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %><center></span></h4>
+            <span class="text-success"><small><center> FUND TRANSFERS </center></small></span>
+          </div>
+          <div class="col-xs-4">
+            <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
+            <span class="text-danger"><small><center>DISBURSED</center></small></span>
+          </div>
+          <div class="col-xs-4">
+            <h4 class="title"><center class="text-primary"><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
+            <span class="text-primary"><small><center> BALANCE </center></small></span>
+          </div>
+        </div>
+
+        <div class="row"><hr class="with-padding"></div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="title alert-warning">Fund Transfers</h4>
+            <hr>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Account</th>
+                  <th>Amount</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
+                  <tr>
+                    <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
+                    <td>
+                      <%=fund_transfer.credit_amounts.last.account.name %>
+                      <br />
+                      <span class="text-muted"><small><%=fund_transfer.date.strftime("%B %e, %Y") %></small></span>
+                    </td>
+                    <td class="text-right">
+                      <i class="fa fa-check text-success"></i>
+                    </td>
+                  </tr>
+                <% end %>
+                <%= paginate @fund_transfers %>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-8">
+            <h4 class="title alert-success">Disbursements</h4>
+            <hr>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th> Description </th>
+                  <th> Recipient </th>
+                  <th> Amount </th>
+                  <th> Date </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
+                  <tr>
+                    <td><%=link_to disbursement.description, accounting_entry_path(disbursement) %></td>
+                    <td><%=disbursement.entriable.try(:name) %> </td>
+                    <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
+                    <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
+                  </tr>
+                <% end %>
+              </tbody>
+              <%= paginate @disbursements %>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-4">
   </div>
 </div>

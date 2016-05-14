@@ -26,7 +26,7 @@ def heading
   move_down 10
 
   text "INCOME STATEMENT", style: :bold, size: 10
-  text "From #{@from_date.strftime("%B %e, %Y")} to #{@to_date.strftime("%B %e, %Y")}", size: 10
+  text "#{@from_date.strftime("%B %e, %Y")} - #{@to_date.strftime("%B %e, %Y")}", size: 10
   move_down 5
   stroke_horizontal_rule
   end

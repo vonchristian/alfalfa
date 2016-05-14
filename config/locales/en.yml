@@ -34,3 +34,8 @@ en:
     currency:
       format:
         unit: ₱
+  views:
+    pagination:
+      previous: "&lt; Previous"
+      next: "Next &gt;"
+      truncate: "..."

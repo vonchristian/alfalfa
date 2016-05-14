@@ -29,6 +29,9 @@
           <% end %>
         </tbody>
       </table>
+      <div class="modal-footer">
+        <%= paginate @accounts, :window => 1 %>
+      </div>
     </div>
   </div>
 </div>
