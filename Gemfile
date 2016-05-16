@@ -8,7 +8,7 @@ gem 'jquery-ui-rails'
 gem 'public_activity'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
-gem 'paperclip', '~> 4.3.2'
+gem "paperclip", "~> 5.0.0.beta1"
 gem 'pg_search'
 gem 'prawn'
 gem 'prawn-table'

@@ -13,10 +13,11 @@ RSpec.describe Employee, type: :model do
    describe "associations" do
     it {is_expected.to have_many :educational_attainments }
     it {is_expected.to have_many :worked_days }
-    it {is_expected.to have_many :payments }
-    it {is_expected.to have_many :cash_advances }
     it {is_expected.to have_many :employments }
     it {is_expected.to have_many :projects }
+    it {is_expected.to have_many :work_details }
+    it {is_expected.to have_many :equipment_schedules }
+    it {is_expected.to have_many :equipments }
   end
 
   it ".full_name" do
@@ -30,35 +31,28 @@ RSpec.describe Employee, type: :model do
     expect(employee.name).to eql(employee.full_name)
   end
 
-  # it "pending.unpaid_worked_days_for(project)" do
-  #   # employee = create(:employee)
-  #   # project = create(:project)
-  #   # worked_day1 = create(:worked_day, number_of_days: 2, project_id: project.id, employee: employee, status: 'unpaid')
-  #   # worked_day2 = create(:worked_day, number_of_days: 2, project_id: project.id, employee: employee, status: 'unpaid')
-  #   #
-  #   # expect(employee.unpaid_worked_days_for(project)).to eql(4)
-  # end
-  it "unpaid_worked_days" do
-    employee = create(:employee)
-    worked_day1 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
-    worked_day2 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
-
-    expect(employee.unpaid_worked_days).to eql(4)
+  describe "photo attachment" do
+    it { should have_attached_file(:profile_photo) }
+    it { should validate_attachment_presence(:profile_photo) }
+    it { should validate_attachment_content_type(:profile_photo).
+               allowing('image/png', 'image/gif').
+               rejecting('text/plain', 'text/xml') }
   end
 
-  it ".unpaid_cash_advances" do
-    employee = create(:employee_with_cash_advances)
-
-    expect(employee.unpaid_cash_advances).to eql(100)
+  describe "enum for position" do
+    it do
+      should define_enum_for(:position).with([ :laborer,
+                                               :skilled_laborer,
+                                               :project_foreman,
+                                               :operator,
+                                               :welder,
+                                               :project_engineer,
+                                               :bookkeeper,
+                                               :liason_officer,
+                                               :supply_officer,
+                                               :accounting_officer,
+                                               :monitoring_officer,
+                                               :mechanical_engineer])
+    end
   end
-  # #
-  # it ".gross_pay" do
-  #   employee = create(:employee)
-  #   worked_day1 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
-  #   worked_day2 = create(:worked_day, number_of_days: 2, employee: employee, status: 'unpaid')
-  #
-  #
-  # end
-
-
 end

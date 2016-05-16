@@ -8,6 +8,7 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require 'capybara/rails'
 require 'shoulda/matchers'
+require "paperclip/matchers"
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :webkit
 RSpec.configure do |config|
@@ -15,6 +16,8 @@ RSpec.configure do |config|
    config.include Rails.application.routes.url_helpers
    config.include RSpec::Rails::RequestExampleGroup, type: :feature
    config.include FactoryGirl::Syntax::Methods
+   config.include ActiveSupport::Testing::TimeHelpers
+   config.include Paperclip::Shoulda::Matchers
 
    Shoulda::Matchers.configure do |config|
   config.integrate do |with|

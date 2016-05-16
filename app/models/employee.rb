@@ -9,8 +9,7 @@ class Employee < ActiveRecord::Base
                     default_url: ":style/profile_default.jpg",
                     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
                     :url => "/system/:attachment/:id/:style/:filename"
-  validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
-
+  validates_attachment_content_type :profile_photo, content_type: /\Aimage\/.*\Z/
   enum position:[:laborer,
                  :skilled_laborer,
                  :project_foreman,
@@ -24,20 +23,21 @@ class Employee < ActiveRecord::Base
                  :monitoring_officer,
                  :mechanical_engineer]
 
-  validates :first_name, :last_name, :email, :mobile_number, :position, :rate, presence: true
-  # validates :full_name, uniqueness: true
+  validates :profile_photo, :first_name, :last_name, :email, :mobile_number, :position, :rate, presence: true
+
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
   has_many :salaries, as: :entriable
-  has_many :equipment_maintenances, class_name: "Maintenance"
   has_many :employments
   has_many :work_details, through: :employments
   has_many :projects, through: :work_details
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
+
   def cash_advances
-      Transactions::CashAdvance.where(entriable: self)
-    end
+    Transactions::CashAdvance.where(entriable: self)
+  end
+
   def paid!
     self.worked_days.unpaid.set_to_paid!
   end

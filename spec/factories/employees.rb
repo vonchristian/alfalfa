@@ -1,16 +1,11 @@
 FactoryGirl.define do
   factory :employee do
-    first_name "MyString"
-    last_name "MyString"
-    mobile_number "MyString"
-    email "MyString"
-    photo_id "MyString"
+    first_name "Von Christian"
+    last_name "Halip"
+    mobile_number "09274173271"
+    email "vc.halip@gmail.com"
+    profile_photo { File.new("#{Rails.root}/spec/support/fixtures/images.png") }
     position "project_foreman"
-
-    factory :employee_with_cash_advances do
-    after(:create) do |employee|
-       employee.cash_advances << create(:employee_cash_advance, cash_advanceable: employee, amount: 100 )
-    end
-  end
+    rate 500
   end
 end
