@@ -11,6 +11,4 @@ describe Accounting::BalanceSheetPolicy do
     let(:user) { create(:user, role: :project_engineer) }
     it { should_not permit(:index)  }
   end
-
-
 end
