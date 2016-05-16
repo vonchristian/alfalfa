@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe EntryPolicy do
-  subject { EntryPolicy.new(user, entry) }
+describe Accounting::EntryPolicy do
+  subject { Accounting::EntryPolicy.new(user, entry) }
 
   let(:entry) { create(:entry_with_credit_and_debit) }
 

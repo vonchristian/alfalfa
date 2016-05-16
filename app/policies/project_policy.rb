@@ -6,6 +6,10 @@ class ProjectPolicy < ApplicationPolicy
     @project = project
   end
 
+  def index
+    user.project_engineer?
+  end
+
   def show?
     true
   end
@@ -43,4 +47,3 @@ class ProjectPolicy < ApplicationPolicy
     end
   end
 end
-

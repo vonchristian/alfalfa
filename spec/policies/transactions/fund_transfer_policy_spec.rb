@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe FundTransferPolicy do
-  subject { FundTransferPolicy.new(user, fund_transfer) }
+describe Transactions::FundTransferPolicy do
+  subject { Transactions::FundTransferPolicy.new(user, fund_transfer) }
 
-  let(:fund_transfer) { create(:fund_transfer) }
+  let(:fund_transfer) { create(:entry_with_credit_and_debit) }
 
 
 

@@ -1,4 +1,4 @@
-class FundTransferPolicy < ApplicationPolicy
+class Transactions::FundTransferPolicy < ApplicationPolicy
   attr_reader :current_user, :fund_transfer
 
   def initialize(user, fund_transfer)
@@ -46,4 +46,3 @@ class FundTransferPolicy < ApplicationPolicy
     end
   end
 end
-
