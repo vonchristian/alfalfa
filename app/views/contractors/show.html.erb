@@ -1,33 +1,4 @@
-<div class="col-md-12">
-  <div class="box box-solid">
-    <div class="box-body">
-      <div class="col-md-2">
-        <div class="box-body box-profile">
-          <%= image_tag @contractor.profile_photo.url(:medium), class: "profile-user-img img-responsive img-circle" %>
-          <h3 class="profile-username text-center"><%=@contractor.full_name %></h3>
-          <p class="text-muted text-center"><%=@contractor.company %></p>
-          <%if policy(@contractor).update? %>
-            <%=link_to "Update", edit_contractor_path(@contractor), class: "btn btn-primary btn-sm btn-block"  %>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-md-10 border-left">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#issued_materials" data-toggle="tab">Issued Materials</a></li>
-          <li><a href="#projects" data-toggle="tab">Projects</a></li>
-          <li><a href="#activity" data-toggle="tab">Activity</a></li>
-          <li><a href="#billings" data-toggle="tab">Billings</a></li>
-          <li><a href="#settings" data-toggle="tab">Settings</a></li>
-        </ul>
-        <div class="tab-content">
-          <%#=render 'timeline' %>
-          <%=render 'projects' %>
-          <%=render 'issued_materials' %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div class="row">
                     <div class="col-lg-4 col-md-5">
