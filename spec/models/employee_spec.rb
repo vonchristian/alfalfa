@@ -31,6 +31,13 @@ RSpec.describe Employee, type: :model do
     expect(employee.name).to eql(employee.full_name)
   end
 
+  it ".unpaid_worked_days_amount" do
+    employee = create(:employee, rate: 500)
+    worked_day = create(:worked_day, employee: employee, number_of_days: 10, status: 'unpaid')
+
+    expect(employee.unpaid_worked_days_amount).to eql(5_000.0)
+  end
+
   describe "photo attachment" do
     it { should have_attached_file(:profile_photo) }
     it { should validate_attachment_presence(:profile_photo) }

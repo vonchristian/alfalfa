@@ -41,9 +41,9 @@ class Employee < ActiveRecord::Base
   def paid!
     self.worked_days.unpaid.set_to_paid!
   end
-  def unpaid_worked_days_for(project)
-    self.worked_days.unpaid.where(project: project).sum(:number_of_days)
-  end
+  # def unpaid_worked_days_for(project)
+  #   self.worked_days.unpaid.where(project: project).sum(:number_of_days)
+  # end
 
   def unpaid_worked_days
     worked_days.unpaid.total
