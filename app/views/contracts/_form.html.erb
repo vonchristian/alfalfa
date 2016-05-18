@@ -1,13 +1,19 @@
 <%= simple_form_for ([@project, @project.contracts.build]) do |f| %>
   <%=f.error_notification %>
-  <h4>New Sub-Contractor</h4>
-  <hr>
-  <%=f.input :contractor_id, collection: Contractor.all,  label: false, prompt: '- Select Contractor -' %>
-  <%=f.input :amount_subcontracted, label: false, placeholder: 'Amount' %>
-  <div class="modal-footer">
-    <%=f.submit "Add this Sub Contractor", class: "btn btn-primary" %>
-    <hr>
-    <%=link_to "I'm done adding Sub Contractors",project_path(@project) %>
+  <div class="well">
+    <div class="header">
+      <h4 class="title">New Sub-Contractor</h4>
+      <div class="row"><hr></div>
+    </div>
+    <div class="content">
+      <%=f.input :contractor_id, collection: Contractor.all,  label: false, prompt: '- Select Contractor -' %>
+      <%=f.input :amount_subcontracted, label: false, placeholder: 'Amount' %>
+      <div class="modal-footer">
+        <%=f.submit "Add this Sub Contractor", class: "btn btn-primary" %>
+        <hr>
+        <%=link_to "I'm done adding Sub Contractors",project_path(@project) %>
+      </div>
+    </div>
   </div>
 <% end %>
 <script>

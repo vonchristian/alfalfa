@@ -15,8 +15,8 @@
 <div class="row"><hr class="with-padding"></div> 
 <div class="row">
   <div class="col-md-8">
-    <% @inventories.each do |inventory| %>
-      <div class="row">
+    <div class="row">
+      <% @inventories.each do |inventory| %>
         <div class="col-md-6">
           <div class="card">
             <div class="header">
@@ -49,8 +49,8 @@
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
   <div class="col-md-4" id="cart">
     <%=render @cart %>

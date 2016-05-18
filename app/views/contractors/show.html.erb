@@ -1,206 +1,193 @@
-<div class="col-md-12">
-  <div class="box box-solid">
-    <div class="box-body">
-      <div class="col-md-2">
-        <div class="box-body box-profile">
-          <%= image_tag @contractor.profile_photo.url(:medium), class: "profile-user-img img-responsive img-circle" %>
-          <h3 class="profile-username text-center"><%=@contractor.full_name %></h3>
-          <p class="text-muted text-center"><%=@contractor.company %></p>
-          <%if policy(@contractor).update? %>
-            <%=link_to "Update", edit_contractor_path(@contractor), class: "btn btn-primary btn-sm btn-block"  %>
-          <% end %>
+<div class="row">
+  <label class="">Inventory Report Filter:</label>
+  <%= form_tag({:action => 'show'}, {:method => :get, class: 'form-inline'}) do %>
+    <div class="col-md-3">
+      <%= label_tag :from_date, nil, class: 'sr-only' %>
+      <%= text_field_tag :from_date, @from_date, class: 'border-input datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
+    </div>
+    <div class="col-md-3">
+      <%= label_tag :to_date, nil, class: 'sr-only' %>
+      <%= text_field_tag :to_date, @to_date, class: 'border-input datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
+    </div>
+    <div class="col-md-2">
+      <%= select_tag :project_id, options_for_select(@contractor.projects.all.collect{ |e| [e.id_number_and_location, e.id] }), class: 'border-input form-control', prompt: 'Select Project' %>
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
+    </div>
+    <div class="col-md-2">
+      <div class="pull-right">
+        <%=link_to "Print Report(PDF)", contractor_path(@contractor, format: 'pdf', :from_date => @from_date, :to_date => @to_date, :project_id => @project), class: 'btn btn-primary btn-sm' %>
+        <% if current_user.supply_officer? %>
+          <%=link_to "Issue Materials", new_contractor_issued_inventory_path(@contractor), class: 'btn btn-sm btn-warning' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row"><hr class="with-padding"></div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="image">
+        <%= image_tag "hero.jpg", class: "img-square center-block", alt: "contractor profile picture" %>
+      </div>
+      <div class="content">
+        <div class="author">
+          <%= image_tag @contractor.profile_photo.url(:medium), class: "avatar border-white", alt: "contractor profile picture" %>
+          <h4 class="title"><%=@contractor.full_name %><br />
+            <small><%=@contractor.position %></small>
+          </h4>
+        </div>
+        <br>
+        <p class="description text-center">
+          <%=@contractor.company %>
+        </p>
+        <div class="modal-footer">
+          <div class="col-md-8 col-md-offset-2">
+            <%=link_to "Update", edit_contractor_path(@contractor), class: "btn btn-primary btn-block" %>
+          </div>
         </div>
       </div>
-      <div class="col-md-10 border-left">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#issued_materials" data-toggle="tab">Issued Materials</a></li>
-          <li><a href="#projects" data-toggle="tab">Projects</a></li>
-          <li><a href="#activity" data-toggle="tab">Activity</a></li>
-          <li><a href="#billings" data-toggle="tab">Billings</a></li>
-          <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Info</h4>
+        <div class="row"><hr class="with-padding"></div>
+      </div>
+      <div class="content">
+        <ul class="list-unstyled team-members">
+          <li>
+            <div class="row">
+              <div class="col-xs-3">
+                <div class="avatar">
+
+                </div>
+              </div>
+              <div class="col-xs-6">
+                DJ Khaled
+                <br />
+                <span class="text-muted"><small>Offline</small></span>
+              </div>
+              <div class="col-xs-3 text-right">
+                <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-3">
+                <div class="avatar">
+                  <img src="assets/img/faces/face-1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                </div>
+              </div>
+              <div class="col-xs-6">
+                Creative Tim
+                <br />
+                <span class="text-success"><small>Available</small></span>
+              </div>
+              <div class="col-xs-3 text-right">
+                <btn class="btn btn-sm btn-danger btn-icon"><i class="fa fa-times"></i></btn>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-3">
+                <div class="avatar">
+                  <img src="assets/img/faces/face-3.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                </div>
+              </div>
+              <div class="col-xs-6">
+                Flume
+                <br />
+                <span class="text-danger"><small>Busy</small></span>
+              </div>
+              <div class="col-xs-3 text-right">
+                <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
+              </div>
+            </div>
+          </li>
         </ul>
-        <div class="tab-content">
-          <%#=render 'timeline' %>
-          <%=render 'projects' %>
-          <%=render 'issued_materials' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Projects</h4>
+        <div class="row"><hr></div>
+      </div>
+        <div class="content">
+          <ul class="list-unstyled team-members">
+            <% @contractor.projects.each do |project| %>
+              <li>
+                <div class="row">
+                  <div class="col-xs-3">
+                    <div class="avatar">
+
+                    </div>
+                  </div>
+                  <div class="col-xs-6">
+                    <%=project.name %>
+                    <br />
+                    <span class="text-muted"><small><%=project.address %></small></span>
+                  </div>
+
+                  <div class="col-xs-3 text-right">
+                    <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Ordered Inventory</h4>
+          <div class="row"><hr></div>
+        </div>
+        <div class="content">
+          <table class="table table-hover">
+  					<thead>
+  						<tr>
+  							<th>Material</th>
+  							<th>Quantity</th>
+  							<th>Price</th>
+  							<th>Amount</th>
+                <th>Date</th>
+                <th></th>
+  						</tr>
+  					</thead>
+  					<tbody>
+  						<% @contractor.line_items.each do |line_item| %>
+  							<tr class="<%='text-danger' if !line_item.paid? %>">
+  							  <td> <%= line_item.inventory %></td>
+                  <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
+                  <td> <%= number_to_currency line_item.inventory.price %></td>
+                  <td> <%= number_to_currency line_item.total_price %> </td>
+                  <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
+                  <td>
+                    <% if line_item.paid? %>
+                      <btn class="btn btn-sm btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></btn>
+                    <% else %>
+                      <btn class="btn btn-sm btn-warning btn-icon" title="Unpaid"><i class="fa fa-times"></i></btn>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% if line_item.unpaid? %>
+                      <%=link_to "Pay", class: "btn btn-primary" %>
+                    <% end %>
+                  </td>
+  							</tr>
+  						<% end %>
+  					</tbody>
+  				</table>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<div class="row">
-                    <div class="col-lg-4 col-md-5">
-                        <div class="card card-user">
-                            <div class="image">
-                                <%= image_tag "hero.jpg", class: "img-square center-block", alt: "contractor profile picture" %>
-                            </div>
-                            <div class="content">
-                                <div class="author">
-                                  <%= image_tag @contractor.profile_photo.url(:medium), class: "avatar border-white", alt: "contractor profile picture" %>
-                                  <h4 class="title"><%=@contractor.full_name %><br />
-                                     <a href="#"><small><%=@contractor.position %></small></a>
-                                  </h4>
-                                </div>
-                                <br>
-                                <p class="description text-center">
-                                  <%=@contractor.company %>
-                                </p>
-                            </div>
-                            <hr>
-                            <br>
-                            <div class="text-center">
-                                <div class="row">
-                                    <div class="col-md-2">
-
-                                    </div>
-                                    <div class="col-md-8">
-                                          <%=link_to "Update", edit_contractor_path(@contractor), class: "btn btn-primary btn-block" %>
-                                    </div>
-                                    <div class="col-md-2">
-
-                                    </div>
-                                </div>
-<br>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Info</h4>
-                            </div>
-                            <div class="content">
-                                <ul class="list-unstyled team-members">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        DJ Khaled
-                                                        <br />
-                                                        <span class="text-muted"><small>Offline</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Creative Tim
-                                                        <br />
-                                                        <span class="text-success"><small>Available</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-danger btn-icon"><i class="fa fa-times"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-3.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Flume
-                                                        <br />
-                                                        <span class="text-danger"><small>Busy</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                            </div>
-                        </div>
-                      </div>
-                        <div class="col-md-8">
-                          <div class="card">
-                              <div class="header">
-                                  <h4 class="title">Projects</h4>
-                              </div>
-                              <div class="content">
-                                <% @contractor.projects.each do |project| %>
-                                  <ul class="list-unstyled team-members">
-                                              <li>
-                                                  <div class="row">
-                                                      <div class="col-xs-3">
-                                                          <div class="avatar">
-
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-xs-6">
-                                                          <%=project.name %>
-                                                          <br />
-                                                          <span class="text-muted"><small><%=project.address %></small></span>
-                                                      </div>
-
-                                                      <div class="col-xs-3 text-right">
-                                                          <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn>
-                                                      </div>
-                                                  </div>
-                                              </li>
-                                              <% end %>
-                                          </ul>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="col-md-8">
-                          <div class="card">
-                              <div class="header">
-                                  <h4 class="title">Ordered Inventory</h4>
-                              </div>
-                              <div class="content">
-                                <table class="table table-hover">
-                        					<thead>
-                        						<tr>
-                        							<th>Material</th>
-                        							<th>Quantity</th>
-                        							<th>Price</th>
-                        							<th>Amount</th>
-                                      <th>Date</th>
-                                      <th></th>
-                        						</tr>
-                        					</thead>
-                        					<tbody>
-                        						<% @contractor.line_items.each do |line_item| %>
-                        							<tr class="<%='text-danger' if !line_item.paid? %>">
-                        							  <td> <%= line_item.inventory %></td>
-                                        <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
-                                        <td> <%= number_to_currency line_item.inventory.price %></td>
-                                        <td> <%= number_to_currency line_item.total_price %> </td>
-                                        <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
-                                        <td>
-                                          <% if line_item.paid? %>
-                                            <btn class="btn btn-sm btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></btn>
-                                          <% else %>
-                                            <btn class="btn btn-sm btn-warning btn-icon" title="Unpaid"><i class="fa fa-times"></i></btn>
-                                          <% end %>
-                                        </td>
-                                        <td>
-                                          <% if line_item.unpaid? %>
-                                            <%=link_to "Pay", class: "btn btn-primary" %>
-                                          <% end %>
-                                        </td>
-                        							</tr>
-                        						<% end %>
-                        					</tbody>
-                        				</table>
-                              </div>
-                          </div>
-                        </div>
-                    </div>

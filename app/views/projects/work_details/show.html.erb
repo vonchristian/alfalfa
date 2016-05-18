@@ -63,8 +63,8 @@
   <div class="col-md-8">
     <div class="card">
       <div class="header">
-
-        <hr>
+        <h4 class="title"></h4>
+        <div class="row"><hr></div>
       </div>
       <div class="content">
         <ul class="list-unstyled team-members">
@@ -76,10 +76,9 @@
           <div class="header">
             <h4 class="title">Contractors
               <span class="pull-right">
-
               </span>
             </h4>
-            <br>
+            <div class="row"><hr></div>
           </div>
           <div class="content">
             <table class="table table-striped">
@@ -92,7 +91,10 @@
         <div class="card">
           <div class="header">
             <h4 class="title">Accomplishments</h4>
-            <hr>
+            <div class="row"><hr></div>
+          </div>
+          <div class="content">
+
           </div>
         </div>
       </div>
@@ -102,7 +104,10 @@
         <div class="card">
           <div class="header">
             <h4 class="title">Collections</h4>
-            <hr>
+            <div class="row"><hr></div>
+          </div>
+          <div class="content">
+
           </div>
         </div>
       </div>
@@ -111,10 +116,14 @@
   <div class="col-md-4">
     <div class="card">
       <div class="header">
-        <h4 class="title">Time Extensions</h4>
-        <span class="pull-right">
-          <%=link_to "New Time Extension", new_work_detail_time_extension_path(@work_detail), class: "btn btn-primary pull-right" %>
-        </span>
+        <h4 class="title">Time Extensions
+          <span class="pull-right">
+            <%=link_to new_work_detail_time_extension_path(@work_detail), class: "btn btn-primary pull-right btn-icon-sm", title: "New Time Extension" do %>
+              <i class="fa fa-plus"></i>
+            <% end %>
+          </span>
+        </h4>
+        <div class="row"><hr></div>
       </div>
       <div class="content">
       </div>

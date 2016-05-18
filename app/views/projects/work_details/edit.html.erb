@@ -1,23 +1,26 @@
 <%= simple_form_for @work_detail, url: :project_work_detail do |f| %>
 <%=f.error_notification %>
-	<div class="col-md-10 col-md-offset-1">
-		<div class="box box-solid">
-			<div class="box-header with-border">
-				<h4>Edit Work Details</h4>
+	<div class="col-md-5 col-md-offset-3">
+		<div class="card">
+			<div class="header">
+				<h4 class="title">Edit Work Details</h4>
+				<div class="row"><hr></div>
 			</div>
-		  <div class="box-body">
-				<div class="col-md-6 col-md-offset-3">
-			   	<%=f.input :code %>
-			  	<%=f.input :description, as: :text, input_html: {rows: 3} %>
-			    <%=f.input :unit %>
-			    <%=f.input :quantity, input_html:{id: "quantity", oninput: "calculate()"} %>
-			    <%=f.input :unit_cost, input_html:{id: "unit_price", oninput: "calculate()"}  %>
-			   	<%=f.input :total_cost, readonly: true ,  input_html:{id: "amount"}%>
-			  </div>
-			</div>
-	    <div class="box-footer">
-	    	<div class="pull-right">
-	    		<%= link_to 'Cancel', @work_detail, class: 'btn btn-warning' %>
+		  <div class="content">
+		   	<%=f.input :code %>
+		  	<%=f.input :description, as: :text, input_html: {rows: 3} %>
+		    <div class="row">
+		      <div class="col-md-6">
+		        <%=f.input :unit, placeholder: 'Unit' %>
+		      </div>
+		      <div class="col-md-6">
+		        <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+		      </div>
+		    </div>
+		    <%=f.input :unit_cost, input_html:{id: "unit_price", oninput: "calculate()"}  %>
+		   	<%=f.input :total_cost, readonly: true ,  input_html:{id: "amount"}%>
+		    <div class="modal-footer">
+	    		<%= link_to 'Cancel', @work_detail, class: 'btn btn-xs pull-left' %>
 	      	<%=f.submit "Update this Work Detail", class: "btn btn-primary" %>
 	      </div>
 	    </div>

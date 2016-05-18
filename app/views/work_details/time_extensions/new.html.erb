@@ -1,20 +1,19 @@
 <%= simple_form_for [@work_detail, @time_extension], url: :work_detail_time_extensions do |f| %>
 <%=f.error_notification %>
   <div class="col-md-4 col-md-offset-4">
-    <div class="box box-widget widget-user">
-      <div class="widget-user-header bg-blue-active">
-        <h3 class="widget-user-username">New Time Extension</h3>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">New Time Extension</h4>
+        <div class="row"><hr></div>
       </div>
-      <div class="box-body">
-        <div class="col-sm-12 border-right">
-          <%=f.input :date, as: :string, input_html:{ class: "datetimepicker" } %>
-          <%=f.input :number_of_days %>
-          <%=f.input :remarks, as: :text %>
+      <div class="content">
+        <%=f.input :date, as: :string, input_html:{ class: "datetimepicker" } %>
+        <%=f.input :number_of_days %>
+        <%=f.input :remarks, as: :text %>
+        <div class="modal-footer">
+          <%= link_to 'Cancel', @work_detail, class: 'btn btn-xs pull-left' %>
+          <%=f.submit "Save", class: "btn btn-primary" %>
         </div>
-      </div>
-      <div class="box-footer">
-        <%= link_to 'Cancel', @work_detail, class: 'btn btn-warning btn-sm' %>
-        <%=f.submit "Save", class: "btn btn-primary btn-sm pull-right" %>
       </div>
     </div>
   </div>

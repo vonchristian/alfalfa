@@ -1,4 +1,5 @@
 class WorkDetails::TimeExtensionsController < ApplicationController
+  layout 'monitoring'
   def new
     @work_detail = WorkDetail.find(params[:work_detail_id])
     @time_extension = @work_detail.time_extensions.build

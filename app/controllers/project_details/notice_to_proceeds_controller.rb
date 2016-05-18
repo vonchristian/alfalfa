@@ -1,6 +1,6 @@
 class ProjectDetails::NoticeToProceedsController < ApplicationController
   # before_action :set_notice_to_proceed, only: [:edit, :update]
-layout "projects"
+layout "monitoring"
   def new
     @project = Project.find(params[:project_id])
     @notice_to_proceed = @project.build_notice_to_proceed

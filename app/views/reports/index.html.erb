@@ -1,9 +1,12 @@
 <div class="col-md-10 col-md-offset-1">
-  <div class="box box-success">
-    <div class="box-body">
-<h4><%=link_to "Contract Summary Report", contract_summary_report_path(format: 'pdf')%></h4>
-<span class="text-muted">Generate a Report of all Projects that </span>
+  <div class="card">
+    <div class="content">
+			<h4><%=link_to "Contract Summary Report", contract_summary_report_path(format: 'pdf')%></h4>
+			<span class="text-muted">Generate a Report of all Projects that </span>
 
-<h4><%=link_to "Expenses Not Assigend to Jobs", contract_summary_report_path %></h4>
+			<h4><%=link_to "Expenses Not Assigend to Jobs", contract_summary_report_path %></h4>
 
-<h4><%=link_to "Cost to Complete by Job Summary", contract_summary_report_path %></h4>
+			<h4><%=link_to "Cost to Complete by Job Summary", contract_summary_report_path %></h4>
+		</div>
+	</div>
+</div>
