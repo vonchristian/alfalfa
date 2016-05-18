@@ -37,12 +37,13 @@ group :production do
 end
 
 group :development, :test do
-gem 'rspec-rails'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
-  gem 'vcr'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -51,8 +52,6 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', '~> 3.1'
-  gem 'database_cleaner'
   gem 'faker'
   gem 'webmock'
   gem 'selenium-webdriver'

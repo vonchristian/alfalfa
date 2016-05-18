@@ -63,7 +63,7 @@ end
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-uard :rspec, cmd: "bin/rspec", all_on_start: true do
+guard :rspec, cmd: "bin/rspec", all_on_start: true do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 

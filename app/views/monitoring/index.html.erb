@@ -8,20 +8,20 @@
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-warning text-center">
-                                            <i class="fa fa-server"></i>
+                                            <i class="glyphicon glyphicon-road"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Capacity</p>
-                                            105GB
+                                            <p>Projects</p>
+                                            <%=Project.count %>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="fa fa-user"></i> Updated now
+                                        <i class="fa fa-user"></i> <small>Updated <%=time_ago_in_words(Project.last.created_at.to_date) %> ago </small>
                                     </div>
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
+                                            <i class="fa fa-bar-chart"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
@@ -108,15 +108,15 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Users Behavior</h4>
+                                <h4 class="title">Project Status</h4>
                                 <p class="category">24 Hours performance</p>
                             </div>
                             <div class="content">
                                 <div id="chartHours" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
+                                        <i class="fa fa-circle text-info"></i> Finished
+                                        <i class="fa fa-circle text-danger"></i> On-going
                                         <i class="fa fa-circle text-warning"></i> Click Second Time
                                     </div>
                                     <hr>

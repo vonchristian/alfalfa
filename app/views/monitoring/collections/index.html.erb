@@ -10,7 +10,7 @@
           <thead>
             <tr class="text-uppercase">
               <th>Name</th>
-              <th>Contract Amount</th>
+              <th>Amount</th>
               <th>Collected </th>
               <th> Remaining </th>
             </tr>
@@ -18,10 +18,10 @@
           <tbody>
             <% @projects.each do |project| %>
               <tr>
-                <td><%= link_to project.name, project %></td>
+                <td><%= link_to project.name.truncate(250), project %></td>
                 <td><%= number_to_currency project.cost %> </td>
-                <td><%= number_to_currency project.cost %></td>
-                <td><%= number_to_currency project.cost %></td>
+                <td><%= number_to_currency project.total_collection %></td>
+                <td><%= number_to_currency project.remaining_collection %></td>
 
               </tr>
             <% end %>

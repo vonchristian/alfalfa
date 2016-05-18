@@ -323,7 +323,6 @@ GEM
       execjs (>= 0.3.0, < 3)
     validates_timeliness (4.0.2)
       timeliness (~> 0.3.7)
-    vcr (3.0.1)
     warden (1.2.6)
       rack (>= 1.0)
     webmock (2.0.2)
@@ -383,7 +382,6 @@ DEPENDENCIES
   traceroute
   uglifier
   validates_timeliness (~> 4.0)
-  vcr
   webmock
 
 RUBY VERSION

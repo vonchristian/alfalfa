@@ -12,7 +12,7 @@ validates :role, :first_name, :last_name, presence: true
                     medium: "70x70>",
                     thumb: "40x40>",
                     small: "30x30>",
-                    x_small: "20x20>" },
+                    x_small: "20x20>"},
                       default_url: ":style/profile_default.jpg",
                     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
                     :url => "/system/:attachment/:id/:style/:filename"
