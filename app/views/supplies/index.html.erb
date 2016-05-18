@@ -12,39 +12,41 @@
     <% end %>
   </div>
 </div>
-  <hr>
+<div class="row"><hr class="with-padding"></div> 
 <div class="row">
   <div class="col-md-8">
     <% @inventories.each do |inventory| %>
-      <div class="col-md-6">
-        <div class="card">
-          <div class="header">
-            <h4 class="title"><%=inventory.name %>
-              <span class='pull-right'><small class="text-info"><%=number_to_currency inventory.price %></small></span>
-            </h4>
-          </div>
-          <div class="content">
-            <%=simple_form_for @line_item, url: :supplies_line_items do |f| %>
-              <div class="row">
-                <div class="col-xs-6">
-                  <%=f.input :quantity, label: false, placeholder: "QTY", as: :string, required: true, input_html: {class: 'input-sm'} %>
-                  <%=f.input :inventory_id, input_html: {value: inventory.id }, as: :hidden %>
-                </div>
-                <div class="col-xs-6">
-                  <div class="pull-right">
-                    <% if inventory.out_of_stock? %>
-                      <span class="btn btn-danger active"> Out of Stock </span>
-                    <% else %>
-                      <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active" %>
-                    <% end %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="header">
+              <h4 class="title"><%=inventory.name %>
+                <span class='pull-right'><small class="text-info"><%=number_to_currency inventory.price %></small></span>
+              </h4>
+            </div>
+            <div class="content">
+              <%=simple_form_for @line_item, url: :supplies_line_items do |f| %>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <%=f.input :quantity, label: false, placeholder: "QTY", as: :string, required: true, input_html: {class: 'input-sm'} %>
+                    <%=f.input :inventory_id, input_html: {value: inventory.id }, as: :hidden %>
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="pull-right">
+                      <% if inventory.out_of_stock? %>
+                        <span class="btn btn-danger active"> Out of Stock </span>
+                      <% else %>
+                        <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active" %>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="footer">
-                <hr>
-                <small class="text-right"><%=inventory.quantity%> <%=inventory.unit %> remaining</small>
-              </div>
-            <% end %>
+                <div class="footer">
+                  <hr>
+                  <small class="text-right"><%=inventory.quantity%> <%=inventory.unit %> remaining</small>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

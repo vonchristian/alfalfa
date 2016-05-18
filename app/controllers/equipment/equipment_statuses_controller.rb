@@ -1,5 +1,5 @@
 class Equipment::EquipmentStatusesController < ApplicationController
-
+  layout 'supplies'
   def new
     @equipment = Equipment.find(params[:equipment_id])
     @equipment_status = @equipment.build_equipment_status

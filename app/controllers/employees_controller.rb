@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
 	layout "accounting"
 	def index
-		@employees = Employee.all
+		@employees = Employee.all.order('last_name DESC').page(params[:page]).per(10)
 	end
 	def new
 		@employee = Employee.new

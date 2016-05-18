@@ -1,7 +1,8 @@
 class EquipmentController < ApplicationController
   layout "supplies"
   def index
-    @equipments = Equipment.all
+    @equipments = Equipment.all.order('created_at DESC').page(params[:page]).per(10)
+    @equipment_schedules = EquipmentSchedule.all.order('created_at DESC').page(params[:page]).per(10)
   end
   def new
     @equipment = Equipment.new

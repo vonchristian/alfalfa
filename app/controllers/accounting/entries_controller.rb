@@ -2,7 +2,7 @@ module Accounting
   class EntriesController < ApplicationController
     layout "accounting"
     def index
-      @entries = Entry.all.order('created_at DESC')
+      @entries = Entry.all.order('date DESC').page(params[:page]).per(10)
     end
     def new
       @entry = Entry.new

@@ -78,9 +78,11 @@
                     </td>
                   </tr>
                 <% end %>
-                <%= paginate @fund_transfers %>
               </tbody>
             </table>
+            <div class="modal-footer">
+              <center><%= paginate @fund_transfers, :window => 1 %></center>
+            </div>
           </div>
           <div class="col-md-8">
             <h4 class="title alert-success">Disbursements</h4>
@@ -104,8 +106,10 @@
                   </tr>
                 <% end %>
               </tbody>
-              <%= paginate @disbursements %>
             </table>
+            <div class="modal-footer">
+              <center><%= paginate @disbursements, :window => 1 %></center>
+            </div>
           </div>
         </div>
       </div>

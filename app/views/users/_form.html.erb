@@ -1,46 +1,44 @@
 <%= simple_form_for @user do |f| %>
 <%=f.error_notification %>
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <div class='box box-solid'>
-        <div class="box-header with-border">
-          <h4 class="text-center">Employee Details </h4>
+    <div class="col-md-5 col-md-offset-3">
+      <div class='card'>
+        <div class="header">
+          <h4 class="title">Employee Details </h4>
+          <div class="row"><hr></div>
         </div>
-        <div class="box-body">
-          <div class="box-header with-border">
-            <div class="col-md-4">
-              <%if @user.profile_photo.blank? %>
-                <center><%=image_tag("default-small.png", :class=>"img-square center-block ") %></center>
-              <% else %>
-                <center><%= image_tag @user.profile_photo.url(:large), class: 'center-block img-responsive img-rounded'%></center>
-              <% end %>
-              <center><%= f.input :profile_photo, class: 'center-block', as: :file %></center>
-            </div>
-            <div class="col-md-4 border-left border-right">
-              <%=f.input :first_name, autofocus: true  %>
-              <%=f.input :middle_name %>
-              <%=f.input :last_name %>
-            </div>
-            <div class="col-md-4">
-              <%= f.input :role, collection: User.roles.keys.to_a.map{|role| [role.titleize, role]}, as: :radio_buttons %>
-            </div>
+        <div class="content">
+          <%if @user.profile_photo.blank? %>
+            <center><%=image_tag("default-small.png", :class=>"img-square center-block ") %></center>
+          <% else %>
+            <center><%= image_tag @user.profile_photo.url(:large), class: 'center-block img-responsive img-rounded'%></center>
+          <% end %>
+          <center><%= f.input :profile_photo, class: 'center-block', as: :file %></center>
+
+          <div class="row"><hr class="with-padding"></div>
+
+          <%=f.input :first_name, autofocus: true  %>
+          <%=f.input :middle_name %>
+          <%=f.input :last_name %>
+          <%= f.input :role, collection: User.roles.keys.to_a.map{|role| [role.titleize, role]}, as: :radio_buttons %>
+
+          <div class="row"><hr class="with-padding"></div>
+
+          <caption><b>Account Details</b></caption>
+
+          <div class="row"><hr></div>
+
+          <div class="alert alert-info">
+            <small>Please fill in <b>password</b> and <b>password confirmation</b> before saving.</small>
           </div>
-          <h4 class="text-center">Account Details</h4>
-          <hr>
-          <div class="row">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-              <div class="col-md-10 col-md-offset-1">
-                <%=f.input :email %>
-                <%=f.input :password %>
-                <%=f.input :password_confirmation %>
-              </div>
-            </div>
-          </div>
+
+          <%=f.input :email %>
+          <%=f.input :password %>
+          <%=f.input :password_confirmation %>
         </div>
         <div class="modal-footer">
-          <%=f.submit 'Save Employee', class: 'btn btn-primary', data: {disable_with: "Saving Employee..."} %> or <%= link_to "Cancel", @user %>
+          <%= link_to "Cancel", @user, class: 'btn btn-xs pull-left' %>
+          <%=f.submit 'Save Employee', class: 'btn btn-primary', data: {disable_with: "Saving Employee..."} %>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 class Equipment::FuelExpensesController < ApplicationController
+  layout 'supplies'
   def new
     @equipment = Equipment.find(params[:equipment_id])
     @fuel_expense = @equipment.fuel_expenses.build

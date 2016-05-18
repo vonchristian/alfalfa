@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   private
   def permission_denied
-    redirect_to after_sign_in_path_for(current_user), alert: 'You are not allowed to access this page.'
+    redirect_to root_path, alert: 'You are not allowed to access this feature.'
   end
   def current_cart
     Supplies::Cart.find(session[:cart_id])

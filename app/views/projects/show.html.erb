@@ -135,10 +135,10 @@
       <div class="col-md-6">
         <div class="card">
           <div class="header">
-            <h4 class="title">Sub Contractors
+            <h4 class="title">Contractors
               <span class="pull-right">
                 <%=link_to new_project_contract_path(@project) do %>
-                  <span class="btn btn-info btn-sm" title="New Subcontract"><i class="fa fa-user-plus"></i> Add Sub Contractor </span>
+                  <span class="btn btn-info btn-sm" title="New Accomplishment"><i class="fa fa-user-plus"></i> New Contractor </span>
                 <% end %>
               </span>
             </h4>
@@ -148,16 +148,14 @@
             <table class="">
               <%@project.contracts.each do |contract| %>
                 <tr>
-                  <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
+                  <td width="65px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
                   <td>
                     <%= link_to contract.contractor do %>
                       <p><%=contract.contractor %><br>
-                      <small class="text-muted"><%=contract.contractor.full_name %></small></p>
+                      <small class="text-info"><%=contract.contractor.full_name %></small></p>
                     <% end %>
                   </td>
-                  <% if contract.contractor.main_contractor? %>
                   <td><small class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></small></td>
-                  <% end %>
                 </tr>
               <% end %>
             </table>

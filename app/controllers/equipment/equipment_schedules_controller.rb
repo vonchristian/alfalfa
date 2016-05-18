@@ -1,5 +1,5 @@
 class Equipment::EquipmentSchedulesController < ApplicationController
-
+  layout 'supplies'
   def new
     @equipment = Equipment.find(params[:equipment_id])
     if @equipment.inactive?

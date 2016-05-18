@@ -9,7 +9,7 @@ module Accounting
 
 
     def index?
-      user.accounting_officer?
+      user.accounting_officer? || user.system_administrator?
     end
   end
 end

@@ -1,35 +1,39 @@
-<div class="col-md-12">
-  <div class="card">
-    <div class="header">
-      <h4 class="title"> List of Employees
-        <%=link_to new_employee_path do %>
-          <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
-        <% end %>
-      </h4>
-      <hr>
-    </div>
-    <div class="content">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th width="70px"></th>
-            <th>Employee </th>
-            <th>Position</th>
-            <th>Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%@employees.each do |employee| %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"> List of Employees
+          <%=link_to new_employee_path do %>
+            <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
+          <% end %>
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+          <thead>
             <tr>
-              <td><%=image_tag(employee.profile_photo.url(:thumb), class: "img-circle img-responsive") %></td>
-              <td><%=link_to employee.full_name, employee %></td>
-              <td> <%= employee.position.try(:titleize) %> </td>
-              <td> <%= number_to_currency employee.rate %> </td>
-
+              <th width="50px"></th>
+              <th>Employee </th>
+              <th>Position</th>
+              <th>Rate</th>
             </tr>
-          <%end %>
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            <%@employees.each do |employee| %>
+              <tr>
+                <td><%=image_tag(employee.profile_photo.url(:small), class: "img-circle img-responsive") %></td>
+                <td><%=link_to employee.full_name, employee %></td>
+                <td> <%= employee.position.try(:titleize) %> </td>
+                <td> <%= number_to_currency employee.rate %> </td>
+              </tr>
+            <%end %>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <center><%= paginate @employees, :window => 1 %></center>
+        </div>
+      </div>
     </div>
   </div>
+</div>
