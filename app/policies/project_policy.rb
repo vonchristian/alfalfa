@@ -7,11 +7,11 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def index
-    user.project_engineer?
+    create?
   end
 
   def show?
-    true
+    user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
   end
 
   def create?

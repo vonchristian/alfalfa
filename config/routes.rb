@@ -2,12 +2,12 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
 
-authenticated :user do
+unauthenticated :user do
   root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.nil? }, as: :unauthenticated_root
 end
 
   root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'monitoring_officer' if request.env['warden'].user }, as: :monitoring_root
-  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' if request.env['warden'].user }, as: :projects_root
+  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' if request.env['warden'].user }, as: :projects_root
   root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'accounting_officer' if request.env['warden'].user }, as: :accounting_root
 
   ####Accounting Department
@@ -23,9 +23,14 @@ end
     resources :entries
     resources :cash_flow, only: [:index]
   end
-
+  resources :monitoring, only:[:index]
   namespace :monitoring do
-    resources :projects, only:[:index, :show]
+    resources :projects, only:[:index, :show, :new, :create, :update, :edit] do
+      resources :work_details, except:[:destroy]
+    end
+    resources :work_details, only:[:index, :show] do
+      resources :work_accomplishments, only: [:new, :create]
+    end
     resources :collections, only:[:index]
     resources :contractors, only: [:index, :show]
   end

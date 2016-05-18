@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     if current_user.is_a?(User) && current_user.supply_officer?
       supplies_url
     elsif current_user.is_a?(User) && current_user.project_engineer?
-      projects_url
+      monitoring_projects_url
     elsif current_user.is_a?(User) && current_user.accounting_officer?
       accounting_petty_cash_index_url
     elsif current_user.is_a?(User) && current_user.monitoring_officer?
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   private
   def permission_denied
-    redirect_to root_path, alert: 'You are not allowed to access this feature.'
+    redirect_to :back, alert: 'You are not allowed to access this page.'
   end
   def current_cart
     Supplies::Cart.find(session[:cart_id])
