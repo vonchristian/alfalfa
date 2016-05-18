@@ -1,0 +1,53 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="header">
+      <h5 class="title"><center><%=@project.name %></center></h5>
+      <br>
+      <h5 class="title"> ( <%=@project.work_details.count%> ) Work Details
+        <%=link_to new_monitoring_project_work_detail_path(@project) do %>
+        <span class="btn btn-primary btn-icon btn-sm pull-right" title="Add New Work Detail"><i class="fa fa-plus"></i></span>
+        <% end %>
+      </h5>
+      <hr>
+    </div>
+    <div class="content">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Accomplished</th>
+            <th>Remaining Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@work_details.each do |work_detail| %>
+            <tr>
+              <td><p><%=link_to work_detail.description, monitoring_project_work_detail_path(work_detail) %></p></td>
+              <td>
+                <span><%=work_detail.quantity %> <%=work_detail.unit %></span>
+                <br> <small class="text-muted">added last <%=work_detail.created_at.strftime("%m %d, %Y") %></small>
+              </td>
+              <td>
+                <span class="text-success"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
+                <br />
+                <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
+              </td>
+              <td>
+                <span class="text-danger"><%=work_detail.remaining_quantity %> <%=work_detail.unit %></span>
+                <br />
+                <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
+              </td>
+              <td>
+                <%=link_to new_monitoring_work_detail_work_accomplishment_path(work_detail) do %>
+                <span class="btn btn-info btn-sm"><i class="fa fa-caret-right"></i></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

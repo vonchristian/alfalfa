@@ -1,0 +1,21 @@
+<%= simple_form_for [@project, @work_detail], url: :monitoring_project_work_details do |f| %>
+  <%=f.error_notification %>
+    <h4 class="title">New Work Detail</h4>
+    <hr>
+    <%=f.input :code,  placeholder: 'Code' %>
+    <%=f.input :description, placeholder: 'Description', as: :text, input_html:{rows: 3} %>
+    <div class="row">
+      <div class="col-md-6">
+        <%=f.input :unit, placeholder: 'Unit' %>
+      </div>
+      <div class="col-md-6">
+        <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+      </div>
+    </div>
+    <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %>
+    <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
+    <div class="modal-footer">
+      <%=f.submit "Add this Work Detail", class: "btn btn-primary pull-right" %>
+      <%=link_to "Back to Project", monitoring_project_path(@project) , class: "btn btn-default pull-left"%>
+    </div>
+<% end %>
