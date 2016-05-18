@@ -3,7 +3,7 @@
     <div class="card">
       <div class="header">
         <h4 class="title"> Bank Account Details </h4>
-        <hr class="with-padding">
+        <div class="row"><hr class="with-padding"></div>
       </div>
       <div class="content">
       </div>
@@ -13,31 +13,35 @@
     <div class="card">
       <div class="header">
         <h4 class="title">Deposits </h4>
-        <hr class="with-padding">
+        <div class="row"><hr></div>
       </div>
       <div class="content">
-        <% @bank_account.debit_entries.each do |entry| %>
-          <ul class="list-unstyled team-members">
-            <li>
-              <div class="row">
-                <div class="col-xs-3">
-                  <%=number_to_currency entry.debit_amounts.sum(:amount) %>
-                </div>
-                <div class="col-xs-6">
-                  <%=entry.description %>
-                  <br />
-                  <span class="text-success"><small><%=entry.date.strftime("%B %e, %Y") %></small></span>
-                </div>
-                <div class="col-xs-3 text-right">
-                  <% if entry.entriable %>
-                    <%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle center-block") %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th><small><b>Recipient</b></small></th>
+              <th><small><b>Description</b></small></th>
+              <th><small><b>Amount</b></small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @bank_account.debit_entries.each do |debit| %>
+              <tr>
+                <td>
+                  <% if debit.entriable %>
+                    <%=image_tag(debit.entriable.profile_photo.url(:thumb), class: "img-circle center-block") %>
                   <% end %>
-                  <!-- <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn> -->
-                </div>
-              </div>
-            </li>
-          </ul>
-        <% end %>
+                </td>
+                <td>
+                  <small># <%=debit.description %></small>
+                  <br />
+                  <span class="text-success"><small>&nbsp&nbsp&nbsp<%=debit.date.strftime("%B %e, %Y") %></small></span>
+                </td>
+                <td><small><%=number_to_currency debit.debit_amounts.sum(:amount) %><small></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -45,31 +49,35 @@
     <div class="card">
       <div class="header">
         <h4 class="title">Withdraws </h4>
-        <hr>
+        <div class="row"><hr></div>
       </div>
       <div class="content">
-        <% @bank_account.credit_entries.each do |credit| %>
-          <ul class="list-unstyled team-members">
-            <li>
-              <div class="row">
-                <div class="col-xs-3">
-                  <%=number_to_currency credit.debit_amounts.sum(:amount) %>
-                </div>
-                <div class="col-xs-6">
-                  #<%=credit.description %>
-                  <br />
-                  <span class="text-success"><small><%=credit.date.strftime("%B %e, %Y") %></small></span>
-                </div>
-                <div class="col-xs-3 text-right">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th><small><b>Recipient</b></small></th>
+              <th><small><b>Description</b></small></th>
+              <th><small><b>Amount</b></small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @bank_account.credit_entries.each do |credit| %>
+              <tr>
+                <td>
                   <% if credit.entriable %>
                     <%=image_tag(credit.entriable.profile_photo.url(:thumb), class: "img-circle center-block") %>
                   <% end %>
-                  <!-- <btn class="btn btn-sm btn-danger btn-icon"><i class="fa fa-times"></i></btn> -->
-                </div>
-              </div>
-            </li>
-          </ul>
-        <% end %>
+                </td>
+                <td>
+                  <small># <%=credit.description %></small>
+                  <br />
+                  <span class="text-success"><small>&nbsp&nbsp&nbsp<%=credit.date.strftime("%B %e, %Y") %></small></span>
+                </td>
+                <td><small><%=number_to_currency credit.debit_amounts.sum(:amount) %></small></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

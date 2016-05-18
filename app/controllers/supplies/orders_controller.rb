@@ -1,7 +1,7 @@
 class Supplies::OrdersController < ApplicationController
   layout 'supplies'
   def index
-    @orders = Supplies::Order.all.order(:date_issued)
+    @orders = Supplies::Order.all.order("date_issued desc").page(params[:page]).per(10)
   end
   def new
     @cart = current_cart

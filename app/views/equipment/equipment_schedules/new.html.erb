@@ -1,17 +1,19 @@
 <%= simple_form_for [@equipment, @equipment_schedule] do |f| %>
 <%=f.error_notification %>
   <div class="col-md-5 col-md-offset-3">
-    <div class="box box-solid">
-      <div class="box-header with-border">
-        <h4>Equipment Schedule Details</h4>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Equipment Schedule Details</h4>
+        <div class="row"><hr></div>
       </div>
-      <div class="box-body">
+      <div class="content">
         <%=f.input :project_id, collection: Project.all.map{ |a| [a.id_number_and_location, a.id]}  %>
         <%=f.input :employee_id, collection: Employee.all.operator %>
+        <div class="modal-footer">
+          <%=link_to "Cancel", @equipment, class: "btn btn-xs pull-left" %>
+          <%=f.submit "Save Schedule", class: "btn btn-primary" %>
+        </div>
       </div>
-      <div class="box-footer">
-        <%=link_to "Cancel", @equipment, class: "btn btn-default btn-sm" %>
-        <%=f.submit "Save Schedule", class: "btn btn-primary btn-sm pull-right" %>
     </div>
   </div>
 <% end %>

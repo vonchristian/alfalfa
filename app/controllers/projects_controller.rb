@@ -4,8 +4,7 @@ class ProjectsController < ApplicationController
   decorates_assigned :project
 
   def index
-    @projects =Project.all
-    authorize @projects
+    @projects =ProjectDecorator.decorate_collection(type_class.all)
   end
 
   def overview

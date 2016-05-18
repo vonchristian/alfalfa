@@ -4,7 +4,7 @@
       <h4 class="title">Accounts
         <span class="pull-right"><%=link_to "New Account", new_account_path, class: 'btn btn-primary' %></span>
       </h4>
-      <hr />
+      <div class="row"><hr></div> 
     </div>
     <div class="content">
       <table class="table table-hover">
@@ -29,9 +29,6 @@
           <% end %>
         </tbody>
       </table>
-      <div class="modal-footer">
-        <%= paginate @accounts, :window => 1 %>
-      </div>
     </div>
   </div>
 </div>

@@ -1,17 +1,19 @@
 <%= simple_form_for [@equipment, @equipment_status] do |f| %>
 <%=f.error_notification %>
   <div class="col-md-4 col-md-offset-4">
-    <div class="box box-solid">
-      <div class="box-header with-border">
-        <h4>Equipment Status</h4>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Equipment Status</h4>
+        <div class="row"><hr></div>
       </div>
-      <div class="box-body">
+      <div class="content">
         <%=f.input :status, collection: EquipmentStatus.statuses.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
         <%=f.input :description, as: :text, label: 'Remarks' %>
+        <div class="modal-footer">
+          <%=link_to "Cancel", equipment_path(id: @equipment), class: "btn btn-xs pull-left" %>
+          <%=f.submit "Save Status", class: "btn btn-primary" %>
+        </div>
       </div>
-      <div class="box-footer">
-        <%=link_to "Cancel", equipment_path(id: @equipment), class: "btn btn-default btn-sm" %>
-        <%=f.submit "Save Status", class: "btn btn-primary btn-sm pull-right" %>
     </div>
   </div>
 <% end %>

@@ -51,14 +51,13 @@
                        <p>Income Statement</p>
                    </a>
                </li>
-               <%# if policy(Accounting::BalanceSheetPolicy.new).index? %>
+
                <li class="<%="active" if current_page? accounting_balance_sheet_index_path %>">
                     <a href="/accounting/balance_sheet">
                         <i class="fa fa-pie-chart"></i>
                         <p>Balance Sheet</p>
                     </a>
                 </li>
-                <%# end %>
                 <li class="<%="active" if current_page? accounting_cash_flow_index_path %>">
                      <a href="/accounting/cash_flow">
                          <i class="fa fa-money"></i>

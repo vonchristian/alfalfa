@@ -1,11 +1,10 @@
-<div class="col-md-12">
-  <div class="card">
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
       <div class="header">
-        <h4 class="title">Orders
-          
-        </h4>
-        <hr>
-       </div>
+        <h4 class="title">Orders</h4>
+        <div class="row"><hr></div>
+      </div>
       <div class="content">
         <table class="table table-striped">
           <thead>
@@ -17,17 +16,22 @@
           </thead>
           <tbody>
             <% @orders.entered_on(:from_date => @from_date, :to_date => @to_date, :project_id => @project).each do |order| %>
-            <tr>
-              <td><%=link_to order.customer.try(:name), order_path(order) %></td>
-              <td><%=number_to_currency order.line_items.total_price %></td>
-              <td><%=order.payment_status %></td>
-              <td><%=order.customer_type %>
-        <% end %>
-      </tbody>
-    </table>
+              <tr>
+                <td><%=link_to order.customer.try(:name), order_path(order) %></td>
+                <td><%=number_to_currency order.line_items.total_price %></td>
+                <td><%=order.payment_status %></td>
+                <td><%=order.customer_type %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <center><%= paginate @orders, :window => 1 %></center>
+        </div>
       </div>
     </div>
   </div>
+</div>
 <script>
     $(document).ready(function() {
         $("#project_id").select2({

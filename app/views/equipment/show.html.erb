@@ -1,57 +1,68 @@
-<div class="col-md-12">
-  <div class="card">
-    <div class="row">
-      <div class="col-md-1">
-        <h1><a href="/equipment" data-toggle="tooltip" title="Return to Equipment Index"><i class="fa fa-angle-left"></i></a></h1>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <div class="row">
+          <div class="col-md-1">
+            <h3 class="title"><a href="/equipment" data-toggle="tooltip" title="Return to Equipment Index"><i class="fa fa-hand-o-left"></i></a></h3>
+          </div>
+          <div class="col-md-9">
+            <h4 class="title"><%=@equipment.make_and_model.upcase %>
+              <% if @equipment.equipment_status.present?%> 
+                <% if @equipment.active?%>
+                  <span class="text-success">(<%=@equipment.equipment_status.status.capitalize%>)</span>
+                <% elsif @equipment.inactive?%>
+                  <span class="text-danger">(<%=@equipment.equipment_status.description.capitalize%>)</span>
+                <% end %>
+              <% end %>
+            </h4>
+          </div>
+          <div class="col-md-2">
+            <div class="pull-right">
+              <% if @equipment.equipment_status.blank? %>
+                <%= link_to 'Add Status', new_equipment_equipment_status_path(@equipment), class: 'btn btn-xs' %>
+              <% else %>
+                <%= link_to 'Update Status', edit_equipment_equipment_status_path(@equipment, @equipment.equipment_status.id), class: 'btn btn-xs' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="row"><hr></div>
       </div>
-      <div class="col-md-9">
-        <h4 class="text-info"><%=@equipment.make_and_model.upcase %>
-          <% if @equipment.equipment_status.present?%> 
-            <% if @equipment.active?%>
-              <span class="text-success">(<%=@equipment.equipment_status.status.capitalize%>)</span>
-            <% elsif @equipment.inactive?%>
-              <span class="text-danger">(<%=@equipment.equipment_status.description.capitalize%>)</span>
-            <% end %>
-          <% end %>
-        </h4>
-      </div>
-      <div class="col-md-2">
-        <div class="pull-right">
-          <% if @equipment.equipment_status.blank? %>
-            <%= link_to 'Add Status', new_equipment_equipment_status_path(@equipment) %>
-          <% else %>
-            <%= link_to 'Update Status', edit_equipment_equipment_status_path(@equipment, @equipment.equipment_status.id) %>
-          <% end %>
+      <div class="content">
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+              <li  role="presentation" class="active">
+                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="true">Profile</a>
+              </li>
+              <li  role="presentation">
+                <a href="#rent_and_lease_payments" aria-controls="rent_and_lease_payments" role="tab" data-toggle="tab" aria-expanded="true">Rent and Lease Payments</a>
+              </li>
+              <li role="presentation">
+                <a href="#depreciation" aria-controls="depreciation" role="tab" data-toggle="tab" aria-expanded="true"></i> Depreciation</a>
+              </li>
+              <li role="presentation">
+                <a href="#repairs_and_maintenance" aria-controls="repairs_and_maintenance" role="tab" data-toggle="tab" aria-expanded="true"></i> Repair and Maintenance</a>
+              </li>
+              <li role="presentation">
+                <a href="#fuel_and_lubrication" aria-controls="fuel_and_lubrication" role="tab" data-toggle="tab" aria-expanded="true">Fuel and Lubrication</a>
+              </li>
+              <li role="presentation">
+                <a href="#taxes_licenses_and_insurance" aria-controls="taxes_licenses_and_insurance" role="tab" data-toggle="tab" aria-expanded="true"></i> Taxes, Licenses and Insurance</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="my-tab-content" class="tab-content text-center">
+          <%=render "profile" %>
+          <%=render "rent_and_lease_payments" %>
+          <%=render "depreciation" %>
+          <%=render "repairs_and_maintenance" %>
+          <%=render "fuel_and_lubrication" %>
+          <%=render "taxes_licenses_and_insurance" %>
         </div>
       </div>
     </div>
-    <ul class="nav nav-tabs" role="tablist">
-      <li  role="presentation" class="active">
-        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
-      </li>
-      <li  role="presentation">
-        <a href="#rent_and_lease_payments" aria-controls="rent_and_lease_payments" role="tab" data-toggle="tab">Rent and Lease Payments</a>
-      </li>
-      <li role="presentation">
-        <a href="#depreciation" aria-controls="depreciation" role="tab" data-toggle="tab"></i> Depreciation</a>
-      </li>
-      <li role="presentation">
-        <a href="#repairs_and_maintenance" aria-controls="repairs_and_maintenance" role="tab" data-toggle="tab"></i> Repairs and Maintenace</a>
-      </li>
-      <li role="presentation">
-        <a href="#fuel_and_lubrication" aria-controls="fuel_and_lubrication" role="tab" data-toggle="tab">Fuel and Lubrication</a>
-      </li>
-      <li role="presentation">
-        <a href="#taxes_licenses_and_insurance" aria-controls="taxes_licenses_and_insurance" role="tab" data-toggle="tab"></i> Taxes, Licenses and Insurance</a>
-      </li>
-    </ul>
-    <div class="tab-content">
-<%=render "profile" %>
-<%=render "rent_and_lease_payments" %>
-<%=render "depreciation" %>
-<%=render "repairs_and_maintenance" %>
-<%=render "fuel_and_lubrication" %>
-<%=render "taxes_licenses_and_insurance" %>
-    </div>
-   </div>
+  </div>
 </div>

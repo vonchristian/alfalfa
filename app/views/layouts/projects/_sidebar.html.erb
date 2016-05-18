@@ -20,6 +20,12 @@
                  </a>
              </li>
 
+             <li class="<%="active" if current_page? reports_path %>">
+                  <a href="/reports/index">
+                      <i class="fa fa-certificate"></i>
+                      <p>Reports</p>
+                  </a>
+              </li>
 
               <li class="<%="active" if current_page? contractors_path %>">
                    <a href="/contractors">
@@ -42,8 +48,8 @@
                      <span class="icon-bar bar3"></span>
                  </button>
                  <a class="navbar-brand" href="#">
-                   <%="Projects" if current_page?(projects_path) %>
-                   <%="Contractors" if current_page?(contractors_path) %>
+                   <%#="Dashboard" if current_page?(dashboard_path) %>
+                   <%#="Taxpayers" if current_page?(taxpayers_path) %>
                    <%#="Businesses" if current_page?(businesses_path) %>
                    <%#="Settings" if current_page?(settings_path) %>
                    <%#="Reports" if current_page?(reports_path) %>

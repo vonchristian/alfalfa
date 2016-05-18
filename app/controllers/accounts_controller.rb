@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   layout "accounting"
   def index
-    @accounts = Account.all.order(:name).page(params[:page]).per(10)
+    @accounts = Account.all.order(:name)
   end
   def new
     @account = Account.new

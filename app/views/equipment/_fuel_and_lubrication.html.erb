@@ -1,23 +1,28 @@
 <div class="tab-pane" id="fuel_and_lubrication">
-<h4>Fuel and Lubrication
-<span class="pull-right"><%=link_to "New Fuel Expense", new_equipment_fuel_expense_path(@equipment), class: "btn btn-primary" %></span>
-</h4>
-<table class="table table-hover">
-  <thead>
-    <tr class="text-uppercase">
-      <th>Date Issued</th>
-      <th>Quantity</th>
-      <th>Total Cost</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @equipment.fuel_expenses.each do |fuel_expense| %>
-    <tr>
-      <td><%=fuel_expense.date_issued.strftime("%B %e, %Y") %></td>
-      <td><%=fuel_expense.quantity %> <%=fuel_expense.inventory.unit %></td>
-      <td><%=number_to_currency fuel_expense.total_cost %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="header">
+    <h4 class="title">Depracation
+      <span class="pull-right"><%=link_to "New Fuel Expense", new_equipment_fuel_expense_path(@equipment), class: "btn btn-primary" %></span>
+    </h4>
+    <div class="row"><hr></div>
+  </div>
+  <div class="content">
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-uppercase">
+          <th>Date Issued</th>
+          <th>Quantity</th>
+          <th>Total Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @equipment.fuel_expenses.each do |fuel_expense| %>
+        <tr>
+          <td><%=fuel_expense.date_issued.strftime("%B %e, %Y") %></td>
+          <td><%=fuel_expense.quantity %> <%=fuel_expense.inventory.unit %></td>
+          <td><%=number_to_currency fuel_expense.total_cost %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
