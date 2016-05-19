@@ -1,16 +1,25 @@
 <div class="col-md-12">
   <div class="card">
     <div class="header">
-      <h5 class="title"><center><%=@project.name %></center></h5>
-      <br>
+      <div class="row">
+        <div class="col-md-2">
+          <%=link_to monitoring_project_path(@project) do %>
+            <span class="btn btn-default btn-icon btn-sm" data-toggle="tooltip" data-placement="right" title="Back to Project"> <i class="fa fa-chevron-left"> </i> </span>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <h5 class="title"><%=@project.name.truncate(200) %></h5>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="content">
       <h5 class="title"> ( <%=@project.work_details.count%> ) Work Details
         <%=link_to new_monitoring_project_work_detail_path(@project) do %>
         <span class="btn btn-primary btn-icon btn-sm pull-right" title="Add New Work Detail"><i class="fa fa-plus"></i></span>
         <% end %>
       </h5>
       <hr>
-    </div>
-    <div class="content">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -24,7 +33,7 @@
         <tbody>
           <%@work_details.each do |work_detail| %>
             <tr>
-              <td><p><%=link_to work_detail.description, monitoring_project_work_detail_path(work_detail) %></p></td>
+              <td><p><%=link_to work_detail.description, monitoring_work_detail_path(work_detail) %></p></td>
               <td>
                 <span><%=work_detail.quantity %> <%=work_detail.unit %></span>
                 <br> <small class="text-muted">added last <%=work_detail.created_at.strftime("%m %d, %Y") %></small>

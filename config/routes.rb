@@ -23,11 +23,14 @@ end
     resources :entries
     resources :cash_flow, only: [:index]
   end
+
   resources :monitoring, only:[:index]
   namespace :monitoring do
-    resources :projects, only:[:index, :show, :new, :create, :update, :edit] do
+    resources :projects, except:[:destroy] do
       resources :work_details, except:[:destroy]
+      resources :contracts, only: [:new, :create]
     end
+    resources :contracts, only:[:edit, :update, :show]
     resources :work_details, only:[:index, :show] do
       resources :work_accomplishments, only: [:new, :create]
     end
@@ -112,7 +115,6 @@ resources :joint_ventures, controller: 'projects', type: 'JointVenture'
     resource :notice_to_proceed, module: :project_details
     resources :remarks
     resources :expenses,         module: :projects
-    resources :contracts
     resources :line_items, only: [:index], module: :projects
   end
 

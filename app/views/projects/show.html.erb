@@ -11,17 +11,17 @@
           <li>
             <div class="row">
               <div class="col-xs-12">
-                <i class="fa fa-clock-o text-success"></i> &nbsp; Notice to Proceed
+                <i class="fa fa-clock-o text-muted"></i> &nbsp; Notice to Proceed
                 <br>
                 <span class="pull-right">
                   <%=@project.notice_to_proceed.date.strftime("%B %e, %Y")  if @project.notice_to_proceed.present?%>
                   <% if @project.notice_to_proceed.blank? %>
                     <%=link_to new_project_notice_to_proceed_path(@project) do %>
-                      <span class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> </span>
+                      <span class="btn btn-success btn-icon btn-xs"><i class="fa fa-pencil"></i> </span>
                     <% end %>
                   <% else %>
                     <%=link_to edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Update NTP' do %>
-                      <span class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </span>
+                      <span class="btn btn-warning btn-icon"><i class="fa fa-pencil"></i> </span>
                     <% end %>
                   <% end %>
                 </span>

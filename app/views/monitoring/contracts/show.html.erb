@@ -1,0 +1,37 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="header">
+      <div class="row">
+        <div class="col-md-2 col-lg-2 col-xs-2">
+          <%=link_to monitoring_project_path(@contract.project) do %>
+            <span class="btn btn-default btn-icon btn-sm" data-toggle="tooltip" data-placement="right" title="Back to Project"> <i class="fa fa-chevron-left"> </i> </span>
+          <% end %>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-9">
+          <div class="row">
+            <div class="col-md-2 col-xs-2">
+              <%=image_tag(@contract.contractor.profile_photo.url(:thumb), class: 'img-circle') %>
+            </div>
+            <div class="col-md-10 col-xs-10">
+              <%=@contract.contractor %><br>
+              <%=@contract.contractor.full_name %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xs-offset-2">
+         Amount: <%=number_to_currency @contract.amount_subcontracted %>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="content">
+      <%=@contract.project.name.truncate(200) %><br>
+      <%=number_to_currency @contract.project.cost %>
+      <div class="modal-footer">
+        <%=link_to edit_monitoring_contract_path(@contract) do %>
+          <span class="btn btn-warning btn-icon" data-toggle="tooltip" data-placement="top" title="Edit Contract"><i class="fa fa-pencil"></i></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

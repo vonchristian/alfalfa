@@ -1,0 +1,25 @@
+<div class="col-md-5 col-md-offset-3">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Contract Details</h4>
+    </div>
+    <div class="content">
+      <%= simple_form_for @contract, url: :monitoring_contract do |f| %>
+        <%=f.error_notification %>
+        <%=f.input :contractor_id, collection: Contractor.all.map{|a| [image_tag(a.profile_photo.url(:thumb), class: "img-circle"),a.id]}, as: :radio_buttons, disabled: true %>
+        <%=f.input :amount_subcontracted, placeholder: 'Amount' %>
+        <div class="modal-footer">
+          <%=f.submit "Update Contract", class: "btn btn-primary" %>
+          <%=link_to "Cancel",monitoring_contract_path(@contract), class: "btn btn-default pull-left" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $("#contract_contractor_id").select2({
+        theme: "bootstrap"
+    });
+  });
+</script>

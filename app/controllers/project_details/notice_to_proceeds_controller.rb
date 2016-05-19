@@ -19,7 +19,7 @@ layout "monitoring"
     authorize @notice_to_proceed
     if @notice_to_proceed.save
      @notice_to_proceed.create_activity :create, owner: current_user, recipient: @project
-      redirect_to @project, notice: "Notice to Proceed date of award saved successfully."
+      redirect_to monitoring_project_path(@project), notice: "Notice to Proceed saved successfully."
     else
       render :new
     end
@@ -32,7 +32,7 @@ layout "monitoring"
      @notice_to_proceed.update(notice_to_proceed_params)
      if @notice_to_proceed.save
       @notice_to_proceed.create_activity :update, owner: current_user, recipient: @project
-      redirect_to @notice_to_proceed.project, notice: "Notice to Proceed date of award updated successfully."
+      redirect_to @notice_to_proceed.project, notice: "Notice to Proceed updated successfully."
     else
       render :edit
     end
