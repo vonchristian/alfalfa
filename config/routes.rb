@@ -35,7 +35,7 @@ end
       resources :work_accomplishments, only: [:new, :create]
     end
     resources :collections, only:[:index]
-    resources :contractors, only: [:index, :show]
+    resources :contractors, except: [:destroy]
   end
 
   resources :accounts

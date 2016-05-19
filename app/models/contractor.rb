@@ -1,7 +1,7 @@
 class Contractor < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:first_name, :last_name, :company]
-
+  pg_search_scope :search_by_name, :against => [:first_name, :last_name]
   has_attached_file :profile_photo, styles: { large: "120x120>", medium: "70x70>", thumb: "40x40>", small: "30x30>", x_small: "20x20>" }, default_url: ":style/profile_default.jpg"
   validates_attachment :profile_photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
