@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="image">
+        <%= image_tag "hero.jpg", class: "img-square center-block", alt: "contractor profile picture" %>
+      </div>
+      <div class="content">
+        <div class="author">
+          <%= image_tag @contractor.profile_photo.url(:medium), class: "avatar border-white", alt: "contractor profile picture" %>
+          <h4 class="title"><%=@contractor.full_name %><br />
+            <small><%=@contractor.position %></small>
+          </h4>
+        </div>
+        <br>
+        <p class="description text-center">
+          <%=@contractor.company %>
+        </p>
+        <div class="modal-footer">
+          <div class="col-md-8 col-md-offset-2">
+            <%=link_to "Update", edit_monitoring_contractor_path(@contractor), class: "btn btn-primary btn-block" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Projects</h4>
+        <div class="row"><hr></div>
+      </div>
+        <div class="content">
+          <ul class="list-unstyled team-members">
+            <% @contractor.projects.each do |project| %>
+              <li>
+                <div class="row">
+                  <div class="col-xs-3">
+                    <div class="avatar">
+
+                    </div>
+                  </div>
+                  <div class="col-xs-6">
+                    <%=project.name.truncate(200) %>
+                    <br />
+                    <span class="text-muted"><small><%=project.address %></small></span>
+                  </div>
+
+                  <div class="col-xs-3 text-right">
+                    <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Ordered Inventory</h4>
+          <div class="row"><hr></div>
+        </div>
+        <div class="content">
+          <table class="table table-hover">
+  					<thead>
+  						<tr>
+  							<th>Material</th>
+  							<th>Quantity</th>
+  							<th>Price</th>
+  							<th>Amount</th>
+                <th>Date</th>
+                <th></th>
+  						</tr>
+  					</thead>
+  					<tbody>
+  						<% @contractor.line_items.each do |line_item| %>
+  							<tr class="<%='text-danger' if !line_item.paid? %>">
+  							  <td> <%= line_item.inventory %></td>
+                  <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
+                  <td> <%= number_to_currency line_item.inventory.price %></td>
+                  <td> <%= number_to_currency line_item.total_price %> </td>
+                  <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
+                  <td>
+                    <% if line_item.paid? %>
+                      <btn class="btn btn-sm btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></btn>
+                    <% else %>
+                      <btn class="btn btn-sm btn-warning btn-icon" title="Unpaid"><i class="fa fa-times"></i></btn>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% if line_item.unpaid? %>
+                      <%=link_to "Pay", class: "btn btn-primary" %>
+                    <% end %>
+                  </td>
+  							</tr>
+  						<% end %>
+  					</tbody>
+  				</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -38,7 +38,7 @@
             <%@contractors.each do |contractor| %>
               <tr>
                 <td><%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle img-responsive") %></td>
-                <td> <%=link_to contractor.full_name, contractor %></td>
+                <td> <%=link_to contractor.full_name, monitoring_contractor_path(contractor) %></td>
                 <td> <%= contractor.company %> </td>
                 <td> <%= contractor.position %> </td>
                 <td> <%= contractor.contracts.count %> </td>

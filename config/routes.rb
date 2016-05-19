@@ -85,42 +85,42 @@ end
     resources :assets
   end
 
-resources :work_details do
-  resources :work_accomplishments, module: :projects
-  resources :issued_inventories, module: :projects
-  resources :purchase_orders, module: :work_details
-  resources :employments, module: :work_details
-  resources :equipment_maintenances, module: :work_details
-  resources :equipment_costs, module: :work_details
-  resources :equipment_fuel_costs, only:[:new, :create], module: :work_details
-  resources :time_extensions,     only:[:new, :create], module: :work_details
-  resources :amount_revisions,   only:[:new, :create], module: :work_details
-end
-
-resources :joint_ventures, controller: 'projects', type: 'JointVenture'
-
-  resources :projects do
-    resources :equipment_costs, module: :projects
-    resources :add_workers, module: :projects
-    resources :attachment_files, module: :projects
-    resources :assign_project_engineers, module: :projects
-    resources :activities, only:[:index], module: :projects
-    resources :work_details, module: :projects
-    resources :invoices, only:[:new, :create], module: :projects
-    resources :employments, module: :projects
-    resources :employees
-    resources :collections
-      match :overview, via: [:get], on: :collection
-      match :payroll, via: [:get], on: :member
-    resource :notice_to_proceed, module: :project_details
-    resources :remarks
-    resources :expenses,         module: :projects
-    resources :line_items, only: [:index], module: :projects
-  end
-
-  resources :contracts do
-    resources :contract_amount_revisions
-  end
+# resources :work_details do
+#   resources :work_accomplishments, module: :projects
+#   resources :issued_inventories, module: :projects
+#   resources :purchase_orders, module: :work_details
+#   resources :employments, module: :work_details
+#   resources :equipment_maintenances, module: :work_details
+#   resources :equipment_costs, module: :work_details
+#   resources :equipment_fuel_costs, only:[:new, :create], module: :work_details
+#   resources :time_extensions,     only:[:new, :create], module: :work_details
+#   resources :amount_revisions,   only:[:new, :create], module: :work_details
+# end
+#
+# resources :joint_ventures, controller: 'projects', type: 'JointVenture'
+#
+#   resources :projects do
+#     resources :equipment_costs, module: :projects
+#     resources :add_workers, module: :projects
+#     resources :attachment_files, module: :projects
+#     resources :assign_project_engineers, module: :projects
+#     resources :activities, only:[:index], module: :projects
+#     resources :work_details, module: :projects
+#     resources :invoices, only:[:new, :create], module: :projects
+#     resources :employments, module: :projects
+#     resources :employees
+#     resources :collections
+#       match :overview, via: [:get], on: :collection
+#       match :payroll, via: [:get], on: :member
+#     resource :notice_to_proceed, module: :project_details
+#     resources :remarks
+#     resources :expenses,         module: :projects
+#     resources :line_items, only: [:index], module: :projects
+#   end
+#
+#   resources :contracts do
+#     resources :contract_amount_revisions
+#   end
 
 
 
