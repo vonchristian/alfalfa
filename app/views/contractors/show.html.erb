@@ -1,26 +1,30 @@
 <div class="row">
   <label class="">Inventory Report Filter:</label>
   <%= form_tag({:action => 'show'}, {:method => :get, class: 'form-inline'}) do %>
-    <div class="col-md-3">
-      <%= label_tag :from_date, nil, class: 'sr-only' %>
-      <%= text_field_tag :from_date, @from_date, class: 'border-input datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
+    <div class="row">
+      <div class="col-md-3">
+        <%= label_tag :from_date, nil, class: 'sr-only' %>
+        <%= text_field_tag :from_date, @from_date, class: 'border-input datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
+      </div>
+      <div class="col-md-3">
+        <%= label_tag :to_date, nil, class: 'sr-only' %>
+        <%= text_field_tag :to_date, @to_date, class: 'border-input datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
+      </div>
+      <div class="col-md-3">
+        <%= select_tag :project_id, options_for_select(@contractor.projects.all.collect{ |e| [e.id_number_and_location, e.id] }), class: 'border-input form-control', prompt: 'Select Project' %>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-default pull-right" format="pdf">Generate Report</button>
+      </div>
     </div>
-    <div class="col-md-3">
-      <%= label_tag :to_date, nil, class: 'sr-only' %>
-      <%= text_field_tag :to_date, @to_date, class: 'border-input datetimepicker form-control', placeholder: 'Date', :as => :datetime_picker %>
-    </div>
-    <div class="col-md-2">
-      <%= select_tag :project_id, options_for_select(@contractor.projects.all.collect{ |e| [e.id_number_and_location, e.id] }), class: 'border-input form-control', prompt: 'Select Project' %>
-    </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-default" format="pdf">Generate Report</button>
-    </div>
-    <div class="col-md-2">
-      <div class="pull-right">
-        <%=link_to "Print Report(PDF)", contractor_path(@contractor, format: 'pdf', :from_date => @from_date, :to_date => @to_date, :project_id => @project), class: 'btn btn-primary btn-sm' %>
-        <% if current_user.supply_officer? %>
-          <%=link_to "Issue Materials", new_contractor_issued_inventory_path(@contractor), class: 'btn btn-sm btn-warning' %>
-        <% end %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <%=link_to "Print Report(PDF)", contractor_path(@contractor, format: 'pdf', :from_date => @from_date, :to_date => @to_date, :project_id => @project), class: 'btn btn-primary btn-sm' %>
+          <% if current_user.supply_officer? %>
+            <%=link_to "Issue Materials", new_contractor_issued_inventory_path(@contractor), class: 'btn btn-sm btn-warning' %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
@@ -135,7 +139,7 @@
                   </div>
 
                   <div class="col-xs-3 text-right">
-                    <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn>
+                    <btn class="btn btn-sm btn-success btn-icon-sm"><i class="fa fa-check"></i></btn>
                   </div>
                 </div>
               </li>
@@ -170,18 +174,18 @@
                   <td> <%= number_to_currency line_item.inventory.price %></td>
                   <td> <%= number_to_currency line_item.total_price %> </td>
                   <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
-                  <td>
-                    <% if line_item.paid? %>
-                      <btn class="btn btn-sm btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></btn>
-                    <% else %>
-                      <btn class="btn btn-sm btn-warning btn-icon" title="Unpaid"><i class="fa fa-times"></i></btn>
-                    <% end %>
-                  </td>
-                  <td>
-                    <% if line_item.unpaid? %>
+                  <% if line_item.paid? %>
+                    <td>
+                      <btn class="btn btn-sm btn-success btn-icon-sm" title="Paid"><i class="fa fa-check"></i></btn>
+                    </td>
+                  <% else %>
+                    <td>
+                      <btn class="btn btn-sm btn-warning btn-icon-sm" title="Unpaid"><i class="fa fa-times"></i></btn>
+                    </td>
+                    <td>
                       <%=link_to "Pay", class: "btn btn-primary" %>
-                    <% end %>
-                  </td>
+                    </td>
+                  <% end %>
   							</tr>
   						<% end %>
   					</tbody>
@@ -191,3 +195,10 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $("#project_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

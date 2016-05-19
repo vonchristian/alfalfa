@@ -7,7 +7,7 @@
     </div>
     <div class="content">
       <h4 class="title"><%=@order.customer.try(:name) %></h4>
-  <hr>
+      <hr>
         <% @order.line_items.each do |line_item| %>
         <ul class="list-unstyled team-members">
           <li id="current_item">
