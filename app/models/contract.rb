@@ -5,7 +5,7 @@ class Contract < ActiveRecord::Base
   belongs_to :contractor
 
   validates :contractor_id, presence: true, uniqueness: {scope: :project, message: "Contractor is already added"}
-  validates :amount_subcontracted, presence: true, numericality: {less_than: :remaining_uncontracted_amount }
+  validates :amount_subcontracted, presence: true, numericality: {less_than_or_equal_to: :remaining_uncontracted_amount }
 
   delegate :remaining_uncontracted_amount, to: :project
 end

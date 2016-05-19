@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
    pg_search_scope :search_by_name, :against => :name
   scope :joint_ventures, -> { where(type: 'JointVenture') }
 
-  has_many :collections
+  has_many :payments, as: :entriable, class_name: "Accounting::Entry"
   has_many :invoices, as: :invoiceable, foreign_key: 'invoiceable_id'
   has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id'
   belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
@@ -74,7 +74,7 @@ class Project < ActiveRecord::Base
   end
 
   def total_collection
-    self.collections.sum(:amount)
+    self.payments.map{|a| a.credit_amounts.sum(:amount)}.sum
   end
 
   def remaining_collection
@@ -214,11 +214,6 @@ class Project < ActiveRecord::Base
   end
 
   def create_contract
-    Contract.create!(contractor_id: self.main_contractor.id, project_id: self.id, amount_subcontracted: nil)
+    Contract.create!(contractor_id: self.main_contractor.id, project_id: self.id, amount_subcontracted: self.cost)
   end
-
-  def update_contract
-    Contract.update(contractor_id: self.main_contractor.id, project_id: self.id, amount_subcontracted: nil)
-  end
-
 end

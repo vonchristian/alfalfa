@@ -15,37 +15,37 @@
          <ul class="nav">
            <li class="<%="active" if current_page? monitoring_index_path %>">
                 <a href="/monitoring">
-                    <i class="fa fa-dashboard"></i>
-                    <p>Dashboard</p>
+
+                    <p><%=image_tag("dashboard.png", height: '45', width: '45', class: "img-circle") %> &nbsp; &nbsp; Dashboard</p>
                 </a>
             </li>
             <li class="<%="active" if current_page? monitoring_projects_path %>">
                  <a href="/monitoring/projects">
-                     <i class="glyphicon glyphicon-road"></i>
-                     <p>Projects</p>
+
+                     <p> <%=image_tag("project_icon.png", height: '45', width: '45', class: "img-circle") %> &nbsp; &nbsp;Projects</p>
                  </a>
              </li>
 
-             <li class="<%="active" if current_page? monitoring_collections_path %>">
-                  <a href="/monitoring/collections">
-                      <i class="fa fa-rub"></i>
-                      <p>Payments</p>
+             <li class="<%="active" if current_page? monitoring_payments_path %>">
+                  <a href="/monitoring/payments">
+
+                      <p>  <%=image_tag("payment_icon.png", height: '45', width: '45') %> &nbsp; &nbsp; Payments</p>
                   </a>
               </li>
 
               <li class="<%="active" if current_page? contractors_path %>">
                    <a href="/monitoring/contractors">
-                       <i class="fa fa-male"></i>
-                       <p>Contractors</p>
+
+                       <p><%=image_tag("contractor.png", height: '45', width: '45') %> &nbsp; &nbsp; Contractors</p>
                    </a>
                </li>
 
-               <!-- <li class="<%#="active" if current_page? equipment_index_path %>">
-                    <a href="/equipment">
-                        <i class="fa fa-truck"></i>
-                        <p>Equipment</p>
+               <li class="<%#="active" if current_page? equipment_index_path %>">
+                    <a href="/monitoring/equipment">
+
+                        <p><%=image_tag("equipment_icon.png", height: '45', width: '45', class: "img-circle") %> &nbsp; &nbsp; Equipment</p>
                     </a>
-                </li> -->
+                </li>
 
          </ul>
    </div>

@@ -16,11 +16,11 @@
                 <span class="pull-right">
                   <%=@project.notice_to_proceed.date.strftime("%B %e, %Y")  if @project.notice_to_proceed.present?%>
                   <% if @project.notice_to_proceed.blank? %>
-                    <%=link_to new_project_notice_to_proceed_path(@project) do %>
+                    <%=link_to new_monitoring_project_notice_to_proceed_path(@project) do %>
                       <span class="btn btn-success btn-icon btn-xs"><i class="fa fa-pencil"></i> </span>
                     <% end %>
                   <% else %>
-                    <%=link_to edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Update NTP' do %>
+                    <%=link_to edit_monitoring_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Update NTP' do %>
                       <span class="btn btn-warning btn-icon"><i class="fa fa-pencil"></i> </span>
                     <% end %>
                   <% end %>
@@ -93,43 +93,7 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Work Details
-          <span class="pull-right"><%=link_to "New Work Detail", new_project_work_detail_path(@project), class: "btn btn-primary btn-sm" %></span>
-        </h4>
-        <hr>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Unit</th>
-              <th>Work Accomplished</th>
-              <th>Remaining Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%@project.work_details.each do |work_detail| %>
-              <tr>
-                <td><p><%=link_to work_detail.description, work_detail %></p></td>
-                <td><%=work_detail.quantity %> <%=work_detail.unit %></td>
-                <td>
-                  <span class="text-success"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
-                  <br />
-                  <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
-                </td>
-                <td>
-                  <span class="text-danger"><%=work_detail.remaining_quantity %> <%=work_detail.unit %></span>
-                  <br />
-                  <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -177,6 +141,9 @@
           <div class="header">
             <h4 class="title">Collections</h4>
             <hr>
+          </div>
+          <div class="content">
+            <%=image_tag("payment_icon.png", height: '45', width: '45') %>
           </div>
         </div>
       </div>

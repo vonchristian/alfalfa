@@ -44,8 +44,8 @@ def site_name
     end
   end
 
-  def project_notice_to_proceeds_path(*args)
-    project_notice_to_proceed_path(*args)
+  def monitoring_project_notice_to_proceeds_path(*args)
+    monitoring_project_notice_to_proceed_path(*args)
   end
 
   def root_path

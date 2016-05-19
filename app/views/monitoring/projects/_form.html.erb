@@ -1,31 +1,38 @@
-<%= simple_form_for @project, url: :monitoring_projects do |f| %>
-<%=f.error_notification %>
-<div class="row">
-  <div class="col-md-5 col-md-offset-3">
-    <div class="card">
-      <div class="header">
-        <h4 class="title"> Project Details </h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <%=f.input :name, as: :text, input_html: {rows: 5}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
-        <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
+<div class="col-md-12">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> Project Details </h4>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-5">
+          <%= simple_form_for [:monitoring,@project] do |f| %>
+            <%=f.error_notification %>
+            <%=f.input :name, as: :text, input_html: {rows: 5}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>
+            <%= f.input :id_number, label: "Contract ID:", placeholder: "Contract ID" %>
 
-        <%=f.input :duration, label: "Duration", as: :string, placeholder: "Contract Duration" %>
+            <%=f.input :duration, label: "Duration", as: :string, placeholder: "Contract Duration" %>
 
-        <%= f.input :cost, placeholder: "0.00" %>
+            <%= f.input :cost, placeholder: "0.00" %>
 
-        <%=f.input :address, label: "Location", placeholder: "Contract Location" %>
-        <%=f.input :implementing_office, label: "Implementing Office" %>
-
-        <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
-
-        <div class="modal-footer">
-          <%= link_to "Cancel", @project, class: "btn btn-xs pull-left" %>
-          <%=f.submit "Save Project", class: "btn btn-primary", data: {disable_with: 'Saving Project...'} %>
+            <%=f.input :address, label: "Location", placeholder: "Contract Location" %>
+            <%=f.input :implementing_office, label: "Implementing Office" %>
+            <% if @project.new_record? %>
+              <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
+            <% end %>
+            <div class="modal-footer">
+              <% if @project.new_record? %>
+              <%= link_to "Cancel", monitoring_projects_path, class: "btn btn-default pull-left" %>
+              <% else %>
+                <%= link_to "Cancel", monitoring_project_path(@project), class: "btn btn-default pull-left" %>
+              <% end %>
+              <%=f.submit "Save Project", class: "btn btn-primary", data: {disable_with: 'Saving Project...'} %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
-<% end %>

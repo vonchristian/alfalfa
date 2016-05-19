@@ -14,11 +14,11 @@
             </div>
             <div class="col-xs-4">
               <% if @project.notice_to_proceed.blank? %>
-                <%=link_to new_project_notice_to_proceed_path(@project) do %>
+                <%=link_to new_monitoring_project_notice_to_proceed_path(@project) do %>
                   <span class="btn btn-success btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Add NTP"><i class="fa fa-plus"></i> </span>
                 <% end %>
               <% else %>
-                <%=link_to edit_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Edit NTP' do %>
+                <%=link_to edit_monitoring_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Edit NTP' do %>
                   <span class="btn btn-warning btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Edit NTP"><i class="fa fa-pencil"></i> </span>
                 <% end %>
               <% end %>
@@ -99,7 +99,7 @@
             <br>
             <div class="row">
               <div class="col-md-8 col-md-offset-2">
-                <%=link_to "Update", edit_project_path(@project), class: "btn btn-primary btn-block" %>
+                <%=link_to "Update", edit_monitoring_project_path(@project), class: "btn btn-primary btn-block" %>
               </div>
             </div>
           </li>
@@ -108,69 +108,25 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div class="card">
-      <div class="header">
-        <h5 class="title"> ( <%=@project.work_details.count%> ) Work Details
-          <%=link_to new_monitoring_project_work_detail_path(@project) do %>
-          <span class="btn btn-primary btn-icon btn-sm pull-right" data-toggle="tooltip" data-placement="bottom" title="Add New Work Detail"><i class="fa fa-plus"></i></span>
-          <% end %>
-        </h5>
-        <hr>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Accomplished</th>
-              <th>Remaining Quantity</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%@work_details.each do |work_detail| %>
-              <tr>
-                <td><p><%=link_to work_detail.description, work_detail %></p></td>
-                <td>
-                  <span><%=work_detail.quantity %> <%=work_detail.unit %></span>
-                  <br> <small class="text-muted"><%=work_detail.created_at.strftime("%m %d, %Y") %></small>
-                </td>
-                <td>
-                  <span class="text-success"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
-                  <br />
-                  <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
-                </td>
-                <td>
-                  <span class="text-danger"><%=work_detail.remaining_quantity %> <%=work_detail.unit %></span>
-                  <br />
-                  <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
-                </td>
-                <td>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <center><%= paginate @work_details %></center>
-
-        <center><%=link_to "View All", monitoring_project_work_details_path(@project), class: "btn btn-primary" %></center>
-      </div>
-    </div>
+    <%=render 'work_details' %>
+  </div>
 
     <div class="row">
       <div class="col-md-6">
         <div class="card">
           <div class="header">
-            <h4 class="title">Collections</h4>
+            <h4 class="title"><%=image_tag("payment_icon.png", height: '35', width: '35') %> Collections</h4>
             <hr>
+          </div>
+          <div class="content">
+
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="card">
           <div class="header">
-            <h4 class="title">Sub Contractors
+            <h4 class="title"> <%=image_tag("contractor.png", height: '35', width: '35') %> Sub Contractors
               <span class="pull-right">
                 <%=link_to new_monitoring_project_contract_path(@project) do %>
                   <span class="btn btn-info btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Sub Contractor"><i class="fa fa-user-plus"></i></span>
@@ -206,7 +162,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="title">Expenses </h4>
+            <h4 class="title"><%=image_tag("expenses_icon.png", height: '35', width: '35')%> Expenses </h4>
             <hr>
           </div>
           <div class="content">

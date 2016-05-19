@@ -3,9 +3,9 @@ module Monitoring
     layout "monitoring"
     def index
       if params[:name].present?
-        @projects = Project.search_by_name(params[:name])
+        @projects = Project.search_by_name(params[:name]).order(:created_at)
       else
-        @projects = Project.all
+        @projects = Project.all.order(:created_at).reverse
       end
       authorize User
     end
@@ -33,9 +33,9 @@ module Monitoring
     def update
       @project = Project.find(params[:id])
       authorize @project
-      if @project.update(project_params)
-        @project.update_contract
-        redirect_to @project, notice: "Project updated successfully."
+      @project.update(project_params)
+      if @project.save
+        redirect_to monitoring_project_url(@project), notice: "Project updated successfully."
       else
         render :edit
       end

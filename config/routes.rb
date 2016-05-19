@@ -29,12 +29,14 @@ end
     resources :projects, except:[:destroy] do
       resources :work_details, except:[:destroy]
       resources :contracts, only: [:new, :create]
+      resource :notice_to_proceed, only: [:new, :create, :edit, :update]
+      resources :payments, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
     resources :work_details, only:[:index, :show] do
       resources :work_accomplishments, only: [:new, :create]
     end
-    resources :collections, only:[:index]
+    resources :payments, only:[:index]
     resources :contractors, except: [:destroy]
   end
 
