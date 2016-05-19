@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
 
 unauthenticated :user do
-  root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.nil? }, as: :unauthenticated_root
+  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.nil? }, as: :unauthenticated_root
 end
 
   root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'monitoring_officer' if request.env['warden'].user }, as: :monitoring_root
@@ -27,13 +27,13 @@ end
   resources :monitoring, only:[:index]
   namespace :monitoring do
     resources :projects, except:[:destroy] do
-      resources :work_details, except:[:destroy]
+      resources :work_details, only:[:new, :create, :index]
       resources :contracts, only: [:new, :create]
       resource :notice_to_proceed, only: [:new, :create, :edit, :update]
       resources :payments, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
-    resources :work_details, only:[:index, :show] do
+    resources :work_details, only:[:index, :show, :edit, :update] do
       resources :work_accomplishments, only: [:new, :create]
     end
     resources :payments, only:[:index]

@@ -18,8 +18,7 @@ module Monitoring
       @project = Project.create(project_params)
       authorize @project
       if @project.save
-        @project.create_contract
-        redirect_to monitoring_project_path(@project), notice: "Project was successfully saved."
+        redirect_to monitoring_project_path(@project), notice: "Project saved successfully."
       else
         render :new
       end

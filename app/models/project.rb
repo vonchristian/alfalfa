@@ -188,9 +188,6 @@ class Project < ActiveRecord::Base
     self.duration + self.total_number_of_days_extended
   end
 
-  def add_main_contractor_to_contractors
-    Contract.create(contractor_id: self.main_contractor.id, project_id: self.id ) if self.new_record?
-  end
 
   def retention_amount
     self.cost * 0.10
@@ -211,9 +208,5 @@ class Project < ActiveRecord::Base
         work_accomplishment.payment_requested!
       end
     end
-  end
-
-  def create_contract
-    Contract.create!(contractor_id: self.main_contractor.id, project_id: self.id, amount_subcontracted: self.cost)
   end
 end

@@ -3,9 +3,11 @@ class WorkAccomplishment < ActiveRecord::Base
   include PublicActivity::Common
    scope :recent, ->(num) { order('date_accomplished DESC').limit(num) }
   belongs_to :work_detail
-  validates :quantity, numericality: { less_than_or_equal_to: :work_detail_quantity }, presence: true
+  belongs_to :recorder, class_name: "User", foreign_key: 'user_id'
+  validates :quantity, numericality: { less_than_or_equal_to: :work_detail_quantity, greater_than: 0.01 }, presence: true
   validates :date_accomplished, presence: true
   delegate :quantity, to: :work_detail, prefix: true
+  delegate :unit, to: :work_detail
     # has_many :images, as: :imageable, dependent: :destroy
     # accepts_attachments_for :images, attachment: :file, append: true
 

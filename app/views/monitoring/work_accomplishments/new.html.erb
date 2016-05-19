@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Accomplishment Details </h4>
+    </div>
+    <div class="content">
+<%= simple_form_for [:monitoring, @work_detail, @work_accomplishment]  do |f| %>
+<%= f.error_notification %>
+<div class="row">
+<div class="col-md-6">
+        <h5 class="title"><%=@work_detail.description %></h5>
+        <h5 class="title">Remaining Quantity: <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %></h5>
+</div>
+<div class="col-md-5">
+          <%=f.input :quantity %>
+          <%=f.input :date_accomplished,  as: :string, input_html:{:class => 'datetimepicker'} %>
+          <%=f.input :remarks %>
+
+
+      <div class="modal-footer">
+        <%=f.submit "Save Work Accomplishment", class: "btn btn-primary bg-blue-active" %>
+        <%=link_to "Cancel",monitoring_work_detail_path(@work_detail.project.id, @work_detail), class: "btn btn-default"%>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+</div>

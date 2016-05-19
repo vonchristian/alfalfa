@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <div class="row">
+          <div class="col-md-2 col-xs-2">
+        <h5 class="title" title="Back to Project" data-toggle="tooltip" data-placement="bottom"> <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle"), monitoring_project_path(@work_detail.project) %>
+        </div>
+        <div class="col-md-6 col-xs-6">
+          <%=@work_detail.description %></h5>
+        </div>
+        <div class="col-md-4 col-xs-4">
+          <span class="pull-right">
+            <%=image_tag("prize.png", height: 25, width: 25)%>
+            <%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> % </span>
+        </div>
+      </div>
+      <hr>
+      </div>
+      <div class="content">
+        <ul class="list-unstyled team-members">
+          <li>
+            <div class="row">
+              <div class="col-md-2">
+              </div>
+              <div class="col-md-6 text-success">
+                <%=image_tag("excavator.png", height: 35, width: 35, class: "img-square" )%> &nbsp; Accomplished
+              </div>
+              <div class="col-md-4">
+                90
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-md-2">
+              </div>
+              <div class="col-md-6 text-danger">
+                <%=image_tag("excavator.png", height: 35, width: 35, class: "img-square" )%>  &nbsp; Remaining
+              </div>
+              <div class="col-md-4">
+                67
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <%=link_to "Update", edit_monitoring_work_detail_path(@work_detail), class: "btn btn-warning btn-block" %>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h5 class="title">
+          <%=image_tag("reporting.png", height: 35, width: 35, class: "img-square" )%> Accomplishments
+          <%=link_to new_monitoring_work_detail_work_accomplishment_path(@work_detail) do %>
+            <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Accomplishment"><i class="fa fa-plus"></i></span>
+          <% end %>
+        </h5>
+        <hr>
+      </div>
+      <div class="content">
+        <% @work_detail.work_accomplishments.each do |accomplishment| %>
+          <ul class="list-unstyled team-members">
+            <li>
+              <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <span><i class="fa fa-clock-o"></i> <%=accomplishment.date_accomplished.strftime("%B %e") %></span>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <%=accomplishment.remarks %><br>
+                  <small class="text-muted" data-toggle="tooltip" title="<%=accomplishment.recorder.full_name if accomplishment.recorder %>">
+                    <%=image_tag(accomplishment.recorder.profile_photo.url(:small), height: 30, width: 30, class: "img-circle") if accomplishment.recorder %>
+                    <%=accomplishment.recorder.full_name if accomplishment.recorder %>
+                  </small>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <%=accomplishment.quantity %> <%=accomplishment.work_detail.unit %></span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

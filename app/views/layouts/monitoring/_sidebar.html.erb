@@ -16,34 +16,34 @@
            <li class="<%="active" if current_page? monitoring_index_path %>">
                 <a href="/monitoring">
 
-                    <p><%=image_tag("dashboard.png", height: '45', width: '45', class: "img-circle") %> &nbsp; &nbsp; Dashboard</p>
+                    <p><%=image_tag("dashboard.png", height: '35', width: '35', class: "img-circle") %> &nbsp; &nbsp; Dashboard</p>
                 </a>
             </li>
             <li class="<%="active" if current_page? monitoring_projects_path %>">
                  <a href="/monitoring/projects">
 
-                     <p> <%=image_tag("project_icon.png", height: '45', width: '45', class: "img-circle") %> &nbsp; &nbsp;Projects</p>
+                     <p> <%=image_tag("project_icon.png", height: '35', width: '35', class: "img-circle") %> &nbsp; &nbsp;Projects</p>
                  </a>
              </li>
 
              <li class="<%="active" if current_page? monitoring_payments_path %>">
                   <a href="/monitoring/payments">
 
-                      <p>  <%=image_tag("payment_icon.png", height: '45', width: '45') %> &nbsp; &nbsp; Payments</p>
+                      <p>  <%=image_tag("payment_icon.png", height: '35', width: '35') %> &nbsp; &nbsp; Payments</p>
                   </a>
               </li>
 
               <li class="<%="active" if current_page? contractors_path %>">
                    <a href="/monitoring/contractors">
 
-                       <p><%=image_tag("contractor.png", height: '45', width: '45') %> &nbsp; &nbsp; Contractors</p>
+                       <p><%=image_tag("contractor.png", height: '35', width: '35') %> &nbsp; &nbsp; Contractors</p>
                    </a>
                </li>
 
                <li class="<%#="active" if current_page? equipment_index_path %>">
                     <a href="/monitoring/equipment">
 
-                        <p><%=image_tag("equipment_icon.png", height: '45', width: '45', class: "img-circle") %> &nbsp; &nbsp; Equipment</p>
+                        <p><%=image_tag("equipment_icon.png", height: '35', width: '35', class: "img-circle") %> &nbsp; &nbsp; Equipment</p>
                     </a>
                 </li>
 
@@ -79,9 +79,9 @@
 
                      <li class="dropdown">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                 <i class="fa fa-user"></i>
+                                
 
-               <p><%=image_tag(current_user.profile_photo.url(:x_small), class: "img-circle") %></p>
+               <p><%=image_tag(current_user.profile_photo.url(:x_small), class: "img-circle") %> <%=current_user.first_name %></p>
 
                <b class="caret"></b>
                            </a>
@@ -89,7 +89,7 @@
                              <li><a href="#">Notification 1</a></li>
                              <li><a href="#">Notification 2</a></li>
                              <li><a href="#">Notification 3</a></li>
-                             <li><a href="#">Notification 4</a></li>
+                             <li><a href="#">Notification 3</a></li>
                             <li><%=link_to "Sign out", destroy_user_session_path, method: :delete %></li>
                            </ul>
                      </li>

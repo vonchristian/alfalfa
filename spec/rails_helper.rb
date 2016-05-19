@@ -12,13 +12,18 @@ require "paperclip/matchers"
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :webkit
 RSpec.configure do |config|
+  config.include Warden::Test::Helpers
+  config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
   config.infer_spec_type_from_file_location!
    config.include Rails.application.routes.url_helpers
    config.include RSpec::Rails::RequestExampleGroup, type: :feature
    config.include FactoryGirl::Syntax::Methods
    config.include ActiveSupport::Testing::TimeHelpers
    config.include Paperclip::Shoulda::Matchers
-
+   config.before :suite do
+     Warden.test_mode!
+   end
    Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec

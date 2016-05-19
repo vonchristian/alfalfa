@@ -15,8 +15,8 @@
         <% end %>
       </div>
       <div class="col-md-6 col-xs-4">
-      <%=link_to new_monitoring_project_path do %>
-        <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Project"><i class="fa fa-plus"></i></span>
+      <%=link_to new_monitoring_project_path, class: 'new_project' do %>
+        <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-plus"></i>New Project</span>
       <% end %>
     </div>
   </div>
@@ -32,7 +32,7 @@
             <hr>
           </div>
           <div class="content">
-            <p class=""><%=project.name.truncate(150) %></p>
+            <p class=""><%=project.name.truncate(200) %></p>
 
             <% project.contractors.each do |contractor| %>
             <%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle", title: "#{contractor.name}") %>

@@ -3,7 +3,7 @@ module Monitoring
     layout "monitoring"
     def index
       @project = Project.find(params[:project_id])
-      @work_details = @project.work_details
+      @work_details = @project.work_details.page(params[:page]).per(50)
     end
     def new
       @project = Project.find(params[:project_id])
