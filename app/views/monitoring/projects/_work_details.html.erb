@@ -27,7 +27,7 @@
       <tbody>
         <%@work_details.each do |work_detail| %>
           <tr>
-            <td><p><%=link_to work_detail.description, monitoring_work_detail_path(work_detail) %></p></td>
+            <td><p><%=work_detail.description %></p></td>
             <td>
               <span><%=work_detail.quantity %> <%=work_detail.unit %></span>
               <br> <small class="text-muted"><%=work_detail.created_at.strftime("%m %d, %Y") %></small>

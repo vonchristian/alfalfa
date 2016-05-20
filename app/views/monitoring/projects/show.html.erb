@@ -10,27 +10,29 @@
             <div class="row">
               <div class="col-xs-8">
                 <i class="fa fa-clock-o text-success"></i> &nbsp; Notice to Proceed
+                <br>
+                <%  if @project.notice_to_proceed.present? %>
+                  &nbsp; &nbsp; &nbsp; &nbsp;  <%=@project.notice_to_proceed.date.strftime("%B %e, %Y") %>
+                <% else %>
+                  <span class="text-muted">&nbsp; &nbsp; &nbsp; &nbsp;  No NTP yet </span>
+                <% end %>
 
             </div>
             <div class="col-xs-4">
               <% if @project.notice_to_proceed.blank? %>
                 <%=link_to new_monitoring_project_notice_to_proceed_path(@project) do %>
-                  <span class="btn btn-success btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Add NTP"><i class="fa fa-plus"></i> </span>
+                  <span class="btn btn-success btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="Add NTP"><i class="fa fa-plus"></i> </span>
                 <% end %>
               <% else %>
                 <%=link_to edit_monitoring_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Edit NTP' do %>
-                  <span class="btn btn-warning btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Edit NTP"><i class="fa fa-pencil"></i> </span>
+                  <span class="btn btn-warning btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="Edit NTP"><i class="fa fa-pencil"></i> </span>
                 <% end %>
               <% end %>
             </div>
           </div>
           <div class="row">
             <div class="col-md-8">
-              <%  if @project.notice_to_proceed.present? %>
-                  &nbsp; &nbsp; &nbsp; &nbsp;  <%=@project.notice_to_proceed.date.strftime("%B %e, %Y") %>
-              <% else %>
-                    <span class="text-muted">&nbsp; &nbsp; &nbsp; &nbsp;  No NTP yet </span>
-              <% end %>
+              
             </div>
           </div>
           </li>
@@ -40,13 +42,13 @@
                 <i class="fa fa-money text-success"></i>  &nbsp; Contract Amount
                 <br>
 
-                  &nbsp; &nbsp; &nbsp; &nbsp;    <%= number_to_currency @project.cost %>
+                  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <%= number_to_currency @project.cost %>
 
             </div>
           </li>
           <li>
             <div class="row">
-              <div class="col-xs-5">
+              <div class="col-xs-12">
                   <i class="fa fa-map-marker text-success"></i>  &nbsp; Location
               </div><br>
 
@@ -58,7 +60,7 @@
           </li>
           <li>
             <div class="row">
-              <div class="col-xs-5">
+              <div class="col-xs-12">
                   <i class="fa fa-calendar text-success"></i>  &nbsp; Duration
               </div>
               <br>

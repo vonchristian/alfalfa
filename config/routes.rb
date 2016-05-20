@@ -33,7 +33,7 @@ end
       resources :payments, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
-    resources :work_details, only:[:index, :show] do
+    resources :work_details, only:[:index, :show, :edit] do
       resources :work_accomplishments, only: [:new, :create]
     end
     resources :payments, only:[:index]
