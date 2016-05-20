@@ -1,4 +1,4 @@
-<%= simple_form_for @contractor do |f| %>
+<%= simple_form_for [:monitoring, @contractor], url: :monitoring_contractors do |f| %>
           <%=f.error_notification %>
 <div class="col-md-6 col-md-offset-3">
   <div class="card">
@@ -7,7 +7,7 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        
+
         <%= image_tag @contractor.profile_photo.url(:medium), class: 'center-block img-rounded'%>
         <center><%= f.input :profile_photo, class: 'center-block', as: :file %></center>
         <br>
@@ -21,7 +21,7 @@
         </div>
         <%=f.input :company, label: false, placeholder: "Company Name" %>
         <%=f.input :position, label: false, placeholder: "Position" %>
-        <%=f.input :main_contractor, label: "Main Contractor?" %>
+        <%=f.input :main_contractor, as: :radio_buttons, label: "Main Contractor?" %>
         <div class="modal-footer">
           <%= link_to "Cancel", monitoring_contractors_path, class: "btn btn-xs pull-left" %>
           <%=f.submit 'Save Contractor', class: 'btn btn-primary' %>

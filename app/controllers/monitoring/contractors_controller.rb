@@ -11,6 +11,19 @@ module Monitoring
       authorize User
     end
 
+    def new
+      @contractor = Contractor.new
+    end
+
+    def create
+      @contractor = Contractor.create(contractor_params)
+      if @contractor.save
+        redirect_to monitoring_contractor_path(@contractor), notice: "Contractor saved successfully."
+      else
+        render :new
+      end
+    end
+
     def show
       @contractor = Contractor.find(params[:id])
     end
@@ -26,6 +39,11 @@ module Monitoring
       else
         render :edit
       end
+    end
+
+    private
+    def contractor_params
+      params.require(:contractor).permit(:first_name, :last_name, :company, :main_contractor, :position)
     end
   end
 end

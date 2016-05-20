@@ -21,7 +21,7 @@
         </div>
         <%=f.input :company, label: false, placeholder: "Company Name" %>
         <%=f.input :position, label: false, placeholder: "Position" %>
-        <%=f.input :main_contractor, label: "Main Contractor?", as: :radio_buttons %>
+        <%=f.input :main_contractor, label: "Main Contractor?" %>
         <div class="modal-footer">
           <%= link_to "Cancel", monitoring_contractors_path, class: "btn  pull-left" %>
           <%=f.submit 'Save Contractor', class: 'btn btn-primary' %>

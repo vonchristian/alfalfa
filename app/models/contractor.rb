@@ -7,11 +7,9 @@ class Contractor < ActiveRecord::Base
 
   has_many :contracts
   has_many :projects, through: :contracts
-  has_many :issued_inventories, as: :inventoriable
-
   has_many :orders, as: :customer, foreign_key: "customer_id", class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
-
+  validates :first_name, :last_name, :company, :position, presence: true
   def self.entered_on(hash={})
     if hash[:from_date] && hash[:to_date] && params[:project_id]
       from_date = hash[:from_date].kind_of?(Time) ? hash[:from_date] : Time.parse(hash[:from_date].strftime('%Y-%m-%d 12:00:00'))
