@@ -35,7 +35,11 @@ end
       resources :time_extensions, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
+<<<<<<< HEAD
     resources :work_details, only:[:index, :show, :edit, :update] do
+=======
+    resources :work_details, only:[:index, :show, :edit] do
+>>>>>>> 3dae8c1c61c2eba2530e15e92058ff527589a8f4
       resources :work_accomplishments, only: [:new, :create]
       resources :amount_revisions, only: [:new, :create]
       resources :time_extensions, only: [:new, :create]

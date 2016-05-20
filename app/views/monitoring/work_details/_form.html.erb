@@ -15,7 +15,7 @@
     <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %>
     <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
     <div class="modal-footer">
-      <%=f.submit "Save Work Detail", class: "btn btn-primary pull-right" %>
-      <%=link_to "Cancel", monitoring_project_path(@project) , class: "btn btn-default pull-left"%>
+      <%=link_to "Cancel", monitoring_project_path(@project) , class: "btn btn-xs pull-left"%>
+      <%=f.submit "Save", class: "btn btn-primary pull-right" %>
     </div>
 <% end %>
