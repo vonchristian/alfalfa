@@ -17,7 +17,7 @@ module Monitoring
       authorize @work_detail
       if @work_detail.save
         @work_detail.create_activity :create, owner: current_user, recipient: @work_detail
-        redirect_to new_monitoring_project_work_detail_path(@project), notice: "Work Detail added successfully."
+        redirect_to new_monitoring_project_work_detail_path(@project), notice: "Work Detail saved successfully."
       else
         render :new
       end

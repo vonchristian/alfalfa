@@ -1,7 +1,7 @@
 <div class="card">
   <div class="header">
     <h5 class="title"> <%=image_tag("work_detail_icon.png", height: '35', width: '35') %>( <%=@project.work_details.count%> ) Work Details
-      <%=link_to new_monitoring_project_work_detail_path(@project) do %>
+      <%=link_to new_monitoring_project_work_detail_path(@project), title: "Add New Work Detail" do %>
       <span class="btn btn-primary btn-icon btn-sm pull-right" data-toggle="tooltip" data-placement="bottom" title="Add New Work Detail"><i class="fa fa-plus"></i></span>
       <% end %>
     </h5>

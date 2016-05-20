@@ -13,7 +13,7 @@ module Monitoring
       if @work_accomplishment.save
         @work_accomplishment.unpaid!
          @work_accomplishment.create_activity :create, owner: current_user, recipient: @work_detail.project
-        redirect_to monitoring_work_detail_path(@work_detail), notice: "Work accomplished recorded successfully"
+        redirect_to monitoring_work_detail_path(@work_detail), notice: "Work accomplishment saved successfully."
       else
         render :new
       end

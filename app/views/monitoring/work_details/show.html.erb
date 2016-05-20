@@ -57,9 +57,9 @@
     <div class="card">
       <div class="header">
         <h5 class="title">
-          <%=image_tag("reporting.png", height: 35, width: 35, class: "img-square" )%> Accomplishments
-          <%=link_to new_monitoring_work_detail_work_accomplishment_path(@work_detail) do %>
-            <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Accomplishment"><i class="fa fa-plus"></i></span>
+          <%=image_tag("reporting.png", height: 35, width: 35 )%> Accomplishments
+          <%=link_to new_monitoring_work_detail_work_accomplishment_path(@work_detail), title: "New Work Accomplishment" do %>
+            <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Work Accomplishment"><i class="fa fa-plus"></i></span>
           <% end %>
         </h5>
         <hr>
