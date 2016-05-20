@@ -39,7 +39,6 @@ Equity.create(code: 430, :name => "Current Period Net Income" )
 
 Revenue.create(code: 500, :name => "Revenue")
 
-
 Expense.create(code: 710, :name => "Rent and Lease Payments")
 Expense.create(code: 720, :name => "Depreciation")
 Expense.create(code: 730, :name => "Repairs and Maintenance")
@@ -47,7 +46,6 @@ Expense.create(code: 740, :name => "Fuel and Lubrication")
 Expense.create(code: 750, :name => "Taxes, Licenses, and Insurance")
 Expense.create(code: 798, :name => "Equipment Cost Charged to Employee")
 Expense.create(code: 799, :name => "Equipment Cost Charged to Jobs")
-
 Expense.create(code: 805, :name => "Advertising")
 Expense.create(code: 806, :name => "Promotion")
 Expense.create(code: 810, :name => "Car and Truck Expenses")

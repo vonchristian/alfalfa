@@ -67,12 +67,12 @@ class Project < ActiveRecord::Base
     cost - contracts.sum(:amount_subcontracted)
   end
 
-  def total_collection
+  def total_payments
     self.payments.map{|a| a.credit_amounts.sum(:amount)}.sum
   end
 
-  def remaining_collection
-    revised_contract_amount -  total_collection
+  def remaining_payments
+    revised_contract_amount -  total_payments
   end
   def total_expenses
     expenses.joins(:debit_amounts).sum(:amount)

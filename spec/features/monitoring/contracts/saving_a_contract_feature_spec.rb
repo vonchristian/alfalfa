@@ -12,7 +12,7 @@ feature "Contract management" do
       contractor = create(:contractor, company: "Alfalfa")
       visit monitoring_project_path(project)
       click_link "New Sub Contractor"
-      choose "Alfalfa"
+      select "Alfalfa"
       fill_in "Amount subcontracted", with: 100_000
       click_button "Save Contract"
 
