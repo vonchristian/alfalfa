@@ -21,8 +21,8 @@
                   </div>
                   <div class="col-xs-4">
                     <% if @project.notice_to_proceed.blank? %>
-                      <%=link_to new_monitoring_project_notice_to_proceed_path(@project) do %>
-                        <span class="btn btn-success btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Add NTP"><i class="fa fa-plus"></i> </span>
+                      <%=link_to new_monitoring_project_notice_to_proceed_path(@project), title: "Add Notice To Proceed" do %>
+                        <span class="btn btn-success btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Notice To Proceed"><i class="fa fa-plus"></i> </span>
                       <% end %>
                     <% else %>
                       <%=link_to edit_monitoring_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Edit NTP' do %>
