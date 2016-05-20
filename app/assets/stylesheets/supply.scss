@@ -214,6 +214,42 @@ button:focus {
   transition: all 150ms ease-in;
 }
 
+.sidebar .nav p .caret {
+  float: right;
+  margin-top: 12px;
+}
+
+.sidebar .nav [data-toggle="collapse"] ~ div > ul > li > a {
+  padding: 3px 5px 3px 60px;
+}
+
+.sidebar .user {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 0;
+}
+
+.sidebar .user .photo {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  margin: 0 auto;
+}
+
+.sidebar .user .photo img,
+.bootstrap-navbar .user .photo img {
+  width: 100%;
+}
+.sidebar .user a,
+.bootstrap-navbar .user a {
+  text-align: center;
+  color: #66615B;
+  padding: 8px 14px;
+  text-align: center;
+  display: block;
+}
+
 .btn {
   -webkit-transition: all 100ms ease-in;
   -moz-transition: all 100ms ease-in;
@@ -242,6 +278,10 @@ hr {
 
 .with-padding {
   margin-bottom: 20px;
+}
+
+.no-top-padding {
+  margin-top: 0px;
 }
 
 .wrapper {
@@ -289,7 +329,7 @@ hr {
 .sidebar .logo,
 .off-canvas-sidebar .logo {
   padding: 18px 0px;
-  margin: 0 20px;
+  margin: 0 1px;
 }
 .sidebar .logo p,
 .off-canvas-sidebar .logo p {
@@ -310,7 +350,7 @@ hr {
 }
 .sidebar .nav,
 .off-canvas-sidebar .nav {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .sidebar .nav li > a,
 .off-canvas-sidebar .nav li > a {

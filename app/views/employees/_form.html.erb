@@ -1,7 +1,7 @@
 <%= simple_form_for @employee do |f| %>
   <%=f.error_notification %>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-5 col-md-offset-3">
       <div class="card">
         <div class="header">
           <h4 class="title"> Employee Details </h4>
@@ -13,23 +13,17 @@
 
           <div class="row"><hr class="with-padding"></div>
 
-          <div class="row">
-            <div class="col-md-5">
-              <%=f.input :first_name, autofocus: true,  placeholder: "First Name" %>
+          <%=f.input :first_name, autofocus: true,  placeholder: "First Name" %>
 
-              <%=f.input :last_name, placeholder: "Last Name"  %>
+          <%=f.input :last_name, placeholder: "Last Name"  %>
 
-              <%=f.input :mobile_number,  placeholder: "Mobile Number" %>
-              <%=f.input :email, placeholder: "Email"  %>
-            </div>
-            <div class="col-md-5 col-md-offset-1">
-              <% if current_user.accounting_officer? %>
-                <%=f.input :position, collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
-              <% end %>
+          <%=f.input :mobile_number,  placeholder: "Mobile Number" %>
+          <%=f.input :email, placeholder: "Email"  %>
+          <% if current_user.accounting_officer? %>
+            <%=f.input :position, collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }, prompt: '--Select --' %>
+          <% end %>
 
-              <%=f.input :rate  %>
-            </div>
-          </div>
+          <%=f.input :rate  %>
           <div class="modal-footer">
             <%= link_to "Cancel", employees_path, class: 'btn btn-xs pull-left' %>
             <%=f.submit 'Save Employee', class: 'btn btn-primary' %>

@@ -2,11 +2,28 @@
   <div class="col-md-12">
     <div class="card">
       <div class="header">
-        <h4 class="title"> List of Employees
-          <%=link_to new_employee_path do %>
-            <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
-          <% end %>
-        </h4>
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="title"> List of Employees</h4>
+          </div>
+          <div class="col-md-6">
+            <%=form_tag employees_path, class: 'sidebar-form', method: :get do %>
+              <div class="input-group">
+                <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search Employee...' %>
+                <span class="input-group-btn">
+                  <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
+                    <i class="fa fa-search"></i>
+                  <% end %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <%=link_to new_employee_path do %>
+              <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
+            <% end %>
+          </div>
+        </div>
         <div class="row"><hr></div>
       </div>
       <div class="content">

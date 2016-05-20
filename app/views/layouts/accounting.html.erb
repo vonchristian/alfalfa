@@ -21,18 +21,21 @@
     <%= javascript_include_tag 'supplies/application' %>
     <%= csrf_meta_tags %>
   </head>
-   <body>
-   <div class="wrapper">
+  <body>
+    <div class="wrapper">
       <%# if user_signed_in? %>
-  <%=render 'layouts/accounting/sidebar' %>
+      <%=render 'layouts/accounting/sidebar' %>
       <%# end %>
-          <%=render 'layouts/flash' %>
-          <div class="content">
-            <div class="container-fluid">
-          <%= yield %>
+      <div class="main-panel">
+        <%=render 'layouts/accounting/navbar' %>
+        <%=render 'layouts/flash' %>
+        <div class="content">
+          <div class="container-fluid">
+            <%= yield %>
+          </div>
+        </div>
+        <%=render 'layouts/supplies/footer' %>
       </div>
-      </div>
-      <%=render 'layouts/supplies/footer' %>
     </div>
   </body>
 </html>
