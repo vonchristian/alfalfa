@@ -22,23 +22,7 @@
             <th>Remaining </th>
             <th style="width: 10%">% Acc.</th>
             <th> </th>
-            <td><p><%=work_detail.description %></p></td>
-            <td>
-              <span><%=work_detail.quantity %> <%=work_detail.unit %></span>
-              <br> <small class="text-muted"><%=work_detail.created_at.strftime("%m %d, %Y") %></small>
-            </td>
-            <td>
-              <span class="text-success"><%=work_detail.accomplished_quantity %> <%=work_detail.unit %></span>
-              <br />
-              <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
-            </td>
-            <td>
-              <span class="text-danger"><%=work_detail.remaining_quantity %> <%=work_detail.unit %></span>
-              <br />
-              <span class="text-muted"><small>updated last <%=Time.zone.now.strftime("%B %e, %Y")%></small></span>
-            </td>
-            <td>
-            </td>
+            
           </tr>
         </thead>
         <tbody>
