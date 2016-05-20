@@ -15,8 +15,7 @@
          <ul class="nav">
             <li class="<%="active" if current_page? supplies_path %>">
                  <a href="/supplies">
-                     <i class="fa fa-home"></i>
-                     <p>Store</p>
+                    <p> <%=image_tag("store.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Store</p>
                  </a>
              </li>
              <li class="<%="active" if current_page? supplies_inventories_path %>">
