@@ -43,7 +43,7 @@ module Monitoring
 
     private
     def contractor_params
-      params.require(:contractor).permit(:first_name, :last_name, :company, :main_contractor, :position)
+      params.require(:contractor).permit(:profile_photo, :first_name, :last_name, :company, :main_contractor, :position)
     end
   end
 end
