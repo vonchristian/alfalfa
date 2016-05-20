@@ -4,14 +4,37 @@
       <h4 class="title">Accomplishment Details </h4>
     </div>
     <div class="content">
-<%= simple_form_for [:monitoring, @work_detail, @work_accomplishment]  do |f| %>
-<%= f.error_notification %>
 <div class="row">
 <div class="col-md-6">
-        <h5 class="title"><%=@work_detail.description %></h5>
-        <h5 class="title">Remaining Quantity: <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %></h5>
+        <p class="title"><%=@work_detail.description %></p>
+        <br>
+        <ul class="list-unstyled team-members">
+          <li>
+            <div class="row">
+              <div class="col-md-6 text-success">
+                <%=image_tag("check_icon.png", height: 30, width: 30, class: "img-square" )%> &nbsp; Accomplished
+              </div>
+              <div class="col-md-4">
+                <%=@work_detail.accomplished_quantity %> <%=@work_detail.unit %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-md-6 text-danger">
+                <%=image_tag("remaining.png", height: 30, width: 30, class: "img-square" )%>  &nbsp; Remaining
+              </div>
+              <div class="col-md-4">
+                  <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %>
+              </div>
+            </div>
+          </li>
+        </ul>
 </div>
 <div class="col-md-5">
+  <%= simple_form_for [:monitoring, @work_detail, @work_accomplishment]  do |f| %>
+  <%= f.error_notification %>
+
           <%=f.input :quantity %>
           <%=f.input :date_accomplished,  as: :string, input_html:{:class => 'datetimepicker'} %>
           <%=f.input :remarks %>
@@ -21,9 +44,10 @@
         <%=f.submit "Save Work Accomplishment", class: "btn btn-primary bg-blue-active" %>
         <%=link_to "Cancel",monitoring_work_detail_path(@work_detail.project.id, @work_detail), class: "btn btn-default"%>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
-<% end %>
+
 </div>
 </div>

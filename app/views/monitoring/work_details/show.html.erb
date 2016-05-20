@@ -28,7 +28,7 @@
                 <%=image_tag("check_icon.png", height: 30, width: 30, class: "img-square" )%> &nbsp; Accomplished
               </div>
               <div class="col-md-4">
-                90
+                <%=@work_detail.accomplished_quantity %> <%=@work_detail.unit %>
               </div>
             </div>
           </li>
@@ -40,7 +40,7 @@
                 <%=image_tag("remaining.png", height: 30, width: 30, class: "img-square" )%>  &nbsp; Remaining
               </div>
               <div class="col-md-4">
-                67
+                  <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %>
               </div>
             </div>
           </li>
