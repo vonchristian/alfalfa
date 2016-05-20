@@ -27,7 +27,7 @@ module Monitoring
 
     private
     def amount_revision_params
-      params.require(:change_orders_amount_revision).permit(:amount, :date, :remarks)
+      params.require(:change_orders_amount_revision).permit(:amount, :date, :remarks, :quantity)
     end
   end
 end

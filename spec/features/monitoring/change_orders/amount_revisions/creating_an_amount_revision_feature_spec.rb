@@ -12,6 +12,7 @@ feature "Amount Revision" do
       work_detail = create(:work_detail, project: project)
       visit monitoring_work_detail_path(work_detail)
       click_link "New Amount Revision"
+      fill_in "Quantity", with: 2
       fill_in "Amount", with: 1_000_000
       fill_in "Date", with: Time.zone.now
       fill_in "Remarks", with: "Due to Variation Order #2"
@@ -21,4 +22,3 @@ feature "Amount Revision" do
     end
   end
 end
-  
