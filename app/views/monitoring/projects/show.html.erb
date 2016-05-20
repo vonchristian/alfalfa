@@ -1,177 +1,229 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     <div class="card">
       <div class="header">
+        <b>#<%=@project.id_number_and_location %></b>
       </div>
       <div class="content">
-        <p><%=@project.name.truncate(250) %></p><hr>
-        <ul class="list-unstyled team-members">
-          <li>
-            <div class="row">
-              <div class="col-xs-8">
-                <i class="fa fa-clock-o text-success"></i> &nbsp; Notice to Proceed
-
-            </div>
-            <div class="col-xs-4">
-              <% if @project.notice_to_proceed.blank? %>
-                <%=link_to new_monitoring_project_notice_to_proceed_path(@project) do %>
-                  <span class="btn btn-success btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Add NTP"><i class="fa fa-plus"></i> </span>
-                <% end %>
-              <% else %>
-                <%=link_to edit_monitoring_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Edit NTP' do %>
-                  <span class="btn btn-warning btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Edit NTP"><i class="fa fa-pencil"></i> </span>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
-              <%  if @project.notice_to_proceed.present? %>
-                  &nbsp; &nbsp; &nbsp; &nbsp;  <%=@project.notice_to_proceed.date.strftime("%B %e, %Y") %>
-              <% else %>
-                    <span class="text-muted">&nbsp; &nbsp; &nbsp; &nbsp;  No NTP yet </span>
-              <% end %>
-            </div>
-          </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-12">
-                <i class="fa fa-money text-success"></i>  &nbsp; Contract Amount
-                <br>
-
-                  &nbsp; &nbsp; &nbsp; &nbsp;    <%= number_to_currency @project.cost %>
-
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-5">
-                  <i class="fa fa-map-marker text-success"></i>  &nbsp; Location
-              </div><br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
-
-                <%= @project.address %>
-
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-5">
-                  <i class="fa fa-calendar text-success"></i>  &nbsp; Duration
-              </div>
-              <br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
-                <%= @project.duration %> Days
-
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-12">
-                  <i class="fa fa-building text-success"></i>  &nbsp; Implementing Office
-                  <br>
-
-
+        <p><%=@project.name %></p>
+        <%=link_to "Edit Project", edit_monitoring_project_path(@project), class: "btn btn-warning btn-sm" %>
+        <br>
+        <hr>
+        <br>
+        <div class="row">
+          <div class="col-md-4">
+            <ul class="list-unstyled team-members">
+              <li>
+                <div class="row">
+                  <div class="col-xs-8">
+                    <i class="fa fa-clock-o text-success"></i> &nbsp; Notice to Proceed
+                  </div>
+                  <div class="col-xs-4">
+                    <% if @project.notice_to_proceed.blank? %>
+                      <%=link_to new_monitoring_project_notice_to_proceed_path(@project) do %>
+                        <span class="btn btn-success btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Add NTP"><i class="fa fa-plus"></i> </span>
+                      <% end %>
+                    <% else %>
+                      <%=link_to edit_monitoring_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Edit NTP' do %>
+                        <span class="btn btn-warning btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Edit NTP"><i class="fa fa-pencil"></i> </span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <%  if @project.notice_to_proceed.present? %>
+                      &nbsp; &nbsp; &nbsp; &nbsp;  <%=@project.notice_to_proceed.date.strftime("%B %e, %Y") %>
+                    <% else %>
+                      <span class="text-muted">&nbsp; &nbsp; &nbsp; &nbsp;  No NTP yet </span>
+                    <% end %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <i class="fa fa-clock-o text-danger"></i>  &nbsp; Expiry Date
+                    <br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; <%= @project.expiry_date %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <i class="fa fa-money text-success"></i>  &nbsp; Contract Amount
+                    <br>
+                    &nbsp; &nbsp; &nbsp; &nbsp;    <%= number_to_currency @project.cost %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <i class="fa fa-map-marker text-success"></i>  &nbsp; Location
+                    <br>
                     &nbsp; &nbsp; &nbsp; &nbsp;
-                  <%= @project.implementing_office %>
-
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-12">
-                  <i class="fa fa-user text-success"></i>  &nbsp; Main Contractor
-                <br>
-
-
-                   &nbsp; &nbsp; &nbsp;  &nbsp;
-                  <%= @project.main_contractor %>
-
-
-              </div>
-            </div>
-          </li>
-          <li>
+                    <%= @project.address %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <i class="fa fa-calendar text-success"></i>  &nbsp; Duration
+                    <br>
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+                    <%= @project.duration %> Days
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <i class="fa fa-building text-success"></i>  &nbsp; Implementing Office
+                    <br>
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+                    <%= @project.implementing_office %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <i class="fa fa-user text-success"></i>  &nbsp; Main Contractor
+                    <br>
+                    &nbsp; &nbsp; &nbsp;  &nbsp;
+                    <%= @project.main_contractor %>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-md-offset-1">
+            <h5 class="title"> Project Status </h5>
+            <ul class="list-unstyled team-members">
+              <li>
+                <%=image_tag("target.png", height: 25, width: 25) %> &nbsp;  Target Accomplishment
+                <span class="pull-right"> <%=@project.target_accomplishment %> % </span>
+              </li>
+              <li>
+                <%=image_tag("engineer.png", height: 25, width: 25) %> &nbsp; Actual Accomplishment
+                <span class="pull-right text-success"> <%=@project.actual_accomplishment %> % </span>
+              </li>
+              <li>
+                <%=image_tag("reporting.png", height: 25, width: 25) %> &nbsp; Slippage
+                <span class="pull-right text-danger"> <%=@project.slippage %> % </span>
+              </li>
+            </ul>
             <br>
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2">
-                <%=link_to "Update", edit_monitoring_project_path(@project), class: "btn btn-primary btn-block" %>
-              </div>
-            </div>
-          </li>
-        </ul>
+            <h5 class="title"> Revisions </h5>
+            <ul class="list-unstyled team-members">
+              <li>
+                <div class="row">
+                  <div class="col-md-6 col-xs-6">
+                    <%=image_tag("coin.png", height: 25, width: 25) %> &nbsp; Amount Revisions
+                  </div>
+                  <div class="col-md-3 col-xs-3">
+                    <span> <%=@project.amount_revisions.total %> </span>
+                  </div>
+                  <div class="col-md-3 col-xs-3">
+                    <%=link_to "View All", monitoring_project_amount_revisions_path(@project), class: "btn btn-info btn-xs pull-right" %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-md-6 col-xs-6">
+                    <%=image_tag("calendar.png", height: 25, width: 25) %> &nbsp; Time Extensions
+                  </div>
+                  <div class="col-md-3 col-xs-3">
+                    <span> <%=@project.time_extensions.total %> </span>
+                  </div>
+                  <div class="col-md-3 col-xs-3">
+                    <%=link_to "View All", monitoring_project_path(@project), class: "btn btn-info btn-xs pull-right" %>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-8">
+</div>
+<div class="row">
+  <div class="col-md-12">
     <%=render 'work_details' %>
   </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="header">
-            <h4 class="title"><%=image_tag("payment_icon.png", height: '35', width: '35') %> Collections</h4>
-            <hr>
-          </div>
-          <div class="content">
-
-          </div>
-        </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h5 class="title"><%=image_tag("payment_icon.png", height: '35', width: '35') %> Payments</h5>
+        <hr>
       </div>
-      <div class="col-md-6">
-        <div class="card">
-          <div class="header">
-            <h4 class="title"> <%=image_tag("contractor.png", height: '35', width: '35') %> Sub Contractors
-              <span class="pull-right">
-                <%=link_to new_monitoring_project_contract_path(@project), title: "New Sub Contractor" do %>
-                  <span class="btn btn-info btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Sub Contractor"><i class="fa fa-user-plus"></i></span>
-                <% end %>
-              </span>
-            </h4>
-            <hr>
-          </div>
-          <div class="content">
-            <table class="">
-              <%@project.contracts.each do |contract| %>
-                <tr>
-                  <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
-                  <td>
-                    <%= link_to monitoring_contract_path(contract) do %>
-                      <%=contract.contractor %><br>
-                      <small class="text-muted"><%=contract.contractor.full_name %></small><br>
-                      <small class="text-danger"><%= number_to_currency contract.amount_subcontracted%></small><br><br>
-                    <% end %>
-
-                  </td>
-
-
-
-                </tr>
-              <% end %>
-            </table>
-          </div>
-        </div>
+      <div class="content">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="header">
-            <h4 class="title"><%=image_tag("expenses_icon.png", height: '35', width: '35')%> Expenses </h4>
-            <hr>
-          </div>
-          <div class="content">
-            <p> Materials </p>
-            <p> Equipment </p>
-            <p> Labor </p>
-            <p> Overhead <p>
-          </div>
-        </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h5 class="title"> <%=image_tag("contractor.png", height: '35', width: '35') %> Sub Contractors
+          <span class="pull-right">
+            <%=link_to new_monitoring_project_contract_path(@project), title: "New Sub Contractor" do %>
+              <span class="btn btn-info btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Sub Contractor"><i class="fa fa-user-plus"></i></span>
+            <% end %>
+          </span>
+        </h5>
+        <hr>
+      </div>
+      <div class="content">
+        <table>
+          <%@project.contracts.each do |contract| %>
+            <tr>
+              <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
+              <td>
+                <%= link_to monitoring_contract_path(contract) do %>
+                  <%=contract.contractor %><br>
+                  <small class="text-muted"><%=contract.contractor.full_name %></small><br>
+                  <small class="text-danger"><%= number_to_currency contract.amount_subcontracted%></small><br><br>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"><%=image_tag("expenses_icon.png", height: '35', width: '35')%> Expenses </h4>
+        <hr>
+      </div>
+      <div class="content">
+          <ul class="list-unstyled team-members">
+            <li>
+              <%=image_tag("target.png", height: 25, width: 25) %> &nbsp;  Materials
+              <span class="pull-right"> <%=@project.target_accomplishment %> % </span>
+            </li>
+            <li>
+              <%=image_tag("engineer.png", height: 25, width: 25) %> &nbsp; Labor
+              <span class="pull-right text-success"> <%=@project.actual_accomplishment %> % </span>
+            </li>
+            <li>
+              <%=image_tag("excavator.png", height: 25, width: 25) %> &nbsp; Equipment
+              <span class="pull-right text-danger"> <%=@project.slippage %> % </span>
+            </li>
+          </ul>
+          <br>
+
       </div>
     </div>
   </div>

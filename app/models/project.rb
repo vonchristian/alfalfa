@@ -8,29 +8,23 @@ class Project < ActiveRecord::Base
   scope :joint_ventures, -> { where(type: 'JointVenture') }
 
   has_many :payments, as: :entriable, class_name: "Accounting::Entry"
-  has_many :invoices, as: :invoiceable, foreign_key: 'invoiceable_id'
   has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id'
   belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
   belongs_to :category
   has_many  :employments
   has_many :employees, through: :employments
   has_many :work_details
-  has_many :equipment_costs, through: :work_details
-  has_many :expenses, class_name: "Plutus::Entry", foreign_key: "commercial_document_id"
-  has_many :activities, class_name: "PublicActivity::Activity", foreign_key: "trackable_id"
+  has_many :amount_revisions, through: :work_details
+  has_many :time_extensions, through: :work_details
   has_many :contracts
   has_many :contractors, through: :contracts
   has_many :work_accomplishments, through: :work_details
-  has_many :workers, class_name: "Employee"
-  has_many :remarks
   has_many :attachment_files
-  has_many :issued_inventories
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
 
   has_many :orders, as: :customer, class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
-
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true

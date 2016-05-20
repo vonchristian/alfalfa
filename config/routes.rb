@@ -31,6 +31,7 @@ end
       resources :contracts, only: [:new, :create]
       resource :notice_to_proceed, only: [:new, :create, :edit, :update]
       resources :payments, only: [:index]
+      resources :amount_revisions, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
     resources :work_details, only:[:index, :show, :edit, :update] do

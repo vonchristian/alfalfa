@@ -1,0 +1,25 @@
+<div class="col-md-6 col-md-offset-3">
+  <div class="card">
+    <div class="header">
+      <h5 class="title"><%=image_tag("coin.png", height: 30, width: 30) %> Amount Revisions </h5>
+      <hr>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <span data-toggle="tooltip" data-placement="right" title="Back to Project">
+            <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle"), monitoring_project_path(@project)  %>
+          </span>
+        </div>
+        <div class="col-md-9">
+          <p><%=@project.name %></p>
+        </div>
+      </div>
+      <%@amount_revisions.each do |amount_revision| %>
+      <ul class="list-unstyled team-members">
+        <%=amount_revision.amount %>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -50,7 +50,7 @@ def site_name
 
   def root_path
     if user_signed_in? && current_user.project_engineer?
-      projects_url
+      monitoring_projects_path
     elsif user_signed_in? && current_user.accounting_officer?
       accounting_petty_cash_index_url
     else
@@ -61,7 +61,7 @@ def site_name
 
     def root_url
       if user_signed_in? && current_user.project_engineer?
-        projects_url
+        monitoring_projects_url
       elsif user_signed_in? && current_user.accounting_officer?
         accounting_petty_cash_index_url
       else
