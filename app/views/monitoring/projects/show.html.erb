@@ -128,7 +128,7 @@
           <div class="header">
             <h4 class="title"> <%=image_tag("contractor.png", height: '35', width: '35') %> Sub Contractors
               <span class="pull-right">
-                <%=link_to new_monitoring_project_contract_path(@project) do %>
+                <%=link_to new_monitoring_project_contract_path(@project), title: "New Sub Contractor" do %>
                   <span class="btn btn-info btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Sub Contractor"><i class="fa fa-user-plus"></i></span>
                 <% end %>
               </span>

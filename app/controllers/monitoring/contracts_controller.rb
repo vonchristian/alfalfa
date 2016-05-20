@@ -12,7 +12,7 @@ module Monitoring
       authorize @contract
       if @contract.save
         @contract.create_activity :create, owner: current_user, trackable: @project
-        redirect_to monitoring_project_url(@project), notice: "Contractor added successfully."
+        redirect_to monitoring_project_url(@project), notice: "Contract saved successfully."
       else
         render :new
       end
