@@ -1,4 +1,4 @@
-<%= simple_form_for [@project, @work_detail], url: :monitoring_project_work_details do |f| %>
+<%= simple_form_for [:monitoring, @project, @work_detail] do |f| %>
   <%=f.error_notification %>
     <h4 class="title">New Work Detail</h4>
     <hr>

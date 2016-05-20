@@ -7,23 +7,23 @@
     </div>
     <div class="content">
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-5">
           <div class="box-header with-border">
           </div>
           <table class="table table-hover">
             <thead>
               <tr class="text-uppercase">
-                <th style="width: 60%">Description</th>
-                <th><span class="pull-right">Cost</span></th>
-                <th></th>
+                <th>Description</th>
+                <th>Cost</th>
+
               </tr>
             </thead>
             <tbody>
               <% if @project.work_details.present? %>
                 <% @project.work_details.each do |work_detail| %>
                   <tr>
-                    <td style="width: 30%" ><%= work_detail.description %></td>
-                    <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
+                    <td><%= work_detail.description.try(:truncate, 100) %></td>
+                    <td><span><%=number_to_currency work_detail.total_cost %></span></td>
                   </tr>
                 <% end %>
                 <tr>
@@ -34,7 +34,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5 col-md-offset-2">
           <%= render 'form' %>
         </div>
       </div>
