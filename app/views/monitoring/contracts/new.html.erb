@@ -6,7 +6,7 @@
     <div class="content">
       <%= simple_form_for [@project, @contract], url: :monitoring_project_contracts do |f| %>
         <%=f.error_notification %>
-        <%=f.input :contractor_id, collection: Contractor.all.map{|a| [a.company, a.id]}, as: :radio_buttons %>
+        <%=f.input :contractor_id, collection: Contractor.all.map{|a| [a.company, a.id]} %>
         <%=f.input :amount_subcontracted%>
         <div class="modal-footer">
           <%=f.submit "Save Contract", class: "btn btn-primary" %>

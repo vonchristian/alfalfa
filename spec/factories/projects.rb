@@ -6,6 +6,7 @@ FactoryGirl.define do
     address "Kiangan, Ifugao"
     duration "120"
     implementing_office "DPWH"
+    created_at Time.zone.now.yesterday
     cost   {Faker::Number.number(6)}
   end
 end

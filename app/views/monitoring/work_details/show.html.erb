@@ -25,10 +25,10 @@
               <div class="col-md-2">
               </div>
               <div class="col-md-6 text-success">
-                <%=image_tag("excavator.png", height: 35, width: 35, class: "img-square" )%> &nbsp; Accomplished
+                <%=image_tag("check_icon.png", height: 30, width: 30, class: "img-square" )%> &nbsp; Accomplished
               </div>
               <div class="col-md-4">
-                90
+                <%=@work_detail.accomplished_quantity %> <%=@work_detail.unit %>
               </div>
             </div>
           </li>
@@ -37,10 +37,10 @@
               <div class="col-md-2">
               </div>
               <div class="col-md-6 text-danger">
-                <%=image_tag("excavator.png", height: 35, width: 35, class: "img-square" )%>  &nbsp; Remaining
+                <%=image_tag("remaining.png", height: 30, width: 30, class: "img-square" )%>  &nbsp; Remaining
               </div>
               <div class="col-md-4">
-                67
+                  <%=@work_detail.remaining_quantity %> <%=@work_detail.unit %>
               </div>
             </div>
           </li>
@@ -96,9 +96,11 @@
             <li>
               <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
-                  <span><i class="fa fa-clock-o"></i> <%=accomplishment.date_accomplished.strftime("%B %e") %></span>
+                  <br>
+                    <%=accomplishment.quantity %> <%=accomplishment.work_detail.unit %></span>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
+                  <small class="text-muted pull-right"><i class="fa fa-clock-o"></i><%=accomplishment.date_accomplished.strftime("%B %e, %Y") %></small><br>
                   <%=accomplishment.remarks %><br>
                   <small class="text-muted" data-toggle="tooltip" title="<%=accomplishment.recorder.full_name if accomplishment.recorder %>">
                     <%=image_tag(accomplishment.recorder.profile_photo.url(:small), height: 30, width: 30, class: "img-circle") if accomplishment.recorder %>
@@ -106,7 +108,7 @@
                   </small>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3">
-                    <%=accomplishment.quantity %> <%=accomplishment.work_detail.unit %></span>
+
                 </div>
               </div>
             </li>

@@ -32,7 +32,7 @@ module Monitoring
       @work_detail = WorkDetail.find(params[:id])
       authorize @work_detail
       if @work_detail.update(work_detail_params)
-        redirect_to project_path(@work_detail.project), notice: "Work detail updated successfully."
+        redirect_to monitoring_project_path(@work_detail.project), notice: "Work detail updated successfully."
       else
         render :new
       end

@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   scope :joint_ventures, -> { where(type: 'JointVenture') }
 
   has_many :payments, as: :entriable, class_name: "Accounting::Entry"
-  has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id'
+  has_one    :notice_to_proceed, class_name: "ProjectDetails::NoticeToProceed", foreign_key: 'project_id', dependent: :destroy
   belongs_to :main_contractor, class_name: "Contractor", foreign_key: 'main_contractor_id'
   belongs_to :category
   has_many  :employments
@@ -67,12 +67,12 @@ class Project < ActiveRecord::Base
     cost - contracts.sum(:amount_subcontracted)
   end
 
-  def total_collection
+  def total_payments
     self.payments.map{|a| a.credit_amounts.sum(:amount)}.sum
   end
 
-  def remaining_collection
-    revised_contract_amount -  total_collection
+  def remaining_payments
+    revised_contract_amount -  total_payments
   end
   def total_expenses
     expenses.joins(:debit_amounts).sum(:amount)
