@@ -1,5 +1,4 @@
 <div class="row">
-<<<<<<< HEAD
   <div class="col-md-6">
     <div class="card">
       <div class="header">
@@ -30,42 +29,6 @@
               </div>
               <div class="col-md-4">
                 90
-=======
-  <div class="col-md-4">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Work Detail Info
-        </h4>
-        <hr>
-      </div>
-      <div class="content">
-        <div class="row">
-          <div class="col-md-3">
-            <span class="text-info"><%=@work_detail.code %>: </span>
-          </div>
-          <div class="col-md-9">
-            <p><%=@work_detail.description.upcase %></p>
-          </div>
-        </div>
-        <ul class="list-unstyled team-members">
-          <hr>
-          <li>
-            <div class="row">
-              <div class="col-xs-5">
-                <i class="fa fa-money text-success"></i>  &nbsp; Quantity
-              </div>
-              <div class="col-xs-7 text-right">
-                <%=@work_detail.quantity %> <%=@work_detail.unit %>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-5">
-                <i class="fa fa-money text-success"></i>  &nbsp; Unit Cost
-              </div>
-              <div class="col-xs-7 text-right">
-                <%=number_to_currency @work_detail.unit_cost %>
               </div>
             </div>
           </li>
@@ -78,20 +41,6 @@
               </div>
               <div class="col-md-4">
                 67
-              <div class="col-xs-5">
-                <i class="fa fa-money text-success"></i>  &nbsp; Total Cost
-              </div>
-              <div class="col-xs-7 text-right">
-                <%=number_to_currency @work_detail.total_cost %>
-              </div>
-            </div>
-          </li>
-          <li>
-            <br>
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2">
-                <%=link_to "Update", edit_monitoring_work_detail_path(id: @work_detail.id), class: "btn btn-warning btn-block" %><br>
-                <%=link_to monitoring_project_path(@work_detail.project), class: "btn btn-link btn-block" do %><i class="fa fa-chevron-left"></i> Back To Project<%end%>
               </div>
             </div>
           </li>
@@ -114,7 +63,7 @@
         <hr>
       </div>
       <div class="content">
-        <%=render @work_detail.amount_revisions %>
+
       </div>
     </div>
     <div class="card">
@@ -127,7 +76,6 @@
         <hr>
       </div>
       <div class="content">
-        <%=render @work_detail.time_extensions %>
       </div>
     </div>
   </div>
@@ -164,75 +112,6 @@
             </li>
           </ul>
         <% end %>
-
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card">
-      <div class="header">
-        <h4 class="title"></h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <ul class="list-unstyled team-members">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="header">
-            <h4 class="title">Contractors
-              <span class="pull-right">
-              </span>
-            </h4>
-            <div class="row"><hr></div>
-          </div>
-          <div class="content">
-            <table class="table table-striped">
-
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card">
-          <div class="header">
-            <h4 class="title">Accomplishments</h4>
-            <div class="row"><hr></div>
-          </div>
-          <div class="content">
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="header">
-            <h4 class="title">Collections</h4>
-            <div class="row"><hr></div>
-          </div>
-          <div class="content">
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Time Extensions
-          <span class="pull-right">
-            <%#=link_to new_work_detail_time_extension_path(@work_detail), class: "btn btn-primary pull-right btn-icon-sm", title: "New Time Extension" do %>
-              <!-- <i class="fa fa-plus"></i> -->
-            <%# end %>
-          </span>
-        </h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
       </div>
     </div>
   </div>

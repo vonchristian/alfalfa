@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520041723) do
+ActiveRecord::Schema.define(version: 20160520081823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160520041723) do
     t.integer  "work_detail_id"
     t.integer  "user_id"
     t.decimal  "quantity"
+    t.string   "type"
   end
 
   add_index "amount_revisions", ["user_id"], name: "index_amount_revisions_on_user_id", using: :btree
