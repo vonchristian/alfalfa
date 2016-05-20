@@ -4,18 +4,19 @@
       <div class="header">
         <div class="row">
           <div class="col-md-2 col-xs-2">
-        <h5 class="title" title="Back to Project" data-toggle="tooltip" data-placement="bottom"> <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle"), monitoring_project_path(@work_detail.project) %>
+            <h5 class="title" title="Back to Project" data-toggle="tooltip" data-placement="bottom"> <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle"), monitoring_project_path(@work_detail.project) %>
+          </div>
+          <div class="col-md-7 col-xs-7">
+            <%=@work_detail.description %></h5>
+          </div>
+          <div class="col-md-3 col-xs-3">
+            <span class="pull-right">
+              <%=image_tag("prize.png", height: 25, width: 25)%>
+              <%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> %
+            </span>
+          </div>
         </div>
-        <div class="col-md-6 col-xs-6">
-          <%=@work_detail.description %></h5>
-        </div>
-        <div class="col-md-4 col-xs-4">
-          <span class="pull-right">
-            <%=image_tag("prize.png", height: 25, width: 25)%>
-            <%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> % </span>
-        </div>
-      </div>
-      <hr>
+        <hr>
       </div>
       <div class="content">
         <ul class="list-unstyled team-members">
@@ -51,6 +52,32 @@
         </div>
       </div>
       <br>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h5 class="title"> Amount Revisions
+          <%=link_to new_monitoring_work_detail_amount_revision_path(@work_detail), title: "New Amount Revision" do %>
+            <span class="btn btn-danger btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Amount Revision"><i class="fa fa-plus"></i></span>
+          <% end %>
+        </h5>
+        <hr>
+      </div>
+      <div class="content">
+        <%=render @work_detail.amount_revisions %>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h5 class="title"> Time Extensions
+          <%=link_to new_monitoring_work_detail_time_extension_path(@work_detail), title: "New Time Extension" do %>
+            <span class="btn btn-danger btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Time Extension"><i class="fa fa-plus"></i></span>
+          <% end %>
+        </h5>
+        <hr>
+      </div>
+      <div class="content">
+        <%=render @work_detail.time_extensions %>
+      </div>
     </div>
   </div>
   <div class="col-md-6">

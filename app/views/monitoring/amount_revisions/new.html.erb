@@ -1,0 +1,17 @@
+<div class="col-md-6 col-md-offset-3">
+  <div class="card">
+    <div class="header">
+      <h5 class="title"> Amount Revision Details </h5>
+    </div>
+    <div class="content">
+      <%=simple_form_for [:monitoring, @work_detail, @amount_revision], url: :monitoring_work_detail_amount_revisions do |f| %>
+        <%=f.input :amount %>
+        <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
+        <%=f.input :remarks, as: :text %>
+        <div class="modal-footer">
+          <%=f.submit "Save", class: "btn btn-success", data: { disable_with: "Saving..."} %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

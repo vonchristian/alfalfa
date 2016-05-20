@@ -9,6 +9,7 @@ RSpec.describe ChangeOrders::AmountRevision, type: :model do
   end
 
   describe "associations" do
-    it { is_expected.to belong_to :work_detail}
+    it { is_expected.to belong_to :work_detail }
+    it { is_expected.to belong_to :recorder }
   end
 end

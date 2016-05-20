@@ -9,5 +9,7 @@ RSpec.describe ChangeOrders::TimeExtension, type: :model do
 
   describe "associations" do
     it { is_expected.to belong_to :work_detail }
+    it { is_expected.to belong_to :recorder }
+
   end
 end

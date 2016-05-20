@@ -32,10 +32,13 @@ end
       resource :notice_to_proceed, only: [:new, :create, :edit, :update]
       resources :payments, only: [:index]
       resources :amount_revisions, only: [:index]
+      resources :time_extensions, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
     resources :work_details, only:[:index, :show, :edit, :update] do
       resources :work_accomplishments, only: [:new, :create]
+      resources :amount_revisions, only: [:new, :create]
+      resources :time_extensions, only: [:new, :create]
     end
     resources :payments, only:[:index]
     resources :contractors, except: [:destroy]

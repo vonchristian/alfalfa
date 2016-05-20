@@ -1,0 +1,20 @@
+<ul class="list-unstyled team-members">
+  <li id="current_item">
+    <div class="row">
+      <div class="col-xs-2">
+          <%=time_extension.number_of_days %> Days
+      </div>
+      <div class="col-xs-6">
+        <%=time_extension.remarks%>
+        <br />
+        <span class="text-muted">
+          <small><i class="fa fa-clock-o"></i> <%=time_extension.date.strftime("%B %e, %Y") %></small><br>
+          <%=image_tag(time_extension.recorder.profile_photo.url(:small), class: "img-circle") if time_extension.recorder %>
+          <%=time_extension.recorder.full_name  if time_extension.recorder %>
+        </span>
+      </div>
+      <div class="col-xs-2 text-right">
+      </div>
+    </div>
+  </li>
+</ul>
