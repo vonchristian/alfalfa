@@ -29,8 +29,8 @@
               <tr>
                 <td>
                   <% if debit.entriable %>
-                    <a href="" title="<%=credit.entriable.name%>">
-                      <%=image_tag(debit.entriable.profile_photo.url(:thumb), class: "img-circle center-block") %>
+                    <a href="" title="<%=debit.entriable.name%>">
+                      <%=image_tag(debit.entriable.profile_photo.url(:thumb), class: "img-circle center-block", title: debit.entriable.name, data: {toggle: 'tooltip', placement:'bottom'}) %>
                     </a>
                   <% end %>
                 </td>
@@ -68,7 +68,7 @@
                 <td>
                   <% if credit.entriable %>
                     <a href="" title="<%=credit.entriable.name%>">
-                      <%=image_tag(credit.entriable.profile_photo.url(:thumb), class: "img-circle center-block") %>
+                      <%=image_tag(credit.entriable.profile_photo.url(:thumb), class: "img-circle center-block", title: credit.entriable.name, data: {toggle: 'tooltip', placement:'bottom'}) %>
                     </a>
                   <% end %>
                 </td>
