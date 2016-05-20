@@ -33,6 +33,7 @@ end
       resources :payments, only: [:index, :new, :create]
       resources :amount_revisions, only: [:index]
       resources :time_extensions, only: [:index]
+      resources :line_items, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
     resources :work_details, only:[:index, :show, :edit, :update] do
@@ -151,6 +152,7 @@ end
     resources :inventories
     resources :carts
     resources :issued_inventories
+    resources :equipment
   end
 
 

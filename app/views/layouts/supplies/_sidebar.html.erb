@@ -16,35 +16,33 @@
             <li class="<%="active" if current_page? supplies_path %>">
                  <a href="/supplies">
                      <i class="fa fa-home"></i>
-                     <p>Supplies</p>
+                     <p>Store</p>
                  </a>
              </li>
              <li class="<%="active" if current_page? supplies_inventories_path %>">
                  <a href="/supplies/inventories">
-                     <i class="fa fa-cubes"></i>
-                     <p>Inventories</p>
+                     <p> <%=image_tag("inventory.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Inventories</p>
                  </a>
                </li>
                <li class="<%="active" if current_page? orders_path %>">
                    <a href="/orders">
-                       <i class="fa fa-shopping-cart"></i>
-                       <p>Orders</p>
+                       <p> <%=image_tag("order.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Orders</p>
                    </a>
                  </li>
                  <li class="<%="active" if current_page? supplies_reports_path %>">
                    <a href="/supplies/reports">
-                       <i class="fa fa-file-text"></i>
-                       <p>Reports</p>
+                        <p> <%=image_tag("report-icon.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Reports</p>
                    </a>
                  </li>
-                 
 
-               <li class="<%="active" if current_page? equipment_index_path %>">
-                    <a href="/equipment">
-                        <i class="fa fa-truck"></i>
-                        <p>Equipment</p>
-                    </a>
-                </li>
+
+                 <li class="<%="active" if current_page? supplies_equipment_index_path %>">
+                      <%= link_to supplies_equipment_index_path do %>
+
+                          <p> <%=image_tag("equipment.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Equipment</p>
+                          <% end %>
+
+                  </li>
          </ul>
    </div>
  </div>

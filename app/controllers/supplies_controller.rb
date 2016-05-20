@@ -9,4 +9,7 @@ class SuppliesController < ApplicationController
     @cart = current_cart
     @line_item = Supplies::LineItem.new
   end
+
+  def show
+  end
 end
