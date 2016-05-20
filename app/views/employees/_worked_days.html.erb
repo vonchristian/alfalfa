@@ -1,27 +1,39 @@
-<div class="tab-pane" id="worked_days">
-  <div class="box-header with-border">
-    <%=link_to "Add Days Worked", new_employee_worked_day_path(@employee), class: 'btn btn-primary pull-right btn-sm' %>
-  </div>
-  <div class="box-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Number of Days</th>
-          <th>Date</th>
-          <th>Status </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @employee.worked_days.each do |worked_day| %>
+<div class="col-md-4">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Days Worked
+        <span class="pull-right">
+          <%=link_to new_employee_worked_day_path(@employee), title: 'Add Days Worked' do %>
+            <span class="btn btn-info btn-icon-sm" data-toggle="tooltip" data-placement="bottom" title="Add Days Worked"><i class="fa fa-plus"></i></span>
+          <% end %>
+        </span>
+      </h4>
+      <div class="row"><hr></div>
+    </div>
+    <div class="content">
+      <table class="table table-hover">
+        <thead>
           <tr>
-            <td><%=worked_day.number_of_days %></td>
-            <td>
-              <p><%=worked_day.start_date.strftime("%b %e, %Y") %> - <%=worked_day.end_date.strftime("%b %e, %Y") %> </p>
-            </td>
-            <td><%=worked_day.status %></td>
+            <th># of Days</th>
+            <th>Amount</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @employee.worked_days.order(:created_at).reverse.each do |work| %>
+            <tr>
+              <td><%=work.number_of_days %> Days</td>
+              <td><%=work.start_date.strftime("%b %e, %Y")%>- <%=work.end_date.strftime("%b %e, %Y") %></td>
+              <td>
+                <% if work.paid? %>
+                  <span class="btn btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

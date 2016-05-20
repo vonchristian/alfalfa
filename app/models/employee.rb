@@ -1,6 +1,6 @@
 class Employee < ActiveRecord::Base
   include PgSearch
-  multisearchable :against => [:first_name, :last_name]
+  pg_search_scope :search_by_name, :against => [:first_name, :last_name]
 
   has_attached_file :profile_photo,
                     styles: { large: "120x120>",

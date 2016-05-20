@@ -22,6 +22,7 @@ end
     resources :income_statement, only:[:index]
     resources :entries
     resources :cash_flow, only: [:index]
+    resources :accounts
   end
 
   resources :monitoring, only:[:index]
