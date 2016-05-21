@@ -42,6 +42,7 @@
               </tr>
             </thead>
             <tbody>
+              <% if @equipment.equipment_schedules.present? %>
               <% @equipment.equipment_schedules.each do |equipment_schedule| %>
                 <tr>
                   <td width="30px">
@@ -55,6 +56,7 @@
                   </td>
                 </tr>
               <% end %>
+              <% end %>
             </tbody>
           </table>
         </div>
@@ -62,6 +64,3 @@
     </div>
   </div>
 </div>
-
-
-
