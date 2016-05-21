@@ -18,7 +18,7 @@ module Supplies
 
     private
     def stock_params
-      params.require(:stock).permit(:quantity, :date)
+      params.require(:supplies_stock).permit(:quantity, :date)
     end
   end
 end

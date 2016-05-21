@@ -20,7 +20,7 @@
           </div>
           <div class="col-md-6">
             <div class="col-md-10 col-md-offset-2">
-              <%=simple_form_for [@inventory, @stock] do |f| %>
+              <%=simple_form_for [:supplies, @inventory, @stock], url: :supplies_inventory_stocks do |f| %>
                 <%=f.error_notification %>
                 <%= f.input :date, as: :string, input_html: {class: "datetimepicker"} %>
                 <%= f.input :quantity, label: 'Enter Quantity' %>
