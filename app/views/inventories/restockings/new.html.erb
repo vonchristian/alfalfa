@@ -1,4 +1,4 @@
-<%=simple_form_for [@inventory, @restocking] do |f| %>
+<%=simple_form_for [:supplies, @inventory, @restocking], url: :supplies_inventory_stocks do |f| %>
 	<div class="col-md-4 col-md-offset-4">
 		<div class="box box-solid">
 			<div class="box-header with-border">
@@ -17,4 +17,3 @@
 		</div>
 	</div>
 <% end %>
-

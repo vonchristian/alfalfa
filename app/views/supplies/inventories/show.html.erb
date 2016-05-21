@@ -8,8 +8,8 @@
         <div class="col-md-6">
           <div class="pull-right">
             <% if current_user.supply_officer? %>
-              <%=link_to "Restock", new_inventory_stock_path(@inventory), class: "btn btn-success" %>
-              <%=link_to "Edit Inventory", edit_inventory_path(@inventory), class: "btn btn-primary" %>
+              <%=link_to "New Stock", new_supplies_inventory_stock_path(@inventory), class: "btn btn-success" %>
+              <%=link_to "Edit Inventory", edit_supplies_inventory_path(@inventory), class: "btn btn-primary" %>
             <% end %>
           </div>
         </div>

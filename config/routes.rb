@@ -34,6 +34,7 @@ end
       resources :payments, only: [:index, :new, :create]
       resources :amount_revisions, only: [:index]
       resources :time_extensions, only: [:index]
+      resources :line_items, only: [:index]
     end
     resources :contracts, only:[:edit, :update, :show]
     resources :work_details, only:[:index, :show, :edit, :update] do
@@ -77,12 +78,6 @@ end
     resources :line_items, only: [:index], module: :contractors
   end
 
-  resources :inventories do
-    resources :restockings, module: :inventories
-    resources :stocks, module: :inventories
-  end
-  resources :sales, module: :inventories
-  resources :issued_inventories
 
   namespace :accounts do
 
@@ -142,16 +137,18 @@ end
   end
 
   resources :equipment_statuses, only: [:edit, :update]
-  resources :supplies
+  resources :supplies, only: [:index]
 
 
   resources :orders, module: :supplies
 
   namespace :supplies do
     resources :line_items
-    resources :inventories
+    resources :inventories do
+      resources :stocks, only: [:new, :create]
+    end
     resources :carts
-    resources :issued_inventories
+    resources :equipment
   end
 
 

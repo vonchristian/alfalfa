@@ -20,11 +20,11 @@ class ProjectLineItemsPdf < Prawn::Document
     move_down 5
     text "Alfalfa Construction", align: :center, size: 11
     move_down 5
-    
+
     move_down 15
   end
 
-  
+
 
   def summary_table
     [["Project: ", "#{(@project.name)}"]]
@@ -52,7 +52,8 @@ class ProjectLineItemsPdf < Prawn::Document
   def issued_materials_data
     move_down 5
     [["INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
-    @table_data ||= @project.line_items.map{ |e| [e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_price)]}
-    
+    @table_data ||= @project.line_items.map{ |e| [e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_price)]} +
+    [["", "", "", "<b>TOTAL</b>", "<b>#{price(@project.line_items.total_price)}</b>"]]
+
   end
 end
