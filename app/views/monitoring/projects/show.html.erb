@@ -106,15 +106,15 @@
             <ul class="list-unstyled team-members">
               <li>
                 <%=image_tag("target.png", height: 25, width: 25) %> &nbsp;  Target Accomplishment
-                <span class="pull-right"> <%=@project.target_accomplishment %> % </span>
+                <span class="pull-right"> <%=number_to_currency @project.target_accomplishment, unit: '' %> % </span>
               </li>
               <li>
                 <%=image_tag("engineer.png", height: 25, width: 25) %> &nbsp; Actual Accomplishment
-                <span class="pull-right text-success"> <%=@project.actual_accomplishment %> % </span>
+                <span class="pull-right text-success"> <%=number_to_currency @project.actual_accomplishment, unit: '' %> % </span>
               </li>
               <li>
                 <%=image_tag("reporting.png", height: 25, width: 25) %> &nbsp; Slippage
-                <span class="pull-right text-danger"> <%=@project.slippage %> % </span>
+                <span class="pull-right text-danger"> <%=number_to_currency @project.slippage, unit: '' %> % </span>
               </li>
             </ul>
             <br>

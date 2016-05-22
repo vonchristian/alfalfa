@@ -93,7 +93,7 @@ class Project < ActiveRecord::Base
 
   def slippage
     if notice_to_proceed.present?
-      (actual_accomplishment - target_accomplishment ).round(2)
+      (actual_accomplishment - target_accomplishment )
     else
         0
     end
@@ -109,7 +109,7 @@ class Project < ActiveRecord::Base
 
   def actual_accomplishment
     if self.work_accomplishments.present?
-      self.work_accomplishments.sum(:quantity)
+      (self.work_accomplishments.sum(:quantity) / self.work_details.sum(:quantity)) * 100
     else
       0
     end
@@ -117,7 +117,7 @@ class Project < ActiveRecord::Base
 
   def target_accomplishment
     if notice_to_proceed.present?
-      ((days_elapsed / duration.to_f) * 100).round(2)
+      ((days_elapsed / duration.to_f) * 100)
     else
       0
     end
