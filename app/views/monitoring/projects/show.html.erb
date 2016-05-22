@@ -2,14 +2,18 @@
   <div class="col-md-12">
     <div class="card">
       <div class="header">
-        <b>#<%=@project.id_number_and_location %></b>
+        <div class="row">
+          <div class="col-md-10">
+            <b>#<%=@project.id_number_and_location %></b>
+            <h5><%=@project.name %></h5>
+          </div>
+          <div class="col-md-2">
+            <%=link_to "Edit Project", edit_monitoring_project_path(@project), class: "btn btn-warning pull-right" %>
+          </div>
+        </div>
+        <div class="row"><hr class="with-padding no-top-padding"></div>
       </div>
       <div class="content">
-        <p><%=@project.name %></p>
-        <%=link_to "Edit Project", edit_monitoring_project_path(@project), class: "btn btn-warning btn-sm" %>
-        <br>
-        <hr>
-        <br>
         <div class="row">
           <div class="col-md-4">
             <h5 class="title">Project Info </h5>
@@ -122,7 +126,7 @@
                     <span> <%=number_to_currency @project.amount_revisions.total %> </span>
                   </div>
                   <div class="col-md-3 col-xs-3">
-                    <%=link_to "View All", monitoring_project_amount_revisions_path(@project), class: "btn btn-info btn-xs pull-right" %>
+                    <%=link_to "View Details", monitoring_project_amount_revisions_path(@project), class: "btn btn-info btn-xs pull-right" %>
                   </div>
                 </div>
               </li>
@@ -135,7 +139,7 @@
                     <span> <%=@project.time_extensions.total %> Days</span>
                   </div>
                   <div class="col-md-3 col-xs-3">
-                    <%=link_to "View All", monitoring_project_time_extensions_path(@project), class: "btn btn-info btn-xs pull-right" %>
+                    <%=link_to "View Details", monitoring_project_time_extensions_path(@project), class: "btn btn-info btn-xs pull-right" %>
                   </div>
                 </div>
               </li>
@@ -162,7 +166,7 @@
             <% end %>
           </span>
         </h5>
-        <hr>
+        <div class="row"><hr></div>
       </div>
       <div class="content">
         <ul class="list-unstyled team-members">
@@ -198,10 +202,16 @@
             <% end %>
           </span>
         </h5>
-        <hr>
+        <div class="row"><hr></div>
       </div>
       <div class="content">
-        <table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2"></th>
+              <th><span class="pull-right">Amount</span></th>
+            </tr>
+          </thead>
           <%@project.contracts.each do |contract| %>
             <tr>
               <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
@@ -209,9 +219,9 @@
                 <%= link_to monitoring_contract_path(contract) do %>
                   <%=contract.contractor %><br>
                   <small class="text-muted"><%=contract.contractor.full_name %></small><br>
-                  <small class="text-danger"><%= number_to_currency contract.amount_subcontracted%></small><br><br>
                 <% end %>
               </td>
+              <td><p class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></p></td>
             </tr>
           <% end %>
         </table>
@@ -225,25 +235,16 @@
     <div class="card">
       <div class="header">
         <h4 class="title"><%=image_tag("expenses_icon.png", height: '35', width: '35')%> Expenses </h4>
-        <hr>
+        <div class="row"><hr></div>
       </div>
       <div class="content">
-          <ul class="list-unstyled team-members">
-            <li>
-              <%=image_tag("target.png", height: 25, width: 25) %> &nbsp;  Materials
-              <span class="pull-right"> <%=@project.target_accomplishment %> % </span>
-            </li>
-            <li>
-              <%=image_tag("engineer.png", height: 25, width: 25) %> &nbsp; Labor
-              <span class="pull-right text-success"> <%=@project.actual_accomplishment %> % </span>
-            </li>
-            <li>
-              <%=image_tag("excavator.png", height: 25, width: 25) %> &nbsp; Equipment
-              <span class="pull-right text-danger"> <%=@project.slippage %> % </span>
-            </li>
-          </ul>
-          <br>
-
+        <ul class="list-unstyled team-members">
+          <li>
+            <%=image_tag("material.png", height: 25, width: 25) %> &nbsp;  Materials
+            <span class="pull-right"> <%=number_to_currency @project.line_items.total_price %></span>
+          </li>
+        </ul>
+        <br>
       </div>
     </div>
   </div>

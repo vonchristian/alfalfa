@@ -29,18 +29,18 @@
         <div class="card">
           <div class="header">
             <b><%="##{project.id_number}"%></b>
-            <hr>
+            <div class="row"><hr></div>
           </div>
           <div class="content">
-            <p class=""><%=project.name.truncate(200) %></p>
+            <p><%=project.name.truncate(200) %></p>
 
             <% project.contractors.each do |contractor| %>
-            <%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle", title: "#{contractor.name}") %>
+            <%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle", title: "#{contractor.name}", data: {toggle: 'tooltip', placement: 'bottom'}) %>
             <% end %>
             <hr>
 
             <span class="text-success"><i class="fa fa-rub"></i><%=number_to_currency project.cost %></span>
-            <span class="text-success"><i class="fa fa-calendar"></i><%= project.duration.to_i %> Days</span>
+            <span class="text-success pull-right"><i class="fa fa-calendar"></i><%= project.duration.to_i %> Days</span>
             <br>
             <br>
             <div class="progress">

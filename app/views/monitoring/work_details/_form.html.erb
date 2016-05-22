@@ -1,7 +1,6 @@
 <%= simple_form_for [:monitoring, @project, @work_detail] do |f| %>
   <%=f.error_notification %>
-    <h4 class="title">New Work Detail</h4>
-    <hr>
+    
     <%=f.input :code,  placeholder: 'Code' %>
     <%=f.input :description, placeholder: 'Description', as: :text, input_html:{rows: 3} %>
     <div class="row">

@@ -1,9 +1,8 @@
 <div class="col-md-12">
   <div class="card">
     <div class="header">
-      <%=link_to monitoring_project_path(@project) do %>
-      <span class="btn btn-default btn-icon btn-sm" data-toggle="tooltip" data-placement="right" title="Back to Project"> <i class="fa fa-chevron-left"> </i> </span>
-      <% end %>
+      <h4 class="title">New Work Detail</h4>
+      <div class="row"><hr></div>
     </div>
     <div class="content">
       <div class="row">
@@ -14,8 +13,7 @@
             <thead>
               <tr class="text-uppercase">
                 <th>Description</th>
-                <th>Cost</th>
-
+                <th><span class="pull-right">Cost</span></th>
               </tr>
             </thead>
             <tbody>
@@ -23,12 +21,12 @@
                 <% @project.work_details.each do |work_detail| %>
                   <tr>
                     <td><%= work_detail.description.try(:truncate, 100) %></td>
-                    <td><span><%=number_to_currency work_detail.total_cost %></span></td>
+                    <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
                   </tr>
                 <% end %>
                 <tr>
-                  <td><h4 class="title pull-right">Total Cost: </h4></td>
-                  <td><h4 class="pull-right"><%= number_to_currency @project.work_details.total%></h4></td>
+                  <td><h5 class="title pull-right">Total Cost: </h5></td>
+                  <td><h5 class="pull-right"><%= number_to_currency @project.work_details.total%></h5></td>
                 </tr>
               <% end %>
             </tbody>

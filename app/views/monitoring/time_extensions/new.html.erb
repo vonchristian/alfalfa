@@ -1,17 +1,19 @@
-<div class="col-md-6 col-md-offset-3">
-  <div class="card">
-    <div class="header">
-      <h5 class="title"> Time Extension Details </h5>
-    </div>
-    <div class="content">
-      <%=simple_form_for [:monitoring, @work_detail, @time_extension], url: :monitoring_work_detail_time_extensions do |f| %>
+<%=simple_form_for [:monitoring, @work_detail, @time_extension], url: :monitoring_work_detail_time_extensions do |f| %>
+  <div class="col-md-5 col-md-offset-3">
+    <div class="card">
+      <div class="header">
+        <h5 class="title"> Time Extension Details </h5>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
         <%=f.input :number_of_days %>
         <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
         <%=f.input :remarks, as: :text %>
         <div class="modal-footer">
+          <%= link_to 'Cancel', monitoring_work_detail_path(@work_detail), class: 'btn btn-xs pull-left' %>
           <%=f.submit "Save", class: "btn btn-success", data: { disable_with: "Saving..."} %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
