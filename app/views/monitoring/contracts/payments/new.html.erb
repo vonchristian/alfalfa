@@ -1,0 +1,88 @@
+<%= simple_form_for [:monitoring, @entry], url: :monitoring_project_payments do |f| %>
+        <%=f.error_notification %>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Payment Details</h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-5">
+            <p> <%=@project.name %></p>
+            <br>
+            <ul class="list-unstyled team-members">
+              <li>
+                <p>
+                  <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Project Cost
+                  <span class="pull-right"> <%=number_to_currency @project.cost %></span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
+                  <span class="pull-right"> <%=number_to_currency @project.total_payments %></span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <%=image_tag("unpaid.png", height: 25, width: 25) %> &nbsp; Balance
+                  <span class="pull-right text-danger"> <%=number_to_currency @project.remaining_payments %></span>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-5 col-md-offset-1">
+            <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
+            <%=f.input :description,input_html: { value: "Payments collected for #{@project.name}"}%>
+            <%=f.input :reference_number %>
+            <%=f.input :type, input_html: {value: "InvoicePayment"} %>
+            <h4 class="title"> Debit </h4>
+            <%=f.simple_fields_for :debit_amounts do |c| %>
+              <%=c.input :amount %>
+              <%=c.input :account, collection: Account.all.pluck(:name)%>
+            <% end %>
+            <h4 class="title"> Credit </h4>
+            <%=f.simple_fields_for :credit_amounts do |d| %>
+              <%=d.input :amount, input_html: { autocomplete: 'off' } %>
+              <%=d.input :account, input_html: { value: "Accounts Payable"}%>
+            <% end %>
+            <div class="modal-footer">
+              <%= link_to "Cancel", monitoring_project_path(@project), class: 'btn btn-xs pull-left' %>
+              <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  $(document).ready(function() {
+    $("#accounting_entry_debit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+    $("#accounting_entry_credit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+    $("#accounting_entry_type").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#accounting_entry_entriable_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#entry_debit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

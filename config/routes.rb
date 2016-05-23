@@ -36,7 +36,9 @@ end
       resources :time_extensions, only: [:index]
       resources :line_items, only: [:index]
     end
-    resources :contracts, only:[:edit, :update, :show]
+    resources :contracts, only:[:edit, :update, :show] do
+      resources :payments, only: [:new, :create], module: :contracts
+    end
     resources :work_details, only:[:index, :show, :edit, :update] do
       resources :work_accomplishments, only: [:new, :create]
       resources :amount_revisions, only: [:new, :create]
