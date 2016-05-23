@@ -15,7 +15,7 @@ module Monitoring
       @entry = Accounting::Entry.new(entry_params)
       @entry.entriable = @project
       if @entry.save
-        redirect_to @asset, notice: "Entry Recorded successfully"
+        redirect_to monitoring_contract_url(@project), notice: "Entry Recorded successfully"
       else
         render :new
       end
