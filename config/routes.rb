@@ -43,7 +43,9 @@ end
       resources :time_extensions, only: [:new, :create]
     end
     resources :payments, only:[:index]
-    resources :contractors, except: [:destroy]
+    resources :contractors, except: [:destroy] do
+      resources :contracts, only: [:show]
+    end
   end
 
   resources :accounts

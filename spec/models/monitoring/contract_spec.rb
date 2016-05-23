@@ -4,6 +4,7 @@ RSpec.describe Contract, type: :model do
   describe "associations" do
     it { is_expected.to belong_to :project }
     it { is_expected.to belong_to :contractor }
+    it { is_expected.to have_many :payments }
   end
 
   describe "validations" do

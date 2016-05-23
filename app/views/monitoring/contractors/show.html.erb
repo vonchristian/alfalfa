@@ -31,7 +31,7 @@
       </div>
         <div class="content">
           <ul class="list-unstyled team-members">
-            <% @contractor.projects.each do |project| %>
+            <% @contractor.contracts.each do |contract| %>
               <li>
                 <div class="row">
                   <div class="col-xs-2">
@@ -40,9 +40,9 @@
                     </div>
                   </div>
                   <div class="col-xs-8">
-                    <%=project.name.truncate(200) %>
+                    <%=link_to contract.project.name.truncate(200), monitoring_contractor_contract_path(contractor_id: @contractor, id: contract.id) %>
                     <br />
-                    <span class="text-muted"><small><%=project.address %></small></span>
+                    <span class="text-muted"><small><%=contract.project.address %></small></span>
                   </div>
 
                   <div class="col-xs-2 text-right">
