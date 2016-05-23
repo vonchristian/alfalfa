@@ -52,7 +52,7 @@
             <% EquipmentSchedule.all.each do |equipment_schedule| %>
               <tr class="<% if equipment_schedule.equipment.inactive? %>text-warning<% elsif equipment_schedule.equipment.active? %>text-success<% end %>">
                 <td><%= equipment_schedule.equipment %></td>
-                <td><%= equipment_schedule.try(:operator, :full_name) %></td>
+                <td><%= equipment_schedule.try(:operator).full_name %></td>
                 <td>
                   <% if equipment_schedule.equipment.inactive? %>
                     <%= equipment_schedule.equipment.equipment_status.description %>
