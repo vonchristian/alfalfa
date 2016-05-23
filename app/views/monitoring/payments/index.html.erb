@@ -17,7 +17,7 @@
           <tbody>
             <% @projects.each do |project| %>
               <tr>
-                <td><%= project.name %></td>
+                <td><%=link_to project.name.truncate(200), project_payments_path(project) %></td>
                 <td><span class="pull-right"><%= number_to_currency project.total_payments %></span></td>
                 <td><span class="pull-right"><%= number_to_currency project.remaining_payments %></span></td>
               </tr>

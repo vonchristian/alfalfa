@@ -1,0 +1,75 @@
+<div class="col-lg-12">
+  <div class="card">
+    <div class="header">
+        <h4 class="title"><%=@project.name %><br />
+          <a href="#"><small><i class="fa fa-map-marker"></i> <%=@project.address %></small></a>
+        </h4>
+        <hr>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-5">
+          <ul class="list-unstyled team-members">
+            <li>
+              <p>
+                <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Project Cost
+                <span class="pull-right"> <%=number_to_currency @project.revised_contract_amount %></span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; 10 % Retention
+                <span class="pull-right"> <%=number_to_currency @project.retention_amount %></span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
+                <span class="pull-right"> <%=number_to_currency @project.total_payments %></span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <%=image_tag("unpaid.png", height: 25, width: 25) %> &nbsp; Balance
+                <span class="pull-right text-danger"> <%=number_to_currency @project.remaining_payments %></span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-md-offset-1">
+          <div class="header">
+            <p>Payments
+              <span class="pull-right">
+                <%=link_to new_monitoring_project_payment_path(@project), title: "New Payment" do %>
+                  <span class="btn btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" title="New Payment"><i class="fa fa-plus"></i></span>
+                <% end %>
+              </span>
+            </p>
+            <div class="header"><hr></div>
+          </div>
+          <div class="content">
+            <%@project.payments.each do |payment| %>
+              <ul class="list-unstyled team-members">
+                <li id="current_item">
+                  <div class="row">
+                    <div class="col-xs-4">
+                        <%=payment.date.strftime("%B %e, %Y") %>
+                    </div>
+                    <div class="col-xs-5">
+                      <%=number_to_currency payment.credit_amounts.sum(:amount)%>
+                      <br />
+                      <span class="text-muted"><small><%#=number_to_currency contract.inventory.price %></small></span>
+                    </div>
+                    <div class="col-xs-3 text-right">
+                      <%#=number_to_currency contract.total_price %>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

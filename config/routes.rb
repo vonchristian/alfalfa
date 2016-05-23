@@ -24,14 +24,16 @@ end
     resources :cash_flow, only: [:index]
     resources :accounts
   end
-
+  resources :projects, only: [:index] do
+    resources :payments, only: [:index], module: :project_payments
+  end
   resources :monitoring, only:[:index]
   namespace :monitoring do
     resources :projects, except:[:destroy] do
       resources :work_details, only:[:new, :create, :index]
       resources :contracts, only: [:new, :create]
       resource :notice_to_proceed, only: [:new, :create, :edit, :update]
-      resources :payments, only: [:index, :new, :create]
+      resources :payments, only: [:new, :create]
       resources :amount_revisions, only: [:index]
       resources :time_extensions, only: [:index]
       resources :line_items, only: [:index]
