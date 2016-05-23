@@ -27,7 +27,7 @@
 									<td width="20%">
 										<small class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
 									</td>
-		              <td><small><%=link_to entry.description, accounting_entry_path(entry) %></small></td>
+		              <td><small><%=link_to entry.description.truncate(200), accounting_entry_path(entry) %></small></td>
 									<td><small><%=entry.entriable.try(:name) %></small></td>
 									<td>
 										<% entry.debit_amounts.each do |debit| %>

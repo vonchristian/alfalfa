@@ -1,4 +1,4 @@
-<div class="sidebar" data-background-color="white" data-active-color="success">  
+<div class="sidebar" data-background-color="white" data-active-color="success">
   <div class="sidebar-wrapper">
     <div class="logo">
       <a href="/petty_cash" class="simple-text">
@@ -36,40 +36,26 @@
           <p>  <%=image_tag("payroll.png", height: '30', width: '30') %> &nbsp; &nbsp; Payroll</p>
         </a>
       </li>
-      <li class="<%="active" if current_page? accounting_reports_path %>">
-        <a href="#reportCollapse" class="collapsed" data-toggle="collapse" aria-expanded="false">
-          <p>  <%=image_tag("report_accounting.png", height: '30', width: '30') %> &nbsp; &nbsp; Reports
-            <b class="caret"></b>
-          </p>
+      <li>
+        <a href="/accounting/accounts">
+          <p>  <%=image_tag("payment_icon.png", height: '20', width: '20') %> &nbsp; &nbsp; Accounts</p>
         </a>
-        <div class="collapse" id="reportCollapse" aria-expanded="false" style="height: 0px;">
-          <ul class="nav">
-            <li>
-              <a href="/accounting/accounts">
-                <p>  <%=image_tag("payment_icon.png", height: '20', width: '20') %> &nbsp; &nbsp; Accounts</p>
-              </a>
-            </li>
-            <li>
-              <a href="/accounting/income_statement">
-                <p>  <%=image_tag("income_statement.png", height: '20', width: '20') %> &nbsp; &nbsp; Income Statement</p>
-              </a>
-            </li>
-            <li>
-              <a href="/accounting/balance_sheet">
-                <p>  <%=image_tag("balance_sheet.png", height: '20', width: '20') %> &nbsp; &nbsp; Balance Sheet</p>
-              </a>
-            </li>
-            <li>
-              <a href="/accounting/cash_flow">
-                   <p>  <%=image_tag("cash_flow.png", height: '20', width: '20') %> &nbsp; &nbsp; Cash Flow </p>
-              </a>
-            </li>
-          </ul>
-        </div>
+      </li>
+      <li>
+        <a href="/accounting/income_statement">
+          <p>  <%=image_tag("income_statement.png", height: '20', width: '20') %> &nbsp; &nbsp; Income Statement</p>
+        </a>
+      </li>
+      <li>
+        <a href="/accounting/balance_sheet">
+          <p>  <%=image_tag("balance_sheet.png", height: '20', width: '20') %> &nbsp; &nbsp; Balance Sheet</p>
+        </a>
+      </li>
+      <li>
+        <a href="/accounting/cash_flow">
+             <p>  <%=image_tag("cash_flow.png", height: '20', width: '20') %> &nbsp; &nbsp; Cash Flow </p>
+        </a>
       </li>
     </ul>
   </div>
 </div>
-
-
-            

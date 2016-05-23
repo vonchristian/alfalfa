@@ -4,7 +4,7 @@ module Monitoring
       def index
         @project = Project.find(params[:id])
       end
-      
+
     end
   end
 end

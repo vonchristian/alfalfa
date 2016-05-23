@@ -1,9 +1,11 @@
 module Accounting
   class EntriesController < ApplicationController
     layout "accounting"
+    
     def index
-      @entries = Entry.all.order('date DESC').page(params[:page]).per(10)
+      @entries = Entry.all.order('date DESC').page(params[:page]).per(30)
     end
+
     def new
       @entry = Entry.new
       authorize @entry
