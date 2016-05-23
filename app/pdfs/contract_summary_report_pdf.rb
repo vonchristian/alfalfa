@@ -29,7 +29,7 @@ def display_projects_table
 
   def project_data
     move_down 5
-    [["ID", "PROJECT NAME", "APPROVED CONTRACT", "APPROVED CHANGE ORDERS", "REVISED CONTRACT", "PENDING CHANGE ORDERS", "PAYMENT RECEIVED", "REMAINING", "PERCENT COMPLETED", "EXPIRY DATE"]] +
-    @fund_transfer_data ||= @projects.map { |e| [e.id_number, e.name, price(e.cost), "", price(e.revised_contract_amount), "", "", "", e.expiry_date]}
+    [["ID", "PROJECT NAME", "APPROVED CONTRACT", "APPROVED CHANGE ORDERS", "REVISED CONTRACT", "PAYMENT RECEIVED", "REMAINING", "PERCENT COMPLETED","NTP", "EXPIRY DATE"]] +
+    @fund_transfer_data ||= @projects.map { |e| [e.id_number, e.name, price(e.cost), price(e.total_amount_revision), price(e.revised_contract_amount), "", "", e.actual_accomplishment.round(2), "#{e.start_date}", e.expiry_date]}
   end
 end

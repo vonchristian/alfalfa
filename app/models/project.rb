@@ -145,7 +145,9 @@ class Project < ActiveRecord::Base
 
   def start_date
     if notice_to_proceed
-      notice_to_proceed.date
+      notice_to_proceed.date.strftime("%B %e, %Y")
+    else
+      "No NTP"
     end
   end
 
@@ -168,7 +170,9 @@ class Project < ActiveRecord::Base
 
   def expiry_date
       if notice_to_proceed.present?
-      ((self.notice_to_proceed.date.to_date) + (self.duration))
+      ((self.notice_to_proceed.date.to_date) + (self.duration)).strftime("%B %e, %Y")
+    else
+      "No NTP"
   end
   end
 
