@@ -4,8 +4,22 @@ module Monitoring
     def index
       if params[:name].present?
         @projects = Project.search_by_name(params[:name]).order(:created_at)
+        respond_to do |format|
+          format.html # index.html.erb
+          format.pdf do
+            pdf = ContractSummaryReportPdf.new(@projects, view_context)
+            send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Income Statement.pdf"
+          end
+        end
       else
         @projects = Project.all.order(:created_at).reverse
+        respond_to do |format|
+          format.html # index.html.erb
+          format.pdf do
+            pdf = ContractSummaryReportPdf.new(@projects, view_context)
+            send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Income Statement.pdf"
+          end
+        end
       end
       authorize User
     end
