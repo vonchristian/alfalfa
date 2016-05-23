@@ -15,6 +15,10 @@ class Contract < ActiveRecord::Base
   end
 
   def remaining_payments
-    amount_subcontracted - total_payments
+    if self.payments.present?
+      amount_subcontracted - total_payments
+    else
+      0
+    end
   end
 end

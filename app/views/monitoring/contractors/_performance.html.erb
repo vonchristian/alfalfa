@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Contractor </th>
+      <th>Amount Subcontracted </th>
+      <th> Amount Paid </th>
+      <th> Balance </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%Contractor.all.each do |contractor| %>
+      <tr>
+        <td><%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle img-responsive") %></td>
+        <td> <%=link_to contractor.full_name, monitoring_contractor_path(contractor) %></td>
+        <td> <span class="pull-right"> <%=number_to_currency contractor.contracts.sum(:amount_subcontracted) %></span> </td>
+        <td> <span class="pull-right"> <%=number_to_currency contractor.contracts.map{|a| a.total_payments}.sum %></span> </td>
+        <td> <span class="pull-right">  <%=number_to_currency contractor.contracts.map{|a| a.remaining_payments}.sum %></span> </td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>

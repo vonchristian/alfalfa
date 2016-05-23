@@ -26,7 +26,7 @@
   <div class="col-md-8">
     <div class="card">
       <div class="header">
-        <h4 class="title">Projects</h4>
+        <h4 class="title">Subcotracted Projects</h4>
         <div class="row"><hr></div>
       </div>
         <div class="content">
@@ -36,17 +36,12 @@
                 <div class="row">
                   <div class="col-xs-2">
                     <div class="avatar">
-
                     </div>
                   </div>
                   <div class="col-xs-8">
                     <%=link_to contract.project.name.truncate(200), monitoring_contractor_contract_path(contractor_id: @contractor, id: contract.id) %>
                     <br />
-                    <span class="text-muted"><small><%=contract.project.address %></small></span>
-                  </div>
-
-                  <div class="col-xs-2 text-right">
-                    <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-check"></i></btn>
+                    <small><i class="fa fa-money"></i> <%=number_to_currency contract.amount_subcontracted%></small>
                   </div>
                 </div>
               </li>
@@ -54,11 +49,14 @@
           </ul>
         </div>
       </div>
-    </div>
     <div class="col-md-8">
       <div class="card">
         <div class="header">
-          <h4 class="title">Ordered Inventory</h4>
+          <h4 class="title">Ordered Inventory
+          <%=link_to contractor_line_items_path(@contractor, format: 'pdf') do %>
+              <span class="btn btn-info pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
+            <% end %>
+          </h4>
           <div class="row"><hr></div>
         </div>
         <div class="content">

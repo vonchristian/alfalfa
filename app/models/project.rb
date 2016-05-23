@@ -145,7 +145,7 @@ class Project < ActiveRecord::Base
 
   def start_date
     if notice_to_proceed
-      notice_to_proceed.date.strftime("%B %e, %Y")
+      notice_to_proceed.date
     else
       "No NTP"
     end
@@ -207,4 +207,15 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+    def performance_status
+      if notice_to_proceed.blank?
+        'danger'
+      elsif
+        actual_accomplishment >= 100
+        'success'
+      else
+        'warning'
+      end
+    end
 end

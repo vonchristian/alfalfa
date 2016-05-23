@@ -39,14 +39,14 @@
         </div>
         <div class="col-md-5 col-md-offset-1">
           <div class="header">
-            <p>Payments
+            <h4 class="title">Payments
               <span class="pull-right">
                 <%=link_to new_monitoring_contract_payment_path(@contract), title: "New Contract Payment" do %>
                   <span class="btn btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" title="New Contract Payment"><i class="fa fa-plus"></i></span>
                 <% end %>
               </span>
-            </p>
-            <div class="header"><hr></div>
+            </h4>
+            <div class="row"><hr></div>
           </div>
           <div class="content">
             <%@contract.payments.each do |payment| %>

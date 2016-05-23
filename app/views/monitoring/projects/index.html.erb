@@ -30,6 +30,7 @@
         <div class="card">
           <div class="header">
             <b><%="##{project.id_number}"%></b>
+            <span class="pull-right btn btn-danger btn-icon" data-toggle="tooltip" data-placement='bottom' title"Slippage"><%=number_to_currency project.slippage, unit: ""%> % </span>
             <div class="row"><hr></div>
           </div>
           <div class="content">
@@ -41,7 +42,7 @@
             <hr>
 
             <span class="text-success"><i class="fa fa-rub"></i><%=number_to_currency project.cost %></span>
-            <span class="text-success pull-right"><i class="fa fa-calendar"></i><%= project.duration.to_i %> Days</span>
+            <span class="text-success pull-right"><i class="fa fa-calendar"></i><%=project.days_elapsed %> / <%= project.duration.to_i %> Days</span>
             <br>
             <br>
             <div class="progress">
