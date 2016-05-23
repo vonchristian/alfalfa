@@ -6,16 +6,16 @@ module Monitoring
     end
     def new
       @project = Project.find(params[:project_id])
-      @entry = Accounting::Entry.new
+      @entry = Transactions::InvoicePayment.new
       @entry.debit_amounts.build
       @entry.credit_amounts.build
     end
     def create
       @project = Project.find(params[:project_id])
-      @entry = Accounting::Entry.new(entry_params)
+      @entry = Transactions::InvoicePayment.create(payment_params)
       @entry.entriable = @project
       if @entry.save
-        redirect_to @asset, notice: "Entry Recorded successfully"
+        redirect_to @asset, notice: "Invoice payment recorded successfully"
       else
         render :new
       end
@@ -25,8 +25,8 @@ module Monitoring
     end
 
     private
-    def entry_params
-      params.require(:accounting_entry).permit(:description, :reference_number, :entriable_id, :entriable_type, :type, :date, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
+    def payment_params
+      params.require(:transactions_invoice_payment).permit(:description, :reference_number, :entriable_id, :entriable_type, :type, :date, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
     end
   end
 end

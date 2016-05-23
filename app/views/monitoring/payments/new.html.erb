@@ -36,7 +36,7 @@
             <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
             <%=f.input :description,input_html: { value: "Payments collected for #{@project.name}"}%>
             <%=f.input :reference_number %>
-            <%=f.input :type, input_html: {value: "InvoicePayment"} %>
+            <%=f.input :type, input_html: {value: "Transactions::InvoicePayment"} %>
             <h4 class="title"> Debit </h4>
             <%=f.simple_fields_for :debit_amounts do |c| %>
               <%=c.input :amount %>
