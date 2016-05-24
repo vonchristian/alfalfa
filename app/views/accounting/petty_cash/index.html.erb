@@ -38,11 +38,11 @@
         <div class="row">
           <div class="col-xs-4">
             <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %></center></span></h4>
-            <span class="text-success"><small><center> FUND TRANSFERS </center></small></span>
+            <span class="text-success"><small><center> DEBITS </center></small></span>
           </div>
           <div class="col-xs-4">
             <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
-            <span class="text-danger"><small><center>DISBURSED</center></small></span>
+            <span class="text-danger"><small><center>CREDITS</center></small></span>
           </div>
           <div class="col-xs-4">
             <h4 class="title"><center class="text-primary"><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
@@ -58,7 +58,7 @@
   <div class="col-md-4">
     <div class="card">
       <div class="header">
-        <h4 class="title">Fund Transfers</h4>
+        <h4 class="title">Debit Transactions</h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
@@ -95,7 +95,7 @@
   <div class="col-md-8">
     <div class="card">
       <div class="header">
-        <h4 class="title">Disbursements</h4>
+        <h4 class="title">Credit Transactions</h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">

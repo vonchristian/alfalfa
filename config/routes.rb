@@ -11,6 +11,7 @@ end
   root :to => 'projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'accounting_officer' if request.env['warden'].user }, as: :accounting_root
 
   ####Accounting Department
+  resources :accounting, only:[:index]
   namespace :accounting do
     resources :bank_account
     resources :petty_cash, only: [:index] do
