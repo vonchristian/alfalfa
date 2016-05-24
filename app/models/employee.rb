@@ -56,12 +56,15 @@ class Employee < ActiveRecord::Base
   def earned_income
     unpaid_worked_days_amount + unpaid_overtimes_amount
   end
+  
   def unpaid_overtimes_amount
     unpaid_overtimes * overtime_rate
   end
+
   def overtime_rate
     rate / 8.0
   end
+
   def unpaid_worked_days_amount
     unpaid_worked_days * rate
   end
