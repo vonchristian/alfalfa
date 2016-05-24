@@ -34,21 +34,34 @@ class Employee < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
 
+  has_many :overtimes, class_name: "Accounting::Employees::Overtime"
+
   def cash_advances
     Transactions::CashAdvance.where(entriable: self)
   end
 
   def paid!
     self.worked_days.unpaid.set_to_paid!
+    self.overtimes.set_to_paid!
   end
-  # def unpaid_worked_days_for(project)
-  #   self.worked_days.unpaid.where(project: project).sum(:number_of_days)
-  # end
 
   def unpaid_worked_days
     worked_days.unpaid.total
   end
 
+  def unpaid_overtimes
+    overtimes.unpaid.total
+  end
+
+  def earned_income
+    unpaid_worked_days_amount + unpaid_overtimes_amount
+  end
+  def unpaid_overtimes_amount
+    unpaid_overtimes * overtime_rate
+  end
+  def overtime_rate
+    rate / 8.0
+  end
   def unpaid_worked_days_amount
     unpaid_worked_days * rate
   end
@@ -58,7 +71,7 @@ class Employee < ActiveRecord::Base
   end
 
   def total_gross_pay
-  unpaid_worked_days_amount - unpaid_cash_advances
+  earned_income - unpaid_cash_advances
   end
 
   def gross_pay(project)

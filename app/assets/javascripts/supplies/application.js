@@ -18,6 +18,8 @@
 //= require bootstrap-datetimepicker
 //= require supplies/datetime_picker
 //= require supplies/admin
+//= require supplies/datepicker
+
 //= require work_detail
 //= require labor_cost
 //= require supplies/bootstrap-checkbox-radio

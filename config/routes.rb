@@ -67,6 +67,7 @@ end
   resources :employees do
     resources :cash_advances, :module => :employees
     resources :worked_days, :module => :employees
+    resources :overtimes, only:[:new, :create], :module => :employees
     resources :educational_attainments, module: :employee_details
     resources :salaries, module: :employees
   end

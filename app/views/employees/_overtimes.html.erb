@@ -1,10 +1,10 @@
 <div class="col-md-6">
   <div class="card">
     <div class="header">
-      <h4 class="title">Days Worked
+      <h4 class="title">Overtimes
         <span class="pull-right">
-          <%=link_to new_employee_worked_day_path(@employee), title: 'Add Days Worked' do %>
-            <span class="btn btn-info btn-icon-sm" data-toggle="tooltip" data-placement="bottom" title="Add Days Worked"><i class="fa fa-plus"></i></span>
+          <%=link_to new_employee_overtime_path(@employee), title: 'Add Overtime' do %>
+            <span class="btn btn-info btn-icon-sm" data-toggle="tooltip" data-placement="bottom" title="Add Overtime"><i class="fa fa-plus"></i></span>
           <% end %>
         </span>
       </h4>
@@ -14,18 +14,18 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th># of Days</th>
+            <th># of Hours</th>
             <th>Duration</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <% @employee.worked_days.order(:created_at).reverse.each do |work| %>
+          <% @employee.overtimes.order(:created_at).reverse.each do |overtime| %>
             <tr>
-              <td><%=work.number_of_days %> Days</td>
-              <td><%=work.start_date.strftime("%b %e, %Y")%>- <%=work.end_date.strftime("%b %e, %Y") %></td>
+              <td><%=overtime.number_of_hours %> Hours</td>
+              <td><%=overtime.start_date.strftime("%b %e, %Y")%> to  <%=overtime.end_date.strftime("%b %e, %Y") %></td>
               <td>
-                <% if work.paid? %>
+                <% if overtime.paid? %>
                   <span class="btn btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></span>
                 <% end %>
               </td>

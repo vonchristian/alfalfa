@@ -7,8 +7,6 @@ class WorkedDay < ActiveRecord::Base
   validates_datetime :end_date, :after => :start_date
   enum status:[:paid, :unpaid]
 
-  
-
   def self.set_to_paid!
     self.all.unpaid.each do |a|
       a.paid!

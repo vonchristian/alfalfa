@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520081823) do
+ActiveRecord::Schema.define(version: 20160524023755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,6 +416,18 @@ ActiveRecord::Schema.define(version: 20160520081823) do
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   add_index "orders", ["customer_type"], name: "index_orders_on_customer_type", using: :btree
 
+  create_table "overtimes", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.decimal  "number_of_hours"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "status",          default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "overtimes", ["employee_id"], name: "index_overtimes_on_employee_id", using: :btree
+
   create_table "payments", force: :cascade do |t|
     t.decimal  "amount"
     t.integer  "paymentable_id"
@@ -633,6 +645,7 @@ ActiveRecord::Schema.define(version: 20160520081823) do
   add_foreign_key "maintenances", "work_details"
   add_foreign_key "miscellaneous_costs", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
+  add_foreign_key "overtimes", "employees"
   add_foreign_key "purchase_orders", "work_details"
   add_foreign_key "remarks", "projects"
   add_foreign_key "restockings", "inventories"

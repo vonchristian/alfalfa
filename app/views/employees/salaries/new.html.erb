@@ -28,7 +28,9 @@
 		    <div class="col-md-6 col-md-offset-3">
 			    <h5 class="text-title">Days Worked<span class="pull-right"><%=@employee.unpaid_worked_days%> Days </span></h5>
 			    <h5 class="text-title">Rate <span class="pull-right"><%=number_to_currency @employee.rate%></span></h5>
-			    <h5>Earned Income <span class="pull-right"><%=number_to_currency @employee.unpaid_worked_days_amount %></span></h5>
+					<h5 class="text-title">Overtime<span class="pull-right"><%=@employee.unpaid_overtimes %> Hours </span></h5>
+					<h5 class="text-title">Overtime Rate <span class="pull-right"><%=number_to_currency @employee.overtime_rate %></span></h5>
+			    <h5>Earned Income <span class="pull-right"><%=number_to_currency @employee.earned_income %></span></h5>
 			<hr>
 		</div>
 	</div>
@@ -48,7 +50,7 @@
 	<div class="col-md-6 col-md-offset-3">
 			<%=simple_form_for [@employee, @entry], url: :employee_salaries do |f| %>
 				<%=f.error_notification %>
-						<%=f.input :date, as: :string, input_html: { class: "datepicker" } %>
+						<%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
 						<% if @employee.unpaid_cash_advances > 0 %>
 						  <%=f.input :description, as: :text, input_html: {value: "Salary Payment for #{@employee.name} and Cash Advance Payments"}, as: :hidden  %>
 						<% else %>

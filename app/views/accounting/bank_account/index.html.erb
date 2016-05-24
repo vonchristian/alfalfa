@@ -2,87 +2,37 @@
   <div class="col-md-4">
     <div class="card">
       <div class="header">
-        <h4 class="title"> Bank Account Details </h4>
-        <div class="row"><hr class="with-padding"></div>
+        <h4 class="title">Bank Account Details </h4>
       </div>
       <div class="content">
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Deposits </h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th><small><b>Recipient</b></small></th>
-              <th><small><b>Description</b></small></th>
-              <th><small><b>Amount</b></small></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @bank_account.debit_entries.each do |debit| %>
-              <tr>
-                <td>
-                  <% if debit.entriable %>
-                    <a href="" title="<%=debit.entriable.name%>">
-                      <%=image_tag(debit.entriable.profile_photo.url(:thumb), class: "img-circle center-block", title: debit.entriable.name, data: {toggle: 'tooltip', placement:'bottom'}) %>
-                    </a>
-                  <% end %>
-                </td>
-                <td>
-                  <small># <%=debit.description %></small>
-                  <br />
-                  <span class="text-success"><small>&nbsp&nbsp&nbsp<%=debit.date.strftime("%B %e, %Y") %></small></span>
-                </td>
-                <td><small><%=number_to_currency debit.debit_amounts.sum(:amount) %><small></td>
-              </tr>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Bank Transactions </h4>
+        </div>
+        <div class="content">
+        <div class="row">
+          <div class="col-md-4">
+            <%=number_to_currency Account.find_by_name("Cash in Bank").balance %>
+            BALANCE
+          </div>
+          <div class="col-md-6">
+            <% Account.find_by_name("Cash in Bank").entries.each do |entry| %>
+            <ul class="list-unstyled team-members">
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    <small class="text-info pull-right"><i class="fa fa-clock-o"></i> <%=entry.date.strftime("%B %e, %Y") %></small><br>
+                      <%=entry.description %>
+                  </div>
+                  <div class="col-md-4">
+                    <%=number_to_currency entry.debit_amounts.sum(:amount) %>
+                  </div>
+                </div>
+              </li>
+            </ul>
             <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Withdraws </h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th><small><b>Recipient</b></small></th>
-              <th><small><b>Description</b></small></th>
-              <th><small><b>Amount</b></small></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @bank_account.credit_entries.each do |credit| %>
-              <tr>
-                <td>
-                  <% if credit.entriable %>
-                    <a href="" title="<%=credit.entriable.name%>">
-                      <%=image_tag(credit.entriable.profile_photo.url(:thumb), class: "img-circle center-block", title: credit.entriable.name, data: {toggle: 'tooltip', placement:'bottom'}) %>
-                    </a>
-                  <% end %>
-                </td>
-                <td>
-                  <small># <%=credit.description %></small>
-                  <br />
-                  <span class="text-success"><small>&nbsp&nbsp&nbsp<%=credit.date.strftime("%B %e, %Y") %></small></span>
-                </td>
-                <td><small><%=number_to_currency credit.debit_amounts.sum(:amount) %></small></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
