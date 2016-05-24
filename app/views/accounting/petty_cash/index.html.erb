@@ -1,4 +1,4 @@
-<div class="row">
+ture<div class="row">
   <div class="col-md-12">
     <div class="card">
       <div class="header">
@@ -49,78 +49,74 @@
             <span class="text-primary"><small><center> BALANCE </center></small></span>
           </div>
         </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Debit Transactions</h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Account</th>
-              <th>Amount</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
-              <tr>
-                <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
-                <td>
-                  <%=fund_transfer.credit_amounts.last.account.name %>
-                  <br />
-                  <span class="text-muted"><small><%=fund_transfer.date.strftime("%B %e, %Y") %></small></span>
-                </td>
-                <td class="text-right">
-                  <i class="fa fa-check text-success"></i>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="modal-footer">
-          <center><%= paginate @fund_transfers, :window => 1 %></center>
+        <div class="col-md-4">
+          <div class="header">
+            <h4 class="title">Debit Transactions</h4>
+            <div class="row"><hr></div>
+          </div>
+          <div class="content">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Account</th>
+                  <th>Amount</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
+                  <tr>
+                    <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
+                    <td>
+                      <%=fund_transfer.credit_amounts.last.account.name %>
+                      <br />
+                      <span class="text-muted"><small><%=fund_transfer.date.strftime("%B %e, %Y") %></small></span>
+                    </td>
+                    <td class="text-right">
+                      <i class="fa fa-check text-success"></i>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="modal-footer">
+              <center><%= paginate @fund_transfers, :window => 1 %></center>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Credit Transactions</h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th> Description </th>
-              <th> Recipient </th>
-              <th> Amount </th>
-              <th> Date </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
-              <tr>
-                <td><%=link_to disbursement.description, accounting_entry_path(disbursement) %></td>
-                <td><%=disbursement.entriable.try(:name) %> </td>
-                <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
-                <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="modal-footer">
-          <center><%= paginate @disbursements, :window => 1 %></center>
+        <div class="col-md-8">
+          <div class="header">
+            <h4 class="title">Credit Transactions</h4>
+            <div class="row"><hr></div>
+          </div>
+          <div class="content">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th> Description </th>
+                  <th> Recipient </th>
+                  <th> Amount </th>
+                  <th> Date </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
+                  <tr>
+                    <td><%=link_to disbursement.description, accounting_entry_path(disbursement) %></td>
+                    <td><%=disbursement.entriable.try(:name) %> </td>
+                    <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
+                    <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="modal-footer">
+              <center><%= paginate @disbursements, :window => 1 %></center>
+            </div>
+          </div>
         </div>
       </div>
     </div>
