@@ -13,7 +13,7 @@ module Monitoring
         @contract = Contract.find(params[:contract_id])
         @project = @contract.project
         @entry = Transactions::ContractorInvoicePayment.create(payment_params)
-        @entry.entriable = @contract
+        @entry.entriable = @contract.contractor
         if @entry.save
           redirect_to monitoring_contract_url(@contract), notice: "Invoice payment recorded successfully"
         else
