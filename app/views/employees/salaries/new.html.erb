@@ -39,6 +39,10 @@
 			<h5>Deductions </h5>
 
 				<h5 class="text-danger"> Cash Advances <span class="pull-right"> - <%=number_to_currency @employee.unpaid_cash_advances %></span></h5>
+				<h5 class="text-danger"> PhilHealth <span class="pull-right"> - <%=number_to_currency @employee.philhealth %></span></h5>
+				<h5 class="text-danger"> SSS Contribution <span class="pull-right"> - <%=number_to_currency @employee.sss_contribution %></span></h5>
+
+
 <hr>
 
 			<h4 class="title">Gross Pay<span class="pull-right"><%= number_to_currency @employee.total_gross_pay %></span>

@@ -71,7 +71,18 @@ class Employee < ActiveRecord::Base
   end
 
   def total_gross_pay
-  earned_income - unpaid_cash_advances
+  earned_income - unpaid_cash_advances - contributions
+  end
+
+  def contributions
+    philhealth + sss_contribution
+  end
+
+  def philhealth
+    100.00
+  end
+  def sss_contribution
+    182.00
   end
 
   def gross_pay(project)
