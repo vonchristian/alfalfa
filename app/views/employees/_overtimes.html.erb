@@ -1,0 +1,39 @@
+<div class="col-md-6">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Overtimes
+        <span class="pull-right">
+          <%=link_to new_employee_overtime_path(@employee), title: 'Add Overtime' do %>
+            <span class="btn btn-info btn-icon-sm" data-toggle="tooltip" data-placement="bottom" title="Add Overtime"><i class="fa fa-plus"></i></span>
+          <% end %>
+        </span>
+      </h4>
+      <div class="row"><hr></div>
+    </div>
+    <div class="content">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th># of Hours</th>
+            <th>Duration</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @employee.overtimes.order(:created_at).reverse.each do |overtime| %>
+            <tr>
+              <td><%=overtime.number_of_hours %> Hours</td>
+              <td><%=overtime.start_date.strftime("%b %e, %Y")%> to  <%=overtime.end_date.strftime("%b %e, %Y") %></td>
+              <td>
+                <% if overtime.paid? %>
+                  <span class="btn btn-success btn-icon" title="Paid"><i class="fa fa-check"></i></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

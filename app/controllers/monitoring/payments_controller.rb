@@ -15,7 +15,7 @@ module Monitoring
       @entry = Transactions::InvoicePayment.create(payment_params)
       @entry.entriable = @project
       if @entry.save
-        redirect_to @asset, notice: "Invoice payment recorded successfully"
+        redirect_to monitoring_project_url(@project), notice: "Entry Recorded successfully"
       else
         render :new
       end

@@ -145,7 +145,7 @@ class Project < ActiveRecord::Base
 
   def start_date
     if notice_to_proceed
-      notice_to_proceed.date.strftime("%B %e, %Y")
+      notice_to_proceed.date
     else
       "No NTP"
     end
@@ -197,7 +197,7 @@ class Project < ActiveRecord::Base
 
    def add_to_accounts
      Entry.create!(description: self.name, debit_amounts_attributes:[{amount: (self.trade_amount), account: "Accounts Receivable-Trade"},{amount: (self.retention_amount), account: "Accounts Receivable-Retention"}],
-                       credit_amounts_attributes:[amount: (self.cost), account: "Cost of Contracts"])
+                       credit_amounts_attributes:[amount: (self.cost), account: "Revenue"])
    end
 
    def update_work_detail_accomplishments_status
@@ -207,4 +207,15 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+    def performance_status
+      if notice_to_proceed.blank?
+        'danger'
+      elsif
+        actual_accomplishment >= 100
+        'success'
+      else
+        'warning'
+      end
+    end
 end

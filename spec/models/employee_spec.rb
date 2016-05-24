@@ -18,6 +18,7 @@ RSpec.describe Employee, type: :model do
     it {is_expected.to have_many :work_details }
     it {is_expected.to have_many :equipment_schedules }
     it {is_expected.to have_many :equipments }
+    it { is_expected.to have_many :overtimes }
   end
 
   it ".full_name" do

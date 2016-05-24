@@ -24,16 +24,16 @@
             <% Employee.all.each do |employee| %>
               <tr>
                 <td><%= image_tag employee.profile_photo.url(:small), class: "img-circle" %></td>
-                <td><%= employee.try(:name) %></td>
+                <td><%= link_to employee.try(:name), new_employee_salary_path(employee) %></td>
                 <td><%=number_to_currency employee.rate %></td>
                 <td><%=employee.unpaid_worked_days %> Days </td>
                 <td class="text-right text-danger">
                   <%=number_to_currency employee.unpaid_cash_advances %>
                 </td>
-                <td class="text-right text-success"><%=number_to_currency employee.unpaid_worked_days_amount %></td>
+                <td class="text-right text-success"><%=number_to_currency employee.earned_income %></td>
                 <td class="text-right text-primary"><%=number_to_currency employee.total_gross_pay %></td>
                 <td>
-                  <% if employee.worked_days.unpaid.present? %>
+                <% if employee.worked_days.unpaid.present? || employee.overtimes.unpaid.present? %>
                     <%=link_to "Pay Slip", new_employee_salary_path(employee), class: 'pull-right btn btn-success' %>
                   <% end %>
                 </td>

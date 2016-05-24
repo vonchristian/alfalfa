@@ -9,7 +9,7 @@ class Employees::WorkedDaysController < ApplicationController
     @employee = Employee.find(params[:employee_id])
     @worked_day = @employee.worked_days.create(worked_day_params)
     if @worked_day.save
-      @worked_day.set_to_unpaid!
+      @worked_day.unpaid!
       redirect_to @employee, notice: "Number of days worked saved successfully."
     else
       render :new

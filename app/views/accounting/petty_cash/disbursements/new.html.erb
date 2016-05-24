@@ -12,7 +12,7 @@
         
         <%=f.input :reference_number %>
         <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
-        <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]}, input_html: {id: "entry_entriable_id"} %>
+        <%=f.input :entriable_id, label: "Recipient", collection: Employee.all.map {|a| [a.full_name, a.id]}, input_html: {id: "entry_entriable_id"} %>
 
 
         <%=f.simple_fields_for :debit_amounts do |c| %>

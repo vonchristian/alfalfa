@@ -33,7 +33,10 @@
 						<% @projects.all.each do |project| %>
 							<tr>
 								<td><%=project.name.truncate(200) %></td>
-								<td><%=link_to "Print Report", monitoring_project_line_items_path(project, format: 'pdf') %></td>
+								<td><%=link_to monitoring_project_line_items_path(project, format: 'pdf') do %>
+									  <span data-toggle="tooltip" data-placement="bottom" title="View PDF Report"> <%=image_tag("document.png", height: 30, width: 30) %></span>
+									<% end %>
+								</td>
 							</tr>
 						<% end %>
 					</tbody>
@@ -69,7 +72,10 @@
 					<% @contractors.all.each do |contractor| %>
 						<tr>
 							<td><%=contractor.name %></td>
-							<td><%=link_to "Print Report", contractor_line_items_path(contractor, format: 'pdf') %></td>
+							<td><%=link_to contractor_line_items_path(contractor, format: 'pdf') do %>
+									<span data-toggle="tooltip" data-placement="bottom" title="View PDF Report"> <%=image_tag("document.png", height: 30, width: 30) %></span>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 				</table>

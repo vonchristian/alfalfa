@@ -1,34 +1,75 @@
-<div class="col-md-12">
-  <div class="card">
+<div class="col-lg-12">
+  <div class="card card-user">
+    <div class="image">
+    </div>
     <div class="header">
-      <div class="row">
-        <div class="col-md-2">
-          <h5 class="title" title="Back to Project" data-toggle="tooltip" data-placement="bottom"> <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle"), monitoring_project_path(@contract.project) %>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-2 col-xs-2">
-              <%=image_tag(@contract.contractor.profile_photo.url(:thumb), class: 'img-circle') %>
-            </div>
-            <div class="col-md-10">
-              <%=@contract.contractor %><br>
-              <%=@contract.contractor.full_name %>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-         Amount: <%=number_to_currency @contract.amount_subcontracted %>
-        </div>
+      <div class="author">
+        <%=image_tag(@contract.contractor.profile_photo.url(:medium), class: "avatar border-white") %>
+        <h4 class="title"><%=@contract.contractor.full_name %><br />
+          <a href="#"><small><%=@contract.contractor.try(:company) %></small></a>
+        </h4>
+        <hr>
       </div>
-      <hr>
     </div>
     <div class="content">
-      <%=@contract.project.name.truncate(200) %><br>
-      <%=number_to_currency @contract.project.cost %>
-      <div class="modal-footer">
-        <%=link_to edit_monitoring_contract_path(@contract) do %>
-          <span class="btn btn-warning btn-icon" data-toggle="tooltip" data-placement="top" title="Edit Contract"><i class="fa fa-pencil"></i></span>
-        <% end %>
+      <div class="row">
+        <div class="col-md-5">
+          <ul class="list-unstyled team-members">
+            <p> <%=@contract.project.name %></p>
+            <br>
+            <li>
+              <p>
+                <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Amount Subcontracted
+                <span class="pull-right"> <%=number_to_currency @contract.amount_subcontracted %></span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
+                <span class="pull-right"> <%=number_to_currency @contract.total_payments %></span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <%=image_tag("unpaid.png", height: 25, width: 25) %> &nbsp; Balance
+                <span class="pull-right text-danger"> <%=number_to_currency @contract.remaining_payments %></span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+          <div class="header">
+            <h4 class="title">Payments
+              <span class="pull-right">
+                <%=link_to new_monitoring_contract_payment_path(@contract), title: "New Contract Payment" do %>
+                  <span class="btn btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" title="New Contract Payment"><i class="fa fa-plus"></i></span>
+                <% end %>
+              </span>
+            </h4>
+            <div class="row"><hr></div>
+          </div>
+          <div class="content">
+            <%@contract.payments.each do |payment| %>
+              <ul class="list-unstyled team-members">
+                <li id="current_item">
+                  <div class="row">
+                    <div class="col-xs-4">
+                        <%=payment.date.strftime("%B %e, %Y") %>
+                    </div>
+                    <div class="col-xs-5">
+                      <%=number_to_currency payment.credit_amounts.sum(:amount)%>
+                      <br />
+                      <span class="text-muted"><small><%#=number_to_currency contract.inventory.price %></small></span>
+                    </div>
+                    <div class="col-xs-3 text-right">
+                      <%#=number_to_currency contract.total_price %>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
