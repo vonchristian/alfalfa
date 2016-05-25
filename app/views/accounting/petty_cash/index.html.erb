@@ -1,14 +1,9 @@
-<div class="row">
-  <div class="col-md-12">
-
-  </div>
-</div>
 
 <div class="row">
   <div class="col-md-4">
     <div class="card">
       <div class="header">
-        <h4 class="title"> Entries</h4>
+        <h4 class="title"> Entries Filter</h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
@@ -74,7 +69,7 @@
           <tbody>
             <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
               <tr>
-                <td><%=link_to truncate(disbursement.description, length: 35), accounting_entry_path(disbursement) %></td>
+                <td><%=link_to truncate(disbursement.description, length: 35), accounting_entry_path(disbursement), data: {toggle: 'tooltip', placement: 'bottom'}, title: disbursement.description %></td>
                 <td><%=disbursement.entriable.try(:name) %> </td>
                 <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
                 <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
@@ -105,16 +100,13 @@
               <th>Amount</th>
               <th>Account</th>
               <th>Date</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
             <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
               <tr>
                 <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
-                <td>
-                  <%=fund_transfer.credit_amounts.last.account.name %>
-                </td>
+                <td><%=fund_transfer.credit_amounts.last.account.name %></td>
                 <td><%=fund_transfer.date.strftime("%B %e, %Y") %></td>
               </tr>
             <% end %>
