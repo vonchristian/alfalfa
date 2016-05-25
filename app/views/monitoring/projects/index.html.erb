@@ -30,7 +30,7 @@
         <div class="card">
           <div class="header">
             <b><%="##{project.id_number}"%></b>
-            <span class="pull-right btn btn-danger btn-icon" data-toggle="tooltip" data-placement='bottom' title"Slippage"><%=number_to_currency project.slippage, unit: ""%> % </span>
+            <p class="pull-right text-<%=project.slippage_color%>" data-toggle="tooltip" data-placement='bottom' title"Slippage"><i class="fa fa-angle-<%=project.slippage_sign%>"></i><%=number_to_currency project.slippage, unit: ""%> % </p>
             <div class="row"><hr></div>
           </div>
           <div class="content">

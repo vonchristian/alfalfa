@@ -20,7 +20,7 @@
           <%=f.input :mobile_number,  placeholder: "Mobile Number" %>
           <%=f.input :email, placeholder: "Email"  %>
           <% if current_user.accounting_officer? %>
-            <%=f.input :position, collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }, prompt: '--Select --' %>
+            <%=f.input :position, collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
           <% end %>
 
           <%=f.input :rate  %>

@@ -111,7 +111,7 @@
               </li>
               <li>
                 <%=image_tag("reporting.png", height: 25, width: 25) %> &nbsp; Slippage
-                <span class="pull-right text-danger"> <%=number_to_currency @project.slippage, unit: '' %> % </span>
+                <span class="pull-right text-<%=@project.slippage_color%>"><i class="fa fa-angle-<%=@project.slippage_sign%>"></i><%=number_to_currency @project.slippage, unit: '' %> % </span>
               </li>
             </ul>
             <br>

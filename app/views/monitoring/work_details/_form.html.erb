@@ -1,6 +1,6 @@
 <%= simple_form_for [:monitoring, @project, @work_detail] do |f| %>
   <%=f.error_notification %>
-    
+
     <%=f.input :code,  placeholder: 'Code' %>
     <%=f.input :description, placeholder: 'Description', as: :text, input_html:{rows: 3} %>
     <div class="row">
@@ -15,6 +15,6 @@
     <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
     <div class="modal-footer">
       <%=f.submit "Save Work Detail", class: "btn btn-primary pull-right" %>
-      <%=link_to "Cancel", monitoring_project_path(@project) , class: "btn btn-default pull-left"%>
+      <%=link_to "Back to Project", monitoring_project_path(@project) , class: "btn btn-default pull-left"%>
     </div>
 <% end %>

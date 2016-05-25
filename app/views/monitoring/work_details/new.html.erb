@@ -20,7 +20,7 @@
               <% if @project.work_details.present? %>
                 <% @project.work_details.each do |work_detail| %>
                   <tr>
-                    <td><%= work_detail.description.try(:truncate, 100) %></td>
+                    <td><%= work_detail.description.try(:truncate, 80) %></td>
                     <td><span class="pull-right"><%=number_to_currency work_detail.total_cost %></span></td>
                   </tr>
                 <% end %>
@@ -32,7 +32,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-5 col-md-offset-1">
           <%= render 'form' %>
         </div>
       </div>

@@ -3,7 +3,7 @@ module Monitoring
     layout "monitoring"
     def index
       if params[:name].present?
-        @projects = Project.search_by_name(params[:name]).order(:created_at)
+        @projects = Project.search_by_name(params[:name]).order(:created_at).decorate
         respond_to do |format|
           format.html # index.html.erb
           format.pdf do
@@ -12,7 +12,7 @@ module Monitoring
           end
         end
       else
-        @projects = Project.all.order(:created_at).reverse
+        @projects = ProjectDecorator.decorate_collection(Project.all.order(:created_at).reverse)
         respond_to do |format|
           format.html # index.html.erb
           format.pdf do
@@ -55,8 +55,7 @@ module Monitoring
     end
 
     def show
-      @project = Project.find(params[:id])
-      @work_details = @project.work_details.page(params[:page]).per(5)
+      @project = Project.find(params[:id]).decorate
       authorize @project
     end
 
