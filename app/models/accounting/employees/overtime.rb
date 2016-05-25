@@ -7,7 +7,7 @@ module Accounting
 
       validates :number_of_hours, presence: true, numericality: { greater_than: 0.1 }
       enum status:[:unpaid, :paid]
-      
+
       def self.set_to_paid!
         self.all.unpaid.each do |a|
           a.paid!
