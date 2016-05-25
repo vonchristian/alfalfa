@@ -20,11 +20,13 @@ class ContractorLineItemsPdf < Prawn::Document
     move_down 5
     text "Alfalfa Construction", align: :center, size: 11
     move_down 5
-
+    text heading_date, align: :center, size: 11
     move_down 15
   end
 
-
+  def heading_date
+    @contractor.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @contractor.orders.last.date_issued.strftime("%B %e, %Y")
+  end
 
   def summary_table
     [["Contractor: ", "#{(@contractor.name)}"]]
