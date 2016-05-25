@@ -22,11 +22,11 @@
             <th>Remaining </th>
             <th style="width: 10%">% Acc.</th>
             <th> </th>
-            
+
           </tr>
         </thead>
         <tbody>
-          <%@work_details.each do |work_detail| %>
+          <%@project.work_details.each do |work_detail| %>
             <tr>
               <td><p><%=link_to work_detail.description.truncate(100), monitoring_work_detail_path(work_detail) %></p></td>
               <td>
@@ -57,7 +57,5 @@
         </tbody>
       </table>
     <% end %>
-    <center><%= paginate @work_details %></center>
-    <center><%=link_to "View All", monitoring_project_work_details_path(@project), class: "btn btn-primary" if @project.work_details.present? %></center>
-  </div>
+    </div>
 </div>
