@@ -35,7 +35,15 @@ class Employee < ActiveRecord::Base
   has_many :equipments, through: :equipment_schedules
 
   has_many :overtimes, class_name: "Accounting::Employees::Overtime"
-
+  def self.total_gross_pay
+    all.map{ |a| a.total_gross_pay }.sum
+  end
+  def self.total_earned_income
+    all.map{ |a| a.earned_income }.sum
+  end
+  def self.total_cash_advances
+    all.map{ |a| a.unpaid_cash_advances }.sum
+  end
   def cash_advances
     Transactions::CashAdvance.where(entriable: self)
   end
@@ -51,6 +59,10 @@ class Employee < ActiveRecord::Base
 
   def unpaid_overtimes
     overtimes.unpaid.total
+  end
+
+  def unpaid_overtimes_amount
+    overtimes.unpaid.total * overtime_rate
   end
 
   def earned_income
