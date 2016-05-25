@@ -1,6 +1,6 @@
 class ContractorLineItemsPdf < Prawn::Document
 
-  TABLE_WIDTHS = [210, 70, 70, 100, 100]
+  TABLE_WIDTHS = [80, 190, 55, 45, 85, 90]
 
   def initialize(contractor, view_context)
     super(margin: 30, page_size: [612, 948], page_layout: :portrait)
@@ -53,9 +53,9 @@ class ContractorLineItemsPdf < Prawn::Document
 
   def issued_materials_data
     move_down 5
-    [["INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
-    @table_data ||= @contractor.line_items.map{ |e| [e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_price)]} +
-    [["", "", "", "<b>TOTAL</b>", "<b>#{price(@contractor.line_items.total_price)}</b>"]]
+    [["DATE", "INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
+    @table_data ||= @contractor.line_items.map{ |e| [e.order.created_at.strftime('%B %e, %Y'), e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_price)]} +
+    [["", "", "", "", "<b>TOTAL</b>", "<b>#{price(@contractor.line_items.total_price)}</b>"]]
 
   end
 end
