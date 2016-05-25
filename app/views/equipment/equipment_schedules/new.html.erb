@@ -7,8 +7,17 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <%=f.input :project_id, collection: Project.all.map{ |a| [a.id_number_and_location, a.id]}  %>
+        <div class="row">
+          <div class="col-md-6">
+            <%=f.input :start_date, as: :string, input_html: { class: 'datetimepicker' } %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :end_date, as: :string, input_html: { class: 'datetimepicker' } %>
+          </div>
+        </div>
+        <%=f.input :project_id, collection: Project.all.map{ |a| [a.name, a.id]} %>
         <%=f.input :employee_id, collection: Employee.all.operator %>
+        <%=f.input :purpose %>
         <div class="modal-footer">
           <%=link_to "Cancel", @equipment, class: "btn btn-xs pull-left" %>
           <%=f.submit "Save Schedule", class: "btn btn-primary" %>

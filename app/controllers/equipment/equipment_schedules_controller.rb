@@ -21,6 +21,6 @@ class Equipment::EquipmentSchedulesController < ApplicationController
 
   private
   def equipment_schedule_params
-    params.require(:equipment_schedule).permit(:project_id, :employee_id)
+    params.require(:equipment_schedule).permit(:project_id, :employee_id, :purpose, :start_date, :end_date)
   end
 end

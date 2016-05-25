@@ -7,8 +7,45 @@ class Equipment < ActiveRecord::Base
   has_many :employees, through: :equipment_schedules
   delegate :full_name, to: :employee
   has_one :equipment_status
+  has_attached_file :photo,
+                    styles: { large: "120x120>",
+                    medium: "70x70>",
+                    thumb: "40x40>",
+                    small: "30x30>",
+                    x_small: "20x20>"},
+                    default_url: ":style/equipment_icon.png",
+                    :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+                    :url => "/system/:attachment/:id/:style/:filename"
+  validates_attachment :photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
   def make_and_model
     "#{make} - #{model}"
+  end
+
+  def current_assignment
+    if equipment_schedules.present?
+    equipment_schedules.last.project.name
+  end
+  end
+  def current_assignment_purpose
+    if equipment_schedules.present?
+      equipment_schedules.last.purpose
+    end
+  end
+  def current_assignment_start_date
+    if equipment_schedules.present?
+    equipment_schedules.last.start_date.strftime("%B %e, %Y")
+  end
+  end
+  def current_assignment_end_date
+    if equipment_schedules.present?
+    equipment_schedules.last.end_date.strftime("%B %e, %Y")
+  end
+  end
+
+  def current_assignment_operator
+    if equipment_schedules.present?
+    equipment_schedules.last.operator
+  end
   end
 
   def to_s
@@ -22,9 +59,17 @@ class Equipment < ActiveRecord::Base
   def inactive?
     self.equipment_status.inactive?
   end
-  
+
   def active?
     self.equipment_status.active?
+  end
+
+  def status
+    if active?
+      'success'
+    elsif inactive?
+      'warning'
+    end
   end
 
   private

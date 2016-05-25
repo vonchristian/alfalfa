@@ -41,6 +41,6 @@
 
     private
     def equipment_params
-      params.require(:equipment).permit(:make, :model, :plate_number, :acquisition_cost, :acquisition_date)
+      params.require(:equipment).permit(:photo, :make, :model, :plate_number, :acquisition_cost, :acquisition_date)
     end
   end
