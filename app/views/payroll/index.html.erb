@@ -1,7 +1,9 @@
 <div class="col-md-12">
   <div class="card">
     <div class="header">
-      <h4 class="title">Payroll</h4>
+      <h4 class="title">Payroll
+        <span class="pull-right"><%=link_to "Summary (PDF)", payroll_index_path(format: 'pdf'), class: "btn btn-info" %></span>
+      </h4>
       <div class="row"><hr></div>
     </div>
     <div class="content">
@@ -13,6 +15,7 @@
               <th>Employee</th>
               <th>Rate</th>
               <th>Days Worked</th>
+              <th>Overtime</th>
               <th class="text-right">Cash Advances</th>
               <th class="text-right">Earned Income</th>
               <th class="text-right">Gross Pay</th>
@@ -27,6 +30,7 @@
                 <td><%= link_to employee.try(:name), new_employee_salary_path(employee) %></td>
                 <td><%=number_to_currency employee.rate %></td>
                 <td><%=employee.unpaid_worked_days %> Days </td>
+                <td><%=employee.unpaid_overtimes %> Hours </td>
                 <td class="text-right text-danger">
                   <%=number_to_currency employee.unpaid_cash_advances %>
                 </td>

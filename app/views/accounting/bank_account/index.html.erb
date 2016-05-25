@@ -3,17 +3,19 @@
     <div class="card">
       <div class="header">
         <h4 class="title">Bank Account Details </h4>
+        <div class="row"><hr></div>
       </div>
       <div class="content">
       </div>
     </div>
   </div>
-    <div class="col-md-8">
-      <div class="card">
-        <div class="header">
-          <h4 class="title">Bank Transactions </h4>
-        </div>
-        <div class="content">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Bank Transactions </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
         <div class="row">
           <div class="col-md-4">
             <%=number_to_currency Account.find_by_name("Cash in Bank").balance %>
@@ -34,5 +36,9 @@
                 </div>
               </li>
             </ul>
-            <% end %>
+          <% end %>
         </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,124 +1,137 @@
-ture<div class="row">
+<div class="row">
   <div class="col-md-12">
+    
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
     <div class="card">
       <div class="header">
-        <h4 class="title"> Entries
-          <span class="pull-right">
-            <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success active btn-icon" %>
-            <%=link_to "New Disbursement", new_accounting_petty_cash_disbursement_path(@petty_cash), class: "btn btn-danger active btn-icon"%>
-          </span>
-        </h4>
-
-        <div class="row"><hr></div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <label>Report Filter:</label>
-            <%= form_tag({:action => 'index'}, {:method => :get, :class => 'form-inline'}) do%>
-              <div class="col-md-3">
-                <%= label_tag :from_date, nil, class: 'sr-only'%>
-                <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control border-input', :placeholder => "Date" %>
-              </div>
-              <div class="col-md-3">
-                <%= label_tag :to_date, nil, class: 'sr-only'%>
-                <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "Date" %>
-              </div>
-              <div class="col-md-3">
-                <button type="submit" class="btn btn-primary active">Get Report</button>
-              </div>
-              <div class="col-,d-3">
-                <%=link_to "Print Report (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-primary pull-right"%>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="row"><hr class="with-padding"></div>
-
-        <div class="row">
-          <div class="col-xs-4">
-            <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %></center></span></h4>
-            <span class="text-success"><small><center> DEBITS </center></small></span>
-          </div>
-          <div class="col-xs-4">
-            <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
-            <span class="text-danger"><small><center>CREDITS</center></small></span>
-          </div>
-          <div class="col-xs-4">
-            <h4 class="title"><center class="text-primary"><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
-            <span class="text-primary"><small><center> BALANCE </center></small></span>
-          </div>
-        </div>
+        <h4 class="title"> Entries</h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
+        <%= form_tag({:action => 'index'}, {:method => :get}) do%>
+          <div class="form-group">
+            <%= label_tag :from_date, nil%>
+            <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control border-input ', :placeholder => "Date" %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :to_date, nil%>
+            <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "Date" %>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary active">Get Report</button>
+            <%=link_to "View (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-default pull-left"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="header">
+      </div>
+      <div class="content">
+        <div class="row">
         <div class="col-md-4">
-          <div class="header">
-            <h4 class="title">Debit Transactions</h4>
-            <div class="row"><hr></div>
-          </div>
-          <div class="content">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Account</th>
-                  <th>Amount</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
-                  <tr>
-                    <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
-                    <td>
-                      <%=fund_transfer.credit_amounts.last.account.name %>
-                      <br />
-                      <span class="text-muted"><small><%=fund_transfer.date.strftime("%B %e, %Y") %></small></span>
-                    </td>
-                    <td class="text-right">
-                      <i class="fa fa-check text-success"></i>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <div class="modal-footer">
-              <center><%= paginate @fund_transfers, :window => 1 %></center>
-            </div>
-          </div>
+          <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %></center></span></h4>
+          <span class="text-success"><small><center> DEBITS </center></small></span>
         </div>
-        <div class="col-md-8">
-          <div class="header">
-            <h4 class="title">Credit Transactions</h4>
-            <div class="row"><hr></div>
-          </div>
-          <div class="content">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th> Description </th>
-                  <th> Recipient </th>
-                  <th> Amount </th>
-                  <th> Date </th>
-                </tr>
-              </thead>
-              <tbody>
-                <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
-                  <tr>
-                    <td><%=link_to disbursement.description, accounting_entry_path(disbursement) %></td>
-                    <td><%=disbursement.entriable.try(:name) %> </td>
-                    <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
-                    <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <div class="modal-footer">
-              <center><%= paginate @disbursements, :window => 1 %></center>
-            </div>
-          </div>
+        <div class="col-md-4">
+          <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
+          <span class="text-danger"><small><center>CREDITS</center></small></span>
+        </div>
+        <div class="col-md-4">
+          <h4 class="title"><center class="text-primary"><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
+          <span class="text-primary"><small><center> BALANCE </center></small></span>
+        </div>
         </div>
       </div>
     </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Disbursements
+          <span class="pull-right">
+            <%=link_to "New Disbursement", new_accounting_petty_cash_disbursement_path(@petty_cash), class: "btn btn-danger active btn-icon"%>
+          </span>
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th> Description </th>
+              <th> Recipient </th>
+              <th> Amount </th>
+              <th> Date </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
+              <tr>
+                <td><%=link_to disbursement.description, accounting_entry_path(disbursement) %></td>
+                <td><%=disbursement.entriable.try(:name) %> </td>
+                <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
+                <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <center><%= paginate @disbursements, :window => 1 %></center>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Fund Transfers
+          <span class="pull-right">
+            <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success active btn-icon" %>
+          </span>
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
+              <tr>
+                <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
+                <td>
+                  <%=fund_transfer.credit_amounts.last.account.name %>
+                </td>
+                <td><%=fund_transfer.date.strftime("%B %e, %Y") %></td>
+                <td class="text-right">
+                  <i class="fa fa-check text-success"></i>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <center><%= paginate @fund_transfers, :window => 1 %></center>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    
+  </div>
+  <div class="col-md-4">
   </div>
 </div>
