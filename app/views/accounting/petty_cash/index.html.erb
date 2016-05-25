@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    
+
   </div>
 </div>
 
@@ -28,6 +28,42 @@
         <% end %>
       </div>
     </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Debit Transactions
+          <span class="pull-right">
+            <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success active btn-icon" %>
+          </span>
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>Account</th>
+              <th>Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
+              <tr>
+                <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
+                <td>
+                  <%=fund_transfer.credit_amounts.last.account.name %>
+                </td>
+                <td><%=fund_transfer.date.strftime("%B %e, %Y") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <center><%= paginate @fund_transfers, :window => 1 %></center>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="col-md-8">
     <div class="card">
@@ -52,7 +88,7 @@
     </div>
     <div class="card">
       <div class="header">
-        <h4 class="title">Disbursements
+        <h4 class="title">Credit Transactions
           <span class="pull-right">
             <%=link_to "New Disbursement", new_accounting_petty_cash_disbursement_path(@petty_cash), class: "btn btn-danger active btn-icon"%>
           </span>
@@ -85,52 +121,12 @@
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Fund Transfers
-          <span class="pull-right">
-            <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success active btn-icon" %>
-          </span>
-        </h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Account</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Account.find_by_name("Petty Cash").debit_entries.order(:date).reverse.each do |fund_transfer| %>
-              <tr>
-                <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
-                <td>
-                  <%=fund_transfer.credit_amounts.last.account.name %>
-                </td>
-                <td><%=fund_transfer.date.strftime("%B %e, %Y") %></td>
-                <td class="text-right">
-                  <i class="fa fa-check text-success"></i>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="modal-footer">
-          <center><%= paginate @fund_transfers, :window => 1 %></center>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+
 </div>
 
 <div class="row">
   <div class="col-md-8">
-    
+
   </div>
   <div class="col-md-4">
   </div>

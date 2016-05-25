@@ -1,18 +1,19 @@
 <div class="col-md-8 col-md-offset-2">
-	<div class="card">
-		<div class="header">
-			<h4 class="title"><center>Pay Slip Detail</center></h4>
-			<span><center><%=Time.zone.now.strftime("%B %e, %Y") %></center></span>
-			<hr>
-		</div>
+  <div class="card card-user">
+     <div class="image">
+     </div>
+     <div class="header">
+         <div class="author">
+           <%=image_tag(@employee.profile_photo.url(:medium), class: "avatar border-white") %>
+           <h4 class="title"><%=@employee.full_name %><br />
+              <a href="#"><small><%=@employee.position.titleize%></small></a>
+           </h4>
+         </div>
+     </div>
+     <div>
 		<div class="content">
 			<div class="row">
-				<div class="col-md-4 col-md-offset-3">
-					<h5 class="title">EMPLOYEE INFO</h5>
-					<p><%=@employee.full_name %><br>
-					<span class"text-muted"><%=@employee.position.titleize %></span></p>
-				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 col-md-offset-2">
 					<h5 class="title">PAY PERIOD</h5>
 					<% if @employee.worked_days.unpaid.present? %>
 						<p>
@@ -24,34 +25,91 @@
 				</div>
 			</div>
       <hr>
-      <div class="row">
-		    <div class="col-md-6 col-md-offset-3">
-			    <h5 class="text-title">Days Worked<span class="pull-right"><%=@employee.unpaid_worked_days%> Days </span></h5>
-			    <h5 class="text-title">Rate <span class="pull-right"><%=number_to_currency @employee.rate%></span></h5>
-					<h5 class="text-title">Overtime<span class="pull-right"><%=@employee.unpaid_overtimes %> Hours </span></h5>
-					<h5 class="text-title">Overtime Rate <span class="pull-right"><%=number_to_currency @employee.overtime_rate %></span></h5>
-			    <h5>Earned Income <span class="pull-right"><%=number_to_currency @employee.earned_income %></span></h5>
-			<hr>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<h5>Deductions </h5>
 
-				<h5 class="text-danger"> Cash Advances <span class="pull-right"> - <%=number_to_currency @employee.unpaid_cash_advances %></span></h5>
-				<h5 class="text-danger"> PhilHealth <span class="pull-right"> - <%=number_to_currency @employee.philhealth %></span></h5>
-				<h5 class="text-danger"> SSS Contribution <span class="pull-right"> - <%=number_to_currency @employee.sss_contribution %></span></h5>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-2">
+							<h5>Days Worked</h5>
+						</div>
+						<div class="col-md-3">
+							<h5><%=@employee.unpaid_worked_days %> Days * <%=number_to_currency @employee.rate %></h5>
+						</div>
+						<div class="col-md-2">
+							<h5 class="pull-right"><%=number_to_currency @employee.unpaid_worked_days_amount %></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-2">
+							<h5>Overtime</h5>
+						</div>
+						<div class="col-md-3">
+							<h5><%=@employee.unpaid_overtimes %> Hours * <%=number_to_currency @employee.overtime_rate %></h5>
+						</div>
+						<div class="col-md-2">
+							<h5 class="pull-right"><%=number_to_currency @employee.unpaid_overtimes_amount %></h5>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-2">
+							<h5>Earned Income</h5>
+						</div>
+						<div class="col-md-3">
+						</div>
+						<div class="col-md-2">
+							<h5 class="pull-right"><%=number_to_currency @employee.earned_income %></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+						  <h5>Deductions </h5>
+					  </div>
+				  </div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-2">
+								<h5 class="text-danger">Cash Advances</h5>
+						</div>
+						<div class="col-md-3">
 
+						</div>
+						<div class="col-md-2">
+							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.unpaid_cash_advances %></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-2">
+								<h5 class="text-danger">Philhealth</h5>
+						</div>
+						<div class="col-md-3">
+						</div>
+						<div class="col-md-2">
+							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.philhealth %></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-2">
+								<h5 class="text-danger">SSS Contribution</h5>
+						</div>
+						<div class="col-md-3">
+						</div>
+						<div class="col-md-2">
+							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.sss_contribution %></h5>
+						</div>
+					</div>
+					<hr>
 
-<hr>
+          <div class="row">
+	          <div class="col-md-2 col-md-offset-2">
+			        <h5 class="title">Gross Pay</h5>
+						</div>
+						<div class="col-md-3">
+						</div>
+						<div class="col-md-2">
+							<h5 class="text-success pull-right"><b><%= number_to_currency @employee.total_gross_pay %></b></h5>
+						</div>
+	        </div>
 
-			<h4 class="title">Gross Pay<span class="pull-right"><%= number_to_currency @employee.total_gross_pay %></span>
-		</h4>
-		<hr>
-	</div>
-</div>
 <div class="row">
-	<div class="col-md-6 col-md-offset-3">
+	<div class="col-md-7 col-md-offset-2">
 			<%=simple_form_for [@employee, @entry], url: :employee_salaries do |f| %>
 				<%=f.error_notification %>
 						<%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
@@ -79,16 +137,17 @@
 						<% if @employee.unpaid_cash_advances > 0 %>
 						<%=f.simple_fields_for :debit_amounts do |d| %>
 							<%=d.input :amount, input_html: { autocomplete: 'off', value: @employee.unpaid_cash_advances }, as: :hidden  %>
-							<%=d.input :account, input_html: { value: "Cash on Hand" }, as: :hidden  %>
+							<%=d.input :account, input_html: { value: "Petty Cash" }, as: :hidden  %>
 						<% end %>
 
 						<%=f.simple_fields_for :credit_amounts do |c| %>
 							<%=c.input :amount, input_html: {value: @employee.unpaid_cash_advances }, as: :hidden  %>
 							<%=c.input :account, input_html: {value: "Advances to Employees"}, as: :hidden  %>
 						<% end %>
+
           <% end %>
 						<div class="modal-footer">
-							<%=f.submit "Pay Employee", class: "btn btn-danger pull-right" %>
+							<%=f.submit "Pay Employee", class: "btn btn-danger" %>
 						</div>
 					</div>
 				</div>
