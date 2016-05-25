@@ -28,11 +28,72 @@
         <% end %>
       </div>
     </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="header">
+      </div>
+      <div class="content">
+        <div class="row">
+        <div class="col-md-4">
+          <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %></center></span></h4>
+          <span class="text-success"><small><center> DEBITS </center></small></span>
+        </div>
+        <div class="col-md-4">
+          <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
+          <span class="text-danger"><small><center>CREDITS</center></small></span>
+        </div>
+        <div class="col-md-4">
+          <h4 class="title"><center class="text-primary"><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
+          <span class="text-primary"><small><center> BALANCE </center></small></span>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Credit Transactions
+          <span class="pull-right">
+            <%=link_to new_accounting_petty_cash_disbursement_path(@petty_cash) do %>
+              <span class="btn btn-danger btn-icon-sm pull-right" data-toggle="tooltip" data-placement="bottom" title="New Disburement"><i class="fa fa-plus"></i></span>
+            <% end %>
+          </span>
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th> Description </th>
+              <th> Recipient </th>
+              <th> Amount </th>
+              <th> Date </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
+              <tr>
+                <td><%=link_to truncate(disbursement.description, length: 35), accounting_entry_path(disbursement) %></td>
+                <td><%=disbursement.entriable.try(:name) %> </td>
+                <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
+                <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <center><%= paginate @disbursements, :window => 1 %></center>
+        </div>
+      </div>
+    </div>
     <div class="card">
       <div class="header">
         <h4 class="title">Debit Transactions
           <span class="pull-right">
-            <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: "btn btn-success active btn-icon" %>
+            <%=link_to new_accounting_petty_cash_fund_transfer_path(@petty_cash) do %>
+              <span class="btn btn-primary btn-icon-sm pull-right" data-toggle="tooltip" data-placement="bottom" title="New Fund Transfer"><i class="fa fa-plus"></i></span>
+            <% end %>
           </span>
         </h4>
         <div class="row"><hr></div>
@@ -64,70 +125,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card">
-      <div class="header">
-      </div>
-      <div class="content">
-        <div class="row">
-        <div class="col-md-4">
-          <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %></center></span></h4>
-          <span class="text-success"><small><center> DEBITS </center></small></span>
-        </div>
-        <div class="col-md-4">
-          <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
-          <span class="text-danger"><small><center>CREDITS</center></small></span>
-        </div>
-        <div class="col-md-4">
-          <h4 class="title"><center class="text-primary"><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
-          <span class="text-primary"><small><center> BALANCE </center></small></span>
-        </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Credit Transactions
-          <span class="pull-right">
-            <%=link_to "New Disbursement", new_accounting_petty_cash_disbursement_path(@petty_cash), class: "btn btn-danger active btn-icon"%>
-          </span>
-        </h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th> Description </th>
-              <th> Recipient </th>
-              <th> Amount </th>
-              <th> Date </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Account.find_by_name("Petty Cash").credit_entries.order(:date).reverse.each do |disbursement| %>
-              <tr>
-                <td><%=link_to disbursement.description, accounting_entry_path(disbursement) %></td>
-                <td><%=disbursement.entriable.try(:name) %> </td>
-                <td><%=number_to_currency disbursement.credit_amounts.sum(:amount) %></td>
-                <td><%=disbursement.date.strftime("%B %e, %Y")%></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="modal-footer">
-          <center><%= paginate @disbursements, :window => 1 %></center>
-        </div>
-      </div>
-    </div>
-
-</div>
-
-<div class="row">
-  <div class="col-md-8">
-
-  </div>
-  <div class="col-md-4">
   </div>
 </div>
