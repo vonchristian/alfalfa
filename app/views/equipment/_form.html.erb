@@ -7,6 +7,13 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
+
+        <%if @equipment.photo.blank? %>
+          <center><%=image_tag("default-small.png", :class=>"img-square center-block ") %></center>
+        <% else %>
+          <center><%= image_tag @equipment.photo.url(:medium), class: 'center-block img-responsive img-rounded'%></center>
+        <% end %>
+        <center><%= f.input :photo, class: 'center-block', as: :file %></center>
         <%= f.input :make, label: false, placeholder: 'Equipment Name' %>
         <%=f.input :model, label: false, placeholder: 'Model' %>
         <%=f.input :acquisition_date, label: false, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>

@@ -30,6 +30,7 @@ end
   end
   resources :monitoring, only:[:index]
   namespace :monitoring do
+    resources :equipment, only: [:index]
     resources :projects, except:[:destroy] do
       resources :work_details, only:[:new, :create, :index]
       resources :contracts, only: [:new, :create]

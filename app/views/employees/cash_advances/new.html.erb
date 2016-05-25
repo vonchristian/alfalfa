@@ -14,7 +14,7 @@
 					<%=c.input :account,input_html: { value: "Advances to Employees" }, as: :hidden %>
 				<% end %>
 				<%=f.simple_fields_for :credit_amounts do |d| %>
-					<%=d.input :amount, input_html:{autocomplete: "off", id: "accounting_entry_credit_amounts_attributes_0_amount" }, as: :hidden %>
+					<%=d.input :amount, input_html:{autocomplete: "off", id: "accounting_cash_advance_credit_amounts_attributes_0_amount" } %>
 					<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
 				<% end %>
         <%=f.input :reference_number %>
