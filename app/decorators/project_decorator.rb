@@ -26,6 +26,7 @@ end
       link_to 'Enter NTP Date', new_project_notice_to_proceed_path(project)
     else
       project.ntp
+      
     end
   end
 

@@ -25,7 +25,7 @@ class ContractorLineItemsPdf < Prawn::Document
   end
 
   def heading_date
-    @contractor.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @contractor.orders.last.date_issued.strftime("%B %e, %Y")
+    # @contractor.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @contractor.orders.last.date_issued.strftime("%B %e, %Y")
   end
 
   def summary_table

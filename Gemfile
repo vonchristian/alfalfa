@@ -55,7 +55,7 @@ group :test do
   gem 'faker'
   gem 'webmock'
   gem 'selenium-webdriver'
-  # gem 'capybara-webkit'
+  gem 'capybara-webkit'
 end
 
 

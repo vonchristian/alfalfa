@@ -25,7 +25,7 @@ class ProjectLineItemsPdf < Prawn::Document
   end
 
   def heading_date
-    @project.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @project.orders.last.date_issued.strftime("%B %e, %Y")
+    # @project.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @project.orders.last.date_issued.strftime("%B %e, %Y")
   end
 
   def summary_table
