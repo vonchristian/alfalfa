@@ -10,11 +10,11 @@
 				<%= f.input :date, as: :string, input_html: { class: 'datetimepicker'} %>
 				<%= f.input :description, input_html: { value: "Cash Advance of #{@employee.name}"}, as: :hidden  %>
 				<%=f.simple_fields_for :debit_amounts do |c| %>
-					<%=c.input :amount, input_html: { id: "accounting_entry_debit_amounts_attributes_0_amount"}  %>
+					<%=c.input :amount, input_html: { autocomplete: "off" }  %>
 					<%=c.input :account,input_html: { value: "Advances to Employees" }, as: :hidden %>
 				<% end %>
 				<%=f.simple_fields_for :credit_amounts do |d| %>
-					<%=d.input :amount, input_html:{autocomplete: "off", id: "accounting_cash_advance_credit_amounts_attributes_0_amount" } %>
+					<%=d.input :amount, readonly: true%>
 					<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
 				<% end %>
         <%=f.input :reference_number %>
