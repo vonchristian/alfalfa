@@ -3,6 +3,7 @@ module Supplies
     include PublicActivity::Common
     include PgSearch
     pg_search_scope :search_by_name, :against => :name
+    enum status:[:available, :out_of_stock, :discontinued]
     has_many :stocks
     has_many :line_items, class_name: 'Supplies::LineItem'
     has_many :orders, through: :line_items, class_name: 'Supplies::Order'

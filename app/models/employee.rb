@@ -27,7 +27,7 @@ class Employee < ActiveRecord::Base
 
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
-  has_many :salaries, as: :entriable
+  has_many :salaries, as: :entriable, class_name: "Transactions::SalaryPayment"
   has_many :employments
   has_many :work_details, through: :employments
   has_many :projects, through: :work_details
@@ -68,7 +68,7 @@ class Employee < ActiveRecord::Base
   def earned_income
     unpaid_worked_days_amount + unpaid_overtimes_amount
   end
-  
+
   def unpaid_overtimes_amount
     unpaid_overtimes * overtime_rate
   end

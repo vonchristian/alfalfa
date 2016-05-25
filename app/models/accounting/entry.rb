@@ -2,9 +2,10 @@ module Accounting
   class Entry < ActiveRecord::Base
     include PublicActivity::Common
     include PgSearch
-    multisearchable :against => [:description]
-
     belongs_to :entriable, :polymorphic => true
+    multisearchable :against => [:description]
+    pg_search_scope :search_by_query, :against => [:description]
+
     has_many :amounts
     has_many :credit_amounts, :extend => AmountsExtension, :class_name => 'CreditAmount', :inverse_of => :entry, dependent: :destroy
     has_many :debit_amounts, :extend => AmountsExtension, :class_name => 'DebitAmount', :inverse_of => :entry, dependent: :destroy

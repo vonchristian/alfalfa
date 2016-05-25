@@ -8,10 +8,14 @@
 			<div class="content">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
+						<p><strong>Recipient</strong></p>
+						<span>&nbsp &nbsp &nbsp<%=@entry.entriable.try(:name) %></span><br>
+							<hr>
 						<p><strong>Description</strong></p>
+						<hr>
 						<span>&nbsp &nbsp &nbsp<%=@entry.description %></span><br>
 
-						<hr>
+
 
 						<p><strong>Date</strong></p>
 						<span>&nbsp &nbsp &nbsp<%=@entry.date.strftime("%B %e, %Y") %></span>
