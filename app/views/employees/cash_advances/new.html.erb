@@ -17,7 +17,7 @@
 					<%=d.input :amount, readonly: true%>
 					<%=d.input :account, input_html: { value: "Petty Cash" }, readonly: true, as: :hidden %>
 				<% end %>
-        <%=f.input :reference_number %>
+        		<%=f.input :reference_number %>
 				<div class="modal-footer">
 					<%= link_to "Cancel", @employee, class: 'btn btn-xs pull-left' %>
 					<%=f.submit "Save", data: {disable_with: 'Saving Entry...'}, class: "btn btn-danger" %>

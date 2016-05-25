@@ -38,7 +38,7 @@
                 <td class="text-right text-primary"><%=number_to_currency employee.total_gross_pay %></td>
                 <td>
                 <% if employee.worked_days.unpaid.present? || employee.overtimes.unpaid.present? %>
-                    <%=link_to "Pay Slip", new_employee_salary_path(employee), class: 'pull-right btn btn-success' %>
+                    <%=link_to "Pay Slip", new_employee_salary_path(employee), class: 'pull-right btn btn-success btn-xs' %>
                   <% end %>
                 </td>
               </tr>
