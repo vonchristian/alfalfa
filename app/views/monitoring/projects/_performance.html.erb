@@ -7,13 +7,13 @@
     <th>Slippage</th>
   </thead>
   <tbody>
-    <% Project.all.each do |project| %>
+    <% @projects.each do |project| %>
       <tr>
         <td><i class="fa fa-circle text-<%=project.performance_status%>"></i>
         <td><%=project.name.truncate(150)%>
         <td><span class="pull-right"><%=number_to_currency project.actual_accomplishment, unit: "" %> %</span> </td>
         <td><span class="pull-right"><%=number_to_currency project.target_accomplishment, unit: "" %> % </span> </td>
-        <td><span class="pull-right"><%=number_to_currency project.slippage, unit: "" %> % </span> </td>
+        <td><span class="pull-right text-<%=project.slippage_color%>"><i class="fa fa-chevron-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> % </span> </td>
       </tr>
     <% end %>
   </tbody>

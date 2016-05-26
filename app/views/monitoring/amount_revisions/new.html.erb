@@ -9,7 +9,9 @@
         <%=f.input :quantity %>
         <%=f.input :amount %>
         <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
+        <%=f.input :revision_type, collection: ChangeOrders::AmountRevision.revision_types.keys.to_a.map{ |a|[a.titleize, a] }, as: :radio_buttons %>
         <%=f.input :remarks, as: :text %>
+
         <div class="modal-footer">
           <%= link_to 'Cancel', monitoring_work_detail_path(@work_detail), class: 'btn btn-xs pull-left' %>
           <%=f.submit "Save", class: "btn btn-success", data: { disable_with: "Saving..."} %>

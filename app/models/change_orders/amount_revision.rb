@@ -6,6 +6,7 @@ class ChangeOrders::AmountRevision < ActiveRecord::Base
   belongs_to :work_detail
   belongs_to :recorder, class_name: "User", foreign_key: 'user_id'
 
+  enum revision_type:[:additive, :subtractive]
   def self.total
     self.all.sum(:amount)
   end
