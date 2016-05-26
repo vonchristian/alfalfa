@@ -52,8 +52,14 @@
     <div class="card">
       <div class="header">
         <h4 class="title">Ordered Inventory
-        <%=link_to contractor_line_items_path(@contractor, format: 'pdf') do %>
-            <span class="btn btn-info pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
+          <% if @contractor.line_items.present? %>
+            <%=link_to contractor_line_items_path(@contractor, format: 'pdf') do %>
+              <span class="btn btn-info pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
+            <% end %>
+          <% else %>
+            <%=link_to nil do %>
+              <span class="btn disabled pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
+            <% end %>
           <% end %>
         </h4>
         <div class="row"><hr></div>
