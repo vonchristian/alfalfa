@@ -19,8 +19,18 @@
               <div class="col-md-5">
                 <% if equipment.equipment_schedules.present? %>
 
-                  <%=equipment.current_assignment %><br>
+
                   <ul class="list-unstyled team-members">
+                    <li>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <small> Project: </small>
+                        </div>
+                        <div class="col-md-8">
+                          <%=equipment.current_assignment %>
+                        </div>
+                      </div>
+                    </li>
                     <li>
                   <div class="row">
                     <div class="col-md-4">
@@ -61,6 +71,7 @@
               </div>
           </li>
         </ul>
+        <hr>
       <% end %>
       <div class="footer">
           <div class="chart-legend">
