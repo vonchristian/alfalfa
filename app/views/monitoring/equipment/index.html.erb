@@ -19,7 +19,7 @@
               <div class="col-md-5">
                 <% if equipment.equipment_schedules.present? %>
 
-                <%=equipment.current_assignment %><br>
+                  <%=equipment.current_assignment %><br>
                     <small class="text-muted"><%=image_tag(equipment.current_assignment_operator.profile_photo.url(:thumb), class: "img-circle") %> <%=equipment.current_assignment_operator.full_name %></small>
                     <small class="pull-right"><i class="fa fa-calendar text-success"></i><%=equipment.current_assignment_start_date%> to <i class="fa fa-calendar text-danger"></i> <%=equipment.current_assignment_end_date%></small><br>
                       <%=equipment.current_assignment_purpose %>
