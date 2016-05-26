@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> Order Details </h4>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-5">
+          <%=simple_form_for [@project, @purchase_order], url: :monitoring_project_purchase_orders do |f| %>
+            <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
+            <%=f.input :quantity %>
+            <%=f.input :description, as: :text %>
+            <%=f.input :unit %>
+            <%=f.input :unit_cost %>
+            <%=f.input :amount %>
+            <div class="modal-footer">
+              <%=f.submit "Save", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

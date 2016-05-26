@@ -1,24 +1,49 @@
-<%=link_to "View PDF", monitoring_project_line_items_path(format: "pdf") %>
-<% @project.line_items.each do |line_item| %>
-<ul class="list-unstyled team-members">
-  <li id="current_item">
-    <div class="row">
-      <div class="col-xs-2">
-          <%=line_item.quantity %> <%=line_item.inventory.unit %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">
+          Orders <small> from Inventory </small>
+          <span class="pull-right"><%=link_to "View PDF", monitoring_project_line_items_path(format: "pdf"), class: "btn btn-info btn-sm" %></span>
+        </h4>
       </div>
-      <div class="col-xs-5">
-        <%=line_item.inventory.name%>
-        <br />
-        <span class="text-muted"><small><%=number_to_currency line_item.inventory.price %></small></span>
-      </div>
-      <div class="col-xs-3 text-right">
-        <%=number_to_currency line_item.total_price %>
-      </div>
-      <div class="col-xs-2 pull-right">
-
+      <div class="content">
+        <% @project.line_items.each do |line_item| %>
+          <ul class="list-unstyled team-members">
+            <li>
+              <div class="row">
+                <div class="col-xs-2">
+                  <small><%=line_item.order.date_issued.strftime("%b %e %Y") %></small>
+                </div>
+                <div class="col-xs-2">
+                    <%=line_item.quantity %> <%=line_item.inventory.unit %>
+                </div>
+                <div class="col-xs-5">
+                  <%=line_item.inventory.name%>
+                  <br />
+                  <span class="text-muted"><small><%=number_to_currency line_item.inventory.price %></small></span>
+                </div>
+                <div class="col-xs-2 text-right">
+                  <%=number_to_currency line_item.total_price %>
+                </div>
+              </div>
+              <hr>
+            </li>
+          </ul>
+        <% end %>
       </div>
     </div>
-  </li>
-</ul>
-
-<% end %>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Purchase Orders
+          <span class="pull-right"><%=link_to "New Entry", new_monitoring_project_purchase_order_path(@project), class: "btn btn-primary" %></span>
+        </h4>
+      </div>
+      <div class="content">
+        <%=render @project.purchase_orders %>
+      </div>
+    </div>
+  </div>
+</div>

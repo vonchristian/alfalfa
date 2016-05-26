@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
 
   has_many :orders, as: :customer, class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
+  has_many :purchase_orders, class_name: "Monitoring::PurchaseOrder"
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
@@ -206,5 +207,8 @@ class Project < ActiveRecord::Base
         work_accomplishment.payment_requested!
       end
     end
+  end
+  def direct_material_costs
+    self.line_items.total_price + self.purchase_orders.total_price
   end
 end

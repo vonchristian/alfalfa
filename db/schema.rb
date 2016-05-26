@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526010340) do
+ActiveRecord::Schema.define(version: 20160526042702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -488,18 +488,18 @@ ActiveRecord::Schema.define(version: 20160526010340) do
   add_index "projects", ["main_contractor_id"], name: "index_projects_on_main_contractor_id", using: :btree
 
   create_table "purchase_orders", force: :cascade do |t|
-    t.integer  "work_detail_id"
+    t.integer  "project_id"
     t.decimal  "quantity"
     t.string   "unit"
     t.string   "description"
     t.decimal  "unit_cost"
     t.decimal  "amount"
     t.datetime "date"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "purchase_orders", ["work_detail_id"], name: "index_purchase_orders_on_work_detail_id", using: :btree
+  add_index "purchase_orders", ["project_id"], name: "index_purchase_orders_on_project_id", using: :btree
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "project_id"
@@ -665,7 +665,7 @@ ActiveRecord::Schema.define(version: 20160526010340) do
   add_foreign_key "miscellaneous_costs", "work_details"
   add_foreign_key "notice_to_proceeds", "projects"
   add_foreign_key "overtimes", "employees"
-  add_foreign_key "purchase_orders", "work_details"
+  add_foreign_key "purchase_orders", "work_details", column: "project_id"
   add_foreign_key "remarks", "projects"
   add_foreign_key "restockings", "inventories"
   add_foreign_key "sales", "inventories"

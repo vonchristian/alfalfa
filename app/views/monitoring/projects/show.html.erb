@@ -115,7 +115,7 @@
               </li>
             </ul>
             <br>
-            <h5 class="title"> Change Orders </h5>
+            <h5 class="title card-title"> Change Orders </h5>
             <ul class="list-unstyled team-members">
               <li>
                 <div class="row">
@@ -241,7 +241,7 @@
         <ul class="list-unstyled team-members">
           <li>
             <i class="fa fa-cubes"></i> <%=link_to "Materials", monitoring_project_line_items_path(@project) %>
-            <span class="pull-right"> <%=number_to_currency @project.line_items.total_price %></span>
+            <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
           </li>
         </ul>
         <br>
