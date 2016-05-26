@@ -9,6 +9,13 @@ class ProjectDecorator < Draper::Decorator
     'road'
   end
 end
+def performance_status
+  if notice_to_proceed.blank?
+    'danger'
+  else 
+    'warning'
+  end
+end
 
   def start_date_to_end_date
     if project.notice_to_proceed.present?

@@ -1,18 +1,32 @@
-<div class="row">
-  <div class="col-md-2">
-    <h5><%=work_accomplishment.date_accomplished.strftime("%e %b") %></h5>
-  </div>
-  <div class="col-md-10">
-  <%=image_tag(work_accomplishment.recorder.profile_photo.url(:small), height: 30, width: 30, class: "img-circle") if work_accomplishment.recorder %>
- <b> <%=work_accomplishment.recorder.full_name if work_accomplishment.recorder %></b> uploaded <%=work_accomplishment.accomplishment_images.count  %> images <br>
-<% work_accomplishment.accomplishment_images.each do |image| %>
-<%=image_tag(image.photo.url(:large), class: "img-thumbnail border-gray") %>
+<ul class="list-unstyled team-members">
+  <li>
+    <div class="row">
+      <div class="col-md-2">
+        <small class="btn btn-success active btn-icon"><i class="fa fa-cubes"></i> <%=work_accomplishment.quantity %> <%=work_accomplishment.unit %></small>
 
-<small><%=image.caption %></small>
-<% end %>
-<br>
-<h5 class="text-muted"><i class="fa fa-cubes"></i> <%=work_accomplishment.quantity %> <%=work_accomplishment.unit %></h5>
+      </div>
+      <div class="col-md-10">
+        <small><i class="fa fa-calendar"></i> <%=work_accomplishment.date_accomplished.strftime("%e %b %Y") %></small>
+        <%=image_tag(work_accomplishment.recorder.profile_photo.url(:small), height: 30, width: 30, class: "img-circle") if work_accomplishment.recorder %>
+        <b> <%=work_accomplishment.recorder.full_name if work_accomplishment.recorder %></b> uploaded <%=work_accomplishment.accomplishment_images.count  %> images <br>
 
-</div>
-<hr>
-</div>
+        <small>&nbsp; &nbsp; <%=work_accomplishment.remarks %></small><br><br>
+        <% work_accomplishment.accomplishment_images.each do |image| %>
+          <%=link_to monitoring_accomplishment_image_path(image) do %>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <%=image_tag(image.photo.url(:large), class: "img-thumbnail border-gray") %>
+                <div class="caption">
+                  <small><%=image.caption %></small>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <br>
+      </div>
+
+      <hr>
+    </div>
+  </li>
+</ul>

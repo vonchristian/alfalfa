@@ -40,6 +40,7 @@ end
       resources :time_extensions, only: [:index]
       resources :line_items, only: [:index]
     end
+    resources :accomplishment_images, only:[:show]
     resources :contracts, only:[:edit, :update, :show] do
       resources :payments, only: [:new, :create], module: :contracts
     end

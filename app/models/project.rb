@@ -207,15 +207,4 @@ class Project < ActiveRecord::Base
       end
     end
   end
-
-    def performance_status
-      if notice_to_proceed.blank?
-        'danger'
-      elsif
-        actual_accomplishment >= 100
-        'success'
-      else
-        'warning'
-      end
-    end
 end

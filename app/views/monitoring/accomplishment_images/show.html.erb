@@ -1,0 +1,24 @@
+<div class="col-md-8 col-md-offset-2">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">
+        <%=link_to monitoring_work_detail_path(@accomplishment_image.work_accomplishment.work_detail), title: "Back to Work Detail" do %>
+          <span data-toggle="tooltip" data-placement="left" title="Back to Work Detail">
+            <i class='fa fa-angle-left'></i><%=@accomplishment_image.work_accomplishment.work_detail.description %>
+          </span>
+          <% end %>
+    <div class="content">
+      <div class="thumbnail">
+        <%=image_tag(@accomplishment_image.photo.url(:original)) %>
+      </div>
+      <div class="caption">
+        <small><%=@accomplishment_image.caption %></small>
+        <br>
+        <br>
+        <small><i class="fa fa-calendar"></i> <%=@accomplishment_image.work_accomplishment.date_accomplished.strftime("%e %b %Y") %></small>
+        <small><i class="fa fa-user"></i>  <%=@accomplishment_image.work_accomplishment.recorder.full_name%>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
