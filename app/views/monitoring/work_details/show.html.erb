@@ -11,8 +11,7 @@
           </div>
           <div class="col-md-3 col-xs-3">
             <span class="pull-right">
-              <%=image_tag("prize.png", height: 25, width: 25)%>
-              <%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> %
+              <small class="text-success"><%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> % </small>
             </span>
           </div>
         </div>

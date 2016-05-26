@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
 
   has_many :orders, as: :customer, class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
+  has_many :purchase_orders, class_name: "Monitoring::PurchaseOrder"
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
@@ -98,6 +99,13 @@ class Project < ActiveRecord::Base
         0
     end
   end
+  def start_date
+    if notice_to_proceed
+      notice_to_proceed.date
+    else
+      "No NTP"
+    end
+  end
 
   def latest_duration
     if time_extensions.present?
@@ -143,14 +151,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def start_date
-    if notice_to_proceed
-      notice_to_proceed.date
-    else
-      "No NTP"
-    end
-  end
-
   def total_number_of_days_extended
       self.work_details.collect{|a| a.time_extensions_total}.sum
   end
@@ -167,14 +167,6 @@ class Project < ActiveRecord::Base
     revised_duration - days_elapsed
   end
 
-
-  def expiry_date
-      if notice_to_proceed.present?
-      ((self.notice_to_proceed.date.to_date) + (self.duration)).strftime("%B %e, %Y")
-    else
-      "No NTP"
-  end
-  end
 
   def revised_expiry_date
    if notice_to_proceed.present? && time_extensions.present?
@@ -206,5 +198,8 @@ class Project < ActiveRecord::Base
         work_accomplishment.payment_requested!
       end
     end
+  end
+  def direct_material_costs
+    self.line_items.total_price + self.purchase_orders.total_price
   end
 end

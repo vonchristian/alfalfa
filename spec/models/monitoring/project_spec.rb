@@ -26,6 +26,7 @@ RSpec.describe Project, type: :model do
    it { is_expected.to have_many :work_accomplishments }
    it { is_expected.to have_many :orders }
    it { is_expected.to have_many :line_items }
+   it { is_expected.to have_many :purchase_orders }
   end
 
   describe "days elapsed" do

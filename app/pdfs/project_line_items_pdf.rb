@@ -16,7 +16,7 @@ class ProjectLineItemsPdf < Prawn::Document
   end
 
   def heading
-    text "Issued Materials Summary", align: :center
+    text "Orders from Inventory Summary", align: :center
     move_down 5
     text "Alfalfa Construction", align: :center, size: 11
     move_down 5

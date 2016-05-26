@@ -8,6 +8,6 @@ class ChangeOrders::AmountRevision < ActiveRecord::Base
 
   enum revision_type:[:additive, :subtractive]
   def self.total
-    self.all.sum(:amount)
+    self.additive.all.sum(:amount) -   self.subtractive.all.sum(:amount)
   end
 end
