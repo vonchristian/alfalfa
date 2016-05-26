@@ -5,7 +5,9 @@
         <h4 class="title pull-left">Equipment Jobs</h4>
       </div>
       <div class="col-md-6">
-        <%=link_to "New Equipment Schedule", new_equipment_equipment_schedule_path(@equipment), class: "btn btn-primary pull-right" %>
+        <%=link_to new_equipment_equipment_schedule_path(@equipment), title: 'New Equipment Schedule' do %>
+          <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Equipment Schedule"><i class="fa fa-plus"></i> </span>
+        <% end %>
       </div>
     </div>
     <div class="row"><hr></div>
@@ -14,33 +16,42 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th width="30px"></th>
           <th>Operator</th>
-          <th width="60%"><center>Project</center></th>
+          <th width="50%"><center>Project/Location</center></th>
+          <th>Date/Purpose</th>
         </tr>
       </thead>
       <tbody>
-        <% if @equipment.equipment_schedules.present? %>
-        <% @equipment.equipment_schedules.each do |equipment_schedule| %>
+        <% if @equipment_schedules.present? %>
+        <% @equipment_schedules.each do |equipment_schedule| %>
           <tr>
-            <td width="30px">
-              <%= image_tag equipment_schedule.operator.profile_photo(:small), class: 'img-circle' %>
+            <td>
+              <span class="text-center">
+                <center>
+                  <%=equipment_schedule.operator.first_name %>
+                  <br>
+                  <%=equipment_schedule.operator.last_name %>
+                </center>
+              </span>
+            </td>
+            <td class="text-center">
+              <%=truncate(equipment_schedule.project.name, length: 35) %>
+              <br>
+              <span class="text-primary"><i class="fa fa-bookmark"></i><%=equipment_schedule.project.id_number %></span> | <span class="text-success"><i class="fa fa-tag"></i><%=equipment_schedule.project.address %></span>
             </td>
             <td>
-              <span class="pull-left"><%=equipment_schedule.operator.full_name %></span>
-            </td>
-            <td>
-              <span class="text-primary">#<%=equipment_schedule.project.id_number %></span> &nbsp | &nbsp <span><%=truncate(equipment_schedule.project.name, length: 35) %></span> &nbsp - &nbsp <span class="text-success"><i class="fa fa-tag"></i><%=equipment_schedule.project.address %></span>
-              <hr class="min-padding">
-              <small><i class="fa fa-calendar text-success"></i><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule.start_date.present? %> to <i class="fa fa-calendar text-danger"></i> <%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule.end_date.present?%>
-                <hr class="min-padding">
+              <span class="pull-right">
+                <span class="text-primary"><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule.start_date.present? %></span> to <span class="text-primary"><%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule.end_date.present?%></span>
                 <i class="fa fa-truck text-primary"></i><%=equipment_schedule.purpose %>
-              </small>
+              </span>
             </td>
           </tr>
         <% end %>
         <% end %>
       </tbody>
     </table>
+    <div class="modal-footer">
+      <center><%= paginate @equipment_schedules, :window => 1 %></center>
+    </div>
   </div>
 </div>

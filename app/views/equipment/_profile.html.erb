@@ -5,15 +5,14 @@
   <div class="content">
     <div class="author">
       <%= image_tag @equipment.photo.url(:medium), class: "avatar border-white", alt: "equipment profile picture" %>
-      <h4 class="title"><%=@equipment.make_and_model.upcase %>
-        <% if @equipment.equipment_status.present?%> 
-          <% if @equipment.active?%>
-            <span class="text-success">(<%=@equipment.equipment_status.status.capitalize%>)</span>
-          <% elsif @equipment.inactive?%>
-            <span class="text-danger">(<%=@equipment.equipment_status.description.capitalize%>)</span>
-          <% end %>
+      <h4 class="title"><%=@equipment.make_and_model.upcase %></h4>
+      <% if @equipment.equipment_status.present? %> 
+        <% if @equipment.active? %>
+          <p class="text-success">(<%=@equipment.equipment_status.status.capitalize%>)</p>
+        <% elsif @equipment.inactive?%>
+          <p class="text-danger">(<%=@equipment.equipment_status.description.capitalize%>)</p>
         <% end %>
-      </h4>
+      <% end %>
       <br>
       <div class="col-md-12">
         <% if @equipment.equipment_status.blank? %>

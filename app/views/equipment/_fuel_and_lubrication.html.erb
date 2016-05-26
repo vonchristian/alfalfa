@@ -1,7 +1,9 @@
 <div class="card">
   <div class="header">
     <h4 class="title">Fuel and Lubrication
-      <span class="pull-right"><%=link_to "New Fuel Expense", new_equipment_fuel_expense_path(@equipment), class: "btn btn-primary" %></span>
+      <%=link_to new_equipment_fuel_expense_path(@equipment), title: "New Fuel Expense" do %>
+        <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Fuel Expense"><i class="fa fa-plus"></i> </span>
+      <% end %>
     </h4>
     <div class="row"><hr></div>
   </div>
