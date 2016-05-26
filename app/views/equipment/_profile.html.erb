@@ -1,65 +1,51 @@
-<div class="tab-pane active" id="profile">
+<div class="card card-user">
+  <div class="image">
+    <%= image_tag "hero.jpg", class: "img-square center-block", alt: "employee profile picture" %>
+  </div>
   <div class="content">
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="list-unstyled team-members">
-          <li>
-            <p><%=@equipment.plate_number %></p>
-            <span class="text-muted">Plate Number</span>
-          </li>
-          <li>
-            <p><%=number_to_currency @equipment.acquisition_cost %></p>
-            <span class="text-muted">Acquisition Cost</span>
-          </li>
-          <li>
-            <p><%=number_to_currency @equipment.acquisition_cost %></p>
-            <span class="text-muted">Acquisition Cost</span>
-          </li>
-          <li>
-            <%=link_to "Update Equipment", edit_equipment_path(@equipment), class: "btn btn-primary btn-block" %>
-          </li>
-        </ul>
+    <div class="author">
+      <%= image_tag @equipment.photo.url(:medium), class: "avatar border-white", alt: "equipment profile picture" %>
+      <h4 class="title"><%=@equipment.make_and_model.upcase %>
+        <% if @equipment.equipment_status.present?%> 
+          <% if @equipment.active?%>
+            <span class="text-success">(<%=@equipment.equipment_status.status.capitalize%>)</span>
+          <% elsif @equipment.inactive?%>
+            <span class="text-danger">(<%=@equipment.equipment_status.description.capitalize%>)</span>
+          <% end %>
+        <% end %>
+      </h4>
+      <br>
+      <div class="col-md-12">
+        <% if @equipment.equipment_status.blank? %>
+          <%= link_to new_equipment_equipment_status_path(@equipment), title: 'Add Status' do %>
+            <span class="btn btn-success btn-icon-sm" data-toggle="tooltip" data-placement="bottom" title="Add Status"><i class="fa fa-plus"></i> </span>
+          <% end %>
+        <% else %>
+          <%= link_to edit_equipment_equipment_status_path(@equipment, @equipment.equipment_status.id), title: 'Update Status' do %>
+            <span class="btn btn-success btn-icon-sm" data-toggle="tooltip" data-placement="bottom" title="Update Status"><i class="fa fa-pencil"></i> </span>
+          <% end %>
+        <% end %>
       </div>
-      <div class="col-md-9">
-        <div class="header">
-          <div class="row">
-            <div class="col-md-6">
-              <h4 class="title pull-left">Equipment Jobs</h4>
-            </div>
-            <div class="col-md-6">
-              <%=link_to "New Equipment Schedule", new_equipment_equipment_schedule_path(@equipment), class: "btn btn-primary pull-right" %>
-            </div>
-          </div>
-          <div class="row"><hr></div>
-        </div>
-        <div class="content">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th width="30px"></th>
-                <th>Operator</th>
-                <th>Equipment</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if @equipment.equipment_schedules.present? %>
-              <% @equipment.equipment_schedules.each do |equipment_schedule| %>
-                <tr>
-                  <td width="30px">
-                    <%= image_tag equipment_schedule.operator.profile_photo(:small), class: 'img-circle' %>
-                  </td>
-                  <td>
-                    <span class="pull-left"><%=equipment_schedule.operator.full_name %></span>
-                  </td>
-                  <td>
-                    <span class="pull-left"><%=equipment_schedule.project.id_number_and_location %></span>
-                  </td>
-                </tr>
-              <% end %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
+    </div>
+    <br>
+    <ul class="description list-unstyled team-members text-center">
+      <li>
+        <div class="row"><hr></div>
+        <p class="no-padding"><%=@equipment.plate_number %></p>
+        <label>Plate Number</label>
+      </li>
+      <li>
+        <p class="no-padding"><%=number_to_currency @equipment.acquisition_cost %></p>
+        <label>Acquisition Cost</label>
+      </li>
+      <li>
+        <p class="no-padding"><%=@equipment.acquisition_date.strftime("%B %e, %Y") %></p>
+        <label>Acquisition Date</label>
+      </li>
+    </ul>
+    <div class="modal-footer">
+      <div class="col-md-10 col-md-offset-1">
+        <%=link_to "Update Equipment", edit_equipment_path(@equipment), class: "btn btn-primary btn-block" %>
       </div>
     </div>
   </div>

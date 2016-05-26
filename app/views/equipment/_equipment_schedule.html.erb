@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="header">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="title pull-left">Equipment Jobs</h4>
+      </div>
+      <div class="col-md-6">
+        <%=link_to "New Equipment Schedule", new_equipment_equipment_schedule_path(@equipment), class: "btn btn-primary pull-right" %>
+      </div>
+    </div>
+    <div class="row"><hr></div>
+  </div>
+  <div class="content">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="30px"></th>
+          <th>Operator</th>
+          <th width="60%"><center>Project</center></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @equipment.equipment_schedules.present? %>
+        <% @equipment.equipment_schedules.each do |equipment_schedule| %>
+          <tr>
+            <td width="30px">
+              <%= image_tag equipment_schedule.operator.profile_photo(:small), class: 'img-circle' %>
+            </td>
+            <td>
+              <span class="pull-left"><%=equipment_schedule.operator.full_name %></span>
+            </td>
+            <td>
+              <span class="text-primary">#<%=equipment_schedule.project.id_number %></span> &nbsp | &nbsp <span><%=truncate(equipment_schedule.project.name, length: 35) %></span> &nbsp - &nbsp <span class="text-success"><i class="fa fa-tag"></i><%=equipment_schedule.project.address %></span>
+              <hr class="min-padding">
+              <small><i class="fa fa-calendar text-success"></i><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule.start_date.present? %> to <i class="fa fa-calendar text-danger"></i> <%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule.end_date.present?%>
+                <hr class="min-padding">
+                <i class="fa fa-truck text-primary"></i><%=equipment_schedule.purpose %>
+              </small>
+            </td>
+          </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
