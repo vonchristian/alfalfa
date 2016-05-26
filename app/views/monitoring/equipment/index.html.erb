@@ -1,4 +1,4 @@
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-12">
   <div class="card">
     <div class="header">
       <h4 class="title">Equipment Schedules</h4>
@@ -9,29 +9,56 @@
         <ul class="list-unstyled team-members">
           <li>
             <div class="row">
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <%=image_tag(equipment.photo.url(:medium)) %>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <br>
-                <%=equipment.make_and_model.upcase %>
+                <i class="fa fa-circle text-<%=equipment.status%>"></i> <%=equipment.make_and_model.upcase %>
               </div>
               <div class="col-md-5">
                 <% if equipment.equipment_schedules.present? %>
 
                   <%=equipment.current_assignment %><br>
-                    <small class="text-muted"><%=image_tag(equipment.current_assignment_operator.profile_photo.url(:thumb), class: "img-circle") %> <%=equipment.current_assignment_operator.full_name %></small>
-                    <small class="pull-right"><i class="fa fa-calendar text-success"></i><%=equipment.current_assignment_start_date%> to <i class="fa fa-calendar text-danger"></i> <%=equipment.current_assignment_end_date%></small><br>
+                  <ul class="list-unstyled team-members">
+                    <li>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <small>Operator: </small>
+                    </div>
+                    <div class="col-md-8">
+                      <%=image_tag(equipment.current_assignment_operator.profile_photo.url(:small), class: "img-circle") %> <%=equipment.current_assignment_operator.full_name %></small><br>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <small>Date: </small>
+                    </div>
+                    <div class="col-md-8">
+                      <i class="fa fa-calendar text-success"></i><%=equipment.current_assignment_start_date%> to <i class="fa fa-calendar text-danger"></i> <%=equipment.current_assignment_end_date%></small><br>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <small>Purpose:</small>
+                    </div>
+                    <div class="col-md-8">
                       <%=equipment.current_assignment_purpose %>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
                 <% else %>
                 <br>
                   <%=equipment.equipment_status %>
-                  <i class="fa fa-circle text-<%=equipment.status%>"></i>
+
                 <% end %>
               </div>
-              <div class="col-md-2">
-
-            </div>
           </li>
         </ul>
       <% end %>
