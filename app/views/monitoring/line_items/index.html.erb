@@ -4,9 +4,14 @@
       <div class="header">
         <h4 class="title">
           Orders <small> from Inventory </small>
-          <span class="pull-right"><%=link_to "View PDF", monitoring_project_line_items_path(format: "pdf"), class: "btn btn-info btn-sm" %></span>
+          <span class="pull-right">
+            <%=link_to monitoring_project_line_items_path(format: "pdf"), title: "View PDF" do %>
+              <span class="btn btn-info btn-sm btn-icon"><i class="fa fa-file-pdf-o"></i> View PDF </span>
+            <% end %>
+          </span>
         </h4>
       </div>
+      <div class="row"><hr></div>
       <div class="content">
         <% @project.line_items.each do |line_item| %>
           <ul class="list-unstyled team-members">
@@ -37,10 +42,23 @@
   <div class="col-md-6">
     <div class="card">
       <div class="header">
-        <h4 class="title">Purchase Orders
-          <span class="pull-right"><%=link_to "New Entry", new_monitoring_project_purchase_order_path(@project), class: "btn btn-primary" %></span>
-        </h4>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="title">Purchase Orders</h4>
+          </div>
+          <div class="col-md-3">
+            <span class="pull-right">
+              <%=link_to monitoring_project_purchase_orders_path(format: "pdf"), title: "View PDF" do %>
+                <span class="btn btn-info btn-sm btn-icon"><i class="fa fa-file-pdf-o"></i> View PDF </span>
+              <% end %>
+            </span>
+          </div>
+          <div class="col-md-5">
+            <span class=""><%=link_to "New Purchase Order", new_monitoring_project_purchase_order_path(@project), class: "btn btn-primary" %></span>
+          </div>
+        </div>
       </div>
+      <div class="row"><hr></div>
       <div class="content">
         <%=render @project.purchase_orders %>
       </div>

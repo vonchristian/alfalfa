@@ -1,6 +1,17 @@
 module Monitoring
   class PurchaseOrdersController < ApplicationController
     layout "monitoring"
+    def index
+      @project = Project.find(params[:project_id])
+      @purchase_orders = @project.purchase_orders
+      respond_to do |format|
+        format.html
+        format.pdf do
+          pdf = PurchaseOrdersPdf.new(@project, @purchase_orders, view_context)
+          			send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Purchase Orders.pdf"
+        end
+      end
+    end
     def new
       @project = Project.find(params[:project_id])
       @purchase_order = @project.purchase_orders.build

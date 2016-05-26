@@ -39,7 +39,7 @@ end
       resources :amount_revisions, only: [:index]
       resources :time_extensions, only: [:index]
       resources :line_items, only: [:index]
-      resources :purchase_orders, only:[:new, :create]
+      resources :purchase_orders, only:[:index, :new, :create]
     end
     resources :accomplishment_images, only:[:show]
     resources :contracts, only:[:edit, :update, :show] do
