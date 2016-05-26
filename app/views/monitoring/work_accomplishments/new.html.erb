@@ -39,6 +39,9 @@
               <%=f.input :quantity %>
               <%=f.input :date_accomplished,  as: :string, input_html:{:class => 'datetimepicker'} %>
               <%=f.input :remarks %>
+              <h5 class="title"> Upload Images </h5>
+              <hr>
+              <br>
               <%=f.simple_fields_for :accomplishment_images do |image| %>
                 <%=image.file_field :photo %>
                 <%=image.input :caption, label: "Image Caption" %>

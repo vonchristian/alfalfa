@@ -1,19 +1,19 @@
 <table class="table table-striped">
   <thead>
     <th></th>
-    <th></th>
-    <th>Accomplished</th>
-    <th>Target</th>
-    <th>Slippage</th>
+    <th style="width: 50%"></th>
+    <th><span class="pull-right">Accomplished</span></th>
+    <th><span class="pull-right">Target</span></th>
+    <th><span class="pull-right">Slippage</span></th>
   </thead>
   <tbody>
     <% @projects.each do |project| %>
       <tr>
         <td><i class="fa fa-circle text-<%=project.performance_status%>"></i>
-        <td><%=project.name.truncate(150)%>
+        <td><%=link_to project.name.truncate(150), monitoring_project_path(project)%>
         <td><span class="pull-right"><%=number_to_currency project.actual_accomplishment, unit: "" %> %</span> </td>
         <td><span class="pull-right"><%=number_to_currency project.target_accomplishment, unit: "" %> % </span> </td>
-        <td><span class="pull-right text-<%=project.slippage_color%>"><i class="fa fa-chevron-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> % </span> </td>
+        <td><span class="pull-right text-<%=project.slippage_color%>"><i class="fa fa-angle-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> % </span> </td>
       </tr>
     <% end %>
   </tbody>
