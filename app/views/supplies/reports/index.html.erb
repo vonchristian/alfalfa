@@ -36,7 +36,7 @@
 								<td><%=project.name.truncate(200) %></td>
 								<td>
 									<%=link_to monitoring_project_line_items_path(project, format: 'pdf') do %>
-									  <span data-toggle="tooltip" data-placement="bottom" title="View PDF Report (Full)"> <%=image_tag("document.png", height: 30, width: 30) %></span>
+									  <span data-toggle="tooltip" data-placement="bottom" title="View PDF Report (Full)"> <%=image_tag("file_pdf.png", height: 30, width: 30) %></span>
 									<% end %>
 								</td>
 							</tr>
@@ -84,7 +84,7 @@
 							<tr>
 								<td><%=contractor.name %></td>
 								<td><%=link_to contractor_line_items_path(contractor, format: 'pdf') do %>
-										<span data-toggle="tooltip" data-placement="bottom" title="View PDF Report (Full)"> <%=image_tag("document.png", height: 30, width: 30) %></span>
+										<span data-toggle="tooltip" data-placement="bottom" title="View PDF Report (Full)"> <%=image_tag("file_pdf.png", height: 30, width: 30) %></span>
 									<% end %>
 								</td>
 							</tr>

@@ -25,7 +25,10 @@ class ProjectLineItemsPdf < Prawn::Document
   end
 
   def heading_date
-    # @project.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @project.orders.last.date_issued.strftime("%B %e, %Y")
+
+    if @project.orders.present?
+      @project.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @project.orders.last.date_issued.strftime("%B %e, %Y")
+    end
   end
 
   def summary_table
@@ -39,7 +42,8 @@ class ProjectLineItemsPdf < Prawn::Document
   end
 
   def display_issued_materials_table
-    if issued_materials_data.empty?
+    if @project.orders.blank?
+      move_down 10
       text "No Issued Materials.", align: :center
     else
       move_down 10

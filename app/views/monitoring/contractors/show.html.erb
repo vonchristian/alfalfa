@@ -26,76 +26,74 @@
   <div class="col-md-8">
     <div class="card">
       <div class="header">
-        <h4 class="title">Subcotracted Projects</h4>
+        <h4 class="title">Subcontracted Projects</h4>
         <div class="row"><hr></div>
       </div>
-        <div class="content">
-          <ul class="list-unstyled team-members">
-            <% @contractor.contracts.each do |contract| %>
-              <li>
-                <div class="row">
-                  <div class="col-xs-2">
-                    <div class="avatar">
-                    </div>
-                  </div>
-                  <div class="col-xs-8">
-                    <%=link_to contract.project.name.truncate(200), monitoring_contractor_contract_path(contractor_id: @contractor, id: contract.id) %>
-                    <br />
-                    <small><i class="fa fa-money"></i> <%=number_to_currency contract.amount_subcontracted%></small>
+      <div class="content">
+        <ul class="list-unstyled team-members">
+          <% @contractor.contracts.each do |contract| %>
+            <li>
+              <div class="row">
+                <div class="col-xs-2">
+                  <div class="avatar">
                   </div>
                 </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+                <div class="col-xs-8">
+                  <%=link_to contract.project.name.truncate(200), monitoring_contractor_contract_path(contractor_id: @contractor, id: contract.id) %>
+                  <br />
+                  <small><i class="fa fa-money"></i> <%=number_to_currency contract.amount_subcontracted%></small>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
       </div>
-    <div class="col-md-8">
-      <div class="card">
-        <div class="header">
-          <h4 class="title">Ordered Inventory
-          <%=link_to contractor_line_items_path(@contractor, format: 'pdf') do %>
-              <span class="btn btn-info pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
-            <% end %>
-          </h4>
-          <div class="row"><hr></div>
-        </div>
-        <div class="content">
-          <table class="table table-hover">
-  					<thead>
-  						<tr>
-  							<th>Material</th>
-  							<th>Quantity</th>
-  							<th>Price</th>
-  							<th>Amount</th>
-                <th>Date</th>
-                <th></th>
-  						</tr>
-  					</thead>
-  					<tbody>
-  						<% @contractor.line_items.each do |line_item| %>
-  							<tr class="<%='text-danger' if !line_item.paid? %>">
-  							  <td> <%= line_item.inventory %></td>
-                  <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
-                  <td> <%= number_to_currency line_item.inventory.price %></td>
-                  <td> <%= number_to_currency line_item.total_price %> </td>
-                  <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
-                  <td>
-                    <% if line_item.paid? %>
-                      <i class="fa fa-check"></i>
-                    <% else %>
-                      <i class="fa fa-times"></i>
-                    <% end %>
-                  </td>
-                  <td>
-                    <% if line_item.unpaid? %>
-                      <%=link_to "Pay", class: "btn btn-primary" %>
-                    <% end %>
-                  </td>
-  							</tr>
-  						<% end %>
-  					</tbody>
-  				</table>
-        </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Ordered Inventory
+        <%=link_to contractor_line_items_path(@contractor, format: 'pdf') do %>
+            <span class="btn btn-info pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
+          <% end %>
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Material</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Amount</th>
+              <th>Date</th>
+              <th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @contractor.line_items.each do |line_item| %>
+							<tr class="<%='text-danger' if !line_item.paid? %>">
+							  <td> <%= line_item.inventory %></td>
+                <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
+                <td> <%= number_to_currency line_item.inventory.price %></td>
+                <td> <%= number_to_currency line_item.total_price %> </td>
+                <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
+                <td>
+                  <% if line_item.paid? %>
+                    <i class="fa fa-check"></i>
+                  <% else %>
+                    <i class="fa fa-times"></i>
+                  <% end %>
+                </td>
+                <td>
+                  <% if line_item.unpaid? %>
+                    <%=link_to "Pay", class: "btn btn-primary" %>
+                  <% end %>
+                </td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
       </div>
     </div>
   </div>
