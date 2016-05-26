@@ -4,6 +4,14 @@ class ProjectDecorator < Draper::Decorator
  decorates_association :work_details
   delegate_all
 
+  def expiry_date
+    if notice_to_proceed.present?
+      ((self.notice_to_proceed.date.to_date) + (self.duration)).strftime("%B %e, %Y")
+    else
+      "No NTP"
+    end
+  end
+
   def sign
     if project.road?
     'road'
@@ -12,7 +20,7 @@ end
 def performance_status
   if notice_to_proceed.blank?
     'danger'
-  else 
+  else
     'warning'
   end
 end

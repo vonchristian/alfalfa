@@ -99,6 +99,13 @@ class Project < ActiveRecord::Base
         0
     end
   end
+  def start_date
+    if notice_to_proceed
+      notice_to_proceed.date
+    else
+      "No NTP"
+    end
+  end
 
   def latest_duration
     if time_extensions.present?
@@ -144,14 +151,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def start_date
-    if notice_to_proceed
-      notice_to_proceed.date
-    else
-      "No NTP"
-    end
-  end
-
   def total_number_of_days_extended
       self.work_details.collect{|a| a.time_extensions_total}.sum
   end
@@ -168,14 +167,6 @@ class Project < ActiveRecord::Base
     revised_duration - days_elapsed
   end
 
-
-  def expiry_date
-      if notice_to_proceed.present?
-      ((self.notice_to_proceed.date.to_date) + (self.duration)).strftime("%B %e, %Y")
-    else
-      "No NTP"
-  end
-  end
 
   def revised_expiry_date
    if notice_to_proceed.present? && time_extensions.present?
