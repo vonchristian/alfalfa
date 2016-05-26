@@ -1,86 +1,54 @@
-<div class="col-md-12">
+<div class="col-md-10 col-md-offset-1">
   <div class="card">
     <div class="header">
       <h4 class="title">Equipment Schedules</h4>
-      <hr>
+      <div class="row"><hr></div>
     </div>
     <div class="content">
-      <%@equipments.each do |equipment| %>
-        <ul class="list-unstyled team-members">
-          <li>
-            <div class="row">
-              <div class="col-md-2">
-                <%=image_tag(equipment.photo.url(:medium)) %>
-              </div>
-              <div class="col-md-3">
-                <br>
-                <i class="fa fa-circle text-<%=equipment.status%>"></i> <%=equipment.make_and_model.upcase %>
-              </div>
-              <div class="col-md-6">
+      <div class="table table-responsive">
+        <table class="table table-hover">
+          <%@equipments.each do |equipment| %>
+            <tr>
+              <td width="95px" class="hidden-xs"><%=image_tag(equipment.photo.url(:medium)) %></td>
+              <td>
+                <%= equipment.make.upcase %><br>
+                <small><%= equipment.model.upcase %></small>
+              </td>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td>
                 <% if equipment.equipment_schedules.present? %>
-                  <ul class="list-unstyled team-members">
-                    <li>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <small> Project: </small>
-                        </div>
-                        <div class="col-md-8">
-                          <%=equipment.current_assignment %>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <small>Operator: </small>
-                        </div>
-                        <div class="col-md-8">
-                          <%=image_tag(equipment.current_assignment_operator.profile_photo.url(:small), class: "img-circle") %> <%=equipment.current_assignment_operator.full_name %></small><br>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <small>Date: </small>
-                        </div>
-                        <div class="col-md-8">
-                          <i class="fa fa-calendar text-success"></i><%=equipment.current_assignment_start_date%> to <i class="fa fa-calendar text-danger"></i> <%=equipment.current_assignment_end_date%></small><br>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <small>Purpose:</small>
-                        </div>
-                        <div class="col-md-8">
-                          <%=equipment.current_assignment_purpose %>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                  <span class="text-success"># <%=equipment.current_assignment_id_number %></span> &nbsp | &nbsp <%= truncate(equipment.current_assignment, length: 65) %> &nbsp - <span class="text-primary"><i class="fa fa-tag"></i><%=equipment.current_assignment_location %></span>
+                  <hr class="min-padding">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <%=image_tag(equipment.current_assignment_operator.profile_photo.url(:thumb), class: "img-circle", title: equipment.current_assignment_operator.full_name, data: {toggle: 'tooltip', placement: 'bottom'}) %>
+                    </div>
+                    <div class="col-md-10">
+                      <small><i class="fa fa-calendar text-success"></i><%=equipment.current_assignment_start_date%> to <i class="fa fa-calendar text-danger"></i> <%=equipment.current_assignment_end_date%>
+                        <hr class="min-padding">
+                        <i class="fa fa-truck text-primary"></i><%=equipment.current_assignment_purpose %>
+                      </small>
+                    </div>
+                  </div>
                 <% else %>
-                  <br>
                   <%=equipment.equipment_status %>
+                  <i class="fa fa-circle text-<%=equipment.status%>"></i>
                 <% end %>
-              </div>
-            </li>
-          </ul>
-          <hr>
-        <% end %>
-        <div class="footer">
-          <div class="chart-legend">
-              <i class="fa fa-circle text-success"></i> Active
-              <i class="fa fa-circle text-warning"></i> Inactive
-          </div>
-          <hr>
-          <div class="stats">
-            <% if EquipmentSchedule.present? %>
-                <i class="ti-reload"></i> Updated <%=time_ago_in_words(EquipmentSchedule.last.created_at.to_date) %> ago
-              <% end %>
-          </div>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="footer">
+        <div class="chart-legend">
+            <i class="fa fa-circle text-success"></i> Active
+            <i class="fa fa-circle text-warning"></i> Inactive
+        </div>
+        <hr>
+        <div class="stats">
+            <i class="ti-reload"></i> Updated _<%#=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
         </div>
       </div>
     </div>
   </div>
+</div>

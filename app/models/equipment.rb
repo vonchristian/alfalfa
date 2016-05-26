@@ -21,31 +21,46 @@ class Equipment < ActiveRecord::Base
     "#{make} - #{model}"
   end
 
+  def current_assignment_id_number
+    if equipment_schedules.present?
+      equipment_schedules.last.project.id_number
+    end
+  end
+
   def current_assignment
     if equipment_schedules.present?
-    equipment_schedules.last.project.name
+      equipment_schedules.last.project.name
+    end
   end
+
+  def current_assignment_location
+    if equipment_schedules.present?
+      equipment_schedules.last.project.address
+    end
   end
+
   def current_assignment_purpose
     if equipment_schedules.present?
       equipment_schedules.last.purpose
     end
   end
+
   def current_assignment_start_date
-    if equipment_schedules.present?
-    equipment_schedules.last.start_date.strftime("%B %e, %Y")
+    if equipment_schedules.last.start_date.present?
+      equipment_schedules.last.start_date.strftime("%B %e, %Y")
+    end
   end
-  end
+
   def current_assignment_end_date
-    if equipment_schedules.present?
-    equipment_schedules.last.end_date.strftime("%B %e, %Y")
-  end
+    if equipment_schedules.last.end_date.present?
+      equipment_schedules.last.end_date.strftime("%B %e, %Y")
+    end
   end
 
   def current_assignment_operator
     if equipment_schedules.present?
-    equipment_schedules.last.operator
-  end
+      equipment_schedules.last.operator
+    end
   end
 
   def to_s
