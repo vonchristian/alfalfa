@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525224712) do
+ActiveRecord::Schema.define(version: 20160526010340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomplishment_images", force: :cascade do |t|
+    t.integer  "work_accomplishment_id"
+    t.string   "caption"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  add_index "accomplishment_images", ["work_accomplishment_id"], name: "index_accomplishment_images_on_work_accomplishment_id", using: :btree
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code"
@@ -624,6 +637,7 @@ ActiveRecord::Schema.define(version: 20160525224712) do
   add_index "worked_days", ["employee_id"], name: "index_worked_days_on_employee_id", using: :btree
   add_index "worked_days", ["project_id"], name: "index_worked_days_on_project_id", using: :btree
 
+  add_foreign_key "accomplishment_images", "work_accomplishments"
   add_foreign_key "attachment_files", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"

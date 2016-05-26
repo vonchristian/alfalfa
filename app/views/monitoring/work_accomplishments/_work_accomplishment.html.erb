@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-2">
+    <h5><%=work_accomplishment.date_accomplished.strftime("%e %b") %></h5>
+  </div>
+  <div class="col-md-10">
+  <%=image_tag(work_accomplishment.recorder.profile_photo.url(:small), height: 30, width: 30, class: "img-circle") if work_accomplishment.recorder %>
+ <b> <%=work_accomplishment.recorder.full_name if work_accomplishment.recorder %></b> uploaded <%=work_accomplishment.accomplishment_images.count  %> images <br>
+<% work_accomplishment.accomplishment_images.each do |image| %>
+<%=image_tag(image.photo.url(:large), class: "img-thumbnail border-gray") %>
+
+<small><%=image.caption %></small>
+<% end %>
+<br>
+<h5 class="text-muted"><i class="fa fa-cubes"></i> <%=work_accomplishment.quantity %> <%=work_accomplishment.unit %></h5>
+
+</div>
+<hr>
+</div>

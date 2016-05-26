@@ -1,4 +1,4 @@
-<%= simple_form_for [:monitoring, @work_detail, @work_accomplishment]  do |f| %>
+<%= simple_form_for [:monitoring, @work_detail, @work_accomplishment], :html => {:multipart => true}  do |f| %>
 <%= f.error_notification %>
   <div class="col-md-12">
     <div class="row">
@@ -39,6 +39,10 @@
               <%=f.input :quantity %>
               <%=f.input :date_accomplished,  as: :string, input_html:{:class => 'datetimepicker'} %>
               <%=f.input :remarks %>
+              <%=f.simple_fields_for :accomplishment_images do |image| %>
+                <%=image.file_field :photo %>
+                <%=image.input :caption, label: "Image Caption" %>
+              <% end %>
               <div class="modal-footer">
                 <%=link_to "Cancel",monitoring_work_detail_path(@work_detail), class: "btn btn-xs pull-left"%>
                 <%=f.submit "Save Work Accomplishment", class: "btn btn-primary bg-blue-active" %>
