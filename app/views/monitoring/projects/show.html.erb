@@ -8,7 +8,9 @@
             <h5><%=@project.name %></h5>
           </div>
           <div class="col-md-2">
-            <%=link_to "Edit Project", edit_monitoring_project_path(@project), class: "btn btn-warning pull-right" %>
+            <% if policy(@project).edit? %>
+              <%=link_to "Edit Project", edit_monitoring_project_path(@project), class: "btn btn-warning pull-right" %>
+            <% end %>
           </div>
         </div>
         <div class="row"><hr class="with-padding no-top-padding"></div>
@@ -31,12 +33,16 @@
                   </div>
                   <div class="col-xs-4">
                     <% if @project.notice_to_proceed.blank? %>
-                      <%=link_to new_monitoring_project_notice_to_proceed_path(@project), title: "Add Notice To Proceed" do %>
+                      <% if policy(ProjectDetails::NoticeToProceed.new).create? %>
+                        <%=link_to new_monitoring_project_notice_to_proceed_path(@project), title: "Add Notice To Proceed" do %>
                         <span class="btn btn-success btn-icon-sm pull-right" data-toggle="tooltip" data-placement="bottom" title="Add Notice To Proceed"><i class="fa fa-plus"></i> </span>
+                        <% end %>
                       <% end %>
                     <% else %>
+                    <% if policy(ProjectDetails::NoticeToProceed.new).edit? %>
                       <%=link_to edit_monitoring_project_notice_to_proceed_path(@project, @project.notice_to_proceed), title: 'Edit Notice To Proceed' do %>
                         <span class="btn btn-warning btn-icon btn-xs" data-toggle="tooltip" data-placement="bottom" title="Edit Notice To Proceed"><i class="fa fa-pencil"></i> </span>
+                      <% end %>
                       <% end %>
                     <% end %>
                   </div>

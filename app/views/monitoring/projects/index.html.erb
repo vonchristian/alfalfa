@@ -16,8 +16,10 @@
       </div>
       <div class="col-md-6 col-xs-4">
         <%=link_to "Summary (PDF)", monitoring_projects_path(@projects, format: 'pdf'), class: 'btn btn-primary' %>
+        <% if policy(Project.new).create? %>
         <%=link_to new_monitoring_project_path, title: "New Project" do %>
           <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Project"><i class="fa fa-plus"></i></span>
+        <% end %>
         <% end %>
     </div>
   </div>
@@ -59,7 +61,3 @@
   </div>
 </div>
 <script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
