@@ -1,5 +1,6 @@
 module Supplies
   class InventoriesController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
     layout 'supplies'
     def index
       @inventories = Supplies::Inventory.all.order('created_at DESC').page(params[:page]).per(10)
@@ -47,6 +48,9 @@ module Supplies
     private
     def inventory_params
       params.require(:supplies_inventory).permit( :name, :description, :price, :unit, stocks_attributes:[:date, :quantity])
+    end
+    def record_not_found
+      redirect_to after_sign_in_path_for(current_user), alert: "We're sorry but the page you were looking for could not be found."
     end
   end
 end

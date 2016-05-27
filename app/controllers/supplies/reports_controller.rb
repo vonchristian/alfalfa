@@ -1,6 +1,6 @@
 class Supplies::ReportsController  < ApplicationController
   layout 'supplies'
-  def index 
+  def index
     if params[:name].present?
       @projects = Project.search_by_name(params[:name])
     else
@@ -12,7 +12,7 @@ class Supplies::ReportsController  < ApplicationController
     else
       @contractors = Contractor.all
     end
-    
+
     @orders = Supplies::Order.all
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     respond_to do |format|
@@ -22,6 +22,7 @@ class Supplies::ReportsController  < ApplicationController
           send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "IssuedMaterials.pdf"
       end
     end
+    authorize :report, :show?
   end
 end
 
