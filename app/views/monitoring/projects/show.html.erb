@@ -218,16 +218,9 @@
             <% end %>
           </span>
         </h5>
-        <div class="row"><hr></div>
       </div>
       <div class="content">
         <table class="table">
-          <thead>
-            <tr>
-              <th colspan="2"></th>
-              <th><span class="pull-right">Amount</span></th>
-            </tr>
-          </thead>
           <%@project.contracts.each do |contract| %>
             <tr>
               <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
