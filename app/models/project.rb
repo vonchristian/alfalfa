@@ -60,6 +60,10 @@ class Project < ActiveRecord::Base
     time_extensions.blank? && amount_revisions.blank?
   end
 
+  def has_no_time_extensions?
+    time_extensions.blank?
+  end
+
   def total_project_estimate
     work_details.collect{|w| w.total_direct_cost}.sum
   end

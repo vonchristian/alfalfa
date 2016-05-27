@@ -47,7 +47,12 @@
                   <div class="col-xs-12">
                     <i class="fa fa-clock-o text-danger"></i>  &nbsp; Expiry Date
                     <br>
-                    &nbsp; &nbsp; &nbsp; &nbsp; <b><%= @project.expiry_date %></b>
+                    <% if @project.has_no_time_extensions? %>
+                      &nbsp; &nbsp; &nbsp; &nbsp; <b><%= @project.expiry_date %></b>
+                      <% else %>
+                        &nbsp; &nbsp; &nbsp; &nbsp; <small class="text-danger"><strike><%= @project.expiry_date %></strike></small><br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; <b><%= @project.revised_expiry_date.strftime("%B %e, %Y") %></b>
+                      <% end %>
                   </div>
                 </div>
               </li>
@@ -56,7 +61,12 @@
                   <div class="col-xs-12">
                     <i class="fa fa-money text-success"></i>  &nbsp; Contract Amount
                     <br>
-                    &nbsp; &nbsp; &nbsp; &nbsp;    <b><%= number_to_currency @project.cost %></b>
+                    <% if @project.no_amount_revisions? %>
+                      &nbsp; &nbsp; &nbsp; &nbsp;    <b><%= number_to_currency @project.cost %></b>
+                    <% else %>
+                        &nbsp; &nbsp; &nbsp; &nbsp;    <small class="text-danger"><strike><%= number_to_currency @project.cost %></strike></small><br>
+                          &nbsp; &nbsp; &nbsp; &nbsp;    <b><%= number_to_currency @project.revised_contract_amount %></b>
+                    <% end %>
                   </div>
                 </div>
               </li>
@@ -74,7 +84,12 @@
                   <div class="col-xs-12">
                     <i class="fa fa-calendar text-success"></i>  &nbsp; Duration
                     <br>
-                    &nbsp; &nbsp; &nbsp; &nbsp;    <b><%= @project.duration %> Days</b>
+                    <% if @project.has_no_time_extensions? %>
+                      &nbsp; &nbsp; &nbsp; &nbsp;    <b><%= @project.duration %> Days</b>
+                    <% else %>
+                      &nbsp; &nbsp; &nbsp; &nbsp;    <small class="text-danger"><strike><%= @project.duration %> Days</strike></small><br>
+                      &nbsp; &nbsp; &nbsp; &nbsp;    <b><%= @project.revised_duration %> Days</b>
+                    <% end %>
                   </div>
                 </div>
               </li>
