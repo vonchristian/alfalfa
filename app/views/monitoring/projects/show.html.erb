@@ -152,7 +152,7 @@
                     <%=image_tag("calendar.png", height: 25, width: 25) %> &nbsp; Time Extensions
                   </div>
                   <div class="col-md-3 col-xs-3">
-                    <span> <%=@project.time_extensions.total %> Days</span>
+                    <span class="pull-right"> <%=@project.time_extensions.total %> Days</span>
                   </div>
                   <div class="col-md-3 col-xs-3">
                     <%=link_to "View Details", monitoring_project_time_extensions_path(@project), class: "btn btn-info btn-xs pull-right" %>

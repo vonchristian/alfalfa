@@ -2,12 +2,12 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <div class="icon-warning text-center">
+                                        <div class="icon-big icon-warning text-center">
                                             <i class="glyphicon glyphicon-road"></i>
                                         </div>
                                     </div>
@@ -22,13 +22,13 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="fa fa-user"></i> <small>Updated <%=time_ago_in_words(Project.last.created_at.to_date) %> ago </small>
+                                        <i class="fa fa-clock-o"></i> <small>Updated <%=time_ago_in_words(Project.last.created_at.to_date) %> ago </small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
@@ -47,13 +47,15 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
+                                      <% if Transactions::InvoicePayment.present? %>
+                                        <i class="fa fa-clock-o"></i> <small>Updated <%=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago </small>
+                                      <% end %>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
@@ -72,32 +74,9 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                       In the last hour
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-info text-center">
-                                          <%=image_tag("engineer.png", height: 40, width: 40) %>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Contractors</p>
-                                            <%=Contractor.count%>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
+                                      <% if Transactions::InvoicePayment.present? %>
+                                        <i class="fa fa-clock-o"></i> <small>Updated <%=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago </small>
+                                      <% end %>
                                     </div>
                                 </div>
                             </div>
