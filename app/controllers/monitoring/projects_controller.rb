@@ -4,7 +4,6 @@ module Monitoring
     def index
       if params[:name].present?
         @projects = Project.search_by_name(params[:name]).order(:created_at).decorate
-        authorize @projects
         respond_to do |format|
           format.html # index.html.erb
           format.pdf do
@@ -14,7 +13,6 @@ module Monitoring
         end
       else
         @projects = ProjectDecorator.decorate_collection(Project.all.order(:created_at).reverse)
-        authorize User
         respond_to do |format|
           format.html # index.html.erb
           format.pdf do
@@ -23,6 +21,7 @@ module Monitoring
           end
         end
       end
+      authorize User, :create?
     end
 
     def new
