@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from Pundit::NotAuthorizedError, with: :permission_denied
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  rescue_from ActionController::RoutingError, :with => :record_not_found
 
 
   def after_sign_in_path_for(current_user)
@@ -18,14 +19,14 @@ class ApplicationController < ActionController::Base
       monitoring_projects_url
     end
   end
-  
+
   def record_not_found
-    redirect_to after_sign_in_path_for(current_user), alert: "Page not found"
+    redirect_to after_sign_in_path_for(current_user), alert: "We're sorry but the page you were looking for could not be found."
   end
 
   private
   def permission_denied
-    redirect_to :back, alert: 'You are not allowed to access this page.'
+    redirect_to after_sign_in_path_for(current_user), alert: 'You are not allowed to access this page.'
   end
   def current_cart
     Supplies::Cart.find(session[:cart_id])

@@ -7,7 +7,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def index
-    true
+    create?
   end
 
   def show?

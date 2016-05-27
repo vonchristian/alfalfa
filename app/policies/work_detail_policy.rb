@@ -6,8 +6,6 @@ class WorkDetailPolicy < ApplicationPolicy
     @work_detail = work_detail
   end
 
-
-
   def index?
     true
   end
@@ -17,7 +15,7 @@ class WorkDetailPolicy < ApplicationPolicy
   end
 
   def create?
-  user.project_engineer? || user.monitoring_officer? || user.project_manager? || user.liason_officer?
+    user.project_engineer? || user.monitoring_officer? || user.project_manager? || user.liason_officer?
   end
 
   def new?
@@ -46,4 +44,3 @@ class WorkDetailPolicy < ApplicationPolicy
     end
   end
 end
-
