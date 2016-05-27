@@ -1,17 +1,41 @@
-<div class="col-md-5 col-md-offset-3">
+<div class="col-md-6 col-md-offset-3">
   <div class="card">
     <div class="header">
       <h4 class="title">Contract Details</h4>
       <div class="row"><hr></div>
     </div>
     <div class="content">
+      <ul class="list-unstyled team-members">
+        <li>
+          <div class="row">
+            <div class="col-md-4">
+              <%=image_tag("contractor.png", width: 30, height: 30) %> &nbsp; Contractor
+            </div>
+            <div class="col-md-6">
+              <%=@contract.contractor.full_name %><br>
+              <small class="text-muted"><%=@contract.contractor.company %></small>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row">
+            <div class="col-md-4">
+              <%=image_tag("payment_icon.png", width: 30, height: 30) %> &nbsp; Amount
+            </div>
+            <div class="col-md-6">
+              <%=number_to_currency @contract.amount_subcontracted %>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <br>
+      <br>
       <%= simple_form_for @contract, url: :monitoring_contract do |f| %>
         <%=f.error_notification %>
-        <%=f.input :contractor_id, collection: Contractor.all.map{|a| [image_tag(a.profile_photo.url(:small), class: "img-circle"),a.id]}, as: :radio_buttons, disabled: true %>
         <%=f.input :amount_subcontracted, placeholder: 'Amount' %>
         <div class="modal-footer">
           <%=f.submit "Update Contract", class: "btn btn-primary" %>
-          <%=link_to "Cancel",monitoring_contract_path(@contract), class: "btn btn-xs pull-left" %>
+          <%=link_to "Cancel",monitoring_contract_path(@contract), class: "btn btn-default pull-left" %>
         </div>
       <% end %>
     </div>

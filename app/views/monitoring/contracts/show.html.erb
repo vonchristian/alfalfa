@@ -7,10 +7,12 @@
         <%=image_tag(@contract.contractor.profile_photo.url(:medium), class: "avatar border-white") %>
         <h4 class="title"><%=@contract.contractor.full_name %><br />
           <a href="#"><small><%=@contract.contractor.try(:company) %></small></a>
+
         </h4>
         <hr>
       </div>
     </div>
+
     <div class="content">
       <div class="row">
         <div class="col-md-5">
@@ -20,7 +22,8 @@
             <li>
               <p>
                 <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Amount Subcontracted
-                <span class="pull-right"> <%=number_to_currency @contract.amount_subcontracted %></span>
+                <span class="pull-right"> <%=number_to_currency @contract.amount_subcontracted %></span><br>
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=link_to "Update Amount", edit_monitoring_contract_path(@contract), class: "btn btn-warning btn-sm active" %>
               </p>
             </li>
             <li>
@@ -46,7 +49,6 @@
                 <% end %>
               </span>
             </h4>
-            <div class="row"><hr></div>
           </div>
           <div class="content">
             <%@contract.payments.each do |payment| %>
