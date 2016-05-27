@@ -13,7 +13,7 @@ module Accounting
     end
 
     def show?
-     true
+     create?
     end
 
     def create?

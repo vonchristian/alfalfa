@@ -30,6 +30,7 @@ module Accounting
 
     def create
       @entry = Entry.new(entry_params)
+      authorize @entry
       if @entry.save
         redirect_to accounting_entries_path, notice: "Entry saved successfully."
       else
@@ -39,6 +40,7 @@ module Accounting
 
     def show
       @entry = Entry.find(params[:id])
+      authorize @entry
     end
 
     def edit
@@ -47,6 +49,7 @@ module Accounting
 
     def update
       @entry = Entry.find(params[:id])
+      authorize @entry
       @entry.update(entry_params)
       if @entry.save
         redirect_to @entry, notice: "Entry updated successfully."
