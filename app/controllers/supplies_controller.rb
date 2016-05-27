@@ -6,6 +6,7 @@ class SuppliesController < ApplicationController
     else
       @inventories = Supplies::Inventory.all
     end
+    authorize :accounting, :show?
     @cart = current_cart
     @line_item = Supplies::LineItem.new
   end
