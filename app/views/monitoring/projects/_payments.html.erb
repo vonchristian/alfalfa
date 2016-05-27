@@ -1,27 +1,26 @@
-<div class="card">
-  <div class="header">
-    <h5 class="title"><%=image_tag("payment_icon.png", height: '35', width: '35') %> Payments
-      <span class="pull-right">
-        <%=link_to new_monitoring_project_payment_path(@project), title: "New Payment" do %>
-          <span class="btn btn-success btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Payment"><i class="fa fa-plus"></i></span>
-        <% end %>
-      </span>
-    </h5>
-    <div class="row"><hr></div>
-  </div>
-  <div class="content">
-    <ul class="list-unstyled team-members">
-        <li>
-          <p>
-            <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Project Cost
-            <span class="pull-right"> <%=number_to_currency @project.cost %></span>
-          </p>
-        </li>
-      <li>
-        <p>
-          <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
-          <span class="pull-right"> <%=number_to_currency @project.total_payments %></span>
-        </p>
+<div class="header">
+  <h5 class="title"><%=image_tag("payment_icon.png", height: '35', width: '35') %> Payments
+    <span class="pull-right">
+      <%=link_to new_monitoring_project_payment_path(@project), title: "New Payment" do %>
+        <span class="btn btn-success btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Payment"><i class="fa fa-plus"></i></span>
+      <% end %>
+    </span>
+  </h5>
+  <div class="row"><hr></div>
+</div>
+<div class="content">
+  <ul class="list-unstyled team-members">
+    <li>
+      <p>
+        <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Project Cost
+        <span class="pull-right"> <%=number_to_currency @project.cost %></span>
+      </p>
+    </li>
+    <li>
+      <p>
+        <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
+        <span class="pull-right"> <%=number_to_currency @project.total_payments %></span>
+      </p>
     </li>
     <li>
       <p>
@@ -30,5 +29,4 @@
       </p>
     </li>
   </ul>
-  </div>
 </div>
