@@ -1,3 +1,0 @@
-class JointVenture < Project
-
-end

@@ -66,7 +66,6 @@ end
   get 'accounts/income_statement' => 'accounts#income_statement'
   resources :payroll, only:[:index, :show]
 
-  resources :activities
   resources :employees do
     resources :cash_advances, :module => :employees
     resources :worked_days, :module => :employees
@@ -75,17 +74,13 @@ end
     resources :salaries, module: :employees
   end
 
-  resources :categories
   resources :users
 
-  get "projects/search"
-  get "/dashboard" => 'dashboards#dashboard', as: "dashboard"
-  get 'result/index' => "result#index"
+
   get 'supplies/inventories' => "supplies/inventories#index"
   get 'supplies/reports' => "supplies/reports#index"
 
   resources :contractors do
-    resources :issued_inventories, module: :contractors
     resources :line_items, only: [:index], module: :contractors
   end
 

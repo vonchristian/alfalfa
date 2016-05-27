@@ -34,22 +34,21 @@
           </div>
           <div class="col-md-5 col-md-offset-1">
             <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
-            <%=f.input :description,input_html: { value: "Payments collected for #{@project.name}"}%>
+            <%=f.input :description,input_html: { value: "Payments collected for #{@project.name}"}, as: :hidden %>
             <%=f.input :reference_number %>
-            <%=f.input :type, input_html: {value: "Transactions::InvoicePayment"} %>
-            <h4 class="title"> Debit </h4>
+            <%=f.input :type, input_html: {value: "Transactions::InvoicePayment"}, as: :hidden %>
             <%=f.simple_fields_for :debit_amounts do |c| %>
               <%=c.input :amount %>
-              <%=c.input :account, collection: Account.all.pluck(:name)%>
+              <%=c.input :account, input_html: { value: "Cash in Bank" }, as: :hidden %>
             <% end %>
-            <h4 class="title"> Credit </h4>
+
             <%=f.simple_fields_for :credit_amounts do |d| %>
-              <%=d.input :amount, input_html: { autocomplete: 'off' } %>
-              <%=d.input :account, input_html: { value: "Accounts Payable"}%>
+              <%=d.input :amount, input_html: { autocomplete: 'off' }, readonly: true, as: :hidden %>
+              <%=d.input :account, input_html: { value: "Accounts Receivable-Trade"}, as: :hidden %>
             <% end %>
             <div class="modal-footer">
               <%= link_to "Cancel", monitoring_project_path(@project), class: 'btn btn-xs pull-left' %>
-              <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
+              <%=f.submit "Record Payment", class: "btn btn-danger pull-right" %>
             </div>
           </div>
         </div>

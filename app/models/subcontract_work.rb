@@ -1,2 +1,0 @@
-class SubcontractWork < Project
-end
