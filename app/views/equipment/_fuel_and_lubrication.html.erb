@@ -17,11 +17,9 @@
         </tr>
       </thead>
       <tbody>
-        <% @equipment.fuel_expenses.each do |fuel_expense| %>
+        <% @equipment.line_items.each do |line_item| %>
         <tr>
-          <td><%=fuel_expense.date_issued.strftime("%B %e, %Y") %></td>
-          <td><%=fuel_expense.quantity %> <%=fuel_expense.inventory.unit %></td>
-          <td><%=number_to_currency fuel_expense.total_cost %></td>
+          
         </tr>
         <% end %>
       </tbody>

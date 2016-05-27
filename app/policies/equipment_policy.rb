@@ -8,7 +8,7 @@ class EquipmentPolicy < ApplicationPolicy
 
 
   def index?
-    true
+    create?
   end
 
   def show?
@@ -45,4 +45,3 @@ class EquipmentPolicy < ApplicationPolicy
     end
   end
 end
-

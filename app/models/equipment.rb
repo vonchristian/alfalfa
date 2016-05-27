@@ -1,8 +1,8 @@
 class Equipment < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:make_and_model]
-  has_many :equipment_maintenances, class_name: "Maintenance"
-  has_many :fuel_expenses, as: :inventoriable, class_name: "IssuedInventory"
+  has_many :orders, as: :customer, class_name: "Supplies::Order"
+  has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
   has_many :equipment_schedules
   has_many :employees, through: :equipment_schedules
   delegate :full_name, to: :employee

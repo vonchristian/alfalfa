@@ -2,6 +2,7 @@ class Accounting::AccountsController < ApplicationController
   layout "accounting"
   def index
     @accounts = Account.all.order(:name)
+    authorize @accounts, :index?
   end
   def new
     @account = Account.new

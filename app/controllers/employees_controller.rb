@@ -7,6 +7,7 @@ class EmployeesController < ApplicationController
     else
 			@employees = Employee.all.order('last_name DESC').page(params[:page]).per(10)
 		end
+    authorize @employees, :index?
 	end
 
 	def new

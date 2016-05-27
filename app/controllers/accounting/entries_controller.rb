@@ -5,8 +5,10 @@ module Accounting
     def index
       if params[:query].present?
         @entries = Entry.search_by_query(params[:query]).order(:created_at).page(params[:page]).per(30)
+        authorize @entries, :index?
       else
         @entries = Entry.all.order('date DESC').page(params[:page]).per(30)
+        authorize @entries, :index?
         @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.zone.now.beginning_of_day
         @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.zone.now.end_of_day
         respond_to do |format|

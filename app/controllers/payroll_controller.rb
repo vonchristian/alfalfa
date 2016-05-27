@@ -1,6 +1,7 @@
 class PayrollController < ApplicationController
   layout "accounting"
 	def index
+    authorize :payroll, :show?
 		@employees = Employee.all.order('last_name DESC').page(params[:page]).per(10)
 		respond_to do |format|
 			format.html
