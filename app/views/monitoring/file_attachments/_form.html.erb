@@ -1,0 +1,20 @@
+<%= simple_form_for [@project, @file_attachment], url: :monitoring_project_file_attachments do |f| %>
+<%=f.error_notification %>
+<div class="col-md-5 col-md-offset-3">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">File Attachment</h4>
+      <div class="row"><hr></div>
+    </div>
+    <div class="content">
+      <%=f.input :attached_file, label: "Choose File to Upload", as: :file %>
+      <%=f.input :date, as: :string, input_html:{:class => 'datetimepicker'} %>
+      <%=f.input :description, as: :text, input_html: {rows: 5} %>
+      <div class="modal-footer">
+        <%= link_to 'Cancel', monitoring_project_path(@project), class: 'btn btn-default pull-left' %>
+        <%=f.submit "Save", class: "btn btn-primary pull-right", data: {disable_with: "Saving File Attachment..."} %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
