@@ -23,8 +23,16 @@
                 <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
                 <td><%=inventory.quantity%> <%=inventory.unit %></td>
                 <td><span><%=number_to_currency inventory.price%></span></td>
-                <td><%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info btn-xs" %></td>
-                <td id='edit_inventory'><%=link_to "Edit", edit_supplies_inventory_path(inventory), class: "btn btn-info btn-xs" %></td>
+                <td>
+                  <% if policy(Supplies::Stock.new).new? %>
+                    <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info btn-xs" %>
+                  <% end %>
+                </td>
+                <td id='edit_inventory'>
+                  <% if policy(inventory).edit? %>
+                    <%=link_to "Edit", edit_supplies_inventory_path(inventory), class: "btn btn-info btn-xs" %>
+                  <% end %>
+                </td>
                 <td>
                   <% if inventory.out_of_stock? %>
                   <span class="label label-danger pull-right"> Out of Stock </span>
