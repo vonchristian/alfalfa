@@ -8,7 +8,7 @@ class EmployeePolicy < ApplicationPolicy
   end
 
   def index
-    user.accounting_officer?
+    create?
   end
 
   def show?
