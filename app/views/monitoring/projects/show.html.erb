@@ -179,88 +179,18 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <div class="card">
-      <div class="header">
-        <h5 class="title"><%=image_tag("payment_icon.png", height: '35', width: '35') %> Payments
-          <span class="pull-right">
-            <%=link_to new_monitoring_project_payment_path(@project), title: "New Payment" do %>
-              <span class="btn btn-success btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Payment"><i class="fa fa-plus"></i></span>
-            <% end %>
-          </span>
-        </h5>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <ul class="list-unstyled team-members">
-            <li>
-              <p>
-                <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Project Cost
-                <span class="pull-right"> <%=number_to_currency @project.cost %></span>
-              </p>
-            </li>
-          <li>
-            <p>
-              <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
-              <span class="pull-right"> <%=number_to_currency @project.total_payments %></span>
-            </p>
-        </li>
-        <li>
-          <p>
-            <%=image_tag("unpaid.png", height: 25, width: 25) %> &nbsp; Balance
-            <span class="pull-right text-danger"> <%=number_to_currency @project.remaining_payments %></span>
-          </p>
-        </li>
-      </ul>
-      </div>
-    </div>
+    <%=render 'payments' %>
   </div>
   <div class="col-md-6">
-    <div class="card">
-      <div class="header">
-        <h5 class="title"> <%=image_tag("contractor.png", height: '35', width: '35') %> Sub Contractors
-          <span class="pull-right">
-            <%=link_to new_monitoring_project_contract_path(@project), title: "New Sub Contractor" do %>
-              <span class="btn btn-info btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Sub Contractor"><i class="fa fa-user-plus"></i></span>
-            <% end %>
-          </span>
-        </h5>
-      </div>
-      <div class="content">
-        <table class="table">
-          <%@project.contracts.each do |contract| %>
-            <tr>
-              <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
-              <td>
-                <%= link_to monitoring_contract_path(contract) do %>
-                  <%=contract.contractor %><br>
-                  <small class="text-muted"><%=contract.contractor.full_name %></small><br>
-                <% end %>
-              </td>
-              <td><p class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></p></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
+    <%=render 'contractors' %>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6">
-    <div class="card">
-      <div class="header">
-        <h4 class="title"><%=image_tag("expenses_icon.png", height: '35', width: '35')%> Direct Costs </h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <ul class="list-unstyled team-members">
-          <li>
-            <i class="fa fa-cubes"></i> <%=link_to "Materials", monitoring_project_line_items_path(@project) %>
-            <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
-          </li>
-        </ul>
-        <br>
-      </div>
-    </div>
+    <%= render 'direct_costs' %>
+  </div>
+  <div class="col-md-6">
+    <%= render 'file_attachments' %>
   </div>
 </div>

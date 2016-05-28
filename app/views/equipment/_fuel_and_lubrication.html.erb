@@ -1,9 +1,9 @@
 <div class="card">
   <div class="header">
     <h4 class="title">Fuel and Lubrication
-      <%=link_to new_equipment_fuel_expense_path(@equipment), title: "New Fuel Expense" do %>
-        <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Fuel Expense"><i class="fa fa-plus"></i> </span>
-      <% end %>
+      <%#=link_to new_equipment_fuel_expense_path(@equipment), title: "New Fuel Expense" do %>
+        <!-- <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Fuel Expense"><i class="fa fa-plus"></i> </span> -->
+      <%# end %>
     </h4>
     <div class="row"><hr></div>
   </div>
@@ -19,9 +19,16 @@
       <tbody>
         <% @equipment.line_items.each do |line_item| %>
         <tr>
-          
+
         </tr>
         <% end %>
+        <% # @equipment.fuel_expenses.each do |fuel_expense| %>
+          <tr>
+            <td><%#=fuel_expense.date_issued.strftime("%B %e, %Y") %></td>
+            <td><%#=fuel_expense.quantity %> <%#=fuel_expense.inventory.unit %></td>
+            <td><%#=number_to_currency fuel_expense.total_cost %></td>
+          </tr>
+        <%# end %>
       </tbody>
     </table>
   </div>

@@ -1,175 +1,123 @@
 
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-warning text-center">
-                                            <i class="glyphicon glyphicon-road"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Cash on Hand</p>
+<div class="row">
+  <div class="col-lg-3 col-sm-6">
+    <div class="card">
+      <div class="content">
+        <h5 class="title"><%=image_tag("cash_on_hand.png", height: '55', width: '55') %>
+          <p class="pull-right">Cash on Hand</p>
+        </h5>
+        <div class="numbers">
+          <small><%=number_to_currency Account.find_by_name("Cash on Hand").balance %></small>
+        </div>
+        <div class="footer">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-user"></i> <small>Updated <%=time_ago_in_words(Account.find_by_name("Cash on Hand").entries.last.date) %> ago </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-6">
+    <div class="card">
+      <div class="content">
+        <h5 class="title"><%=image_tag("cash_in_bank.png", height: '55', width: '55') %>
+          <p class="pull-right">Cash in Bank</p>
+        </h5>
+        <div class="numbers">
+          <small><%=number_to_currency Project.all.map{|a| a.total_payments}.sum %></small>
+        </div>
+        <div class="footer">
+          <hr />
+          <div class="stats">
+            <i class="ti-calendar"></i> Last day
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-6">
+    <div class="card">
+      <div class="content">
+        <h5 class="title"><%=image_tag("atm-in.png", height: '55', width: '55') %>
+          <p class="pull-right">Accounts<br>Receivable</p>
+        </h5>
+        <div class="numbers">
+          <small><%=number_to_currency Project.all.map{|a| a.remaining_payments}.sum %></small>
+        </div>
+        <div class="footer">
+          <hr />
+          <div class="stats">
+            In the last hour
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-6">
+    <div class="card">
+      <div class="content">
+        <h5 class="title"><%=image_tag("atm-out.png", height: '55', width: '55') %>
+          <p class="pull-right">Accounts<br>Payable</p>
+        </h5>
+        <div class="numbers">
+          <small><%=number_to_currency Account.find_by_name("Accounts Payable-Trade").balance %></small>
+        </div>
+        <div class="footer">
+          <hr />
+          <div class="stats">
+            <i class="ti-reload"></i> Updated now
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="content">
+        <%=render 'accounting/entries/entries' %>
+        <div class="footer">
+          <div class="chart-legend">
+            <i class="fa fa-circle text-success"></i> Debit
+            <i class="fa fa-circle text-danger"></i> Credit
+          </div>
+          <hr>
+          <div class="stats">
+            <i class="fa fa-server"></i> Updated <%=time_ago_in_words(WorkAccomplishment.last.created_at.to_date) %> ago
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-                                            <small><%=number_to_currency Account.find_by_name("Cash on Hand").balance %></small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="fa fa-user"></i> <small>Updated <%=time_ago_in_words(Account.find_by_name("Cash on Hand").entries.last.date) %> ago </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-success text-center">
-                                            <i class="fa fa-bar-chart"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Cash in Bank</p>
-                                            <small><%=number_to_currency Project.all.map{|a| a.total_payments}.sum %></small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-danger text-center">
-                                            <i class="fa fa-bar-chart"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Accounts Receivable</p>
-                                            <small><%=number_to_currency Project.all.map{|a| a.remaining_payments}.sum %></small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                       In the last hour
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-info text-center">
-                                          <%=image_tag("engineer.png", height: 40, width: 40) %>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Accounts Payable</p>
-                                            <%=number_to_currency Account.find_by_name("Accounts Payable-Trade").balance %>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="content">
-                              <%=render 'accounting/entries/entries' %>
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-success"></i> Debit
-                                        <i class="fa fa-circle text-danger"></i> Credit
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-server"></i> Updated <%=time_ago_in_words(WorkAccomplishment.last.created_at.to_date) %> ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-              <div class="row">
-                  <div class="col-md-6">
-                      <div class="card">
-                          <div class="header">
-                              <h4 class="title">Payments</h4>
-                              <p class="category">Project Payment Status Monitoring</p>
-                          </div>
-                          <div class="content">
-                            <%=render 'monitoring/payments/payments' %>
-                              <div class="footer">
-                                  <div class="chart-legend">
-                                      <i class="fa fa-circle text-success"></i> Finished
-                                      <i class="fa fa-circle text-warning"></i> On-going
-                                      <i class="fa fa-circle text-danger"></i> Not Started
-                                  </div>
-                                  <hr>
-                                  <div class="stats">
-                                      <i class="ti-reload"></i> Updated <%=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="card">
-                          <div class="header">
-                              <h4 class="title">Contractors</h4>
-                              <p class="category">Subcontract Work Status Monitoring</p>
-                          </div>
-                          <div class="content">
-                            <%=render 'monitoring/contractors/performance' %>
-                              <div class="footer">
-                                  <div class="chart-legend">
-                                      <i class="fa fa-circle text-success"></i> Paid
-                                      <i class="fa fa-circle text-warning"></i> On-going
-                                      <i class="fa fa-circle text-danger"></i> Not Started
-                                  </div>
-                                  <hr>
-                                  <div class="stats">
-                                      <i class="ti-reload"></i> Updated <%=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            </div>
+<div class="row">
+  <div class="col-md-6">
+    <%=render 'monitoring/payments/payments' %>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Contractors</h4>
+        <p class="category">Subcontract Work Status Monitoring</p>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <%=render 'monitoring/contractors/performance' %>
+        <div class="footer">
+          <div class="chart-legend">
+            <i class="fa fa-circle text-success"></i> Paid
+            <i class="fa fa-circle text-warning"></i> On-going
+            <i class="fa fa-circle text-danger"></i> Not Started
+          </div>
+          <hr>
+          <div class="stats">
+            <i class="ti-reload"></i> Updated _<%#=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

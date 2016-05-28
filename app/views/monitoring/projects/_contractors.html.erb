@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="header">
+    <h5 class="title"> <%=image_tag("contractor.png", height: '35', width: '35') %> Sub Contractors
+      <span class="pull-right">
+        <%=link_to new_monitoring_project_contract_path(@project), title: "New Sub Contractor" do %>
+          <span class="btn btn-info btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New Sub Contractor"><i class="fa fa-user-plus"></i></span>
+        <% end %>
+      </span>
+    </h5>
+    <div class="row"><hr></div>
+  </div>
+  <div class="content">
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="2"></th>
+          <th><span class="pull-right">Amount</span></th>
+        </tr>
+      </thead>
+      <%@project.contracts.each do |contract| %>
+        <tr>
+          <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
+          <td>
+            <%= link_to monitoring_contract_path(contract) do %>
+              <%=contract.contractor %><br>
+              <small class="text-muted"><%=contract.contractor.full_name %></small><br>
+            <% end %>
+          </td>
+          <td><p class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></p></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

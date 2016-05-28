@@ -1,6 +1,6 @@
 module Monitoring
   class EquipmentController < ApplicationController
-layout "monitoring"
+		layout "monitoring"
     def index
       @equipments = Equipment.all
     end

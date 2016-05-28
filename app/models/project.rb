@@ -22,6 +22,7 @@ class Project < ActiveRecord::Base
   has_many :attachment_files
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
+  has_many :file_attachments
 
   has_many :orders, as: :customer, class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
