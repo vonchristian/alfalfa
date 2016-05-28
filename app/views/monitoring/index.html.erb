@@ -156,3 +156,23 @@
               </div>
             </div>
             </div>
+<div class="col-md-5">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"><center>Projects Progress</center> </h4>
+    </div>
+    <div class="content">
+      <%@projects.each do |project| %>
+      <div class="row">
+        <div class="col-md-2">
+          <%=image_tag("equipment.png", height: 100, width: 100, class: "img-circle") %>
+        </div>
+        <div class="col-md-7">
+          <h4 class="title"><span class="text-warning"># <%=project.id_number %></span></h4>
+          <%=project.name %>
+        </div>
+        <div class="col-md-3">
+          <h3><b class="text-info"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </b></h3>
+        </div>
+      </div>
+      <% end %>

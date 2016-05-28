@@ -1,0 +1,27 @@
+
+    <ul class="list-unstyled team-members">
+      <li>
+        <p>
+        <i><%=image_tag("material_cost.png", width: 40, height: 40) %></i> &nbsp; <%=link_to "Materials", monitoring_project_line_items_path(@project) %>
+          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+        </p>
+      </li>
+      <li>
+        <p>
+          <i><%=image_tag("labor.png", width: 40, height: 40) %></i> &nbsp; <%=link_to "Labor", monitoring_project_line_items_path(@project) %>
+          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+        </p>
+      </li>
+      <li>
+        <p>
+          <i><%=image_tag("contractor.png", width: 40, height: 40) %></i> &nbsp; <%=link_to "Sub Contract", monitoring_project_line_items_path(@project) %>
+          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+        </p>
+      </li>
+      <li>
+        <p>
+            <i><%=image_tag("equipment.png", width: 40, height: 40) %></i> &nbsp;<%=link_to "Equipment", monitoring_project_line_items_path(@project) %>
+          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+        </p>
+      </li>
+    </ul>

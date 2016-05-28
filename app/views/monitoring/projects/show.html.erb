@@ -253,12 +253,7 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <ul class="list-unstyled team-members">
-          <li>
-            <i class="fa fa-cubes"></i> <%=link_to "Materials", monitoring_project_line_items_path(@project) %>
-            <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
-          </li>
-        </ul>
+        <%=render 'direct_costs' %>
         <br>
       </div>
     </div>
