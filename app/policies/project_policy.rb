@@ -11,11 +11,11 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def show?
-    user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
+    create?
   end
 
   def create?
-  user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
+    user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
   end
 
   def new?

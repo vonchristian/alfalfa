@@ -1,23 +1,22 @@
-module Accounting
-  class EntryPolicy < ApplicationPolicy
-    attr_reader :current_user, :entry
+module Supplies
+    class OrderPolicy < ApplicationPolicy
+    attr_reader :user, :order
 
-    def initialize(user, entry)
+    def initialize(user, order)
       @user = user
-      @entry = entry
+      @order = order
     end
 
-
-    def index?
+    def index
       create?
     end
 
     def show?
-     create?
+      create?
     end
 
     def create?
-    user.accounting_officer?
+      user.supply_officer?
     end
 
     def new?
@@ -25,11 +24,11 @@ module Accounting
     end
 
     def edit?
-      user.accounting_officer?
+      create?
     end
 
     def update?
-      edit?
+      create?
     end
 
     def destroy?
@@ -37,10 +36,13 @@ module Accounting
     end
 
     class Scope
+      attr_reader :user, :scope
+
       def initialize(user, scope)
         @user = user
         @scope = scope
       end
+
       def resolve
         scope
       end

@@ -8,7 +8,7 @@
     <div class="row"><hr></div>
   </div>
   <div class="content">
-    <!-- <table class="table table-hover">
+    <table class="table table-hover">
       <thead>
         <tr class="text-uppercase">
           <th>Date Issued</th>
@@ -17,6 +17,11 @@
         </tr>
       </thead>
       <tbody>
+        <% @equipment.line_items.each do |line_item| %>
+        <tr>
+
+        </tr>
+        <% end %>
         <% # @equipment.fuel_expenses.each do |fuel_expense| %>
           <tr>
             <td><%#=fuel_expense.date_issued.strftime("%B %e, %Y") %></td>
@@ -25,6 +30,6 @@
           </tr>
         <%# end %>
       </tbody>
-    </table> -->
+    </table>
   </div>
 </div>

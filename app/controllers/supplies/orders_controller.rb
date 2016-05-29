@@ -3,19 +3,22 @@ class Supplies::OrdersController < ApplicationController
 
   def index
     @orders = Supplies::Order.all.order("date_issued desc").page(params[:page]).per(10)
+    authorize @orders, :index?
   end
 
   def new
     @cart = current_cart
       if @cart.line_items.empty?
-        redirect_to store_url, notice: "Your cart is empty"
+        redirect_to supplies_url, notice: "Your cart is empty"
       return
     end
     @order = Supplies::Order.new
+    authorize @order
   end
 
   def create
     @order = Supplies::Order.new(order_params)
+    authorize @order
     @order.add_line_items_from_cart(current_cart)
     respond_to do |format|
       if @order.save!
@@ -36,6 +39,7 @@ class Supplies::OrdersController < ApplicationController
 
   def show
     @order = Supplies::Order.find(params[:id])
+    authorize @order
   end
 
   private

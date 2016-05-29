@@ -1,12 +1,11 @@
-module Accounting
-  class EntryPolicy < ApplicationPolicy
-    attr_reader :current_user, :entry
+module Supplies
+  class InventoryPolicy < ApplicationPolicy
+    attr_reader :current_user, :inventory
 
-    def initialize(user, entry)
+    def initialize(user, inventory)
       @user = user
-      @entry = entry
+      @inventory = inventory
     end
-
 
     def index?
       create?
@@ -17,7 +16,7 @@ module Accounting
     end
 
     def create?
-    user.accounting_officer?
+    user.supply_officer?
     end
 
     def new?
@@ -25,7 +24,7 @@ module Accounting
     end
 
     def edit?
-      user.accounting_officer?
+      user.supply_officer?
     end
 
     def update?

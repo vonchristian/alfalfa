@@ -7,8 +7,12 @@ class EmployeePolicy < ApplicationPolicy
     @employee = employee
   end
 
+  def index
+    create?
+  end
+
   def show?
-    true
+    create?
   end
 
   def create?

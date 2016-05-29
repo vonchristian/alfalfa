@@ -1,10 +1,10 @@
-module Accounting
-  class EntryPolicy < ApplicationPolicy
-    attr_reader :current_user, :entry
 
-    def initialize(user, entry)
+  class AccountPolicy < ApplicationPolicy
+    attr_reader :current_user, :account
+
+    def initialize(user, account)
       @user = user
-      @entry = entry
+      @account = account
     end
 
 
@@ -46,4 +46,3 @@ module Accounting
       end
     end
   end
-end

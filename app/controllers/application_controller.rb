@@ -11,21 +11,22 @@ class ApplicationController < ActionController::Base
     if current_user.is_a?(User) && current_user.supply_officer?
       supplies_url
     elsif current_user.is_a?(User) && current_user.project_engineer?
-      monitoring_projects_url
+      monitoring_index_url
     elsif current_user.is_a?(User) && current_user.accounting_officer?
-      accounting_petty_cash_index_url
+      accounting_index_url
     elsif current_user.is_a?(User) && current_user.monitoring_officer?
-      monitoring_projects_url
+      monitoring_index_url
     end
   end
-  
+
   def record_not_found
-    redirect_to after_sign_in_path_for(current_user), alert: "Page not found"
+    redirect_to after_sign_in_path_for(current_user), alert: "We're sorry but the page you were looking for could not be found."
   end
 
   private
   def permission_denied
-    redirect_to :back, alert: 'You are not allowed to access this page.'
+    redirect_to after_sign_in_path_for(current_user), alert: "We're sorry but you are not allowed to access this page or feature."
+    return
   end
   def current_cart
     Supplies::Cart.find(session[:cart_id])

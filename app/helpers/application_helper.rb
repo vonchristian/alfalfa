@@ -47,25 +47,4 @@ def site_name
   def monitoring_project_notice_to_proceeds_path(*args)
     monitoring_project_notice_to_proceed_path(*args)
   end
-
-  def root_path
-    if user_signed_in? && current_user.project_engineer?
-      monitoring_projects_path
-    elsif user_signed_in? && current_user.accounting_officer?
-      accounting_petty_cash_index_url
-    else
-    dashboard_url
-  end
-  end
-
-
-    def root_url
-      if user_signed_in? && current_user.project_engineer?
-        monitoring_projects_url
-      elsif user_signed_in? && current_user.accounting_officer?
-        accounting_petty_cash_index_url
-      else
-      dashboard_url
-    end
-  end
 end

@@ -5,8 +5,10 @@ module Accounting
     def index
       if params[:query].present?
         @entries = Entry.search_by_query(params[:query]).order(:created_at).page(params[:page]).per(30)
+        authorize @entries, :index?
       else
         @entries = Entry.all.order('date DESC').page(params[:page]).per(30)
+        authorize @entries, :index?
         @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.zone.now.beginning_of_day
         @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.zone.now.end_of_day
         respond_to do |format|
@@ -28,6 +30,7 @@ module Accounting
 
     def create
       @entry = Entry.new(entry_params)
+      authorize @entry
       if @entry.save
         redirect_to accounting_entries_path, notice: "Entry saved successfully."
       else
@@ -37,6 +40,7 @@ module Accounting
 
     def show
       @entry = Entry.find(params[:id])
+      authorize @entry
     end
 
     def edit
@@ -45,6 +49,7 @@ module Accounting
 
     def update
       @entry = Entry.find(params[:id])
+      authorize @entry
       @entry.update(entry_params)
       if @entry.save
         redirect_to @entry, notice: "Entry updated successfully."
