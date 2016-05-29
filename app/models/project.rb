@@ -16,6 +16,7 @@ class Project < ActiveRecord::Base
   has_many :work_details
   has_many :amount_revisions, through: :work_details
   has_many :time_extensions, through: :work_details
+  has_many :accomplishment_images, through: :work_details
   has_many :contracts
   has_many :contractors, through: :contracts
   has_many :work_accomplishments, through: :work_details

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160527050419) do
+=======
+ActiveRecord::Schema.define(version: 20160528101118) do
+>>>>>>> feature
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +176,21 @@ ActiveRecord::Schema.define(version: 20160527050419) do
 
   add_index "contracts", ["contractor_id"], name: "index_contracts_on_contractor_id", using: :btree
   add_index "contracts", ["project_id"], name: "index_contracts_on_project_id", using: :btree
+
+  create_table "costs", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "type"
+    t.string   "description"
+    t.decimal  "quantity"
+    t.string   "unit"
+    t.decimal  "unit_cost"
+    t.decimal  "total_cost"
+    t.datetime "date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "costs", ["project_id"], name: "index_costs_on_project_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -661,6 +680,7 @@ ActiveRecord::Schema.define(version: 20160527050419) do
   add_foreign_key "contract_amount_revisions", "contracts"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
+  add_foreign_key "costs", "projects"
   add_foreign_key "educational_attainments", "employees"
   add_foreign_key "employments", "employees"
   add_foreign_key "employments", "projects"
