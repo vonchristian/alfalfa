@@ -24,6 +24,7 @@ class Project < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
   has_many :file_attachments
+  
   has_many :labor_costs, class_name: "DirectCosts::Labor"
   has_many :equipment_costs, class_name: "DirectCosts::Equipment"
   has_many :material_costs, class_name: "DirectCosts::Material"

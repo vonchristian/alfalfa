@@ -1,0 +1,21 @@
+<ul class="list-unstyled team-members">
+  <li>
+    <div class="row">
+      <div class="col-xs-2">
+        <small><%=labor.date.strftime("%b %e %Y") %></small>
+      </div>
+      <div class="col-xs-2">
+          <%=labor.quantity %> <%=labor.unit %>
+      </div>
+      <div class="col-xs-5">
+        <%=labor.description%>
+        <br />
+        <span class="text-muted"><small><%=number_to_currency labor.unit_cost %></small></span>
+      </div>
+      <div class="col-xs-2 text-right">
+        <%=number_to_currency labor.total_cost %>
+      </div>
+    </div>
+    <hr>
+  </li>
+</ul>
