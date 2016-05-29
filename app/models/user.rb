@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-validates :role, :first_name, :last_name, presence: true
+  validates :role, :first_name, :last_name, presence: true
   has_attached_file :profile_photo,
                     styles: { large: "120x120>",
                     medium: "70x70>",

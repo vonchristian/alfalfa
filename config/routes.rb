@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       resources :time_extensions, only: [:index]
       resources :line_items, only: [:index]
       resources :purchase_orders, only:[:index, :new, :create]
+      resources :labor_costs, only:[:index, :new, :create]
       resources :file_attachments
     end
     resources :accomplishment_images, only:[:show]

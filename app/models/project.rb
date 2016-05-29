@@ -24,6 +24,11 @@ class Project < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
   has_many :file_attachments
+  has_many :labor_costs, class_name: "DirectCosts::Labor"
+  has_many :equipment_costs, class_name: "DirectCosts::Equipment"
+  has_many :material_costs, class_name: "DirectCosts::Material"
+  has_many :sub_contract_costs, class_name: "DirectCosts::SubContract"
+  has_many :other_costs, class_name: "DirectCosts::OtherCost"
 
   has_many :orders, as: :customer, class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"

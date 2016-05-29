@@ -7,7 +7,7 @@ module Supplies
       @order = order
     end
 
-    def index
+    def index?
       create?
     end
 
@@ -44,7 +44,9 @@ module Supplies
       end
 
       def resolve
-        scope
+        if user.supply_officer?
+          scope
+        end
       end
     end
   end

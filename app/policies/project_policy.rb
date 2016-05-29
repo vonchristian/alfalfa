@@ -43,7 +43,9 @@ class ProjectPolicy < ApplicationPolicy
     end
 
     def resolve
-      scope
+      if user.project_engineer? || user.monitoring_officer? || user.liason_officer? || user.project_manager?
+        scope
+      end
     end
   end
 end
