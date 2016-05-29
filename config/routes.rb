@@ -2,9 +2,9 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
 
-unauthenticated :user do
-  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.nil? }, as: :unauthenticated_root
-end
+  unauthenticated :user do
+    root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.nil? }, as: :unauthenticated_root
+  end
 
   root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'monitoring_officer' if request.env['warden'].user }, as: :monitoring_root
   root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' if request.env['warden'].user }, as: :projects_root
@@ -31,6 +31,7 @@ end
   resources :monitoring, only:[:index]
   namespace :monitoring do
     resources :equipment, only: [:index]
+    resources :file_attachments, only: [:show]
     resources :projects, except:[:destroy] do
       resources :work_details, only:[:new, :create, :index]
       resources :contracts, only: [:new, :create]
@@ -40,7 +41,7 @@ end
       resources :time_extensions, only: [:index]
       resources :line_items, only: [:index]
       resources :purchase_orders, only:[:index, :new, :create]
-      resources :file_attachments, only:[:show, :new, :create, :edit, :update]
+      resources :file_attachments
     end
     resources :accomplishment_images, only:[:show]
     resources :contracts, only:[:edit, :update, :show] do

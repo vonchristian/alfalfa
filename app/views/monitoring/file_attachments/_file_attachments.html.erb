@@ -1,7 +1,7 @@
 <div class="header">
   <h4 class="title"><%=image_tag("attachment.png", height: '35', width: '35')%> File Attachments
     <span class="pull-right">
-      <%=link_to new_monitoring_project_file_attachment_path(@project), title: "New File Attachment" do %>
+      <%=link_to new_monitoring_project_file_attachment_path(@project), title: "New Sub Contractor" do %>
         <span class="btn btn-info btn-icon btn-sm" data-toggle="tooltip" data-placement="bottom" title="New File Attachment"><i class="fa fa-plus"></i></span>
       <% end %>
     </span>
@@ -16,21 +16,15 @@
         <th>Filename</th>
         <th>Description</th>
         <th>Created At</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @project.file_attachments.each do |file| %>
         <tr>
           <td></td>
-          <td><%= link_to file.attached_file_file_name, monitoring_file_attachment_path(file), target: '_blank' %></td>
+          <td><%= file.attached_file_file_name %></td>
           <td><%= file.description %></td>
           <td><%= file.date.strftime("%B %e, %Y") %></td>
-          <td>
-            <%= link_to file.attached_file.url, target: '_blank', title: "Download" do %>
-              <span data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></span>
-            <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>

@@ -1,8 +1,10 @@
 class Supplies::OrdersController < ApplicationController
   layout 'supplies'
+
   def index
     @orders = Supplies::Order.all.order("date_issued desc").page(params[:page]).per(10)
   end
+
   def new
     @cart = current_cart
       if @cart.line_items.empty?
@@ -11,6 +13,7 @@ class Supplies::OrdersController < ApplicationController
     end
     @order = Supplies::Order.new
   end
+
   def create
     @order = Supplies::Order.new(order_params)
     @order.add_line_items_from_cart(current_cart)

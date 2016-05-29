@@ -39,6 +39,10 @@ module Monitoring
       end
     end
 
+    def show
+      @file_attachment = Project::FileAttachment.find(params[:id])
+    end
+
     private
 
     def file_attachment_params

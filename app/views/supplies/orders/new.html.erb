@@ -13,14 +13,22 @@
             <br>
             <span class="pull-left"><%=image_tag("total.png", height: 30, width: 30) %> &nbsp; <b> Total</b></span>
             <span class="pull-right"><b><%=number_to_currency @cart.line_items.total_price %></b></span>
-
+            <br>
+            <br>
+            <br>
           </div>
           <div class="col-md-5 col-md-offset-1">
             <%=simple_form_for @order, url: :orders do |f| %>
               <%=f.error_notification %>
               <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'datetimepicker'} %>
               <%=f.input :customer_type, collection: Supplies::Order.customer_types, as: :radio_buttons %>
-              <%= f.input :customer_id, collection: Supplies::Order.customers %>
+              <label>Customer</label>
+              <div class="project_customer_id">
+                <%= f.input :customer_id, label: false, collection: Supplies::Order.project_customers, input_html: {class: "project_customer", style: 'width:100%'} %>
+              </div>
+              <div class="contractor_customer_id">
+                <%= f.input :customer_id, label: false, collection: Supplies::Order.contractor_customers, input_html: {class: "contractor_customer", style: 'width:100%'} %>
+              </div>
               <%= f.input :payment_status, collection: Supplies::Order.payment_statuses.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons %>
               <div class="modal-footer">
                 <%= link_to 'Add more items', supplies_path, class: 'btn btn-warning pull-left' %>
@@ -35,7 +43,15 @@
 </div>
 <script>
   $(document).ready(function() {
-    $("#supplies_order_customer_id").select2({
+    $(".contractor_customer").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $(".project_customer").select2({
       theme: "bootstrap"
     });
   });
