@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526042702) do
+ActiveRecord::Schema.define(version: 20160528101118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,6 +173,21 @@ ActiveRecord::Schema.define(version: 20160526042702) do
   add_index "contracts", ["contractor_id"], name: "index_contracts_on_contractor_id", using: :btree
   add_index "contracts", ["project_id"], name: "index_contracts_on_project_id", using: :btree
 
+  create_table "costs", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "type"
+    t.string   "description"
+    t.decimal  "quantity"
+    t.string   "unit"
+    t.decimal  "unit_cost"
+    t.decimal  "total_cost"
+    t.datetime "date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "costs", ["project_id"], name: "index_costs_on_project_id", using: :btree
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -299,6 +314,20 @@ ActiveRecord::Schema.define(version: 20160526042702) do
   end
 
   add_index "equipment_statuses", ["equipment_id"], name: "index_equipment_statuses_on_equipment_id", using: :btree
+
+  create_table "file_attachments", force: :cascade do |t|
+    t.integer  "project_id"
+    t.datetime "date"
+    t.text     "description"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "attached_file_file_name"
+    t.string   "attached_file_content_type"
+    t.integer  "attached_file_file_size"
+    t.datetime "attached_file_updated_at"
+  end
+
+  add_index "file_attachments", ["project_id"], name: "index_file_attachments_on_project_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
@@ -647,6 +676,7 @@ ActiveRecord::Schema.define(version: 20160526042702) do
   add_foreign_key "contract_amount_revisions", "contracts"
   add_foreign_key "contracts", "contractors"
   add_foreign_key "contracts", "projects"
+  add_foreign_key "costs", "projects"
   add_foreign_key "educational_attainments", "employees"
   add_foreign_key "employments", "employees"
   add_foreign_key "employments", "projects"
@@ -656,6 +686,7 @@ ActiveRecord::Schema.define(version: 20160526042702) do
   add_foreign_key "equipment_schedules", "equipment"
   add_foreign_key "equipment_schedules", "projects"
   add_foreign_key "equipment_statuses", "equipment"
+  add_foreign_key "file_attachments", "projects"
   add_foreign_key "labor_costs", "work_details"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "inventories"

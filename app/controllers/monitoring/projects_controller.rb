@@ -2,6 +2,7 @@ module Monitoring
   class ProjectsController < ApplicationController
     layout "monitoring"
     def index
+      authorize User, :create?
       if params[:name].present?
         @projects = Project.search_by_name(params[:name]).order(:created_at).decorate
         respond_to do |format|
@@ -21,7 +22,6 @@ module Monitoring
           end
         end
       end
-      authorize User, :create?
     end
 
     def new

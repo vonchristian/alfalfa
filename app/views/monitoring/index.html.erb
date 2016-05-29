@@ -164,10 +164,14 @@
     <div class="content">
       <%@projects.each do |project| %>
       <div class="row">
-        <div class="col-md-2">
-          <%=image_tag("equipment.png", height: 100, width: 100, class: "img-circle") %>
+        <div class="col-md-3">
+          <% if project.accomplishment_images.present? %>
+          <%=image_tag(project.accomplishment_images.last.photo.url(:large), height: 100, width: 100, class: "img-square") %>
+          <% else %>
+            <%=image_tag("equipment.png", height: 100, width: 100, class: "img-square") %>
+          <% end %>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
           <h4 class="title"><span class="text-warning"># <%=project.id_number %></span></h4>
           <%=project.name %>
         </div>

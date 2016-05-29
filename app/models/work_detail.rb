@@ -6,6 +6,7 @@ class WorkDetail < ActiveRecord::Base
 
   belongs_to :project
   has_many :work_accomplishments
+  has_many :accomplishment_images, through: :work_accomplishments
   has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
 
