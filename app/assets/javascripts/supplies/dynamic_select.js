@@ -8,6 +8,9 @@ $(document).ready(function(){
     } else if ( selected == "Contractor") {
       $(".project_customer_id").hide();
       $(".contractor_customer_id").show();
+    } else if ( selected == "Customer") {
+      $(".project_customer_id").hide();
+      $(".contractor_customer_id").hide();
     }
   });
 });
