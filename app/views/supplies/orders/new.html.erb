@@ -24,11 +24,15 @@
               <%=f.input :customer_type, collection: Supplies::Order.customer_types, as: :radio_buttons %>
               <div class="project_customer_id">
                 <label>Customer</label>
-                <%= f.input :customer_id, label: false, collection: Supplies::Order.project_customers, input_html: {class: "project_customer", style: 'width:100%'} %>
+                <%= f.input :customer_id, label: false, collection: Supplies::Order.project_customers.collect {|p| [p.id_number_and_location, p.id]}, input_html: {class: "project_customer", style: 'width:100%'} %>
               </div>
               <div class="contractor_customer_id">
                 <label>Customer</label>
                 <%= f.input :customer_id, label: false, collection: Supplies::Order.contractor_customers, input_html: {class: "contractor_customer", style: 'width:100%'} %>
+              </div>
+              <div class="customer_name">
+                <label>Customer</label>
+                <%= f.input :name, label: false %>
               </div>
               <%= f.input :payment_status, collection: Supplies::Order.payment_statuses.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons %>
               <div class="modal-footer">

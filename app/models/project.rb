@@ -40,14 +40,17 @@ class Project < ActiveRecord::Base
   validates :id_number, uniqueness: true
 
   delegate :time_extensions_total, to: :work_details, prefix: true
+
   def effectivity_date
     if notice_to_proceed.present?
       notice_to_proceed.date + 7.days
     end
   end
+
   def total_direct_costs
     costs.total + direct_material_costs
   end
+
   def id_number_and_location
     "#{id_number} - #{address}"
   end
@@ -96,9 +99,7 @@ class Project < ActiveRecord::Base
     revised_contract_amount -  total_payments
   end
 
-
-
-   def total_amount_revision
+  def total_amount_revision
       self.work_details.collect{|a| a.amount_revisions_total}.sum
   end
 
@@ -117,6 +118,7 @@ class Project < ActiveRecord::Base
         0
     end
   end
+
   def start_date
     if notice_to_proceed
       notice_to_proceed.date
@@ -205,18 +207,19 @@ class Project < ActiveRecord::Base
     self.cost - self.retention_amount
   end
 
-   def add_to_accounts
-     Entry.create!(description: self.name, debit_amounts_attributes:[{amount: (self.trade_amount), account: "Accounts Receivable-Trade"},{amount: (self.retention_amount), account: "Accounts Receivable-Retention"}],
+  def add_to_accounts
+    Entry.create!(description: self.name, debit_amounts_attributes:[{amount: (self.trade_amount), account: "Accounts Receivable-Trade"},{amount: (self.retention_amount), account: "Accounts Receivable-Retention"}],
                        credit_amounts_attributes:[amount: (self.cost), account: "Revenue"])
-   end
+  end
 
-   def update_work_detail_accomplishments_status
+  def update_work_detail_accomplishments_status
     self.work_details.each do |work_detail|
       work_detail.work_accomplishments.unpaid.each do |work_accomplishment|
         work_accomplishment.payment_requested!
       end
     end
   end
+
   def direct_material_costs
     self.line_items.total_price + self.purchase_orders.total_price
   end

@@ -31,20 +31,12 @@ class Supplies::Order < ActiveRecord::Base
   def self.customer_types
     ['Project', 'Contractor', "Customer"]
   end
-  
-  def self.customers
-    Contractor.all  + Project.all
-  end
 
   def self.project_customers
-    Project.all.map { |p| [p.id_number_and_location, p.id]}
+    Project.all
   end
 
   def self.contractor_customers
     Contractor.all
-  end
-
-  def self.projects
-    Project.all.map { |p| [p.id_number_and_location, p.id]}
   end
 end
