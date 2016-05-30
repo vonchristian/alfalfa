@@ -56,7 +56,7 @@
                     <% if @project.has_no_time_extensions? %>
                       &nbsp; &nbsp; &nbsp; &nbsp; <b><%= @project.expiry_date %></b>
                       <% else %>
-                        &nbsp; &nbsp; &nbsp; &nbsp; <small class="text-danger"><strike><%= @project.expiry_date %></strike></small><br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; <small class="text-danger">Orig: <%= @project.expiry_date %></small><br>
                         &nbsp; &nbsp; &nbsp; &nbsp; <b><%= @project.revised_expiry_date.strftime("%B %e, %Y") %></b>
                       <% end %>
                   </div>
