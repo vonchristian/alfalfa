@@ -12,7 +12,9 @@
         <div class="footer">
           <hr>
           <div class="stats">
-            <i class="fa fa-user"></i> <small>Updated <%=time_ago_in_words(Account.find_by_name("Cash on Hand").entries.last.date) %> ago </small>
+            <% if Account.find_by_name("Cash on Hand").entries.any? %>
+              <i class="fa fa-user"></i> <small>Updated <%=time_ago_in_words(Account.find_by_name("Cash on Hand").entries.last.date) %> ago </small>
+            <% end %>
           </div>
         </div>
       </div>
@@ -85,7 +87,9 @@
           </div>
           <hr>
           <div class="stats">
-            <i class="fa fa-server"></i> Updated <%=time_ago_in_words(WorkAccomplishment.last.created_at.to_date) %> ago
+            <% if WorkAccomplishment.any? %>
+              <i class="fa fa-server"></i> Updated <%=time_ago_in_words(WorkAccomplishment.last.created_at.to_date) %> ago
+            <% end %>
           </div>
         </div>
       </div>
@@ -111,7 +115,9 @@
           </div>
           <hr>
           <div class="stats">
-            <i class="ti-reload"></i> Updated _<%#=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
+            <% if Transactions::InvoicePayment.any? %>
+              <i class="ti-reload"></i> Updated _<%=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
+            <% end %>
           </div>
         </div>
       </div>
@@ -134,7 +140,9 @@
           </div>
           <hr>
           <div class="stats">
-            <i class="ti-reload"></i> Updated _<%#=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
+            <% if Transactions::InvoicePayment.any? %>
+              <i class="ti-reload"></i> Updated <%=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
+            <% end %>
           </div>
         </div>
       </div>
