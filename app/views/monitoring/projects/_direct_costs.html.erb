@@ -9,25 +9,25 @@
       <li>
         <p>
           <i><%=image_tag("labor.png", width: 30, height: 30) %></i> &nbsp; <%=link_to "Labor", monitoring_project_labor_costs_path(@project) %>
-          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+          <span class="pull-right"> <%=number_to_currency @project.labor_costs.total %></span>
         </p>
       </li>
       <li>
         <p>
           <i><%=image_tag("contractor.png", width: 30, height: 30) %></i> &nbsp; <%=link_to "Sub Contract", monitoring_project_line_items_path(@project) %>
-          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+          <span class="pull-right"> <%=number_to_currency @project.sub_contract_costs.total %></span>
         </p>
       </li>
       <li>
         <p>
           <i><%=image_tag("equipment.png", width: 30, height: 30) %></i> &nbsp;<%=link_to "Equipment", monitoring_project_line_items_path(@project) %>
-          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+          <span class="pull-right"> <%=number_to_currency @project.equipment_costs.total %></span>
         </p>
       </li>
       <li>
         <p>
-          <i><%=image_tag("engineer.png", width: 30, height: 30) %></i> &nbsp; <%=link_to "Labor", monitoring_project_line_items_path(@project) %>
-          <span class="pull-right"> <%=number_to_currency @project.direct_material_costs %></span>
+          <i><%=image_tag("engineer.png", width: 30, height: 30) %></i> &nbsp; <%=link_to "Other Costs", monitoring_project_line_items_path(@project) %>
+          <span class="pull-right"> <%=number_to_currency @project.other_costs.total %></span>
         </p>
       </li>
     </ul>
