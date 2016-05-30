@@ -40,6 +40,11 @@ class Project < ActiveRecord::Base
   validates :id_number, uniqueness: true
 
   delegate :time_extensions_total, to: :work_details, prefix: true
+  def effectivity_date
+    if notice_to_proceed.present?
+      notice_to_proceed.date + 7.days
+    end
+  end
   def total_direct_costs
     costs.total + direct_material_costs
   end
