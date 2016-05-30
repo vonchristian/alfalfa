@@ -65,19 +65,6 @@
         <%=render @work_detail.amount_revisions %>
       </div>
     </div>
-    <div class="card">
-      <div class="header">
-        <h5 class="title"> Time Extensions
-          <%=link_to new_monitoring_work_detail_time_extension_path(@work_detail), title: "New Time Extension" do %>
-            <span class="btn btn-danger btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Time Extension"><i class="fa fa-plus"></i></span>
-          <% end %>
-        </h5>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-          <%=render @work_detail.time_extensions %>
-      </div>
-    </div>
   </div>
   <div class="col-md-8">
     <div class="card">

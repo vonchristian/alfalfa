@@ -1,4 +1,4 @@
-<%=simple_form_for [:monitoring, @work_detail, @time_extension], url: :monitoring_work_detail_time_extensions do |f| %>
+<%=simple_form_for [:monitoring, @project, @time_extension], url: :monitoring_project_time_extensions do |f| %>
   <div class="col-md-5 col-md-offset-3">
     <div class="card">
       <div class="header">
@@ -10,7 +10,7 @@
         <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
         <%=f.input :remarks, as: :text %>
         <div class="modal-footer">
-          <%= link_to 'Cancel', monitoring_work_detail_path(@work_detail), class: 'btn btn-xs pull-left' %>
+          <%= link_to 'Cancel', monitoring_project_path(@project), class: 'btn btn-xs pull-left' %>
           <%=f.submit "Save", class: "btn btn-success", data: { disable_with: "Saving..."} %>
         </div>
       </div>

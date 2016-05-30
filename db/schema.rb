@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530112008) do
+
+ActiveRecord::Schema.define(version: 20160530091201) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -594,13 +596,13 @@ ActiveRecord::Schema.define(version: 20160530112008) do
     t.string   "remarks"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "work_detail_id"
     t.datetime "date"
     t.integer  "user_id"
+    t.integer  "project_id"
   end
 
+  add_index "time_extensions", ["project_id"], name: "index_time_extensions_on_project_id", using: :btree
   add_index "time_extensions", ["user_id"], name: "index_time_extensions_on_user_id", using: :btree
-  add_index "time_extensions", ["work_detail_id"], name: "index_time_extensions_on_work_detail_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                      default: "", null: false
@@ -704,7 +706,6 @@ ActiveRecord::Schema.define(version: 20160530112008) do
   add_foreign_key "stocks", "inventories"
   add_foreign_key "subcontract_costs", "contractors"
   add_foreign_key "subcontract_costs", "work_details"
-  add_foreign_key "time_extensions", "work_details"
   add_foreign_key "work_accomplishments", "work_details"
   add_foreign_key "work_details", "projects"
   add_foreign_key "worked_days", "employees"

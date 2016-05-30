@@ -14,7 +14,9 @@
       <hr>
     </div>
     <div class="content">
-      <h5 class="title"><%=image_tag("calendar.png", height: 30, width: 30) %> Time Extensions </h5>
+      <h5 class="title"><%=image_tag("calendar.png", height: 30, width: 30) %> Time Extension Details
+        <span class="pull-right"><%=link_to "New Time Extension", new_monitoring_project_time_extension_path(@project), class: "btn btn-primary" %>
+      </h5>
       <hr>
       <%=render @project.time_extensions %>
     </div>

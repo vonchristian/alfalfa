@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
   has_many :employees, through: :employments
   has_many :work_details
   has_many :amount_revisions, through: :work_details
-  has_many :time_extensions, through: :work_details
+has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :accomplishment_images, through: :work_details
   has_many :contracts
   has_many :contractors, through: :contracts
@@ -38,8 +38,6 @@ class Project < ActiveRecord::Base
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
-
-  delegate :time_extensions_total, to: :work_details, prefix: true
 
   def effectivity_date
     if notice_to_proceed.present?
@@ -172,7 +170,7 @@ class Project < ActiveRecord::Base
   end
 
   def total_number_of_days_extended
-      self.work_details.collect{|a| a.time_extensions_total}.sum
+      self.time_extensions.total
   end
 
   def days_elapsed
