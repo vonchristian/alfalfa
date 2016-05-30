@@ -20,7 +20,9 @@
         <div class="footer">
           <hr />
           <div class="stats">
-            <i class="fa fa-clock-o"></i> <small>Updated <%=time_ago_in_words(Project.last.created_at.to_date) %> ago </small>
+            <% if Project.any? %>
+              <i class="fa fa-clock-o"></i> <small>Updated <%=time_ago_in_words(Project.last.created_at.to_date) %> ago </small>
+            <% end %>
           </div>
         </div>
       </div>

@@ -37,7 +37,7 @@ class Supplies::Order < ActiveRecord::Base
   end
 
   def self.project_customers
-    Project.all
+    Project.all.map { |p| [p.id_number_and_location, p.id]}
   end
 
   def self.contractor_customers
@@ -45,6 +45,6 @@ class Supplies::Order < ActiveRecord::Base
   end
 
   def self.projects
-    Project.all
+    Project.all.map { |p| [p.id_number_and_location, p.id]}
   end
 end
