@@ -7,11 +7,10 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <%=f.input :type, value: 'DirectCosts::Labor' %>
         <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
         <%=f.input :description, as: :text %>
-        <%=f.input :quantity %>
-        <%=f.input :unit %>
+        <%=f.input :quantity, label: "Number of Days" %>
+        <%=f.input :unit, input_html: { value: "Days" } %>
         <%=f.input :unit_cost %>
         <%=f.input :total_cost %>
         <div class="modal-footer">

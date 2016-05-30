@@ -24,7 +24,8 @@ class Project < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
   has_many :file_attachments
-  
+
+  has_many :costs
   has_many :labor_costs, class_name: "DirectCosts::Labor"
   has_many :equipment_costs, class_name: "DirectCosts::Equipment"
   has_many :material_costs, class_name: "DirectCosts::Material"
@@ -39,7 +40,9 @@ class Project < ActiveRecord::Base
   validates :id_number, uniqueness: true
 
   delegate :time_extensions_total, to: :work_details, prefix: true
-
+  def total_direct_costs
+    costs.total + direct_material_costs
+  end
   def id_number_and_location
     "#{id_number} - #{address}"
   end
@@ -87,9 +90,7 @@ class Project < ActiveRecord::Base
   def remaining_payments
     revised_contract_amount -  total_payments
   end
-  def total_expenses
-    expenses.joins(:debit_amounts).sum(:amount)
-  end
+
 
 
    def total_amount_revision

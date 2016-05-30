@@ -18,7 +18,7 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary active">Get Report</button>
-            <%=link_to "View (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-default pull-left"%>
+            <%=link_to "View (PDF)", accounting_petty_cash_index_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-default pull-left", target: '_blank'%>
           </div>
         <% end %>
       </div>

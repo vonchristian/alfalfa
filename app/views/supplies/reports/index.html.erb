@@ -35,7 +35,7 @@
 							<tr>
 								<td><%=project.name.truncate(200) %></td>
 								<td>
-									<%=link_to monitoring_project_line_items_path(project, format: 'pdf') do %>
+									<%=link_to monitoring_project_line_items_path(project, format: 'pdf'), target: '_blank' do %>
 									  <span data-toggle="tooltip" data-placement="bottom" title="View PDF Report (Full)"> <%=image_tag("file_pdf.png", height: 30, width: 30) %></span>
 									<% end %>
 								</td>
@@ -58,7 +58,7 @@
 						<div class="pull-right">
 							<%=form_tag supplies_reports_path, class: 'sidebar-form', method: :get do %>
 					      <div class="input-group">
-					        <%=text_field_tag :contractor_name, params[:contractor_name], class: 'form-control border-input', placeholder: 'Search Project...' %>
+					        <%=text_field_tag :contractor_name, params[:contractor_name], class: 'form-control border-input', placeholder: 'Search Contractor...' %>
 					        <span class="input-group-btn">
 					          <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
 					            <i class="fa fa-search"></i>
@@ -83,7 +83,7 @@
 						<% @contractors.all.each do |contractor| %>
 							<tr>
 								<td><%=contractor.name %></td>
-								<td><%=link_to contractor_line_items_path(contractor, format: 'pdf') do %>
+								<td><%=link_to contractor_line_items_path(contractor, format: 'pdf'), target: '_blank' do %>
 										<span data-toggle="tooltip" data-placement="bottom" title="View PDF Report (Full)"> <%=image_tag("file_pdf.png", height: 30, width: 30) %></span>
 									<% end %>
 								</td>
