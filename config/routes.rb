@@ -35,9 +35,10 @@ Rails.application.routes.draw do
     resources :file_attachments, only: [:show]
     resources :projects, except:[:destroy] do
       resources :work_details, only:[:new, :create, :index]
+      resources :time_extensions, only: [:new, :create]
       resources :contracts, only: [:new, :create]
       resource :notice_to_proceed, only: [:new, :create, :edit, :update]
-      resources :payments, only: [:new, :create]
+      resources :payments, only: [:new, :create, :index]
       resources :amount_revisions, only: [:index]
       resources :time_extensions, only: [:index]
       resources :line_items, only: [:index]
@@ -52,7 +53,6 @@ Rails.application.routes.draw do
     resources :work_details, only:[:index, :show, :edit, :update] do
       resources :work_accomplishments, only: [:new, :create]
       resources :amount_revisions, only: [:new, :create]
-      resources :time_extensions, only: [:new, :create]
     end
     resources :payments, only:[:index]
     resources :contractors, except: [:destroy] do

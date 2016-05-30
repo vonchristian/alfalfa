@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   protect_from_forgery with: :exception
   rescue_from Pundit::NotAuthorizedError, with: :permission_denied
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  # rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
 
   def after_sign_in_path_for(current_user)

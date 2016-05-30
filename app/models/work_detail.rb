@@ -7,7 +7,6 @@ class WorkDetail < ActiveRecord::Base
   belongs_to :project
   has_many :work_accomplishments
   has_many :accomplishment_images, through: :work_accomplishments
-  has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
 
   validates :quantity, numericality: { greater_than: 0.1 }, presence: true
@@ -15,7 +14,6 @@ class WorkDetail < ActiveRecord::Base
   validates :unit, presence: true
 
   delegate :cost, to: :project, prefix: true
-  delegate :total, to: :time_extensions, prefix: true
   delegate :total, to: :amount_revisions, prefix: true
 
   def self.total
