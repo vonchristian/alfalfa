@@ -51,6 +51,20 @@
               <li>
                 <div class="row">
                   <div class="col-xs-12">
+                    <i class="fa fa-clock-o text-danger"></i>  &nbsp; Effectivity Date
+                    <br>
+                    <% if @project.has_no_time_extensions? %>
+                      &nbsp; &nbsp; &nbsp; &nbsp; <b><%= @project.expiry_date %></b>
+                      <% else %>
+                        &nbsp; &nbsp; &nbsp; &nbsp; <small class="text-danger">Orig: <%= @project.expiry_date %></small><br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; <b><%= @project.revised_expiry_date.strftime("%B %e, %Y") %></b>
+                      <% end %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-12">
                     <i class="fa fa-clock-o text-danger"></i>  &nbsp; Expiry Date
                     <br>
                     <% if @project.has_no_time_extensions? %>
