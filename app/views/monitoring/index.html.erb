@@ -113,7 +113,7 @@
                 </td>
                 <td>
                   <h4 class="title"><span class="text-warning"># <%=project.id_number %></span></h4>
-                  <%= link_to truncate(project.name, length: 40), monitoring_project_path(project), data: {toggle: 'tooltip', placement: 'bottom'}, title: project.name %>
+                  <%= link_to project.name, monitoring_project_path(project) %>
                 </td>
                 <td class="text-right">
                   <h3><b class="text-info"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </b></h3>
