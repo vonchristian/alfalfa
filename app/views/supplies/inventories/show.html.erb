@@ -62,7 +62,7 @@
                   <tr>
                     <td><%=stock.date.strftime("%B %e, %Y") %></td>
                     <td><%=stock.quantity %> <%=stock.inventory.unit %></td>
-
+                    <td> <%=link_to "Edit", edit_supplies_stock_path(stock), class: "btn btn-warning" %> </td>
                   </tr>
                 <% end %>
               </tbody>

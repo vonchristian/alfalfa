@@ -18,6 +18,20 @@ module Supplies
       end
     end
 
+    def edit
+      @stock = Supplies::Stock.find(params[:id])
+    end
+
+    def update
+      @stock = Supplies::Stock.find(params[:id])
+      @stock.update(stock_params)
+      if @stock.save
+        redirect_to @stock.inventory, notice: "Stock Updated successfully."
+      else
+        render :edit
+      end
+    end
+
     private
     def stock_params
       params.require(:supplies_stock).permit(:quantity, :date)

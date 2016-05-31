@@ -159,6 +159,7 @@ Rails.application.routes.draw do
     end
     resources :carts
     resources :equipment
+    resources :stocks, only: [:edit, :update]
   end
 
 
