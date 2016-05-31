@@ -58,10 +58,10 @@
                 </tr>
               </thead>
               <tbody>
-                <% @inventory.stocks.each do |restock| %>
+                <% @inventory.stocks.order(:date).reverse.each do |stock| %>
                   <tr>
-                    <td><%=restock.date.strftime("%B %e, %Y") %></td>
-                    <td><%=restock.quantity %> <%=restock.inventory.unit %></td>
+                    <td><%=stock.date.strftime("%B %e, %Y") %></td>
+                    <td><%=stock.quantity %> <%=stock.inventory.unit %></td>
 
                   </tr>
                 <% end %>
