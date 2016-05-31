@@ -94,34 +94,34 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="hidden-xs"></th>
-              <th class="text-center">Project</th>
-              <th class="text-center">Accomplished</th>
-              <th class="text-center">Target</th>
-              <th class="text-center">Slippage</th>
+              <th class="hidden-xs" width="10%"></th>
+              <th class="text-center" width="200px">Project</th>
+              <th class="text-center" width="10%">Accomplished</th>
+              <th class="text-center" width="10%">Target</th>
+              <th class="text-center" width="10%">Slippage</th>
             </tr>
           </thead>
           <tbody>
-            <%@projects.each do |project| %>
+            <% @projects.each do |project| %>
               <tr>
-                <td class="hidden-xs">
+                <td class="hidden-xs" width="10%">
                   <% if project.accomplishment_images.present? %>
                     <%=image_tag(project.accomplishment_images.last.photo.url(:large), height: 100, width: 100, class: "img-square") %>
                   <% else %>
                     <%=image_tag("equipment.png", height: 100, width: 100, class: "img-square") %>
                   <% end %>
                 </td>
-                <td>
+                <td width="200px">
                   <h4 class="title"><span class="text-warning"># <%=project.id_number %></span></h4>
                   <%= link_to project.name, monitoring_project_path(project) %>
                 </td>
-                <td class="text-right">
+                <td class="text-right" width="10%">
                   <h3><b class="text-info"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </b></h3>
                 </td>
-                <td class="text-right">
+                <td class="text-right" width="10%">
                   <h3><b class="text-warning"><%=number_to_currency project.target_accomplishment, unit: "" %> %</b></h3>
                 </td>
-                <td class="text-right">
+                <td class="text-right" width="10%">
                   <h3><b class="text-danger"><i class="fa fa-angle-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> %</b></h3>
                 </td>
               </tr>

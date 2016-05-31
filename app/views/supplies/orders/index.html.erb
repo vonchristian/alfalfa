@@ -17,7 +17,12 @@
           <tbody>
             <% @orders.entered_on(:from_date => @from_date, :to_date => @to_date, :project_id => @project).each do |order| %>
               <tr>
-                <td><%=link_to order.customer.try(:name), order_path(order) %></td>
+                <td>
+                  <% if order.customer_id.present? %>
+                    <%=link_to order.customer.try(:name), order_path(order) %></td>
+                  <% else %>
+                    <%=link_to order.name, order_path(order) %></td>
+                  <% end %>
                 <td><%=number_to_currency order.line_items.total_price %></td>
                 <td><%=order.payment_status %></td>
                 <td><%=order.customer_type %></td>

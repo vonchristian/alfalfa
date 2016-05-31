@@ -32,11 +32,7 @@ class Supplies::Order < ActiveRecord::Base
     ['Project', 'Contractor', "Customer"]
   end
 
-  def self.project_customers
-    Project.all
-  end
-
-  def self.contractor_customers
-    Contractor.all
+  def self.customers
+    Contractor.all + Project.all
   end
 end

@@ -53,6 +53,10 @@ class Project < ActiveRecord::Base
     "#{id_number} - #{address}"
   end
 
+  def select2_options
+    "#{id_number} - #{address}"
+  end
+
   def self.types
     ["JointVenture", "SubcontractWork"]
   end

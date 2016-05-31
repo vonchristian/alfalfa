@@ -28,6 +28,10 @@ class Contractor < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def select2_options
+    "#{first_name} #{last_name}"
+  end
+
   def to_s
     "#{company}"
   end
