@@ -24,3 +24,4 @@
 //= require supplies/bootstrap-checkbox-radio
 //= require supplies/entries
 //= require supplies/tooltip
+//= require supplies/stocks
