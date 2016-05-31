@@ -95,10 +95,10 @@
           <thead>
             <tr>
               <th class="hidden-xs" width="10%"></th>
-              <th class="text-center" width="200px">Project</th>
-              <th class="text-center" width="10%">Accomplished</th>
-              <th class="text-center" width="10%">Target</th>
-              <th class="text-center" width="10%">Slippage</th>
+              <th class="text-center" width="200px"></th>
+              <th class="text-center title" width="10%">Accomplished</th>
+              <th class="text-center title" width="10%">Target</th>
+              <th class="text-center title" width="10%">Slippage</th>
             </tr>
           </thead>
           <tbody>
@@ -116,13 +116,13 @@
                   <%= link_to project.name, monitoring_project_path(project) %>
                 </td>
                 <td class="text-right" width="10%">
-                  <h3><b class="text-info"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </b></h3>
+                  <h4 class="title"><span class="text-info"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </span></h4>
                 </td>
                 <td class="text-right" width="10%">
-                  <h3><b class="text-warning"><%=number_to_currency project.target_accomplishment, unit: "" %> %</b></h3>
+                  <h4 class="title"><span class="text-warning"><%=number_to_currency project.target_accomplishment, unit: "" %> %</span></h3>
                 </td>
                 <td class="text-right" width="10%">
-                  <h3><b class="text-danger"><i class="fa fa-angle-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> %</b></h3>
+                  <h4 class="title"><span class="text-danger"><i class="fa fa-angle-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> %</span></h4>
                 </td>
               </tr>
             <% end %>
