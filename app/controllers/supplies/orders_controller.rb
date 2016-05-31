@@ -44,7 +44,7 @@ class Supplies::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:supplies_order).permit(:date_issued, :project_id, :customer_id, :customer_type, :payment_status,
+    params.require(:supplies_order).permit(:date_issued, :project_id, :name, :customer_id, :customer_type, :payment_status,
       entry_attributes: [:description, :reference_number, :entriable_id, :entriable_type, :type, :date, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account]])
   end
 end

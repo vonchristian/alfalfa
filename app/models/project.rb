@@ -15,10 +15,10 @@ class Project < ActiveRecord::Base
   has_many :employees, through: :employments
   has_many :work_details
   has_many :amount_revisions, through: :work_details
-has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
+  has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :accomplishment_images, through: :work_details
   has_many :contracts
-  has_many :contrpactors, through: :contracts
+  has_many :contractors, through: :contracts
   has_many :work_accomplishments, through: :work_details
   has_many :attachment_files
   has_many :equipment_schedules
@@ -32,7 +32,7 @@ has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :sub_contract_costs, class_name: "DirectCosts::SubContract"
   has_many :other_costs, class_name: "DirectCosts::OtherCost"
 
-  has_many :orders, as: :customer, class_name: "Supplies::Order"
+  has_many :orders, as: :customer,  class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
   has_many :purchase_orders, class_name: "Monitoring::PurchaseOrder"
 

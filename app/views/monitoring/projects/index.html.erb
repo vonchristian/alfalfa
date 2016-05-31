@@ -38,9 +38,9 @@
           <div class="content">
             <p><%=project.name.truncate(200) %></p>
 
-            <% project.contractors.each do |contractor| %>
-            <%=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle", title: "#{contractor.name}", data: {toggle: 'tooltip', placement: 'bottom'}) %>
-            <% end %>
+            <%# project.contractors.each do |contractor| %>
+            <%#=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle", title: "#{contractor.name}", data: {toggle: 'tooltip', placement: 'bottom'}) %>
+            <%# end %>
             <hr>
 
             <span class="text-success"><i class="fa fa-rub"></i><%=number_to_currency project.cost %></span>
