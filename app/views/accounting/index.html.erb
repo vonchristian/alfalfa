@@ -27,7 +27,7 @@
           <p class="pull-right">Cash in Bank</p>
         </h5>
         <div class="numbers">
-          <small><%=number_to_currency Project.all.map{|a| a.total_payments}.sum %></small>
+            <small><%=number_to_currency Account.find_by_name("Cash in Bank").balance %></small>
         </div>
         <div class="footer">
           <hr />
