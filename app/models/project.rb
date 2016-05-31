@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
 has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :accomplishment_images, through: :work_details
   has_many :contracts
-  has_many :contractors, through: :contracts
+  has_many :contrpactors, through: :contracts
   has_many :work_accomplishments, through: :work_details
   has_many :attachment_files
   has_many :equipment_schedules
