@@ -55,8 +55,10 @@
                 <tr>
                   <th>Date</th>
                   <th>Quantity</th>
-                  <th> Purchase Price </th>
-                  <th> 
+                  <th> Unit Cost </th>
+                  <th> Total Cost </th>
+
+                  <th>
                 </tr>
               </thead>
               <tbody>
@@ -64,7 +66,10 @@
                   <tr>
                     <td><%=stock.date.strftime("%B %e, %Y") %></td>
                     <td><%=stock.quantity %> <%=stock.inventory.unit %></td>
-                    <td> <%=link_to "Edit", edit_supplies_stock_path(stock), class: "btn btn-warning" %> </td>
+                    <td><%=stock.unit_cost %> </td>
+                    <td><%=stock.total_cost %></td>
+                  
+                    <td><%=link_to "Edit", edit_supplies_stock_path(stock), class: "btn btn-warning" %> </td>
                   </tr>
                 <% end %>
               </tbody>

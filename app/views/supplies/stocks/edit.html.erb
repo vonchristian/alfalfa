@@ -23,9 +23,9 @@
               <%=simple_form_for [:supplies, @stock], url: :supplies_stock do |f| %>
                 <%=f.error_notification %>
                 <%= f.input :date, as: :string, input_html: {class: "datetimepicker"} %>
-                <%= f.input :quantity, label: 'Enter Quantity' %>
-                <%= f.input :unit_cost %>
-                <%= f.input :total_cost %>
+                <%= f.input :quantity, input_html: { id: "stock_quantity", oninput: "calculate()" } %>
+                <%= f.input :unit_cost,  input_html: { id: "stock_unit_cost", oninput: "calculate()" } %>
+                <%= f.input :total_cost, input_html: { id: "stock_total_cost" } %>
 
                 <div class="modal-footer">
                   <%= link_to "Cancel", supplies_inventories_path, class: 'btn btn-xs btn-warning pull-left' %>
