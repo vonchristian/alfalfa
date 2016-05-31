@@ -3,7 +3,7 @@ module Supplies
     rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
     layout 'supplies'
     def index
-      @inventories = Supplies::Inventory.all.order('created_at DESC').page(params[:page]).per(50)
+      @inventories = Supplies::Inventory.all.order(:name).page(params[:page]).per(50)
       authorize @inventories, :index?
     end
 
@@ -43,6 +43,9 @@ module Supplies
       else
         render :edit
       end
+    end
+
+    def discontinue
     end
 
     private
