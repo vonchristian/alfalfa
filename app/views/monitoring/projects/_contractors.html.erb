@@ -10,25 +10,27 @@
     <div class="row"><hr></div>
   </div>
   <div class="content">
-    <table class="table">
-      <thead>
-        <tr>
-          <th colspan="2"></th>
-          <th><span class="pull-right">Amount</span></th>
-        </tr>
-      </thead>
-      <%@project.contracts.each do |contract| %>
-        <tr>
-          <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
-          <td>
-            <%= link_to monitoring_contract_path(contract) do %>
-              <%=contract.contractor %><br>
-              <small class="text-muted"><%=contract.contractor.full_name %></small><br>
-            <% end %>
-          </td>
-          <td><p class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></p></td>
-        </tr>
-      <% end %>
-    </table>
+    <% if @project.contracts.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+            <th><span class="pull-right">Amount</span></th>
+          </tr>
+        </thead>
+        <%@project.contracts.each do |contract| %>
+          <tr>
+            <td width="60px"><%= image_tag contract.contractor.profile_photo.url(:thumb),  class: "img-circle" %></td>
+            <td>
+              <%= link_to monitoring_contract_path(contract) do %>
+                <%=contract.contractor %><br>
+                <small class="text-muted"><%=contract.contractor.full_name %></small><br>
+              <% end %>
+            </td>
+            <td><p class="text-danger pull-right"><%= number_to_currency contract.amount_subcontracted%></p></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
   </div>
 </div>

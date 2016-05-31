@@ -9,30 +9,32 @@
   <div class="row"><hr></div>
 </div>
 <div class="content">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Filename</th>
-        <th>Description</th>
-        <th>Created At</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @project.file_attachments.each do |file| %>
+  <% if @project.file_attachments.any? %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td></td>
-          <td><%= link_to file.attached_file_file_name, monitoring_file_attachment_path(file), target: '_blank' %></td>
-          <td><%= file.description %></td>
-          <td><%= file.date.strftime("%B %e, %Y") %></td>
-          <td>
-            <%= link_to file.attached_file.url, target: '_blank', title: "Download" do %>
-              <span data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></span>
-            <% end %>
-          </td>
+          <th></th>
+          <th>Filename</th>
+          <th>Description</th>
+          <th>Created At</th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @project.file_attachments.each do |file| %>
+          <tr>
+            <td></td>
+            <td><%= link_to file.attached_file_file_name, monitoring_file_attachment_path(file), target: '_blank' %></td>
+            <td><%= file.description %></td>
+            <td><%= file.date.strftime("%B %e, %Y") %></td>
+            <td>
+              <%= link_to file.attached_file.url, target: '_blank', title: "Download" do %>
+                <span data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
