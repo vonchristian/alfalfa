@@ -273,7 +273,7 @@ ActiveRecord::Schema.define(version: 20160531095441) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.string   "chasis_number"
+    t.string   "chassis_number"
     t.string   "engine_number"
   end
 
