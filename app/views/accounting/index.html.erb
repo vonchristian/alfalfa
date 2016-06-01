@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-lg-3 col-sm-6">
-    <div class="card">
+    <div class="card-info">
       <div class="content">
         <h5 class="title"><%=image_tag("cash_on_hand.png", height: '55', width: '55') %>
           <p class="pull-right">Cash on Hand</p>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="col-lg-3 col-sm-6">
-    <div class="card">
+    <div class="card-success">
       <div class="content">
         <h5 class="title"><%=image_tag("cash_in_bank.png", height: '55', width: '55') %>
           <p class="pull-right">Cash in Bank</p>
@@ -32,14 +32,16 @@
         <div class="footer">
           <hr />
           <div class="stats">
-            <i class="ti-calendar"></i> Last day
+            <% if Account.find_by_name("Cash in Bank").entries.any? %>
+              <i class="fa fa-user"></i> <small>Updated <%=time_ago_in_words(Account.find_by_name("Cash in Bank").entries.last.date) %> ago </small>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="col-lg-3 col-sm-6">
-    <div class="card">
+    <div class="card-warning">
       <div class="content">
         <h5 class="title"><%=image_tag("atm-in.png", height: '55', width: '55') %>
           <p class="pull-right">Accounts<br>Receivable</p>
@@ -57,7 +59,7 @@
     </div>
   </div>
   <div class="col-lg-3 col-sm-6">
-    <div class="card">
+    <div class="card-danger">
       <div class="content">
         <h5 class="title"><%=image_tag("atm-out.png", height: '55', width: '55') %>
           <p class="pull-right">Accounts<br>Payable</p>
