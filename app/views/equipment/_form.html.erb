@@ -1,6 +1,6 @@
 <%= simple_form_for @equipment do |f| %>
 <%=f.error_notification %>
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-5 col-md-offset-3">
     <div class="card">
       <div class="header">
         <h4 class="title">Equipment Details</h4>
@@ -16,6 +16,8 @@
         <center><%= f.input :photo, class: 'center-block', as: :file %></center>
         <%= f.input :make, label: false, placeholder: 'Equipment Name' %>
         <%=f.input :model, label: false, placeholder: 'Model' %>
+        <%=f.input :chasis_number, label: false, placeholder: 'Chasis Number' %>
+        <%=f.input :engine_number, label: false, placeholder: 'Engine Number' %>
         <%=f.input :acquisition_date, label: false, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>
         <%=f.input :acquisition_cost, label: false, placeholder: 'Acquisition Cost' %>
         <%=f.input :plate_number, label: false, placeholder: 'Plate Number' %>

@@ -12,9 +12,11 @@ module Supplies
     validates :price, numericality: { greater_than: 0.1 }
 
     accepts_nested_attributes_for :stocks
+    
     def discontinue
       self.discontinued!
     end
+
     def quantity
       stocks.all.sum(:quantity) - line_items.all.sum(:quantity)
     end
