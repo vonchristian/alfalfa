@@ -145,35 +145,8 @@
 </div>
 
 <div class="row">
-
-          <%=render 'monitoring/payments/payments' %>
-
-  
-    <div class="col-md-6">
-        <div class="card bg-brown">
-            <div class="header">
-                <h4 class="title">Contractors</h4>
-                <p class="category">Subcontract Work Status Monitoring</p>
-                <div class="row"><hr></div>
-            </div>
-            <div class="content">
-              <%=render 'monitoring/contractors/performance' %>
-                <div class="footer">
-                    <div class="chart-legend">
-                        <i class="fa fa-circle text-success"></i> Paid
-                        <i class="fa fa-circle text-warning"></i> On-going
-                        <i class="fa fa-circle text-danger"></i> Not Started
-                    </div>
-                    <hr>
-                    <div class="stats">
-                      <% if Transactions::InvoicePayment.any? %>
-                        <i class="ti-reload"></i> Updated <%=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
-                      <% end %>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <%=render 'monitoring/payments/payments' %>
+  <%=render 'monitoring/contractors/contractor' %>  
 </div>
 <script type="text/javascript">
   $(function () {

@@ -1,0 +1,32 @@
+<div class="col-md-6">
+  <div class="card">
+      <div class="header">
+          <h4 class="title">Contractors</h4>
+      </div>
+      <div class="content">
+        <% Contractor.all.each do |contractor| %>
+          <%=link_to monitoring_contractor_path(contractor) do %>
+            <ul class="list-unstyled team-members">
+              <li>
+                <div class="row">
+                  <div class="col-md-2">
+                    <%=image_tag(contractor.profile_photo.url(:medium), class: "img-circle", width: 60, height: 60) %>
+                  </div>
+                  <div class="col-md-5">
+                    <p class="contractor-name"><%=contractor.full_name %></p>
+                    <span class="text-muted"><%=contractor.company %></span>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="title"><%=contractor.projects.count %> Projects</span>
+                  </div>
+                  <div class="col-md-2">
+                    <i class="fa fa-angle-right fa-3x contractor-name"></i>
+                </div>
+              </li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
