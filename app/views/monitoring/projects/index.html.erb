@@ -18,7 +18,7 @@
         <%=link_to "Summary (PDF)", monitoring_projects_path(@projects, format: 'pdf'), class: 'btn btn-primary' %>
         <% if policy(Project.new).create? %>
         <%=link_to new_monitoring_project_path, title: "New Project" do %>
-          <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Project"><i class="fa fa-plus"></i></span>
+          <span class="btn btn-warning active btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Project"><i class="fa fa-plus-circle"></i> New Project </span>
         <% end %>
         <% end %>
     </div>
@@ -29,28 +29,24 @@
     <%@projects.each do |project| %>
      <%=link_to monitoring_project_path(project) do %>
       <div class="col-md-4">
-        <div class="card">
+        <div class="card card-project">
+          <div class="image">
+          <%=image_tag("bg.jpg") %>
+        </div>
           <div class="header">
-            <b><%="##{project.id_number}"%></b>
+            <b class="title text-yellow"><%="##{project.id_number.upcase}"%></b>
             <p class="pull-right text-<%=project.slippage_color%>" data-toggle="tooltip" data-placement='bottom' title"Slippage"><i class="fa fa-angle-<%=project.slippage_sign%>"></i><%=number_to_currency project.slippage, unit: ""%> % </p>
-            <div class="row"><hr></div>
+            <div class="row"></div>
           </div>
           <div class="content">
-            <p><%=project.name.truncate(200) %></p>
-
-            <%# project.contractors.each do |contractor| %>
-            <%#=image_tag(contractor.profile_photo.url(:thumb), class: "img-circle", title: "#{contractor.name}", data: {toggle: 'tooltip', placement: 'bottom'}) %>
-            <%# end %>
-            <hr>
-
-            <span class="text-success"><i class="fa fa-rub"></i><%=number_to_currency project.cost %></span>
-            <span class="text-success pull-right"><i class="fa fa-calendar"></i><%=project.days_elapsed %> / <%= project.duration.to_i %> Days</span>
+            <small><%=project.name.truncate(100) %></small><br>
             <br>
-            <br>
+<div class="card-footer">
             <div class="progress">
               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=project.actual_accomplishment %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=project.actual_accomplishment %>%;">
                 <span class="text-black"><%=number_to_currency project.actual_accomplishment, unit: "" %>%</span>
               </div>
+            </div>
             </div>
           </div>
 

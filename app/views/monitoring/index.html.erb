@@ -112,7 +112,7 @@
                 </td>
                 <td width="200px">
                   <h4 class="title"><span class="text-warning"># <%=project.id_number %></span></h4>
-                  <%= link_to project.name, monitoring_project_path(project) %>
+                  <span class="project-name"><%= link_to project.name, monitoring_project_path(project) %></span>
                 </td>
                 <td class="text-right" width="10%">
                   <h4 class="title"><span class="text-info"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </span></h4>
@@ -146,7 +146,7 @@
 
 <div class="row">
   <%=render 'monitoring/payments/payments' %>
-  <%=render 'monitoring/contractors/contractor' %>  
+  <%=render 'monitoring/contractors/contractor' %>
 </div>
 <script type="text/javascript">
   $(function () {

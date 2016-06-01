@@ -35,6 +35,63 @@
 
 }
 
+// Project Card
+.card-project {
+  min-height: 400px;
+  max-height: 400px;
+}
+.card-project .image {
+  border-radius: 8px 8px 0 0;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.card-project .image img {
+  width: 100%;
+}
+.card-project .image-plain {
+  height: 0;
+  margin-top: 110px;
+}
+.card-project .author {
+  text-align: center;
+  text-transform: none;
+  margin-top: -65px;
+}
+.card-project .author .title {
+  color: #403D39;
+}
+.card-project .author .title small {
+  color: #ccc5b9;
+}
+.card-project .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 15px;
+}
+.card-project .avatar.border-white {
+  border: 5px solid #FFFFFF;
+}
+.card-project .avatar.border-gray {
+  border: 5px solid #ccc5b9;
+}
+.card-project .title {
+  font-weight: 600;
+  line-height: 24px;
+}
+.card-project .description {
+  margin-top: 10px;
+}
+.card-project .content {
+  min-height: 200px;
+}
+.card-project.card-plain .avatar {
+  height: 190px;
+  width: 190px;
+}
+
 
 #bg {
   position: fixed;
@@ -69,6 +126,12 @@
 .text-light-gray {
     color: #D1D1D1;
 }
+.text-yellow {
+  color: #FCCE36;
+}
 .contractor-name {
   color: #FCCE36;
+}
+.project-name {
+  color: #A63A92;
 }

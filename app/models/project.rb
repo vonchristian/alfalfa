@@ -20,6 +20,7 @@ class Project < ActiveRecord::Base
   has_many :contracts
   has_many :contractors, through: :contracts
   has_many :work_accomplishments, through: :work_details
+  has_many :accomplishment_images, through: :work_accomplishments
   has_many :attachment_files
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules

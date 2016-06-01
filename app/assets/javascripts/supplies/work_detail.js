@@ -1,9 +1,7 @@
-function calculate() {
-    var myBox1 = document.getElementById('quantity').value;
-    var myBox2 = document.getElementById('unit_price').value;
-    var result = document.getElementById('amount');
-    var myResult = myBox1 * myBox2;
-    result.value = myResult;
-
-
+function calculateWorkDetailCost() {
+    var quantity = document.getElementById('work_detail_quantity').value;
+    var unitPrice = document.getElementById('work_detail_unit_price').value;
+    var amount = document.getElementById('work_detail_amount');
+    var result = quantity * unitPrice;
+    amount.value = myResult;
   }

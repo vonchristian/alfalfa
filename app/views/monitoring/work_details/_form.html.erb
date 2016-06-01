@@ -8,11 +8,11 @@
         <%=f.input :unit, placeholder: 'Unit' %>
       </div>
       <div class="col-md-6">
-        <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
+        <%=f.input :quantity,  placeholder: 'Quantity', input_html: {id: "work_detail_quantity", oninput: "calculateWorkDetailCost()"} %>
       </div>
     </div>
-    <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html:{id: "unit_price", oninput: "calculate()"}  %>
-    <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html:{id: "amount"}%>
+    <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html: {id: "work_detail_unit_price", oninput: "calculateWorkDetailCost()"}  %>
+    <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html: {id: "work_detail_amount"}%>
     <div class="modal-footer">
       <%=f.submit "Save Work Detail", class: "btn btn-primary pull-right" %>
       <%=link_to "Back to Project", monitoring_project_path(@project) , class: "btn btn-default pull-left"%>
