@@ -21,7 +21,9 @@
         <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
         <span class="pull-right"> <%=number_to_currency @project.total_payments %>
         </span><br>
-        <small class="text-muted pull-right">Last Updated: <%= @project.payments.last.created_at.strftime("%B %e, %Y") %> </small>
+        <% if @project.payments.any? %>
+          <small class="text-muted pull-right">Last Updated: <%= @project.payments.last.created_at.strftime("%B %e, %Y") %> </small>
+        <% end %>
       </p>
     </li>
     <li>

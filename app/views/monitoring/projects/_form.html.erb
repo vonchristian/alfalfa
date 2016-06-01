@@ -6,9 +6,9 @@
     </div>
     <div class="content">
       <div class="row">
-        <div class="col-md-6">
-        </div>
         <div class="col-md-5">
+        </div>
+        <div class="col-md-6">
           <%= simple_form_for [:monitoring,@project] do |f| %>
             <%=f.error_notification %>
             <%=f.input :name, as: :text, input_html: {rows: 5}, label: "Project Name", autofocus: true, placeholder: "Enter name of project" %>

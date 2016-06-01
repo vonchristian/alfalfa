@@ -1,25 +1,37 @@
+<div class="col-md-6">
+  <div class="card">
+    <div class="header">
+      <h4 class="card-title">Payments</h4>
+    </div>
+    <div class="content bg-blue">
+<% Project.all.each do |project| %>
+  <ul class="list-unstyled team-members">
+    <%=link_to project_payments_path(project) do %>
+      <li>
+        <div class="row">
+          <div class="col-md-3 hidden-xs">
+            <h3 class="percent-title"><center><%=number_to_human project.revised_contract_amount %></center></h3>
+          </div>
+          <div class="col-md-9">
 
-<table class="table">
-  <thead>
-    <tr>
-      <th width="60%">Project Name</th>
-      <th class="text-center">Amount Collected</th>
-      <th class="text-center">Amount Remaining</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% Project.all.each do |project| %>
-      <tr>
-        <td><%=link_to project.name.truncate(200), project_payments_path(project) %></td>
-        <td><span class="pull-right"><%= number_to_currency project.total_payments %></span></td>
-        <td><span class="pull-right"><%= number_to_currency project.remaining_payments %></span></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <% if project.payments.any? %>
+            <small class="pull-right text-white"><i class="fa fa-clock-o"></i> Updated <%=project.payments.last.created_at.strftime("%b %e, %Y") %></small><br>
+            <% end %>
+            <small class="text-white"> # <%=project.id_number %>
+          <i class="fa fa-map-marker"></i><%=project.address %></small><br>
+            <small class="text-white"><%=project.name.truncate(150) %></small><br>
+            <br>
+               <i class="fa fa-circle text-success"></i> <span class="text-white"><%=number_to_currency project.total_payments %></span>
+               <i class="fa fa-circle text-danger"></i> <span class="text-white"><%=number_to_currency project.remaining_payments%></span>
+  <hr>
+          </div>
 
-<script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+        </div>
+      </li>
+
+      <% end %>
+  </ul>
+<% end %>
+</div>
+</div>
+</div>
