@@ -13,6 +13,7 @@ module Supplies
       authorize @stock
       if @stock.save
         redirect_to @inventory, notice: "New stock saved successfully."
+        @inventory.available!
       else
         render :new
       end

@@ -24,11 +24,17 @@
                 <%=f.error_notification %>
                 <%= f.input :date, as: :string, input_html: {class: "datetimepicker"} %>
                 <%= f.input :quantity, input_html: { id: "stock_quantity", oninput: "calculate()" } %>
-                <%= f.input :unit_cost,  input_html: { id: "stock_unit_cost", oninput: "calculate()" } %>
-                <%= f.input :total_cost, input_html: { id: "stock_total_cost" } %>
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= f.input :unit_cost,  input_html: { id: "stock_unit_cost", oninput: "calculate()" } %>
+                  </div>
+                  <div class="col-md-6">
+                    <%= f.input :total_cost, input_html: { id: "stock_total_cost" }, readonly: true %>
+                  </div>
+                </div>
 
                 <div class="modal-footer">
-                  <%= link_to "Cancel", supplies_inventories_path, class: 'btn btn-xs btn-warning pull-left' %>
+                  <%= link_to "Cancel", supplies_inventories_path, class: 'btn btn-warning pull-left' %>
                   <%= f.submit "Save Stock", class: "btn btn-primary" %>
                 </div>
               <% end %>

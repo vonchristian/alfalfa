@@ -1,6 +1,5 @@
-
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8">
     <div class="card">
       <div class="header">
         <h4 class="title">List of Inventories
@@ -24,18 +23,20 @@
                 <td><%=inventory.quantity%> <%=inventory.unit %></td>
                 <td><span><%=number_to_currency inventory.price%></span></td>
                 <td>
-                  <% if policy(Supplies::Stock.new).new? %>
-                    <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active btn-sm" %>
+                  <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
+                    <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
                   <% end %>
                 </td>
                 <td id='edit_inventory'>
-                  <% if policy(inventory).edit? %>
-                    <%=link_to "Edit", edit_supplies_inventory_path(inventory), class: "btn btn-info active btn-sm" %>
+                  <% if policy(inventory).edit?  && !inventory.discontinued? %>
+                    <%=link_to "Edit", edit_supplies_inventory_path(inventory), class: "btn btn-info active " %>
                   <% end %>
                 </td>
                 <td>
-                  <% if inventory.out_of_stock? %>
-                  <span class="label label-danger pull-right"> Out of Stock </span>
+                  <% if inventory.unavailable? %>
+                    <span class="btn btn-danger btn-icon inactive pull-right"> Out of Stock </span>
+                  <% elsif inventory.discontinued? %>
+                    <span class="btn btn-danger btn-icon inactive pull-right"> Discontinued </span>
                   <% end %>
                 </td>
               </tr>
@@ -46,6 +47,27 @@
           <center><%= paginate @inventories, :window => 1 %></center>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"> Out of Stock Items </h4>
+      </div>
+      <div class="content">
+        <%=render @inventories.unavailable%>
+    </div>
+  </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title"> Discontinued Products </h4>
+      </div>
+      <div class="content">
+        <% if @inventories.discontinued.any? %>
+          <%=render @inventories.discontinued%>
+        <% else %>
+          No discontinued products
+        <% end %>
     </div>
   </div>
 </div>

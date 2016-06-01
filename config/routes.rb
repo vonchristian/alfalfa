@@ -156,6 +156,8 @@ Rails.application.routes.draw do
     resources :line_items
     resources :inventories do
       resources :stocks, only: [:new, :create]
+      match "/discontinue" => "inventories#discontinue", as: :discontinue, via: [:get, :post]
+      match "/continue" => "inventories#continue", as: :continue, via: [:get, :post]
     end
     resources :carts
     resources :equipment

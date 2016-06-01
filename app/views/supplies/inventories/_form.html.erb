@@ -13,8 +13,15 @@
             <%= render 'stock_fields', :f => ff %>
           <% end %>
         <% end %>
-        <%=f.input :unit %>
-        <%=f.input :price %>
+        <div class="row">
+          <div class="col-md-6">
+            <%=f.input :unit, placeholder: 'e.g bags, liters, pcs' %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :price, placeholder: "Selling Price" %>
+          </div>
+        </div>
+
         <div class="modal-footer">
           <%= link_to "Cancel", supplies_inventories_path, class: 'btn  pull-left' %>
           <%=f.submit "Save Inventory", class: "btn btn-primary" %>

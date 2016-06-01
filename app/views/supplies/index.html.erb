@@ -33,8 +33,12 @@
                   </div>
                   <div class="col-xs-6">
                     <div class="pull-right">
-                      <% if inventory.out_of_stock? %>
+                      <% if inventory.unavailable? && inventory.out_of_stock? %>
                         <span class="btn btn-danger active"> Out of Stock </span>
+                        <% elsif inventory.out_of_stock? && !inventory.discontinued? %>
+                          <span class="btn btn-danger active"> Out of Stock </span>
+                        <% elsif inventory.discontinued? %>
+                        <span class="btn btn-danger active"> Discontinued </span>
                       <% else %>
                         <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active" %>
                       <% end %>

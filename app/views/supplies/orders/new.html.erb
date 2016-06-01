@@ -23,11 +23,11 @@
               <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'datetimepicker'} %>
               <%=f.input :customer_type, collection: Supplies::Order.customer_types, as: :radio_buttons %>
               <div class="project_contractor">
-                <label>Customer</label>
+                <label>Select Project or Contractor</label>
                 <%= f.input :customer_id, label: false, collection: Supplies::Order.customers , input_html: {class: "project_customer", style: 'width:100%'} %>
               </div>
               <div class="customer_name">
-                <label>Customer</label>
+                <label>Customer Name</label>
                 <%= f.input :name, label: false %>
               </div>
               <%= f.input :payment_status, collection: Supplies::Order.payment_statuses.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons %>

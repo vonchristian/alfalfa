@@ -3,7 +3,7 @@ module Supplies
     include PublicActivity::Common
     include PgSearch
     pg_search_scope :search_by_name, :against => :name
-    enum status:[:available, :out_of_stock, :discontinued]
+    enum status:[:available, :unavailable, :discontinued]
     has_many :stocks
     has_many :line_items, class_name: 'Supplies::LineItem'
     has_many :orders, through: :line_items, class_name: 'Supplies::Order'
@@ -12,20 +12,16 @@ module Supplies
     validates :price, numericality: { greater_than: 0.1 }
 
     accepts_nested_attributes_for :stocks
-    
     def discontinue
       self.discontinued!
     end
 
-<<<<<<< HEAD
-=======
     def check_if_out_of_stock
       if out_of_stock?
-        out_of_stock!
+        unavailable!
       end
     end
-    
->>>>>>> feature
+
     def quantity
       stocks.all.sum(:quantity) - line_items.all.sum(:quantity)
     end
