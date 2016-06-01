@@ -25,6 +25,7 @@ class Supplies::Order < ActiveRecord::Base
     cart.line_items.each do |item|
       item.cart_id = nil
       line_items << item
+      item.check_if_out_of_stock
     end
   end
 

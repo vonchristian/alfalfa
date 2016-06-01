@@ -17,6 +17,15 @@ module Supplies
       self.discontinued!
     end
 
+<<<<<<< HEAD
+=======
+    def check_if_out_of_stock
+      if out_of_stock?
+        out_of_stock!
+      end
+    end
+    
+>>>>>>> feature
     def quantity
       stocks.all.sum(:quantity) - line_items.all.sum(:quantity)
     end
