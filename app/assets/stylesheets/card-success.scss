@@ -1,0 +1,217 @@
+.card-success {
+  border-radius: 6px;
+  box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+  background-color: #8CD2AB;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.card-success .image {
+  width: 100%;
+  overflow: hidden;
+  height: 260px;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.card-success .image img {
+  width: 100%;
+}
+.card-success .content {
+  padding: 15px 15px 10px 15px;
+}
+.card-success .header {
+  padding: 20px 20px 0;
+}
+.card-success .description {
+  font-size: 16px;
+  color: #66615b;
+}
+.card-success h6 {
+  font-size: 12px;
+  margin: 0;
+}
+.card-success .category,
+.card-success label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9A9A9A;
+  margin-bottom: 0px;
+}
+.card-success .category i,
+.card-success label i {
+  font-size: 16px;
+}
+.card-success label {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.card-success .title {
+  margin: 0;
+  color: #252422;
+  font-weight: 300;
+}
+.card-success .avatar {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.card-success .footer {
+  padding: 0;
+  line-height: 30px;
+}
+.card-success .footer .legend {
+  padding: 5px 0;
+}
+.card-success .footer hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.card-success .stats {
+  color: #F2F1ED;
+  font-weight: 300;
+}
+.card-success .stats i {
+  margin-right: 2px;
+  min-width: 15px;
+  display: inline-block;
+}
+.card-success .footer div {
+  display: inline-block;
+}
+.card-success .author {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.card-success .author i {
+  font-size: 14px;
+}
+.card-success.card-success-separator:after {
+  height: 100%;
+  right: -15px;
+  top: 0;
+  width: 1px;
+  background-color: #DDDDDD;
+  content: "";
+  position: absolute;
+}
+.card-success .ct-chart {
+  margin: 30px 0 30px;
+  height: 245px;
+}
+.card-success .table tbody td:first-child,
+.card-success .table thead th:first-child {
+  padding-left: 15px;
+}
+.card-success .table tbody td:last-child,
+.card-success .table thead th:last-child {
+  padding-right: 15px;
+}
+.card-success .alert {
+  border-radius: 4px;
+  position: relative;
+}
+.card-success .alert.alert-with-icon {
+  padding-left: 65px;
+}
+.card-success .icon-big {
+  font-size: 3em;
+  min-height: 64px;
+}
+.card-success .numbers {
+  font-size: 1.5em;
+  text-align: right;
+}
+.card-success .numbers p {
+  margin: 0;
+}
+.card-success ul.team-members li {
+  padding: 10px 0px;
+}
+.card-success ul.team-members li:not(:last-child) {
+  border-bottom: 1px solid #F1EAE0;
+}
+
+.card-success-user .image {
+  border-radius: 8px 8px 0 0;
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.card-success-user .image img {
+  width: 100%;
+}
+.card-success-user .image-plain {
+  height: 0;
+  margin-top: 110px;
+}
+.card-success-user .author {
+  text-align: center;
+  text-transform: none;
+  margin-top: -65px;
+}
+.card-success-user .author .title {
+  color: #403D39;
+}
+.card-success-user .author .title small {
+  color: #ccc5b9;
+}
+.card-success-user .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 15px;
+}
+.card-success-user .avatar.border-white {
+  border: 5px solid #FFFFFF;
+}
+.card-success-user .avatar.border-gray {
+  border: 5px solid #ccc5b9;
+}
+.card-success-user .title {
+  font-weight: 600;
+  line-height: 24px;
+}
+.card-success-user .description {
+  margin-top: 10px;
+}
+.card-success-user .content {
+  min-height: 200px;
+}
+.card-success-user.card-success-plain .avatar {
+  height: 190px;
+  width: 190px;
+}
+
+.card-success-map .map {
+  height: 500px;
+  padding-top: 20px;
+}
+.card-success-map .map > div {
+  height: 100%;
+}
+
+.card-success-user .footer,
+.card-success-price .footer {
+  padding: 5px 15px 10px;
+}
+.card-success-user hr,
+.card-success-price hr {
+  margin: 5px 15px;
+}
+
+.card-success-plain {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+.card-success-plain .image {
+  border-radius: 4px;
+}

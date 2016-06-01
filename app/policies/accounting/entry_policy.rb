@@ -13,11 +13,11 @@ module Accounting
     end
 
     def show?
-     create?
+     user.accounting_officer?
     end
 
     def create?
-    user.accounting_officer?
+      user.accounting_officer?
     end
 
     def new?
