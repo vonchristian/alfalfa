@@ -1,7 +1,7 @@
 <div class="col-md-6">
   <div class="card">
     <div class="header">
-      <h4 class="card-title">Collection Monitoring</h4>
+      <h4 class="title">Collection Monitoring</h4>
     </div>
     <div class="content bg-blue">
       <% Project.all.each do |project| %>
@@ -23,11 +23,11 @@
                   <br>
                   <i class="fa fa-circle text-success"></i> <small class="text-white"><%=number_to_currency project.total_payments %></small>
                   <i class="fa fa-circle text-danger"></i> <small class="text-white"><%=number_to_currency project.remaining_payments%></small>
-                  <hr>
                 </div>
               </div>
             </li>
           <% end %>
+            <hr>
         </ul>
       <% end %>
     </div>

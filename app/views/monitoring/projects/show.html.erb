@@ -4,8 +4,14 @@
       <div class="header">
         <div class="row">
           <div class="col-md-10">
-            <b>#<%=@project.id_number_and_location %></b>
+            <b>#<%=@project.id_number_and_location.upcase %></b>
             <h5><%=@project.name %></h5>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%=@project.actual_accomplishment %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@project.actual_accomplishment %>%;">
+                <span class="text-black"><%=number_to_currency @project.actual_accomplishment, unit: "" %>%</span>
+              </div>
+
+            </div>
           </div>
           <div class="col-md-2">
             <% if policy(@project).edit? %>

@@ -14,7 +14,7 @@
           </div>
         <% end %>
       </div>
-      <div class="col-md-6 col-xs-4">
+      <div class="col-md-6 col-sm-4 hidden-xs">
         <%=link_to "Summary (PDF)", monitoring_projects_path(@projects, format: 'pdf'), class: 'btn btn-primary' %>
         <% if policy(Project.new).create? %>
         <%=link_to new_monitoring_project_path, title: "New Project" do %>
@@ -31,22 +31,23 @@
       <div class="col-md-4">
         <div class="card card-project">
           <div class="image">
-          <%=image_tag("bg.jpg") %>
+            <% if project.accomplishment_images.any? %>
+              <%=image_tag(project.accomplishment_images.last.photo.url(:original)) %>
+            <% else %>
+              <%=image_tag("bg.jpg") %>
+          <% end %>
         </div>
           <div class="header">
             <b class="title text-yellow"><%="##{project.id_number.upcase}"%></b>
-            <p class="pull-right text-<%=project.slippage_color%>" data-toggle="tooltip" data-placement='bottom' title"Slippage"><i class="fa fa-angle-<%=project.slippage_sign%>"></i><%=number_to_currency project.slippage, unit: ""%> % </p>
+            <p class="pull-right btn btn-<%=project.slippage_color%> btn-icon active text-<%=project.slippage_color%>" data-toggle="tooltip" data-placement='bottom' title"Slippage"><i class="fa fa-angle-<%=project.slippage_sign%>"></i><%=number_to_currency project.slippage, unit: ""%> % </p>
             <div class="row"></div>
           </div>
           <div class="content">
             <small><%=project.name.truncate(100) %></small><br>
             <br>
 <div class="card-footer">
-            <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=project.actual_accomplishment %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=project.actual_accomplishment %>%;">
-                <span class="text-black"><%=number_to_currency project.actual_accomplishment, unit: "" %>%</span>
-              </div>
-            </div>
+
+              <i class="fa fa-map-marker"></i><%=project.address %>
             </div>
           </div>
 
