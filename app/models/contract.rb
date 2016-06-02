@@ -8,7 +8,9 @@ class Contract < ActiveRecord::Base
   validates :contractor_id, presence: true, uniqueness: {scope: :project, message: "Contractor is already added"}
   validates :amount_subcontracted, presence: true, numericality: {less_than_or_equal_to: :remaining_uncontracted_amount }
 
-  delegate :remaining_uncontracted_amount, to: :project
+  def remaining_uncontracted_amount
+    project.remaining_uncontracted_amount
+  end
 
   def total_payments
     self.payments.map{|a| a.credit_amounts.sum(:amount)}.sum
@@ -20,5 +22,7 @@ class Contract < ActiveRecord::Base
     else
       0
     end
+  end
+  def add_to_contractors_contract
   end
 end

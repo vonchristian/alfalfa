@@ -55,7 +55,7 @@ class Project < ActiveRecord::Base
   end
 
   def select2_options
-    "#{id_number} - #{address}"
+    id_number_and_location
   end
 
   def self.types

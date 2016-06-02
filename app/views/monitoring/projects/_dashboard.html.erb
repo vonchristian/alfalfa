@@ -5,6 +5,22 @@
         <h4 class="title">Projects Progress</h4>
       </div>
       <div class="content">
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-1">
+            <span class="title text-black pull-right">ACTUAL ACC. </span>
+          </div>
+          <div class="col-md-1">
+            <span class="title text-black pull-right">Target ACC. </span>
+          </div>
+          <div class="col-md-1">
+            <span class="title text-black pull-right">Slippage</span>
+          </div>
+
+        </div>
         <% @projects.each do |project| %>
           <%=link_to monitoring_project_path(project) do %>
             <ul class="list-unstyled team-members">
@@ -18,17 +34,23 @@
                     <% end %>
                   </div>
                   <div class="col-md-6">
-                    <h4 class="title"><span># <%=project.id_number_and_location %></span></h4>
-                    <span class="text-yellow"><%=project.name %></span>
+                    <h4 class="title">  <i class="fa fa-circle text-<%=project.performance_status%>"></i> <span># <%=project.id_number_and_location %></span></h4>
+                    <span class="text-black"><%=project.name %></span>
                   </div>
                   <div class="col-md-1">
-                    <p><span class="text-success"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </span></p>
+                    <br>
+                    <br>
+                    <p><span class="text-success pull-right"><%=number_to_currency project.actual_accomplishment, unit: "" %> % </span></p>
                   </div>
                   <div class="col-md-1">
-                    <p><span class="text-yellow"><%=number_to_currency project.target_accomplishment, unit: "" %> %</span></p>
+                    <br>
+                    <br>
+                    <p><span class="text-yellow pull-right"><%=number_to_currency project.target_accomplishment, unit: "" %> %</span></p>
                   </div>
                   <div class="col-md-1">
-                    <p><span class="text-danger"><i class="fa fa-angle-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> %</span></p>
+                    <br>
+                    <br>
+                    <p><span class="text-danger pull-right"><i class="fa fa-angle-<%=project.slippage_sign%>"></i> <%=number_to_currency project.slippage, unit: "" %> %</span></p>
                   </div>
                 </div>
               </li>
