@@ -1,6 +1,6 @@
 <%= simple_form_for @equipment do |f| %>
 <%=f.error_notification %>
-  <div class="col-md-5 col-md-offset-3">
+  <div class="col-md-6 col-md-offset-3">
     <div class="card">
       <div class="header">
         <h4 class="title">Equipment Details</h4>
@@ -14,11 +14,23 @@
           <center><%= image_tag @equipment.photo.url(:medium), class: 'center-block img-responsive img-rounded'%></center>
         <% end %>
         <center><%= f.input :photo, class: 'center-block', as: :file %></center>
-        <%= f.input :make, label: false, placeholder: 'Equipment Name' %>
-        <%=f.input :model, label: false, placeholder: 'Model' %>
-        <%=f.input :chassis_number, label: false, placeholder: 'Chassis Number' %>
-        <%=f.input :engine_number, label: false, placeholder: 'Engine Number' %>
-        <%=f.input :acquisition_date, label: false, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.input :make, label: false, placeholder: 'Equipment Name' %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :model, label: false, placeholder: 'Model' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <%=f.input :chassis_number, label: false, placeholder: 'Chassis Number' %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :engine_number, label: false, placeholder: 'Engine Number' %>
+          </div>
+        </div>
+        <%#=f.input :acquisition_date, label: false, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>
         <%=f.input :acquisition_cost, label: false, placeholder: 'Acquisition Cost' %>
         <%=f.input :plate_number, label: false, placeholder: 'Plate Number' %>
         <br>

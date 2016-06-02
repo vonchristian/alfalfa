@@ -1,30 +1,24 @@
-<ul class="list-unstyled team-members">
-  <li>
-    <div class="row">
-      <div class="col-md-6">
-        <%=inventory.name %>
-      </div>
-      <div class="col-md-4">
+<table class="table">
+  <tr>
+    <td><%=inventory.name %></td>
+    <td>
+      <div class="pull-right">
         <% if policy(Supplies::Stock.new).new? && inventory.unavailable? %>
           <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
         <% end %>
       </div>
-      <div class="col-md-2">
-        <% if inventory.unavailable? %>
-          <%=link_to supplies_inventory_discontinue_path(inventory_id: inventory.id, id: inventory.id),
-            method: :discontinue, data: { :confirm => "Are You sure you want to discontinue this product?" },
-            :title => "Delete #{inventory.name}" do %>
-            <span class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" title="Discontinue Product"><i class="fa fa-times"></i></span>
-          <% end %>
-          <% elsif inventory.discontinued? %>
-          <%=link_to supplies_inventory_continue_path(inventory_id: inventory.id, id: inventory.id),
-            method: :discontinue, data: { :confirm => "Are You sure you want to continue this product?" },
-            :title => "Delete #{inventory.name}" do %>
-            <span class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="bottom" title="Continue Product"><i class="fa fa-check"></i></span>
-          <% end %>
-
+    </td>
+    <td>
+      <% if inventory.unavailable? %>
+        <%=link_to supplies_inventory_discontinue_path(inventory_id: inventory.id, id: inventory.id), method: :discontinue, data: { :confirm => "Are You sure you want to discontinue this product?" }, :title => "Delete #{inventory.name}" do %>
+          <span class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" title="Discontinue Product"><i class="fa fa-times"></i></span>
         <% end %>
-      </div>
-    </div>
-  </li>
-</ul>
+      <% elsif inventory.discontinued? %>
+        <%=link_to supplies_inventory_continue_path(inventory_id: inventory.id, id: inventory.id),
+          method: :discontinue, data: { :confirm => "Are You sure you want to continue this product?" }, :title => "Delete #{inventory.name}" do %>
+          <span class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="bottom" title="Continue Product"><i class="fa fa-check"></i></span>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+</table>
