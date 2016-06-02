@@ -8,17 +8,18 @@
 						</h4>
 					</div>
 					<div class="col-md-6">
-						<%=form_tag accounting_entries_path, method: :get do %>
+						<%=form_tag accounting_entries_path, method: :get, class: "custom-search-input" do %>
 				      <div class="input-group">
-				        <%=text_field_tag :query, params[:query], class: 'form-control border-input', placeholder: 'Search Entries...' %>
-				        <span class="input-group-btn">
-				          <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
-				            <i class="fa fa-search"></i>
-				          <% end %>
-				        </span>
+				        <%=text_field_tag :query, params[:query], class: 'form-control search-query border-input', placeholder: 'Search Entries...' %>
+                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
 				      </div>
 				    <% end %>
 					</div>
+          
 					<div class="col-md-3">
 						<span class="pull-right"><%=link_to "New Entry", new_accounting_entry_path, class: "btn btn-primary" %> </span>
 					</div>
