@@ -1,39 +1,14 @@
 
-<div class="row">
-	<div class="col-md-4">
-		<div class="card">
-			<div class="header">
-				<h4 class="title">Entries Filter</h4>
-				<div class="row"><hr></div>
-			</div>
-			<div class="content">
-				<%= form_tag({:action => 'index'}, {:method => :get}) do%>
-					<div class="form-group">
-						<label>From Date:</label>
-						<%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control border-input', :placeholder => "Date" %>
-					</div>
-					<div class="form-group">
-						<label>To Date:</label>
-						<%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "Date" %>
-					</div>
-					<div class="modal-footer">
-						<%=link_to "View (PDF)", accounting_entries_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-primary pull-left"%>
-						<button type="submit" class="btn btn-primary active pull-right">Get Report</button>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-8">
+	<div class="col-md-12">
 		<div class="card">
 			<div class="header">
 				<div class="row">
 					<div class="col-md-3">
-						<h4 class="title">Entries
+						<h4 class="title">Find a Transaction
 						</h4>
 					</div>
 					<div class="col-md-6">
-						<%=form_tag accounting_entries_path, class: 'sidebar-form', method: :get do %>
+						<%=form_tag accounting_entries_path, method: :get do %>
 				      <div class="input-group">
 				        <%=text_field_tag :query, params[:query], class: 'form-control border-input', placeholder: 'Search Entries...' %>
 				        <span class="input-group-btn">
@@ -48,14 +23,69 @@
 						<span class="pull-right"><%=link_to "New Entry", new_accounting_entry_path, class: "btn btn-primary" %> </span>
 					</div>
 				</div>
-				<div class="row"><hr class="no-top-padding"></div>
+        <br>
+        <div class="row">
+          <div class="col-md-1">
+            <small class="text-light-gray"> Show Activity: </small>
+          </div>
+          <div class="col-md-5">
+            <span> <%=link_to 'This Day', accounting_entries_path, class: "btn btn-info btn-sm active" %></span>
+            <span> <%=link_to 'This Week', accounting_entries_path, class: "btn btn-default btn-sm" %></span>
+            <span> <%=link_to 'This Month', accounting_entries_path, class: "btn btn-default btn-sm" %></span>
+            <span> <%=link_to 'Last Month', accounting_entries_path, class: "btn btn-default btn-sm" %></span>
+            or
+          </div>
+          <div class="col-md-6">
+            <%= form_tag({:action => 'index'}, {:method => :get})  do %>
+              <div class="row">
+                <div class="col-md-3">
+                    <%= text_field_tag :from_date, @from_date, :class => 'datepicker form-control input-sm border-input', :placeholder => "From " %>
+                </div>
+                <div class="col-md-3">
+                    <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datepicker', :placeholder => "To " %>
+                </div>
+                <div class="col-md-6">
+                  <button type="submit" class="btn btn-success active  btn-sm"> Go </button>
+
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+            <small class="text-light-gray"> Filters: </small>
+          </div>
+          <div class="col-md-10">
+            <span> <%=link_to 'Cash Advance', accounting_entries_path, class: "btn btn-default btn-sm" %></span>
+            <span> <%=link_to 'Deposit', accounting_entries_path, class: "btn btn-default btn-sm" %></span>
+            <span> <%=link_to 'Withdraw', accounting_entries_path, class: "btn btn-default btn-sm" %></span>
+            <span> <%=link_to 'Salary Payment', accounting_entries_path, class: "btn btn-default btn-sm" %></span>
+          </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-1">
+              <small class="text-light-gray"> Report: </small>
+            </div>
+            <div class="col-md-10">
+              <%=link_to "PDF", accounting_entries_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-danger btn-sm active"%>
+            </div>
+          </div>
+        </div>
+        <br>
 			</div>
+
+  </div>
+    <div class="col-md-12">
+    <div class="card">
+    <div class="header">
+      <h4 class="title"> All Activity </h4>
 			<div class="content">
 				<div class="table table-responsive">
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th> Date </th>
 								<th> Description </th>
 								<th> Recipient </th>
 								<th> Debit </th>
@@ -67,10 +97,10 @@
 						<tbody>
 							<% @entries.each do |entry| %>
 								<tr>
-									<td width="20%">
-										<small class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
-									</td>
-		              <td><small><%=link_to entry.description.truncate(200), accounting_entry_path(entry) %></small></td>
+
+		              <td>
+                    	<small class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
+                    <small><%=link_to entry.description.truncate(200), accounting_entry_path(entry) %></small></td>
 									<td><small><%=entry.entriable.try(:name) %></small></td>
 									<td>
 										<% entry.debit_amounts.each do |debit| %>

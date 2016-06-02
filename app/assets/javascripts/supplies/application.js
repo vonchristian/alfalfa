@@ -25,3 +25,5 @@
 //= require supplies/tooltip
 //= require supplies/stocks
 //= require supplies/work_detail
+//= require bootstrap-datepicker
+//= require supplies/datepicker
