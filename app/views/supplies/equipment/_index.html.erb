@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="title">List of Equipment</h4>
+          </div>
+          <div class="col-md-6">
+            <small class="text-uppercase text-light-gray">Filter:</small>
+            <span> <%=link_to 'Active', active_supplies_equipment_index_path, class: 'btn btn-success  btn-sm' %> </span>
+            <span> <%=link_to 'Inactive', inactive_supplies_equipment_index_path, class: 'btn btn-danger btn-sm' %> </span>
+            <span> <%=link_to 'All', supplies_equipment_index_path, class: 'btn btn-default btn-sm' %> </span>
+          </div>
+          <div class="col-md-3">
+            <span class="pull-right"><%= link_to "New Equipment", new_equipment_path, class: "btn btn-warning active btn-sm" %></span>
+          </div>
+        </div>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <%=render @equipments %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,13 +11,13 @@
             <tr>
               <td width="95px" class="hidden-xs"><%=image_tag(equipment.photo.url(:medium)) %></td>
               <td>
-                <%= equipment.make.upcase %><br>
-                <small><%= equipment.model.upcase %></small>
+                <%= equipment.make_and_model.upcase %><br>
+                <small><%= equipment.plate_number %></small>
               </td>
               <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
               <td>
-                <% if equipment.equipment_schedules.present? %>
-                  <span class="text-success"># <%=equipment.current_assignment_id_number %></span> &nbsp | &nbsp <%= truncate(equipment.current_assignment, length: 65) %> &nbsp - <span class="text-primary"><i class="fa fa-tag"></i><%=equipment.current_assignment_location %></span>
+                <% if equipment.equipment_schedules.any? %>
+                  <span class="text-success"># <%=equipment.current_assignment_id_number_and_location %></span> &nbsp | &nbsp <%= truncate(equipment.current_assignment, length: 65) %> &nbsp - <span class="text-primary"><i class="fa fa-tag"></i><%=equipment.current_assignment_location %></span>
                   <hr class="min-padding">
                   <div class="row">
                     <div class="col-md-2">

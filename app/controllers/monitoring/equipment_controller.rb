@@ -2,7 +2,7 @@ module Monitoring
   class EquipmentController < ApplicationController
 		layout "monitoring"
     def index
-      @equipments = Equipment.all
+      @equipments = EquipmentDecorator.decorate_collection(Equipment.all)
     end
   end
 end

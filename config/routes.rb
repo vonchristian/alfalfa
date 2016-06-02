@@ -119,7 +119,11 @@ Rails.application.routes.draw do
       match "/continue" => "inventories#continue", as: :continue, via: [:get, :post]
     end
     resources :carts
-    resources :equipment
+    resources :equipment do
+      match "/active" => "equipment#active", as: :active, via: [:get], on: :collection
+      match "/inactive" => "equipment#inactive", as: :inactive, via: [:get], on: :collection
+    end
+
     resources :stocks, only: [:edit, :update]
   end
 

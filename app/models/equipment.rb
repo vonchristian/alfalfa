@@ -21,13 +21,15 @@ class Equipment < ActiveRecord::Base
     "#{make} - #{model}"
   end
 
-
   def to_s
     make_and_model
   end
 
-  def set_equipment_status
-    EquipmentStatus.create(equipment_id: self.id, status: 0, description: "Ready")
+  def self.active
+    all.select{|a| a.equipment_status.active? }
+  end
+  def self.inactive
+    all.select{|a| a.equipment_status.inactive? }
   end
 
   def inactive?
@@ -38,6 +40,9 @@ class Equipment < ActiveRecord::Base
     self.equipment_status.active?
   end
 
+  def set_equipment_status
+    EquipmentStatus.create(equipment_id: self.id, status: 0, description: "Ready")
+  end
 
   private
 

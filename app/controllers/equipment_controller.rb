@@ -4,7 +4,6 @@
     def index
       authorize User, :index?
       @equipments = EquipmentDecorator.decorate_collection(Equipment.all.order('created_at DESC').page(params[:page]).per(50))
-      @equipment_schedules = EquipmentSchedule.all.order('created_at DESC').page(params[:page]).per(50)
     end
     def new
       @equipment = Equipment.new
