@@ -1,71 +1,14 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="card">
       <div class="header">
         <h4 class="title">List of Equipment
-          <span class="pull-right"><%= link_to "New Equipment", new_equipment_path, class: "btn btn-primary btn-sm" %></span>
+          <span class="pull-right"><%= link_to "New Equipment", new_equipment_path, class: "btn btn-warning active btn-sm" %></span>
         </h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Equipment</th>
-              <th>Description</th>
-              <th>Acquisition Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @equipments.each do |equipment| %>
-              <tr>
-                <td><%= link_to equipment.make_and_model, equipment %></td>
-                <td><%= equipment.plate_number %></td>
-                <td><%= number_to_currency equipment.acquisition_cost %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="modal-footer">
-          <center><%= paginate @equipments, :window => 1 %></center>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card">
-      <div class="header">
-        <h4 class="title">Equipment Schedule</h4>
-        <div class="row"><hr></div>
-      </div>
-      <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Equipment</th>
-              <th>Operator</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% EquipmentSchedule.all.each do |equipment_schedule| %>
-              <tr class="<% if equipment_schedule.equipment.inactive? %>text-warning<% elsif equipment_schedule.equipment.active? %>text-success<% end %>">
-                <td><%= equipment_schedule.equipment %></td>
-                <td><%= equipment_schedule.try(:operator).full_name %></td>
-                <td>
-                  <% if equipment_schedule.equipment.inactive? %>
-                    <%= equipment_schedule.equipment.equipment_status.description %>
-                  <% elsif equipment_schedule.equipment.active? %>
-                    <%= equipment_schedule.equipment.equipment_status.status.capitalize %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="modal-footer">
-          <center><%= paginate @equipment_schedules, :window => 1 %></center>
-        </div>
+        <%=render @equipments %>
       </div>
     </div>
   </div>

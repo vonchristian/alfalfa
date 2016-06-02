@@ -2,9 +2,9 @@
   class EquipmentController < ApplicationController
     layout "supplies"
     def index
-      @equipments = Equipment.all.order('created_at DESC').page(params[:page]).per(10)
-      @equipment_schedules = EquipmentSchedule.all.order('created_at DESC').page(params[:page]).per(10)
-      authorize @equipments, :index?
+      authorize User, :index?
+      @equipments = EquipmentDecorator.decorate_collection(Equipment.all.order('created_at DESC').page(params[:page]).per(50))
+      @equipment_schedules = EquipmentSchedule.all.order('created_at DESC').page(params[:page]).per(50)
     end
     def new
       @equipment = Equipment.new
