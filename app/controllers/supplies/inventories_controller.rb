@@ -2,8 +2,16 @@ module Supplies
   class InventoriesController < ApplicationController
     layout 'supplies'
     def index
-      @inventories = Supplies::Inventory.all.order(:name).page(params[:page]).per(50)
-      authorize @inventories, :index?
+      authorize User
+      if params[:name].present?
+        @inventories = Supplies::Inventory.search_by_name(params[:name]).order(:created_at).page(params[:page]).per(50)
+      else
+        @inventories = Supplies::Inventory.all.order(:name).page(params[:page]).per(50)
+      end
+    end
+    def active
+      authorize User
+      @inventories = Supplies::Inventory.available
     end
 
     def new

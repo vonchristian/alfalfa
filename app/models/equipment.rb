@@ -1,7 +1,7 @@
 class Equipment < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:make_and_model]
-   pg_search_scope :search_by_name, :against => [:make, :model, :plate_number]
+  pg_search_scope :search_by_name, :against => [:make, :model, :plate_number]
   has_many :orders, as: :customer, class_name: "Supplies::Order"
   has_many :line_items, through: :orders, class_name: "Supplies::LineItem"
   has_many :equipment_schedules

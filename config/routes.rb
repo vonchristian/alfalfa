@@ -117,6 +117,7 @@ Rails.application.routes.draw do
       resources :stocks, only: [:new, :create]
       match "/discontinue" => "inventories#discontinue", as: :discontinue, via: [:get, :post]
       match "/continue" => "inventories#continue", as: :continue, via: [:get, :post]
+      match "/available" => "inventories#available", as: :available, via: [:get], on: :collection
     end
     resources :carts
     resources :equipment do
