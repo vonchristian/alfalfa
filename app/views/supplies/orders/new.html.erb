@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-12">
     <div class="card">
       <div class="header">
         <h4 class="title">Order Details </h4>
@@ -20,7 +20,7 @@
           <div class="col-md-5 col-md-offset-1">
             <%=simple_form_for @order, url: :orders do |f| %>
               <%=f.error_notification %>
-              <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'datetimepicker'} %>
+              <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'date_picker'} %>
               <%=f.input :customer_type, collection: Supplies::Order.customer_types, as: :radio_buttons %>
               <div class="project_contractor">
                 <label>Select Project or Contractor</label>

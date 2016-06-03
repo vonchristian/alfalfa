@@ -9,6 +9,17 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('.date_picker').datetimepicker({
+  	format: 'MMMM DD, YYYY',
+  	showClose: true,
+      widgetPositioning: {
+            horizontal: 'auto',
+            vertical: 'auto'
+      }
+  });
+});
+
 // $(document).ready(function() {
 //   $('.datepicker_report').datepicker({
 //   format: "yyyy-mm-dd",
