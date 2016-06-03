@@ -12,6 +12,9 @@ module Supplies
     validates :price, numericality: { greater_than: 0.1 }
 
     accepts_nested_attributes_for :stocks
+    def available
+      all.where(status: :available)
+    end
     def discontinue
       self.discontinued!
     end

@@ -9,9 +9,14 @@ module Supplies
         @inventories = Supplies::Inventory.all.order(:name).page(params[:page]).per(50)
       end
     end
-    def active
-      authorize User
+    def available
       @inventories = Supplies::Inventory.available
+    end
+    def out_of_stock
+      @inventories = Supplies::Inventory.unavailable
+    end
+    def discontinued
+      @inventories = Supplies::Inventory.discontinued
     end
 
     def new
