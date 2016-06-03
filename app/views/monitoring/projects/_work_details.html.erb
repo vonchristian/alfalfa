@@ -32,13 +32,13 @@
             <tr>
               <td><%=link_to work_detail.description.truncate(100), monitoring_work_detail_path(work_detail) %></td>
               <td>
-                <span class="pull-right"><%=number_to_currency work_detail.quantity, unit: '' %> <%=work_detail.unit %></span>
+                <span class="pull-right"><%=number_to_currency work_detail.quantity, unit: '' %></span>
               </td>
               <td>
-                <span class="text-success pull-right"><%=number_to_currency work_detail.accomplished_quantity, unit: '' %> <%=work_detail.unit %></span>
+                <span class="text-success pull-right"><%=number_to_currency work_detail.accomplished_quantity, unit: '' %></span>
               </td>
               <td>
-                <span class="text-danger pull-right"><%=number_to_currency work_detail.remaining_quantity, unit: '' %> <%=work_detail.unit %></span>
+                <span class="text-danger pull-right"><%=number_to_currency work_detail.remaining_quantity, unit: '' %></span>
               </td>
               <td>
                 <small>
