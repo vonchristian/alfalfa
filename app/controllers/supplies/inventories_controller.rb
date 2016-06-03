@@ -10,13 +10,13 @@ module Supplies
       end
     end
     def available
-      @inventories = Supplies::Inventory.available
+      @inventories = Supplies::Inventory.available.page(params[:page]).per(50)
     end
     def out_of_stock
-      @inventories = Supplies::Inventory.unavailable
+      @inventories = Supplies::Inventory.unavailable.page(params[:page]).per(50)
     end
     def discontinued
-      @inventories = Supplies::Inventory.discontinued
+      @inventories = Supplies::Inventory.discontinued.page(params[:page]).per(50)
     end
 
     def new
@@ -29,7 +29,7 @@ module Supplies
       @inventory = Supplies::Inventory.create(inventory_params)
       authorize @inventory
       if @inventory.save
-        # @inventory.update_accounts
+        @inventory.available!
         @inventory.create_activity :create, owner: current_user
         redirect_to supplies_inventories_url, notice: "Inventory saved successfully."
       else

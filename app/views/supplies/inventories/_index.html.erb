@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="title">List of Inventories</h4>
+          </div>
+          <div class="col-md-4">
+            <%=form_tag supplies_inventories_path, class: 'form-inline', method: :get do %>
+              <div class="input-group">
+                <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search Inventory...' %>
+                <span class="input-group-btn">
+                  <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
+                    <i class="fa fa-search"></i>
+                  <% end %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-4">
+            <span class="pull-right"><%=link_to "New Inventory", new_supplies_inventory_path, class: "btn btn-primary" %></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <small class="text-light-gray"> FILTER: </small>
+            <span><%=link_to "Available", available_supplies_inventories_path, class: "btn btn-success btn-sm" %></span>
+            <span><%=link_to "Out of Stock", out_of_stock_supplies_inventories_path, class: "btn btn-warning btn-sm" %></span>
+            <span><%=link_to "Discontinued", discontinued_supplies_inventories_path, class: "btn btn-danger btn-sm" %></span>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th></th>
+              <th></th>
+            </thead>
+            <tbody>
+              <% @inventories.each do |inventory| %>
+                <tr class="<%="text-danger" if inventory.out_of_stock?%>">
+                  <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
+                  <td><%=inventory.quantity%> <%=inventory.unit %></td>
+                  <td><span><%=number_to_currency inventory.price%></span></td>
+                  <td>
+                    <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
+                      <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
+                    <% end %>
+                  </td>
+                  <td id='edit_inventory'>
+                    <% if policy(inventory).edit?  && !inventory.discontinued? %>
+                      <%=link_to "Edit", edit_supplies_inventory_path(inventory), class: "btn btn-info active " %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% if inventory.unavailable? %>
+                      <span class="label label-danger pull-right"> Out of Stock </span>
+                      <span><%=link_to "Discontinue", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id) %>
+                    <% elsif inventory.discontinued? %>
+                      <span class="label label-danger pull-right"> Discontinued </span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <center><%= paginate @inventories, :window => 1 %></center>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
