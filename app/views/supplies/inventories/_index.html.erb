@@ -37,17 +37,25 @@
         <div class="table table-responsive">
           <table class="table table-hover">
             <thead>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th></th>
-              <th></th>
+              <tr class="title">
+                <th>Name</th>
+                <th> Unit </th>
+                <th>Qty Stock</th>
+                <th>Qty Used </th>
+                <th>Qty Remaining </th>
+                <th>Price</th>
+                <th></th>
+                <th></th>
+              </tr>
             </thead>
             <tbody>
               <% @inventories.each do |inventory| %>
                 <tr class="<%="text-danger" if inventory.out_of_stock?%>">
                   <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
-                  <td><%=inventory.quantity%> <%=inventory.unit %></td>
+                  <td> <%=inventory.unit %>
+                  <td><%=inventory.stocks.sum(:quantity) %></td>
+                  <td><%=inventory.line_items.sum(:quantity) %></td>
+                  <td><%=inventory.quantity%> </td>
                   <td><span><%=number_to_currency inventory.price%></span></td>
                   <td>
                     <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
