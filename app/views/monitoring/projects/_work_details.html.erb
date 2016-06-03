@@ -15,7 +15,7 @@
         <%=link_to "Start adding work detail", new_monitoring_project_work_detail_path(@project) %>
       </span>
     <% else %>
-      <table class="table table-striped">
+      <table class="table table-hover">
         <thead>
           <tr class="title">
             <th style="width: 60%">Description</th>
@@ -41,7 +41,7 @@
                 <span class="text-danger pull-right"><%=number_to_currency work_detail.remaining_quantity, unit: '' %></span>
               </td>
               <td>
-                <small>
+                <small class="pull-right">
                   <% if work_detail.work_accomplishments.present? %>
                     <%=number_to_currency work_detail.actual_accomplishment_percent, unit: '' %> %
                   <% else %>
