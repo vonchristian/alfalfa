@@ -21,6 +21,6 @@ class Supplies::LineItemsController < ApplicationController
 
   private
   def line_item_params
-    params.require(:supplies_line_item).permit(:inventory_id, :quantity)
+    params.require(:supplies_line_item).permit(:inventory_id, :quantity, :unit_cost, :total_cost)
   end
 end

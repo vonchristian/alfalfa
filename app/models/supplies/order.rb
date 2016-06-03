@@ -28,6 +28,7 @@ class Supplies::Order < ActiveRecord::Base
       item.cart_id = nil
       line_items << item
       item.check_if_out_of_stock
+      item.set_total_cost
     end
   end
 

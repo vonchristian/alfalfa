@@ -9,14 +9,19 @@ class Supplies::LineItem < ActiveRecord::Base
   delegate :check_if_out_of_stock, to: :inventory
 
   def total_price
-      inventory.price * quantity
-    end
+    inventory.price * quantity
+  end
 
-    def inventory_quantity
-      inventory.quantity
-    end
+  def set_total_cost
+    self.total_cost = self.total_price
+    self.save
+  end
 
-    def self.total_price
-        self.all.to_a.sum { |item| item.total_price }
-    end
+  def inventory_quantity
+    inventory.quantity
+  end
+
+  def self.total_price
+      self.all.to_a.sum { |item| item.total_cost }
+  end
   end

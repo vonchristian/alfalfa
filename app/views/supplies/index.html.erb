@@ -31,6 +31,7 @@
                   <div class="col-xs-6">
                     <%=f.input :quantity, label: false, placeholder: "QTY", as: :string, required: true, input_html: {class: 'input-sm'} %>
                     <%=f.input :inventory_id, input_html: {value: inventory.id }, as: :hidden %>
+                    <%=f.input :unit_cost, input_html: { value: inventory.price}, as: :hidden %>
                   </div>
                   <div class="col-xs-6">
                     <div class="pull-right">
