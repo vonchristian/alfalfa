@@ -1,10 +1,21 @@
 <div class="card">
   <div class="header">
-    <h5 class="title"> <%=image_tag("work_detail_icon.png", height: '35', width: '35') %>( <%=@project.work_details.count%> ) Work Details
-      <% if policy(WorkDetail.new).create? %>
-      <%=link_to "New Work Detail", new_monitoring_project_work_detail_path(@project), class: "btn btn-primary pull-right" %>
-      <% end %>
-    </h5>
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="title"> <%=image_tag("work_detail_icon.png", height: '35', width: '35') %>( <%=@project.work_details.count%> ) Work Details </h5>
+      </div>
+      <div class="col-md-6">
+        <% if policy(WorkDetail.new).create? %>
+          <%=link_to "New Work Detail", new_monitoring_project_work_detail_path(@project), class: "btn btn-primary pull-right" %>
+        <% end %>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <small class="text-light-gray text-uppercase"> Reports: </small> <%=link_to "Generate SWA", monitoring_project_work_details_path(@project, format: 'pdf'), class: "btn btn-default btn-sm" %>
+      </div>
+    </div>
     <div class="row"><hr></div>
   </div>
   <div class="content">
