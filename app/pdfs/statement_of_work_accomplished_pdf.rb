@@ -40,7 +40,7 @@ class StatementOfWorkAccomplishedPdf < Prawn::Document
     if table_data.empty?
       text "No work detail ACCOMPLISHED.", align: :center
     else
-      table(table_data,
+      table(table_data, position: :right
         header: true,
         cell_style: { size: 7, font: "Helvetica", :padding => [1, 2, 2, 2]},
         column_widths: TABLE_WIDTHS) do
