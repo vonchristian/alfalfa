@@ -4,5 +4,6 @@ module Supplies
 
     validates :date, :quantity, presence: true
     validates :quantity, numericality: { greater_than: 0.1 }
+    validates :unit_cost, numericality: { greater_than: 0.1 }
   end
 end

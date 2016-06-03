@@ -27,7 +27,7 @@ class ProjectLineItemsPdf < Prawn::Document
   def heading_date
 
     if @project.orders.present?
-      @project.orders.first.date_issued.strftime("%B %e, %Y") + " - " + @project.orders.last.date_issued.strftime("%B %e, %Y")
+      @project.orders.order("date_issued").first.date_issued.strftime("%B %e, %Y") + " - " + @project.orders.order("date_issued").last.date_issued.strftime("%B %e, %Y")
     end
   end
 
