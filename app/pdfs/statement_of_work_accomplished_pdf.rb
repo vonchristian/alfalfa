@@ -17,7 +17,9 @@ class StatementOfWorkAccomplishedPdf < Prawn::Document
   def heading
     text "CONTRACTOR'S STATEMENT OF WORK ACCOMPLISHED", align: :center, size: 10
     move_down 5
-    text "From: #{Time.zone.now.strftime("%B %e, %Y")} To: #{Time.zone.now.next_month.strftime("%B %e, %Y")}", align: :center, size: 10
+    if @project.work_accomplishments.any?
+      text "From: #{@project.work_accomplishments.first.date_accomplished.strftime("%B %e, %Y")} To: #{@project.work_accomplishments.last.date_accomplished.strftime("%B %e, %Y")}", align: :center, size: 10
+    end
   end
 
   def project_info_table
