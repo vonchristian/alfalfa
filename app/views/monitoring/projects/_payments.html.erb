@@ -13,17 +13,13 @@
     <li>
       <p>
         <%=image_tag("price_tag.png", height: 25, width: 25) %> &nbsp; Project Cost
-        <span class="pull-right"> <%=number_to_currency @project.cost %></span>
+        <span class="pull-right"> <%=number_to_currency @project.revised_contract_amount %></span>
       </p>
     </li>
     <li>
       <p>
         <%=image_tag("payment_icon.png", height: 25, width: 25) %> &nbsp; Payments
-        <span class="pull-right"> <%=number_to_currency @project.total_payments %>
-        </span><br>
-        <% if @project.payments.any? %>
-          <small class="text-muted pull-right">Last Updated: <%= @project.payments.last.created_at.strftime("%B %e, %Y") %> </small>
-        <% end %>
+        <span class="pull-right"> <%=number_to_currency @project.total_payments %></span>
       </p>
     </li>
     <li>
@@ -33,4 +29,6 @@
       </p>
     </li>
   </ul>
+  <center><%=link_to "View Details", project_payments_path(@project), class: "btn btn-default" %></center>
+  <br>
 </div>

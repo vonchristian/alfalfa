@@ -28,7 +28,7 @@
         <tbody>
           <%@project.work_details.each do |work_detail| %>
             <tr>
-              <td><span class="title text-black"><%=link_to work_detail.description.truncate(100), monitoring_work_detail_path(work_detail) %></span></td>
+              <td><span><%=link_to work_detail.description.truncate(100), monitoring_work_detail_path(work_detail) %></span></td>
               <td>
                 <span class="pull-right"><%=number_to_currency work_detail.quantity, unit: '' %></span>
               </td>
