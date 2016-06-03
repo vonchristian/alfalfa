@@ -15,7 +15,20 @@ class WorkDetail < ActiveRecord::Base
 
   delegate :cost, to: :project, prefix: true
   delegate :total, to: :amount_revisions, prefix: true
-
+  def total_quantity_approved_in_previous_billing
+  end
+  def total_quantity_approved_in_this_billing
+  end
+  def balance_of_quantity
+  end
+  def cost_of_previous_billings
+  end
+  def cost_of_this_billing
+  end
+  def cost_to_date
+  end
+  def balance_of_cost
+  end
   def self.total
     self.all.sum(:total_cost)
   end

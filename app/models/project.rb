@@ -39,7 +39,7 @@ class Project < ActiveRecord::Base
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
-
+  
   def effectivity_date
     if notice_to_proceed.present?
       notice_to_proceed.date + 7.days

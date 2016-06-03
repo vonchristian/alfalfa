@@ -4,6 +4,13 @@ module Monitoring
     def index
       @project = Project.find(params[:project_id])
       @work_details = @project.work_details.page(params[:page]).per(50)
+      respond_to do |format|
+        format.html
+        format.pdf do
+          pdf =  StatementOfWorkAccomplishedPdf.new(@project, view_context)
+            send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Entries Report.pdf"
+        end
+      end
     end
     def new
       @project = Project.find(params[:project_id])

@@ -1,8 +1,8 @@
 class StatementOfWorkAccomplishedPdf < Prawn::Document
-  TABLE_WIDTHS = [40, 170, 30, 55, 60, 65, 40, 60, 60, 60, 60, 60, 60, 65]
+  TABLE_WIDTHS = [40, 160, 30, 55, 60, 65, 40, 60, 60, 60, 60, 60, 60, 65]
 
   def initialize(project, view_context)
-    super(margin: 30, page_size: [612, 948], page_layout: :landscape)
+    super(margin: 30, page_size: [612, 936], page_layout: :landscape)
     @project = project
     @view_context = view_context
     heading
@@ -38,10 +38,14 @@ class StatementOfWorkAccomplishedPdf < Prawn::Document
     if table_data.empty?
       text "No work detail ACCOMPLISHED.", align: :center
     else
-      table table_data,
-        header: true, 
+      table(table_data,
+        header: true,
         cell_style: { size: 7, font: "Helvetica", :padding => [1, 2, 2, 2]},
-        column_widths: TABLE_WIDTHS
+        column_widths: TABLE_WIDTHS) do
+          row(0).font_style = :bold
+          row(0).font_size = 6
+          row(0).background_color = 'DDDDDD'
+        end
     end
   end
   def table_data
