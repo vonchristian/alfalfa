@@ -1,4 +1,6 @@
 class Supplies::Order < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :text_search, :against => [:date_issued, :customer_type]
   belongs_to :customer, polymorphic: true
   belongs_to :project
   enum pay_type:[:cash, :check]

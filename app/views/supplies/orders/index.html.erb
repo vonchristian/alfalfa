@@ -2,30 +2,49 @@
   <div class="col-md-12">
     <div class="card">
       <div class="header">
-        <h4 class="title">Orders</h4>
-        <div class="row"><hr></div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="title">Find an Order</h4>
+          </div>
+          <div class="col-md-4">
+            <%=form_tag orders_path, method: :get, class: "form-inline" do %>
+				      <div class="input-group">
+				        <%=text_field_tag :query, params[:query], class: 'form-control search-query border-input', placeholder: 'Search Orders...' %>
+                <span class="input-group-btn">
+                  <button class="btn btn-danger" type="button">
+                    <span class=" glyphicon glyphicon-search"></span>
+                  </button>
+                </span>
+				      </div>
+				    <% end %>
+					</div>
+        </div>
       </div>
       <div class="content">
         <table class="table table-striped">
           <thead>
-            <tr>
-              <th>Order </th>
-              <th> Amount </th>
+            <tr class="title">
+              <th>Customer</th>
+              <th>Date </th>
+              <th> # of Items </th>
               <th> Payment Status </th>
+              <th> Customer Type </th>
+              <th><span class="pull-right">Total Amount</span> </th>
             </tr>
           </thead>
           <tbody>
             <% @orders.entered_on(:from_date => @from_date, :to_date => @to_date, :project_id => @project).each do |order| %>
               <tr>
-                <td>
-                  <% if order.customer_id.present? %>
-                    <%=link_to order.customer.try(:name), order_path(order) %></td>
-                  <% else %>
-                    <%=link_to order.name, order_path(order) %></td>
-                  <% end %>
-                <td><%=number_to_currency order.line_items.total_price %></td>
+                <% if order.customer_id.present? %>
+                  <td><span class="text-uppercase"><%=link_to order.customer.try(:name), order_path(order) %></span></td>
+                <% else %>
+                  <td><span class="text-uppercase"><%=link_to order.name, order_path(order) %></span></td>
+                <% end %>
+                <td><%=order.date_issued.strftime("%B %e, %Y") %></td>
+                <td><%=order.line_items.count %></td>
                 <td><%=order.payment_status %></td>
                 <td><%=order.customer_type %></td>
+                <td><span class="pull-right"><%=number_to_currency order.line_items.total_price %></span></td>
               </tr>
             <% end %>
           </tbody>

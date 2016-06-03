@@ -2,7 +2,11 @@ class Supplies::OrdersController < ApplicationController
   layout 'supplies'
 
   def index
-    @orders = Supplies::Order.all.order("date_issued desc").page(params[:page]).per(10)
+    if params[:query].present?
+      @orders  = Supplies::Order.text_search(params[:name]).order(:created_at).page(params[:page]).per(50)
+    else
+      @orders = Supplies::Order.all.order("date_issued desc").page(params[:page]).per(50)
+    end
     authorize @orders, :index?
   end
 
