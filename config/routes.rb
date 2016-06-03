@@ -51,9 +51,10 @@ Rails.application.routes.draw do
       resources :payments, only: [:new, :create], module: :contracts
     end
     resources :work_details, only:[:index, :show, :edit, :update] do
-      resources :work_accomplishments, only: [:new, :create]
+      resources :work_accomplishments, only: [:new, :create, :index]
       resources :amount_revisions, only: [:new, :create]
     end
+    resources :work_accomplishments, only:[:edit, :update]
     resources :payments, only:[:index]
     resources :contractors, except: [:destroy] do
       resources :contracts, only: [:show]

@@ -15,19 +15,29 @@ class WorkDetail < ActiveRecord::Base
 
   delegate :cost, to: :project, prefix: true
   delegate :total, to: :amount_revisions, prefix: true
+  def self.cost_of_this_billing
+    all.map{ |a| a.cost_of_this_billing }.sum
+  end
   def total_quantity_approved_in_previous_billing
+    work_accomplishments.paid.sum(:quantity)
   end
   def total_quantity_approved_in_this_billing
+    work_accomplishments.pending.sum(:quantity)
   end
   def balance_of_quantity
+    quantity - (total_quantity_approved_in_previous_billing + total_quantity_approved_in_this_billing)
   end
   def cost_of_previous_billings
+    total_quantity_approved_in_previous_billing * unit_cost
   end
   def cost_of_this_billing
+    total_quantity_approved_in_this_billing * unit_cost
   end
   def cost_to_date
+    (total_quantity_approved_in_previous_billing + total_quantity_approved_in_this_billing) * unit_cost
   end
   def balance_of_cost
+    total_cost - cost_to_date
   end
   def self.total
     self.all.sum(:total_cost)

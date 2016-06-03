@@ -18,4 +18,7 @@ class WorkAccomplishment < ActiveRecord::Base
   def self.total
     self.all.sum(:quantity)
   end
+  def total_cost
+    quantity * work_detail.unit_cost
+  end
 end

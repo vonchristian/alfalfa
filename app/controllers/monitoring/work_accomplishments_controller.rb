@@ -1,6 +1,10 @@
 module Monitoring
   class WorkAccomplishmentsController < ApplicationController
     layout "monitoring"
+    def index
+      @work_detail = WorkDetail.find(params[:work_detail_id])
+    end
+
     def new
       @work_detail = WorkDetail.find(params[:work_detail_id])
       @work_accomplishment = @work_detail.work_accomplishments.build
@@ -17,6 +21,20 @@ module Monitoring
         redirect_to monitoring_work_detail_path(@work_detail), notice: "Work accomplishment saved successfully."
       else
         render :new
+      end
+    end
+
+    def edit
+      @work_accomplishment = WorkAccomplishment.find(params[:id])
+    end
+
+    def update
+      @work_accomplishment = WorkAccomplishment.find(params[:id])
+      @work_accomplishment.update(work_accomplishment_params)
+      if @work_accomplishment.save
+        redirect_to monitoring_work_detail_work_accomplishments_url(@work_accomplishment.work_detail), notice: "Work Accomplishment updated successfully."
+      else
+        render :edit
       end
     end
 

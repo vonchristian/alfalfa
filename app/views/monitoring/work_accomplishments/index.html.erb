@@ -1,0 +1,23 @@
+<% @work_detail.work_accomplishments.each do |work_accomplishment| %>
+  <ul class="list-unstyled team-members">
+    <li>
+      <div class="row">
+        <div class="col-md-4">
+          <%=@work_detail.description %>
+        </div>
+        <div class="col-md-2">
+          <%=@work_detail.quantity %>
+        </div>
+        <div class="col-md-1">
+          <%=work_accomplishment.quantity %>
+        </div>
+        <div class="col-md-3">
+          <%=work_accomplishment.total_cost %>
+        </div>
+        <div class="col-md-2">
+          <%=link_to 'Edit', edit_monitoring_work_accomplishment_path(work_accomplishment), class: "btn btn-warning active" %>
+        </div>
+      </div>
+    </li>
+  </ul>
+<% end %>

@@ -69,3 +69,77 @@
     </div>
   </div>
 </div>
+<div class="col-md-8">
+  <div class="card">
+    <div class="header">
+      <div class="row">
+        <div class="col-md-6">
+          <h4 class="title">Unpaid Work Accomplishments </h4>
+        </div>
+        <div class="col-md-6">
+          <span class="pull-right"> <%=link_to "Request for Payment", monitoring_project_path(@project), class: "btn btn-success active" %></span>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <ul class="team-members list-unstyled">
+        <li class="title">
+          <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-1">
+              Qty
+            </div>
+            <div class="col-md-1">
+              Acc.
+            </div>
+            <div class="col-md-1">
+              Unpaid
+            </div>
+            <div class="col-md-2">
+              <span class="pull-right"> Cost </span>
+            </div>
+          </div>
+        </li>
+      <% @project.work_details.each do |work_detail| %>
+          <li>
+            <div class="row">
+              <div class="col-md-4">
+                <%=work_detail.description %>
+              </div>
+              <div class="col-md-1">
+                <%=work_detail.quantity %>
+              </div>
+              <div class="col-md-1">
+                <%=work_detail.total_quantity_approved_in_previous_billing %>
+              </div>
+              <div class="col-md-1">
+                <%=work_detail.total_quantity_approved_in_this_billing %>
+              </div>
+              <div class="col-md-2">
+                <span class="pull-right"><%=number_to_currency work_detail.cost_of_this_billing %></span>
+              </div>
+              <div class="col-md-2">
+                <%=link_to monitoring_work_detail_work_accomplishments_path(work_detail) do %>
+                  <span class="btn btn-warning btn-icon"><i class="fa fa-pencil"></i></span>
+                <% end %>
+            </div>
+          </li>
+        <% end %>
+        <li>
+          <div class="row">
+            <div class="col-md-3">
+              <p class="title"> Total </p>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3">
+              <b class="title pull-right"><%=number_to_currency @project.work_details.cost_of_this_billing %></b>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
