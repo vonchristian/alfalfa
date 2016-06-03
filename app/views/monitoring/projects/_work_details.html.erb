@@ -2,9 +2,7 @@
   <div class="header">
     <h5 class="title"> <%=image_tag("work_detail_icon.png", height: '35', width: '35') %>( <%=@project.work_details.count%> ) Work Details
       <% if policy(WorkDetail.new).create? %>
-        <%=link_to new_monitoring_project_work_detail_path(@project), title: "Add New Work Detail" do %>
-      <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="Add New Work Detail"><i class="fa fa-plus"></i></span>
-      <% end %>
+      <%=link_to "New Work Detail", new_monitoring_project_work_detail_path(@project), class: "btn btn-primary pull-right" %>
       <% end %>
     </h5>
     <div class="row"><hr></div>
@@ -12,7 +10,7 @@
   <div class="content">
     <% if @project.work_details.empty? %>
       <span> No Work Details are added to this project yet.
-        <%=link_to "Start adding work detail", new_monitoring_project_work_detail_path(@project) %>
+        <%=link_to "New Work Detail", new_monitoring_project_work_detail_path(@project) %>
       </span>
     <% else %>
       <table class="table table-hover">
