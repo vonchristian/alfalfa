@@ -15,7 +15,7 @@
         <tbody>
           <% @order.line_items.each do |line_item| %>
             <tr>
-              <td><%= line_item.id %>   <%= line_item.order.date_issued.strftime("%B %e, %Y") %></td>
+              <td><%= line_item.order.date_issued.strftime("%B %e, %Y") %></td>
               <td><%=line_item.quantity %> <%=line_item.inventory.unit %></td>
               <td>
                 <%=line_item.inventory.name%>
