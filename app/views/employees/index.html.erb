@@ -39,7 +39,7 @@
           <tbody>
             <%@employees.each do |employee| %>
               <tr>
-                <td><%=image_tag(employee.profile_photo.url(:small), class: "img-circle img-responsive") %></td>
+                <td><%=image_tag(employee.profile_photo.url(:thumb), class: "img-circle") %></td>
                 <td><span class="text-uppercase text-light-gray"><%=link_to employee.full_name, employee, class: "text-light-gray" %></span></td>
                 <td> <%= employee.position.try(:titleize) %> </td>
                 <td> <%= number_to_currency employee.rate %> </td>
