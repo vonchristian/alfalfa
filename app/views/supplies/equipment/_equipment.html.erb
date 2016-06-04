@@ -13,9 +13,9 @@
 
         <div class="card-footer">
           <% if equipment.equipment_schedules.any? && equipment.active? %>
-            <i class="fa fa-map-marker"></i><span class="text-uppercase"><%=equipment.current_assignment_id_number_and_location %></span> <%=equipment.current_assignment.truncate(50) %>
-            <i class="fa fa-calendar"></i><%=equipment.current_assignment_start_date %> - <%=equipment.current_assignment_end_date %>
-            <i class="fa fa-circle"></i>
+            <i class="fa fa-map-marker"></i><span class="text-uppercase"><%=equipment.current_assignment_id_number_and_location %></span><br><br>
+            <i class="fa fa-calendar"></i><%=equipment.current_assignment_start_date %> - <%=equipment.current_assignment_end_date %><br><br>
+            <i class="fa fa-circle"></i> <%=equipment.current_assignment_purpose %>
           <% else %>
             <center class="text-danger"> No Current Schedule or Equipment is Inactive </center>
           <% end %>

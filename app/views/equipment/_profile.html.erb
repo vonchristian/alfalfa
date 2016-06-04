@@ -1,28 +1,26 @@
-
-
-    <div class="card card-project">
-      <div class="image">
-        <%=image_tag(@equipment.photo.url(:original), class: "img-responsive") %>
+<div class="card card-project">
+  <div class="image">
+    <%=image_tag(@equipment.photo.url(:original), class: "img-responsive") %>
+  </div>
+  <div class="header">
+    <b class="title text-yellow"><%="#{@equipment.make_and_model}"%></b>
+    <span class="btn btn-<%=@equipment.status_color%> btn-xs active pull-right"><%=@equipment.status%> </span><br>
+    <span class="text-light-gray"><%=@equipment.plate_number %></span>
+  </div>
+  <div class="content">
+    <div class="row">
+      <div class="col-md-6">
+        <i class="fa fa-circle text-<%=@equipment.status_color%>"></i>
+        <%=@equipment.equipment_status %>
       </div>
-      <div class="header">
-        <b class="title text-yellow"><%="#{@equipment.make_and_model}"%></b>
-        <span class="btn btn-<%=@equipment.status_color%> btn-xs active pull-right"><%=@equipment.status%> </span><br>
-        <span class="text-light-gray"><%=@equipment.plate_number %></span>
-      </div>
-      <div class="content">
-        <div class="row">
-          <div class="col-md-6">
-            <i class="fa fa-circle text-<%=@equipment.status_color%>"></i>
-            <%=@equipment.equipment_status %>
-          </div>
-          <div class="col-md-6">
-            <%=link_to "Update", new_equipment_equipment_status_path(@equipment), class: "btn btn-xs btn-danger  pull-right" %>
-          </div>
-        </div>
-        <br>
-        <br>
-        <div class="card-footer">
-         <%=link_to "Update Info", edit_equipment_path(@equipment), class: "btn btn-warning btn-block active" %>
-        </div>
+      <div class="col-md-6">
+        <%=link_to "Update", new_equipment_equipment_status_path(@equipment), class: "btn btn-xs btn-danger  pull-right" %>
       </div>
     </div>
+    <br>
+    <br>
+    <div class="card-footer">
+     <%=link_to "Update Info", edit_equipment_path(@equipment), class: "btn btn-warning btn-block active" %>
+    </div>
+  </div>
+</div>
