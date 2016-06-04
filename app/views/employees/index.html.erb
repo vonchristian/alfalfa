@@ -1,3 +1,56 @@
+<div class="col-md-6 col-md-offset-3">
+  <div class="card">
+      <div class="header">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="title"> List of Employees</h4>
+          </div>
+          <div class="col-md-6">
+            <%=form_tag employees_path, class: 'sidebar-form', method: :get do %>
+              <div class="input-group">
+                <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search Employee...' %>
+                <span class="input-group-btn">
+                  <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
+                    <i class="fa fa-search"></i>
+                  <% end %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <%=link_to new_employee_path do %>
+              <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <% Employee.all.each do |employee| %>
+          <%=link_to employee_path(employee) do %>
+            <ul class="list-unstyled team-members">
+              <li>
+                <div class="row">
+                  <div class="col-md-2">
+                    <%=image_tag(employee.profile_photo.url(:medium), class: "img-circle", width: 60, height: 60) %>
+                  </div>
+                  <div class="col-md-5">
+                    <p class="text-purple text-uppercase"><%=employee.full_name %></p>
+                    <span class="text-muted"><%=employee.position %></span>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="title"></span>
+                  </div>
+                  <div class="col-md-2">
+                    <i class="fa fa-angle-right fa-3x text-purple"></i>
+                </div>
+              </li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-12">
     <div class="card">
@@ -33,7 +86,7 @@
               <th width="50px"></th>
               <th>Employee </th>
               <th>Position</th>
-              <th>Rate</th>
+              <th>
             </tr>
           </thead>
           <tbody>
@@ -42,7 +95,7 @@
                 <td><%=image_tag(employee.profile_photo.url(:thumb), class: "img-circle") %></td>
                 <td><span class="text-uppercase text-light-gray"><%=link_to employee.full_name, employee, class: "text-light-gray" %></span></td>
                 <td> <%= employee.position.try(:titleize) %> </td>
-                <td> <%= number_to_currency employee.rate %> </td>
+                <td>
               </tr>
             <%end %>
           </tbody>
