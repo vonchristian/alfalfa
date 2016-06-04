@@ -457,13 +457,12 @@ ActiveRecord::Schema.define(version: 20160603223117) do
   create_table "orders", force: :cascade do |t|
     t.integer  "customer_id"
     t.string   "customer_type"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "payment_status",         default: 1
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "payment_status", default: 1
     t.datetime "date_issued"
     t.integer  "project_id"
     t.string   "name"
-    t.string   "equipment_plate_number"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree

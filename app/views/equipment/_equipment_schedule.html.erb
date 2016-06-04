@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <% if @equipment_schedules.present? %>
+        <% if @equipment_schedules.any? %>
         <% @equipment_schedules.each do |equipment_schedule| %>
           <tr>
             <td>
@@ -41,7 +41,7 @@
             </td>
             <td>
               <span class="pull-right">
-                <span class="text-primary"><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule.start_date.present? %></span> to <span class="text-primary"><%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule.end_date.present?%></span>
+                <span class="text-primary"><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule.start_date.any? %></span> to <span class="text-primary"><%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule.end_date.any?%></span>
                 <i class="fa fa-truck text-primary"></i><%=equipment_schedule.purpose %>
               </span>
             </td>
