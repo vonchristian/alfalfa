@@ -3,9 +3,9 @@ class EmployeesController < ApplicationController
 
 	def index
 		if params[:name].present?
-      @employees = Employee.search_by_name(params[:name]).order('last_name DESC').page(params[:page]).per(1)
+      @employees = Employee.search_by_name(params[:name]).order('last_name DESC').page(params[:page]).per(30)
     else
-			@employees = Employee.all.order('last_name DESC').page(params[:page]).per(1)
+			@employees = Employee.all.order('last_name DESC').page(params[:page]).per(30)
 		end
     authorize User, :index?
 	end
