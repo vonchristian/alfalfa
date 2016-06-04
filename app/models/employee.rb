@@ -23,7 +23,7 @@ class Employee < ActiveRecord::Base
                  :monitoring_officer,
                  :mechanical_engineer]
 
-  validates :profile_photo, :first_name, :last_name, :mobile_number, :position, :rate, presence: true
+  validates :first_name, :last_name, presence: true
 
   has_many :educational_attainments, class_name: "EmployeeDetails::EducationalAttainment"
   has_many :worked_days
