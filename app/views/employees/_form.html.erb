@@ -2,30 +2,42 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="card">
       <div class="header">
-        <h4 class="title"><center> Employee Details </center></h4>
-        <div class="row"><hr></div>
+        <h4 class="title"><center> Edit Employee Details</center></h4>
       </div>
       <div class="content">
-<%= simple_form_for @employee do |f| %>
-  <%=f.error_notification %>
+      <%= simple_form_for @employee do |f| %>
+        <%=f.error_notification %>
           <%= image_tag @employee.profile_photo.url(:medium), class: 'center-block img-responsive img-rounded'%>
           <center><%= f.input :profile_photo, class: 'center-block', as: :file %></center>
 
-          <div class="row"><hr class="with-padding"></div>
-
-          <%=f.input :first_name, autofocus: true,  placeholder: "First Name" %>
-
-          <%=f.input :last_name, placeholder: "Last Name"  %>
-
-          <%=f.input :mobile_number,  placeholder: "Mobile Number" %>
-          <%=f.input :email, placeholder: "Email"  %>
-          <% if current_user.accounting_officer? %>
-            <%=f.input :position, collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
-          <% end %>
-
-          <%=f.input :rate  %>
+          <div class="row">
+            <div class="col-md-6">
+              <%=f.input :first_name, autofocus: true,  placeholder: "First Name" %>
+            </div>
+            <div class="col-md-6">
+              <%=f.input :last_name, placeholder: "Last Name" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%=f.input :mobile_number,  placeholder: "Mobile Number" %>
+            </div>
+            <div class="col-md-6">
+              <%=f.input :email, placeholder: "Email"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <% if current_user.accounting_officer? %>
+                <%=f.input :position, collection: Employee.positions.keys.to_a.map{ |a| [a.titleize, a] }%>
+              <% end %>
+            </div>
+            <div class="col-md-4">
+              <%=f.input :rate  %>
+            </div>
+          </div>
           <div class="modal-footer">
-            <%= link_to "Cancel", employees_path, class: 'btn btn-xs pull-left' %>
+            <%= link_to "Cancel", employees_path, class: 'btn btn-default pull-left' %>
             <%=f.submit 'Save Employee', class: 'btn btn-primary' %>
           </div>
         </div>
