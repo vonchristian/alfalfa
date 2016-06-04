@@ -49,9 +49,7 @@
       <div class="header">
         <h4 class="title">Credit Transactions
           <span class="pull-right">
-            <%=link_to new_accounting_petty_cash_disbursement_path(@petty_cash) do %>
-              <span class="btn btn-danger btn-icon-sm pull-right" data-toggle="tooltip" data-placement="bottom" title="New Disburement"><i class="fa fa-plus"></i></span>
-            <% end %>
+            <%=link_to "New Disbursement", new_accounting_petty_cash_disbursement_path(@petty_cash), class: 'btn btn-danger' %>
           </span>
         </h4>
         <div class="row"><hr></div>
@@ -86,9 +84,7 @@
       <div class="header">
         <h4 class="title">Debit Transactions
           <span class="pull-right">
-            <%=link_to new_accounting_petty_cash_fund_transfer_path(@petty_cash) do %>
-              <span class="btn btn-primary btn-icon-sm pull-right" data-toggle="tooltip" data-placement="bottom" title="New Fund Transfer"><i class="fa fa-plus"></i></span>
-            <% end %>
+            <%=link_to "New Fund Transfer", new_accounting_petty_cash_fund_transfer_path(@petty_cash), class: 'btn btn-primary' %>
           </span>
         </h4>
         <div class="row"><hr></div>

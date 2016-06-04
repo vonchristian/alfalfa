@@ -11,7 +11,7 @@
 						<%=form_tag accounting_entries_path, method: :get, class: "custom-search-input" do %>
 				      <div class="input-group">
 				        <%=text_field_tag :query, params[:query], class: 'form-control search-query border-input', placeholder: 'Search Entries...' %>
-                <span class="input-group-btn">
+                	<span class="input-group-btn">
                                     <button class="btn btn-danger" type="button">
                                         <span class=" glyphicon glyphicon-search"></span>
                                     </button>
@@ -39,13 +39,13 @@
           <div class="col-md-6">
             <%= form_tag({:action => 'index'}, {:method => :get})  do %>
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <%= text_field_tag :from_date, @from_date, :class => 'datepicker form-control input-sm border-input', :placeholder => "From " %>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datepicker', :placeholder => "To " %>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <button type="submit" class="btn btn-success active  btn-sm"> Go </button>
 
                 </div>
