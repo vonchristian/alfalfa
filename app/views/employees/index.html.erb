@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="content">
-        <% Employee.all.each do |employee| %>
+        <% @employees.each do |employee| %>
           <%=link_to employee_path(employee) do %>
             <ul class="list-unstyled team-members">
               <li>
@@ -45,6 +45,9 @@
                 </div>
               </li>
             </ul>
+            <div class="modal-footer">
+              <center><%= paginate @employees, :window => 1 %></center>
+            </div>
           <% end %>
         <% end %>
       </div>
