@@ -33,7 +33,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @orders.entered_on(:from_date => @from_date, :to_date => @to_date, :project_id => @project).each do |order| %>
+            <% @orders.each do |order| %>
               <tr>
                 <% if order.customer_id.present? %>
                   <td><span class="text-uppercase"><%=link_to order.customer.try(:name), order_path(order) %></span></td>
