@@ -110,7 +110,12 @@ Rails.application.routes.draw do
   resources :supplies, only: [:index]
 
 
-  resources :orders, module: :supplies
+  resources :orders, module: :supplies do
+    match "/projects" => "orders#projects", as: :projects, via: [:get], on: :collection
+    match "/contractors" => "orders#contractors", as: :contractors, via: [:get], on: :collection
+    match "/customers" => "orders#customers", as: :customers, via: [:get], on: :collection
+
+  end
 
   namespace :supplies do
     resources :line_items

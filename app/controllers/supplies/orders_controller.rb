@@ -10,6 +10,16 @@ class Supplies::OrdersController < ApplicationController
     authorize @orders, :index?
   end
 
+  def projects
+    @orders = Supplies::Order.for_projects
+  end
+  def contractors
+    @orders = Supplies::Order.for_contractors
+  end
+  def customers
+    @orders = Supplies::Order.for_customers
+  end
+
   def new
     @cart = current_cart
       if @cart.line_items.empty?

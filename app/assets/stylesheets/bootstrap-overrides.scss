@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'roboto-condensed-webfont';
     src: font-url('roboto-condensed-webfont.eot');
@@ -145,4 +146,17 @@
 
     .search-query:focus + button {
         z-index: 3;
+    }
+
+    .stylish-input-group .input-group-addon{
+        background: white !important;
+    }
+    .stylish-input-group .form-control{
+    	border-right:0;
+    	box-shadow:0 0 0;
+    	border-color:#ccc;
+    }
+    .stylish-input-group button{
+        border:0;
+        background:transparent;
     }

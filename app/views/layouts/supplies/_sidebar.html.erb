@@ -1,4 +1,4 @@
-<div class="sidebar" data-background-color="white" data-active-color="warning">
+<div class="sidebar" data-background-color="dark-gray" data-active-color="warning">
 
  <!--
  Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -15,29 +15,34 @@
          <ul class="nav">
             <li class="<%="active" if current_page? supplies_path %>">
                  <a href="/supplies">
-                    <p> <%=image_tag("store.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Store</p>
+                   <i class="fa fa-home"></i>
+                    <p>Store</p>
                  </a>
              </li>
              <li class="<%="active" if current_page? supplies_inventories_path %>">
                  <a href="/supplies/inventories">
-                     <p> <%=image_tag("inventory.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Inventories</p>
+                   <i class="fa fa-cubes"></i>
+                     <p>Inventories</p>
                  </a>
                </li>
                <li class="<%="active" if current_page? orders_path %>">
                    <a href="/orders">
-                       <p> <%=image_tag("order.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Orders</p>
+                     <i class="fa fa-list"></i>
+                       <p>Orders</p>
                    </a>
                  </li>
                  <li class="<%="active" if current_page? supplies_reports_path %>">
                    <a href="/supplies/reports">
-                        <p> <%=image_tag("report-icon.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Reports</p>
+                     <i class="fa fa-server"></i>
+                        <p>Reports</p>
                    </a>
                  </li>
 
 
                   <li class="<%="active" if current_page? supplies_equipment_index_path %>">
                     <a href="/supplies/equipment">
-                      <p> <%=image_tag("equipment.png", height: '30', width: '30', class: "img-circle") %> &nbsp; &nbsp; Equipment</p>
+                      <i class="fa fa-truck"></i>
+                      <p>Equipment</p>
                     </a>
                   </li>
          </ul>
@@ -54,13 +59,13 @@
                      <span class="icon-bar bar2"></span>
                      <span class="icon-bar bar3"></span>
                  </button>
-                 <a class="navbar-brand" href="#">
-                   <%#="Dashboard" if current_page?(dashboard_path) %>
-                   <%#="Taxpayers" if current_page?(taxpayers_path) %>
+                 <a class="navbar-brand title" href="#">
+                   <%="Hardware Store" if current_page?(supplies_path) %>
+                   <%="Inventory Section" if current_page?(supplies_inventories_path) %>
                    <%#="Businesses" if current_page?(businesses_path) %>
                    <%#="Settings" if current_page?(settings_path) %>
                    <%#="Reports" if current_page?(reports_path) %>
-                   <%#="Payments" if current_page?(entries_path) %>
+                   <%="Equipment Section" if current_page?(supplies_equipment_index_path) %>
                  </a>
              </div>
              <div class="nav navbar-nav navbar-left">

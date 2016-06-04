@@ -22,9 +22,8 @@
     end
 
     def show
-      @equipment = Equipment.find(params[:id])
+      @equipment = Equipment.find(params[:id]).decorate
       authorize @equipment
-      @equipment_schedules = @equipment.equipment_schedules.all.order('created_at DESC').page(params[:page]).per(10)
     end
 
     def edit
