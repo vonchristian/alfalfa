@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
 		if params[:name].present?
       @employees = Employee.search_by_name(params[:name]).order('last_name DESC').page(params[:page]).per(30)
     else
-			@employees = Employee.all.order('last_name DESC').page(params[:page]).per(30)
+			@employees = Employee.all.order('last_name DESC').page(params[:page]).per(50)
 		end
     authorize User, :index?
 	end
