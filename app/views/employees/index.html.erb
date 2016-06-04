@@ -1,55 +1,54 @@
 <div class="col-md-6 col-md-offset-3">
   <div class="card">
-      <div class="header">
-        <div class="row">
-          <div class="col-md-3">
-            <h4 class="title"> List of Employees</h4>
-          </div>
-          <div class="col-md-6">
-            <%=form_tag employees_path, class: 'sidebar-form', method: :get do %>
-              <div class="input-group">
-                <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search Employee...' %>
-                <span class="input-group-btn">
-                  <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
-                    <i class="fa fa-search"></i>
-                  <% end %>
-                </span>
-              </div>
-            <% end %>
-          </div>
-          <div class="col-md-3">
-            <%=link_to new_employee_path do %>
-              <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
-            <% end %>
-          </div>
+    <div class="header">
+      <div class="row">
+        <div class="col-md-3">
+          <h4 class="title"> List of Employees</h4>
+        </div>
+        <div class="col-md-6">
+          <%=form_tag employees_path, class: 'sidebar-form', method: :get do %>
+            <div class="input-group">
+              <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search Employee...' %>
+              <span class="input-group-btn">
+                <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
+                  <i class="fa fa-search"></i>
+                <% end %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-3">
+          <%=link_to new_employee_path do %>
+            <span class="btn btn-primary btn-icon pull-right"><i class="fa fa-user-plus"></i> New employee </span>
+          <% end %>
         </div>
       </div>
-      <div class="content">
-        <% @employees.each do |employee| %>
-          <%=link_to employee_path(employee) do %>
-            <ul class="list-unstyled team-members">
-              <li>
-                <div class="row">
-                  <div class="col-md-2">
-                    <%=image_tag(employee.profile_photo.url(:medium), class: "img-circle", width: 60, height: 60) %>
-                  </div>
-                  <div class="col-md-5">
-                    <p class="text-blue-employee-name text-uppercase"><%=employee.full_name %></p>
-                    <span class="text-muted"><%=employee.position.try(:titleize) %></span>
-                  </div>
-                  <div class="col-md-3">
-                    <span class="title"></span>
-                  </div>
-                  <div class="col-md-2">
-                    <i class="fa fa-angle-right fa-3x text-blue-employee-name"></i>
+    </div>
+    <div class="content">
+      <% @employees.each do |employee| %>
+        <%=link_to employee_path(employee) do %>
+          <ul class="list-unstyled team-members">
+            <li>
+              <div class="row">
+                <div class="col-md-2">
+                  <%=image_tag(employee.profile_photo.url(:medium), class: "img-circle", width: 60, height: 60) %>
                 </div>
-              </li>
-            </ul>
-          <% end %>
+                <div class="col-md-5">
+                  <p class="text-blue-employee-name text-uppercase"><%=employee.full_name %></p>
+                  <span class="text-muted"><%=employee.position.try(:titleize) %></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="title"></span>
+                </div>
+                <div class="col-md-2">
+                  <i class="fa fa-angle-right fa-3x text-blue-employee-name"></i>
+              </div>
+            </li>
+          </ul>
         <% end %>
-        <div class="modal-footer">
-          <center><%= paginate @employees, :window => 1 %></center>
-        </div>
+      <% end %>
+      <div class="modal-footer">
+        <center><%= paginate @employees, :window => 1 %></center>
       </div>
     </div>
   </div>
