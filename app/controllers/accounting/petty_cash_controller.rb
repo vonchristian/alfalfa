@@ -1,7 +1,7 @@
 class Accounting::PettyCashController < ApplicationController
   layout "accounting"
   def index
-    authorize :petty_cash, :show?
+    authorize User
     @petty_cash = Account.find_by_name("Petty Cash")
     @disbursements = @petty_cash.credit_entries.order("date DESC").page(params[:page]).per(10)
     @fund_transfers = @petty_cash.debit_entries.order("date DESC").page(params[:page]).per(10)
