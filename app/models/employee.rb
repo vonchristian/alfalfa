@@ -54,15 +54,21 @@ class Employee < ActiveRecord::Base
   end
 
   def unpaid_worked_days
-    worked_days.unpaid.total
+    if worked_days.any?
+      worked_days.unpaid.total
+    end
   end
 
   def unpaid_overtimes
-    overtimes.unpaid.total
+    if overtimes.any?
+      overtimes.unpaid.total
+    end
   end
 
   def unpaid_overtimes_amount
-    overtimes.unpaid.total * overtime_rate
+    if overtimes.any?
+      overtimes.unpaid.total * overtime_rate
+    end
   end
 
   def earned_income
@@ -82,7 +88,9 @@ class Employee < ActiveRecord::Base
   end
 
   def unpaid_cash_advances
-    Transactions::CashAdvance.unpaid_amount_for(self)
+    if cash_advances.any?
+      Transactions::CashAdvance.unpaid_amount_for(self)
+    end
   end
 
   def total_gross_pay
