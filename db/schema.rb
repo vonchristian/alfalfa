@@ -409,6 +409,7 @@ ActiveRecord::Schema.define(version: 20160603223117) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "order_id"
+    t.decimal  "hauling_cost"
     t.decimal  "total_cost"
     t.decimal  "unit_cost"
   end
