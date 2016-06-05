@@ -1,50 +1,46 @@
 
-        <div class="row">
-          <div class="col-md-6">
-            <%=form_tag monitoring_contractors_path, method: :get do %>
-              <div class="input-group stylish-input-group">
-                <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for a Contractor' %>
-                <span class="input-group-addon">
-                  <button type="submit">
-                    <span class=" glyphicon glyphicon-search"></span>
-                  </button>
-                </span>
-              </div>
-            <% end %>
-          </div>
-          <div class="col-md-6">
-            <%=link_to new_monitoring_contractor_path, title: "New Contractor" do %>
-              <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Contractor"><i class="fa fa-user-plus"></i> New Contractor </span>
-            <% end %>
-          </div>
-        </div>
-
-            <%@contractors.each do |contractor| %>
-            <div class="col-md-4">
-              <div class="card card-user">
-                <div class="image">
-                  <%= image_tag "hero.jpg", class: "img-square center-block", alt: "contractor profile picture" %>
-                </div>
-                <div class="content">
-                  <div class="author">
-                    <%= image_tag contractor.profile_photo.url(:medium), class: "avatar border-white", alt: "contractor profile picture" %>
-                    <h4 class="title"><%=contractor.full_name %><br />
-                      <small><%=contractor.position %></small>
-                    </h4>
-                  </div>
-                  <br>
-                  <p class="description text-center">
-                    <%=contractor.company %>
-                  </p>
-
-                  
-                </div>
-              </div>
-            </div>
-            <%end %>
-          </tbody>
-        </table>
+<div class="row">
+  <div class="col-md-6">
+    <%=form_tag monitoring_contractors_path, method: :get do %>
+      <div class="input-group stylish-input-group">
+        <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for a Contractor' %>
+        <span class="input-group-addon">
+          <button type="submit">
+            <span class=" glyphicon glyphicon-search"></span>
+          </button>
+        </span>
       </div>
-    </div>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <%=link_to new_monitoring_contractor_path, title: "New Contractor" do %>
+      <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Contractor"><i class="fa fa-user-plus"></i> New Contractor </span>
+    <% end %>
   </div>
 </div>
+<div class="content">
+  <%@contractors.each do |contractor| %>
+    <%=link_to monitoring_contractor_path(contractor) do %>
+      <div class="col-md-4">
+        <div class="card card-user">
+          <div class="image">
+            <%= image_tag "hero.jpg", class: "img-square center-block", alt: "contractor profile picture" %>
+          </div>
+          <div class="content">
+            <div class="author">
+              <%= image_tag contractor.profile_photo.url(:medium), class: "avatar border-white", alt: "contractor profile picture" %>
+              <h4 class="title"><%=contractor.full_name %><br />
+                <small><%=contractor.position %></small>
+              </h4>
+            </div>
+            <br>
+            <p class="description text-center">
+              <%=contractor.company %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <%end %>
+</div>
+      
