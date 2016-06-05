@@ -1,90 +1,78 @@
-<div class="row">
-  <div class="col-md-12">
+
+  <div class="row">
+    <div class="col-md-4">
+      <small class="text-light-gray"> FILTER: </small>
+      <span><%=link_to "All", supplies_inventories_path, class: "btn btn-default btn-sm" %></span>
+      <span><%=link_to "Available", available_supplies_inventories_path, class: "btn btn-success btn-sm" %></span>
+      <span><%=link_to "Out of Stock", out_of_stock_supplies_inventories_path, class: "btn btn-warning btn-sm" %></span>
+      <span><%=link_to "Discontinued", discontinued_supplies_inventories_path, class: "btn btn-danger btn-sm" %></span>
+      <br>
+    </div>
+    <div class="col-md-4">
+      <%=form_tag supplies_inventories_path, method: :get do %>
+        <div class="input-group stylish-input-group">
+          <%=text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Search for a Product' %>
+          <span class="input-group-addon">
+            <button type="submit">
+              <span class=" glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <span class="pull-right"><%=link_to "New Inventory", new_supplies_inventory_path, class: "btn btn-primary" %></span>
+    </div>
+  </div>
+  <div class="row"><hr class="no-top-padding with-padding"></div>
+  <div class="row">
     <div class="card">
-      <div class="header">
-        <div class="row">
-          <div class="col-md-4">
-            <h4 class="title">List of Inventories</h4>
-          </div>
-          <div class="col-md-4">
-            <%=form_tag supplies_inventories_path, class: 'form-inline', method: :get do %>
-              <div class="input-group">
-                <%=text_field_tag :name, params[:name], class: 'form-control border-input', placeholder: 'Search Inventory...' %>
-                <span class="input-group-btn">
-                  <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
-                    <i class="fa fa-search"></i>
-                  <% end %>
-                </span>
-              </div>
-            <% end %>
-          </div>
-          <div class="col-md-4">
-            <span class="pull-right"><%=link_to "New Inventory", new_supplies_inventory_path, class: "btn btn-primary" %></span>
-          </div>
-        </div>
-        <div class="row"><hr class="no-top-padding with-padding"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <small class="text-light-gray"> FILTER: </small>
-            <span><%=link_to "All", supplies_inventories_path, class: "btn btn-default btn-sm" %></span>
-            <span><%=link_to "Available", available_supplies_inventories_path, class: "btn btn-success btn-sm" %></span>
-            <span><%=link_to "Out of Stock", out_of_stock_supplies_inventories_path, class: "btn btn-warning btn-sm" %></span>
-            <span><%=link_to "Discontinued", discontinued_supplies_inventories_path, class: "btn btn-danger btn-sm" %></span>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="table table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr class="title">
-                <th>Name</th>
-                <th> Unit </th>
-                <th>Qty Stock</th>
-                <th>Qty Used </th>
-                <th>Qty Remaining </th>
-                <th>Price</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @inventories.each do |inventory| %>
-                <tr class="<%="text-danger" if inventory.out_of_stock?%>">
-                  <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
-                  <td> <%=inventory.unit %>
-                  <td><%=inventory.stocks.sum(:quantity) %></td>
-                  <td><%=inventory.line_items.sum(:quantity) %></td>
-                  <td><%=inventory.quantity%> </td>
-                  <td><span><%=number_to_currency inventory.price%></span></td>
-                  <td>
-                    <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
-                      <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
-                    <% end %>
-                  </td>
-                  <td id='edit_inventory'>
-                    <% if policy(inventory).edit?  && !inventory.discontinued? %>
-                      <%=link_to "Edit", edit_supplies_inventory_path(inventory), class: "btn btn-info active " %>
-                    <% end %>
-                  </td>
-                  <td>
-                    <% if inventory.unavailable? %>
-                      <span class="btn btn-warning btn-xs pull-right"> Out of Stock </span>
-                      <span><%=link_to "DISCONTINUE", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id), class: "btn btn-danger btn-sm active", data: {confirm: "Are you sure you want to discontinue this inventory?"} %>
-                    <% elsif inventory.discontinued? %>
-                      <span><%=link_to "ACTIVATE", supplies_inventory_continue_path(id: inventory.id, inventory_id: inventory.id), class: " btn btn-success btn-sm active", data: {confirm: "Are you sure you want to continue this inventory?"} %>
-                      <span class="btn btn-danger btn-xs pull-right"> Discontinued </span>
-                    <% end %>
-                  </td>
+        <div class="content">
+          <div class="table table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr class="title">
+                  <th>Name</th>
+                  <th> Unit </th>
+                  <th>Qty Stock</th>
+                  <th>Qty Used </th>
+                  <th>Qty Remaining </th>
+                  <th>Price</th>
+                  <th></th>
+                  <th></th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <center><%= paginate @inventories, :window => 1 %></center>
+              </thead>
+              <tbody>
+                <% @inventories.each do |inventory| %>
+                  <tr class="<%="text-danger" if inventory.out_of_stock?%>">
+                    <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
+                    <td> <%=inventory.unit %>
+                    <td><%=inventory.stocks.sum(:quantity) %></td>
+                    <td><%=inventory.line_items.sum(:quantity) %></td>
+                    <td><%=inventory.quantity%> </td>
+                    <td><span><%=number_to_currency inventory.price%></span></td>
+                    <td>
+                      <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
+                        <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if inventory.unavailable? %>
+                        <span class="btn btn-warning btn-xs active pull-right"> Out of Stock </span>
+                        <span><%=link_to "DISCONTINUE", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id), class: "btn btn-danger btn-sm active", data: {confirm: "Are you sure you want to discontinue this inventory?"} %>
+                      <% elsif inventory.discontinued? %>
+                        <span><%=link_to "ACTIVATE", supplies_inventory_continue_path(id: inventory.id, inventory_id: inventory.id), class: " btn btn-success btn-sm active", data: {confirm: "Are you sure you want to continue this inventory?"} %>
+                        <span class="btn btn-danger btn-xs pull-right"> Discontinued </span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <center><%= paginate @inventories, :window => 1 %></center>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

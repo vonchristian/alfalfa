@@ -1,36 +1,26 @@
-<ul class="list-unstyled team-members">
-  <%=link_to equipment do %>
-  <li>
-    <div class="row">
-      <div class="col-md-2">
-        <%=image_tag(equipment.photo.url(:large), width: 90, height: 90, class: "img-square") %>
+<%=link_to equipment do %>
+  <div class="col-md-4">
+    <div class="card card-project">
+      <div class="image">
+        <%=image_tag(equipment.photo.url(:original), class: "img-responsive") %>
       </div>
-      <div class="col-md-4">
-        <b class="text-black"><%=equipment.plate_number %></b><br>
-        <span class="text-yellow"><%=equipment.make_and_model.upcase %></span><br>
-        <i class="fa fa-circle text-<%=equipment.status_color%>"></i> <span class="text-<%=equipment.status_color %>"> <%=equipment.status %> </span><br>
+      <div class="header">
+        <b class="title text-yellow"><%="#{equipment.make_and_model}"%></b>
+        <span class="btn btn-<%=equipment.status_color%> btn-xs active pull-right"><%=equipment.status%> </span><br>
+        <span class="text-light-gray"><%=equipment.plate_number %></span>
       </div>
-      <div class="col-md-4">
-        <% if equipment.equipment_schedules.any? && equipment.active? %>
-        <small class="text-black text-uppercase">  <i class="fa fa-calendar"></i>  Current Schedule: </small><br>
+      <div class="content">
 
-          <span class="text-yellow"><i class="fa fa-circle text-light-gray"></i><b>(<%=equipment.current_assignment_id_number_and_location %> )</b></span><br>
-            <i class="fa fa-map-marker text-light-gray"></i><span class="text-light-gray"><%=equipment.current_assignment.truncate(100) %></span><br>
-          <i class="fa fa-clock-o text-light-gray"></i><span class="text-light-gray"><%=equipment.current_assignment_start_date%> to <%=equipment.current_assignment_end_date %></span>
-          <i class="fa fa-user text-light-gray"></i><span class="text-light-gray"><%=equipment.current_assignment_operator.try(:full_name) %></span>
-        <% elsif equipment.inactive? %>
-          <span class="text-black"> <%=equipment.equipment_status.description %> </span>
-
-        <% else %>
-          <span class="text-black"> No Schedule found for this equipment.</span>
-        <% end %>
-      </div>
-      <div class="col-md-2">
-        <br>
-        <span class="btn btn-warning btn-icon pull-right"><i class="fa fa-angle-right"></i></span>
+        <div class="card-footer">
+          <% if equipment.equipment_schedules.any? && equipment.active? %>
+            <i class="fa fa-map-marker"></i><span class="text-uppercase"><%=equipment.current_assignment_id_number_and_location %></span><br><br>
+            <i class="fa fa-calendar"></i><%=equipment.current_assignment_start_date %> - <%=equipment.current_assignment_end_date %><br><br>
+            <i class="fa fa-circle"></i> <%=equipment.current_assignment_purpose %>
+          <% else %>
+            <center class="text-danger"> No Current Schedule or Equipment is Inactive </center>
+          <% end %>
+        </div>
       </div>
     </div>
-  </li>
-  <% end %>
-  <hr>
-</ul>
+  </div>
+<% end %>

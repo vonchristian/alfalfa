@@ -1,7 +1,7 @@
 class EquipmentStatus < ActiveRecord::Base
   enum status:[:active, :inactive]
   belongs_to :equipment
-  validates :status, presence: true
+  validates :status, :description, presence: true
 
   def to_s
     description

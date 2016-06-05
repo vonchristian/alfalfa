@@ -22,8 +22,8 @@
         </tr>
       </thead>
       <tbody>
-        <% if @equipment_schedules.any? %>
-        <% @equipment_schedules.each do |equipment_schedule| %>
+        <% if @equipment.equipment_schedules.any? %>
+        <% @equipment.equipment_schedules.each do |equipment_schedule| %>
           <tr>
             <td>
               <span class="text-center">
@@ -41,7 +41,7 @@
             </td>
             <td>
               <span class="pull-right">
-                <span class="text-primary"><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule.start_date.any? %></span> to <span class="text-primary"><%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule.end_date.any?%></span>
+                <span class="text-primary"><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule %></span> to <span class="text-primary"><%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule %></span>
                 <i class="fa fa-truck text-primary"></i><%=equipment_schedule.purpose %>
               </span>
             </td>
@@ -50,8 +50,5 @@
         <% end %>
       </tbody>
     </table>
-    <div class="modal-footer">
-      <center><%= paginate @equipment_schedules, :window => 1 %></center>
-    </div>
   </div>
 </div>
