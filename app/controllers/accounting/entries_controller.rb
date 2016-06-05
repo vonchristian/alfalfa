@@ -70,7 +70,7 @@ module Accounting
     end
     private
     def entry_params
-      params.require(:accounting_entry).permit(:description,  :date, :reference_number, :entriable_id, :entriable_type,
+      params.require(:accounting_entry).permit(:description, :type,  :date, :reference_number, :entriable_id, :entriable_type,
                                     :credit_amounts_attributes=> [:amount, :account],
                                     :debit_amounts_attributes=> [:amount, :account])
     end
