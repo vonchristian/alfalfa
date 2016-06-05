@@ -79,13 +79,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% @contractor.line_items.each do |line_item| %>
+						<% @contractor.line_items.order(date: :desc).each do |line_item| %>
 							<tr class="<%='text-danger' if !line_item.paid? %>">
 							  <td> <%= line_item.inventory %></td>
                 <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
                 <td> <%= number_to_currency line_item.inventory.price %></td>
                 <td> <%= number_to_currency line_item.total_price %> </td>
-                <td> <%= line_item.order.date_issued.strftime("%b %e, %Y") %> </td>
+                <td> <%= line_item.order.date_issued.strftime("%B %e, %Y") %> </td>
 							</tr>
 						<% end %>
 					</tbody>
