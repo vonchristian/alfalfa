@@ -34,11 +34,11 @@ class Equipment < ActiveRecord::Base
   end
 
   def inactive?
-    self.equipment_status.inactive?
+      self.equipment_status && self.equipment_status.inactive?
   end
 
   def active?
-    self.equipment_status.active?
+      self.equipment_status && self.equipment_status.active?
   end
 
   def set_equipment_status

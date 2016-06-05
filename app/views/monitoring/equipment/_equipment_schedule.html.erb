@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="header">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="title pull-left">Equipment Schedules</h4>
+      </div>
+      <div class="col-md-6">
+        <%=link_to new_equipment_equipment_schedule_path(@equipment), title: 'New Equipment Schedule' do %>
+          <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Equipment Schedule"><i class="fa fa-plus"></i> </span>
+        <% end %>
+      </div>
+    </div>
+    <div class="row"><hr></div>
+  </div>
+  <div class="content">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Operator</th>
+          <th width="50%"><center>Project/Location</center></th>
+          <th>Date/Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @equipment.equipment_schedules.any? %>
+        <% @equipment.equipment_schedules.each do |equipment_schedule| %>
+          <tr>
+            <td>
+              <span class="text-center">
+                <center>
+                  <%=equipment_schedule.operator.first_name %>
+                  <br>
+                  <%=equipment_schedule.operator.last_name %>
+                </center>
+              </span>
+            </td>
+            <td class="text-center">
+              <%=truncate(equipment_schedule.project.name, length: 35) %>
+              <br>
+              <span class="text-primary"><i class="fa fa-bookmark"></i><%=equipment_schedule.project.id_number %></span> | <span class="text-success"><i class="fa fa-tag"></i><%=equipment_schedule.project.address %></span>
+            </td>
+            <td>
+              <span class="pull-right">
+                <span class="text-primary"><%=equipment_schedule.start_date.strftime("%B %e, %Y") if equipment_schedule %></span> to <span class="text-primary"><%=equipment_schedule.end_date.strftime("%B %e, %Y") if equipment_schedule %></span>
+                <i class="fa fa-truck text-primary"></i><%=equipment_schedule.purpose %>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
