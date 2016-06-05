@@ -30,7 +30,7 @@
                 <td><%= link_to employee.try(:name), new_employee_salary_path(employee) %></td>
                 <td><%=number_to_currency employee.rate %></td>
                 <td><%=employee.unpaid_worked_days %> Days </td>
-                <td><%=employee.unpaid_overtimes %> Hours </td>
+                <td><%=employee.unpaid_overtimes if employee.overtimes %> Hours </td>
                 <td class="text-right text-danger">
                   <%=number_to_currency employee.unpaid_cash_advances %>
                 </td>
