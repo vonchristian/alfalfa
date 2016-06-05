@@ -1,6 +1,6 @@
 <p class="title"> Stock Details</p>
 <br>
-<%= f.input :date, as: :string, input_html: {class: "datetimepicker"} %>
+<%= f.input :date, as: :string, input_html: {class: 'date_picker'} %>
 <div class="row">
   <div class="col-md-4">
     <%= f.input :quantity, input_html: { id: "stock_quantity", oninput: "calculate()" } %>
