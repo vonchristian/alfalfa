@@ -23,6 +23,14 @@ module Accounting
     def daily
       @entries = Accounting::Entry.created_between(Time.zone.now.beginning_of_day, Time.zone.now.end_of_day).page(params[:page]).per(50)
     end
+    def weekly
+      @entries = Accounting::Entry.created_between(Time.zone.now.beginning_of_week, Time.zone.now.end_of_week).page(params[:page]).per(50)
+    end
+
+    def monthly
+      @entries = Accounting::Entry.created_between(Time.zone.now.beginning_of_month, Time.zone.now.end_of_month).page(params[:page]).per(50)
+    end
+
 
     def new
       @entry = Entry.new

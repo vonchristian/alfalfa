@@ -25,9 +25,8 @@
   </div>
   <div class="col-md-5">
     <span> <%=link_to 'This Day', daily_accounting_entries_path, class: "btn btn-info btn-sm active" %></span>
-    <span> <%=link_to 'This Week', accounting_entries_path, class: "btn btn-default btn-sm active" %></span>
-    <span> <%=link_to 'This Month', accounting_entries_path, class: "btn btn-default btn-sm active" %></span>
-    <span> <%=link_to 'Last Month', accounting_entries_path, class: "btn btn-default btn-sm active" %></span>
+    <span> <%=link_to 'This Week', weekly_accounting_entries_path, class: "btn btn-default btn-sm active" %></span>
+    <span> <%=link_to 'This Month', monthly_accounting_entries_path, class: "btn btn-default btn-sm active" %></span>
   </div>
   <div class="col-md-6">
     <%= form_tag({:action => 'index'}, {:method => :get})  do %>
