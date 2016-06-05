@@ -4,6 +4,7 @@ class Supplies::LineItemsController < ApplicationController
     @line_item = @cart.line_items.create(line_item_params)
     respond_to do |format|
       if @line_item.save
+        @line_item.set_total_cost
         @cart.add_inventory
         format.html { redirect_to supplies_url }
         format.js   { @current_item = @line_item }
