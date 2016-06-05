@@ -119,7 +119,9 @@ Rails.application.routes.draw do
 
   namespace :supplies do
     resources :contractors, only:[:show]
-    resources :line_items
+    resources :line_items do
+      resources :payments, only:[:new, :create]
+    end
     resources :inventories do
       resources :stocks, only: [:new, :create]
       match "/discontinue" => "inventories#discontinue", as: :discontinue, via: [:get, :post]

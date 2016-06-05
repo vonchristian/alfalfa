@@ -17,7 +17,9 @@
         </p>
         <div class="modal-footer">
           <div class="col-md-8 col-md-offset-2">
-            <%=link_to "Update", edit_monitoring_contractor_path(@contractor), class: "btn btn-primary btn-block" %>
+            <% if policy(@contractor).update? %>
+              <%=link_to "Update", edit_monitoring_contractor_path(@contractor), class: "btn btn-primary btn-block" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -26,7 +28,7 @@
   <div class="col-md-8">
     <div class="card">
       <div class="header">
-        <h4 class="title">Subcontracted Projects</h4>
+        <h4 class="title">Projects</h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
@@ -65,9 +67,9 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <table class="table table-hover">
+        <table class="table table-striped">
 					<thead>
-						<tr class="text-uppercase">
+						<tr class="title">
 							<th>Material</th>
 							<th>Quantity</th>
 							<th>Price</th>
@@ -84,18 +86,6 @@
                 <td> <%= number_to_currency line_item.inventory.price %></td>
                 <td> <%= number_to_currency line_item.total_price %> </td>
                 <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
-                <td>
-                  <% if line_item.paid? %>
-                    <i class="fa fa-check"></i>
-                  <% else %>
-                    <i class="fa fa-times"></i>
-                  <% end %>
-                </td>
-                <td>
-                  <% if line_item.unpaid? %>
-                    <%=link_to "Pay", class: "btn btn-primary" %>
-                  <% end %>
-                </td>
 							</tr>
 						<% end %>
 					</tbody>
