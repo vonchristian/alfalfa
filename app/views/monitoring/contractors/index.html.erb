@@ -1,28 +1,23 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="content">
+
         <div class="row">
           <div class="col-md-6">
-            <%=form_tag monitoring_contractors_path, class: 'sidebar-form', method: :get do %>
-              <div class="input-group">
-                <%=text_field_tag :query, params[:query], class: 'form-control border-input', placeholder: 'Search Contractor...' %>
-                <span class="input-group-btn">
-                  <%= button_tag(type: 'submit', class: "btn btn-default") do %>
-                    <i class="fa fa-search"></i>
-                  <% end %>
+            <%=form_tag monitoring_contractors_path, method: :get do %>
+              <div class="input-group stylish-input-group">
+                <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for a Contractor' %>
+                <span class="input-group-addon">
+                  <button type="submit">
+                    <span class=" glyphicon glyphicon-search"></span>
+                  </button>
                 </span>
               </div>
             <% end %>
           </div>
           <div class="col-md-6">
             <%=link_to new_monitoring_contractor_path, title: "New Contractor" do %>
-              <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Contractor"><i class="fa fa-user-plus"></i> </span>
+              <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Contractor"><i class="fa fa-user-plus"></i> New Contractor </span>
             <% end %>
           </div>
         </div>
-        <div class="row"><hr></div>
-      </div>
       <div class="content">
         <table class="table table-hover">
           <thead>

@@ -1,9 +1,12 @@
-\
+
       <div class="row">
+        <div class="col-md-3 col-sm-3 hidden-xs">
+          <%=link_to "Summary (PDF)", monitoring_projects_path(@projects, format: 'pdf'), class: 'btn btn-primary' %>
+        </div>
       <div class="col-md-6 col-xs-8">
         <%=form_tag monitoring_projects_path, method: :get do %>
           <div class="input-group stylish-input-group">
-            <%=text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Search for a Product' %>
+            <%=text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Search for a Project' %>
             <span class="input-group-addon">
               <button type="submit">
                 <span class=" glyphicon glyphicon-search"></span>
@@ -12,16 +15,17 @@
           </div>
         <% end %>
       </div>
-      <div class="col-md-6 col-sm-4 hidden-xs">
-        <%=link_to "Summary (PDF)", monitoring_projects_path(@projects, format: 'pdf'), class: 'btn btn-primary' %>
+
+      <div class="col-md-3">
         <% if policy(Project.new).create? %>
         <%=link_to new_monitoring_project_path, title: "New Project" do %>
           <span class="btn btn-warning active btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Project"><i class="fa fa-plus-circle"></i> New Project </span>
         <% end %>
         <% end %>
     </div>
-  </div>
 
+  </div>
+<br>
 <div class="row">
     <%@projects.each do |project| %>
       <%=link_to monitoring_project_path(project) do %>
