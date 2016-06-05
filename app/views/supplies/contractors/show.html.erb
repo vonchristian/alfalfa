@@ -85,7 +85,7 @@
                 <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
                 <td> <%= number_to_currency line_item.inventory.price %></td>
                 <td> <%= number_to_currency line_item.total_price %> </td>
-                <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
+                <td> <%= line_item.order.date_issued.strftime("%b %e, %Y") %> </td>
 							</tr>
 						<% end %>
 					</tbody>
