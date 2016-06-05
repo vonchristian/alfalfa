@@ -22,7 +22,7 @@
             <div class="col-md-10 col-md-offset-2">
               <%=simple_form_for [:supplies, @inventory, @stock], url: :supplies_inventory_stocks do |f| %>
                 <%=f.error_notification %>
-                <%= f.input :date, as: :string, input_html: {class: "datetimepicker"} %>
+                <%= f.input :date, as: :string, input_html: {class: "date_picker"} %>
                 <%= f.input :quantity, input_html: { id: "stock_quantity", oninput: "calculate()" } %>
                 <div class="row">
                   <div class="col-md-6">
