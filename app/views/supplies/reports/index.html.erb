@@ -46,62 +46,29 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6">
-		<div class="card">
-			<div class="header">
-				<div class="row">
-					<div class="col-md-12">
-						<h4 class="title">Issued Materials to Contractors</h4>
-						<br>
-					</div>
-					<div class="col-md-12">
-						<div class="pull-right">
-							<%=form_tag supplies_reports_path, class: 'sidebar-form', method: :get do %>
-					      <div class="input-group">
-					        <%=text_field_tag :contractor_name, params[:contractor_name], class: 'form-control border-input', placeholder: 'Search Contractor...' %>
-					        <span class="input-group-btn">
-					          <%= button_tag(type: 'submit', class: "btn btn-flat") do %>
-					            <i class="fa fa-search"></i>
-					          <% end %>
-					        </span>
-					      </div>
-					    <% end %>
-					  </div>
-				  </div>
-				 </div>
-				<div class="row"><hr class="no-top-padding"></div>
-			</div>
-			<div class="content">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Name of Contractor</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<% @contractors.all.each do |contractor| %>
-							<tr>
-								<td><%=contractor.name %></td>
-								<td class="text-right"><%=link_to contractor_line_items_path(contractor, format: 'pdf'), target: '_blank' do %>
-										<span data-toggle="tooltip" data-placement="bottom" title="View PDF Report (Full)"> <%=image_tag("pdf_icon.png", height: 40, width: 40) %></span>
-									<% end %>
-								</td>
-							</tr>
-						<% end %>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="col-md-6">
   <div class="card">
       <div class="header">
-          <h4 class="title">Contractors</h4>
+        <div class="row">
+          <div class="col-md-5">
+            <h4 class="title">Contractors</h4>
+          </div>
+          <div class="col-md-7">
+            <%=form_tag supplies_reports_path, method: :get do %>
+              <div class="input-group stylish-input-group">
+                <%=text_field_tag :contractor_name, params[:contractor_name], class: 'form-control', placeholder: 'Search Contractor' %>
+                <span class="input-group-addon">
+                  <button type="submit">
+                    <span class=" glyphicon glyphicon-search"></span>
+                  </button>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div class="content">
-        <% Contractor.all.each do |contractor| %>
+        <% @contractors.all.each do |contractor| %>
           <%=link_to supplies_contractor_path(contractor) do %>
             <ul class="list-unstyled team-members">
               <li>
