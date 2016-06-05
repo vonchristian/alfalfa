@@ -20,15 +20,18 @@ module Accounting
         end
       end
     end
-    def daily
-      @entries = Accounting::Entry.created_between(Time.zone.now.beginning_of_day, Time.zone.now.end_of_day).page(params[:page]).per(50)
-    end
-    def weekly
-      @entries = Accounting::Entry.created_between(Time.zone.now.beginning_of_week, Time.zone.now.end_of_week).page(params[:page]).per(50)
-    end
-
-    def monthly
-      @entries = Accounting::Entry.created_between(Time.zone.now.beginning_of_month, Time.zone.now.end_of_month).page(params[:page]).per(50)
+    def scope_to_date
+      @entries = Accounting::Entry.created_between(params[:from_date], params[:to_date]).page(params[:page]).per(50)
+      @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.zone.now.beginning_of_week
+      @to_date = params[:to_date] ? Time.parse(params[:to_date]) :
+      Time.zone.now.end_of_week
+      respond_to do |format|
+        format.html
+        format.pdf do
+          pdf = EntriesPdf.new(@entries, @from_date, @to_date, view_context)
+            send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Entries Report.pdf"
+        end
+      end
     end
 
 
