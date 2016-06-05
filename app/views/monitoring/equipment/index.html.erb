@@ -1,54 +1,19 @@
-<div class="col-md-10 col-md-offset-1">
-  <div class="card">
-    <div class="header">
-      <h4 class="title">Equipment Schedules</h4>
-      <div class="row"><hr></div>
+
+<div class="row">
+    <div class="col-md-3">
     </div>
-    <div class="content">
-      <div class="table table-responsive">
-        <table class="table table-hover">
-          <%@equipments.each do |equipment| %>
-            <tr>
-              <td width="95px" class="hidden-xs"><%=image_tag(equipment.photo.url(:medium)) %></td>
-              <td>
-                <%= equipment.make_and_model.upcase %><br>
-                <small><%= equipment.plate_number %></small>
-              </td>
-              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-              <td>
-                <% if equipment.equipment_schedules.any? %>
-                  <span class="text-success"># <%=equipment.current_assignment_id_number_and_location %></span> &nbsp | &nbsp <%= truncate(equipment.current_assignment, length: 65) %> &nbsp - <span class="text-primary"><i class="fa fa-tag"></i><%=equipment.current_assignment_location %></span>
-                  <hr class="min-padding">
-                  <div class="row">
-                    <div class="col-md-2">
-                      <%=image_tag(equipment.current_assignment_operator.profile_photo.url(:thumb), class: "img-circle", title: equipment.current_assignment_operator.full_name, data: {toggle: 'tooltip', placement: 'bottom'}) %>
-                    </div>
-                    <div class="col-md-10">
-                      <small><i class="fa fa-calendar text-success"></i><%=equipment.current_assignment_start_date%> to <i class="fa fa-calendar text-danger"></i> <%=equipment.current_assignment_end_date%>
-                        <hr class="min-padding">
-                        <i class="fa fa-truck text-primary"></i><%=equipment.current_assignment_purpose %>
-                      </small>
-                    </div>
-                  </div>
-                <% else %>
-                  <%=equipment.equipment_status %>
-                  <i class="fa fa-circle text-<%=equipment.status%>"></i>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-      <div class="footer">
-        <div class="chart-legend">
-            <i class="fa fa-circle text-success"></i> Active
-            <i class="fa fa-circle text-warning"></i> Inactive
-        </div>
-        <hr>
-        <div class="stats">
-            <i class="ti-reload"></i> Updated _<%#=time_ago_in_words(Transactions::InvoicePayment.last.created_at.to_date) %> ago
-        </div>
+      <div class="col-sm-6">
+        <%=form_tag supplies_equipment_index_path, method: :get do %>
+          <div class="input-group stylish-input-group">
+            <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search Equipment' %>
+            <span class="input-group-addon">
+              <button type="submit">
+                <span class=" glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
-</div>
+    <br>
+    <%=render @equipments %>
