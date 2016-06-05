@@ -1,0 +1,38 @@
+.sidebar:after, .sidebar:before, .sidebar[data-background-color="dark-gray"]:after, .sidebar[data-background-color="dark-gray"]:before,
+.off-canvas-sidebar:after,
+.off-canvas-sidebar:before,
+.off-canvas-sidebar[data-background-color="dark-gray"]:after,
+.off-canvas-sidebar[data-background-color="dark-gray"]:before {
+  background-color: #62488A;
+}
+.sidebar .logo, .sidebar[data-background-color="dark-gray"] .logo,
+.off-canvas-sidebar .logo,
+.off-canvas-sidebar[data-background-color="dark-gray"] .logo {
+  border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+}
+.sidebar .logo p, .sidebar[data-background-color="dark-gray"] .logo p,
+.off-canvas-sidebar .logo p,
+.off-canvas-sidebar[data-background-color="dark-gray"] .logo p {
+  color: #EEEEEE;
+}
+.sidebar .logo .simple-text, .sidebar[data-background-color="dark-gray"] .logo .simple-text,
+.off-canvas-sidebar .logo .simple-text,
+.off-canvas-sidebar[data-background-color="dark-gray"] .logo .simple-text {
+  color: #EEEEEE;
+}
+.sidebar .nav li:not(.active) > a, .sidebar[data-background-color="dark-gray"] .nav li:not(.active) > a,
+.off-canvas-sidebar .nav li:not(.active) > a,
+.off-canvas-sidebar[data-background-color="dark-gray"] .nav li:not(.active) > a {
+  color: #EEEEEE;
+}
+.sidebar .nav .divider, .sidebar[data-background-color="dark-gray"] .nav .divider,
+.off-canvas-sidebar .nav .divider,
+.off-canvas-sidebar[data-background-color="dark-gray"] .nav .divider {
+  background-color: rgb(217,200,180);
+}
+
+.sidebar[data-active-color="white"] .nav li.active > a,
+.off-canvas-sidebar[data-active-color="white"] .nav li.active > a {
+  color: #FEFEFE;
+  opacity: 1;
+}

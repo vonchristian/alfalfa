@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     resources :reports, only:[:index]
     resources :balance_sheet, only:[:index]
     resources :income_statement, only:[:index]
-    resources :entries
+    resources :entries do
+      match "/daily" => "entries#daily", as: :daily, via: [:get], on: :collection
+    end
     resources :cash_flow, only: [:index]
     resources :accounts
   end

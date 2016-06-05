@@ -11,6 +11,8 @@ module Accounting
     has_many :debit_amounts, :extend => AmountsExtension, :class_name => 'DebitAmount', :inverse_of => :entry, dependent: :destroy
     has_many :credit_accounts, :through => :credit_amounts, :source => :account, :class_name => 'Account'
     has_many :debit_accounts, :through => :debit_amounts, :source => :account, :class_name => 'Account'
+
+    scope :created_between, lambda {|start_date, end_date| where("date >= ? AND date <= ?", start_date, end_date )}
     validates_presence_of :description, :date
     validate :has_credit_amounts?
     validate :has_debit_amounts?
