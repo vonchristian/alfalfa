@@ -1,0 +1,26 @@
+<%=link_to monitoring_equipment_path(equipment) do %>
+  <div class="col-md-4">
+    <div class="card card-project">
+      <div class="image">
+        <%=image_tag(equipment.photo.url(:original), class: "img-responsive") %>
+      </div>
+      <div class="header">
+        <b class="title text-yellow"><%="#{equipment.make_and_model}"%></b>
+        <span class="btn btn-<%=equipment.status_color%> btn-xs active pull-right"><%=equipment.status%> </span><br>
+        <span class="text-light-gray"><%=equipment.plate_number %></span>
+      </div>
+      <div class="content">
+
+        <div class="card-footer">
+          <% if equipment.equipment_schedules.any? && equipment.active? %>
+            <i class="fa fa-map-marker"></i><span class="text-uppercase"><%=equipment.current_assignment_id_number_and_location %></span><br><br>
+            <i class="fa fa-calendar"></i><%=equipment.current_assignment_start_date %> - <%=equipment.current_assignment_end_date %><br><br>
+            <i class="fa fa-circle"></i> <%=equipment.current_assignment_purpose %>
+          <% else %>
+            <center class="text-danger"> No Current Schedule or Equipment is Inactive </center>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
