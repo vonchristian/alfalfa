@@ -118,6 +118,7 @@ Rails.application.routes.draw do
   end
 
   namespace :supplies do
+    resources :contractors, only:[:show]
     resources :line_items
     resources :inventories do
       resources :stocks, only: [:new, :create]

@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="image">
+        <%= image_tag "hero.jpg", class: "img-square center-block", alt: "contractor profile picture" %>
+      </div>
+      <div class="content">
+        <div class="author">
+          <%= image_tag @contractor.profile_photo.url(:medium), class: "avatar border-white", alt: "contractor profile picture" %>
+          <h4 class="title"><%=@contractor.full_name %><br />
+            <small><%=@contractor.position %></small>
+          </h4>
+        </div>
+        <br>
+        <p class="description text-center">
+          <%=@contractor.company %>
+        </p>
+        <div class="modal-footer">
+          <div class="col-md-8 col-md-offset-2">
+            <%=link_to "Update", edit_monitoring_contractor_path(@contractor), class: "btn btn-primary btn-block" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Subcontracted Projects</h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <ul class="list-unstyled team-members">
+          <% @contractor.contracts.each do |contract| %>
+            <li>
+              <div class="row">
+                <div class="col-xs-2">
+                  <div class="avatar">
+                  </div>
+                </div>
+                <div class="col-xs-8">
+                  <%=link_to contract.project.name.truncate(200), monitoring_contractor_contract_path(contractor_id: @contractor, id: contract.id) %>
+                  <br />
+                  <small><i class="fa fa-money"></i> <%=number_to_currency contract.amount_subcontracted%></small>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Ordered Inventory
+          <% if @contractor.line_items.present? %>
+            <%=link_to contractor_line_items_path(@contractor, format: 'pdf') do %>
+              <span class="btn btn-info pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
+            <% end %>
+          <% else %>
+            <%=link_to nil do %>
+              <span class="btn disabled pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
+            <% end %>
+          <% end %>
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+					<thead>
+						<tr class="text-uppercase">
+							<th>Material</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Amount</th>
+              <th>Date</th>
+              <th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @contractor.line_items.each do |line_item| %>
+							<tr class="<%='text-danger' if !line_item.paid? %>">
+							  <td> <%= line_item.inventory %></td>
+                <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
+                <td> <%= number_to_currency line_item.inventory.price %></td>
+                <td> <%= number_to_currency line_item.total_price %> </td>
+                <td> <%= line_item.created_at.strftime("%b %e, %Y") %> </td>
+                <td>
+                  <% if line_item.paid? %>
+                    <i class="fa fa-check"></i>
+                  <% else %>
+                    <i class="fa fa-times"></i>
+                  <% end %>
+                </td>
+                <td>
+                  <% if line_item.unpaid? %>
+                    <%=link_to "Pay", class: "btn btn-primary" %>
+                  <% end %>
+                </td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+      </div>
+    </div>
+  </div>
+</div>
