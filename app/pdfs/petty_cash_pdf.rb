@@ -36,20 +36,20 @@ class PettyCashPdf < Prawn::Document
   end
 
   def oldest?
-    if Trasanctions::FundTransfer.any?
+    if Transactions::FundTransfer.any?
       @from_date < Transactions::FundTransfer.first.date
     end
   end
 
   def previous_debit_balance
-     if Trasanctions::FundTransfer.any?
-      @petty_cash.debits_balance({from_date: Transactions::FundTransfer.first.date, to_date: @from_date})
+     if Transactions::FundTransfer.any?
+      @petty_cash.debits_balance({from_date: Transaction::FundTransfer.first.date, to_date: @from_date})
     end
   end
 
   def previous_credit_balance
-     if Trasanctions::Disbursement.any?
-      @petty_cash.credits_balance({from_date: Transactions::Disbursement.first.date, to_date: @from_date})
+     if Transactions::Disbursement.any?
+      @petty_cash.credits_balance({from_date: Transaction::Disbursement.first.date, to_date: @from_date})
     end
   end
 
@@ -100,10 +100,11 @@ class PettyCashPdf < Prawn::Document
   end
 
   def display_fund_transfer_table
-    if fund_transfer_data.empty?
+    if Transactions::FundTransfer.blank?
+      move_down 10
       text "No Fund Transfer data.", align: :center
     else
-      move_down 10
+      move_down 15
       text "FUND TRANSFER TRANSACTION", size: 10
       table(fund_transfer_data, header: true, cell_style: { size: 8, font: "Helvetica"}, column_widths: TABLE_WIDTHS) do
         row(0).font_style = :bold
@@ -120,8 +121,9 @@ class PettyCashPdf < Prawn::Document
   end
 
   def display_petty_cash_table
-    if table_data.empty?
-      text "No Employee data.", align: :center
+    if Transactions::Disbursement.blank?
+      move_down 10
+      text "No Transaction data.", align: :center
     else
       move_down 10
       text "DISBURSEMENT TRANSACTION", size: 10
