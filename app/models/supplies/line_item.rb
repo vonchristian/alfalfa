@@ -22,6 +22,6 @@ class Supplies::LineItem < ActiveRecord::Base
   end
 
   def self.total_price
-      self.all.to_a.sum { |item| item.total_cost }
+      self.all.to_a.sum { |item| item.total_price }
   end
   end
