@@ -41,7 +41,7 @@ sidebar:after, .sidebar:before, .sidebar[data-background-color="dark-yellow"]:af
 .off-canvas-sidebar:before,
 .off-canvas-sidebar[data-background-color="dark-yellow"]:after,
 .off-canvas-sidebar[data-background-color="dark-yellow"]:before {
-  background-color: #F4EB51;
+  background-color: #3F5765;
 }
 .sidebar .logo, .sidebar[data-background-color="dark-yellow"] .logo,
 .off-canvas-sidebar .logo,
@@ -51,17 +51,17 @@ sidebar:after, .sidebar:before, .sidebar[data-background-color="dark-yellow"]:af
 .sidebar .logo p, .sidebar[data-background-color="dark-yellow"] .logo p,
 .off-canvas-sidebar .logo p,
 .off-canvas-sidebar[data-background-color="dark-yellow"] .logo p {
-  color: #212E4E;
+  color: #FFFFFF;
 }
 .sidebar .logo .simple-text, .sidebar[data-background-color="dark-yellow"] .logo .simple-text,
 .off-canvas-sidebar .logo .simple-text,
 .off-canvas-sidebar[data-background-color="dark-yellow"] .logo .simple-text {
-  color: #212E4E;
+  color: #FFFFFF;
 }
 .sidebar .nav li:not(.active) > a, .sidebar[data-background-color="dark-yellow"] .nav li:not(.active) > a,
 .off-canvas-sidebar .nav li:not(.active) > a,
 .off-canvas-sidebar[data-background-color="dark-yellow"] .nav li:not(.active) > a {
-  color: #212E4E;
+  color: #FFFFFF;
 }
 .sidebar .nav .divider, .sidebar[data-background-color="dark-yellow"] .nav .divider,
 .off-canvas-sidebar .nav .divider,
@@ -70,6 +70,6 @@ sidebar:after, .sidebar:before, .sidebar[data-background-color="dark-yellow"]:af
 }
 .sidebar[data-active-color="dark-blue"] .nav li.active > a,
 .off-canvas-sidebar[data-active-color="dark-blue"] .nav li.active > a {
-  color: #212E4E;
+  color: #EFEFEF;
   opacity: 1;
 }
