@@ -40,6 +40,7 @@ class Supplies::Order < ActiveRecord::Base
       line_items << item
       item.check_if_out_of_stock
       item.set_total_cost
+      item.set_date
     end
   end
 
