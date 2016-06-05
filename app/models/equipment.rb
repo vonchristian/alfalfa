@@ -14,7 +14,7 @@ class Equipment < ActiveRecord::Base
                     thumb: "40x40>",
                     small: "30x30>",
                     x_small: "20x20>"},
-                    default_url: ":style/equipment_icon.png",
+                    default_url: "hero.jpg",
                     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
                     :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment :photo, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
