@@ -34,10 +34,13 @@ class Employee < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
 
+
   has_many :overtimes, class_name: "Accounting::Employees::Overtime"
+  enum employee_type:[:regular, :irregular]
   def self.total_gross_pay
     all.map{ |a| a.total_gross_pay }.sum
   end
+
   def self.total_earned_income
     all.map{ |a| a.earned_income }.sum
   end
