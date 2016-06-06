@@ -26,7 +26,7 @@
           <%=f.input :unit_cost, input_html: {oninput: "calculate_equipment_maintenance()", id: 'input2'} %>
         </div>
         <div class="col-md-3">
-          <%=f.input :total_cost, input_html: {oninput: "calculate_equipment_maintenance()", id: 'total'} %>
+          <%=f.input :total_cost, input_html: { id: 'total', readonly: true} %>
         </div>
       </div>
       <div class="modal-footer">
