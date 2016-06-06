@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605043453) do
+ActiveRecord::Schema.define(version: 20160606052613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20160605043453) do
     t.string   "profile_photo_content_type"
     t.integer  "profile_photo_file_size"
     t.datetime "profile_photo_updated_at"
+    t.integer  "employee_type"
   end
 
   add_index "employees", ["project_id"], name: "index_employees_on_project_id", using: :btree
@@ -388,6 +389,23 @@ ActiveRecord::Schema.define(version: 20160605043453) do
   add_index "issued_inventories", ["inventoriable_id"], name: "index_issued_inventories_on_inventoriable_id", using: :btree
   add_index "issued_inventories", ["inventoriable_type"], name: "index_issued_inventories_on_inventoriable_type", using: :btree
   add_index "issued_inventories", ["inventory_id"], name: "index_issued_inventories_on_inventory_id", using: :btree
+
+  create_table "items", force: :cascade do |t|
+    t.datetime "date"
+    t.string   "reference_number"
+    t.decimal  "quantity"
+    t.string   "unit"
+    t.string   "description"
+    t.string   "unit_cost"
+    t.string   "total_cost"
+    t.integer  "itemable_id"
+    t.string   "itemable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "items", ["itemable_id"], name: "index_items_on_itemable_id", using: :btree
+  add_index "items", ["itemable_type"], name: "index_items_on_itemable_type", using: :btree
 
   create_table "labor_costs", force: :cascade do |t|
     t.string   "personnel"

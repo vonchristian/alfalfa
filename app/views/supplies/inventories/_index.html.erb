@@ -58,7 +58,7 @@
                     </td>
                     <td>
                       <% if inventory.unavailable? %>
-                        <span class="btn btn-warning btn-xs active pull-right"> Out of Stock </span>
+                        <span class="btn btn-default btn-xs pull-right"> Out of Stock </span>
                         <span><%=link_to "DISCONTINUE", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id), class: "btn btn-danger btn-sm active", data: {confirm: "Are you sure you want to discontinue this inventory?"} %>
                       <% elsif inventory.discontinued? %>
                         <span><%=link_to "ACTIVATE", supplies_inventory_continue_path(id: inventory.id, inventory_id: inventory.id), class: " btn btn-success btn-sm active", data: {confirm: "Are you sure you want to continue this inventory?"} %>

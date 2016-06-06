@@ -36,6 +36,7 @@
               <%=f.input :rate  %>
             </div>
           </div>
+          <%=f.input :employee_type, collection: Employee.employee_types.keys.to_a.map{ |a| [a.titleize, a]}, as: :radio_buttons %>
           <div class="modal-footer">
             <%= link_to "Cancel", employees_path, class: 'btn btn-default pull-left' %>
             <%=f.submit 'Save Employee', class: 'btn btn-primary' %>

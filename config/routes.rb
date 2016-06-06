@@ -135,6 +135,7 @@ Rails.application.routes.draw do
     end
     resources :carts
     resources :equipment do
+      resources :items, except:[:destroy]
       match "/active" => "equipment#active", as: :active, via: [:get], on: :collection
       match "/inactive" => "equipment#inactive", as: :inactive, via: [:get], on: :collection
     end

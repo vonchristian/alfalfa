@@ -22,6 +22,7 @@
 //= require labor_cost
 //= require supplies/bootstrap-checkbox-radio
 //= require supplies/entries
+//= require supplies/equipment_cost
 //= require supplies/tooltip
 //= require supplies/stocks
 //= require supplies/work_detail
