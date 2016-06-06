@@ -31,10 +31,10 @@
     <%= form_tag({:action => 'index'}, {:method => :get})  do %>
       <div class="row">
         <div class="col-md-4">
-          <%= text_field_tag :from_date, @from_date, :class => 'date_picker form-control input-sm border-input', :placeholder => "From " %>
+          <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control input-sm border-input', :placeholder => "From " %>
         </div>
         <div class="col-md-4">
-          <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input date_picker', :placeholder => "To " %>
+          <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "To " %>
         </div>
         <div class="col-md-4">
           <button type="submit" class="btn btn-success active  btn-sm"> Go </button>
