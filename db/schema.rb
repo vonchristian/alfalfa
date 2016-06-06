@@ -59,12 +59,6 @@ ActiveRecord::Schema.define(version: 20160605043453) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "add_date_to_line_items", force: :cascade do |t|
-    t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "amount_revisions", force: :cascade do |t|
     t.decimal  "amount"
     t.string   "remarks"
@@ -415,6 +409,7 @@ ActiveRecord::Schema.define(version: 20160605043453) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "order_id"
+    t.decimal  "hauling_cost"
     t.decimal  "total_cost"
     t.decimal  "unit_cost"
     t.datetime "date"
@@ -464,13 +459,12 @@ ActiveRecord::Schema.define(version: 20160605043453) do
   create_table "orders", force: :cascade do |t|
     t.integer  "customer_id"
     t.string   "customer_type"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "payment_status",         default: 1
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "payment_status", default: 1
     t.datetime "date_issued"
     t.integer  "project_id"
     t.string   "name"
-    t.string   "equipment_plate_number"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
