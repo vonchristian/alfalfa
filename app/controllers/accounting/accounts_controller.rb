@@ -11,7 +11,7 @@ class Accounting::AccountsController < ApplicationController
   def create
     @account = Account.create(account_params)
     if @account.save
-      redirect_to account_path(@account), notice: "Account created successfully."
+      redirect_to accounting_account_path(@account), notice: "Account created successfully."
     else
       render :new
     end
