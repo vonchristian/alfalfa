@@ -26,7 +26,7 @@ module Accounting
 
     before_save :set_default_date
     def self.types
-      ["CashAdvance", "Disbursement", "FundTransfer", "SalaryPayment", "BankWithdraw", "BankDeposit", "InvoicePayment"]
+      ["CashAdvance", "Disbursement", "FundTransfer", "SalaryPayment", "BankWithdraw", "BankDeposit", "InvoicePayment", "CashAdvancePayment"]
     end
     def name
       description

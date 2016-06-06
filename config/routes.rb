@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     end
     resources :cash_flow, only: [:index]
     resources :accounts
+    resources :cash_advances, only: [:show] do
+      resources :payments, only: [:new, :create], module: :cash_advances
+    end
   end
   resources :projects, only: [:index] do
     resources :payments, only: [:index], module: :project_payments

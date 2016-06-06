@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
-
+  include PgSearch
+  pg_search_scope :search_by_name, :against => [:code, :name, :type]
   FUND_TRANSFER_SOURCES = ["Owner's Capital", "Cash on Hand", "Cash in Bank"]
   class_attribute :normal_credit_balance
     has_many :amounts

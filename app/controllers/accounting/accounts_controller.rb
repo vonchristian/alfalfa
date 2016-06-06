@@ -1,8 +1,11 @@
 class Accounting::AccountsController < ApplicationController
   layout "accounting"
   def index
-    @accounts = Account.all.order(:name)
-    authorize @accounts, :index?
+    if params[:name].present?
+      @accounts = Account.search_by_name(params[:name])
+    else
+      @accounts = Account.all.order(:type)
+    end
   end
   def new
     @account = Account.new
@@ -26,6 +29,6 @@ class Accounting::AccountsController < ApplicationController
 
   private
   def account_params
-    params.require(:account).permit(:code, :name, :type)
+    params.require(:account).permit(:code, :name, :type, :contra)
   end
   end

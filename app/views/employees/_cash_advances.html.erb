@@ -22,11 +22,10 @@
           <tr>
             <td><%=cash_advance.date.strftime("%B %e, %Y") %></td>
             <td><%=number_to_currency cash_advance.debit_amounts.sum(:amount) %></td>
-            <td></td>
+            <td><%=link_to "Payment", new_accounting_cash_advance_payment_path(cash_advance) %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
-

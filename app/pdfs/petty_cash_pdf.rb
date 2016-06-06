@@ -43,13 +43,13 @@ class PettyCashPdf < Prawn::Document
 
   def previous_debit_balance
      if Transactions::FundTransfer.any?
-      @petty_cash.debits_balance({from_date: Transaction::FundTransfer.first.date, to_date: @from_date})
+      @petty_cash.debits_balance({from_date: Transactions::FundTransfer.first.date, to_date: @from_date})
     end
   end
 
   def previous_credit_balance
      if Transactions::Disbursement.any?
-      @petty_cash.credits_balance({from_date: Transaction::Disbursement.first.date, to_date: @from_date})
+      @petty_cash.credits_balance({from_date: Transactions::Disbursement.first.date, to_date: @from_date})
     end
   end
 

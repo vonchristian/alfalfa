@@ -10,7 +10,9 @@
         <div class="content">
   				<%=f.input :code %>
   				<%=f.input :name %>
+          <%=f.input :contra, label: "Contra Account?" %>
   				<%=f.input :type, collection: ["Asset", "Liability", "Equity", "Expense", "Revenue"], as: :radio_buttons %>
+
   				<div class="modal-footer">
             <%= link_to "Cancel", accounts_path, class: 'btn btn-xs pull-left' %>
   				  <%=f.submit "Save Account", class: "btn btn-primary pull-right" %>
