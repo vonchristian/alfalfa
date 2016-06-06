@@ -13,6 +13,7 @@ module Accounting
     has_many :debit_accounts, :through => :debit_amounts, :source => :account, :class_name => 'Account'
 
     scope :created_between, lambda {|start_date, end_date| where("date >= ? AND date <= ?", start_date, end_date )}
+
     validates_presence_of :description, :date
     validate :has_credit_amounts?
     validate :has_debit_amounts?

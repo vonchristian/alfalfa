@@ -17,6 +17,7 @@
           </div>
         </div>
         <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
+        <%#=f.input :entriable_id, label: "Recipient", collection: Employee.all.map {|a| [a.full_name, a.id]}, input_html: {id: "entry_entriable_id"} %>
         <%=f.input :entriable_id, label: "Recipient", collection: Employee.all.map {|a| [a.full_name, a.id]}, input_html: {id: "entry_entriable_id"} %>
 
 
@@ -26,7 +27,7 @@
             <%=c.input :amount, input_html: {id: "accounting_entry_debit_amounts_attributes_0_amount"}%>
           </div>
           <div class="col-md-6">
-          <%=c.input :account, collection: Expense.all.pluck(:name), input_html: {class: "transactions_disbursement_debit_amounts_attributes_0_account"}%>
+          <%=c.input :account, collection: Account.all.pluck(:name), input_html: {class: "transactions_disbursement_debit_amounts_attributes_0_account"}%>
         </div>
       </div>
         <% end %>
