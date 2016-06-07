@@ -105,7 +105,7 @@ class PettyCashPdf < Prawn::Document
       text "No Fund Transfer data.", align: :center
     else
       move_down 15
-      text "FUND TRANSFER TRANSACTION", size: 10
+      text "CASH IN", size: 10
       table(fund_transfer_data, header: true, cell_style: { size: 8, font: "Helvetica"}, column_widths: TABLE_WIDTHS) do
         row(0).font_style = :bold
         row(0).background_color = 'DDDDDD'
@@ -126,7 +126,7 @@ class PettyCashPdf < Prawn::Document
       text "No Transaction data.", align: :center
     else
       move_down 10
-      text "DISBURSEMENT TRANSACTION", size: 10
+      text "CASH OUT", size: 10
       table(table_data, header: true, cell_style: { size: 8, font: "Helvetica"}, column_widths: TABLE_WIDTHS) do
         row(0).font_style = :bold
         row(0).background_color = 'DDDDDD'
