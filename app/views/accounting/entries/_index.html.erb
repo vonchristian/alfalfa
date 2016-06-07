@@ -19,84 +19,90 @@
 	</div>
 </div>
 <div class="row">
-  <div class="col-md-1">
-    <small class="text-light-gray"> Show Activity: </small>
-  </div>
   <div class="col-md-3">
-    <span> <%=link_to 'This Day', scope_to_date_accounting_entries_path(:from_date => Time.zone.now.beginning_of_day, :to_date => Time.zone.now.end_of_day, format: 'pdf'), class: "btn btn-info btn-sm active" %></span>
-    <span> <%=link_to 'This Week', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf'), class: "btn btn-default btn-sm active" %></span>
-      <span> <%=link_to 'This Month', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf'), class: "btn btn-default btn-sm active" %></span>
+  	<ul class="nav navbar-nav">
+      <li class="dropdown">
+      	<li class="dropdown">
+        <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" aria-expanded="false">Show Activity <b class="caret"></b></button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><%=link_to 'This Day', scope_to_date_accounting_entries_path(:from_date => Time.zone.now.beginning_of_day, :to_date => Time.zone.now.end_of_day, format: 'pdf') %></li>
+			    <li> <%=link_to 'This Week', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
+			    <li> <%=link_to 'This Month', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
+        </ul>
+      </li>
+    </ul>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-9">
     <%= form_tag({:action => 'index'}, {:method => :get})  do %>
       <div class="row">
         <div class="col-md-4">
-          <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control input-sm border-input', :placeholder => "From " %>
+          <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control border-input', :placeholder => "From " %>
         </div>
         <div class="col-md-4">
           <%= text_field_tag :to_date, @to_date, :class => 'form-control border-input datetimepicker', :placeholder => "To " %>
         </div>
         <div class="col-md-4">
-          <button type="submit" class="btn btn-success active  btn-sm"> Go </button>
-            <%=link_to "PDF", accounting_entries_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-danger btn-sm active"%>
+        	<button type="submit" class="btn btn-success active"> Go </button>
+          <%=link_to "PDF", accounting_entries_path(format: 'pdf', from_date: @from_date, to_date: @to_date), class: "btn btn-danger active"%>
         </div>
       </div>
     <% end %>
   </div>
 </div>
 <br>
-
-    <div class="col-md-12">
-    <div class="card">
-    <div class="header">
-    </div>
-			<div class="content">
-				<div class="table table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr class="title">
-								<th> Description </th>
-								<th> Recipient </th>
-								<th> Debit </th>
-								<th> Credit </th>
-								<th> Amount</th>
-								<th> Type </th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @entries.each do |entry| %>
-								<tr>
-
-		              <td>
-                    	<small class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
-                    <small><%=link_to entry.description.truncate(200), accounting_entry_path(entry) %></small></td>
-									<td><small><%=entry.entriable.try(:name) %></small></td>
-									<td>
-										<% entry.debit_amounts.each do |debit| %>
-										  <small><%=debit.account.name %></small><br>
-										<% end %>
-									</td>
-									<td>
-										<% entry.credit_amounts.each do |credit| %>
-											<small><%=credit.account.name %></small>
-										<% end %>
-									</td>
-									<td>
-										<% entry.credit_amounts.each do |credit| %>
-											<small><%=number_to_currency credit.amount %></small>
-										<% end %>
-									</td>
-									<td><small><%=entry.type.sub("Transactions::", "") if entry.type %></small></td>
+<div class="row">
+	<div class="col-md-12">
+	  <div class="card">
+	    <div class="header">
+	    </div>
+				<div class="content">
+					<div class="table table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr class="title">
+									<th> Description </th>
+									<th> Recipient </th>
+									<th> Debit </th>
+									<th> Credit </th>
+									<th> Amount</th>
+									<th> Type </th>
 								</tr>
-							<% end %>
-						</tbody>
-					</table>
-					<div class="modal-footer">
-	          <center><%= paginate @entries, :window => 1 %></center>
-	          <%=link_to "View All", class: "btn btn-info" %>
-	        </div>
+							</thead>
+							<tbody>
+								<% @entries.each do |entry| %>
+									<tr>
+
+			              <td>
+	                    	<small class="help-block"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></small>
+	                    <small><%=link_to entry.description.truncate(200), accounting_entry_path(entry) %></small></td>
+										<td><small><%=entry.entriable.try(:name) %></small></td>
+										<td>
+											<% entry.debit_amounts.each do |debit| %>
+											  <small><%=debit.account.name %></small><br>
+											<% end %>
+										</td>
+										<td>
+											<% entry.credit_amounts.each do |credit| %>
+												<small><%=credit.account.name %></small>
+											<% end %>
+										</td>
+										<td>
+											<% entry.credit_amounts.each do |credit| %>
+												<small><%=number_to_currency credit.amount %></small>
+											<% end %>
+										</td>
+										<td><small><%=entry.type.sub("Transactions::", "") if entry.type %></small></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+						<div class="modal-footer">
+		          <center><%= paginate @entries, :window => 1 %></center>
+		          <%=link_to "View All", class: "btn btn-info" %>
+		        </div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</li>
