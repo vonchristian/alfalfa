@@ -3,7 +3,7 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="card">
       <div class="header">
-        <h4 class="title">Add a New Transaction </h4>
+        <h4 class="title">Edit Transaction </h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
@@ -17,7 +17,7 @@
         </div>
 
         <%=f.input :description, as: :text %>
-        <%=f.input :type, collection: Accounting::Entry.types %>
+        <%=f.input :entry_type, collection: Accounting::Entry.entry_types.keys.to_a.map{ |a| [a.titleize, a]}%>
         <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
         <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]} %>
         <h4 class="title"> Debit </h4>

@@ -17,6 +17,7 @@
         </div>
 
         <%=f.input :description, as: :text %>
+        <%=f.input :entry_type, collection: Accounting::Entry.entry_types.keys.to_a.map{ |a| [a.titleize, a]} %>
         <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
         <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]} %>
         <h4 class="title"> Debit </h4>

@@ -2,6 +2,14 @@ module Accounting
   class Entry < ActiveRecord::Base
     include PublicActivity::Common
     include PgSearch
+    enum entry_type:[:cash_advance,
+                     :disbursement,
+                     :fund_transfer,
+                   :salary_payment,
+                   :bank_withdraw,
+                   :bank_deposit,
+                   :invoice_payment,
+                   :cash_advance_payment]
     belongs_to :entriable, :polymorphic => true
     multisearchable :against => [:description]
     pg_search_scope :search_by_query, :against => [:description]

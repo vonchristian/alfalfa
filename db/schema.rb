@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606052613) do
+ActiveRecord::Schema.define(version: 20160607022412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,12 @@ ActiveRecord::Schema.define(version: 20160606052613) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+
+  create_table "add_date_to_line_items", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "amount_revisions", force: :cascade do |t|
     t.decimal  "amount"
@@ -254,10 +260,12 @@ ActiveRecord::Schema.define(version: 20160606052613) do
     t.datetime "updated_at",       null: false
     t.string   "reference_number"
     t.string   "type"
+    t.integer  "entry_type"
   end
 
   add_index "entries", ["entriable_id"], name: "index_entries_on_entriable_id", using: :btree
   add_index "entries", ["entriable_type"], name: "index_entries_on_entriable_type", using: :btree
+  add_index "entries", ["entry_type"], name: "index_entries_on_entry_type", using: :btree
 
   create_table "equipment", force: :cascade do |t|
     t.string   "plate_number"
@@ -427,7 +435,6 @@ ActiveRecord::Schema.define(version: 20160606052613) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "order_id"
-    t.decimal  "hauling_cost"
     t.decimal  "total_cost"
     t.decimal  "unit_cost"
     t.datetime "date"
@@ -477,12 +484,13 @@ ActiveRecord::Schema.define(version: 20160606052613) do
   create_table "orders", force: :cascade do |t|
     t.integer  "customer_id"
     t.string   "customer_type"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "payment_status", default: 1
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "payment_status",         default: 1
     t.datetime "date_issued"
     t.integer  "project_id"
     t.string   "name"
+    t.string   "equipment_plate_number"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
