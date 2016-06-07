@@ -121,7 +121,7 @@
             <% @fund_transfers.order(:date).reverse.each do |fund_transfer| %>
               <tr>
                 <td><%=number_to_currency fund_transfer.credit_amounts.sum(:amount) %></td>
-                <td><%=fund_transfer.credit_amounts.last.account.name %></td>
+                <td><%=link_to fund_transfer.credit_amounts.last.account.name, accounting_entry_path(fund_transfer) %></td>
                 <td><%=fund_transfer.date.strftime("%B %e, %Y") %></td>
               </tr>
             <% end %>
