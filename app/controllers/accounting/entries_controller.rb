@@ -65,16 +65,14 @@ module Accounting
       authorize @entry
       @entry.update(entry_params)
       if @entry.save
-        redirect_to @entry, notice: "Entry updated successfully."
+        redirect_to accounting_entry_path(@entry), notice: "Entry updated successfully."
       else
         render :edit
       end
     end
     private
     def entry_params
-      params.require(:accounting_entry).permit(:description, :type,  :date, :reference_number, :entriable_id, :entriable_type,
-                                    :credit_amounts_attributes=> [:amount, :account],
-                                    :debit_amounts_attributes=> [:amount, :account])
+      params.require(:accounting_entry).permit(:description,  :date, :reference_number, :entriable_id, :entriable_type, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account])
     end
   end
 end
