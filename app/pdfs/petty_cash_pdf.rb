@@ -43,22 +43,22 @@ class PettyCashPdf < Prawn::Document
 
   def previous_debit_balance
      if Transactions::FundTransfer.any?
-      @petty_cash.debits_balance({from_date: Transactions::FundTransfer.first.date, to_date: @from_date})
+      Account.find_by_name("Petty Cash").debits_balance({from_date: Transactions::FundTransfer.first.date, to_date: @from_date})
     end
   end
 
   def previous_credit_balance
      if Transactions::Disbursement.any?
-      @petty_cash.credits_balance({from_date: Transactions::Disbursement.first.date, to_date: @from_date})
+    Account.find_by_name("Petty Cash").credits_balance({from_date: Transactions::Disbursement.first.date, to_date: @from_date})
     end
   end
 
   def current_debit_balance
-    @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date})
+    Account.find_by_name("Petty Cash").debits_balance({from_date: @from_date, to_date: @to_date})
   end
 
   def current_credit_balance
-    @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date})
+  Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date})
   end
 
   def starting_balance
@@ -88,8 +88,8 @@ class PettyCashPdf < Prawn::Document
 
   def data_summary
       [["Starting Balance:", "#{(price starting_balance)}"],
-        ["Fund Transfer:", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"],
-        ["Disbursed:", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"],
+        ["Fund Transfer:", "#{(price Account.find_by_name("Petty Cash").debits_balance({from_date: @from_date, to_date: @to_date}))}"],
+        ["Disbursed:", "#{(price Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Outstanding Balance:", outstanding_balance]]
   end
 
@@ -116,8 +116,8 @@ class PettyCashPdf < Prawn::Document
   def fund_transfer_data
     move_down 5
     [["SOURCE ACCOUNT", "DESCRIPTION", "DATE", "AMOUNT"]] +
-    @fund_transfer_data ||= @petty_cash.debit_entries.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.credit_amounts.last.account.name, e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
-    @fund_transfer_data ||= [["", "", "TOTAL", "#{(price @petty_cash.debits_balance({from_date: @from_date, to_date: @to_date}))}"]]
+    @fund_transfer_data ||= Account.find_by_name("Petty Cash").debit_entries.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.credit_amounts.last.account.name, e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
+    @fund_transfer_data ||= [["", "", "TOTAL", "#{(price Account.find_by_name("Petty Cash").debits_balance({from_date: @from_date, to_date: @to_date}))}"]]
   end
 
   def display_petty_cash_table
@@ -137,7 +137,7 @@ class PettyCashPdf < Prawn::Document
   def table_data
     move_down 5
     [["RECIPIENT", "DESCRIPTION", "DATE", "AMOUNT"]] +
-    @table_data ||= @petty_cash.credit_entries.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.entriable.try(:name), e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
-    @table_data ||= [["", "", "TOTAL", "#{(price @petty_cash.credits_balance({from_date: @from_date, to_date: @to_date}))}"]]
+    @table_data ||= Account.find_by_name("Petty Cash").credit_entries.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.entriable.try(:name), e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
+    @table_data ||= [["", "", "TOTAL", "#{(price Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date}))}"]]
   end
 end

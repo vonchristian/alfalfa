@@ -27,7 +27,7 @@ module Accounting
       respond_to do |format|
         format.html
         format.pdf do
-          pdf = EntriesPdf.new(@entries, @from_date, @to_date, view_context)
+          pdf = PettyCashPdf.new(@entries, @from_date, @to_date, view_context)
             send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Entries Report.pdf"
         end
       end
