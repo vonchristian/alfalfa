@@ -50,12 +50,12 @@
       <div class="content">
         <div class="row">
         <div class="col-md-4">
-          <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance(from_date: @from_date, to_date: @to_date) %></center></span></h4>
-          <span class="text-success"><small><center> DEBITS </center></small></span>
+          <h4 class="title"><span class="text-success"><center><%=number_to_currency @petty_cash.debits_balance %></center></span></h4>
+          <span class="text-success"><small><center> CASH IN </center></small></span>
         </div>
         <div class="col-md-4">
-          <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance(from_date: @from_date, to_date: @to_date) %> </center></h4>
-          <span class="text-danger"><small><center>CREDITS</center></small></span>
+          <h4 class="title"><center class="text-danger"><%=number_to_currency @petty_cash.credits_balance %> </center></h4>
+          <span class="text-danger"><small><center>CASH OUT</center></small></span>
         </div>
         <div class="col-md-4">
           <h4 class="title"><center class="text-primary"><%=number_to_currency @petty_cash.balance(from_date: Time.zone.now.beginning_of_year, to_date: @to_date) %> </center></h4>
@@ -63,7 +63,9 @@
         </div>
         </div>
       </div>
+      <br>
     </div>
+
     <div class="card">
       <div class="header">
         <h4 class="title">Credit Transactions
