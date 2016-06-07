@@ -42,7 +42,7 @@ def heading
   def table_data
     move_down 5
     [["RECIPIENT", "DATE", "AMOUNT"]] +
-    @table_data ||= @entries.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.entriable.try(:name), e.date.strftime("%B %e, %Y"), (price e.debit_amounts.sum(:amount))]} +
+    @table_data ||= @entries.entered_on({from_date: @from_date, to_date: @to_date}).order(:date).reverse.map { |e| [e.entriable.try(:name), e.date.strftime("%B %e, %Y"), (price e.debit_amounts.sum(:amount))]} +
     @table_data ||= [["",  "TOTAL", "#{(price Account.find_by_name("Advances to Employees").balance({from_date: @from_date, to_date: @to_date}))}"]]
   end
 end

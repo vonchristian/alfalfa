@@ -116,7 +116,7 @@ class PettyCashPdf < Prawn::Document
   def fund_transfer_data
     move_down 5
     [["SOURCE ACCOUNT", "DESCRIPTION", "DATE", "AMOUNT"]] +
-    @fund_transfer_data ||= Account.find_by_name("Petty Cash").debit_entries.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.credit_amounts.last.account.name, e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
+    @fund_transfer_data ||= Account.find_by_name("Petty Cash").debit_entries.entered_on({from_date: @from_date, to_date: @to_date}).order(:date).reverse.map { |e| [e.credit_amounts.last.account.name, e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
     @fund_transfer_data ||= [["", "", "TOTAL", "#{(price Account.find_by_name("Petty Cash").debits_balance({from_date: @from_date, to_date: @to_date}))}"]]
   end
 
@@ -137,7 +137,7 @@ class PettyCashPdf < Prawn::Document
   def table_data
     move_down 5
     [["RECIPIENT", "DESCRIPTION", "DATE", "AMOUNT"]] +
-    @table_data ||= Account.find_by_name("Petty Cash").credit_entries.entered_on({from_date: @from_date, to_date: @to_date}).map { |e| [e.entriable.try(:name), e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
+    @table_data ||= Account.find_by_name("Petty Cash").credit_entries.entered_on({from_date: @from_date, to_date: @to_date}).order(:date).reverse.map { |e| [e.entriable.try(:name), e.description, e.date.strftime("%B %e, %Y"), (price e.credit_amounts.last.amount)]} +
     @table_data ||= [["", "", "TOTAL", "#{(price Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date}))}"]]
   end
 end
