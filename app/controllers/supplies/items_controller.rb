@@ -10,7 +10,7 @@ module Supplies
       @equipment = Equipment.find(params[:equipment_id])
       @item = @equipment.items.create(item_params)
       if @item.save
-        redirect_to supplies_equipment_path(@equipment), notice: "Item saved successfully."
+        redirect_to new_supplies_equipment_item_path(@equipment), notice: "Item saved successfully."
       else
         render :new
       end

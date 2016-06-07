@@ -30,6 +30,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <%= link_to "Back to Equipment", equipment_path(@equipment), class: 'btn btn-warning pull-left' %>
         <%=f.submit "Save", class: "btn btn-primary" %>
       </div>
       <% end %>
