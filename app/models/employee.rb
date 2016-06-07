@@ -48,7 +48,7 @@ class Employee < ActiveRecord::Base
     all.map{ |a| a.unpaid_cash_advances }.sum
   end
   def cash_advances
-    Transactions::CashAdvance.where(entriable: self)
+    Accounting::Entry.cash_advance.where(entriable: self)
   end
 
   def paid!
