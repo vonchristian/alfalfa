@@ -16,6 +16,7 @@
             <%=f.input :reference_number %>
           </div>
         </div>
+        <%=f.input :entry_type, collection: Accounting::Entry.entry_types.keys.to_a.map{ |a| [a.titleize, a]} %>
         <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
         <%#=f.input :entriable_id, label: "Recipient", collection: Employee.all.map {|a| [a.full_name, a.id]}, input_html: {id: "entry_entriable_id"} %>
         <%=f.input :entriable_id, label: "Recipient", collection: Employee.all.map {|a| [a.full_name, a.id]}, input_html: {id: "entry_entriable_id"} %>

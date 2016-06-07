@@ -14,6 +14,7 @@ module Employees
       @cash_advance = Transactions::CashAdvance.create(cash_advance_params)
       # authorize @cash_advance
       @cash_advance.entriable = @employee
+      @cash_advance.entry_type = 'cash_advance'
       if @cash_advance.save
         redirect_to @employee, notice: "Cash Advance recorded successfully."
       else

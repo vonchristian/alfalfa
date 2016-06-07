@@ -7,7 +7,7 @@
 				<div class="row"><hr></div>
 			</div>
 			<div class="content">
-				<%= f.input :date, as: :string, input_html: { class: 'date_picker'} %>
+				<%= f.input :date, as: :string, input_html: { class: 'datetimepicker'} %>
 				<%= f.input :description, input_html: { value: "Cash Advance of #{@employee.name}"}, as: :hidden  %>
 				<%=f.simple_fields_for :debit_amounts do |c| %>
 					<%=c.input :amount, input_html: { autocomplete: "off" }  %>

@@ -33,6 +33,9 @@ module Accounting
 
 
     before_save :set_default_date
+    def self.select_entries_for(entry_type)
+      self.all.where(entry_type = entry_type.to_s)
+    end
     def self.types
       ["CashAdvance", "Disbursement", "FundTransfer", "SalaryPayment", "BankWithdraw", "BankDeposit", "InvoicePayment", "CashAdvancePayment"]
     end

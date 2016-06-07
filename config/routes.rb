@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :accounts
     resources :cash_advances, only: [:show] do
       resources :payments, only: [:new, :create], module: :cash_advances
+        match "/scope_to_date" => "transactions/cash_advances#scope_to_date", as: :scope_to_date, via: [:get], on: :collection
     end
   end
   resources :projects, only: [:index] do

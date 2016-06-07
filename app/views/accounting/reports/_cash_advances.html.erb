@@ -1,0 +1,41 @@
+<div class="col-md-5">
+  <div class="card">
+    <div class="header">
+      <h4 class="title"> Cash Advances</h4>
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <li class="dropdown">
+              <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" aria-expanded="false">Show Activity <b class="caret"></b></button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><%=link_to 'This Day', scope_to_date_accounting_cash_advances_path(:from_date => Time.zone.now.beginning_of_day, :to_date => Time.zone.now.end_of_day, format: 'pdf') %></li>
+                <li> <%=link_to 'This Week', scope_to_date_accounting_cash_advances_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
+                <li> <%=link_to 'This Month', scope_to_date_accounting_cash_advances_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <%Account.find_by_name("Advances to Employees").entries.each do |entry| %>
+      <ul class="list-unstyled team-members">
+        <li>
+          <div class="row">
+            <div class="col-md-4">
+              <%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %> <%=entry.entriable.full_name %>
+            </div>
+            <div class="col-md-4">
+              <%=number_to_currency entry.debit_amounts.sum(:amount) %><br>
+              <%=entry.date.strftime("%B %e, %Y") %>
+            </div>
+            <div class="col-md-4">
+
+          </div>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
