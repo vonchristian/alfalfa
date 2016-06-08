@@ -33,6 +33,7 @@
         <%#=f.input :acquisition_date, label: false, placeholder: 'Acquisition Date', as: :string, input_html: {class: "datetimepicker"} %>
         <%=f.input :acquisition_cost, label: false, placeholder: 'Acquisition Cost' %>
         <%=f.input :plate_number, label: false, placeholder: 'Plate Number' %>
+        <%= f.input :employee_id, collection: Employee.operator, label: 'Operator' %>
         <br>
         <br>
         <div class="modal-footer">
@@ -43,3 +44,10 @@
     </div>
   </div>
 <% end %>
+<script>
+  $(document).ready(function() {
+    $("#equipment_employee_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

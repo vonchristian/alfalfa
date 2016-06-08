@@ -9,6 +9,7 @@ class Equipment < ActiveRecord::Base
   has_many :employees, through: :equipment_schedules
   delegate :full_name, to: :employee
   has_one :equipment_status
+  belongs_to :operator, class_name: 'Employee', foreign_key: 'employee_id'
   has_attached_file :photo,
                     styles: { large: "120x120>",
                     medium: "70x70>",
