@@ -15,7 +15,7 @@
       <%=link_to "Update", new_equipment_equipment_status_path(@equipment), class: "btn btn-xs btn-danger  pull-right" %>
     </p>
     <div class="row"><hr class="with-padding"></div>
-    <% if @equipment.operator.any? %>
+    <% if @equipment.operator.present? %>
       <p class="text-info">
         <%= image_tag @equipment.operator.profile_photo.url(:small), class: 'img circle' %>&nbsp
         <%= @equipment.operator.name %>
