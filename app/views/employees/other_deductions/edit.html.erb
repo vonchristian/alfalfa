@@ -1,0 +1,39 @@
+<div class="col-md-8 col-md-offset-2">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Item Details </h4>
+    </div>
+    <div class="content">
+      <%=simple_form_for [@employee, @item], url: :employee_other_deduction do |f| %>
+      <%=f.error_notification %>
+      <div class="row">
+        <div class="col-md-6">
+          <%=f.input :date, as: :string,  input_html: {class: "date_picker"} %>
+        </div>
+        <div class="col-md-6">
+          <%=f.input :reference_number %>
+        </div>
+      </div>
+        <%=f.input :description %>
+      <div class="row">
+        <div class="col-md-3">
+          <%=f.input :quantity, input_html: {oninput: "calculate_equipment_maintenance()", id: 'input1'} %>
+        </div>
+        <div class="col-md-3">
+          <%=f.input :unit%>
+        </div>
+        <div class="col-md-3">
+          <%=f.input :unit_cost, input_html: {oninput: "calculate_equipment_maintenance()", id: 'input2'} %>
+        </div>
+        <div class="col-md-3">
+          <%=f.input :total_cost, input_html: { id: 'total', readonly: true} %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Back to Employee", employee_path(@employee), class: 'btn btn-warning pull-left' %>
+        <%=f.submit "Save", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -87,7 +87,9 @@ Rails.application.routes.draw do
     resources :overtimes, only:[:new, :create], :module => :employees
     resources :educational_attainments, module: :employee_details
     resources :salaries, module: :employees
+    resources :other_deductions, only: [:new, :create, :edit, :update], module: :employees
   end
+  resources :other_deductions, only: [:edit, :update], module: :employees
 
   resources :users
 

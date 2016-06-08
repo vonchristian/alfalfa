@@ -33,10 +33,15 @@ class Employee < ActiveRecord::Base
   has_many :projects, through: :work_details
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
+  has_many :other_deductions, as: :itemable, class_name: "Item"
 
 
   has_many :overtimes, class_name: "Accounting::Employees::Overtime"
   enum employee_type:[:regular, :irregular]
+  def self.other_deductions
+    all.map{ |a| a.total_other_deductions }.sum
+  end
+
   def self.total_gross_pay
     all.map{ |a| a.total_gross_pay }.sum
   end
@@ -44,9 +49,15 @@ class Employee < ActiveRecord::Base
   def self.total_earned_income
     all.map{ |a| a.earned_income }.sum
   end
+
   def self.total_cash_advances
     all.map{ |a| a.unpaid_cash_advances }.sum
   end
+
+  def total_other_deductions
+    other_deductions.unpaid.sum(:total_cost)
+  end
+
   def cash_advances
     Accounting::Entry.cash_advance.where(entriable: self)
   end
@@ -54,6 +65,7 @@ class Employee < ActiveRecord::Base
   def paid!
     self.worked_days.unpaid.set_to_paid!
     self.overtimes.set_to_paid!
+    self.other_deductions.set_to_paid!
   end
 
   def unpaid_worked_days
@@ -122,10 +134,14 @@ class Employee < ActiveRecord::Base
 
   def total_gross_pay
     if self.worked_days.present?
-  earned_income - unpaid_cash_advances - contributions
-else
-  0
-end
+      earned_income - total_deductions
+    else
+      0
+    end
+  end
+
+  def total_deductions
+    unpaid_cash_advances + contributions + total_other_deductions
   end
 
   def contributions

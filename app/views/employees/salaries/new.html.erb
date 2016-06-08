@@ -95,6 +95,26 @@
 							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.sss_contribution %></h5>
 						</div>
 					</div>
+          <div class="row">
+						<div class="col-md-2 col-md-offset-2">
+								<h5 class="text-danger">Others</h5>
+						</div>
+						<div class="col-md-3">
+						</div>
+						<div class="col-md-2">
+							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.total_other_deductions %></h5>
+						</div>
+					</div>
+          <div class="row">
+						<div class="col-md-2 col-md-offset-2">
+								<small class="title"><b class="text-danger">Total Deductions</b></small>
+						</div>
+						<div class="col-md-3">
+						</div>
+						<div class="col-md-2">
+							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.total_deductions %></h5>
+						</div>
+					</div>
 					<hr>
 
           <div class="row">
