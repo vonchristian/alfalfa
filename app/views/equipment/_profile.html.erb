@@ -6,19 +6,20 @@
     <b class="title text-yellow"><%="#{@equipment.make_and_model}"%></b>
     <span class="btn btn-<%=@equipment.status_color%> btn-xs active pull-right"><%=@equipment.status%> </span>
     <br>
-    <span class="text-light-gray"><%=@equipment.plate_number %></span>
+    <span class="text-light-gray text-center"><%=@equipment.plate_number %></span>
   </div>
   <div class="content">
     <p class="">
-      <i class="fa fa-circle text-<%=@equipment.status_color%>"></i>
+      <i class="fa fa-circle text-<%=@equipment.status_color%> text-center"></i>
       <%=@equipment.equipment_status %>
       <%=link_to "Update", new_equipment_equipment_status_path(@equipment), class: "btn btn-xs btn-danger  pull-right" %>
     </p>
     <div class="row"><hr class="with-padding"></div>
     <% if @equipment.operator.present? %>
-      <p class="text-info">
+      <p>Operator</p>
+      <p class="text-info text-center">
         <%= image_tag @equipment.operator.profile_photo.url(:small), class: 'img circle' %>&nbsp
-        <%= @equipment.operator.name %>
+        <%= @equipment.operator.name %><br>
       </p>
     <% end %>
     <br>

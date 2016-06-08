@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     end
     resources :cash_flow, only: [:index]
     resources :accounts
+    resources :liabilities
+    resources :equities
+    resources :revenue
+    resources :assets
     resources :cash_advances, only: [:show] do
       resources :payments, only: [:new, :create], module: :cash_advances
         match "/scope_to_date" => "transactions/cash_advances#scope_to_date", as: :scope_to_date, via: [:get], on: :collection
@@ -95,14 +99,6 @@ Rails.application.routes.draw do
     resources :line_items, only: [:index], module: :contractors
   end
 
-
-  namespace :accounts do
-
-    resources :liabilities
-    resources :equities
-    resources :revenue
-    resources :assets
-  end
 
   resources :fund_transfers
 

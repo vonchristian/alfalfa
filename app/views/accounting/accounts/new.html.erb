@@ -14,7 +14,7 @@
   				<%=f.input :type, collection: ["Asset", "Liability", "Equity", "Expense", "Revenue"], as: :radio_buttons %>
 
   				<div class="modal-footer">
-            <%= link_to "Cancel", accounts_path, class: 'btn btn-xs pull-left' %>
+            <%= link_to "Cancel", accounting_accounts_path, class: 'btn btn-xs pull-left' %>
   				  <%=f.submit "Save Account", class: "btn btn-primary pull-right" %>
   			  </div>
         </div>
