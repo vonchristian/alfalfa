@@ -20,11 +20,9 @@
 
             <%=f.input :address, label: "Location", placeholder: "Contract Location" %>
             <%=f.input :implementing_office, label: "Implementing Office" %>
-            <% if @project.new_record? %>
+
               <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
-            <% else %>
-              <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
-            <% end %>
+          
             <div class="modal-footer">
               <% if @project.new_record? %>
               <%= link_to "Cancel", monitoring_projects_path, class: "btn btn-default pull-left" %>

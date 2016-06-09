@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         match "/scope_to_date" => "transactions/cash_advances#scope_to_date", as: :scope_to_date, via: [:get], on: :collection
     end
   end
+  resources :accounts, only:[:edit, :update], module: :accounting
   resources :projects, only: [:index] do
     resources :payments, only: [:index], module: :project_payments
   end

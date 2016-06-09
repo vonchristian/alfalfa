@@ -12,12 +12,19 @@ class Accounting::AccountsController < ApplicationController
   end
 
   def create
+    @accounts = Account.all.order(:type)
     @account = Account.create(account_params)
-    if @account.save
-      redirect_to accounting_account_path(@account), notice: "Account created successfully."
-    else
-      render :new
-    end
+  end
+
+  def edit
+    @account = Account.find(params[:id])
+  end
+
+  def update
+    @accounts = Account.all
+    @account = Account.find(params[:id])
+
+    @account.update_attributes(account_params)
   end
 
   def show
