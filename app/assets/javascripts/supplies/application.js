@@ -20,6 +20,7 @@
 //= require supplies/admin
 //= require supplies/dynamic_select
 //= require labor_cost
+//= require purchase_order
 //= require supplies/bootstrap-checkbox-radio
 //= require supplies/entries
 //= require supplies/equipment_cost

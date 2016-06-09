@@ -5,11 +5,11 @@
         <div class="col-md-12">
           <h4 class="title"><%=@inventory.name %>
           <% if @inventory.unavailable? %>
-            <span class="btn btn-danger btn-icon active pull-right"> Out of Stock </span>
+            <span class="btn btn-danger btn-fill active pull-right"> Out of Stock </span>
           <% elsif @inventory.discontinued? %>
-            <span class="btn btn-danger btn-icon active pull-right"> Discontinued </span>
+            <span class="btn btn-danger btn-fill active pull-right"> Discontinued </span>
             <% else %>
-            <span class="btn btn-success btn-icon active pull-right"> Available </span>
+            <span class="btn btn-success btn-fill active pull-right"> Available </span>
 
           <% end %>
           </h4>

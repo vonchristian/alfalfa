@@ -1,99 +1,143 @@
 <div class="row">
+  <div class="col-md-3">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
+        Filter <b class="caret"></b></button>
+        <ul class="dropdown-menu dropdown-menu-left">
+          <li>
+            <%=link_to "All", supplies_equipment_index_path %>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%=link_to "Active", active_supplies_equipment_index_path %>
+          </li>
+          <li>
+            <%=link_to "Inactive", inactive_supplies_equipment_index_path %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-6">
+    <%=form_tag supplies_equipment_index_path, method: :get do %>
+      <div class="input-group stylish-input-group">
+        <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search Equipment' %>
+        <span class="input-group-addon">
+          <button type="submit">
+            <span class=" glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <span><%= link_to "New Equipment", new_equipment_path, class: "btn btn-warning active pull-right" %></span>
+  </div>
+</div>
+
+<div class="row"><hr class="with-padding no-top-padding"></div>
+
+<div class="row">
   <div class="col-md-9">
-    <div class="row">
-        <div class="col-md-3">
-          <small class="text-uppercase text-light-gray">Filter:</small>
-          <span> <%=link_to 'Active', active_supplies_equipment_index_path, class: 'btn btn-success  btn-sm' %> </span>
-          <span> <%=link_to 'Inactive', inactive_supplies_equipment_index_path, class: 'btn btn-danger btn-sm' %> </span>
-          <span> <%=link_to 'All', supplies_equipment_index_path, class: 'btn btn-default btn-sm' %> </span>
-        </div>
-          <div class="col-sm-6">
-            <%=form_tag supplies_equipment_index_path, method: :get do %>
-              <div class="input-group stylish-input-group">
-                <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search Equipment' %>
-                <span class="input-group-addon">
-                  <button type="submit">
-                    <span class=" glyphicon glyphicon-search"></span>
-                  </button>
-                </span>
-              </div>
-            <% end %>
-          </div>
-          <div class="col-md-3">
-            <span><%= link_to "New Equipment", new_equipment_path, class: "btn btn-warning active" %></span>
-          </div>
-
-    </div>
-      <br>
-      <div class="col-md-12">
-        <div class="card card-project">
-          <div class="header">
-            <h4 class="title">Statistics</h4>
-          </div>
-          <div class="content">
-            <div class="col-md-4">
-              <ul class="list-unstyled team-members">
-                <li>
-                  <div class="row">
-                    <div class="col-md-6">
-                      Equipment
-                    </div>
-                    <div class="col-md-6">
-                      <span class="pull-right"><span class="label label-default"><%=Equipment.count %></span></span>
-                    </div>
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Statistics</h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-4">
+            <ul class="list-unstyled team-members">
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    Equipment
                   </div>
-                </li>
-                <li>
-                  <div class="row">
-                    <div class="col-md-6">
-                      Active
-                    </div>
-                    <div class="col-md-6">
-                      <span class="pull-right"><span class="label label-success"><%=Equipment.active.count %></span></span>
-                    </div>
+                  <div class="col-md-6">
+                    <span class="pull-right"><span class="label label-default"><%=Equipment.count %></span></span>
                   </div>
-                </li>
-                <li>
-                  <div class="row">
-                    <div class="col-md-6">
-                      Inactive
-                    </div>
-                    <div class="col-md-6">
-                      <span class="pull-right"><span class="label label-danger"><%=Equipment.inactive.count %></span></span>
-                    </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    Active
                   </div>
-                </li>
-              </ul>
-
-              <hr>
-            </div>
-            <div class="col-md-8">
-              Fuel and Lubrication <br>
-              Repairs and Maintenance <br>
-              Taxes and Insurance <br>
-              <hr>
-            </div>
+                  <div class="col-md-6">
+                    <span class="pull-right"><span class="label label-success"><%=Equipment.active.count %></span></span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    Inactive
+                  </div>
+                  <div class="col-md-6">
+                    <span class="pull-right"><span class="label label-danger"><%=Equipment.inactive.count %></span></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-7 col-md-offset-1">
+            <ul class="list-unstyled team-members">
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    Fuel and Lubrication
+                  </div>
+                  <div class="col-md-6">
+                    <span class="pull-right"><span class="label label-default"><%=Equipment.count %></span></span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    Repairs and Maintenance
+                  </div>
+                  <div class="col-md-6">
+                    <span class="pull-right"><span class="label label-default"><%=Equipment.count %></span></span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-md-6">
+                    Taxes and Insurance
+                  </div>
+                  <div class="col-md-6">
+                    <span class="pull-right"><span class="label label-default"><%=Equipment.count %></span></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-        <%=render @equipments %>
-
+    </div>
+    <div class="row">
+      <%=render @equipments %>
+    </div>
   </div>
   <div class="col-md-3">
-    Operators
-    <% Employee.operator.each do |employee| %>
-      <ul class="list-unstyled team-members">
-        <li>
-          <div class="row">
-            <div class="col-md-3">
-              <%=image_tag(employee.profile_photo.url(:thumb), class: "img-circle") %>
-            </div>
-            <div class="col-md-9">
-              <%=employee.full_name %>
-            </div>
-          </div>
-        </li>
-      </ul>
-    <% end %>
+    <div class="card">
+      <div class="header">
+        <h5 class="title">Operators</h5>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-hover">
+          <% Employee.operator.each do |employee| %>
+            <tr>
+              <td><%=image_tag(employee.profile_photo.url(:thumb), class: "img-circle") %></td>
+              <td><%=employee.first_name %><br><%=employee.last_name %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

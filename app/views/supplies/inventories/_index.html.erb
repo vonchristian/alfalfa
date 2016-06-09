@@ -1,12 +1,27 @@
 
   <div class="row">
     <div class="col-md-4">
-      <small class="text-light-gray"> FILTER: </small>
-      <span><%=link_to "All", supplies_inventories_path, class: "btn btn-default btn-xs" %></span>
-      <span><%=link_to "Available", available_supplies_inventories_path, class: "btn btn-success btn-xs" %></span>
-      <span><%=link_to "Out of Stock", out_of_stock_supplies_inventories_path, class: "btn btn-warning btn-xs" %></span>
-      <span><%=link_to "Discontinued", discontinued_supplies_inventories_path, class: "btn btn-danger btn-xs" %></span>
-      <br>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
+          Filter <b class="caret"></b></button>
+          <ul class="dropdown-menu dropdown-menu-left">
+            <li>
+              <%=link_to "All", supplies_inventories_path %>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <%=link_to "Available", available_supplies_inventories_path %>
+            </li>
+            <li>
+              <%=link_to "Out of Stock", out_of_stock_supplies_inventories_path %>
+            </li>
+            <li>
+              <%=link_to "Discontinued", discontinued_supplies_inventories_path %>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
     <div class="col-md-4">
       <%=form_tag supplies_inventories_path, method: :get do %>
@@ -45,7 +60,14 @@
               <tbody>
                 <% @inventories.each do |inventory| %>
                   <tr class="<%="text-danger" if inventory.out_of_stock?%>">
-                    <td class="text-uppercase"><%=link_to inventory.name, inventory %></td>
+                    <td class="text-uppercase">
+                      <% if inventory.unavailable? %>
+                        <span class="label label-danger pull-right"> Out of Stock </span>
+                      <% elsif inventory.discontinued? %>
+                        <span class="label label-danger pull-right"> Discontinued </span>
+                      <% end %><br>
+                      <%=link_to inventory.name, inventory %>
+                    </td>
                     <td> <%=inventory.unit %>
                     <td><%=inventory.stocks.sum(:quantity) %></td>
                     <td><%=inventory.line_items.sum(:quantity) %></td>
@@ -55,14 +77,10 @@
                       <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
                         <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
                       <% end %>
-                    </td>
-                    <td>
                       <% if inventory.unavailable? %>
-                        <span class="btn btn-default btn-xs pull-right"> Out of Stock </span>
-                        <span><%=link_to "DISCONTINUE", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id), class: "btn btn-danger btn-sm active", data: {confirm: "Are you sure you want to discontinue this inventory?"} %>
+                        <%=link_to "DISCONTINUE", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id), class: "btn btn-danger btn-sm active", data: {confirm: "Are you sure you want to discontinue this inventory?"} %>
                       <% elsif inventory.discontinued? %>
-                        <span><%=link_to "ACTIVATE", supplies_inventory_continue_path(id: inventory.id, inventory_id: inventory.id), class: " btn btn-success btn-sm active", data: {confirm: "Are you sure you want to continue this inventory?"} %>
-                        <span class="btn btn-danger btn-xs pull-right"> Discontinued </span>
+                        <%=link_to "ACTIVATE", supplies_inventory_continue_path(id: inventory.id, inventory_id: inventory.id), class: " btn btn-success active", data: {confirm: "Are you sure you want to continue this inventory?"} %>
                       <% end %>
                     </td>
                   </tr>

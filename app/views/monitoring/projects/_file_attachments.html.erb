@@ -14,7 +14,6 @@
       <thead>
         <tr>
           <th>Filename</th>
-          <th>Description</th>
           <th>Date</th>
           <th></th>
         </tr>
@@ -23,7 +22,6 @@
         <% @project.file_attachments.each do |file| %>
           <tr>
             <td><%= link_to file.attached_file_file_name, monitoring_file_attachment_path(file), target: '_blank' %></td>
-            <td><%= file.description %></td>
             <td><%= file.date.strftime("%B %e, %Y") %></td>
             <td>
               <%= link_to file.attached_file.url, target: '_blank', title: "Download" do %>

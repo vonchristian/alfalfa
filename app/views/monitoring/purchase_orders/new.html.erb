@@ -6,16 +6,16 @@
     </div>
     <div class="content">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
           <%=simple_form_for [@project, @purchase_order], url: :monitoring_project_purchase_orders do |f| %>
             <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
             <%=f.input :description, as: :text %>
-            <%=f.input :quantity %>
+            <%=f.input :quantity, input_html: {oninput: "calculate_purchase_order()", id: 'quantity'} %>
             <%=f.input :unit %>
-            <%=f.input :unit_cost %>
-            <%=f.input :amount %>
+            <%=f.input :unit_cost, input_html: {oninput: "calculate_purchase_order()" , id: 'unit_cost'} %>
+            <%=f.input :amount, label: 'Total Amount', input_html: {id: "total_amount", readonly: true} %>
             <div class="modal-footer">
               <%= link_to 'Cancel', monitoring_project_path(@project), class: 'btn btn-default pull-left' %>
               <%=f.submit "Save", class: "btn btn-primary" %>
