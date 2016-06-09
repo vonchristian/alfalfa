@@ -25,7 +25,7 @@ module Monitoring
       authorize @bid_expense
       if @bid_expense.save
         # @bid_expense.create_activity :create, owner: current_user, recipient: @project
-        redirect_to monitoring_project_path(@project), notice: "Bid Expense saved successfully."
+        redirect_to new_monitoring_project_bid_expense_path(@project), notice: "Bid Expense saved successfully."
       else
         render :new
       end

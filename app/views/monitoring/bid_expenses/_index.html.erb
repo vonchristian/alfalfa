@@ -11,9 +11,15 @@
 			<tr>
 				<td><%= bid_expense.date.strftime("%B %e, %Y") if bid_expense.date.present? %></td>
 				<td><%= bid_expense.description %></td>
-				<td><%= number_to_currency bid_expense.amount %></td>
+				<td class="text-right"><%= number_to_currency bid_expense.amount %></td>
 			</tr>
 		<% end %>
 	</tbody>
+	<tfoot>
+		<tr>
+			<th colspan="2" class="text-right">Total:</th>
+			<th class="text-right"><%= number_to_currency @project.bid_expenses.sum(:amount) if @project.bid_expenses.present? %></th>
+		</tr>
+	</tfoot>
 </table>
 			

@@ -29,6 +29,12 @@
 							</tr>
 						<% end %>
 					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="2" class="text-right">Total:</th>
+							<th colspan="2"><%= number_to_currency @project.bid_expenses.sum(:amount) if @project.bid_expenses.present? %></th>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		</div>
