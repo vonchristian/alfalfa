@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608163438) do
+ActiveRecord::Schema.define(version: 20160609012948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,17 @@ ActiveRecord::Schema.define(version: 20160608163438) do
   end
 
   add_index "attachment_files", ["project_id"], name: "index_attachment_files_on_project_id", using: :btree
+
+  create_table "bid_expenses", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "description"
+    t.decimal  "amount"
+    t.datetime "date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "bid_expenses", ["project_id"], name: "index_bid_expenses_on_project_id", using: :btree
 
   create_table "billable_materials", force: :cascade do |t|
     t.integer  "contractor_id"
@@ -700,6 +711,7 @@ ActiveRecord::Schema.define(version: 20160608163438) do
 
   add_foreign_key "accomplishment_images", "work_accomplishments"
   add_foreign_key "attachment_files", "projects"
+  add_foreign_key "bid_expenses", "projects"
   add_foreign_key "billable_materials", "contractors"
   add_foreign_key "billable_materials", "inventories"
   add_foreign_key "billable_materials", "projects"

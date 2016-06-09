@@ -1,7 +1,7 @@
 module Monitoring
   class FileAttachmentsController < ApplicationController
     # before_action :set_file_attachment, only: [:edit, :update]
-  layout "monitoring"
+    layout "monitoring"
     def new
       @project = Project.find(params[:project_id])
       @file_attachment = @project.file_attachments.build
