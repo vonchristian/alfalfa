@@ -22,6 +22,8 @@
             <%=f.input :implementing_office, label: "Implementing Office" %>
             <% if @project.new_record? %>
               <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
+            <% else %>
+              <%=f.input :main_contractor_id, collection: Contractor.main_contractors.map{|a| [a.company.titleize, a.id]}, as: :radio_buttons, label: "Main Contractor" %>
             <% end %>
             <div class="modal-footer">
               <% if @project.new_record? %>

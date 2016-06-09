@@ -7,7 +7,7 @@ class ProjectDecorator < Draper::Decorator
 
   def expiry_date
     if notice_to_proceed.present?
-      ((self.notice_to_proceed.date.to_date) + (self.duration)).strftime("%B %e, %Y")
+      ((self.notice_to_proceed.date.to_date + 7.days) + (self.duration)).strftime("%B %e, %Y")
     else
       "No NTP"
     end

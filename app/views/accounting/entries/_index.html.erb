@@ -20,17 +20,18 @@
 </div>
 <div class="row">
   <div class="col-md-3">
-  	<ul class="nav navbar-nav">
-      <li class="dropdown">
-      	<li class="dropdown">
-        <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" aria-expanded="false">Show Activity <b class="caret"></b></button>
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li><%=link_to 'This Day', scope_to_date_accounting_entries_path(:from_date => Time.zone.now.beginning_of_day, :to_date => Time.zone.now.end_of_day, format: 'pdf') %></li>
-			    <li> <%=link_to 'This Week', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
-			    <li> <%=link_to 'This Month', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
-        </ul>
-      </li>
-    </ul>
+  	<div class="pull-right">
+	  	<ul class="nav navbar-nav">
+	      <li class="dropdown">
+	        <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" aria-expanded="false">Show Activity <b class="caret"></b></button>
+	        <ul class="dropdown-menu dropdown-menu-right">
+	          <li><%=link_to 'This Day', scope_to_date_accounting_entries_path(:from_date => Time.zone.now.beginning_of_day, :to_date => Time.zone.now.end_of_day, format: 'pdf') %></li>
+				    <li> <%=link_to 'This Week', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
+				    <li> <%=link_to 'This Month', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
   </div>
   <div class="col-md-9">
     <%= form_tag({:action => 'index'}, {:method => :get})  do %>

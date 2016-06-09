@@ -193,7 +193,7 @@ class Project < ActiveRecord::Base
 
   def revised_expiry_date
    if notice_to_proceed.present? && time_extensions.present?
-      self.notice_to_proceed.date + self.revised_duration.days
+      self.notice_to_proceed.date + self.revised_duration.days + 7.days
     end
   end
 
