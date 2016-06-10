@@ -1,0 +1,10 @@
+<%= simple_form_for [@project, @bid_expense], url: :monitoring_project_bid_expenses do |f| %>
+<%=f.error_notification %>
+	<%=f.input :date, as: :string, label: 'Date', input_html: { class: 'datetimepicker'} %>
+	<%=f.input :description, label: 'Description' %>
+	<%=f.input :amount,  label: 'Amount' %>
+	<div class="modal-footer">
+    <%=f.submit "Save Bid Expense", class: "btn btn-primary pull-right" %>
+    <%=link_to "Back to Project", monitoring_project_path(@project) , class: "btn btn-default pull-left"%>
+  </div>
+<% end %>

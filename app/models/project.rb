@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
   has_many :file_attachments
+  has_many :bid_expenses
 
   has_many :costs
   has_many :labor_costs, class_name: "DirectCosts::Labor"
@@ -47,7 +48,7 @@ class Project < ActiveRecord::Base
   end
 
   def total_direct_costs
-    costs.total + direct_material_costs
+    costs.total + direct_material_costs + bid_expenses.sum(:amount) if bid_expenses.present?
   end
 
   def id_number_and_location
