@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       match "/scope_to_date" => "entries#scope_to_date", as: :scope_to_date, via: [:get], on: :collection
     end
     resources :cash_flow, only: [:index]
+    resources :expenses, only: [:index]
     resources :accounts
     resources :liabilities
     resources :equities

@@ -1,29 +1,32 @@
-<%= simple_form_for @work_detail, url: :monitoring_work_detail do |f| %>
-<%=f.error_notification %>
+
 	<div class="col-md-5 col-md-offset-3">
 		<div class="card">
 			<div class="header">
 				<h4 class="title">Edit Work Details</h4>
 				<div class="row"><hr></div>
 			</div>
-		  <div class="content">
-		   	<%=f.input :code %>
-		  	<%=f.input :description, as: :text, input_html: {rows: 3} %>
-		    <div class="row">
-		      <div class="col-md-6">
-		        <%=f.input :unit, placeholder: 'Unit' %>
-		      </div>
-		      <div class="col-md-6">
-		        <%=f.input :quantity,  placeholder: 'Quantity', input_html:{id: "quantity", oninput: "calculate()"} %>
-		      </div>
-		    </div>
-		    <%=f.input :unit_cost, input_html:{id: "unit_price", oninput: "calculate()"}  %>
-		   	<%=f.input :total_cost, readonly: true ,  input_html:{id: "amount"}%>
-		    <div class="modal-footer">
-	    		<%= link_to 'Cancel', monitoring_work_detail_path(@work_detail), class: 'btn btn-xs pull-left' %>
-	      	<%=f.submit "Update Work Detail", class: "btn btn-primary" %>
-	      </div>
-	    </div>
+      <div class="content">
+      <%= simple_form_for @work_detail, url: :monitoring_work_detail do |f| %>
+        <%=f.error_notification %>
+
+          <%=f.input :code,  placeholder: 'Code' %>
+          <%=f.input :description, placeholder: 'Description', as: :text, input_html:{rows: 3} %>
+          <div class="row">
+            <div class="col-md-6">
+              <%=f.input :unit, placeholder: 'Unit' %>
+            </div>
+            <div class="col-md-6">
+              <%=f.input :quantity,  placeholder: 'Quantity', input_html: {id: "work_detail_quantity", oninput: "calculateWorkDetailCost()"} %>
+            </div>
+          </div>
+          <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html: {id: "work_detail_unit_cost", oninput: "calculateWorkDetailCost()"}  %>
+          <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html: {id: "work_detail_total_cost"}%>
+          <div class="modal-footer">
+            <%=f.submit "Save Work Detail", class: "btn btn-primary pull-right" %>
+            <%=link_to "Back to Project", monitoring_work_detail_path(@work_detail) , class: "btn btn-default pull-left"%>
+          </div>
+      <% end %>
+    </div>
+
 		</div>
 	</div>
-<% end %>
