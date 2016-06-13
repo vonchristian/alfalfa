@@ -50,7 +50,7 @@ Rails.application.routes.draw do
       resources :work_details, only:[:new, :create, :index, :update, :destroy]
       resources :time_extensions, only: [:new, :create]
       resources :contracts, only: [:new, :create]
-      resource :notice_to_proceed, only: [:new, :create, :edit, :update]
+      resources :notice_to_proceeds, only: [:new, :create, :edit, :update]
       resources :payments, only: [:new, :create, :index]
       resources :amount_revisions, only: [:index]
       resources :time_extensions, only: [:index]

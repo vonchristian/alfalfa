@@ -16,29 +16,22 @@ module Monitoring
     end
 
     def create
+      @contractors = Contractor.all
       @contractor = Contractor.create(contractor_params)
-      if @contractor.save
-        redirect_to monitoring_contractor_path(@contractor), notice: "Contractor saved successfully."
-      else
-        render :new
-      end
     end
 
     def show
       @contractor = Contractor.find(params[:id])
     end
+
     def edit
       @contractor = Contractor.find(params[:id])
     end
 
     def update
+      @contractors = Contractor.all
       @contractor = Contractor.find(params[:id])
       @contractor.update(contractor_params)
-      if @contractor.save
-        redirect_to monitoring_contractor_url(@contractor), notice: "Contractor updated successfully."
-      else
-        render :edit
-      end
     end
 
     private

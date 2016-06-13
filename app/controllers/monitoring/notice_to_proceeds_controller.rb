@@ -10,7 +10,7 @@ module Monitoring
 
     def edit
       @project = Project.find(params[:project_id])
-      @notice_to_proceed = @project.build_notice_to_proceed
+      @notice_to_proceed = ProjectDetails::NoticeToProceed.find(params[:id])
       authorize @notice_to_proceed
     end
 
@@ -18,25 +18,13 @@ module Monitoring
       @project = Project.find(params[:project_id])
       @notice_to_proceed = @project.create_notice_to_proceed(notice_to_proceed_params)
       authorize @notice_to_proceed
-      if @notice_to_proceed.save
-       @notice_to_proceed.create_activity :create, owner: current_user, recipient: @project
-        redirect_to monitoring_project_path(@project), notice: "Notice to Proceed saved successfully."
-      else
-        render :new
-      end
     end
 
     def update
       @project = Project.find(params[:project_id])
       @notice_to_proceed = ProjectDetails::NoticeToProceed.find(params[:id])
       authorize @notice_to_proceed
-       @notice_to_proceed.update(notice_to_proceed_params)
-       if @notice_to_proceed.save
-        @notice_to_proceed.create_activity :update, owner: current_user, recipient: @project
-        redirect_to @notice_to_proceed.project, notice: "Notice to Proceed updated successfully."
-      else
-        render :edit
-      end
+      @notice_to_proceed.update(notice_to_proceed_params)
     end
 
     private
