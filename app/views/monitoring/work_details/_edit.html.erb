@@ -1,7 +1,7 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title"><%= "Editing #{@work_detail.description}" %></h4>
+      <h4 class="modal-title">Update Work Detail</h4>
     </div>
     <%= simple_form_for [:monitoring, @project, @work_detail], remote: true do |f| %>
     <%=f.error_notification %>
@@ -23,7 +23,7 @@
       </div>
       <div class="modal-footer">
         <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
-        <%=f.submit "Update", class: "btn btn-primary pull-right" %>
+        <%=f.submit "Update", class: "btn btn-primary active" %>
       </div>
     <% end %>
   </div>
