@@ -1,29 +1,29 @@
+
+  
 <div class="row">
+
   <div class="col-md-4">
+  
     <div class="card">
       <div class="header">
         <div class="row">
-          <div class="col-md-2 col-xs-2">
-            <h5 class="title" title="Back to Project" data-toggle="tooltip" data-placement="bottom"> <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle"), monitoring_project_path(@work_detail.project) %>
+          <div class="col-md-2">
+            <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle", title: "Back to Project", data: {toggle: "tooltip", placement: "bottom"}), monitoring_project_path(@work_detail.project) %>
           </div>
-          <div class="col-md-7 col-xs-7">
-            <%=@work_detail.description %></h5>
+          <div class="col-md-8">
+            <h5 class="text-center"><%=@work_detail.description %></h5>
+            <h5 class="text-success text-center"><%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> % </h5>
           </div>
-          <div class="col-md-3 col-xs-3">
-            <span class="pull-right">
-              <small class="text-success"><%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> % </small>
-            </span>
+          <div class="col-md-2">
           </div>
         </div>
-        <div class="row"><hr></div>
+        <div class="row"><hr class="no-top-padding"></div>
       </div>
       <div class="content">
         <ul class="list-unstyled team-members">
           <li>
             <div class="row">
-              <div class="col-md-2">
-              </div>
-              <div class="col-md-6 text-success">
+              <div class="col-md-8 text-success">
                 <%=image_tag("check_icon.png", height: 30, width: 30, class: "img-square" )%> &nbsp; Accomplished
               </div>
               <div class="col-md-4">
@@ -33,9 +33,7 @@
           </li>
           <li>
             <div class="row">
-              <div class="col-md-2">
-              </div>
-              <div class="col-md-6 text-danger">
+              <div class="col-md-8 text-danger">
                 <%=image_tag("remaining.png", height: 30, width: 30, class: "img-square" )%>  &nbsp; Remaining
               </div>
               <div class="col-md-4">

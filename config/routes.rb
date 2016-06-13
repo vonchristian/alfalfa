@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :equipment, only: [:index, :show]
     resources :file_attachments, only: [:show]
     resources :projects, except:[:destroy] do
-      resources :work_details, only:[:new, :create, :index]
+      resources :work_details, only:[:new, :create, :index, :update, :destroy]
       resources :time_extensions, only: [:new, :create]
       resources :contracts, only: [:new, :create]
       resource :notice_to_proceed, only: [:new, :create, :edit, :update]

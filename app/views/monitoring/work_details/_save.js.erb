@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @work_detail.errors.any? %>
+  <% @work_detail.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $(".work-detail-index").html("<%= escape_javascript(render 'index') %>")
+  $("#work-detail-modal").modal("hide")
+<% end %>

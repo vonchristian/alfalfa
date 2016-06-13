@@ -20,14 +20,9 @@ module Monitoring
 
     def create
       @project = Project.find(params[:project_id])
+      @work_details = WorkDetail.all
       @work_detail = @project.work_details.create(work_detail_params)
       authorize @work_detail
-      if @work_detail.save
-        @work_detail.create_activity :create, owner: current_user, recipient: @work_detail
-        redirect_to new_monitoring_project_work_detail_path(@project), notice: "Work Detail saved successfully."
-      else
-        render :new
-      end
     end
 
     def edit
@@ -37,20 +32,14 @@ module Monitoring
 
     def update
       @work_detail = WorkDetail.find(params[:id])
-      authorize @work_detail
-      if @work_detail.update(work_detail_params)
-        redirect_to monitoring_project_path(@work_detail.project), notice: "Work detail updated successfully."
-      else
-        render :new
-      end
+      @work_details = WorkDetail.all
+      @work_detail.update_attributes(work_detail_params)
     end
 
     def destroy
       @project = Project.find(params[:project_id])
       @work_detail = WorkDetail.find(params[:id])
-        authorize @work_detail
-      @work_detail.destroy
-      redirect_to root_path, notice: "Work Detail has been deleted."
+      authorize @work_detail
     end
 
     def show

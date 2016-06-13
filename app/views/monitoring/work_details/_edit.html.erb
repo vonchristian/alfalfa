@@ -1,0 +1,30 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title"><%= "Editing #{@work_detail.description}" %></h4>
+    </div>
+    <%= simple_form_for [:monitoring, @project, @work_detail], remote: true do |f| %>
+    <%=f.error_notification %>
+      <div class="modal-body">
+        <ul class="errors text-danger">
+        </ul>
+        <%=f.input :code,  placeholder: 'Code' %>
+        <%=f.input :description, placeholder: 'Description', as: :text, input_html:{rows: 2} %>
+        <div class="row">
+          <div class="col-md-6">
+            <%=f.input :unit, placeholder: 'Unit' %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :quantity,  placeholder: 'Quantity', input_html: {id: "work_detail_quantity", oninput: "calculateWorkDetailCost()"} %>
+          </div>
+        </div>
+        <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html: {id: "work_detail_unit_cost", oninput: "calculateWorkDetailCost()"}  %>
+        <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html: {id: "work_detail_total_cost"}%>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+        <%=f.submit "Update", class: "btn btn-primary pull-right" %>
+      </div>
+    <% end %>
+  </div>
+</div>
