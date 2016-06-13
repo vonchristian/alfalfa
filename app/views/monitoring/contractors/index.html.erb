@@ -13,34 +13,12 @@
     <% end %>
   </div>
   <div class="col-md-6">
-    <%=link_to new_monitoring_contractor_path, title: "New Contractor" do %>
+    <%=link_to new_monitoring_contractor_path, title: "New Contractor", remote: true do %>
       <span class="btn btn-primary btn-icon pull-right" data-toggle="tooltip" data-placement="bottom" title="New Contractor"><i class="fa fa-user-plus"></i> New Contractor </span>
     <% end %>
   </div>
 </div>
-<div class="content">
-  <%@contractors.each do |contractor| %>
-    <%=link_to monitoring_contractor_path(contractor) do %>
-      <div class="col-md-4">
-        <div class="card card-user">
-          <div class="image">
-            <%= image_tag "hero.jpg", class: "img-square center-block", alt: "contractor profile picture" %>
-          </div>
-          <div class="content">
-            <div class="author">
-              <%= image_tag contractor.profile_photo.url(:medium), class: "avatar border-white", alt: "contractor profile picture" %>
-              <h4 class="title"><%=contractor.full_name %><br />
-                <small><%=contractor.position %></small>
-              </h4>
-            </div>
-            <br>
-            <p class="description text-center">
-              <%=contractor.company %>
-            </p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <%end %>
+<div class="content ">
+  <%= render 'index' %>
 </div>
-      
+<div id="contractor-modal" class="modal fade"></div>

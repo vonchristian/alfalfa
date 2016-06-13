@@ -17,7 +17,7 @@
         </p>
         <div class="modal-footer">
           <div class="col-md-8 col-md-offset-2">
-            <%=link_to "Update", edit_monitoring_contractor_path(@contractor), class: "btn btn-primary btn-block" %>
+            <%=link_to "Update", edit_monitoring_contractor_path(@contractor), class: "btn btn-primary btn-block", remote: true %>
           </div>
         </div>
       </div>
@@ -104,3 +104,4 @@
     </div>
   </div>
 </div>
+<div id="contractor-modal" class="modal fade"></div>

@@ -5,6 +5,7 @@
       <h4 class="modal-title">New Account</h4>
     </div>
     <%= simple_form_for [:accounting, @account], url: :accounting_accounts, remote: true, html: { style: "display:inline;" } do |f| %>
+    <%=f.error_notification %>
       <div class="modal-body">
         <div class="form-group">
           <%=f.input :name %>
