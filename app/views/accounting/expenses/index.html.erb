@@ -1,9 +1,36 @@
+<div class="card">
+  <div class="header">
+    <h4 class="title">Expenses Activity
+    <%=link_to "New Expense", new_accounting_expense_path, class: "btn btn-danger pull-right" %>
+    </h4>
+  </div>
+  <div class="content">
 
-
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Project</a></li>
-  <li role="presentation"><a href="#">Equipment</a></li>
-  <li role="presentation"><a href="#">Utilities</a></li>
-  <li role="presentation"><a href="#">Overhead</a></li>
-
-</ul>
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li class="active"><a href="#employee" data-toggle="tab">Employee</a></li>
+            <li><a href="#orange" data-toggle="tab">Project</a></li>
+            <li><a href="#yellow" data-toggle="tab">Equipment</a></li>
+            <li><a href="#green" data-toggle="tab">Others</a></li>
+        </ul>
+        <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="employee">
+                <h4 class="title">Employee</h4>
+                <p>red red red red red red</p>
+            </div>
+            <div class="tab-pane" id="orange">
+                <h1>Orange</h1>
+                <p>orange orange orange orange orange</p>
+            </div>
+            <div class="tab-pane" id="yellow">
+                <h1>Yellow</h1>
+                <p>yellow yellow yellow yellow yellow</p>
+            </div>
+            <div class="tab-pane" id="green">
+                <h1>Green</h1>
+                <p>green green green green green</p>
+            </div>
+            <div class="tab-pane" id="blue">
+                <h1>Blue</h1>
+                <p>blue blue blue blue blue</p>
+            </div>
+        </div>

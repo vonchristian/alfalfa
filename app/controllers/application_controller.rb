@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
       accounting_index_url
     elsif current_user.is_a?(User) && current_user.monitoring_officer?
       monitoring_index_url
+    elsif current_user.is_a?(User) && current_user.system_administrator?
+      :back
     end
   end
 
