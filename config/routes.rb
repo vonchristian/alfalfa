@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :reports, only:[:index]
     resources :balance_sheet, only:[:index]
     resources :income_statement, only:[:index]
-    resources :entries, except:[:destroy] do
+    resources :entries do
       match "/scope_to_date" => "entries#scope_to_date", as: :scope_to_date, via: [:get], on: :collection
     end
     resources :cash_flow, only: [:index]

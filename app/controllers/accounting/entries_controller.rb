@@ -70,6 +70,13 @@ module Accounting
         render :edit
       end
     end
+
+    def destroy
+      @entry = Accounting::Entry.find(params[:id])
+      if @entry.destroy
+        redirect_to accounting_entries_path, notice: 'Deletion successful.'
+      end
+    end
     private
     def entry_params
       params.require(:accounting_entry).permit(:description, :entry_type,  :date, :reference_number, :entriable_id, :entriable_type, :credit_amounts_attributes=> [:id, :amount, :account],:debit_amounts_attributes=> [:id, :amount, :account])

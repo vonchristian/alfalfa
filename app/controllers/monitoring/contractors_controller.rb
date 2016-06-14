@@ -31,7 +31,7 @@ module Monitoring
     def update
       @contractors = Contractor.all
       @contractor = Contractor.find(params[:id])
-      @contractor.update(contractor_params)
+      @contractor.update_attributes(contractor_params)
     end
 
     private

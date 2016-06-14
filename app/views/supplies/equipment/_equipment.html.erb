@@ -7,7 +7,8 @@
       <div class="header">
         <b class="title text-yellow"><%="#{equipment.make_and_model}"%></b>
         <span class="btn btn-<%=equipment.status_color%> btn-xs active pull-right"><%=equipment.status%> </span><br>
-        <span class="text-light-gray"><%=equipment.plate_number %></span>
+        <span class="text-light-gray"><%=equipment.plate_number %></span><br>
+        <span class=""><%=equipment.operator.name if equipment.operator.present? %></span>
       </div>
       <div class="content">
         <div class="card-footer">

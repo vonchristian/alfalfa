@@ -29,6 +29,7 @@ gem "coffee-rails"
 gem "select2-rails"
 gem 'mina-puma', :require => false
 gem 'validates_timeliness', '~> 4.0'
+gem 'remotipart'
 
 group :production do
   gem 'pg',  group: :development

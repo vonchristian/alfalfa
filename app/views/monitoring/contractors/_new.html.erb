@@ -3,7 +3,7 @@
     <div class="modal-header">
       <h4 class="modal-title">New Contractor</h4>
     </div>
-		<%= simple_form_for @contractor, url: :monitoring_contractors do |f| %>
+		<%= simple_form_for @contractor, url: :monitoring_contractors, remote: true do |f| %>
     <%=f.error_notification %>
       <div class="modal-body">
 
