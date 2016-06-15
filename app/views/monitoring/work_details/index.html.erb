@@ -32,11 +32,19 @@
               <th>Rem.</th>
               <th>% Acc.</th>
               <th>Total Cost </th>
+              <th></th>
             </tr>
           </thead>
           <tbody class="work-detail-index">
             <%= render 'index' %>
           </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="7" class=text-right>Total:&nbsp&nbsp</th>
+              <th><%= number_to_currency @work_details.sum(:total_cost) if @work_details.present? %></th>
+              <th></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     <% end %>
