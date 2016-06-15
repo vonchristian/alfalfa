@@ -13,7 +13,7 @@ class Project < ActiveRecord::Base
   belongs_to :category
   has_many  :employments
   has_many :employees, through: :employments
-  has_many :work_details
+  has_many :work_details, -> { order 'id asc' }
   has_many :amount_revisions, through: :work_details
   has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :accomplishment_images, through: :work_details
@@ -40,7 +40,7 @@ class Project < ActiveRecord::Base
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
-  
+
   def effectivity_date
     if notice_to_proceed.present?
       notice_to_proceed.date + 7.days
