@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-6">
         <% if policy(WorkDetail.new).create? %>
-          <%=link_to "New Work Detail", monitoring_project_work_details_path(@project), class: "btn btn-primary pull-right" if @project.work_details.present? %>
+          <%= link_to "New Work Detail", monitoring_project_work_details_path(@project), class: "btn btn-primary pull-right" %>
         <% end %>
       </div>
     </div>
