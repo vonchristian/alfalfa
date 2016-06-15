@@ -23,6 +23,7 @@
 			<div class="content">
 						<% @projects.all.each do |project| %>
 							<ul class="list-unstyled team-members">
+                <%=link_to supplies_project_path(project) do %>
                 <li>
                   <div class="row">
                     <div class="col-md-7">
@@ -37,6 +38,7 @@
                   </div>
                   </div>
                 </li>
+                <% end %>
               </ul>
 						<% end %>
 

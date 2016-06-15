@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"><%= @project.name %>
+
+        </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <table class="table table-striped">
+					<thead>
+						<tr class="title">
+							<th>Material</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Amount</th>
+              <th>Date</th>
+              <th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @project.line_items.order(date: :desc).each do |line_item| %>
+							<tr class="<%='text-danger' if !line_item.paid? %>">
+							  <td> <%= line_item.inventory %></td>
+                <td> <%= line_item.quantity %> <%=line_item.inventory.unit %></td>
+                <td> <%= number_to_currency line_item.inventory.price %></td>
+                <td> <%= number_to_currency line_item.total_price %> </td>
+                <td> <%= line_item.order.date_issued.strftime("%B %e, %Y") %> </td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+      </div>
+    </div>
+  </div>
+</div>

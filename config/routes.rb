@@ -127,6 +127,7 @@ Rails.application.routes.draw do
 
   namespace :supplies do
     resources :contractors, only:[:show]
+    resources :projects, only:[:show]
     resources :line_items do
       resources :payments, only:[:new, :create]
     end
