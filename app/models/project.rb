@@ -13,7 +13,7 @@ class Project < ActiveRecord::Base
   belongs_to :category
   has_many  :employments
   has_many :employees, through: :employments
-  has_many :work_details, -> { order 'id asc' }
+  has_many :work_details, -> { order 'created_at asc' }
   has_many :amount_revisions, through: :work_details
   has_many :time_extensions, class_name: "ChangeOrders::TimeExtension"
   has_many :accomplishment_images, through: :work_details
