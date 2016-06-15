@@ -10,7 +10,7 @@ class WorkDetail < ActiveRecord::Base
   has_many :amount_revisions, class_name: "ChangeOrders::AmountRevision"
 
   validates :quantity, numericality: { greater_than: 0.1 }, presence: true
-  validates :code, :description, presence: true, uniqueness: { scope: :project }
+  validates :code, :description, presence: true
   validates :unit, presence: true
 
   delegate :cost, to: :project, prefix: true
