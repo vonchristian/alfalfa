@@ -57,6 +57,13 @@ module Monitoring
     def show
       @project = Project.find(params[:id]).decorate
       authorize @project
+      respond_to do |format|
+        format.html
+        format.pdf do
+          pdf = ProjectSummaryReportPdf.new(@project, view_context)
+          send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Project Summary.pdf"
+        end
+      end
     end
 
     private
