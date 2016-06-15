@@ -1,9 +1,0 @@
-$("ul.errors").html("")
-<% if @notice_to_proceed.errors.any? %>
-  <% @notice_to_proceed.errors.full_messages.each do |message| %>
-    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
-  <% end %>
-<% else %>
-  $("#notice-to-proceed-modal").modal("hide")
-  window.location.reload();
-<% end %>
