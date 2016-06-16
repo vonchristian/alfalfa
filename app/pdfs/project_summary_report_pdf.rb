@@ -26,11 +26,11 @@ text "PROJECT INFO", style: :bold, size: 10
 move_down 5
 text "Notice to Proceed       #{@project.notice_to_proceed.date.strftime("%B %e, %Y")}", size: 9
 move_down 5
-text "Contract Amount         #{price(@project.cost)}", size: 9
+text "Contract Amount         #{price(@project.revised_contract_amount)}", size: 9
 move_down 5
 text "Project Location         #{@project.address}", size: 9
 move_down 5
-text "Project Duration         #{@project.duration} Days", size: 9
+text "Project Duration         #{@project.latest_duration} Days", size: 9
 end
 bounding_box([300, y_position], :width => 200, :height => 150) do
 transparent(0) { stroke_bounds } # This will stroke on one page
@@ -63,6 +63,19 @@ move_down 5
 stroke_horizontal_rule
 move_down 5
 text "TOTAL                                             #{price(@project.other_costs.total)}", size: 10
+end
+bounding_box([300, y_position], :width => 250, :height => 130) do
+transparent(0) { stroke_bounds }
+text "COLLECTION", style: :bold, size: 10
+text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
+move_down 5
+text "Contract Amount                #{price(@project.revised_contract_amount)}", size: 10
+move_down 5
+text "Collected                            #{price(@project.total_payments)}", size: 10
+move_down 5
+stroke_horizontal_rule
+move_down 5
+text "REMAINING                       #{price(@project.remaining_payments)}", size: 10, color: "FF4F61"
 end
 
 stroke_horizontal_rule
