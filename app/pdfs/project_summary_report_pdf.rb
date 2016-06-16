@@ -28,13 +28,9 @@ class ProjectSummaryReportPdf < Prawn::Document
   transparent(0) { stroke_bounds }
   text "#{@project.address}", size: 9, color: '4A4A4A'
 end
-bounding_box([150, y_position], :width => 20, :height => 10) do
-transparent(0) { stroke_bounds }
-icon 'fa-rub', size: 9, color: '4A4A4A'
-end
 bounding_box([160, y_position], :width => 150, :height => 10) do
 transparent(0) { stroke_bounds }
-text "#{@project.revised_contract_amount}", size: 9, color: '4A4A4A'
+text "#{price(@project.revised_contract_amount)}", size: 9, color: '4A4A4A'
 end
   end
   def summary
