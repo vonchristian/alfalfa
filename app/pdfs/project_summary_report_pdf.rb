@@ -22,21 +22,23 @@ class ProjectSummaryReportPdf < Prawn::Document
     y_position = cursor - 3
     bounding_box([0, y_position], :width => 20, :height => 10) do
     transparent(0) { stroke_bounds }
-    icon 'fa-map-marker', size: 8, color: '4A4A4A'
+    icon 'fa-map-marker', size: 6, color: '4A4A4A'
   end
   bounding_box([10, y_position], :width => 150, :height => 10) do
   transparent(0) { stroke_bounds }
-  text "#{@project.address}", size: 10, color: '4A4A4A'
+  text "#{@project.address.upcase}", size: 8, color: '4A4A4A'
 end
+if @project.main_contractor.present?
 bounding_box([90, y_position], :width => 20, :height => 10) do
 transparent(0) { stroke_bounds }
-icon 'fa-bookmark', size: 8, color: '4A4A4A'
+icon 'fa-bookmark', size: 6, color: '4A4A4A'
 end
 bounding_box([100, y_position], :width => 300, :height => 10) do
 transparent(0) { stroke_bounds }
-text "#{@project.main_contractor}", size: 10, color: '4A4A4A'
+text "#{@project.main_contractor.company.upcase}", size: 8, color: '4A4A4A'
 end
   end
+end
   def summary
 y_position = cursor - 20
 bounding_box([0, y_position], :width => 280, :height => 150) do
