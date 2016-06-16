@@ -30,7 +30,7 @@ class ProjectSummaryReportPdf < Prawn::Document
 end
 bounding_box([90, y_position], :width => 20, :height => 10) do
 transparent(0) { stroke_bounds }
-icon 'fa-user', size: 8, color: '4A4A4A'
+icon 'fa-bookmark', size: 8, color: '4A4A4A'
 end
 bounding_box([100, y_position], :width => 300, :height => 10) do
 transparent(0) { stroke_bounds }
@@ -60,9 +60,9 @@ bounding_box([300, y_position], :width => 200, :height => 150) do
 transparent(0) { stroke_bounds } # This will stroke on one page
 text "PROJECT STATUS",  style: :bold, size: 10, color: '4A4A4A'
 move_down 5
-text "Target Accomplishment         #{@project.target_accomplishment.round(2)} %", size: 10, color: "4A4A4A"
+text "Target Accomplishment            #{@project.target_accomplishment.round(2)} %", size: 10, color: "4A4A4A"
 move_down 5
-text "Actual Accomplishment         #{@project.actual_accomplishment.round(2)} %", size: 10, color: "5FCF80"
+text "Actual Accomplishment            #{@project.actual_accomplishment.round(2)} %", size: 10, color: "5FCF80"
 move_down 5
 
 text "SLIPPAGE                                #{@project.slippage.round(2)} %", size: 10, color: "CC181E"
