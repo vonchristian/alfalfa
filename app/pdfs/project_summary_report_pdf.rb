@@ -87,7 +87,7 @@ move_down 5
 text "Other Costs                                     #{price(@project.other_costs.total)}", size: 10
 move_down 5
 stroke_horizontal_rule
-move_down 5
+move_down 8
 text "TOTAL                                             #{price(@project.total_direct_costs)}", size: 10, color: "CC181E"
 end
 bounding_box([300, y_position], :width => 250, :height => 200) do
@@ -100,7 +100,7 @@ move_down 5
 text "Collected                            #{price(@project.total_payments)}", size: 10
 move_down 5
 stroke_horizontal_rule
-move_down 5
+move_down 8
 text "REMAINING                       #{price(@project.remaining_payments)}", size: 10, color: "CC181E"
 move_down 20
 text "REVENUE SUMMARY", style: :bold, size: 10, color: '4A4A4A'
@@ -110,7 +110,7 @@ move_down 5
 text "Commited Costs               #{price(@project.total_direct_costs)}", size: 10
 move_down 5
 stroke_horizontal_rule
-move_down 5
+move_down 8
 text "REVENUE                        #{price(@project.revenue)}", size: 10, color: '132361'
 
 end
