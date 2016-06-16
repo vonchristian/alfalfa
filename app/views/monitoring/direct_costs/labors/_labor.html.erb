@@ -1,7 +1,22 @@
-<tr>
-  <td><%=labor.date.strftime("%b %e %Y") %></td>
-  <td><%=image_tag(labor.employee.profile_photo(:small), class: "img-circle")%>&nbsp<%=labor.employee.full_name %></td>
-  <td><%=number_to_currency labor.unit_cost %></td>
-  <td><%=labor.quantity %> <%=labor.unit %></td>
-  <td><%=number_to_currency labor.total_cost %></td>
-</tr>
+<ul class="list-unstyled team-members">
+  <li>
+    <div class="row">
+      <div class="col-xs-2">
+        <small><%=labor.date.strftime("%b %e %Y") %></small>
+      </div>
+      <div class="col-xs-3">
+        <%=image_tag(labor.employee.profile_photo(:small), class: "img-circle")%>&nbsp<%=labor.employee.full_name %>
+      </div>
+      <div class="col-xs-2">
+        <%=number_to_currency labor.unit_cost %>
+      </div>
+      <div class="col-xs-2">
+        <%=labor.quantity %> <%=labor.unit %>
+      </div>
+      <div class="col-xs-2 text-right">
+        <%=number_to_currency labor.total_cost %>
+      </div>
+    </div>
+    <hr>
+  </li>
+</ul>

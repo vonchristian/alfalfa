@@ -21,11 +21,11 @@ module Monitoring
     def create
       @project = Project.find(params[:project_id])
       @equipment_cost = @project.equipment_costs.create(equipment_cost_params)
-      if @equipment_cost.save
-        redirect_to monitoring_project_equipment_costs_url(@project), notice: "Equipment cost saved successfully."
-      else
-        render :new
-      end
+      # if @equipment_cost.save
+      #   redirect_to monitoring_project_equipment_costs_url(@project), notice: "Equipment cost saved successfully."
+      # else
+      #   render :new
+      # end
     end
 
     private

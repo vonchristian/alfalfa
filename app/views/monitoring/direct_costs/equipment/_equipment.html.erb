@@ -2,17 +2,20 @@
   <li>
     <div class="row">
       <div class="col-xs-2">
-        <small><%=equipment.date.strftime("%b %e %Y") %></small>
+        <%=equipment.date.strftime("%b %e %Y") %>
       </div>
-      <div class="col-xs-2">
-          <%=equipment.quantity %> <%=equipment.unit %>
-      </div>
-      <div class="col-xs-5">
+      <div class="col-xs-4">
         <%=image_tag(equipment.costable.photo(:thumb), height: 30, witdh: 30, class: "img-circle")%> <%=equipment.costable.make_and_model %>
         <br />
-        <span class="text-muted"><small>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=equipment.description %></small></span>
+        <span class="text-warning"><small>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=equipment.description %></small></span>
       </div>
-      <div class="col-xs-2 text-right">
+      <div class="col-xs-2">
+        <%=equipment.quantity %> <%=equipment.unit %>
+      </div>
+      <div class="col-xs-2">
+        <%=number_to_currency equipment.unit_cost %>
+      </div>
+      <div class="col-xs-2">
         <%=number_to_currency equipment.total_cost %>
       </div>
     </div>

@@ -2,31 +2,27 @@
   <div class="col-md-12">
     <div class="card">
       <div class="header">
-        <h4 class="title">Labor Costs
-          <span class="pull-right">
-            <%=link_to monitoring_project_purchase_orders_path(format: "pdf"), target: '_blank', title: "View PDF" do %>
-              <span class="btn btn-info btn-sm btn-icon"><i class="fa fa-file-pdf-o"></i> View PDF </span>
+        <div class="row">
+          <div class="col-md-1">
+            <%=link_to monitoring_project_path(@project) do %>
+              <span data-toggle="tooltip" data-placement="bottom" title="Back to Project"><i class="fa fa-angle-left fa-2x"></i></span>
             <% end %>
-            <%=link_to "New Labor Cost", new_monitoring_project_labor_cost_path(@project), class: 'btn btn-primary btn-icon', remote: true %>
-          </span>
-        </h4>
+          </div>
+          <div class="col-md-11">
+            <h4 class="title">Labor Costs
+              <span class="pull-right">
+                <%=link_to monitoring_project_purchase_orders_path(format: "pdf"), target: '_blank', title: "View PDF" do %>
+                  <span class="btn btn-info btn-sm btn-icon"><i class="fa fa-file-pdf-o"></i> View PDF </span>
+                <% end %>
+                <%=link_to "New Labor Cost", new_monitoring_project_labor_cost_path(@project), class: 'btn btn-primary btn-icon', remote: true %>
+              </span>
+            </h4>
+          </div>
+        </div>
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Employee</th>
-              <th>Rate</th>
-              <th>Number of Days</th>
-              <th>Total Cost</th>
-            </tr>
-          </thead>
-          <tbody class="labor-cost-index">
-            <%=render 'index' %>
-          </tbody>
-        </table>
+        <%=render @project.labor_costs %>
       </div>
     </div>
   </div>

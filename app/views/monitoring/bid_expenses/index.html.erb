@@ -2,9 +2,18 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="header">
-				<h4 class="title">Bid Expenses
-					<span class="pull-right"><%= link_to 'New Bid Expense', new_monitoring_project_bid_expense_path(@project), class: 'btn btn-primary' %></span>
-				</h4>
+				<div class="row">
+          <div class="col-md-1">
+            <%=link_to monitoring_project_path(@project) do %>
+              <span data-toggle="tooltip" data-placement="bottom" title="Back to Project"><i class="fa fa-angle-left fa-2x"></i></span>
+            <% end %>
+          </div>
+          <div class="col-md-11">
+						<h4 class="title">Bid Expenses
+							<span class="pull-right"><%= link_to 'New Bid Expense', new_monitoring_project_bid_expense_path(@project), class: 'btn btn-primary' %></span>
+						</h4>
+					</div>
+				</div>
 				<div class="row"><hr></div>
 			</div>
 			<div class="content">

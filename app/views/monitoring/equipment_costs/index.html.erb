@@ -2,23 +2,21 @@
   <div class="col-md-12">
     <div class="card">
       <div class="header">
-          <div class="row">
-            <div class="col-md-1">
-              <%=link_to monitoring_project_path(@project) do %>
-                <span data-toggle="tooltip" data-placement="bottom" title="Back to Project"><i class="fa fa-angle-left fa-2x"></i></span>
-              <% end %>
-            </div>
-            <div class="col-md-11">
-              <h4 class="title">Equipment Costs
-                <span class="pull-right">
-              <%=link_to "New Equipment Cost", new_monitoring_project_equipment_cost_path(@project), class: 'btn btn-primary' %>
-</span>
-</h4>
-              </div>
-
+        <div class="row">
+          <div class="col-md-1">
+            <%=link_to monitoring_project_path(@project) do %>
+              <span data-toggle="tooltip" data-placement="bottom" title="Back to Project"><i class="fa fa-angle-left fa-2x"></i></span>
+            <% end %>
+          </div>
+          <div class="col-md-11">
+            <h4 class="title">Equipment Costs
+              <span class="pull-right">
+              <%=link_to "New Equipment Cost", new_monitoring_project_equipment_cost_path(@project), class: 'btn btn-primary', remote: true %>
+              </span>
+            </h4>
+          </div>
         </div>
-<hr>
-
+        <div class="row"><hr></div>
       </div>
       <div class="content">
         <%=render @project.equipment_costs %>
@@ -26,3 +24,4 @@
     </div>
   </div>
 </div>
+<div id="equipment-cost-modal" class="modal fade"></div>

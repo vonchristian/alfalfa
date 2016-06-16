@@ -21,11 +21,11 @@ module Monitoring
     def create
       @project = Project.find(params[:project_id])
       @sub_contract_cost = @project.sub_contract_costs.create(sub_contract_cost_params)
-      if @sub_contract_cost.save
-        redirect_to monitoring_project_sub_contract_costs_url(@project), notice: "Sub contract cost saved successfully."
-      else
-        render :new
-      end
+      # if @sub_contract_cost.save
+      #   redirect_to monitoring_project_sub_contract_costs_url(@project), notice: "Sub contract cost saved successfully."
+      # else
+      #   render :new
+      # end
     end
 
     private
