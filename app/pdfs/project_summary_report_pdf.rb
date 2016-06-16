@@ -69,6 +69,12 @@ text "Actual Accomplishment            #{@project.actual_accomplishment.round(2)
 move_down 5
 
 text "SLIPPAGE                                #{@project.slippage.round(2)} %", size: 10, color: "CC181E"
+move_down 20
+text "CHANGE ORDERS", style: :bold, size: 10, color: '4A4A4A'
+move_down 5
+text "Amount Revisions                     #{price(@project.amount_revisions.total)}", size: 10
+move_down 5
+text "Time Extensions                       #{@project.time_extensions.total} Days", size: 10
 end
 stroke_horizontal_rule
 end
