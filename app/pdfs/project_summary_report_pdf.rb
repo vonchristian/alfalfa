@@ -56,7 +56,7 @@ move_down 5
 text "Actual Accomplishment         #{@project.actual_accomplishment.round(2)} %", size: 10, color: "5FCF80"
 move_down 5
 
-text "Slippage                                #{@project.slippage.round(2)} %", size: 10, color: "FF4F61"
+text "Slippage                                #{@project.slippage.round(2)} %", size: 10, color: "CC181E"
 end
 stroke_horizontal_rule
 end
@@ -73,11 +73,13 @@ text "Labor                                               #{price(@project.labor
 move_down 5
 text "Equipment                                       #{price(@project.equipment_costs.total)}", size: 10
 move_down 5
+text "Bid Expenses                                  #{price(@project.total_bid_expenses)}", size: 10
+move_down 5
 text "Other Costs                                     #{price(@project.other_costs.total)}", size: 10
 move_down 5
 stroke_horizontal_rule
 move_down 5
-text "TOTAL                                             #{price(@project.other_costs.total)}", size: 10
+text "TOTAL                                             #{price(@project.total_direct_costs)}", size: 10, color: "CC181E"
 end
 bounding_box([300, y_position], :width => 250, :height => 200) do
 transparent(0) { stroke_bounds }
@@ -90,7 +92,7 @@ text "Collected                            #{price(@project.total_payments)}", s
 move_down 5
 stroke_horizontal_rule
 move_down 5
-text "REMAINING                       #{price(@project.remaining_payments)}", size: 10, color: "FF4F61"
+text "REMAINING                       #{price(@project.remaining_payments)}", size: 10, color: "CC181E"
 move_down 20
 text "REVENUE SUMMARY", style: :bold, size: 10, color: '4A4A4A'
 move_down 5
@@ -100,7 +102,7 @@ text "Commited Costs               #{price(@project.total_direct_costs)}", size:
 move_down 5
 stroke_horizontal_rule
 move_down 5
-text "REVENUE                          #{price(@project.revenue)}", size: 10, color: '132361'
+text "REVENUE                        #{price(@project.revenue)}", size: 10, color: '132361'
 
 end
 stroke_horizontal_rule

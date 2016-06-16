@@ -48,11 +48,15 @@ class Project < ActiveRecord::Base
   end
 
   def total_direct_costs
-    if costs.present?
-    costs.total + direct_material_costs + bid_expenses.sum(:amount) if bid_expenses.present?
-  else
-    0
+    costs.total + direct_material_costs + total_bid_expenses
   end
+  
+  def total_bid_expenses
+    if bid_expenses.present?
+      bid_expenses.sum(:amount)
+    else
+      0
+    end
   end
 
   def revenue
