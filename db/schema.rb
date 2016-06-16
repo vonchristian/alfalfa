@@ -59,12 +59,6 @@ ActiveRecord::Schema.define(version: 20160616031709) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "add_date_to_line_items", force: :cascade do |t|
-    t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "amount_revisions", force: :cascade do |t|
     t.decimal  "amount"
     t.string   "remarks"

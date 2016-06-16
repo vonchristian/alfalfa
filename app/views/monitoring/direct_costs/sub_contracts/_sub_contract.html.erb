@@ -1,0 +1,21 @@
+<ul class="list-unstyled team-members">
+  <li>
+    <div class="row">
+      <div class="col-xs-2">
+        <small><%=sub_contract.date.strftime("%b %e %Y") %></small>
+      </div>
+      <div class="col-xs-2">
+          <%=sub_contract.quantity %> <%=sub_contract.unit %>
+      </div>
+      <div class="col-xs-5">
+        <%=image_tag(sub_contract.contractor.profile_photo(:thumb), class: "img-circle")%> <%=sub_contract.contractor.full_name %>
+        <br />
+        <span class="text-muted"><small>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=sub_contract.description%></small></span>
+      </div>
+      <div class="col-xs-2 text-right">
+        <%=number_to_currency sub_contract.total_cost %>
+      </div>
+    </div>
+    <hr>
+  </li>
+</ul>

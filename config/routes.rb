@@ -57,6 +57,8 @@ Rails.application.routes.draw do
       resources :line_items, only: [:index]
       resources :purchase_orders, only:[:index, :new, :create]
       resources :labor_costs, only:[:index, :new, :create]
+      resources :sub_contract_costs, only:[:index, :new, :create]
+      resources :equipment_costs, only:[:index, :new, :create]
       resources :file_attachments
       resources :bid_expenses, only: [:new, :create, :edit, :update, :index]
     end

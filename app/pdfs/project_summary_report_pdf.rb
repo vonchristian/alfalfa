@@ -83,7 +83,7 @@ text "Labor                                               #{price(@project.labor
 move_down 5
 text "Equipment                                       #{price(@project.equipment_costs.total)}", size: 10
 move_down 5
-text "SubContract                                    #{price(@project.equipment_costs.total)}", size: 10
+text "SubContract                                    #{price(@project.sub_contract_costs.total)}", size: 10
 
 move_down 5
 text "Bid Expenses                                  #{price(@project.total_bid_expenses)}", size: 10
