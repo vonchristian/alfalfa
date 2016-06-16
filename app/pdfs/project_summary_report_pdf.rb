@@ -1,5 +1,4 @@
 class ProjectSummaryReportPdf < Prawn::Document
-
   def initialize(project, view_context)
     super(margin: 30, page_size: [612, 948], page_layout: :portrait)
     @project = project
@@ -15,16 +14,16 @@ class ProjectSummaryReportPdf < Prawn::Document
 
   def heading
     text "Summary Report as of #{Time.zone.now.strftime("%B %e, %Y")}", style: :bold, size: 9
-    move_down 5
+    move_down 10
     text "#{@project.name}", size: 11
   end
   def summary
-y_position = cursor - 20
-bounding_box([0, y_position], :width => 200, :height => 150) do
+y_position = cursor - 30
+bounding_box([0, y_position], :width => 280, :height => 150) do
 transparent(0) { stroke_bounds }
 text "PROJECT INFO", style: :bold, size: 10
 move_down 5
-text "Notice to Proceed       #{@project.notice_to_proceed.date.strftime("%B %e, %Y")}", size: 9
+text "Notice to Proceed       #{@project.ntp}", size: 9
 move_down 5
 text "Contract Amount         #{price(@project.revised_contract_amount)}", size: 9
 move_down 5
