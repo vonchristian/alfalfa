@@ -1,0 +1,18 @@
+<%= simple_form_for [@project, @notice_to_proceed], url: :monitoring_project_notice_to_proceeds do |f| %>
+<%=f.error_notification %>
+  <div class="col-md-5 col-md-offset-3">
+    <div class="card">
+      <div class="header">
+        <h4 class="modal-title">New Notice to Proceed</h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <%=f.input :date, as: :string, input_html:{:class => 'datetimepicker'} %>
+        <div class="modal-footer">
+          <%= link_to "Cancel", monitoring_project_path(@project), class: "btn" %>
+          <%=f.submit "Save", class: "btn btn-primary pull-right", data: {disable_with: "Saving NTP..."} %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

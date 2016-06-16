@@ -43,8 +43,4 @@ def site_name
       "#{page_title} | #{site_name}"
     end
   end
-
-  def monitoring_project_notice_to_proceeds_path(*args)
-    monitoring_project_notice_to_proceed_path(*args)
-  end
 end

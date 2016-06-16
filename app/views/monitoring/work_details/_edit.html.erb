@@ -8,17 +8,26 @@
       <div class="modal-body">
         <ul class="errors text-danger">
         </ul>
-        <%=f.input :code,  placeholder: 'Code' %>
-        <%=f.input :description, placeholder: 'Description', as: :text, input_html:{rows: 2} %>
         <div class="row">
-          <div class="col-md-6">
-            <%=f.input :unit, placeholder: 'Unit' %>
+          <div class="col-md-4">
+            <%=f.input :code,  placeholder: 'Code' %>
           </div>
-          <div class="col-md-6">
-            <%=f.input :quantity,  placeholder: 'Quantity', input_html: {id: "work_detail_quantity", oninput: "calculateWorkDetailCost()"} %>
+          <div class="col-md-8">
+            <%=f.input :description, placeholder: 'Description' %>
           </div>
         </div>
-        <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html: {id: "work_detail_unit_cost", oninput: "calculateWorkDetailCost()"}  %>
+        <div class="row">
+          <div class="col-md-4">
+            <%=f.input :unit, placeholder: 'Unit' %>
+          </div>
+          <div class="col-md-4">
+            <%=f.input :quantity,  placeholder: 'Quantity', input_html: {id: "work_detail_quantity", oninput: "calculateWorkDetailCost()"} %>
+          </div>
+          <div class="col-md-4">
+            <%=f.input :unit_cost,  placeholder: 'Unit Cost', input_html: {id: "work_detail_unit_cost", oninput: "calculateWorkDetailCost()"}  %>
+          </div>
+        </div>
+
         <%=f.input :total_cost,  placeholder: 'Total Cost', readonly: true ,  input_html: {id: "work_detail_total_cost"}%>
       </div>
       <div class="modal-footer">
