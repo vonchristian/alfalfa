@@ -7,8 +7,9 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
-        <%=f.input :description, as: :text %>
+        <%=f.input :date, as: :string, input_html: { class: "date_picker" } %>
+        <%=f.input :costable_type, input_html: {value: "Employee"}, as: :hidden %>
+        <%=f.input :costable_id, collection: Employee.all, label: "Employee" %>
         <%=f.input :quantity, label: "Number of Days" %>
         <%=f.input :unit, input_html: { value: "Days" } %>
         <%=f.input :unit_cost %>

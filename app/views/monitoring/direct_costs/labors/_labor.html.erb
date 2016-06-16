@@ -8,9 +8,9 @@
           <%=labor.quantity %> <%=labor.unit %>
       </div>
       <div class="col-xs-5">
-        <%=labor.description%>
+        <%=image_tag(labor.employee.profile_photo(:thumb), class: "img-circle")%> <%=labor.employee.full_name %>
         <br />
-        <span class="text-muted"><small><%=number_to_currency labor.unit_cost %></small></span>
+        <span class="text-muted"><small>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=number_to_currency labor.unit_cost %></small></span>
       </div>
       <div class="col-xs-2 text-right">
         <%=number_to_currency labor.total_cost %>

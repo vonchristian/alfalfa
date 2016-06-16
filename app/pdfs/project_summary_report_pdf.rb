@@ -1,7 +1,7 @@
 require 'prawn/icon'
 class ProjectSummaryReportPdf < Prawn::Document
   def initialize(project, view_context)
-    super(margin: 30, page_size: [612, 1048], page_layout: :portrait)
+    super(margin: 40)
     @project = project
     @view_context = view_context
     heading
@@ -71,7 +71,7 @@ stroke_horizontal_rule
 end
 def costs
 y_position = cursor - 20
-bounding_box([0, y_position], :width => 250, :height => 130) do
+bounding_box([0, y_position], :width => 250, :height => 150) do
 transparent(0) { stroke_bounds }
 text "DIRECT COSTS", style: :bold, size: 10, color: '4A4A4A'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
@@ -82,6 +82,9 @@ text "Labor                                               #{price(@project.labor
 move_down 5
 text "Equipment                                       #{price(@project.equipment_costs.total)}", size: 10
 move_down 5
+text "SubContract                                    #{price(@project.equipment_costs.total)}", size: 10
+
+move_down 5
 text "Bid Expenses                                  #{price(@project.total_bid_expenses)}", size: 10
 move_down 5
 text "Other Costs                                     #{price(@project.other_costs.total)}", size: 10
@@ -90,7 +93,7 @@ stroke_horizontal_rule
 move_down 8
 text "TOTAL                                             #{price(@project.total_direct_costs)}", size: 10, color: "CC181E"
 end
-bounding_box([300, y_position], :width => 250, :height => 200) do
+bounding_box([300, y_position], :width => 230, :height => 200) do
 transparent(0) { stroke_bounds }
 text "COLLECTION", style: :bold, size: 10, color: '4A4A4A'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"

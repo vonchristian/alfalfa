@@ -30,7 +30,7 @@ module Monitoring
 
     private
     def labor_cost_params
-      params.require(:direct_costs_labor).permit(:type, :quantity, :unit, :description, :unit_cost, :total_cost, :date)
+      params.require(:direct_costs_labor).permit(:type, :quantity, :unit, :costable_id, :costable_type, :unit_cost, :total_cost, :date)
     end
   end
 end
