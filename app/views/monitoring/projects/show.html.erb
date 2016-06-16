@@ -10,12 +10,14 @@
               <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%=@project.actual_accomplishment %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@project.actual_accomplishment %>%;">
                 <span class="text-black"><%=number_to_currency @project.actual_accomplishment, unit: "" %>%</span>
               </div>
-
             </div>
+              <%=link_to "View PDF", monitoring_project_path(@project, format: 'pdf'), class: "btn btn-default btn-xs" %>
+              <br>
+              <br>
           </div>
           <div class="col-md-2">
             <% if policy(@project).edit? %>
-              <%=link_to "Edit Project", edit_monitoring_project_path(@project), class: "btn btn-warning pull-right", remote: true %>
+              <%=link_to "Edit Project", edit_monitoring_project_path(@project), class: "btn btn-warning pull-right" %>
             <% end %>
           </div>
         </div>

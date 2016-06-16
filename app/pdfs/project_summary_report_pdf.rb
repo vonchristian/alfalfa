@@ -22,15 +22,19 @@ class ProjectSummaryReportPdf < Prawn::Document
     y_position = cursor - 5
     bounding_box([0, y_position], :width => 20, :height => 10) do
     transparent(0) { stroke_bounds }
-    icon 'fa-map-marker', size: 10, color: '4A4A4A'
+    icon 'fa-map-marker', size: 8, color: '4A4A4A'
   end
   bounding_box([10, y_position], :width => 150, :height => 10) do
   transparent(0) { stroke_bounds }
   text "#{@project.address}", size: 10, color: '4A4A4A'
 end
-bounding_box([100, y_position], :width => 150, :height => 10) do
+bounding_box([90, y_position], :width => 20, :height => 10) do
 transparent(0) { stroke_bounds }
-text "#{price(@project.revised_contract_amount)}", size: 10, color: '4A4A4A'
+icon 'fa-user', size: 8, color: '4A4A4A'
+end
+bounding_box([100, y_position], :width => 300, :height => 10) do
+transparent(0) { stroke_bounds }
+text "#{@project.main_contractor}", size: 10, color: '4A4A4A'
 end
   end
   def summary
@@ -39,13 +43,18 @@ bounding_box([0, y_position], :width => 280, :height => 150) do
 transparent(0) { stroke_bounds }
 text "PROJECT INFO", style: :bold, size: 10, color: '4A4A4A'
 move_down 5
-text "Notice to Proceed       #{@project.ntp}", size: 10
+text "Notice to Proceed              #{@project.ntp}", size: 10
 move_down 5
-text "Contract Amount             #{price(@project.revised_contract_amount)}", size: 10
+text "Contract Amount                #{price(@project.revised_contract_amount)}", size: 10
 move_down 5
-text "Project Location          #{@project.address}", size: 10
+text "Project Duration                 #{@project.latest_duration} Days", size: 10
 move_down 5
-text "Project Duration          #{@project.latest_duration} Days", size: 10
+text "Days Elapsed                     #{@project.days_elapsed} Days", size: 10
+move_down 5
+text "Days Remaining                #{@project.remaining_days} Days", size: 10
+
+move_down 5
+text "Implementing Office          #{@project.implementing_office}", size: 10
 end
 bounding_box([300, y_position], :width => 200, :height => 150) do
 transparent(0) { stroke_bounds } # This will stroke on one page
@@ -56,7 +65,7 @@ move_down 5
 text "Actual Accomplishment         #{@project.actual_accomplishment.round(2)} %", size: 10, color: "5FCF80"
 move_down 5
 
-text "Slippage                                #{@project.slippage.round(2)} %", size: 10, color: "CC181E"
+text "SLIPPAGE                                #{@project.slippage.round(2)} %", size: 10, color: "CC181E"
 end
 stroke_horizontal_rule
 end
