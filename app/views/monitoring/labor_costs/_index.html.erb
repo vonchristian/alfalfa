@@ -1,0 +1,9 @@
+<% @labor_costs.each do |labor| %>
+	<tr>
+	  <td><%=labor.date.strftime("%b %e %Y") %></td>
+	  <td><%=image_tag(labor.employee.profile_photo(:small), class: "img-circle")%>&nbsp<%=labor.employee.full_name %></td>
+	  <td><%=number_to_currency labor.unit_cost %></td>
+	  <td><%=labor.quantity %> <%=labor.unit %></td>
+	  <td><%=number_to_currency labor.total_cost %></td>
+	</tr>
+<% end %>

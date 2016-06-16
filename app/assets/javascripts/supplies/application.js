@@ -19,7 +19,7 @@
 //= require supplies/datetime_picker
 //= require supplies/admin
 //= require supplies/dynamic_select
-//= require labor_cost
+//= require supplies/labor_cost
 //= require bootstrap-checkbox-radio
 //= require supplies/entries
 //= require supplies/equipment_cost
