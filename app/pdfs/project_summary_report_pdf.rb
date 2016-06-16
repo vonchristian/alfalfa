@@ -17,25 +17,25 @@ class ProjectSummaryReportPdf < Prawn::Document
 
     text "PROJECT SUMMARY REPORT", size: 8, style: :bold
     move_down 10
-    text "<b>##{@project.id_number}</b> - #{@project.name}", size: 10, inline_format: true
+    text "<b>##{@project.id_number}</b> - #{@project.name}", size: 10, inline_format: true, color: '444444'
     move_down 5
     y_position = cursor - 3
     bounding_box([0, y_position], :width => 20, :height => 10) do
     transparent(0) { stroke_bounds }
-    icon 'fa-map-marker', size: 6, color: '4A4A4A'
+    icon 'fa-map-marker', size: 6, color: '444444'
   end
   bounding_box([10, y_position], :width => 150, :height => 10) do
   transparent(0) { stroke_bounds }
-  text "#{@project.address.upcase}", size: 8, color: '4A4A4A'
+  text "#{@project.address.upcase}", size: 8, color: '444444'
 end
 if @project.main_contractor.present?
 bounding_box([90, y_position], :width => 20, :height => 10) do
 transparent(0) { stroke_bounds }
-icon 'fa-bookmark', size: 6, color: '4A4A4A'
+icon 'fa-bookmark', size: 6, color: '444444'
 end
 bounding_box([100, y_position], :width => 300, :height => 10) do
 transparent(0) { stroke_bounds }
-text "#{@project.main_contractor.company.upcase}", size: 8, color: '4A4A4A'
+text "#{@project.main_contractor.company.upcase}", size: 8, color: '444444'
 end
   end
 end
@@ -43,7 +43,7 @@ end
 y_position = cursor - 20
 bounding_box([0, y_position], :width => 280, :height => 150) do
 transparent(0) { stroke_bounds }
-text "PROJECT INFO", style: :bold, size: 10, color: '4A4A4A'
+text "PROJECT INFO", style: :bold, size: 10, color: '444444'
 move_down 5
 text "Notice to Proceed              #{@project.ntp}", size: 10
 move_down 5
@@ -60,17 +60,17 @@ text "Implementing Office          #{@project.implementing_office}", size: 10
 end
 bounding_box([300, y_position], :width => 200, :height => 150) do
 transparent(0) { stroke_bounds } # This will stroke on one page
-text "PROJECT STATUS",  style: :bold, size: 10, color: '4A4A4A'
+text "PROJECT STATUS",  style: :bold, size: 10, color: '444444'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
-text "Target Accomplishment            #{@project.target_accomplishment.round(2)} %", size: 10, color: "4A4A4A"
+text "Target Accomplishment            #{@project.target_accomplishment.round(2)} %", size: 10, color: "444444"
 move_down 5
 text "Actual Accomplishment            #{@project.actual_accomplishment.round(2)} %", size: 10, color: "5FCF80"
 move_down 5
 
 text "SLIPPAGE                                #{@project.slippage.round(2)} %", size: 10, color: "CC181E"
 move_down 20
-text "CHANGE ORDERS", style: :bold, size: 10, color: '4A4A4A'
+text "CHANGE ORDERS", style: :bold, size: 10, color: '444444'
 move_down 5
 text "Amount Revisions                     #{price(@project.amount_revisions.total)}", size: 10
 move_down 5
@@ -82,7 +82,7 @@ def costs
 y_position = cursor - 20
 bounding_box([0, y_position], :width => 250, :height => 150) do
 transparent(0) { stroke_bounds }
-text "DIRECT COSTS", style: :bold, size: 10, color: '4A4A4A'
+text "DIRECT COSTS", style: :bold, size: 10, color: '444444'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
 text "Materials                                          #{price(@project.direct_material_costs)}", size: 10
@@ -104,7 +104,7 @@ text "TOTAL                                             #{price(@project.total_d
 end
 bounding_box([300, y_position], :width => 230, :height => 200) do
 transparent(0) { stroke_bounds }
-text "COLLECTION", style: :bold, size: 10, color: '4A4A4A'
+text "COLLECTION", style: :bold, size: 10, color: '444444'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
 text "Contract Amount                #{price(@project.revised_contract_amount)}", size: 10
@@ -115,7 +115,7 @@ stroke_horizontal_rule
 move_down 8
 text "REMAINING                       #{price(@project.remaining_payments)}", size: 10, color: "CC181E"
 move_down 20
-text "REVENUE SUMMARY", style: :bold, size: 10, color: '4A4A4A'
+text "REVENUE SUMMARY", style: :bold, size: 10, color: '444444'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
 text "Contract Amount               #{price(@project.revised_contract_amount)}", size: 10
