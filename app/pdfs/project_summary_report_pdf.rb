@@ -37,7 +37,7 @@ end
 y_position = cursor - 30
 bounding_box([0, y_position], :width => 280, :height => 150) do
 transparent(0) { stroke_bounds }
-text "PROJECT INFO", style: :bold, size: 10
+text "PROJECT INFO", style: :bold, size: 10, color: '4A4A4A'
 move_down 5
 text "Notice to Proceed       #{@project.ntp}", size: 9
 move_down 5
@@ -49,11 +49,11 @@ text "Project Duration         #{@project.latest_duration} Days", size: 9
 end
 bounding_box([300, y_position], :width => 200, :height => 150) do
 transparent(0) { stroke_bounds } # This will stroke on one page
-text "PROJECT STATUS",  style: :bold, size: 10
+text "PROJECT STATUS",  style: :bold, size: 10, color: '4A4A4A'
 move_down 5
 text "Target Accomplishment         #{@project.target_accomplishment.round(2)} %", size: 9, color: "0F599C"
 move_down 5
-text "Actual Accomplishment         #{@project.actual_accomplishment.round(2)} %", size: 9, color: "5FBA7D"
+text "Actual Accomplishment         #{@project.actual_accomplishment.round(2)} %", size: 9, color: "5FCF80"
 move_down 5
 
 text "Slippage                                #{@project.slippage.round(2)} %", size: 9, color: "FF4F61"
@@ -64,7 +64,7 @@ def costs
 y_position = cursor - 20
 bounding_box([0, y_position], :width => 250, :height => 130) do
 transparent(0) { stroke_bounds }
-text "DIRECT COSTS", style: :bold, size: 10
+text "DIRECT COSTS", style: :bold, size: 10, color: '4A4A4A'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
 text "Materials                                          #{price(@project.direct_material_costs)}", size: 10
@@ -81,7 +81,7 @@ text "TOTAL                                             #{price(@project.other_c
 end
 bounding_box([300, y_position], :width => 250, :height => 130) do
 transparent(0) { stroke_bounds }
-text "COLLECTION", style: :bold, size: 10
+text "COLLECTION", style: :bold, size: 10, color: '4A4A4A'
 text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
 text "Contract Amount                #{price(@project.revised_contract_amount)}", size: 10
