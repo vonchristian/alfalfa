@@ -12,6 +12,7 @@ gem "paperclip", "~> 5.0.0.beta1"
 gem 'pg_search'
 gem 'prawn'
 gem 'prawn-table'
+gem 'prawn-icon'
 gem 'devise'
 gem 'kaminari'
 gem 'pundit'

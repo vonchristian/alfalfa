@@ -1,3 +1,4 @@
+require 'prawn/icon'
 class ProjectSummaryReportPdf < Prawn::Document
   def initialize(project, view_context)
     super(margin: 30, page_size: [612, 948], page_layout: :portrait)
@@ -13,9 +14,25 @@ class ProjectSummaryReportPdf < Prawn::Document
   end
 
   def heading
+
     text "Summary Report as of #{Time.zone.now.strftime("%B %e, %Y")}", style: :bold, size: 9
     move_down 10
     text "#{@project.name}", size: 11
+    move_down 5
+    y_position = cursor - 5
+
+
+
+
+    
+    bounding_box([0, y_position], :width => 20, :height => 10) do
+    transparent(0) { stroke_bounds }
+    icon 'fa-map-marker', size: 8, color: '4A4A4A'
+  end
+  bounding_box([10, y_position], :width => 150, :height => 10) do
+  transparent(0) { stroke_bounds }
+  text "#{@project.address}", size: 8, color: '4A4A4A'
+end
   end
   def summary
 y_position = cursor - 30
