@@ -15,11 +15,11 @@ class ProjectSummaryReportPdf < Prawn::Document
 
   def heading
 
-    text "SUMMARY REPORT AS OF #{Time.zone.now.strftime("%B %e, %Y")}", size: 10
+    text "PROJECT SUMMARY REPORT", size: 8, style: :bold
     move_down 10
-    text "<b>##{@project.id_number}</b> - #{@project.name}", size: 11, inline_format: true
+    text "<b>##{@project.id_number}</b> - #{@project.name}", size: 10, inline_format: true
     move_down 5
-    y_position = cursor - 5
+    y_position = cursor - 3
     bounding_box([0, y_position], :width => 20, :height => 10) do
     transparent(0) { stroke_bounds }
     icon 'fa-map-marker', size: 8, color: '4A4A4A'
@@ -38,7 +38,7 @@ text "#{@project.main_contractor}", size: 10, color: '4A4A4A'
 end
   end
   def summary
-y_position = cursor - 30
+y_position = cursor - 20
 bounding_box([0, y_position], :width => 280, :height => 150) do
 transparent(0) { stroke_bounds }
 text "PROJECT INFO", style: :bold, size: 10, color: '4A4A4A'
@@ -59,6 +59,7 @@ end
 bounding_box([300, y_position], :width => 200, :height => 150) do
 transparent(0) { stroke_bounds } # This will stroke on one page
 text "PROJECT STATUS",  style: :bold, size: 10, color: '4A4A4A'
+text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
 text "Target Accomplishment            #{@project.target_accomplishment.round(2)} %", size: 10, color: "4A4A4A"
 move_down 5
@@ -107,6 +108,7 @@ move_down 8
 text "REMAINING                       #{price(@project.remaining_payments)}", size: 10, color: "CC181E"
 move_down 20
 text "REVENUE SUMMARY", style: :bold, size: 10, color: '4A4A4A'
+text "(As of #{Time.zone.now.strftime("%B %e, %Y")})", size: 8, color: "3E3E3E"
 move_down 5
 text "Contract Amount               #{price(@project.revised_contract_amount)}", size: 10
 move_down 5
