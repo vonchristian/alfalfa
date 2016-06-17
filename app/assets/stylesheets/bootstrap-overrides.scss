@@ -50,6 +50,7 @@
 .card-project .image img {
   width: 100%;
 }
+
 .card-project .card-footer {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -144,26 +145,28 @@
   color:#D9230F;
 }
 
-    .search-query:focus + button {
-        z-index: 3;
-    }
+.search-query:focus + button {
+    z-index: 3;
+}
 
-    .stylish-input-group .input-group-addon{
-        background: white !important;
-    }
-    .stylish-input-group .form-control{
-    	border-right:0;
-    	box-shadow:0 0 0;
-    	border-color:#FFFFFF;
-    }
-    .stylish-input-group button{
-        border:0;
-        background:transparent;
-    }
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#FFFFFF;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
 
 .search-query:focus + button {
   z-index: 3;
 }
+
+
 
 .modal-backdrop {
   position: fixed;
@@ -171,7 +174,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: -$zindex-modal-background;
+  z-index: $zindex-modal-background;
   background-color: $modal-backdrop-bg;
   // Fade for backdrop
   &.fade { @include opacity(0); }
