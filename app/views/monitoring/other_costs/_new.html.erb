@@ -1,0 +1,64 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">New other Cost</h4>
+    </div>
+    <%=simple_form_for [@project, @other_cost], url: :monitoring_project_other_costs, remote: true do |f| %>
+    <%= f.error_notification %>
+      <div class="modal-body">
+        <ul class="errors text-danger">
+        </ul>
+        <div class="row">
+          <div class="col-md-6">
+        <%=f.input :date, as: :string, input_html: { class: "date_picker" }, required: true %>
+      </div>
+      <div class="col-md-6">
+        <%=f.input :costable_type, input_html: {value: "Employee"}, as: :hidden %>
+        <%=f.input :costable_id, collection: Employee.all, label: "Employee" %>
+      </div>
+    </div>
+        <div class="row">
+          <div class="col-md-2">
+            <%=f.input :unit %>
+          </div>
+          <div class="col-md-10">
+        <%=f.input :description %>
+      </div>
+    </div>
+        <div class="row">
+          <div class="col-md-6">
+            <%=f.input :quantity, input_html: {id: 'number_of_days', oninput: 'calculateOtherCost()'} %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :unit_cost, input_html: {id: 'unit_cost', oninput: 'calculateOtherCost()'} %>
+          </div>
+        </div>
+        <%=f.input :total_cost, input_html: {id: 'total_cost', readonly: true} %>
+      </div>
+      <div class="modal-footer">
+        <%#= link_to 'Cancel', monitoring_project_path(@project), class: 'btn btn-default pull-left' %>
+        <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+        <%=f.submit "Save", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $("#direct_costs_other_costable_id").select2({
+      theme: "bootstrap", width: '100%'
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $('.date_picker').datetimepicker({
+      format: 'MMMM DD, YYYY',
+      showClose: true,
+        widgetPositioning: {
+              horizontal: 'auto',
+              vertical: 'auto'
+        }
+    });
+  });
+</script>

@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @other_cost.errors.any? %>
+  <% @other_cost.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#other-cost-modal").modal("hide")
+  window.location.reload();
+<% end %>

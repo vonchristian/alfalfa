@@ -1,0 +1,22 @@
+<ul class="list-unstyled team-members">
+  <li>
+    <div class="row">
+      <div class="col-xs-2">
+        <small><%=other_cost.date.strftime("%b %e %Y") %></small>
+      </div>
+      <div class="col-xs-3">
+        <%=image_tag(other_cost.costable.profile_photo(:small), class: "img-circle")%>&nbsp<%=other_cost.costable.full_name %>
+      </div>
+      <div class="col-xs-2">
+        <%=other_cost.description%>
+      </div>
+      <div class="col-xs-2">
+        <%=other_cost.quantity %> <%=other_cost.unit %>
+      </div>
+      <div class="col-xs-2 text-right">
+        <%=number_to_currency other_cost.total_cost %>
+      </div>
+    </div>
+    <hr>
+  </li>
+</ul>

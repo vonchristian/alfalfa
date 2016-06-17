@@ -9,12 +9,12 @@
             <% end %>
           </div>
           <div class="col-md-11">
-            <h4 class="title">Labor Costs
+            <h4 class="title">Other Costs
               <span class="pull-right">
                 <%=link_to monitoring_project_purchase_orders_path(format: "pdf"), target: '_blank', title: "View PDF" do %>
                   <span class="btn btn-info btn-sm btn-icon"><i class="fa fa-file-pdf-o"></i> View PDF </span>
                 <% end %>
-                <%=link_to "New Labor Cost", new_monitoring_project_labor_cost_path(@project), class: 'btn btn-primary btn-icon', remote: true %>
+                <%=link_to "New other Cost", new_monitoring_project_other_cost_path(@project), class: 'btn btn-primary btn-icon', remote: true %>
               </span>
             </h4>
           </div>
@@ -22,9 +22,9 @@
         <div class="row"><hr></div>
       </div>
       <div class="content">
-        <%=render @project.labor_costs %>
+        <%=render @project.other_costs %>
       </div>
     </div>
   </div>
 </div>
-<div id="labor-cost-modal" class="modal fade"></div>
+<div id="other-cost-modal" class="modal fade"></div>
