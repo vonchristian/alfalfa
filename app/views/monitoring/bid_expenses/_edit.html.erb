@@ -1,0 +1,34 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">New Bid Expense</h4>
+    </div>
+    <%= simple_form_for [@project, @bid_expense], url: :monitoring_project_bid_expense, remote: true do |f| %>
+		<%=f.error_notification %>
+	    <div class="modal-body">
+		  	<ul class="errors text-danger">
+		    </ul>
+				<%=f.input :date, as: :string, label: 'Date', input_html: { class: 'datetimepicker'} %>
+				<%=f.input :description, label: 'Description' %>
+				<%=f.input :amount, label: 'Amount' %>
+				<div class="modal-footer">
+					<%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+			    <%=f.submit "Update", class: "btn btn-primary pull-right" %>
+			    <%#=link_to "Back to Project", monitoring_project_path(@project) , class: "btn btn-default pull-left"%>
+			  </div>
+			</div>
+		<% end %>
+	</div>
+</div>
+<script>
+  $(document).ready(function() {
+	  $('.datetimepicker').datetimepicker({
+	  	format: 'YYYY-MM-DD hh:mm:ss A',
+	  	showClose: true,
+	      widgetPositioning: {
+	            horizontal: 'auto',
+	            vertical: 'auto'
+	      }
+	  });
+	});
+</script>

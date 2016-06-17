@@ -23,12 +23,12 @@ module Monitoring
       @project = Project.find(params[:project_id])
       @bid_expense = @project.bid_expenses.create(bid_expense_params)
       authorize @bid_expense
-      if @bid_expense.save
-        # @bid_expense.create_activity :create, owner: current_user, recipient: @project
-        redirect_to new_monitoring_project_bid_expense_path(@project), notice: "Bid Expense saved successfully."
-      else
-        render :new
-      end
+      # if @bid_expense.save
+      #   # @bid_expense.create_activity :create, owner: current_user, recipient: @project
+      #   redirect_to new_monitoring_project_bid_expense_path(@project), notice: "Bid Expense saved successfully."
+      # else
+      #   render :new
+      # end
     end
 
     def update
@@ -36,12 +36,12 @@ module Monitoring
       @bid_expense = Project::BidExpense.find(params[:id])
       authorize @bid_expense
       @bid_expense.update(bid_expense_params)
-      if @bid_expense.save
-        # @bid_expense.create_activity :update, owner: current_user, recipient: @project
-        redirect_to monitoring_project_bid_expenses_path(@bid_expense.project), notice: "Bid Expense updated successfully."
-      else
-        render :edit
-      end
+      # if @bid_expense.save
+      #   # @bid_expense.create_activity :update, owner: current_user, recipient: @project
+      #   redirect_to monitoring_project_bid_expenses_path(@bid_expense.project), notice: "Bid Expense updated successfully."
+      # else
+      #   render :edit
+      # end
     end
 
     def show

@@ -7,7 +7,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @project.bid_expenses.each do |bid_expense| %>
+		<% @project.bid_expenses.order(:created_at).each do |bid_expense| %>
 			<tr>
 				<td><%= bid_expense.date.strftime("%B %e, %Y") if bid_expense.date.present? %></td>
 				<td><%= bid_expense.description %></td>
