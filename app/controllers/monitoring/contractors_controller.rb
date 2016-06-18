@@ -18,6 +18,12 @@ module Monitoring
     def create
       @contractors = Contractor.all
       @contractor = Contractor.create(contractor_params)
+      authorize @contractor
+      if @contractor.save
+        redirect_to monitoring_contractors_path, notice: "Contractor saved successfully."
+      else
+        render :new
+      end
     end
 
     def show
@@ -25,13 +31,18 @@ module Monitoring
     end
 
     def edit
+      @contractors = Contractor.all
       @contractor = Contractor.find(params[:id])
     end
 
     def update
-      @contractors = Contractor.all
       @contractor = Contractor.find(params[:id])
-      @contractor.update_attributes(contractor_params)
+      authorize @contractor
+      if @contractor.update(contractor_params)
+        redirect_to monitoring_contractor_path(@contractor), notice: "Contractor updated successfully."
+      else
+        render :edit
+      end
     end
 
     private

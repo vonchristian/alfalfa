@@ -1,14 +1,12 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title">Editing Contractor</h4>
-    </div>
-    <%= simple_form_for [:monitoring, @contractor], url: :monitoring_contractor, multipart: true, remote: true do |f| %>
-    <%=f.error_notification %>
-      <div class="modal-body">
-        <ul class="errors text-danger">
-        </ul>
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<%= simple_form_for @contractor, url: :monitoring_contractors do |f| %>
+<%=f.error_notification %>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">New Contractor</h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
         <%= image_tag @contractor.profile_photo.url(:medium), class: 'center-block img-rounded'%>
         <center><%= f.input :profile_photo, class: 'center-block', as: :file %></center>
         <br>
@@ -24,11 +22,10 @@
         <%=f.input :position, label: false, placeholder: "Position" %>
         <%=f.input :main_contractor, label: "Main Contractor?" %>
         <div class="modal-footer">
-          <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
-          <%=f.submit 'Update', class: 'btn btn-primary active' %>
+          <%= link_to "Cancel", monitoring_contractors_path, class: "btn", data: {dismiss: "modal"} %>
+          <%=f.submit 'Save', class: 'btn btn-primary active' %>
         </div>
       </div>
-    <% end %>
     </div>
   </div>
-</div>
+<% end %>
