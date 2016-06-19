@@ -166,8 +166,6 @@
   z-index: 3;
 }
 
-
-
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -179,4 +177,17 @@
   // Fade for backdrop
   &.fade { @include opacity(0); }
   &.in { @include opacity($modal-backdrop-opacity); }
+}
+
+@media (max-width: 761px) {
+  .tab-caption {
+    display: none;
+  }
+}
+
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 32px;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
 }
