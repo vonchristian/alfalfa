@@ -1,0 +1,52 @@
+<div class="tab-pane active" id="equipment">
+  <br>
+  <h4 class="title">Equipment
+    <%=link_to "New Expense", new_accounting_equipment_expense_path, class: "btn btn-danger pull-right" %>
+  </h4>
+  <table class="table table-hover">
+  	<thead>
+			<tr>
+				<th></th>
+				<th> Description </th>
+				<th> Equipment </th>
+				<th> Credit </th>
+				<th> Debit </th>
+				<th> Amount</th>
+				<th> Type </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @equipment_expenses.each do |equipment_expense| %>
+				<tr>
+					<td>
+
+					</td>
+          <td>
+            <small class="help-block pull-right"><i class="fa fa-clock-o"></i> <%=equipment_expense.created_at.strftime("%B %d, %Y %I:%M%p") %></small><br>
+            <small><%=link_to equipment_expense.description.truncate(200), accounting_equipment_expense_path(equipment_expense) %></small>
+          </td>
+
+					<td>
+            <small><%=equipment_expense.entriable.try(:name) %></small>
+          </td>
+					<td>
+						<% equipment_expense.credit_amounts.each do |credit| %>
+							<small><%=credit.account.name %></small>
+						<% end %>
+					</td>
+					<td>
+						<% equipment_expense.debit_amounts.each do |debit| %>
+						  <small><%=debit.account.name %></small><br>
+						<% end %>
+					</td>
+					<td>
+						<% equipment_expense.credit_amounts.each do |credit| %>
+							<small><%=number_to_currency credit.amount %></small>
+						<% end %>
+					</td>
+					<td><small><%#=equipment_expense.type.sub("Transactions::", "").titleize if equipment_expense.type %></small></td>
+				</tr>
+			<% end %>
+		</tbody>
+  </table>
+</div>

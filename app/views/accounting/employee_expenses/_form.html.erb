@@ -1,0 +1,76 @@
+<%= simple_form_for @employee_expense, url: :accounting_employee_expenses do |f| %>
+  <%=f.error_notification %>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Add a New Employee Expense </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <%=f.input :date, as: :string, input_html: { class: "datetimepicker" } %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :reference_number %>
+          </div>
+        </div>
+
+        <%=f.input :description, as: :text %>
+        <%=f.input :entry_type, collection: Accounting::Entry.entry_types.keys.to_a.map{ |a| [a.titleize, a]} %>
+        <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
+        <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]} %>
+        <h4 class="title"> Debit </h4>
+        <%=f.simple_fields_for :debit_amounts do |c| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%=c.input :amount, input_html: { id: 'debit_amount' } %>
+          </div>
+          <div class="col-md-6">
+            <%=c.input :account, collection: Account.all.pluck(:name) %>
+          </div>
+        </div>
+        <% end %>
+        <h4 class="title"> Credit </h4>
+        <%=f.simple_fields_for :credit_amounts do |d| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%=d.input :amount, input_html: { id: 'credit_amount' }, readonly: true %>
+          </div>
+          <div class="col-md-6">
+            <%=d.input :account, collection: Account.all.pluck(:name)%>
+          </div>
+        </div>
+        <% end %>
+        <div class="modal-footer">
+          <%= link_to "Cancel", accounting_employee_expenses_path, class: 'btn btn-xs pull-left' %>
+          <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  $(document).ready(function() {
+
+    $("#employee_expense_entry_type").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#employee_expense_entriable_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#entry_debit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

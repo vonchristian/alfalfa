@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616031709) do
+ActiveRecord::Schema.define(version: 20160620145931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,11 +78,17 @@ ActiveRecord::Schema.define(version: 20160616031709) do
     t.string  "type"
     t.integer "account_id"
     t.integer "entry_id"
-    t.decimal "amount",     precision: 20, scale: 10
+    t.decimal "amount",               precision: 20, scale: 10
+    t.integer "employee_expense_id"
+    t.integer "project_expense_id"
+    t.integer "equipment_expense_id"
   end
 
   add_index "amounts", ["account_id", "entry_id"], name: "index_amounts_on_account_id_and_entry_id", using: :btree
+  add_index "amounts", ["employee_expense_id"], name: "index_amounts_on_employee_expense_id", using: :btree
   add_index "amounts", ["entry_id", "account_id"], name: "index_amounts_on_entry_id_and_account_id", using: :btree
+  add_index "amounts", ["equipment_expense_id"], name: "index_amounts_on_equipment_expense_id", using: :btree
+  add_index "amounts", ["project_expense_id"], name: "index_amounts_on_project_expense_id", using: :btree
   add_index "amounts", ["type"], name: "index_amounts_on_type", using: :btree
 
   create_table "attachment_files", force: :cascade do |t|
@@ -226,6 +232,20 @@ ActiveRecord::Schema.define(version: 20160616031709) do
 
   add_index "educational_attainments", ["employee_id"], name: "index_educational_attainments_on_employee_id", using: :btree
 
+  create_table "employee_expenses", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "entry_type"
+    t.datetime "date"
+    t.string   "reference_number"
+    t.integer  "entriable_id"
+    t.string   "entriable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "employee_expenses", ["entriable_id"], name: "index_employee_expenses_on_entriable_id", using: :btree
+  add_index "employee_expenses", ["entriable_type"], name: "index_employee_expenses_on_entriable_type", using: :btree
+
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
     t.string   "middle_name"
@@ -309,6 +329,20 @@ ActiveRecord::Schema.define(version: 20160616031709) do
   end
 
   add_index "equipment_costs", ["work_detail_id"], name: "index_equipment_costs_on_work_detail_id", using: :btree
+
+  create_table "equipment_expenses", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "entry_type"
+    t.datetime "date"
+    t.string   "reference_number"
+    t.integer  "entriable_id"
+    t.string   "entriable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "equipment_expenses", ["entriable_id"], name: "index_equipment_expenses_on_entriable_id", using: :btree
+  add_index "equipment_expenses", ["entriable_type"], name: "index_equipment_expenses_on_entriable_type", using: :btree
 
   create_table "equipment_schedules", force: :cascade do |t|
     t.integer  "equipment_id"
@@ -445,6 +479,7 @@ ActiveRecord::Schema.define(version: 20160616031709) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "order_id"
+    t.decimal  "hauling_cost"
     t.decimal  "total_cost"
     t.decimal  "unit_cost"
     t.datetime "date"
@@ -494,13 +529,12 @@ ActiveRecord::Schema.define(version: 20160616031709) do
   create_table "orders", force: :cascade do |t|
     t.integer  "customer_id"
     t.string   "customer_type"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "payment_status",         default: 1
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "payment_status", default: 1
     t.datetime "date_issued"
     t.integer  "project_id"
     t.string   "name"
-    t.string   "equipment_plate_number"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
@@ -540,6 +574,20 @@ ActiveRecord::Schema.define(version: 20160616031709) do
   end
 
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
+
+  create_table "project_expenses", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "entry_type"
+    t.datetime "date"
+    t.string   "reference_number"
+    t.integer  "entriable_id"
+    t.string   "entriable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "project_expenses", ["entriable_id"], name: "index_project_expenses_on_entriable_id", using: :btree
+  add_index "project_expenses", ["entriable_type"], name: "index_project_expenses_on_entriable_type", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.integer  "main_contractor_id"

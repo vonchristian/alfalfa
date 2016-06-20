@@ -1,0 +1,70 @@
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="card">
+			<div class="header">
+				<h4 class="title">Entry Details
+					<div class="pull-right">
+				  	<ul class="nav navbar-nav">
+				      <li class="dropdown">
+				        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <b class="caret"></b></a>
+				        <ul class="dropdown-menu dropdown-menu-right">
+				          <li><%=link_to 'Delete', accounting_employee_expense_path(@employee_expense), method: :delete, data: {confirm: 'Are you sure?'} %></li>
+				        </ul>
+				      </li>
+				    </ul>
+				  </div>
+				</h4>
+				<div class="row"><hr></div>
+			</div>
+			<div class="content">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<p><strong>Recipient</strong></p>
+						<span>&nbsp &nbsp &nbsp<%=@employee_expense.entriable.try(:name) %></span><br>
+							<hr>
+						<p><strong>Description</strong></p>
+						<hr>
+						<span>&nbsp &nbsp &nbsp<%=@employee_expense.description %></span><br>
+
+
+
+						<p><strong>Date</strong></p>
+						<span>&nbsp &nbsp &nbsp<%=@employee_expense.date.strftime("%B %e, %Y") %></span>
+
+						<hr>
+
+						<p><strong>Reference Number</strong></p>
+						<span>&nbsp &nbsp &nbsp<%=@employee_expense.reference_number%></span>
+
+						<hr>
+
+						<p><strong>Debited Account(s)</strong></p>
+						<%@employee_expense.debit_amounts.each do |d|%>
+							<div class="row">
+								<div class="col-md-12">
+									&nbsp &nbsp &nbsp<%=d.account.name %><span class="pull-right"><%=number_to_currency d.amount %></span>
+								</div>
+							</div>
+						<%end %>
+
+						<hr>
+
+						<p><strong>Credited Account(s)</strong></p>
+						<%@employee_expense.credit_amounts.each do |d|%>
+							<div class="row">
+								<div class="col-md-12">
+									&nbsp &nbsp &nbsp<%=d.account.name %> <span class="pull-right"><%=number_to_currency d.amount %></span>
+								</div>
+							</div>
+						<% end %>
+						<br>
+						<div class="modal-footer">
+							<%= link_to "Cancel", accounting_employee_expenses_path, class: 'btn btn-xs pull-left' %>
+							<%=link_to "Edit Entry", edit_accounting_employee_expense_path(@employee_expense), class: "btn btn-primary" %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

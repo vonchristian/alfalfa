@@ -24,6 +24,10 @@ class Equipment < ActiveRecord::Base
     "#{make} - #{model}"
   end
 
+  def make_and_plate_number
+    "#{plate_number} - #{make}"
+  end
+
   def to_s
     make_and_model
   end

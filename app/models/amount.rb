@@ -1,6 +1,9 @@
 class Amount < ActiveRecord::Base
     belongs_to :entry, :class_name => 'Accounting::Entry'
     belongs_to :account, :class_name => 'Account'
+    belongs_to :employee_expense, :class_name => 'EmployeeExpense'
+    belongs_to :project_expense, :class_name => 'ProjectExpense'
+    belongs_to :project_expense, :class_name => 'EquipmentExpense'
 
     validates_presence_of :type, :amount, :entry, :account
     # attr_accessible :account, :account_name, :amount, :entry
