@@ -1,6 +1,7 @@
 class WorkedDay < ActiveRecord::Base
 
   belongs_to :employee
+  belongs_to :project
 
   validates :number_of_days, presence: true, numericality: { less_than: 30 }
   validates :start_date, :end_date, presence: true
@@ -17,4 +18,7 @@ class WorkedDay < ActiveRecord::Base
   def self.total
     all.sum(:number_of_days)
   end
+
+  def cost
+    number_of_days * employee.rate
 end

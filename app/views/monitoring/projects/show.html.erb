@@ -11,7 +11,7 @@
                 <span class="text-black"><%=number_to_currency @project.actual_accomplishment, unit: "" %>%</span>
               </div>
             </div>
-              <%=link_to "View PDF", monitoring_project_path(@project, format: 'pdf'), class: "btn btn-default btn-xs" %>
+              <%=link_to "View Summary (PDF)", monitoring_project_path(@project, format: 'pdf'), class: "btn btn-default btn-sm" %>
               <br>
               <br>
           </div>

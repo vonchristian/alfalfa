@@ -2,6 +2,8 @@ class Account < ActiveRecord::Base
   include PgSearch
   pg_search_scope :search_by_name, :against => [:code, :name, :type]
   FUND_TRANSFER_SOURCES = ["Owner's Capital", "Cash on Hand", "Cash in Bank"]
+  EMPLOYEE_EXPENSES_SOURCES = ["Advances to Employees",
+                               "Employee Wages and Salaries"]
   class_attribute :normal_credit_balance
     has_many :amounts
     has_many :credit_amounts, :extend => AmountsExtension, class_name: "CreditAmount"
@@ -14,6 +16,10 @@ class Account < ActiveRecord::Base
 
   def self.fund_transfer_sources
      self.all.select{|a| Account::FUND_TRANSFER_SOURCES.include?(a.name)}
+  end
+
+  def self.employee_expenses_sources
+     self.all.select{|a| Account::EMPLOYEE_EXPENSES_SOURCES.include?(a.name)}
   end
 
   def self.petty_cash_expenses

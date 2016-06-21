@@ -59,7 +59,7 @@ class Employee < ActiveRecord::Base
   end
 
   def cash_advances
-    Accounting::Entry.cash_advance.where(entriable: self)
+  Account.find_by_name("Advances to Employees").debit_entries.where(entriable: self)
   end
 
   def paid!
