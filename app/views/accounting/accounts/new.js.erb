@@ -1,2 +1,6 @@
 $("#account-modal").html("<%= escape_javascript(render 'new') %>")
-$("#account-modal").modal("show")
+$("#account-modal").modal( {
+    
+    backdrop: 'static',
+    keyboard: false
+})
