@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :accounting, only:[:index]
   namespace :accounting do
     resources :employee_expenses, only:[:new, :create]
+    resources :project_expenses, only:[:new, :create]
     resources :expenses, except:[:destroy]
     resources :bank_account
     resources :petty_cash, only: [:index] do

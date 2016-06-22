@@ -1,0 +1,80 @@
+<%= simple_form_for @entry, url: :accounting_employee_expenses do |f| %>
+  <%=f.error_notification %>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Add a New Transaction </h4>
+        <div class="row"><hr></div>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <%=f.input :date, as: :string, input_html: { class: "datepicker" } %>
+          </div>
+          <div class="col-md-6">
+            <%=f.input :reference_number %>
+          </div>
+        </div>
+
+        <%=f.input :description, as: :text %>
+        <%=f.input :entriable_type, input_html: { value: "Project" }, as: :hidden %>
+        <%=f.input :entriable_id, label: "Project", collection: Project.all.map {|a| [a.id_number_and_location, a.id]} %>
+        <h4 class="title"> Debit </h4>
+        <%=f.simple_fields_for :debit_amounts do |c| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%=c.input :amount %>
+          </div>
+          <div class="col-md-6">
+            <%=c.input :account, collection: Account::PROJECT_EXPENSES_SOURCES%>
+          </div>
+        </div>
+        <% end %>
+        <h4 class="title"> Credit </h4>
+        <%=f.simple_fields_for :credit_amounts do |d| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%=d.input :amount, input_html: { autocomplete: 'off' }, readonly: true %>
+          </div>
+          <div class="col-md-6">
+            <%=d.input :account, collection: Account::CASH_SOURCES%>
+          </div>
+        </div>
+        <% end %>
+        <div class="modal-footer">
+          <%= link_to "Cancel", accounting_expenses_path, class: 'btn btn-xs pull-left' %>
+          <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  $(document).ready(function() {
+    $("#accounting_entry_debit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+    $("#accounting_entry_credit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+    $("#accounting_entry_type").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#accounting_entry_entriable_id").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#entry_debit_amounts_attributes_0_account").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>

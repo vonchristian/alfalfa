@@ -52,7 +52,7 @@ class Employee < ActiveRecord::Base
     all.map{ |a| a.unpaid_cash_advances }.sum
   end
 
-  def self.total_other_deductions
+  def self.total_advanced_ppes
     all.map{ |a| a.unpaid_advanced_ppes }.sum
   end
 

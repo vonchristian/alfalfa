@@ -1,0 +1,29 @@
+<br>
+<h4 class="title"> List of Employee Expenses</h4>
+<p class="category"> Last updated <%=Time.zone.now.strftime("%B %e, %Y") %></p>
+<hr>
+<table class="table table-hover">
+  <thead>
+    <tr class="title">
+      <th>Employee</th>
+      <th>Type </th>
+      <th> Amount </th>
+      <th> Date </th>
+  </thead>
+  <tbody>
+  <% Account.employee_expenses_sources.each do |account| %>
+  <% account.entries.each do |entry| %>
+    <tr>
+      <td><%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %> <%=link_to entry.entriable.try(:full_name), accounting_entry_path(entry)%></td>
+      <td>
+        <% entry.debit_amounts.each do |debit| %>
+        <p class="category"><%=debit.account.name %></p>
+        <%end %>
+      </td>
+      <td><%= number_to_currency entry.debit_amounts.sum(:amount) %></td>
+      <td><%= entry.date.strftime("%B %e, %Y") %></td>
+    </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
