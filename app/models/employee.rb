@@ -33,8 +33,6 @@ class Employee < ActiveRecord::Base
   has_many :projects, through: :work_details
   has_many :equipment_schedules
   has_many :equipments, through: :equipment_schedules
-  has_many :other_deductions, as: :itemable, class_name: "Item"
-
 
   has_many :overtimes, class_name: "Accounting::Employees::Overtime"
   enum employee_type:[:regular, :irregular]
@@ -54,18 +52,21 @@ class Employee < ActiveRecord::Base
     all.map{ |a| a.unpaid_cash_advances }.sum
   end
 
-  def total_other_deductions
-    other_deductions.unpaid.sum(:total_cost)
+  def self.total_other_deductions
+    all.map{ |a| a.unpaid_advanced_ppes }.sum
   end
 
   def cash_advances
   Account.find_by_name("Advances to Employees").debit_entries.where(entriable: self)
   end
 
+  def advanced_ppes
+    Account.find_by_name("Advances to Employees (PPE)").debit_entries.where(entriable: self)
+  end
+
   def paid!
     self.worked_days.unpaid.set_to_paid!
     self.overtimes.set_to_paid!
-    self.other_deductions.set_to_paid!
   end
 
   def unpaid_worked_days
@@ -126,7 +127,14 @@ class Employee < ActiveRecord::Base
 
   def unpaid_cash_advances
     if cash_advances.any?
-      Transactions::CashAdvance.unpaid_amount_for(self)
+      cash_advances.all.map{|a| a.debit_amounts.sum(:amount)}.sum
+    else
+      0
+    end
+  end
+  def unpaid_advanced_ppes
+    if advanced_ppes.any?
+      advanced_ppes.all.map{|a| a.debit_amounts.sum(:amount)}.sum
     else
       0
     end
@@ -141,7 +149,7 @@ class Employee < ActiveRecord::Base
   end
 
   def total_deductions
-    unpaid_cash_advances + contributions + total_other_deductions
+    unpaid_cash_advances + contributions + unpaid_advanced_ppes
   end
 
   def contributions

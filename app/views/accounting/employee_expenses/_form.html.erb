@@ -3,7 +3,7 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="card">
       <div class="header">
-        <h4 class="title">Employee Expense Details</h4>
+        <h4 class="title">Add a New Transaction </h4>
         <div class="row"><hr></div>
       </div>
       <div class="content">
@@ -27,7 +27,7 @@
             <%=c.input :amount %>
           </div>
           <div class="col-md-6">
-            <%=c.input :account, collection: Account::EMPLOYEE_EXPENSES_SOURCES %>
+            <%=c.input :account, collection: Account::EMPLOYEE_EXPENSES_SOURCES%>
           </div>
         </div>
         <% end %>
@@ -38,12 +38,12 @@
             <%=d.input :amount, input_html: { autocomplete: 'off' } %>
           </div>
           <div class="col-md-6">
-            <%=d.input :account, input_html: { value: "Petty Cash" }%>
+            <%=d.input :account, collection: Account.all.pluck(:name)%>
           </div>
         </div>
         <% end %>
         <div class="modal-footer">
-          <%= link_to "Cancel", accounting_entries_path, class: 'btn btn-xs pull-left' %>
+          <%= link_to "Cancel", accounting_expenses_path, class: 'btn btn-xs pull-left' %>
           <%=f.submit "Record Entry", class: "btn btn-danger pull-right" %>
         </div>
       </div>

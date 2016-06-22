@@ -29,3 +29,4 @@ This is the repository for Alfalfa Construction project management system.
 
 * Repo owner or admin
 * Other community or team contact
+ Run a small company? Looking to be able to do bigger things with a small crew? Basecamp 3 is our secret weapon, and it can be yours too.

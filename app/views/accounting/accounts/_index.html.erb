@@ -3,6 +3,8 @@
     <td><%= account.code %></td>
     <td><%= account.name %></td>
     <td><%= account.type %></td>
+    <td><%= account.debits_balance %> </td>
+    <td><%= account.credits_balance %> </td>
     <td><%= link_to "Edit", edit_accounting_account_path(account), remote: true, class: "btn btn-default" %></td>
   </tr>
 <% end %>

@@ -102,7 +102,7 @@
 						<div class="col-md-3">
 						</div>
 						<div class="col-md-2">
-							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.total_other_deductions %></h5>
+							<h5 class="text-danger pull-right">- <%=number_to_currency @employee.unpaid_advanced_ppes %></h5>
 						</div>
 					</div>
           <div class="row">
@@ -166,6 +166,19 @@
 						<% end %>
 
           <% end %>
+          <!-- Advanced PPES Payment -->
+          <% if @employee.unpaid_cash_advances > 0 %>
+          <%=f.simple_fields_for :debit_amounts do |d| %>
+            <%=d.input :amount, input_html: { autocomplete: 'off', value: @employee.unpaid_advanced_ppes }, as: :hidden  %>
+            <%=d.input :account, input_html: { value: "Petty Cash" }, as: :hidden  %>
+          <% end %>
+
+          <%=f.simple_fields_for :credit_amounts do |c| %>
+            <%=c.input :amount, input_html: {value: @employee.unpaid_advanced_ppes }, as: :hidden  %>
+            <%=c.input :account, input_html: {value: "Advances to Employees (PPE)"}, as: :hidden  %>
+          <% end %>
+
+        <% end %>
 						<div class="modal-footer">
 							<%=f.submit "Pay Employee", class: "btn btn-danger" %>
 						</div>

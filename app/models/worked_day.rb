@@ -19,6 +19,7 @@ class WorkedDay < ActiveRecord::Base
     all.sum(:number_of_days)
   end
 
-  def cost
+  def total_cost
     number_of_days * employee.rate
+  end
 end

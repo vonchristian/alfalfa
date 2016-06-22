@@ -13,29 +13,19 @@
       <thead>
         <tr class="title">
           <th>Date</th>
-          <th>Qty </th>
-          <th>description </th>
+          <th>Description </th>
           <th>Amount</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-      <% @employee.other_deductions.order(:date).reverse.each do |deduction| %>
+      <% @employee.advanced_ppes.order(:date).reverse.each do |deduction| %>
           <tr>
             <td><%=deduction.date.strftime("%B %e, %Y") %></td>
-            <td><%=deduction.quantity %> <%=deduction.unit %></td>
             <td> <%=deduction.description %></td>
-            <td><%=number_to_currency deduction.unit_cost %></td>
+            <td><%=number_to_currency deduction.debit_amounts.sum(:amount) %></td>
             <td>
-              <%if !deduction.paid? %>
-                <%=link_to edit_employee_other_deduction_path(id: deduction.id, employee_id: @employee.id) do %>
-                  <span class="btn btn-warning btn-icon"><i class="fa fa-pencil"></i></span>
-                  <% end %>
-                  <% else %>
-                  Paid
-
-                <% end %>
-              </td>
+            </td>
           </tr>
         <% end %>
       </tbody>

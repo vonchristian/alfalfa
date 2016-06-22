@@ -3,7 +3,8 @@ class Account < ActiveRecord::Base
   pg_search_scope :search_by_name, :against => [:code, :name, :type]
   FUND_TRANSFER_SOURCES = ["Owner's Capital", "Cash on Hand", "Cash in Bank"]
   EMPLOYEE_EXPENSES_SOURCES = ["Advances to Employees",
-                               "Employee Wages and Salaries"]
+                               "Employee Wages and Salaries",
+                               "Advances to Employees (PPE)"]
   class_attribute :normal_credit_balance
     has_many :amounts
     has_many :credit_amounts, :extend => AmountsExtension, class_name: "CreditAmount"
