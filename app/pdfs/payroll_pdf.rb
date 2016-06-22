@@ -32,8 +32,8 @@ def heading
 
   def payroll_data
     move_down 5
-    [["<b>Employee</b>", "<b>Position</b>", "<b>Rate</b>", "<b>Days Worked (Days)</b>", "<b>Overtime (Hours) </b>", "<b>Cash Advances</b>", "<b>Earned Income</b>", "<b>Gross Pay</b>"]] +
-    @payroll_data ||= @employees.map { |e| [e.full_name, e.position.try(:titleize), e.rate, e.unpaid_worked_days, e.unpaid_overtimes, price(e.unpaid_cash_advances), price(e.earned_income), price(e.total_gross_pay) ]} +
-    [["", "", "", "", "", "<b>#{price(@employees.total_cash_advances)}</b>", "<b>#{price(@employees.total_earned_income)}</b>", "<b>#{price(@employees.total_gross_pay)}</b>"]]
+    [["<b>Employee</b>", "<b>Position</b>", "<b>Rate</b>", "<b>Days Worked (Days)</b>", "<b>Overtime (Hours) </b>", "<b>Cash Advances</b>", "<b>PPE</b>",  "<b>Earned Income</b>", "<b>Gross Pay</b>"]] +
+    @payroll_data ||= @employees.map { |e| [e.full_name, e.position.try(:titleize), e.rate, e.unpaid_worked_days, e.unpaid_overtimes, price(e.unpaid_cash_advances), price(e.unpaid_advanced_ppes), price(e.earned_income), price(e.total_gross_pay) ]} +
+    [["", "", "", "", "","<b>#{price(@employees.total_cash_advances)}</b>", "<b>#{price(@employees.total_advanced_ppes)}</b>", "<b>#{price(@employees.total_earned_income)}</b>", "<b>#{price(@employees.total_gross_pay)}</b>"]]
   end
 end
