@@ -22,7 +22,7 @@
   <% Account.employee_expenses_sources.each do |account| %>
   <% account.entries.order(:date).reverse.each do |entry| %>
     <tr>
-      <td><%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %> <%=link_to entry.entriable.try(:full_name), accounting_entry_path(entry)%></td>
+      <td><%=link_to entry.entriable.try(:full_name), accounting_entry_path(entry)%></td>
       <td>
         <% entry.debit_amounts.each do |debit| %>
         <p class="category"><%=debit.account.name %></p>
