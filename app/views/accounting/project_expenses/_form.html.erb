@@ -1,4 +1,4 @@
-<%= simple_form_for @entry, url: :accounting_employee_expenses do |f| %>
+<%= simple_form_for @entry, url: :accounting_project_expenses do |f| %>
   <%=f.error_notification %>
   <div class="col-md-8 col-md-offset-2">
     <div class="card">
@@ -15,7 +15,8 @@
             <%=f.input :reference_number %>
           </div>
         </div>
-
+        <%=f.input :recipient_type, input_html: { value: "Contractor" } %>
+        <%=f.input :recipient_id, collection: Contractor.all %>
         <%=f.input :description, as: :text %>
         <%=f.input :entriable_type, input_html: { value: "Project" }, as: :hidden %>
         <%=f.input :entriable_id, label: "Project", collection: Project.all.map {|a| [a.id_number_and_location, a.id]} %>

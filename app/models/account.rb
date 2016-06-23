@@ -25,6 +25,10 @@ class Account < ActiveRecord::Base
      self.all.select{|a| Account::EMPLOYEE_EXPENSES_SOURCES.include?(a.name)}
   end
 
+  def self.project_expenses_sources
+    self.all.select{|a| Account::PROJECT_EXPENSES_SOURCES.include?(a.name)} 
+  end
+
   def self.petty_cash_expenses
     self.all.select{|a| Account::PETTY_CASH_EXPENSES.include?(a.name)}
   end

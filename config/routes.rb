@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   ####Accounting Department
   resources :accounting, only:[:index]
   namespace :accounting do
+    resources :projects, only:[:show]
     resources :employee_expenses, only:[:new, :create]
+    resources :labor_expenses, only:[:new, :create]
     resources :project_expenses, only:[:new, :create]
     resources :expenses, except:[:destroy]
     resources :bank_account

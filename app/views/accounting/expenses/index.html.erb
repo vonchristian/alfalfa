@@ -1,15 +1,15 @@
 <div class="card">
-  
+
   <div class="content">
 
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
       <li class="active">
-        <a href="#employee" data-toggle="tab">
+        <a href="#employee_expenses" data-toggle="tab">
           <span class="tab-icon"><i class="fa fa-user"></i></span><span class="tab-caption"> Employee</span>
         </a>
       </li>
       <li>
-        <a href="#orange" data-toggle="tab">
+        <a href="#project_expenses" data-toggle="tab">
           <span class="tab-icon"><i class="fa fa-server"></i> </span><span class="tab-caption"> Project</span>
         </a>
       </li>
@@ -26,10 +26,7 @@
     </ul>
     <div id="my-tab-content" class="tab-content">
       <%=render 'employee_expenses' %>
-      <div class="tab-pane" id="orange">
-          <h1>Orange</h1>
-          <p>orange orange orange orange orange</p>
-      </div>
+      <%=render 'project_expenses' %>
       <div class="tab-pane" id="yellow">
           <h1>Yellow</h1>
           <p>yellow yellow yellow yellow yellow</p>

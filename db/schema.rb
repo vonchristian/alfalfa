@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616031709) do
+ActiveRecord::Schema.define(version: 20160622031837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,22 @@ ActiveRecord::Schema.define(version: 20160616031709) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
+  create_table "add_date_to_line_items", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "add_recipient_id_to_entries", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "add_recipient_id_to_entries", ["recipient_id"], name: "index_add_recipient_id_to_entries_on_recipient_id", using: :btree
+  add_index "add_recipient_id_to_entries", ["recipient_type"], name: "index_add_recipient_id_to_entries_on_recipient_type", using: :btree
+
   create_table "amount_revisions", force: :cascade do |t|
     t.decimal  "amount"
     t.string   "remarks"
@@ -78,11 +94,17 @@ ActiveRecord::Schema.define(version: 20160616031709) do
     t.string  "type"
     t.integer "account_id"
     t.integer "entry_id"
-    t.decimal "amount",     precision: 20, scale: 10
+    t.decimal "amount",               precision: 20, scale: 10
+    t.integer "employee_expense_id"
+    t.integer "project_expense_id"
+    t.integer "equipment_expense_id"
   end
 
   add_index "amounts", ["account_id", "entry_id"], name: "index_amounts_on_account_id_and_entry_id", using: :btree
+  add_index "amounts", ["employee_expense_id"], name: "index_amounts_on_employee_expense_id", using: :btree
   add_index "amounts", ["entry_id", "account_id"], name: "index_amounts_on_entry_id_and_account_id", using: :btree
+  add_index "amounts", ["equipment_expense_id"], name: "index_amounts_on_equipment_expense_id", using: :btree
+  add_index "amounts", ["project_expense_id"], name: "index_amounts_on_project_expense_id", using: :btree
   add_index "amounts", ["type"], name: "index_amounts_on_type", using: :btree
 
   create_table "attachment_files", force: :cascade do |t|
@@ -226,6 +248,20 @@ ActiveRecord::Schema.define(version: 20160616031709) do
 
   add_index "educational_attainments", ["employee_id"], name: "index_educational_attainments_on_employee_id", using: :btree
 
+  create_table "employee_expenses", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "entry_type"
+    t.datetime "date"
+    t.string   "reference_number"
+    t.integer  "entriable_id"
+    t.string   "entriable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "employee_expenses", ["entriable_id"], name: "index_employee_expenses_on_entriable_id", using: :btree
+  add_index "employee_expenses", ["entriable_type"], name: "index_employee_expenses_on_entriable_type", using: :btree
+
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
     t.string   "middle_name"
@@ -268,11 +304,15 @@ ActiveRecord::Schema.define(version: 20160616031709) do
     t.string   "reference_number"
     t.string   "type"
     t.integer  "entry_type"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
   end
 
   add_index "entries", ["entriable_id"], name: "index_entries_on_entriable_id", using: :btree
   add_index "entries", ["entriable_type"], name: "index_entries_on_entriable_type", using: :btree
   add_index "entries", ["entry_type"], name: "index_entries_on_entry_type", using: :btree
+  add_index "entries", ["recipient_id"], name: "index_entries_on_recipient_id", using: :btree
+  add_index "entries", ["recipient_type"], name: "index_entries_on_recipient_type", using: :btree
 
   create_table "equipment", force: :cascade do |t|
     t.string   "plate_number"
@@ -309,6 +349,20 @@ ActiveRecord::Schema.define(version: 20160616031709) do
   end
 
   add_index "equipment_costs", ["work_detail_id"], name: "index_equipment_costs_on_work_detail_id", using: :btree
+
+  create_table "equipment_expenses", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "entry_type"
+    t.datetime "date"
+    t.string   "reference_number"
+    t.integer  "entriable_id"
+    t.string   "entriable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "equipment_expenses", ["entriable_id"], name: "index_equipment_expenses_on_entriable_id", using: :btree
+  add_index "equipment_expenses", ["entriable_type"], name: "index_equipment_expenses_on_entriable_type", using: :btree
 
   create_table "equipment_schedules", force: :cascade do |t|
     t.integer  "equipment_id"
@@ -540,6 +594,20 @@ ActiveRecord::Schema.define(version: 20160616031709) do
   end
 
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
+
+  create_table "project_expenses", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "entry_type"
+    t.datetime "date"
+    t.string   "reference_number"
+    t.integer  "entriable_id"
+    t.string   "entriable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "project_expenses", ["entriable_id"], name: "index_project_expenses_on_entriable_id", using: :btree
+  add_index "project_expenses", ["entriable_type"], name: "index_project_expenses_on_entriable_type", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.integer  "main_contractor_id"

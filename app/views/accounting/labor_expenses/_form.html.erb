@@ -1,4 +1,4 @@
-<%= simple_form_for @entry, url: :accounting_employee_expenses do |f| %>
+<%= simple_form_for @entry, url: :accounting_labor_expenses do |f| %>
   <%=f.error_notification %>
   <div class="col-md-8 col-md-offset-2">
     <div class="card">
@@ -15,11 +15,11 @@
             <%=f.input :reference_number %>
           </div>
         </div>
-
+        <%=f.input :recipient_type, input_html: { value: "Employee" } %>
+        <%=f.input :recipient_id, collection: Employee.all %>
         <%=f.input :description, as: :text %>
-        <%=f.input :entry_type, collection: Accounting::Entry.entry_types.keys.to_a.map{ |a| [a.titleize, a]} %>
-        <%=f.input :entriable_type, input_html: { value: "Employee" }, as: :hidden %>
-        <%=f.input :entriable_id, label: "Employee", collection: Employee.all.map {|a| [a.full_name, a.id]} %>
+        <%=f.input :entriable_type, input_html: { value: "Project" }, as: :hidden %>
+        <%=f.input :entriable_id, label: "Project", collection: Project.all.map {|a| [a.id_number_and_location, a.id]} %>
         <h4 class="title"> Debit </h4>
         <%=f.simple_fields_for :debit_amounts do |c| %>
         <div class="row">
@@ -27,7 +27,7 @@
             <%=c.input :amount %>
           </div>
           <div class="col-md-6">
-            <%=c.input :account, collection: Account::EMPLOYEE_EXPENSES_SOURCES%>
+            <%=c.input :account, collection: Account::PROJECT_EXPENSES_SOURCES%>
           </div>
         </div>
         <% end %>

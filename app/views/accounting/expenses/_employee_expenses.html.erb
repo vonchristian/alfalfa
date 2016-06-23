@@ -1,6 +1,14 @@
+  <div class="tab-pane active" id="employee_expenses">
 <br>
+<div class="row">
+  <div class="col-md-6">
 <h4 class="title"> List of Employee Expenses</h4>
 <p class="category"> Last updated <%=Time.zone.now.strftime("%B %e, %Y") %></p>
+</div>
+<div class="col-md-6">
+<span class="pull-right"><%=link_to "New Employee Expense", new_accounting_employee_expense_path, class: "btn btn-danger" %></span>
+</div>
+</div>
 <hr>
 <table class="table table-hover">
   <thead>
@@ -12,7 +20,7 @@
   </thead>
   <tbody>
   <% Account.employee_expenses_sources.each do |account| %>
-  <% account.entries.each do |entry| %>
+  <% account.entries.order(:date).reverse.each do |entry| %>
     <tr>
       <td><%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %> <%=link_to entry.entriable.try(:full_name), accounting_entry_path(entry)%></td>
       <td>
@@ -27,3 +35,4 @@
     <% end %>
   </tbody>
 </table>
+</div>

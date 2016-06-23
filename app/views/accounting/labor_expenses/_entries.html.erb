@@ -1,0 +1,60 @@
+
+<div class="header">
+	<h4 class="title">Entries
+		<span class="pull-right"><%=link_to "New Entry", new_accounting_entry_path, class: "btn btn-primary" %> </span>
+	</h4>
+	<div class="row"><hr></div>
+</div>
+<div class="content">
+	<div class="table table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th></th>
+					<th> Description </th>
+					<th> Recipient / Project </th>
+					<th> Credit </th>
+					<th> Debit </th>
+					<th> Amount</th>
+					<th> Type </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @entries.each do |entry| %>
+					<tr>
+						<td>
+
+						</td>
+            <td>
+              <small class="help-block pull-right"><i class="fa fa-clock-o"></i> <%=entry.created_at.strftime("%B %d, %Y %I:%M%p") %></small><br>
+              <small><%=link_to entry.description.truncate(200), accounting_entry_path(entry) %></small>
+            </td>
+
+						<td>
+              <small><%=entry.entriable.try(:name) %></small>
+            </td>
+						<td>
+							<% entry.credit_amounts.each do |credit| %>
+								<small><%=credit.account.name %></small>
+							<% end %>
+						</td>
+						<td>
+							<% entry.debit_amounts.each do |debit| %>
+							  <small><%=debit.account.name %></small><br>
+							<% end %>
+						</td>
+						<td>
+							<% entry.credit_amounts.each do |credit| %>
+								<small><%=number_to_currency credit.amount %></small>
+							<% end %>
+						</td>
+						<td><small><%=entry.type.sub("Transactions::", "").titleize if entry.type %></small></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+    <center><%=link_to "View All", accounting_entries_path, class: "btn btn-info" %></center>
+  </div>
+</div>
