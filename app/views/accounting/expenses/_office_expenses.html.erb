@@ -1,0 +1,52 @@
+<div class="tab-pane" id="office_expenses">
+<br>
+<div class="row">
+  <div class="col-md-6">
+<h4 class="title"> List of Office Expenses</h4>
+<p class="category"> Last updated <%=Time.zone.now.strftime("%B %e, %Y") %></p>
+</div>
+<div class="col-md-6">
+  <ul class="nav navbar-nav pull-right">
+    <li class="dropdown">
+      <li class="dropdown">
+      <button href="#" class="dropdown-toggle btn btn-danger" data-toggle="dropdown" aria-expanded="false">New Expense <b class="caret"></b></button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li><%=link_to "Labor", new_accounting_project_expense_path %></li>
+        <li> <%=link_to 'Equipment', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
+        <li> <%=link_to 'Subcontract', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</div>
+<hr>
+<table class="table table-hover">
+<thead>
+  <tr class="title">
+    <th>Recipient</th>
+    <th>Project</th>
+    <th>Type</th>
+    <th>Description </th>
+    <th>Amount</th>
+    <th>Date</th>
+</thead>
+<tbody>
+<% Account.project_expenses_sources.each do |account| %>
+<% account.entries.each do |entry| %>
+  <tr>
+    <td><%=entry.recipient.try(:full_name)%></td>
+    <td><%=link_to entry.entriable.try(:id_number_and_location), accounting_project_path(entry.entriable)%></td>
+    <td>
+      <% entry.debit_amounts.each do |debit| %>
+      <p class="category"><%=debit.account.name %></p>
+      <%end %>
+    </td>
+      <td><%=entry.description %></td>
+    <td><%= number_to_currency entry.debit_amounts.sum(:amount) %></td>
+    <td><%= entry.date.strftime("%B %e, %Y") %></td>
+  </tr>
+  <% end %>
+  <% end %>
+</tbody>
+</table>
+</div>
