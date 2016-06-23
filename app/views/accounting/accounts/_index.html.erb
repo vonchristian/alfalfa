@@ -3,8 +3,8 @@
     <td><%= account.code %></td>
     <td><%= link_to account.name, accounting_account_path(account) %></td>
     <td><%= account.type %></td>
-    <td><%= account.debits_balance %> </td>
-    <td><%= account.credits_balance %> </td>
+    <td><%= number_to_currency account.debits_balance %> </td>
+    <td><%= number_to_currency account.credits_balance %> </td>
     <td><%= link_to "Edit", edit_accounting_account_path(account), remote: true, class: "btn btn-default" %></td>
   </tr>
 <% end %>
