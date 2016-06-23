@@ -29,7 +29,6 @@
       </div>
       <div class="content">
         <%= render 'accounting/account', :name => "Revenues", :accounts => @revenues %>
-        <h4 class="title">Construction Costs </h4>
         <%= render 'accounting/account', :name => "Expenses", :accounts => @expenses %>
         <hr>
         <h4 class="title">Net Income: <span class="pull-right"><%=number_to_currency (@revenues.balance(from_date: @from_date, to_date: @to_date ) - @expenses.balance(from_date: @from_date, to_date: @to_date )) %></h4>
