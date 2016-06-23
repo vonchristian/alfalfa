@@ -11,8 +11,9 @@ class Account < ActiveRecord::Base
                                 "Repairs",
                                 "Maintenance",
                                 "Tires",
+                                "Miscellaneous",
                                 "Fuel and Lubrication",
-                                "Fuel and Lubrication",
+                                "Taxes, Licenses and Insurance",
                                 "Equipment Cost Charged to Employee",
                                 "Equipment Cost Charged to Jobs",]
   CASH_SOURCES = ["Cash on Hand", "Petty Cash", "Cash in Bank"]
