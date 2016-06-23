@@ -1,0 +1,43 @@
+<div class="tab-pane" id="equipment_expenses">
+<br>
+<div class="row">
+  <div class="col-md-6">
+<h4 class="title"> List of Equipment Expenses</h4>
+<p class="category"> Last updated <%=Time.zone.now.strftime("%B %e, %Y") %></p>
+</div>
+<div class="col-md-6">
+  <%=link_to "New Equipment Expense", new_accounting_equipment_expense_path, class: "btn btn-danger pull-right" %>
+</div>
+</div>
+<hr>
+<table class="table table-hover">
+<thead>
+  <tr class="title">
+    <th>Recipient</th>
+    <th>Equipment</th>
+    <th>Description </th>
+    <th>Type</th>
+    <th>Amount </th>
+    <th> Date </th>
+</thead>
+<tbody>
+<% Account.equipment_expenses_sources.each do |account| %>
+<% account.entries.each do |entry| %>
+  <tr>
+
+    <td><%=link_to entry.entriable.try(:full_name), accounting_equipment_path(entry.entriable)%></td>
+      <td><%=entry.recipient %></td>
+      <td><%=entry.description %></td>
+      <td>
+      <% entry.debit_amounts.each do |debit| %>
+      <p class="category"><%=debit.account.name %></p>
+      <%end %>
+    </td>
+    <td><%= number_to_currency entry.debit_amounts.sum(:amount) %></td>
+    <td><%= entry.date.strftime("%B %e, %Y") %></td>
+  </tr>
+  <% end %>
+  <% end %>
+</tbody>
+</table>
+</div>

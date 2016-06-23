@@ -12,7 +12,8 @@ module Accounting
                      :cash_advance_payment,
                      :sales
                    ]
-    belongs_to :entriable, :polymorphic => true
+    belongs_to :entriable, polymorphic: true
+    belongs_to :recipient, polymorphic: true
     multisearchable :against => [:description]
     pg_search_scope :search_by_query, :against => [:description]
 

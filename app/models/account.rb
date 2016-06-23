@@ -6,7 +6,18 @@ class Account < ActiveRecord::Base
                                "Employee Wages and Salaries",
                                "Advances to Employees (PPE)"]
   PROJECT_EXPENSES_SOURCES = ["Materials", "Labor", "Equipment","Subcontract", "Other Costs"]
+  EQUIPMENT_EXPENSES_SOURCES = ["Rent and Lease Payments",
+                                "Depreciation",
+                                "Repairs",
+                                "Maintenance",
+                                "Tires",
+                                "Fuel and Lubrication",
+                                "Fuel and Lubrication",
+                                "Equipment Cost Charged to Employee",
+                                "Equipment Cost Charged to Jobs",]
   CASH_SOURCES = ["Cash on Hand", "Petty Cash", "Cash in Bank"]
+  CASH_SOURCES_WITH_INVENTORY = ["Cash on Hand", "Petty Cash", "Cash in Bank", "Inventory"]
+
   class_attribute :normal_credit_balance
     has_many :amounts
     has_many :credit_amounts, :extend => AmountsExtension, class_name: "CreditAmount"
@@ -26,7 +37,10 @@ class Account < ActiveRecord::Base
   end
 
   def self.project_expenses_sources
-    self.all.select{|a| Account::PROJECT_EXPENSES_SOURCES.include?(a.name)} 
+    self.all.select{|a| Account::PROJECT_EXPENSES_SOURCES.include?(a.name)}
+  end
+  def self.equipment_expenses_sources
+    self.all.select{|a| Account::EQUIPMENT_EXPENSES_SOURCES.include?(a.name)}
   end
 
   def self.petty_cash_expenses
