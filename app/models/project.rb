@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Common
   include PgSearch
+  enum status: [:on_going, :suspended, :completed, :terminated]
   pg_search_scope :search_by_name, :against => [:name, :id_number, :address]
   multisearchable :against => [:name, :id_number],
    :order_within_rank => "projects.created_at DESC"
@@ -50,7 +51,7 @@ class Project < ActiveRecord::Base
   def total_direct_costs
     costs.total + direct_material_costs + total_bid_expenses
   end
-  
+
   def total_bid_expenses
     if bid_expenses.present?
       bid_expenses.sum(:amount)
