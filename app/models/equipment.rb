@@ -25,7 +25,7 @@ class Equipment < ActiveRecord::Base
   end
 
   def to_s
-    make_and_model
+    "#{make_and_model} (#{plate_number})"
   end
 
   def self.active

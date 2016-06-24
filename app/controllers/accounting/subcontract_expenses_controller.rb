@@ -1,5 +1,5 @@
 module Accounting
-  class ProjectExpensesController < ApplicationController
+  class SubcontractExpensesController < ApplicationController
     layout 'accounting'
         def index
           if params[:query].present?
@@ -44,7 +44,7 @@ module Accounting
           @entry = Accounting::Entry.new(entry_params)
           authorize @entry
           if @entry.save
-            redirect_to accounting_expenses_path, notice: "Entry saved successfully."
+            redirect_to accounting_expenses_path, notice: "Subcontract expense saved successfully."
           else
             render :new
           end

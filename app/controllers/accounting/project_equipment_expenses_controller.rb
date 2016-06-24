@@ -1,5 +1,5 @@
 module Accounting
-  class ProjectExpensesController < ApplicationController
+  class ProjectEquipmentExpensesController < ApplicationController
     layout 'accounting'
         def index
           if params[:query].present?

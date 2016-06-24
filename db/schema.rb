@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622031837) do
+ActiveRecord::Schema.define(version: 20160624060252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -306,11 +306,13 @@ ActiveRecord::Schema.define(version: 20160622031837) do
     t.integer  "entry_type"
     t.integer  "recipient_id"
     t.string   "recipient_type"
+    t.integer  "equipment_id"
   end
 
   add_index "entries", ["entriable_id"], name: "index_entries_on_entriable_id", using: :btree
   add_index "entries", ["entriable_type"], name: "index_entries_on_entriable_type", using: :btree
   add_index "entries", ["entry_type"], name: "index_entries_on_entry_type", using: :btree
+  add_index "entries", ["equipment_id"], name: "index_entries_on_equipment_id", using: :btree
   add_index "entries", ["recipient_id"], name: "index_entries_on_recipient_id", using: :btree
   add_index "entries", ["recipient_type"], name: "index_entries_on_recipient_type", using: :btree
 

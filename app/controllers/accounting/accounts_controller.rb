@@ -2,9 +2,9 @@ class Accounting::AccountsController < ApplicationController
   layout "accounting"
   def index
     if params[:name].present?
-      @accounts = Account.search_by_name(params[:name])
+      @accounts = Account.search_by_name(params[:name]).order(:code)
     else
-      @accounts = Account.all.order(:type)
+      @accounts = Account.all.order(:code)
     end
   end
   def new

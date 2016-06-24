@@ -16,6 +16,11 @@ Rails.application.routes.draw do
   namespace :accounting do
     resources :projects, only:[:show]
     resources :equipment, only:[:show]
+    ##PROJECT EXPENSES
+    resources :labor_expenses, only:[:new, :create]
+    resources :subcontract_expenses, only:[:new, :create]
+    resources :project_equipment_expenses, only:[:new, :create]
+    ####
     resources :employee_expenses, only:[:new, :create]
     resources :project_expenses, only:[:new, :create]
     resources :equipment_expenses, only:[:new, :create]
