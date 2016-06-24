@@ -44,7 +44,7 @@ module Accounting
           @entry = Accounting::Entry.new(entry_params)
           authorize @entry
           if @entry.save
-            redirect_to accounting_entries_path, notice: "Entry saved successfully."
+            redirect_to accounting_expenses_path, notice: "Entry saved successfully."
           else
             render :new
           end
