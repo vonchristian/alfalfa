@@ -1,36 +1,37 @@
 <div class="col-md-12">
 <div class="card">
-
-  <div class="content">
-
-    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+  <div class="header">
+<div class="nav-tabs-navigation">
+  <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
       <li class="active">
         <a href="#employee_expenses" data-toggle="tab">
-          <span class="tab-icon"><i class="fa fa-user"></i></span><span class="tab-caption"> Employee</span>
+          <span class="tab-caption"> Employee</span>
         </a>
       </li>
       <li>
         <a href="#project_expenses" data-toggle="tab">
-          <span class="tab-icon"><i class="fa fa-server"></i> </span><span class="tab-caption"> Project</span>
+          <span class="tab-caption"> Project</span>
         </a>
       </li>
       <li>
         <a href="#equipment_expenses" data-toggle="tab">
-          <span class="tab-icon"><i class="fa fa-truck"></i> </span><span class="tab-caption"> Equipment</span>
+          <span class="tab-caption"> Equipment</span>
         </a>
       </li>
       <li>
         <a href="#office_expenses" data-toggle="tab">
-          <span class="tab-icon"><i class="fa fa-building"></i></span><span class="tab-caption"> Office</span>
+          <span class="tab-caption"> Office</span>
         </a>
       </li>
       <li>
         <a href="#overhead_expenses" data-toggle="tab">
-          <span class="tab-icon"><i class="fa fa-circle-o"></i></span><span class="tab-caption"> Overhead</span>
+        <span class="tab-caption"> Overhead</span>
         </a>
       </li>
     </ul>
-    <div id="my-tab-content" class="tab-content">
+  </div>
+    <div class="content">
+      <div id="my-tab-content" class="tab-content">
       <%=render 'employee_expenses' %>
       <%=render 'project_expenses' %>
       <%=render 'equipment_expenses' %>

@@ -185,9 +185,62 @@
   }
 }
 
+
+.nav-tabs-navigation {
+  border-bottom: 1px solid #F1EAE0;
+}
+.nav-tabs-navigation .nav > li > a {
+  padding-bottom: 20px;
+}
+
+.nav-tabs-wrapper {
+  display: inline-block;
+  margin-bottom: -6px;
+  margin-left: 1.25%;
+  margin-right: 1.25%;
+  position: relative;
+  width: auto;
+}
+
+.nav-tabs {
+  border-bottom: 0 none;
+  font-size: 14px;
+  font-weight: 600;
+}
 .nav-tabs > li > a {
-  margin-right: 2px;
-  line-height: 32px;
-  border: 1px solid transparent;
-  border-radius: 4px 4px 0 0;
+  border: 0 none;
+  color: #A49E93;
+}
+.nav-tabs > li > a:hover {
+  color: #66615b;
+}
+.nav-tabs > li.active {
+  color: #66615b;
+  position: relative;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  background-color: transparent;
+  border: 0 none;
+}
+.nav-tabs > li.active :after {
+  border-bottom: 11px solid #FFFCF5;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 40%;
+  bottom: -1px;
+}
+.nav-tabs > li.active :before {
+  border-bottom: 11px solid #F1EAE0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 40%;
+  bottom: 1px;
 }

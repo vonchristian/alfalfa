@@ -15,7 +15,8 @@ class Account < ActiveRecord::Base
                                 "Fuel and Lubrication",
                                 "Taxes, Licenses and Insurance",
                                 "Equipment Cost Charged to Employee",
-                                "Equipment Cost Charged to Jobs",]
+                                "Equipment Cost Charged to Jobs"]
+  OFFICE_EXPENSES_SOURCES = ["Computer and Office Furniture", "Office Supplies", "Office Purchase", "Office Rent", "Office Utilities", "Postage and Delivery", "Janitorial and Cleaning", "Telephone", "Meals and Entertainment"]
   CASH_SOURCES = ["Cash on Hand", "Petty Cash", "Cash in Bank"]
   CASH_SOURCES_WITH_INVENTORY = ["Cash on Hand", "Petty Cash", "Cash in Bank", "Inventory"]
 
@@ -35,6 +36,10 @@ class Account < ActiveRecord::Base
 
   def self.employee_expenses_sources
      self.all.select{|a| Account::EMPLOYEE_EXPENSES_SOURCES.include?(a.name)}
+  end
+
+  def self.office_expenses_sources
+     self.all.select{|a| Account::OFFICE_EXPENSES_SOURCES.include?(a.name)}
   end
 
   def self.project_expenses_sources
