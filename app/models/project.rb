@@ -29,6 +29,7 @@ class Project < ActiveRecord::Base
   has_many :bid_expenses
 
   has_many :costs
+  has_many :other_costs, class_name: "DirectCosts::Other"
   has_many :labor_costs, class_name: "DirectCosts::Labor"
   has_many :equipment_costs, class_name: "DirectCosts::Equipment"
   has_many :material_costs, class_name: "DirectCosts::Material"
@@ -41,13 +42,6 @@ class Project < ActiveRecord::Base
 
   validates :name, :cost, :implementing_office, :duration, :id_number, :address, presence: true
   validates :id_number, uniqueness: true
-  def other_costs
-    Account.find_by_name("Other Costs").entries.where(entriable: self)
-  end
-
-  def total_other_costs
-    other_costs.map{|a| a.debit_amounts.sum(:amount)}.sum
-  end
 
   def effectivity_date
     if notice_to_proceed.present?

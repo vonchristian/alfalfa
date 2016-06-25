@@ -6,17 +6,7 @@
 <p class="category"> Last updated <%=Time.zone.now.strftime("%B %e, %Y") %></p>
 </div>
 <div class="col-md-6">
-  <ul class="nav navbar-nav pull-right">
-    <li class="dropdown">
-      <li class="dropdown">
-      <button href="#" class="dropdown-toggle btn btn-danger" data-toggle="dropdown" aria-expanded="false">New Expense <b class="caret"></b></button>
-      <ul class="dropdown-menu dropdown-menu-right">
-        <li><%=link_to "Labor", new_accounting_project_expense_path %></li>
-        <li> <%=link_to 'Equipment', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
-        <li> <%=link_to 'Subcontract', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
-      </ul>
-    </li>
-  </ul>
+  <%=link_to "New Overhead Expense", new_accounting_overhead_expense_path, class: "btn btn-danger pull-right" %>
 </div>
 </div>
 <hr>
