@@ -29,7 +29,7 @@ class Project < ActiveRecord::Base
   has_many :bid_expenses
 
   has_many :costs
-  has_many :other_costs, class_name: "DirectCosts::Other"
+  has_many :other_costs, class_name: "DirectCosts::OtherCost"
   has_many :labor_costs, class_name: "DirectCosts::Labor"
   has_many :equipment_costs, class_name: "DirectCosts::Equipment"
   has_many :material_costs, class_name: "DirectCosts::Material"
