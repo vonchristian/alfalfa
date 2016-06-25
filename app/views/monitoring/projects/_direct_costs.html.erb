@@ -35,7 +35,7 @@
       <li>
         <p>
           <i><%=image_tag("engineer.png", width: 30, height: 30) %></i> &nbsp; <%=link_to "Other Costs", monitoring_project_other_costs_path(@project) %>
-          <span class="pull-right"><%=number_to_currency @project.total_other_costs %></span>
+          <span class="pull-right"><%=number_to_currency @project.other_costs.total %></span>
         </p>
       </li>
       <li>
