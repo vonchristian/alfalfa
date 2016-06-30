@@ -2,7 +2,8 @@ module Supplies
   class Inventory < ActiveRecord::Base
     include PublicActivity::Common
     include PgSearch
-    pg_search_scope :search_by_name, :against => [:name]
+    pg_search_scope :search_by_name, :against => [:name], :associated_against => {
+    :item_category => [:name]}
     enum status:[:available, :unavailable, :discontinued]
     has_many :stocks, dependent: :destroy
     has_many :line_items, class_name: 'Supplies::LineItem'
@@ -44,7 +45,7 @@ module Supplies
     end
 
     def to_s
-      "#{name} (#{item_category.try(:name)})"
+      "#{name} #{item_category.try(:name)}"
     end
 
     def name_description
