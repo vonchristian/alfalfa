@@ -4,9 +4,10 @@ module Supplies
     include PgSearch
     pg_search_scope :search_by_name, :against => [:name]
     enum status:[:available, :unavailable, :discontinued]
-    has_many :stocks
+    has_many :stocks, dependent: :destroy
     has_many :line_items, class_name: 'Supplies::LineItem'
     has_many :orders, through: :line_items, class_name: 'Supplies::Order'
+    belongs_to :item_category
 
     validates :name, :unit, :price, presence: true
     validates :price, numericality: { greater_than: 0.1 }
@@ -15,6 +16,7 @@ module Supplies
     def available
       all.where(status: :available)
     end
+    
     def discontinue
       self.discontinued!
     end
@@ -42,7 +44,7 @@ module Supplies
     end
 
     def to_s
-      "#{name} - #{description}"
+      "#{name} (#{item_category.try(:name)})"
     end
 
     def name_description

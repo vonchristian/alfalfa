@@ -66,7 +66,7 @@
                       <% elsif inventory.discontinued? %>
                         <span class="label label-danger pull-right"> Discontinued </span>
                       <% end %><br>
-                      <%=link_to inventory.name, inventory %>
+                      <%=link_to inventory, inventory %>
                     </td>
                     <td> <%=inventory.unit %>
                     <td><%=inventory.stocks.sum(:quantity) %></td>

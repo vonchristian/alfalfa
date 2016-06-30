@@ -8,6 +8,7 @@
       </div>
       <div class="content">
         <%=f.input :name, autofocus: true %>
+        <%=f.input :item_category_id, label: 'Category', collection: ItemCategory.all %>
         <% if @inventory.new_record? %>
           <%=f.simple_fields_for :stocks do |ff| %>
             <%= render 'stock_fields', :f => ff %>

@@ -57,11 +57,19 @@ module Supplies
       end
     end
 
+    def destroy
+      @inventory = Supplies::Inventory.find(params[:id])
+      if @inventory.destroy
+        redirect_to supplies_inventories_url, notice: 'Item successfully deleted.'
+      end
+    end
+
     def discontinue
       @inventory = Supplies::Inventory.find(params[:id])
       @inventory.discontinue
       redirect_to supplies_inventories_url, notice: "Inventory discontinued successfully."
     end
+    
     def continue
       @inventory = Supplies::Inventory.find(params[:id])
       @inventory.unavailable!
@@ -70,7 +78,7 @@ module Supplies
 
     private
     def inventory_params
-      params.require(:supplies_inventory).permit( :name, :description, :price, :unit, stocks_attributes:[:date, :quantity, :unit_cost, :total_cost])
+      params.require(:supplies_inventory).permit( :name, :item_category_id, :description, :price, :unit, stocks_attributes:[:date, :quantity, :unit_cost, :total_cost])
     end
   end
 end

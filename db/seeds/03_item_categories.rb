@@ -1,0 +1,8 @@
+ItemCategory.create(:name => "Aggregate")
+ItemCategory.create(:name => "Explosive")
+ItemCategory.create(:name => "Fuel")
+ItemCategory.create(:name => "Cement")
+ItemCategory.create(:name => "Tire")
+ItemCategory.create(:name => "CHB")
+ItemCategory.create(:name => "RCPC")
+ItemCategory.create(:name => "RSB")

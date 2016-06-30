@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'monitoring_officer' if request.env['warden'].user }, as: :monitoring_root
-  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' if request.env['warden'].user }, as: :projects_root
+  root :to => 'monitoring/projects#index', :constraints => lambda { |request| request.env['warden'].user.role == 'project_engineer' || 'project_manager' if request.env['warden'].user }, as: :projects_root
   root :to => 'accounting#index', :constraints => lambda { |request| request.env['warden'].user.role == 'accounting_officer' if request.env['warden'].user }, as: :accounting_root
   root :to => 'supplies#index', :constraints => lambda { |request| request.env['warden'].user.role == 'supply_officer' if request.env['warden'].user }, as: :supply_root
 
