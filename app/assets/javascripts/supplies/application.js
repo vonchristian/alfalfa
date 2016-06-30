@@ -30,3 +30,4 @@
 //= require supplies/work_detail
 //= require bootstrap-datepicker
 //= require supplies/datepicker
+//= require supplies/purchase_order
