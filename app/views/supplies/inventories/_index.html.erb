@@ -22,6 +22,7 @@
           </ul>
         </li>
       </ul>
+      <%=link_to "New Category", new_supplies_item_category_path, remote: true, class: 'btn btn-primary' %>
     </div>
     <div class="col-md-4">
       <%=form_tag supplies_inventories_path, method: :get do %>
@@ -42,55 +43,56 @@
   <div class="row"><hr class="no-top-padding with-padding"></div>
   <div class="row">
     <div class="card">
-        <div class="content">
-          <div class="table table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr class="title">
-                  <th>Name</th>
-                  <th> Unit </th>
-                  <th>Qty Stock</th>
-                  <th>Qty Used </th>
-                  <th>Qty Remaining </th>
-                  <th>Price</th>
-                  <th></th>
-                  <th></th>
+      <div class="content">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr class="title">
+                <th>Name</th>
+                <th> Unit </th>
+                <th>Qty Stock</th>
+                <th>Qty Used </th>
+                <th>Qty Remaining </th>
+                <th>Price</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @inventories.each do |inventory| %>
+                <tr class="<%="text-danger" if inventory.out_of_stock?%>">
+                  <td class="text-uppercase">
+                    <% if inventory.unavailable? %>
+                      <span class="label label-danger pull-right"> Out of Stock </span>
+                    <% elsif inventory.discontinued? %>
+                      <span class="label label-danger pull-right"> Discontinued </span>
+                    <% end %><br>
+                    <%=link_to inventory, inventory %>
+                  </td>
+                  <td> <%=inventory.unit %>
+                  <td><%=inventory.stocks.sum(:quantity) %></td>
+                  <td><%=inventory.line_items.sum(:quantity) %></td>
+                  <td><%=inventory.quantity%> </td>
+                  <td><span><%=number_to_currency inventory.price%></span></td>
+                  <td>
+                    <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
+                      <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
+                    <% end %>
+                    <% if inventory.unavailable? %>
+                      <%=link_to "DISCONTINUE", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id), class: "btn btn-danger btn-sm active", data: {confirm: "Are you sure you want to discontinue this inventory?"} %>
+                    <% elsif inventory.discontinued? %>
+                      <%=link_to "ACTIVATE", supplies_inventory_continue_path(id: inventory.id, inventory_id: inventory.id), class: " btn btn-success active", data: {confirm: "Are you sure you want to continue this inventory?"} %>
+                    <% end %>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                <% @inventories.each do |inventory| %>
-                  <tr class="<%="text-danger" if inventory.out_of_stock?%>">
-                    <td class="text-uppercase">
-                      <% if inventory.unavailable? %>
-                        <span class="label label-danger pull-right"> Out of Stock </span>
-                      <% elsif inventory.discontinued? %>
-                        <span class="label label-danger pull-right"> Discontinued </span>
-                      <% end %><br>
-                      <%=link_to inventory, inventory %>
-                    </td>
-                    <td> <%=inventory.unit %>
-                    <td><%=inventory.stocks.sum(:quantity) %></td>
-                    <td><%=inventory.line_items.sum(:quantity) %></td>
-                    <td><%=inventory.quantity%> </td>
-                    <td><span><%=number_to_currency inventory.price%></span></td>
-                    <td>
-                      <% if policy(Supplies::Stock.new).new? && !inventory.discontinued? %>
-                        <%=link_to "Add Stock", new_supplies_inventory_stock_path(inventory), class: "btn btn-info active " %>
-                      <% end %>
-                      <% if inventory.unavailable? %>
-                        <%=link_to "DISCONTINUE", supplies_inventory_discontinue_path(id: inventory.id, inventory_id: inventory.id), class: "btn btn-danger btn-sm active", data: {confirm: "Are you sure you want to discontinue this inventory?"} %>
-                      <% elsif inventory.discontinued? %>
-                        <%=link_to "ACTIVATE", supplies_inventory_continue_path(id: inventory.id, inventory_id: inventory.id), class: " btn btn-success active", data: {confirm: "Are you sure you want to continue this inventory?"} %>
-                      <% end %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <center><%= paginate @inventories, :window => 1 %></center>
-          </div>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <center><%= paginate @inventories, :window => 1 %></center>
         </div>
       </div>
     </div>
+  </div>
+  <div id="item-category-modal" class="modal fade"></div>

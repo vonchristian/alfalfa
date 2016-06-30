@@ -96,7 +96,7 @@ Rails.application.routes.draw do
   get 'reports/contract_summary_report', as: 'contract_summary_report'
   get 'reports/index', as: 'reports'
 
-    get 'expenses/filtered_data' => 'expenses#filtered_data'
+  get 'expenses/filtered_data' => 'expenses#filtered_data'
   get 'accounts/income_statement' => 'accounts#income_statement'
   resources :payroll, only:[:index, :show]
 
@@ -141,6 +141,7 @@ Rails.application.routes.draw do
   end
 
   namespace :supplies do
+    resources :item_categories, only: [:new, :create]
     resources :contractors, only:[:show]
     resources :projects, only:[:show]
     resources :line_items do
