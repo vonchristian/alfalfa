@@ -22,7 +22,6 @@
           </ul>
         </li>
       </ul>
-      <%=link_to "New Category", new_supplies_item_category_path, remote: true, class: 'btn btn-primary' %>
     </div>
     <div class="col-md-4">
       <%=form_tag supplies_inventories_path, method: :get do %>
@@ -37,7 +36,16 @@
       <% end %>
     </div>
     <div class="col-md-4">
-      <span class="pull-right"><%=link_to "New Inventory", new_supplies_inventory_path, class: "btn btn-warning active" %></span>
+      <span class="pull-right">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <b class="caret"></b></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><%=link_to "New Category", new_supplies_item_category_path, remote: true %></li>
+            </ul>
+          </li>
+        </ul>
+        <%=link_to "New Inventory", new_supplies_inventory_path, class: "btn btn-warning active" %></span>
     </div>
   </div>
   <div class="row"><hr class="no-top-padding with-padding"></div>
