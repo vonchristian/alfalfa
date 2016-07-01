@@ -36,6 +36,9 @@ class Employee < ActiveRecord::Base
 
   has_many :overtimes, class_name: "Accounting::Employees::Overtime"
   enum employee_type:[:regular, :irregular]
+  def self.with_cash_advances
+    all.map{|a| a.unpaid_cash_advances > 0}
+  end
   def self.other_deductions
     all.map{ |a| a.total_other_deductions }.sum
   end
