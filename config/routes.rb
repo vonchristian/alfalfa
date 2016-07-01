@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :projects, only:[:show]
     resources :equipment, only:[:show]
     ##PROJECT EXPENSES
+    resources :overhead_expenses, only:[:new, :create]
     resources :other_expenses, only:[:new, :create]
     resources :office_expenses, only:[:new, :create]
     resources :labor_expenses, only:[:new, :create]
