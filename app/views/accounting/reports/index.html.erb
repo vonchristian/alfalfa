@@ -18,9 +18,10 @@
 <tr>
   <td><%= employee.full_name %></td>
 <td><% employee.cash_advances.each do |cash_advance| %>
-<p class="category"><%=cash_advance.date.strftime("%B %e, %Y") %>
+<span class="category"><%=cash_advance.date.strftime("%B %e, %Y") %>
   <span class="pull-right"><%=number_to_currency cash_advance.credit_amounts.sum(:amount) %></span>
-</p>
+</span>
+<br>
 <% end %>
 </td>
 <td><span class="pull-right"><%=number_to_currency employee.unpaid_cash_advances%></span></td>
