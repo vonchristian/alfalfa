@@ -1,5 +1,5 @@
 class CashAdvancesPdf < Prawn::Document
- TABLE_WIDTHS = [200, 100, 100]
+ TABLE_WIDTHS = [300, 250]
 def initialize(entries, from_date, to_date, view_context)
   super(margin: 20, page_size: [612, 1008], page_layout: :portrait)
   @entries = entries
@@ -41,8 +41,8 @@ def heading
 
   def table_data
     move_down 5
-    [["RECIPIENT", "DATE", "AMOUNT"]] +
-    @table_data ||= @entries.entered_on({from_date: @from_date, to_date: @to_date}).order(:date).reverse.map { |e| [e.entriable.try(:name), e.date.strftime("%B %e, %Y"), (price e.credit_amounts.sum(:amount))]} +
-    @table_data ||= [["",  "TOTAL", "#{(price Account.find_by_name("Advances to Employees").balance({from_date: @from_date, to_date: @to_date}))}"]]
+    [["EMPLOYEE", "AMOUNT"]] +
+    @table_data ||= Employee.all.map {|e| [e.full_name, price(e.unpaid_cash_advances)]} +
+    @table_data ||= [["TOTAL", "#{(price Account.find_by_name("Advances to Employees").balance({from_date: @from_date, to_date: @to_date}))}"]]
   end
 end
