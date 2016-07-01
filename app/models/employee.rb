@@ -173,7 +173,9 @@ class Employee < ActiveRecord::Base
   def unpaid_worked_days_amount_for(project)
     self.unpaid_worked_days_for(project) * self.rate
   end
-
+  def last_name_first_name
+    "#{last_name.titleize}, #{first_name.titleize}"
+  end
   def full_name
     "#{first_name.titleize} #{last_name.titleize}"
   end
