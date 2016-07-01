@@ -24,7 +24,8 @@
         <li>
           <div class="row">
             <div class="col-md-4">
-              <%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %> <%=entry.entriable.full_name %>
+              <% if entry.entriable %>
+                <%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %><% end %> <%=entry.entriable.try(:full_name) %>
             </div>
             <div class="col-md-4">
               <%=number_to_currency entry.debit_amounts.sum(:amount) %><br>
