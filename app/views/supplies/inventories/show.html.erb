@@ -54,7 +54,7 @@
               <tbody>
                 <% @inventory.orders.each do |order| %>
                   <tr>
-                    <td><%=order.date.strftime("%B %e, %Y") %></td>
+                    <td><%=order.date_issued.strftime("%B %e, %Y") %></td>
                     <td><%=order.line_items.where(:inventory_id => @inventory.id).pluck(:quantity).sum %> <%=@inventory.unit %></td>
                     <td><%=order.customer.try(:name)%></td>
                   </tr>
