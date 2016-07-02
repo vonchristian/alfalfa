@@ -8,7 +8,8 @@
       </div>
       <div class="content">
         <%=f.input :name, autofocus: true %>
-        <%=f.input :item_category_id, label: 'Category', collection: ItemCategory.all %>
+        <label>Category</label> <span class="pull-right"><%= link_to 'New Category?', new_supplies_item_category_path, remote: true %></span>
+        <%=f.input :item_category_id, label: false, collection: ItemCategory.all %>
         <% if @inventory.new_record? %>
           <%=f.simple_fields_for :stocks do |ff| %>
             <%= render 'stock_fields', :f => ff %>
@@ -30,3 +31,4 @@
     </div>
   </div>
 <% end %>
+<div id="item-category-modal" class="modal fade"></div>
