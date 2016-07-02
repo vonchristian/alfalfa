@@ -4,6 +4,6 @@ $("ul.errors").html("")
     $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
   <% end %>
 <% else %>
-  $("#account-modal").modal("hide")
-  window.location.reload();
+  $("#item-category-modal").modal("hide")
+  $("#supplies_inventory_item_category_id").load(location.href + " #supplies_inventory_item_category_id>*", "");
 <% end %>

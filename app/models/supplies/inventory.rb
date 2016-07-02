@@ -48,6 +48,10 @@ module Supplies
       "#{name} #{item_category.try(:name)}"
     end
 
+    def name_category
+      "#{name} #{item_category.try(:name)}"
+    end
+
     def name_description
       "#{name} - #{description}"
     end
