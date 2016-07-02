@@ -1,5 +1,5 @@
 class CashAdvancesPdf < Prawn::Document
- TABLE_WIDTHS = [200, 100, 100]
+ TABLE_WIDTHS = [200, 150, 150]
 def initialize(entries, from_date, to_date, view_context)
   super(margin: 20, page_size: [612, 1008], page_layout: :portrait)
   @entries = entries
@@ -32,7 +32,7 @@ def heading
     else
       move_down 10
 
-      table(table_data, header: true, cell_style: { size: 8, font: "Helvetica"}, column_widths: TABLE_WIDTHS) do
+      table(table_data, header: true, cell_style: { size: 8, font: "Helvetica", :inline_format => true }, column_widths: TABLE_WIDTHS) do
         row(0).font_style = :bold
         row(0).background_color = 'DDDDDD'
       end
@@ -41,8 +41,8 @@ def heading
 
   def table_data
     move_down 5
-    [["RECIPIENT", "DATE", "AMOUNT"]] +
-    @table_data ||= @entries.entered_on({from_date: @from_date, to_date: @to_date}).order(:date).reverse.map { |e| [e.entriable.try(:name), e.date.strftime("%B %e, %Y"), (price e.credit_amounts.sum(:amount))]} +
-    @table_data ||= [["",  "TOTAL", "#{(price Account.find_by_name("Advances to Employees").balance({from_date: @from_date, to_date: @to_date}))}"]]
+    [["EMPLOYEE","PPE", "CASH ADVANCES"]] +
+    @table_data ||= Employee.all.order(:last_name).map {|e| [e.last_name_first_name,price(e.unpaid_advanced_ppes), price(e.unpaid_cash_advances)]} +
+    @table_data ||= [["<b>TOTAL</b>","<b>#{(price Account.find_by_name("Advances to Employees (PPE)").balance({from_date: @from_date, to_date: @to_date}))}</b>", "<b>#{(price Account.find_by_name("Advances to Employees").balance({from_date: @from_date, to_date: @to_date}))}</b>"]]
   end
 end

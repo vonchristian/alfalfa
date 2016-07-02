@@ -17,6 +17,7 @@
                     <li><%=link_to 'This Day', scope_to_date_accounting_entries_path(:from_date => Time.zone.now.beginning_of_day, :to_date => Time.zone.now.end_of_day, format: 'pdf') %></li>
                     <li> <%=link_to 'This Week', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
                     <li> <%=link_to 'This Month', scope_to_date_accounting_entries_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
+                    <li> <%=link_to 'Last Month', scope_to_date_accounting_entries_path(from_date: Time.zone.now.last_month.beginning_of_month, to_date: Time.zone.now.last_month.end_of_month, format: 'pdf') %></li>
                   </ul>
                 </li>
               </ul>

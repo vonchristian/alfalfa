@@ -37,7 +37,7 @@
 <% account.entries.each do |entry| %>
   <tr>
     <td><%=entry.recipient.try(:full_name)%></td>
-    <td><%=link_to entry.entriable.try(:id_number_and_location), accounting_project_path(entry.entriable)%></td>
+    <td><%=entry.entriable.try(:id_number_and_location)%></td>
     <td>
       <% entry.debit_amounts.each do |debit| %>
       <p class="category"><%=debit.account.name %></p>

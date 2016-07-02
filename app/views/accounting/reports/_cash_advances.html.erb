@@ -12,6 +12,7 @@
                 <li><%=link_to 'This Day', scope_to_date_accounting_cash_advances_path(:from_date => Time.zone.now.beginning_of_day, :to_date => Time.zone.now.end_of_day, format: 'pdf') %></li>
                 <li> <%=link_to 'This Week', scope_to_date_accounting_cash_advances_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') %></li>
                 <li> <%=link_to 'This Month', scope_to_date_accounting_cash_advances_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') %></li>
+                  <li> <%=link_to 'Last Month', scope_to_date_accounting_cash_advances_path(from_date: Time.zone.now.last_month.beginning_of_month, to_date: Time.zone.now.last_month.end_of_month, format: 'pdf') %></li>
               </ul>
             </li>
           </ul>
@@ -24,7 +25,8 @@
         <li>
           <div class="row">
             <div class="col-md-4">
-              <%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %> <%=entry.entriable.full_name %>
+              <% if entry.entriable %>
+                <%=image_tag(entry.entriable.profile_photo.url(:thumb), class: "img-circle") %><% end %> <%=entry.entriable.try(:full_name) %>
             </div>
             <div class="col-md-4">
               <%=number_to_currency entry.debit_amounts.sum(:amount) %><br>
