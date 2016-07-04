@@ -25,7 +25,7 @@
 <% account.entries.each do |entry| %>
   <tr>
 
-    <td><%=link_to entry.entriable.try(:full_name), accounting_equipment_path(entry.entriable)%></td>
+    <td><%=entry.entriable.try(:make_and_model)%></td>
       <td><%=entry.recipient %></td>
       <td><%=entry.description %></td>
       <td>
