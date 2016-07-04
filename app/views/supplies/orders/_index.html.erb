@@ -1,79 +1,78 @@
 
-  <div class="row">
-    <div class="col-md-4">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
-          Filter <b class="caret"></b></button>
-          <ul class="dropdown-menu dropdown-menu-left">
-            <li>
-              <%=link_to "All", orders_path %>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <%=link_to "Project", projects_orders_path %>
-            </li>
-            <li>
-              <%=link_to "Contractor", contractors_orders_path %>
-            </li>
-            <li>
-              <%=link_to "Customer", customers_orders_path %>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-4">
-      <%=form_tag orders_path, method: :get do %>
-        <div class="input-group stylish-input-group">
-          <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for Order' %>
-          <span class="input-group-addon">
-            <button type="submit">
-              <span class=" glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <span class="pull-right"><%=link_to "New Order", supplies_path, class: "btn btn-warning active" %></span>
-    </div>
+<div class="row">
+  <div class="col-md-4">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
+        Filter <b class="caret"></b></button>
+        <ul class="dropdown-menu dropdown-menu-left">
+          <li>
+            <%=link_to "All", orders_path %>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%=link_to "Project", projects_orders_path %>
+          </li>
+          <li>
+            <%=link_to "Contractor", contractors_orders_path %>
+          </li>
+          <li>
+            <%=link_to "Customer", customers_orders_path %>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
-  <div class="row"><hr class="no-top-padding with-padding"></div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="content">
-          <table class="table table-striped">
-            <thead>
-              <tr class="title">
-                <th>Customer / Project</th>
-                <th>Date </th>
-                <th> # of Items </th>
-                <th> Payment Status </th>
-                <th> Customer Type </th>
-                <th><span class="pull-right">Total Amount</span> </th>
+  <div class="col-md-4">
+    <%=form_tag orders_path, method: :get do %>
+      <div class="input-group stylish-input-group">
+        <%=text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search for Order' %>
+        <span class="input-group-addon">
+          <button type="submit">
+            <span class=" glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <span class="pull-right"><%=link_to "New Order", supplies_path, class: "btn btn-warning active" %></span>
+  </div>
+</div>
+<div class="row"><hr class="no-top-padding with-padding"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="content">
+        <table class="table table-striped">
+          <thead>
+            <tr class="title">
+              <th>Customer / Project</th>
+              <th>Date </th>
+              <th> # of Items </th>
+              <th> Payment Status </th>
+              <th> Customer Type </th>
+              <th><span class="pull-right">Total Amount</span> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @orders.each do |order| %>
+              <tr>
+                <% if order.customer_id.present? || !order.customer_type == "Customer"%>
+                  <td><span class="text-uppercase"><%=link_to order.customer.try(:name), order_path(order) %></span></td>
+                <% else %>
+                  <td><span class="text-uppercase"><%=link_to order.name, order_path(order) %></span></td>
+                <% end %>
+                <td><%=order.date_issued.strftime("%B %e, %Y") %></td>
+                <td><%=order.line_items.count %></td>
+                <td><%=order.payment_status %></td>
+                <td><%=order.customer_type %></td>
+                <td><span class="pull-right"><%=number_to_currency order.line_items.total_price %></span></td>
               </tr>
-            </thead>
-            <tbody>
-              <% @orders.each do |order| %>
-                <tr>
-                  <% if order.customer_id.present? || !order.customer_type == "Customer"%>
-                    <td><span class="text-uppercase"><%=link_to order.customer.try(:name), order_path(order) %></span></td>
-                  <% else %>
-                    <td><span class="text-uppercase"><%=link_to order.name, order_path(order) %></span></td>
-                  <% end %>
-                  <td><%=order.date_issued.strftime("%B %e, %Y") %></td>
-                  <td><%=order.line_items.count %></td>
-                  <td><%=order.payment_status %></td>
-                  <td><%=order.customer_type %></td>
-                  <td><span class="pull-right"><%=number_to_currency order.line_items.total_price %></span></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          </div>
-        </div>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
