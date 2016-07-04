@@ -3,7 +3,7 @@
     <div class="header">
       <div class="row">
         <div class="col-md-12">
-          <h4 class="title"><%=@inventory.name %>
+          <h4 class="title"><%=@inventory.name_category %>
           <% if @inventory.unavailable? %>
             <span class="btn btn-danger btn-fill active pull-right"> Out of Stock </span>
           <% elsif @inventory.discontinued? %>
@@ -52,7 +52,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% @inventory.orders.each do |order| %>
+                <% @inventory.orders.order("date_issued DESC").each do |order| %>
                   <tr>
                     <td><%=order.date_issued.strftime("%B %e, %Y") %></td>
                     <td><%=order.line_items.where(:inventory_id => @inventory.id).pluck(:quantity).sum %> <%=@inventory.unit %></td>
