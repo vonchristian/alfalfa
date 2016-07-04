@@ -167,6 +167,7 @@ Rails.application.routes.draw do
     resources :stocks, only: [:edit, :update]
   end
 
+  get 'fuel_monitoring/index'
 
 
 end

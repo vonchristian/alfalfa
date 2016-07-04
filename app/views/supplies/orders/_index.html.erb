@@ -72,6 +72,9 @@
             <% end %>
           </tbody>
         </table>
+        <div class="modal-footer">
+          <center><%= paginate @orders, :window => 1 %></center>
+        </div>
       </div>
     </div>
   </div>
