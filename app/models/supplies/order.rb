@@ -49,6 +49,6 @@ class Supplies::Order < ActiveRecord::Base
   end
 
   def self.select
-    Contractor.all + Project.all
+    Project.all + Contractor.all
   end
 end
