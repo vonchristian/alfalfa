@@ -48,11 +48,7 @@ class Supplies::Order < ActiveRecord::Base
     ['Project', 'Contractor', "Customer"]
   end
 
-  def self.select_projects
-    Project.all
-  end
-
-  def self.select_contractors
-    Contractor.all
+  def self.select
+    Contractor.all + Project.all
   end
 end

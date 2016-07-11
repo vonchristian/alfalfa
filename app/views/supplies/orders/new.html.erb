@@ -22,13 +22,9 @@
               <%=f.error_notification %>
               <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'date_picker'} %>
               <%=f.input :customer_type, collection: Supplies::Order.customer_types, as: :radio_buttons, checked: 0 %>
-              <div class="project_select">
-                <label>Select Project</label>
-                <%= f.input :customer_id, label: false, collection: Supplies::Order.select_projects , input_html: {class: "project_customer", style: 'width:100%'} %>
-              </div>
-              <div class="contractor_select">
-                <label>Select Contractor</label>
-                <%= f.input :customer_id, label: false, collection: Supplies::Order.select_contractors , input_html: {class: "project_customer", style: 'width:100%'} %>
+              <div class="select">
+                <label>Select Contractor or Project</label>
+                <%= f.input :customer_id, label: false, collection: Supplies::Order.select , input_html: {class: "project_customer", style: 'width:100%'} %>
               </div>
               <div class="customer_name">
                 <label>Customer Name</label>
