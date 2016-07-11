@@ -37,6 +37,13 @@ module Monitoring
       end
     end
 
+    def destroy
+      @contract = Contract.find(params[:id])
+      if @contract.destroy
+        redirect_to monitoring_project_url(@contract.project), notice: "Contract deleted successfully."
+      end
+    end
+
     private
     def contract_params
       params.require(:contract).permit(:contractor_id, :amount_subcontracted)

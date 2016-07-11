@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
   include PgSearch
   enum status: [:on_going, :suspended, :completed, :terminated]
   pg_search_scope :search_by_name, :against => [:name, :id_number, :address]
-  multisearchable :against => [:name, :id_number],
+  multisearchable :against => [:name, :id_number, :address],
    :order_within_rank => "projects.created_at DESC"
    pg_search_scope :search_by_name, :against => :name
   scope :joint_ventures, -> { where(type: 'JointVenture') }

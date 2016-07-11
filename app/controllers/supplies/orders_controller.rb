@@ -3,7 +3,7 @@ class Supplies::OrdersController < ApplicationController
 
   def index
     if params[:query].present?
-      @orders  = Supplies::Order.text_search(params[:name]).order(:created_at).page(params[:page]).per(50)
+      @orders  = Supplies::Order.text_search(params[:query]).order(:created_at).page(params[:page]).per(50)
     else
       @orders = Supplies::Order.all.order("date_issued desc").page(params[:page]).per(50)
     end
@@ -22,8 +22,15 @@ class Supplies::OrdersController < ApplicationController
 
   def new
     @cart = current_cart
+    @inventory = Supplies::Inventory.find_by(name: "Diesel")
       if @cart.line_items.empty?
-        redirect_to supplies_url, notice: "Your cart is empty"
+        if @inventory.id == @order.line_items.first.inventory_id
+          format.html { redirect_to supplies_fuel_monitoring_index_path, notice: 'Your cart is empty.' }
+          format.js   { @current_item = @line_item }
+        else
+          format.html { redirect_to supplies_url, notice: 'Your cart is empty.' }
+          format.js   { @current_item = @line_item }
+        end
       return
     end
     @order = Supplies::Order.new

@@ -77,7 +77,7 @@ Rails.application.routes.draw do
       resources :bid_expenses, only: [:new, :create, :edit, :update, :index]
     end
     resources :accomplishment_images, only:[:show]
-    resources :contracts, only:[:edit, :update, :show] do
+    resources :contracts, only:[:edit, :update, :show, :destroy] do
       resources :payments, only: [:new, :create], module: :contracts
     end
     resources :work_details, only:[:index, :show, :edit, :update] do
@@ -142,6 +142,7 @@ Rails.application.routes.draw do
   end
 
   namespace :supplies do
+    resources :fuel_monitoring, only: [:index]
     resources :item_categories, only: [:new, :create]
     resources :contractors, only:[:show]
     resources :projects, only:[:show]
@@ -167,7 +168,7 @@ Rails.application.routes.draw do
     resources :stocks, only: [:edit, :update]
   end
 
-  get 'fuel_monitoring/index'
+  
 
 
 end

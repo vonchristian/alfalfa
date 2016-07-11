@@ -12,11 +12,11 @@
           <p>Store</p>
         </a>
       </li>
-      <li class="<%="active" if current_page? fuel_monitoring_index_path %>">
-        <a href="/fuel_monitoring">
+      <li class="<%="active" if current_page? supplies_fuel_monitoring_index_path %>">
+        <%= link_to supplies_fuel_monitoring_index_path do %>
           <i class="fa fa-home"></i>
           <p>Fuel Monitoring</p>
-        </a>
+        <% end %>
       </li>
       <li class="<%="active" if current_page? supplies_inventories_path %>">
         <a href="/supplies/inventories">
@@ -58,7 +58,7 @@
         <a class="navbar-brand title" href="#">
           <%="Hardware Store" if current_page?(supplies_path) %>
           <%="Inventory Section" if current_page?(supplies_inventories_path) %>
-          <%#="Businesses" if current_page?(businesses_path) %>
+          <%="Fuel Monitoring" if current_page?(supplies_fuel_monitoring_index_path) %>
           <%#="Settings" if current_page?(settings_path) %>
           <%#="Reports" if current_page?(reports_path) %>
           <%="Equipment Section" if current_page?(supplies_equipment_index_path) %>

@@ -48,7 +48,11 @@ class Supplies::Order < ActiveRecord::Base
     ['Project', 'Contractor', "Customer"]
   end
 
-  def self.customers
-    Contractor.all + Project.all
+  def self.select_projects
+    Project.all.map { |p| [p.id_number_and_location, p.id] }
+  end
+
+  def self.select_contractors
+    Contractor.all
   end
 end

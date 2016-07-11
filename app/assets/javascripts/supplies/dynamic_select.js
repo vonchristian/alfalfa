@@ -1,16 +1,21 @@
 $(document).ready(function(){
   $(".customer_name").hide();
+  $(".contractor_name").hide();
+  $(".project_select").hide();
   $('input[type="radio"]').change(function(){
     var selected = $('input:checked[name="supplies_order[customer_type]"]').val();
     if(selected === "Project"){
       $(".customer_name").hide();
-      $(".project_contractor").show();
+      $(".contractor_select").hide();
+      $(".project_select").show();
     } else if ( selected === "Contractor") {
       $(".customer_name").hide();
-      $(".project_contractor").show();
+      $(".contractor_select").show();
+      $(".project_select").hide();
     } else if ( selected === "Customer") {
-      $(".project_contractor").hide();
       $(".customer_name").show();
+      $(".contractor_select").hide();
+      $(".project_select").hide();
     }
   });
 });

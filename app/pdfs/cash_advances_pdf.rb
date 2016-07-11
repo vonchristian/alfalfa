@@ -42,7 +42,7 @@ def heading
   def table_data
     move_down 5
     [["EMPLOYEE","PPE", "CASH ADVANCES"]] +
-    @table_data ||= Employee.all.order(:last_name).map {|e| [e.last_name_first_name,price(e.unpaid_advanced_ppes), price(e.unpaid_cash_advances)]} +
+    @table_data ||= Employee.all.order(:last_name).map {|e| [e.last_name_first_name, price(e.unpaid_advanced_ppes), price(e.unpaid_cash_advances)]} +
     @table_data ||= [["<b>TOTAL</b>","<b>#{(price Account.find_by_name("Advances to Employees (PPE)").balance({from_date: @from_date, to_date: @to_date}))}</b>", "<b>#{(price Account.find_by_name("Advances to Employees").balance({from_date: @from_date, to_date: @to_date}))}</b>"]]
   end
 end

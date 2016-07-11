@@ -21,10 +21,14 @@
             <%=simple_form_for @order, url: :orders do |f| %>
               <%=f.error_notification %>
               <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'date_picker'} %>
-              <%=f.input :customer_type, collection: Supplies::Order.customer_types, as: :radio_buttons %>
-              <div class="project_contractor">
-                <label>Select Project or Contractor</label>
-                <%= f.input :customer_id, label: false, collection: Supplies::Order.customers , input_html: {class: "project_customer", style: 'width:100%'} %>
+              <%=f.input :customer_type, collection: Supplies::Order.customer_types, as: :radio_buttons, checked: 0 %>
+              <div class="project_select">
+                <label>Select Project</label>
+                <%= f.input :customer_id, label: false, collection: Supplies::Order.select_projects , input_html: {class: "project_customer", style: 'width:100%'} %>
+              </div>
+              <div class="contractor_select">
+                <label>Select Contractor</label>
+                <%= f.input :customer_id, label: false, collection: Supplies::Order.select_contractors , input_html: {class: "project_customer", style: 'width:100%'} %>
               </div>
               <div class="customer_name">
                 <label>Customer Name</label>
@@ -32,7 +36,11 @@
               </div>
               <%= f.input :payment_status, collection: Supplies::Order.payment_statuses.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons %>
               <div class="modal-footer">
-                <%= link_to 'Add more items', supplies_path, class: 'btn btn-warning pull-left' %>
+                <% if @inventory.id == @cart.line_items.first.inventory_id %>
+                  <%= link_to 'Add more items', supplies_fuel_monitoring_index_path, class: 'btn btn-warning pull-left' %>
+                <% else %>
+                  <%= link_to 'Add more items', supplies_path, class: 'btn btn-warning pull-left' %>
+                <% end %>
                 <%=f.submit "Place Order", class: "btn btn-primary" %>
               </div>
             <% end %>

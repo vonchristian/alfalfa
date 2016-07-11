@@ -1,13 +1,12 @@
 <div class="row">
   <div class="col-md-8">
     <div class="row">
-      <% @inventories.each do |inventory| %>
         <div class="col-md-6">
           <div class="card">
             <div class="header">
               <h4 class="title">
-                <%=inventory.name_category %>
-                <span class='pull-right'><small class="text-info"><%=number_to_currency inventory.price %></small></span>
+                <%=@inventory.name_category %>
+                <span class='pull-right'><small class="text-info"><%=number_to_currency @inventory.price %></small></span>
               </h4>
             </div>
             <div class="content">
@@ -15,19 +14,19 @@
                 <div class="row">
                   <div class="col-xs-4">
                     <%=f.input :quantity, label: false, placeholder: "QTY", as: :string, required: true, input_html: {class: 'input-sm'} %>
-                    <%=f.input :inventory_id, input_html: {value: inventory.id }, as: :hidden %>
-                    <%=f.input :unit_cost, input_html: { value: inventory.price}, as: :hidden %>
+                    <%=f.input :inventory_id, input_html: {value: @inventory.id }, as: :hidden %>
+                    <%=f.input :unit_cost, input_html: { value: @inventory.price}, as: :hidden %>
                   </div>
                   <div class="col-md-2">
-                    <small class="title"><%=inventory.unit %></small>
+                    <small class="title"><%=@inventory.unit %></small>
                   </div>
                   <div class="col-xs-6">
                     <div class="pull-right">
-                      <% if inventory.unavailable? && inventory.out_of_stock? %>
+                      <% if @inventory.unavailable? && @inventory.out_of_stock? %>
                         <span class="btn btn-danger active"> Out of Stock </span>
-                        <% elsif inventory.out_of_stock? && !inventory.discontinued? %>
+                        <% elsif @inventory.out_of_stock? && !@inventory.discontinued? %>
                           <span class="btn btn-danger active"> Out of Stock </span>
-                        <% elsif inventory.discontinued? %>
+                        <% elsif @inventory.discontinued? %>
                         <span class="btn btn-danger active"> Discontinued </span>
                       <% else %>
                         <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active" %>
@@ -37,9 +36,8 @@
                 </div>
                 <div class="footer">
                   <hr>
-                  <small class="text-right"><%=inventory.quantity%> <%=inventory.unit %> remaining</small>
+                  <small class="text-right"><%=@inventory.quantity%> <%=@inventory.unit %> remaining</small>
                 </div>
-              <% end %>
             </div>
           </div>
         </div>

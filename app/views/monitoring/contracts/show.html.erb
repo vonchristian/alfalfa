@@ -3,6 +3,16 @@
     <div class="image">
     </div>
     <div class="header">
+      <div class="pull-right">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <b class="caret"></b></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><%=link_to 'Delete', monitoring_contract_path(@contract), method: :delete, data: {confirm: 'Are you sure?'} %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
       <div class="author">
         <%=image_tag(@contract.contractor.profile_photo.url(:medium), class: "avatar border-white") %>
         <h4 class="title"><%=@contract.contractor.full_name %><br />
