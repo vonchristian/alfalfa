@@ -57,6 +57,16 @@
         </button>
         <a class="navbar-brand title" href="#">
           <%="Hardware Store" if current_page?(supplies_path) %>
+          <%="Hardware Store / Cement" if current_page?(cement_category_supplies_path) %>
+          <%="Hardware Store / Fuel" if current_page?(fuel_category_supplies_path) %>
+          <%="Hardware Store / Explosives" if current_page?(explosive_category_supplies_path) %>
+          <%="Hardware Store / Aggregates" if current_page?(aggregate_category_supplies_path) %>
+          <%="Hardware Store / Tires" if current_page?(tire_category_supplies_path) %>
+          <%="Hardware Store / CHB" if current_page?(chb_category_supplies_path) %>
+          <%="Hardware Store / RSB" if current_page?(rsb_category_supplies_path) %>
+          <%="Hardware Store / RCPC" if current_page?(rcpc_category_supplies_path) %>
+          <%="Hardware Store / CWN" if current_page?(cwn_category_supplies_path) %>
+
           <%="Inventory Section" if current_page?(supplies_inventories_path) %>
           <%="Fuel Monitoring" if current_page?(supplies_fuel_monitoring_index_path) %>
           <%#="Settings" if current_page?(settings_path) %>

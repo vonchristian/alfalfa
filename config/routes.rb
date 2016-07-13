@@ -135,6 +135,8 @@ Rails.application.routes.draw do
     match "/cement_category" => "supplies#cement_category", as: :cement_category, via: [:get], on: :collection
     match "/fuel_category" => "supplies#fuel_category", as: :fuel_category, via: [:get], on: :collection
     match "/explosive_category" => "supplies#explosive_category", as: :explosive_category, via: [:get], on: :collection
+    match "/aggregate_category" => "supplies#aggregate_category", as: :aggregate_category, via: [:get], on: :collection
+    match "/tire_category" => "supplies#tire_category", as: :tire_category, via: [:get], on: :collection
     match "/chb_category" => "supplies#chb_category", as: :chb_category, via: [:get], on: :collection
     match "/rsb_category" => "supplies#rsb_category", as: :rsb_category, via: [:get], on: :collection
     match "/rcpc_category" => "supplies#rcpc_category", as: :rcpc_category, via: [:get], on: :collection

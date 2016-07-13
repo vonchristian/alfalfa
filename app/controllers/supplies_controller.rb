@@ -35,6 +35,22 @@ class SuppliesController < ApplicationController
     @line_item = Supplies::LineItem.new
   end
 
+  def aggregate_category
+    item_category_id = ItemCategory.find_by(:name => 'Aggregate').id
+    @inventories = Supplies::Inventory.where(:item_category_id => item_category_id).all.order(:name)
+    authorize :supply, :show?
+    @cart = current_cart
+    @line_item = Supplies::LineItem.new
+  end
+
+  def tire_category
+    item_category_id = ItemCategory.find_by(:name => 'Tire').id
+    @inventories = Supplies::Inventory.where(:item_category_id => item_category_id).all.order(:name)
+    authorize :supply, :show?
+    @cart = current_cart
+    @line_item = Supplies::LineItem.new
+  end
+
   def chb_category
     item_category_id = ItemCategory.find_by(:name => 'CHB').id
     @inventories = Supplies::Inventory.where(:item_category_id => item_category_id).all.order(:name)
