@@ -28,7 +28,7 @@
             <%=c.input :amount, input_html: {id: "accounting_entry_debit_amounts_attributes_0_amount"}%>
           </div>
           <div class="col-md-6">
-          <%=c.input :account, collection: Account.all.pluck(:name), input_html: {class: "transactions_disbursement_debit_amounts_attributes_0_account"}%>
+          <%=c.input :account, collection: Account.all.pluck(:name)%>
         </div>
       </div>
         <% end %>
@@ -63,7 +63,7 @@
 
 <script>
   $(document).ready(function() {
-    $("#entry_debit_amounts_attributes_0_account").select2({
+    $("#accounting_entry_debit_amounts_attributes_0_account").select2({
       theme: "bootstrap"
     });
   });

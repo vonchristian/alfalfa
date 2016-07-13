@@ -36,20 +36,20 @@ class PettyCashPdf < Prawn::Document
   end
 
   def oldest?
-    if Transactions::FundTransfer.any?
-      @from_date < Transactions::FundTransfer.first.date
+    if Accounting::Entry.any?
+      @from_date < Accounting::Entry.first.date
     end
   end
 
   def previous_debit_balance
-     if Transactions::FundTransfer.any?
-      Account.find_by_name("Petty Cash").debits_balance({from_date: Transactions::FundTransfer.first.date, to_date: @from_date})
+     if Accounting::Entry.any?
+      Account.find_by_name("Petty Cash").debits_balance({from_date: Accounting::Entry.first.date, to_date: @from_date})
     end
   end
 
   def previous_credit_balance
-     if Transactions::Disbursement.any?
-    Account.find_by_name("Petty Cash").credits_balance({from_date: Transactions::Disbursement.first.date, to_date: @from_date})
+     if Accounting::Entry.any?
+    Account.find_by_name("Petty Cash").credits_balance({from_date: Accounting::Entry.first.date, to_date: @from_date})
     end
   end
 
@@ -100,7 +100,7 @@ class PettyCashPdf < Prawn::Document
   end
 
   def display_fund_transfer_table
-    if Transactions::FundTransfer.blank?
+    if Accounting::Entry.blank?
       move_down 10
       text "No Fund Transfer data.", align: :center
     else
@@ -121,7 +121,7 @@ class PettyCashPdf < Prawn::Document
   end
 
   def display_petty_cash_table
-    if Transactions::Disbursement.blank?
+    if Accounting::Entry.blank?
       move_down 10
       text "No Transaction data.", align: :center
     else

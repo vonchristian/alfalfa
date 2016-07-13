@@ -131,7 +131,15 @@ Rails.application.routes.draw do
   end
 
   resources :equipment_statuses, only: [:edit, :update]
-  resources :supplies, only: [:index]
+  resources :supplies, only: [:index] do
+    match "/cement_category" => "supplies#cement_category", as: :cement_category, via: [:get], on: :collection
+    match "/fuel_category" => "supplies#fuel_category", as: :fuel_category, via: [:get], on: :collection
+    match "/explosive_category" => "supplies#explosive_category", as: :explosive_category, via: [:get], on: :collection
+    match "/chb_category" => "supplies#chb_category", as: :chb_category, via: [:get], on: :collection
+    match "/rsb_category" => "supplies#rsb_category", as: :rsb_category, via: [:get], on: :collection
+    match "/rcpc_category" => "supplies#rcpc_category", as: :rcpc_category, via: [:get], on: :collection
+    match "/cwn_category" => "supplies#cwn_category", as: :cwn_category, via: [:get], on: :collection
+  end
 
 
   resources :orders, module: :supplies do
