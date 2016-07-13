@@ -1,5 +1,40 @@
 <div class="row">
-  <div class="col-md-4 col-sm-offset-4">
+  <div class="col-md-4">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
+        Filter <b class="caret"></b></button>
+        <ul class="dropdown-menu dropdown-menu-left">
+          <li>
+            <%= link_to 'All', supplies_path %>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to 'Cement', cement_category_supplies_path %>
+          </li>
+          <li>
+            <%= link_to 'Explosives', explosive_category_supplies_path %>
+          </li>
+          <li>
+            <%= link_to 'Fuel', fuel_category_supplies_path %>
+          </li>
+          <li>
+            <%= link_to 'CHB', chb_category_supplies_path %>
+          </li>
+          <li>
+            <%= link_to 'RSB', rsb_category_supplies_path %>
+          </li>
+          <li>
+            <%= link_to 'RCPC', rcpc_category_supplies_path %>
+          </li>
+          <li>
+            <%= link_to 'CWN', cwn_category_supplies_path %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-4">
     <%=form_tag supplies_path, method: :get do %>
       <div class="input-group stylish-input-group">
         <%=text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Search for a Product' %>
@@ -10,31 +45,6 @@
         </span>
       </div>
     <% end %>
-  </div>
-  <div class="col-md-12">
-    <ul class="nav nav-pills nav-pills-info" role="tablist">
-      <li class="<%="active" if current_page? cement_category_supplies_path %>">
-        <%= link_to 'Cement', cement_category_supplies_path %>
-      </li>
-      <li class="<%="active" if current_page? explosive_category_supplies_path %>">
-        <%= link_to 'Explosives', explosive_category_supplies_path %>
-      </li>
-      <li class="<%="active" if current_page? fuel_category_supplies_path %>">
-        <%= link_to 'Fuel', fuel_category_supplies_path %>
-      </li>
-      <li class="<%="active" if current_page? chb_category_supplies_path %>">
-        <%= link_to 'CHB', chb_category_supplies_path %>
-      </li>
-      <li class="<%="active" if current_page? rsb_category_supplies_path %>">
-        <%= link_to 'RSB', rsb_category_supplies_path %>
-      </li>
-      <li class="<%="active" if current_page? rcpc_category_supplies_path %>">
-        <%= link_to 'RCPC', rcpc_category_supplies_path %>
-      </li>
-      <li class="<%="active" if current_page? cwn_category_supplies_path %>">
-        <%= link_to 'CWN', cwn_category_supplies_path %>
-      </li>
-    </ul>
   </div>
 </div>
 <div class="row"><hr class="with-padding"></div>
