@@ -39,7 +39,7 @@
         <tbody>
           <%@project.work_details.each do |work_detail| %>
             <tr>
-              <td><span><%=link_to work_detail.description.capitalize, monitoring_work_detail_path(work_detail) %></span></td>
+              <td><span><%=link_to work_detail.description.upcase, monitoring_work_detail_path(work_detail) %></span></td>
               <td><%=number_to_currency work_detail.quantity, unit: '' %></td>
               <td>
                 <span class="text-success"><%=number_to_currency work_detail.accomplished_quantity, unit: '' %></span>

@@ -1,7 +1,7 @@
 <%@work_details.each do |work_detail| %>
   <tr>
     <td><%=work_detail.code %></td>
-    <td><p><%=link_to work_detail.description.capitalize, monitoring_work_detail_path(work_detail) %></p></td>
+    <td><%=link_to work_detail.description.upcase, monitoring_work_detail_path(work_detail) %></td>
     <td>
       <span><%=work_detail.quantity %> <%=work_detail.unit %></span>
     </td>
