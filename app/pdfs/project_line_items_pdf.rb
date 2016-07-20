@@ -61,7 +61,7 @@ class ProjectLineItemsPdf < Prawn::Document
   def issued_materials_data
     move_down 5
     [["DATE", "INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
-    @table_data ||= @project.line_items.order(date: :asc).map{ |e| [e.order.date_issued.strftime('%B %e, %Y'), e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.unit_cost), price(e.total_cost)]} +
+    @table_data ||= @project.line_items.order(date: :asc).map{ |e| [e.order.date_issued.strftime('%B %e, %Y'), e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_cost)]} +
     [["", "", "", "", "<b>TOTAL</b>", "<b>#{price(@project.line_items.total_price)}</b>"]]
 
   end
