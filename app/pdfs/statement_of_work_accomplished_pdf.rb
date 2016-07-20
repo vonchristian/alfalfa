@@ -55,7 +55,7 @@ class StatementOfWorkAccomplishedPdf < Prawn::Document
      [["ITEM", "DESCRIPTION", "UNIT", "TOTAL CONTRACT QUANTITY", "UNIT PRICE", "TOTAL CONTRACT COST", "Wt. %", "TOTAL QTY. APPROVED IN PREVIOUS BILLING",
       "TOTAL QUANTITY APPROVED IN THIS BILLING", "BALANCE OF QUANTITY", "COST OF PREVIOUS BILLINGS", "COST OF THIS BILLING", "COST TO DATE", "BALANCE OF COST"]] +
     @table_data ||= @project.work_details.map { |e| [e.code,
-                                                    e.description,
+                                                    e.description.upcase,
                                                     e.unit, e.quantity,
                                                     price(e.unit_cost),
                                                     price(e.total_cost),

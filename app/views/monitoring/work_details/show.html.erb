@@ -11,7 +11,7 @@
             <%=link_to (image_tag 'left_arrow.png', height: 40, width: 40, class: "img-circle", title: "Back to Project", data: {toggle: "tooltip", placement: "bottom"}), monitoring_project_path(@work_detail.project) %>
           </div>
           <div class="col-md-8">
-            <h5 class="text-center"><%=@work_detail.description %></h5>
+            <h5 class="text-center"><%=@work_detail.description.upcase %></h5>
             <h5 class="text-success text-center"><%=number_to_currency @work_detail.actual_accomplishment_percent, unit: '' %> % </h5>
           </div>
           <div class="col-md-2">
