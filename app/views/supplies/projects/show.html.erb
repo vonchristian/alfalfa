@@ -6,7 +6,7 @@
           <%= @project.name %><br>
           <p class="text-muted"><span class="fa fa-map-marker"><%= @project.id_number %></span></p>
           <% if @project.line_items.present? %>
-            <%=link_to contractor_line_items_path(@project, format: 'pdf') do %>
+            <%=link_to supplies_project_path(@project, format: 'pdf') do %>
               <span class="btn btn-info pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
             <% end %>
           <% else %>

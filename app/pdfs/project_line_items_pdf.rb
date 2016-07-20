@@ -33,12 +33,14 @@ class ProjectLineItemsPdf < Prawn::Document
 
   def summary_table
     [["Project: ", "#{(@project.name)}"],
-    ["Project ID:", '#{(@project.id_number)}']]
+    ["Project ID:", "#{(@project.id_number)}"],
+    ["Location:", "#{(@project.address)}"]]
   end
 
   def summary
-    table(summary_table, :cell_style => {size: 11, :padding => [2, 2, 2, 2]}) do
+    table(summary_table, :cell_style => {size: 11, :padding => [2, 2, 2, 2]}, column_widths: [80, 470]) do
       cells.borders = []
+
     end
   end
 
