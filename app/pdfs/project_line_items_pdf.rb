@@ -32,7 +32,8 @@ class ProjectLineItemsPdf < Prawn::Document
   end
 
   def summary_table
-    [["Project: ", "#{(@project.name)}"]]
+    [["Project: ", "#{(@project.name)}"],
+    ["Project ID:", '#{(@project.id_number)}']]
   end
 
   def summary
