@@ -42,14 +42,14 @@ class PettyCashPdf < Prawn::Document
   end
 
   def previous_debit_balance
-     if Accounting::Entry.any?
+    if Accounting::Entry.any?
       Account.find_by_name("Petty Cash").debits_balance({from_date: Accounting::Entry.first.date, to_date: @from_date})
     end
   end
 
   def previous_credit_balance
-     if Accounting::Entry.any?
-    Account.find_by_name("Petty Cash").credits_balance({from_date: Accounting::Entry.first.date, to_date: @from_date})
+    if Accounting::Entry.any?
+      Account.find_by_name("Petty Cash").credits_balance({from_date: Accounting::Entry.first.date, to_date: @from_date})
     end
   end
 
@@ -58,7 +58,7 @@ class PettyCashPdf < Prawn::Document
   end
 
   def current_credit_balance
-  Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date})
+    Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date})
   end
 
   def starting_balance
@@ -66,11 +66,8 @@ class PettyCashPdf < Prawn::Document
   end
 
   def outstanding_balance
-    if previous_debit_balance.present? && previous_credit_balance.present? && oldest?
-      "#{(price current_debit_balance - current_credit_balance)}"
-
-    elsif previous_debit_balance.present? && current_debit_balance.present?
-      "#{(price starting_balance - current_credit_balance)}"
+    if previous_debit_balance.present? && previous_credit_balance.present? && current_debit_balance.present? && current_credit_balance.present?
+      "#{(price starting_balance + current_debit_balance - current_credit_balance)}"
 
     elsif previous_debit_balance.blank? && previous_credit_balance.blank?
       "#{(price current_debit_balance - current_credit_balance)}"
