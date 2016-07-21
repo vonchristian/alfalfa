@@ -76,7 +76,7 @@ class PettyCashPdf < Prawn::Document
   end
 
   def data_summary
-      [["Starting Balance:", "#{(price starting_balance)}"],
+      [["Starting Balance:", "#{(price previous_debit_balance)}, #{(price previous_credit_balance)}, #{(price starting_balance)}"],
         ["Fund Transfer:", "#{(price Account.find_by_name("Petty Cash").debits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Disbursed:", "#{(price Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Outstanding Balance:", outstanding_balance]]
