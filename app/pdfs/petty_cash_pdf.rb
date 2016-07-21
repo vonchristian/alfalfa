@@ -63,7 +63,11 @@ class PettyCashPdf < Prawn::Document
   end
 
   def starting_balance
-    previous_debit_balance - previous_credit_balance if previous_debit_balance.present?
+    if previous_debit_balance.present? && previous_credit_balance.present?
+      previous_debit_balance - previous_credit_balance
+    elsif previous_credit_balance.blank?
+      0
+    end
   end
 
   def outstanding_balance
