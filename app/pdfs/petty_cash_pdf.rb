@@ -37,19 +37,20 @@ class PettyCashPdf < Prawn::Document
 
   def oldest?
     if Accounting::Entry.any?
-      @from_date < Accounting::Entry.first.date
+      @entries = Accounting::Entry.all.map { |entry| entry["date"] }
+      @entries.min
     end
   end
 
   def previous_debit_balance
     if Accounting::Entry.any?
-      Account.find_by_name("Petty Cash").debits_balance({from_date: Accounting::Entry.first.date, to_date: @from_date})
+      Account.find_by_name("Petty Cash").debits_balance({from_date: oldest?, to_date: @from_date})
     end
   end
 
   def previous_credit_balance
     if Accounting::Entry.any?
-      Account.find_by_name("Petty Cash").credits_balance({from_date: Accounting::Entry.first.date, to_date: @from_date})
+      Account.find_by_name("Petty Cash").credits_balance({from_date: oldest?, to_date: @from_date})
     end
   end
 
