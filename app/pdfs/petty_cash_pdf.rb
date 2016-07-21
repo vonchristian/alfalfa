@@ -69,17 +69,8 @@ class PettyCashPdf < Prawn::Document
     if previous_debit_balance.present? && previous_credit_balance.present? && current_debit_balance.present? && current_credit_balance.present?
       "#{(price starting_balance + current_debit_balance - current_credit_balance)}"
 
-    elsif previous_debit_balance.blank? && previous_credit_balance.blank?
+    elsif previous_debit_balance.blank? && previous_credit_balance.blank? && current_debit_balance.present? && current_credit_balance.present?
       "#{(price current_debit_balance - current_credit_balance)}"
-
-    elsif previous_debit_balance.blank? && current_debit_balance.blank?
-      "#{(price starting_balance - current_credit_balance)}"
-
-    elsif previous_debit_balance.blank? && current_debit_balance.present?
-      "#{(price current_debit_balance - current_credit_balance)}"
-
-    elsif previous_debit_balance.present? && current_debit_balance.blank?
-      "#{(price starting_balance - current_credit_balance)}"
     end
   end
 
