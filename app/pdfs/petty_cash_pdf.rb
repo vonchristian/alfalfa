@@ -64,11 +64,7 @@ class PettyCashPdf < Prawn::Document
 
   def starting_balance
     if previous_debit_balance.present? && previous_credit_balance.present?
-      if previous_debit_balance - previous_credit_balance <= 0
-        0
-      elsif previous_debit_balance - previous_credit_balance > 0
-        previous_debit_balance - previous_credit_balance
-      end
+      previous_debit_balance - previous_credit_balance
     end
   end
 
@@ -82,7 +78,7 @@ class PettyCashPdf < Prawn::Document
   end
 
   def data_summary
-      [["Starting Balance:", "#{(price previous_debit_balance)} - #{(price previous_credit_balance)} = #{(price starting_balance)}"],
+      [["Starting Balance:", "#{(price starting_balance)}"],
         ["Fund Transfer:", "#{(price Account.find_by_name("Petty Cash").debits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Disbursed:", "#{(price Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date}))}"],
         ["Outstanding Balance:", outstanding_balance]]
