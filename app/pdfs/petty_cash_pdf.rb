@@ -50,7 +50,7 @@ class PettyCashPdf < Prawn::Document
 
   def previous_credit_balance
     if Accounting::Entry.any?
-      Account.find_by_name("Petty Cash").credits_balance({from_date: oldest?, to_date: @from_date})
+      Account.find_by_name("Petty Cash").credits_balance({from_date: oldest?, to_date: @from_date.beginning_of_day})
     end
   end
 
