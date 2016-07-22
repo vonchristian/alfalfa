@@ -64,7 +64,8 @@ class PettyCashPdf < Prawn::Document
 
   def zero_or_negative?
     if previous_debit_balance.present? && previous_credit_balance.present?
-      negative_balance <= previous_debit_balance - previous_credit_balance
+      negative_balance = previous_debit_balance - previous_credit_balance
+      negative_balance <= 0
     end
   end
 
