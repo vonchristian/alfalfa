@@ -62,15 +62,8 @@ class PettyCashPdf < Prawn::Document
     Account.find_by_name("Petty Cash").credits_balance({from_date: @from_date, to_date: @to_date})
   end
 
-  def final_starting_balance
-    if starting_balance <= 0
-      0
-    end
-  end
-
   def starting_balance
     if previous_debit_balance.present? && previous_credit_balance.present?
-      previous_debit_balance - previous_credit_balance
       if previous_debit_balance - previous_credit_balance <= 0
         0
       else
