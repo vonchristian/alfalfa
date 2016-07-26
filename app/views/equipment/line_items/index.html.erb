@@ -2,15 +2,16 @@
   <div class="header">
     <h4 class="title">Fuel and Lubrication
       <% if @line_items.present? %>
-        <%=link_to equipment_orders_path do %>
-          <span class="btn btn-info pull-right" title="View PDF Report"><i class="fa fa-print"></i>Generate Report</span>
+        <%=link_to supplies_equipment_path(@equipment, format: 'pdf') do %>
+          <span class="btn btn-info pull-right" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
         <% end %>
       <% else %>
         <%=link_to nil do %>
-          <span class="btn disabled pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Generate Report</span>
+          <span class="btn disabled pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
         <% end %>
       <% end %>
     </h4>
+    <p class="category"><%= @equipment.name %></p>
     <div class="row"><hr></div>
   </div>
   <div class="content">
@@ -18,6 +19,7 @@
       <thead>
         <tr class="text-uppercase">
           <th>Date Issued</th>
+          <th>Purpose</th>
           <th>Quantity</th>
           <th>Total Cost</th>
         </tr>
@@ -26,12 +28,12 @@
         <% @line_items.each do |line_item| %>
           <tr>
             <td><%=line_item.date.strftime("%B %e, %Y") %></td>
+            <td><%=line_item.order.purpose %></td>
             <td><%=line_item.quantity %> <%=line_item.inventory.unit %></td>
             <td><%=number_to_currency line_item.total_cost %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <center><%= link_to 'View All', equipment_line_items_path(@equipment) %></center>
   </div>
 </div>

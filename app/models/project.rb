@@ -73,6 +73,10 @@ class Project < ActiveRecord::Base
     "( #{name} - #{address} )"
   end
 
+  def to_s
+    "#{id_number} - #{name}"
+  end
+
   def select2_options
     id_number_and_location
   end

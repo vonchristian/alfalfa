@@ -3,21 +3,62 @@ class Supplies::OrdersController < ApplicationController
 
   def index
     if params[:query].present?
-      @orders  = Supplies::Order.text_search(params[:query]).order(:created_at).page(params[:page]).per(50)
+      @orders  = Supplies::Order.text_search(params[:query]).order(date_issued: :desc).page(params[:page]).per(50)
     else
       @orders = Supplies::Order.all.order("date_issued desc").page(params[:page]).per(50)
     end
     authorize @orders, :index?
+
+    @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_month
+    @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_month
+    @orders = Supplies::Order.filter_with(:customer_id => @customer_id, :from_date => @from_date, :to_date => @to_date).all.page(params[:page]).per(30)
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = OrderLineItemsPdf.new(@orders, @customer_id, @from_date, @to_date, view_context)
+              send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
+      end
+    end
   end
 
   def projects
-    @orders = Supplies::Order.for_projects
+    @customer_id = params[:customer_id] if params[:customer_id].present?
+    @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_month
+    @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_month
+    @orders = Supplies::Order.filter_with(:customer_id => @customer_id, :from_date => @from_date, :to_date => @to_date).where(:customer_type => "Project").order(date_issued: :desc).all.page(params[:page]).per(50)
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = ProjectLineItemsPdf.new(@orders, @customer_id, @from_date, @to_date, view_context)
+              send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
+      end
+    end
   end
   def contractors
-    @orders = Supplies::Order.for_contractors
+    @customer_id = params[:customer_id] if params[:customer_id].present?
+    @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_month
+    @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_month
+    @orders = Supplies::Order.filter_with(:customer_id => @customer_id, :from_date => @from_date, :to_date => @to_date).where(:customer_type => "Contractor").order(date_issued: :desc).all.page(params[:page]).per(50)
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = ContractorLineItemsPdf.new(@orders, @customer_id, @from_date, @to_date, view_context)
+              send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
+      end
+    end
   end
-  def customers
-    @orders = Supplies::Order.for_customers
+  def equipment
+    @customer_id = params[:customer_id] if params[:customer_id].present?
+    @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_month
+    @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_month
+    @orders = Supplies::Order.filter_with(:customer_id => @customer_id, :from_date => @from_date, :to_date => @to_date).where(:customer_type => "Equipment").order(date_issued: :desc).all.page(params[:page]).per(50)
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = EquipmentLineItemsPdf.new(@orders, @customer_id, @from_date, @to_date, view_context)
+              send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
+      end
+    end
   end
 
   def new
@@ -65,7 +106,7 @@ class Supplies::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:supplies_order).permit(:date_issued, :project_id, :name, :customer_id, :customer_type, :payment_status,
+    params.require(:supplies_order).permit(:date_issued, :project_id, :purpose, :customer_id, :customer_type, :payment_status,
       entry_attributes: [:description, :reference_number, :entriable_id, :entriable_type, :type, :date, :credit_amounts_attributes=> [:amount, :account], :debit_amounts_attributes=> [:amount, :account]])
   end
 end

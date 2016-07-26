@@ -2,12 +2,15 @@ class ContractorLineItemsPdf < Prawn::Document
 
   TABLE_WIDTHS = [80, 190, 55, 45, 85, 90]
 
-  def initialize(contractor, view_context)
+  def initialize(orders, customer_id, from_date, to_date, view_context)
     super(margin: 30, page_size: [612, 948], page_layout: :portrait)
-    @contractor = contractor
+    @orders = orders
+    @from_date = from_date
+    @to_date = to_date
+    @customer_id = customer_id
+    @customer = Contractor.find(@customer_id) if @customer_id.present?
     @view_context = view_context
     heading
-    summary
     display_issued_materials_table
   end
 
@@ -16,34 +19,34 @@ class ContractorLineItemsPdf < Prawn::Document
   end
 
   def heading
-    text "Issued Materials Summary", align: :center
+    text "Issued Fuel to Contractor", align: :center
     move_down 5
     text "Alfalfa Construction", align: :center, size: 11
     move_down 5
     text heading_date, align: :center, size: 11
-    move_down 15
+    move_down 10
   end
 
   def heading_date
-
-    if @contractor.orders.present?
-      @contractor.orders.order("date_issued").first.date_issued.strftime("%B %e, %Y") + " - " + @contractor.orders.order("date_issued").last.date_issued.strftime("%B %e, %Y")
-    else
+    if @from_date.strftime("%B %Y") == @to_date.strftime("%B %Y") && @from_date.strftime("%e") != @to_date.strftime("%e")
+      @from_date.strftime("%B %e") + " - " + @to_date.strftime("%e, %Y")
+    elsif @from_date.strftime("%B %e %Y") == @to_date.strftime("%B %e %Y")
+      @to_date.strftime("%B %e, %Y")
+    elsif @from_date.strftime("%B") != @to_date.strftime("%B") || @from_date.strftime("%Y") != @to_date.strftime("%Y")
+      @from_date.strftime("%B %e, %Y") + " - " + @to_date.strftime("%B %e, %Y")
     end
   end
 
-  def summary_table
-    [["Contractor: ", "#{(@contractor.name)}"]]
-  end
-
-  def summary
-    table(summary_table, :cell_style => {size: 11, :padding => [2, 2, 2, 2]}) do
-      cells.borders = []
+  def total_orders
+    if @customer_id.present?
+      @customer.line_items.where("date" => @from_date..@to_date).sum(:total_cost)
+    else
+      Supplies::LineItem.where("date" => @from_date..@to_date).sum(:total_cost)
     end
   end
 
   def display_issued_materials_table
-    if @contractor.orders.blank?
+    if @orders.blank?
       move_down 10
       text "No Issued Materials.", align: :center
     else
@@ -58,8 +61,32 @@ class ContractorLineItemsPdf < Prawn::Document
 
   def issued_materials_data
     move_down 5
-    [["DATE", "INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
-    @table_data ||= @contractor.line_items.order(date: :desc).map{ |e| [ e.order.date_issued.strftime('%B %e, %Y'), e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.unit_cost), price(e.total_cost)]} +
-    [["", "", "", "", "<b>TOTAL</b>", "<b>#{price(@contractor.line_items.total_price)}</b>"]]
+    if @customer_id.blank?
+      table_title = [["Name: ", "#{@customer.full_name}", "Total Orders:", "#{price(total_orders)}"]]
+      table(table_title, :cell_style => {size: 9, :padding => [1, 1, 1, 1]}, column_widths: [80, 250, 150, 70]) do
+        cells.borders = []
+        column(1).font_style = :bold
+        column(3).font_style = :bold
+        column(2).align = :right
+        column(3).align = :right
+      end
+      move_down 5
+      [["DATE", "INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
+      @table_data ||= Supplies::LineItem.where(:date => @from_date..@to_date).order(date: :desc).map{ |e| [ e.date.strftime('%B %e, %Y'), e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_cost)]} +
+      [["", "", "", "", "<b>TOTAL</b>", "<b>#{price(total_orders)}</b>"]]
+    else
+      table_title = [["Name: ", "#{@customer}", "Total Orders:", "#{price(total_orders)}"]]
+      table(table_title, :cell_style => {size: 9, :padding => [1, 1, 1, 1]}, column_widths: [80, 250, 150, 70]) do
+        cells.borders = []
+        column(1).font_style = :bold
+        column(3).font_style = :bold
+        column(2).align = :right
+        column(3).align = :right
+      end
+      move_down 5
+      [["DATE", "INVENTORY", "QUANTITY", "UNIT", "UNIT COST", "TOTAL COST"]] +
+      @table_data ||= @customer.line_items.where(:date => @from_date..@to_date).order(date: :desc).map{ |e| [ e.order.date_issued.strftime('%B %e, %Y'), e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_cost)]} +
+      [["", "", "", "", "<b>TOTAL</b>", "<b>#{price(total_orders)}</b>"]]
+    end
   end
 end

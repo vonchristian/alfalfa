@@ -23,6 +23,8 @@
 
     def show
       @equipment = Equipment.find(params[:id]).decorate
+      @inventory = Supplies::Inventory.find_by(:name => 'Diesel')
+      @line_items = @equipment.line_items.where(:inventory_id => @inventory.id).order(date: :desc).limit(10).all
       authorize @equipment
     end
 

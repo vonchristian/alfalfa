@@ -28,6 +28,10 @@ class Equipment < ActiveRecord::Base
     "#{make_and_model} (#{plate_number})"
   end
 
+  def name
+    "#{make_and_model} - #{plate_number}"
+  end
+
   def self.active
     all.select{|a| a.equipment_status.active? }
   end

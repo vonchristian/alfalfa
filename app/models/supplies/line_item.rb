@@ -11,6 +11,7 @@ class Supplies::LineItem < ActiveRecord::Base
   def total_price
     inventory.price * quantity
   end
+  
   def set_date
     self.date = self.order.date_issued
     self.save

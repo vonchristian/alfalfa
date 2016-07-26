@@ -21,12 +21,15 @@
             <%=simple_form_for @order, url: :orders do |f| %>
               <%=f.error_notification %>
               <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'date_picker'} %>
-              <%=f.input :customer_type, collection: Supplies::Order.select_customer_types, as: :radio_buttons, checked: 0 %>
+              <%=f.input :customer_type, collection: Supplies::Order.select_customer_types, as: :radio_buttons %>
               <div class="select">
-                <label>Select Contractor or Project</label>
+                <label>Select Contractor / Project / Equipment</label>
                 <%= f.input :customer_id, label: false, input_html: {class: 'col-md-12', :style => "width:100%"} do %>
-                  <%= f.select :customer_id, Project.all.map { |p| [p.id_number_and_location, p.id] } + Contractor.all.map { |c| [c.name, c.id] } %>
+                  <%= f.select :customer_id, Project.all.map { |p| [p.id_number_and_location, p.id] } + Contractor.all.map { |c| [c.name, c.id] } + Equipment.all.map { |e| [e.name, e.id] } %>
                 <% end %>
+              </div>
+              <div id="purpose_field">
+                <%= f.input :purpose %>
               </div>
               <%= f.input :payment_status, collection: Supplies::Order.payment_statuses.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons %>
               <div class="modal-footer">

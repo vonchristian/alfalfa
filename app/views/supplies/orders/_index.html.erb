@@ -17,7 +17,7 @@
             <%=link_to "Contractor", contractors_orders_path %>
           </li>
           <li>
-            <%=link_to "Customer", customers_orders_path %>
+            <%=link_to "Equipment", equipment_orders_path %>
           </li>
         </ul>
       </li>
@@ -39,6 +39,9 @@
     <span class="pull-right"><%=link_to "New Order", supplies_path, class: "btn btn-warning active" %></span>
   </div>
 </div>
+<div class="row">
+  <%= render 'filter_form' %>
+</div>
 <div class="row"><hr class="no-top-padding with-padding"></div>
 <div class="row">
   <div class="col-md-12">
@@ -47,7 +50,17 @@
         <table class="table table-striped">
           <thead>
             <tr class="title">
-              <th>Customer / Project</th>
+              <th>
+                <% if current_page? orders_path %>
+                  Customer
+                <% elsif current_page? projects_orders_path %>
+                  Projects
+                <% elsif current_page? contractors_orders_path %>
+                  Contractors
+                <% elsif current_page? equipment_orders_path %>
+                  Equipment
+                <% end %>
+              </th>
               <th>Date </th>
               <th> # of Items </th>
               <th> Payment Status </th>
@@ -79,3 +92,8 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $( "#customer_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>

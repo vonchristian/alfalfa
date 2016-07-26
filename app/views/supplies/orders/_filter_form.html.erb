@@ -1,0 +1,105 @@
+<% if current_page? orders_path %>
+  <%= form_tag({:action => 'index'}, {:method => :get})  do %>
+    <div class="row">
+      <div class="col-md-3">
+        <!-- <div class="form-group">
+          <%#= select_tag :customer_id, options_from_collection_for_select(Project.all + Contractor.all + Equipment.all, :id, :name, params[:customer_id]), include_blank: '- Select Customer -', class: 'form-control', label: false %>
+        </div> -->
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control', label: false, placeholder: 'From Date' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :to_date, @to_date, :class => 'datetimepicker form-control', label: false, placeholder: 'To Date' %>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-success active"> Go </button>
+      </div>
+      <div class="col-md-2">
+        <%=link_to 'Generate Report', orders_path(format: 'pdf', customer_id: @customer_id, from_date: @from_date, to_date: @to_date), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+<% elsif current_page? projects_orders_path %>
+  <%= form_tag({:action => 'projects'}, {:method => :get})  do %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= select_tag :customer_id, options_from_collection_for_select(Project.all, :id, :name, params[:customer_id]), include_blank: '- Select Project -', class: 'form-control', label: false %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control', label: false, placeholder: 'From Date' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :to_date, @to_date, :class => 'datetimepicker form-control', label: false, placeholder: 'To Date' %>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-success active"> Go </button>
+      </div>
+      <div class="col-md-2">
+        <%=link_to 'Generate Report', projects_orders_path(format: 'pdf', customer_id: @customer_id, from_date: @from_date, to_date: @to_date), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+<% elsif current_page? contractors_orders_path %>
+  <%= form_tag({:action => 'contractors'}, {:method => :get})  do %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= select_tag :customer_id, options_from_collection_for_select(Contractor.all, :id, :name, params[:customer_id]), include_blank: '- Select Contractor -', class: 'form-control', label: false %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control', label: false, placeholder: 'From Date' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :to_date, @to_date, :class => 'datetimepicker form-control', label: false, placeholder: 'To Date' %>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-success active"> Go </button>
+      </div>
+      <div class="col-md-2">
+        <%=link_to 'Generate Report', contractors_orders_path(format: 'pdf', customer_id: @customer_id, from_date: @from_date, to_date: @to_date), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+<% elsif current_page? equipment_orders_path %>
+  <%= form_tag({:action => 'equipment'}, {:method => :get})  do %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= select_tag :customer_id, options_from_collection_for_select(Equipment.all, :id, :name, params[:customer_id]), include_blank: '- Select Equipment -', class: 'form-control', label: false %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :from_date, @from_date, :class => 'datetimepicker form-control', label: false, placeholder: 'From Date' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= text_field_tag :to_date, @to_date, :class => 'datetimepicker form-control', label: false, placeholder: 'To Date' %>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-success active"> Go </button>
+      </div>
+      <div class="col-md-2">
+        <%=link_to 'Generate Report', equipment_orders_path(format: 'pdf', customer_id: @customer_id, from_date: @from_date, to_date: @to_date), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

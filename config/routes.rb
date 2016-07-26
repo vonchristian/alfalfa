@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     resources :assets
     resources :cash_advances, only: [:show] do
       resources :payments, only: [:new, :create], module: :cash_advances
-        match "/scope_to_date" => "transactions/cash_advances#scope_to_date", as: :scope_to_date, via: [:get], on: :collection
+      match "/scope_to_date" => "transactions/cash_advances#scope_to_date", as: :scope_to_date, via: [:get], on: :collection
     end
   end
   resources :accounts, only:[:edit, :update], module: :accounting
@@ -125,7 +125,7 @@ Rails.application.routes.draw do
   resources :fund_transfers
 
   resources :equipment do
-    resources :fuel_expenses, module: :equipment
+    resources :line_items, only: [:index], module: :equipment
     resources :equipment_schedules, module: :equipment
     resources :equipment_statuses, module: :equipment
   end
@@ -147,7 +147,7 @@ Rails.application.routes.draw do
   resources :orders, module: :supplies do
     match "/projects" => "orders#projects", as: :projects, via: [:get], on: :collection
     match "/contractors" => "orders#contractors", as: :contractors, via: [:get], on: :collection
-    match "/customers" => "orders#customers", as: :customers, via: [:get], on: :collection
+    match "/equipment" => "orders#equipment", as: :equipment, via: [:get], on: :collection
 
   end
 

@@ -1,4 +1,5 @@
 class Supplies::LineItemsController < ApplicationController
+
   def create
     @cart = current_cart
     @line_item = @cart.line_items.create(line_item_params)

@@ -1,4 +1,4 @@
-class ProjectLineItemsPdf < Prawn::Document
+class EquipmentLineItemsPdf < Prawn::Document
 
   TABLE_WIDTHS = [80, 190, 55, 45, 85, 90]
 
@@ -8,7 +8,7 @@ class ProjectLineItemsPdf < Prawn::Document
     @from_date = from_date
     @to_date = to_date
     @customer_id = customer_id
-    @customer = Project.find(@customer_id) if @customer_id.present?
+    @customer = Equipment.find(@customer_id) if @customer_id.present?
     @view_context = view_context
     heading
     display_issued_materials_table
@@ -19,7 +19,7 @@ class ProjectLineItemsPdf < Prawn::Document
   end
 
   def heading
-    text "Issued Fuel to Project", align: :center
+    text "Issued Fuel to Equipment", align: :center
     move_down 5
     text "Alfalfa Construction", align: :center, size: 11
     move_down 5
@@ -62,9 +62,7 @@ class ProjectLineItemsPdf < Prawn::Document
   def issued_materials_data
     move_down 5
     if @customer_id.blank?
-      table_title = [["Project Name: ", "#{@customer.try(:name)}", "Total Orders:", "#{price(total_orders)}"],
-                      ["Project ID: ", "#{@customer.try(:id_number)}", "", ""],
-                      ["Location: ", "#{@customer.try(:address)}", "", ""]]
+      table_title = [["Equipment: ", "#{@customer}", "Total Orders:", "#{price(total_orders)}"]]
       table(table_title, :cell_style => {size: 9, :padding => [1, 1, 1, 1]}, column_widths: [80, 250, 150, 70]) do
         cells.borders = []
         column(1).font_style = :bold
@@ -77,9 +75,7 @@ class ProjectLineItemsPdf < Prawn::Document
       @table_data ||= Supplies::LineItem.where(:date => @from_date..@to_date).order(date: :desc).map{ |e| [ e.date.strftime('%B %e, %Y'), e.inventory.try(:name), e.quantity, e.inventory.unit, price(e.inventory.price), price(e.total_cost)]} +
       [["", "", "", "", "<b>TOTAL</b>", "<b>#{price(Supplies::LineItem.where(:date => @from_date..@to_date).total_price)}</b>"]]
     else
-      table_title = [["Project Name: ", "#{@customer.try(:name)}", "Total Orders:", "#{price(total_orders)}"],
-                      ["Project ID: ", "#{@customer.try(:id_number)}", "", ""],
-                      ["Location: ", "#{@customer.try(:address)}", "", ""]]
+      table_title = [["Equipment: ", "#{@customer}", "Total Orders:", "#{price(total_orders)}"]]
       table(table_title, :cell_style => {size: 9, :padding => [1, 1, 1, 1]}, column_widths: [80, 250, 150, 70]) do
         cells.borders = []
         column(1).font_style = :bold
