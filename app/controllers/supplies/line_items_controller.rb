@@ -23,8 +23,9 @@ class Supplies::LineItemsController < ApplicationController
 
   def destroy
     @line_item = Supplies::LineItem.find(params[:id])
-    @line_item.destroy
-    redirect_to supplies_url
+    if @line_item.destroy
+      redirect_to supplies_url
+    end
   end
 
   private

@@ -99,6 +99,13 @@ class Supplies::OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    @order = Supplies::Order.find(params[:id])
+    if @order.destroy
+      redirect_to orders_url, notice: 'Order successfully deleted.'
+    end
+  end
+
   def show
     @order = Supplies::Order.find(params[:id])
     authorize @order
