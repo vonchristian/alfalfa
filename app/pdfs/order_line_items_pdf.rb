@@ -72,7 +72,7 @@ class OrderLineItemsPdf < Prawn::Document
   def table_data
     if @inventory_id.present?
       [["Date", "Issued To", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
-      @table_data ||= @line_items.where(:inventory_id => @inventory_id).all.map { |e| [ e.date.strftime("%B %e, %Y"), "#{e.order.customer}", e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.inventory.price), price(e.total_cost) ] } +
+      @table_data ||= @line_items.where(:inventory_id => @inventory_id).all.map { |e| [ e.date.strftime("%B %e, %Y"), "#{e.order.customer.try(:name)}", e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.inventory.price), price(e.total_cost) ] } +
       @table_data ||= [["", "", "", "", "", "TOTAL", "#{price(total_orders)}"]]
     else
       [["Date", "Issued To", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
