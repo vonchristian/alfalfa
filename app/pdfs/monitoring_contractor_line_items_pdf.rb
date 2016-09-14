@@ -1,7 +1,5 @@
 class MonitoringContractorLineItemsPdf < Prawn::Document
 
-  class ContractorLineItemsPdf < Prawn::Document
-
   TABLE_WIDTHS = [90, 190, 55, 50, 75, 90]
 
   def initialize(contractor, line_items, view_context)
@@ -71,9 +69,7 @@ class MonitoringContractorLineItemsPdf < Prawn::Document
       @table_data ||= [["", "", "", "", "TOTAL", "#{price(total_orders)}"]]
     else
       [["Date", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
-      [["", "No Orders for #{inventory_name}.", "", "", "", ""]]
+      [["", "No Orders for #{@contractor}.", "", "", "", ""]]
     end
   end
-end
-
 end
