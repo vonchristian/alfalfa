@@ -19,19 +19,7 @@ class MonitoringContractorLineItemsPdf < Prawn::Document
     text "Issued Inventories to Contractor", align: :center, size: 11
     move_down 2
     text "Alfalfa Construction", align: :center, size: 11
-    move_down 2
-    text heading_date, align: :center, size: 10
     move_down 10
-  end
-
-  def heading_date
-    if @from_date.strftime("%B %Y") == @to_date.strftime("%B %Y") && @from_date.strftime("%e") != @to_date.strftime("%e")
-      @from_date.strftime("%B %e") + " - " + @to_date.strftime("%e, %Y")
-    elsif @from_date.strftime("%B %e %Y") == @to_date.strftime("%B %e %Y")
-      @to_date.strftime("%B %e, %Y")
-    elsif @from_date.strftime("%B") != @to_date.strftime("%B") || @from_date.strftime("%Y") != @to_date.strftime("%Y")
-      @from_date.strftime("%B %e, %Y") + " - " + @to_date.strftime("%B %e, %Y")
-    end
   end
 
   def total_orders
