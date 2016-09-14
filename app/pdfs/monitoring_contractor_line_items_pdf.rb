@@ -23,12 +23,12 @@ class MonitoringContractorLineItemsPdf < Prawn::Document
   end
 
   def total_orders
-    @contractor.line_items.sum(:total_cost)
+    @line_items.sum(:total_cost)
   end
 
   def ordered_items
     move_down 10
-    if @contractor.line_items.blank?
+    if @line_items.blank?
       text "No Orders for", align: :center
     else
       table_title = [["Contractor Name: ", "#{@contractor.try(:name)}", "Total Amount: ", "#{price(total_orders)}"]]
@@ -51,9 +51,9 @@ class MonitoringContractorLineItemsPdf < Prawn::Document
   end
 
   def table_data
-    if @contractor.line_items.present?
+    if @line_items.present?
       [["Date", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
-      @table_data ||= @contractor.line_items.map { |e| [ e.date.strftime("%B %e, %Y"), e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.inventory.price), price(e.total_cost) ] } +
+      @table_data ||= @line_items.map { |e| [ e.date.strftime("%B %e, %Y"), e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.inventory.price), price(e.total_cost) ] } +
       @table_data ||= [["", "", "", "", "TOTAL", "#{price(total_orders)}"]]
     else
       [["Date", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
