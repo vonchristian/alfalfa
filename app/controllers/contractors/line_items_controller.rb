@@ -7,9 +7,10 @@ module Contractors
 	      @contractors = Contractor.all
 	    end
 			@contractor = Contractor.find(params[:contractor_id])
+			@line_items = @contractor.line_items.order(date: :desc).all
 			respond_to do |format|
 				format.pdf do 
-					pdf = ContractorLineItemsPdf.new(@contractor, view_context)
+					pdf = MonitoringContractorLineItemsPdf.new(@contractor, @line_items, view_context)
           			send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "IssuedMaterials.pdf"
 				end
 			end
