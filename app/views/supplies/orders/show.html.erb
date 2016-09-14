@@ -24,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @order.line_items.each do |line_item| %>
+          <% @line_items.each do |line_item| %>
             <tr>
               <td><%= line_item.order.date_issued.strftime("%B %e, %Y") %></td>
               <td><%=line_item.quantity %> <%=line_item.inventory.unit %></td>
@@ -50,8 +50,9 @@
           <% end %>
         </tbody>
       </table>
+      <h4 class="title text-right">Total:  <%=number_to_currency @order.line_items.total_price %></h4>
       <div class="modal-footer">
-        <h4 class="title">Total:  <%=number_to_currency @order.line_items.total_price %></h4>
+        <center><%= paginate @line_items, :window => 1 %></center>
       </div>
     </div>
   </div>

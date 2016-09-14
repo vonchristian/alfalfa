@@ -39,6 +39,8 @@ module Supplies
 
     def show
       @inventory = Supplies::Inventory.find(params[:id])
+      @stocks = @inventory.stocks.order(date: :desc).all.page(params[:page]).per(30)
+      @orders = @inventory.orders.order(date_issued: :desc).all.page(params[:page]).per(30)
       authorize @inventory
     end
 

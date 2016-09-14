@@ -27,6 +27,11 @@ class Supplies::Order < ActiveRecord::Base
       payment_status = hash[:payment_status] unless hash[:payment_status].blank?
       self.where('date_issued' => from_date..to_date).where('customer_id' => customer_id)
       # self.where('date' => from_date..to_date)
+    elsif hash[:from_date] && hash[:to_date] && hash[:inventory_id]
+      from_date = hash[:from_date].kind_of?(Time) ? hash[:from_date] : Time.parse(hash[:from_date].strftime('%Y-%m-%d 12:00:00'))
+      to_date = hash[:to_date].kind_of?(Time) ? hash[:to_date] : Time.parse(hash[:to_date].strftime('%Y-%m-%d 12:59:59'))
+      inventory_id = hash[:inventory_id] unless hash[:inventory_id].blank?
+      self.where('date_issued' => from_date..to_date)
     elsif hash[:from_date] && hash[:to_date]
       from_date = hash[:from_date].kind_of?(Time) ? hash[:from_date] : Time.parse(hash[:from_date].strftime('%Y-%m-%d 12:00:00'))
       to_date = hash[:to_date].kind_of?(Time) ? hash[:to_date] : Time.parse(hash[:to_date].strftime('%Y-%m-%d 12:59:59'))

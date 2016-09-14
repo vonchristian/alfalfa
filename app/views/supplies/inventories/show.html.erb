@@ -22,16 +22,16 @@
           <% end %>
         <% end %>
 
-        <div class="pull-right">
+        <!-- <div class="pull-right">
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li><%=link_to 'Delete Inventory', supplies_inventory_path(@inventory), method: :delete, data: {confirm: 'Are you sure?'} %></li>
+                <li><%#=link_to 'Delete Inventory', supplies_inventory_path(@inventory), method: :delete, data: {confirm: 'Are you sure?'} %></li>
               </ul>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
     <hr>
@@ -52,7 +52,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% @inventory.orders.order("date_issued DESC").each do |order| %>
+                <% @orders.each do |order| %>
                   <tr>
                     <td><%=order.date_issued.strftime("%B %e, %Y") %></td>
                     <td><%=order.line_items.where(:inventory_id => @inventory.id).pluck(:quantity).sum %> <%=@inventory.unit %></td>
@@ -61,6 +61,9 @@
                 <% end %>
               </tbody>
             </table>
+            <div class="modal-footer">
+              <center><%= paginate @orders, :window => 1 %></center>
+            </div>
           </div>
         </div>
         <div class="col-md-6">
@@ -76,12 +79,11 @@
                   <th>Quantity</th>
                   <th> Unit Cost </th>
                   <th> Total Cost </th>
-
-                  <th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                <% @inventory.stocks.order(:date).reverse.each do |stock| %>
+                <% @stocks.each do |stock| %>
                   <tr>
                     <td><%=stock.date.strftime("%B %e, %Y") %></td>
                     <td><%=stock.quantity %> <%=stock.inventory.unit %></td>
@@ -92,8 +94,10 @@
                   </tr>
                 <% end %>
               </tbody>
-
             </table>
+            <div class="modal-footer">
+              <center><%= paginate @stocks, :window => 1 %></center>
+            </div>
           </div>
         </div>
       </div>

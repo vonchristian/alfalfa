@@ -145,6 +145,7 @@ Rails.application.routes.draw do
 
 
   resources :orders, module: :supplies do
+    match "/over_all" => "orders#over_all", as: :all_in_one, via: [:get], on: :collection
     match "/projects" => "orders#projects", as: :projects, via: [:get], on: :collection
     match "/contractors" => "orders#contractors", as: :contractors, via: [:get], on: :collection
     match "/equipment" => "orders#equipment", as: :equipment, via: [:get], on: :collection

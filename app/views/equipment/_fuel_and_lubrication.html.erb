@@ -33,5 +33,8 @@
       </tbody>
     </table>
     <center><%= link_to 'View All', equipment_line_items_path(@equipment) %></center>
+    <div class="modal-footer">
+      <center><%= paginate @line_items, :window => 1 %></center>
+    </div>
   </div>
 </div>

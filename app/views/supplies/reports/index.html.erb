@@ -1,95 +1,239 @@
 <div class="row">
-	<div class="col-md-6">
-		<div class="card">
-			<div class="header">
-				<div class="row">
-					<div class="col-md-4">
-						<h4 class="title">Projects</h4>
-					</div>
-					<div class="col-md-8">
-            <%=form_tag supplies_reports_path, method: :get do %>
-              <div class="input-group stylish-input-group">
-                <%=text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Search Project' %>
-                <span class="input-group-addon">
-                  <button type="submit">
-                    <span class=" glyphicon glyphicon-search"></span>
-                  </button>
-                </span>
-              </div>
-            <% end %>
-				  </div>
-				</div>
-			</div>
-			<div class="content">
-						<% @projects.all.each do |project| %>
-							<ul class="list-unstyled team-members">
-                <%=link_to supplies_project_path(project) do %>
-                <li>
-                  <div class="row">
-                    <div class="col-md-7">
-                      <%=project.name.truncate(150) %><br>
-                        <i class="fa fa-map-marker"></i><small class="text-light-gray"><%=project.id_number_and_location %></small>
-                    </div>
-                    <div class="col-md-3">
-                      <span class="title"><%=project.line_items.count %> Orders</span>
-                    </div>
-                    <div class="col-md-2">
-                      <i class="fa fa-angle-right fa-3x contractor-name"></i>
-                  </div>
-                  </div>
-                </li>
-                <% end %>
-              </ul>
-						<% end %>
-
-			</div>
-		</div>
-	</div>
-<div class="col-md-6">
-  <div class="card">
+  <div class="col-md-12">
+    <div class="card">
       <div class="header">
+        <h4 class="title">Reports
+        </h4>
+        <div class="row"><hr class="with-padding"></div>
+      </div>
+      <div class="content">
         <div class="row">
-          <div class="col-md-5">
-            <h4 class="title">Contractors</h4>
+          <div class="col-md-12">
+            <h3 class="">Issued Materials for Projects and Contractors</h3>
+            <p class="category">Allows you to generate reports, on daily, weekly, monthly and by setting up a filter on dates for all issued materials on projects and contractors.</p>
+            <hr class="with-padding">
           </div>
-          <div class="col-md-7">
-            <%=form_tag supplies_reports_path, method: :get do %>
-              <div class="input-group stylish-input-group">
-                <%=text_field_tag :contractor_name, params[:contractor_name], class: 'form-control', placeholder: 'Search Contractor' %>
-                <span class="input-group-addon">
-                  <button type="submit">
-                    <span class=" glyphicon glyphicon-search"></span>
-                  </button>
-                </span>
+          <div class="col-md-4 text-center">
+            <%=link_to all_in_one_orders_path(from_date: Time.zone.now.beginning_of_day, to_date: Time.zone.now.end_of_day, format: 'pdf') do %>
+              <h5 class=""> Daily Report </h5>
+              <p class="category"> Generate daily orders report for today. </p>
+            <% end %>
+            <hr class="with-padding">
+          </div>
+          <div class="col-md-4 text-center">
+            <%=link_to all_in_one_orders_path(from_date: Time.zone.now.beginning_of_week, to_date: Time.zone.now.end_of_week, format: 'pdf') do %>
+              <h5 class=""> Weekly Report </h5>
+              <p class="category"> Generate weekly orders report as of today. </p>
+            <% end %>
+            <hr class="with-padding">
+          </div>
+          <div class="col-md-4 text-center">
+            <%=link_to all_in_one_orders_path(from_date: Time.zone.now.beginning_of_month, to_date: Time.zone.now.end_of_month, format: 'pdf') do %>
+              <h5 class=""> Monthly Report </h5>
+              <p class="category"> Generate monthly orders report as of today. </p>
+            <% end %>
+            <hr class="with-padding">
+          </div>
+          <div class="col-md-10 col-md-offset-1 text-center">
+            <h5>Customized Report</h5>
+            <p class="category text-muted">*To generate report for a specific date, set the same date range. (e.g. <b>From: July 2, 2016 and To: July 2, 2016</b>). </p>
+            <%= form_tag({:action => "over_all", controller: "orders", format: 'pdf'}, {:method => :get})  do %>
+              <div class="row">
+                <div class="text-center">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= select_tag :inventory_id, options_from_collection_for_select(Supplies::Inventory.all, :id, :name, params[:inventory_id]), include_blank: '- Select Material -', class: 'form-control', id: "over_all_inventory_id", label: false %>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= text_field_tag :from_date, @from_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'From Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= text_field_tag :to_date, @to_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'To Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-success active btn-block"> Generate </button>
+                  </div>
+                </div>
               </div>
             <% end %>
           </div>
         </div>
-      </div>
-      <div class="content">
-        <% @contractors.all.each do |contractor| %>
-          <%=link_to supplies_contractor_path(contractor) do %>
-            <ul class="list-unstyled team-members">
-              <li>
-                <div class="row">
-                  <div class="col-md-2">
-                    <%=image_tag(contractor.profile_photo.url(:medium), class: "img-circle", width: 60, height: 60) %>
-                  </div>
-                  <div class="col-md-5">
-                    <p class="contractor-name"><%=contractor.full_name %></p>
-                    <span class="text-muted"><%=contractor.company %></span>
+        <br>
+        <br>
+        <div class="row"><hr class="with-padding"></div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="">Issued Materials to Project</h3>
+            <p class="category">Allows you to filter report by setting up filters on dates and also on a specific material that was issued to a project.</p>
+            <hr class="with-padding">
+          </div>
+          <div class="col-md-12 text-center">
+            <h5>Customized Report</h5>
+            <p class="category text-muted">*To generate report for a specific date, set the same date range. (e.g. <b>From: July 2, 2016 and To: July 2, 2016</b>). </p>
+            <%= form_tag({:action => "projects", controller: "orders", format: 'pdf'}, {:method => :get})  do %>
+              <div class="row">
+                <div class="text-center">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= select_tag :inventory_id, options_from_collection_for_select(Supplies::Inventory.all, :id, :name, params[:inventory_id]), include_blank: '- Select Material -', class: 'form-control', id: "projects_inventory_id", label: false %>
+                    </div>
                   </div>
                   <div class="col-md-3">
-                    <span class="title"><%=contractor.orders.count %> Orders</span>
+                    <div class="form-group">
+                      <%= select_tag :customer_id, options_from_collection_for_select(Project.all, :id, :name, params[:customer_id]), include_blank: '- Select Project -', class: 'form-control', label: false, id: "projects_customer_id", required: true %>
+                    </div>
                   </div>
                   <div class="col-md-2">
-                    <i class="fa fa-angle-right fa-3x contractor-name"></i>
+                    <div class="form-group">
+                      <%= text_field_tag :from_date, @from_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'From Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <%= text_field_tag :to_date, @to_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'To Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-success active btn-block"> Generate </button>
+                  </div>
                 </div>
-              </li>
-            </ul>
-          <% end %>
-        <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row"><hr class="with-padding"></div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="">Issued Materials to Contractor</h3>
+            <p class="category">Allows you to filter report by setting up filters on dates and also on a specific material that was issued to a contractor.</p>
+            <hr class="with-padding">
+          </div>
+          <div class="col-md-12 text-center">
+            <h5>Customized Report</h5>
+            <p class="category text-muted">*To generate report for a specific date, set the same date range. (e.g. <b>From: July 2, 2016 and To: July 2, 2016</b>). </p>
+            <%= form_tag({:action => "contractors", controller: "orders", format: 'pdf'}, {:method => :get})  do %>
+              <div class="row">
+                <div class="text-center">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= select_tag :inventory_id, options_from_collection_for_select(Supplies::Inventory.all, :id, :name, params[:inventory_id]), include_blank: '- Select Material -', class: 'form-control', id: "contractors_inventory_id", label: false %>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= select_tag :customer_id, options_from_collection_for_select(Contractor.all, :id, :name, params[:customer_id]), include_blank: '- Select Contractor -', class: 'form-control', id: "contractors_customer_id", label: false, required: true %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <%= text_field_tag :from_date, @from_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'From Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <%= text_field_tag :to_date, @to_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'To Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-success active btn-block"> Generate </button>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div><br>
+        <br>
+        <div class="row"><hr class="with-padding"></div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="">Equipment Fuel and Maintenance</h3>
+            <p class="category">Allows you to filter report by setting up filters on dates and also on a specific inventory used by the equipment.</p>
+            <hr class="with-padding">
+          </div>
+          <div class="col-md-12 text-center">
+            <h5>Customized Report</h5>
+            <p class="category text-muted">*To generate report for a specific date, set the same date range. (e.g. <b>From: July 2, 2016 and To: July 2, 2016</b>). </p>
+            <%= form_tag({:action => "equipment", controller: "orders", format: 'pdf'}, {:method => :get})  do %>
+              <div class="row">
+                <div class="text-center">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= select_tag :inventory_id, options_from_collection_for_select(Supplies::Inventory.all, :id, :name, params[:inventory_id]), include_blank: '- Select Material -', class: 'form-control', id: "equipment_inventory_id", label: false %>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= select_tag :customer_id, options_from_collection_for_select(Equipment.all, :id, :name, params[:customer_id]), include_blank: '- Select Contractor -', class: 'form-control', id: "equipment_customer_id", label: false, required: true %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <%= text_field_tag :from_date, @from_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'From Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <%= text_field_tag :to_date, @to_date, :class => 'date_picker form-control border-input', label: false, placeholder: 'To Date' %>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-success active btn-block"> Generate </button>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <br>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $( "#over_all_inventory_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>
+<script type="text/javascript">
+  $( "#projects_inventory_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>
+<script type="text/javascript">
+  $( "#contractors_inventory_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>
+<script type="text/javascript">
+  $( "#equipment_inventory_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>
+<script type="text/javascript">
+  $( "#projects_customer_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>
+<script type="text/javascript">
+  $( "#contractors_customer_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>
+<script type="text/javascript">
+  $( "#equipment_customer_id" ).select2({
+    theme: "bootstrap"
+  });
+</script>

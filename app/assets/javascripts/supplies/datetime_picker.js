@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('.date_picker').datetimepicker({
-  	format: 'MMMM DD, YYYY',
+  	format: 'MMM DD, YYYY',
   	showClose: true,
       widgetPositioning: {
             horizontal: 'auto',

@@ -21,41 +21,63 @@ class Supplies::OrdersController < ApplicationController
     end
   end
 
+  def over_all
+    @inventory_id = params[:inventory_id] if params[:inventory_id].present?
+    @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.parse(params[:from_date].strftime('%Y-%m-%d 12:00:00'))
+    @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.parse(params[:to_date].strftime('%Y-%m-%d 12:59:59'))
+    @line_items = Supplies::LineItem.filter_with(:from_date => @from_date, :to_date => @to_date).order(date: :desc).all
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = OrderLineItemsPdf.new(@line_items, @inventory_id, @from_date, @to_date, view_context)
+              send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
+      end
+    end
+  end
+
   def projects
+    @inventory_id = params[:inventory_id].to_i if params[:inventory_id].present?
     @customer_id = params[:customer_id] if params[:customer_id].present?
     @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_month
     @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_month
+    @line_items = Supplies::LineItem.filter_with(:from_date => @from_date, :to_date => @to_date).order(date: :desc).all
     @orders = Supplies::Order.filter_with(:customer_id => @customer_id, :from_date => @from_date, :to_date => @to_date).where(:customer_type => "Project").order(date_issued: :desc).all.page(params[:page]).per(50)
     respond_to do |format|
       format.html
       format.pdf do 
-        pdf = ProjectLineItemsPdf.new(@orders, @customer_id, @from_date, @to_date, view_context)
+        pdf = ProjectLineItemsPdf.new(@line_items, @inventory_id, @customer_id, @from_date, @to_date, view_context)
               send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
       end
     end
   end
+  
   def contractors
+    @inventory_id = params[:inventory_id] if params[:inventory_id].present?
     @customer_id = params[:customer_id] if params[:customer_id].present?
     @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_month
     @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_month
+    @line_items = Supplies::LineItem.filter_with(:from_date => @from_date, :to_date => @to_date).order(date: :desc).all
     @orders = Supplies::Order.filter_with(:customer_id => @customer_id, :from_date => @from_date, :to_date => @to_date).where(:customer_type => "Contractor").order(date_issued: :desc).all.page(params[:page]).per(50)
     respond_to do |format|
       format.html
       format.pdf do 
-        pdf = ContractorLineItemsPdf.new(@orders, @customer_id, @from_date, @to_date, view_context)
+        pdf = ContractorLineItemsPdf.new(@line_items, @inventory_id, @customer_id, @from_date, @to_date, view_context)
               send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
       end
     end
   end
+
   def equipment
+    @inventory_id = params[:inventory_id] if params[:inventory_id].present?
     @customer_id = params[:customer_id] if params[:customer_id].present?
     @from_date = params[:from_date] ? Time.parse(params[:from_date]) : Time.now.beginning_of_month
     @to_date = params[:to_date] ? Time.parse(params[:to_date]) : Time.now.end_of_month
+    @line_items = Supplies::LineItem.filter_with(:from_date => @from_date, :to_date => @to_date).order(date: :desc).all
     @orders = Supplies::Order.filter_with(:customer_id => @customer_id, :from_date => @from_date, :to_date => @to_date).where(:customer_type => "Equipment").order(date_issued: :desc).all.page(params[:page]).per(50)
     respond_to do |format|
       format.html
       format.pdf do 
-        pdf = EquipmentLineItemsPdf.new(@orders, @customer_id, @from_date, @to_date, view_context)
+        pdf = EquipmentLineItemsPdf.new(@line_items, @inventory_id, @customer_id, @from_date, @to_date, view_context)
               send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Orders.pdf"
       end
     end
@@ -108,6 +130,7 @@ class Supplies::OrdersController < ApplicationController
 
   def show
     @order = Supplies::Order.find(params[:id])
+    @line_items = @order.line_items.order(date: :desc).page(params[:page]).per(30)
     authorize @order
   end
 
