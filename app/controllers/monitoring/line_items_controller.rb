@@ -8,10 +8,11 @@ module Monitoring
 	      @projects = Project.all
 	    end
 			@project = Project.find(params[:project_id])
+			@line_items = @project.line_items.order(date: :desc).all
 			respond_to do |format|
 				format.html
 				format.pdf do
-					pdf = ProjectLineItemsPdf.new(@project, view_context)
+					pdf = MonitoringProjectLineItemsPdf.new(@project, @line_items view_context)
           			send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "IssuedMaterials.pdf"
 				end
 			end
