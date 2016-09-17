@@ -1,15 +1,7 @@
 <div class="card">
   <div class="header">
-    <h4 class="title">Fuel and Lubrication
-      <% if @line_items.present? %>
-        <%=link_to supplies_equipment_path(@equipment, format: 'pdf') do %>
-          <span class="btn btn-info pull-right" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
-        <% end %>
-      <% else %>
-        <%=link_to nil do %>
-          <span class="btn disabled pull-right" data-toggle="tooltip" data-placement="bottom" title="View PDF Report"><i class="fa fa-print"></i>Print(PDF)</span>
-        <% end %>
-      <% end %>
+    <h4 class="title">Fuel and Lubrication 
+      <span class="pull-right"><%=link_to "New", supplies_fuel_monitoring_index_path, class: "btn btn-primary btn-fill" %></span>
     </h4>
     <p class="category"><%= @equipment.name %></p>
     <div class="row"><hr></div>

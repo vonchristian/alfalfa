@@ -1,4 +1,6 @@
 class Supplies::LineItem < ActiveRecord::Base
+  attr_accessor :change_price
+
   belongs_to :inventory
   belongs_to :cart, class_name: "Supplies::Cart"
   belongs_to :order, class_name: "Supplies::Order"
@@ -17,7 +19,7 @@ class Supplies::LineItem < ActiveRecord::Base
   end
 
   def total_price
-    inventory.price * quantity
+    unit_cost * quantity
   end
   
   def set_date

@@ -4,7 +4,7 @@ class SuppliesController < ApplicationController
     if params[:name].present?
       @inventories = Supplies::Inventory.search_by_name(params[:name]).order(:name)
     else
-      @inventories = Supplies::Inventory.all.order(:name)
+      @inventories = Supplies::Inventory.all.order(:name).page(params[:page]).per(30)
     end
     authorize :supply, :show?
     @cart = current_cart

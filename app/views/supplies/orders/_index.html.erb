@@ -80,7 +80,7 @@
                 <td><%=order.line_items.count %></td>
                 <td><%=order.payment_status %></td>
                 <td><%=order.customer_type %></td>
-                <td><span class="pull-right"><%=number_to_currency order.line_items.total_price %></span></td>
+                <td><span class="pull-right"><%=number_to_currency order.line_items.sum(:total_cost) %></span></td>
               </tr>
             <% end %>
           </tbody>
