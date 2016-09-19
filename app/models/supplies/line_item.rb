@@ -9,7 +9,7 @@ class Supplies::LineItem < ActiveRecord::Base
 
   delegate :paid?, :unpaid?, to: :order
   delegate :check_if_out_of_stock, to: :inventory
-  validates :unit_cost
+  validates :unit_cost, :presence => true
 
   def self.filter_with(hash={})
     if hash[:from_date] && hash[:to_date]
