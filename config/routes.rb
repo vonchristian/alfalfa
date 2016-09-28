@@ -1,4 +1,3 @@
-
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
 
@@ -149,7 +148,6 @@ Rails.application.routes.draw do
     match "/projects" => "orders#projects", as: :projects, via: [:get], on: :collection
     match "/contractors" => "orders#contractors", as: :contractors, via: [:get], on: :collection
     match "/equipment" => "orders#equipment", as: :equipment, via: [:get], on: :collection
-
   end
 
   namespace :supplies do

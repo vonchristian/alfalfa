@@ -10,6 +10,7 @@ class Supplies::LineItem < ActiveRecord::Base
   delegate :paid?, :unpaid?, to: :order
   delegate :check_if_out_of_stock, to: :inventory
   validates :unit_cost, :presence => true
+  before_save :set_total_cost
 
   def self.filter_with(hash={})
     if hash[:from_date] && hash[:to_date]
@@ -31,9 +32,9 @@ class Supplies::LineItem < ActiveRecord::Base
     self.date = self.order.date_issued
     self.save
   end
+
   def set_total_cost
     self.total_cost = self.total_price
-    self.save
   end
 
   def inventory_quantity

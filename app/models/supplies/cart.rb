@@ -15,14 +15,14 @@ end
 #   current_item
 # end
 
-  def add_inventory
+  def add_inventory(line_item)
     sums = self.line_items.group(:inventory_id).sum(:quantity)
-    sums.each do |inventory_id, quantity|
+    sums.each do |inventory_id, quantity, unit_cost|
       if quantity > 1
         # remove individual items
         self.line_items.where(inventory_id: inventory_id).delete_all
         # replace with a single item
-        self.line_items.create(inventory_id: inventory_id, quantity: quantity)
+        self.line_items.create!(inventory_id: inventory_id, quantity: quantity, unit_cost: line_item.unit_cost)
       end
     end
   end

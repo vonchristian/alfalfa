@@ -9,6 +9,7 @@ module Supplies
       end
       @cart = current_cart
       @line_item = Supplies::LineItem.new
+      @order = Order.new
     end
 
     def show

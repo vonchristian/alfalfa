@@ -11,6 +11,7 @@ class Supplies::CartsController < ApplicationController
         format.json { render json: @cart }
       end
     end
+    @order = Order.new
   end
 
   def destroy

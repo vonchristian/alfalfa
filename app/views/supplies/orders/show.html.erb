@@ -8,7 +8,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li><%= link_to 'Delete Order', order_path(@order), method: :delete, data: {confirm: 'Are you sure?'} %></li>
+                <li><%= link_to 'Delete Order', order_path(@order), method: :delete, data: {confirm: 'Line items in your order will be deleted, do you wish to continue?'} %></li>
               </ul>
             </li>
           </ul>

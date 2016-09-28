@@ -123,7 +123,7 @@ class Supplies::OrdersController < ApplicationController
 
   def destroy
     @order = Supplies::Order.find(params[:id])
-    if @order.destroy
+    if @order.line_items.destroy_all && @order.destroy
       redirect_to orders_url, notice: 'Order successfully deleted.'
     end
   end

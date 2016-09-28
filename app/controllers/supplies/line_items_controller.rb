@@ -5,8 +5,7 @@ class Supplies::LineItemsController < ApplicationController
     @line_item = @cart.line_items.create(line_item_params)
     respond_to do |format|
       if @line_item.save
-        @line_item.set_total_cost
-        @cart.add_inventory
+        @cart.add_inventory(@line_item)
         @inventory = Supplies::Inventory.find_by(name: "Diesel")
         if @inventory.id == @line_item.inventory_id
           format.html { redirect_to supplies_fuel_monitoring_index_path }
@@ -23,8 +22,19 @@ class Supplies::LineItemsController < ApplicationController
 
   def destroy
     @line_item = Supplies::LineItem.find(params[:id])
-    if @line_item.destroy
-      redirect_to supplies_url
+    @order = @line_item.order
+    if request.referrer == supplies_url || request.referrer == supplies_fuel_monitoring_index_url || request.referrer == new_order_url
+      @line_item.destroy
+      redirect_to supplies_url, notice: 'LineItem has been deleted.'
+    else
+      if @order.line_items.count > 1
+        @line_item.destroy
+        redirect_to order_path(@order), notice: 'LineItem has been deleted.'
+      elsif @order.line_items.count < 2
+        @line_item.destroy
+        @order.destroy
+        redirect_to orders_url, notice: 'Order has been deleted.'
+      end
     end
   end
 

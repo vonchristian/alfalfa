@@ -1,44 +1,5 @@
 <div class="row">
   <div class="col-md-4">
-    <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <button href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
-        Filter <b class="caret"></b></button>
-        <ul class="dropdown-menu dropdown-menu-left">
-          <li>
-            <%= link_to 'All', supplies_path %>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <%= link_to 'Cement', cement_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'Explosives', explosive_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'Aggregates', aggregate_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'Tires', tire_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'Fuel', fuel_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'CHB', chb_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'RSB', rsb_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'RCPC', rcpc_category_supplies_path %>
-          </li>
-          <li>
-            <%= link_to 'CWN', cwn_category_supplies_path %>
-          </li>
-        </ul>
-      </li>
-    </ul>
   </div>
   <div class="col-md-4">
     <%=form_tag supplies_path, method: :get do %>
@@ -55,7 +16,7 @@
 </div>
 <div class="row"><hr class="with-padding"></div>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-7">
     <% @inventories.each do |inventory| %>
       <div class="card">
         <div class="header">
@@ -75,7 +36,7 @@
                 <small class="title"><%=inventory.unit %></small>
               </div>
               <div class="col-md-4">
-                <%=f.input :unit_cost, input_html: { value: inventory.price }, label: false, readonly: true %>
+                <%=f.input :unit_cost, input_html: { value: inventory.price }, label: false, readonly: true, required: true %>
                 <%= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
               </div>
               <div class="col-md-3">
@@ -91,10 +52,10 @@
       </div>
     <% end %>
     <div class="modal-footer">
-      <center><%= paginate @inventories, :window => 1 %></center>
+      <center><%= paginate @inventories, :window => 1 unless params[:name].present? %></center>
     </div>
   </div>
-  <div class="col-md-4" id="cart">
+  <div class="col-md-5" id="cart">
     <%=render @cart %>
   </div>
 </div>

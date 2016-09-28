@@ -9,6 +9,7 @@ class SuppliesController < ApplicationController
     authorize :supply, :show?
     @cart = current_cart
     @line_item = Supplies::LineItem.new
+    @order = Supplies::Order.new
   end
 
   def cement_category

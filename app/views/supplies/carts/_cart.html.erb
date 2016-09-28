@@ -1,23 +1,53 @@
 
-  <div class="card">
-    <div class="header">
-      <h4 class="title"> Your Orders
-        <span class="pull-right"><%= button_to 'Empty cart', supplies_cart_path(@cart), method: :delete, confirm: 'Are you sure?', class: "btn btn-danger" %></span>
-      </h4>
-      <div class="row"><hr></div>
+<div class="card">
+  <div class="header">
+    <h4 class="title"> Your Orders
+      <span class="pull-right"><%= button_to 'Empty cart', supplies_cart_path(@cart), method: :delete, confirm: 'Are you sure?', class: "btn btn-danger" %></span>
+    </h4>
+    <div class="row"><hr></div>
+  </div>
+  <div class="content">
+    <%=render @cart.line_items %>
+    <div class="modal-footer">
+      <h4 class="title"><b>Total:</b> <%=number_to_currency @cart.total_price %></h4>
     </div>
-    <div class="content">
-      <%=render @cart.line_items %>
-      <div class="modal-footer">
-        <h4 class="title"><b>Total:</b> <%=number_to_currency @cart.total_price %></h4>
-      </div>
-      <% unless @cart.line_items.empty? %>
-        <div class="row"><hr class="with-padding"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <span><center><%= button_to "Checkout", new_order_path, method: :get, class: "btn btn-success btn-block"%></center>
-          </div>
+    <% unless @cart.line_items.empty? %>
+      <%=simple_form_for @order, url: :orders do |f| %>
+        <%=f.error_notification %>
+        <%= f.input :date_issued, as: :string, label: 'Date', input_html: { class: 'date_picker'} %>
+        <%=f.input :customer_type, collection: Supplies::Order.select_customer_types, as: :radio_buttons %>
+        <div class="select">
+          <label>Select Contractor / Project / Equipment</label>
+          <%= f.input :customer_id, label: false, input_html: {class: 'col-md-12', :style => "width:100%"} do %>
+            <%= f.select :customer_id, Project.all.map { |p| [p.id_number_and_location, p.id] } + Contractor.all.map { |c| [c.name, c.id] } + Equipment.all.map { |e| [e.name, e.id] } %>
+          <% end %>
+        </div>
+        <div id="purpose_field">
+          <%= f.input :purpose %>
+        </div>
+        <%= f.input :payment_status, collection: Supplies::Order.payment_statuses.keys.to_a.map{|a| [a.titleize, a]}, as: :radio_buttons %>
+        <div class="modal-footer">
+          <%= link_to 'Add more items', supplies_path, class: 'btn btn-warning pull-left' %>
+          <%=f.submit "Place Order", class: "btn btn-primary" %>
         </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $(".contractor_customer").select2({
+      theme: "bootstrap"
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#supplies_order_customer_id").select2({
+      theme: "bootstrap",
+      width: '100%'
+    });
+  });
+</script>
