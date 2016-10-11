@@ -5,7 +5,6 @@ ruby '2.3.1'
 gem 'rails'
 gem 'draper'
 gem 'jquery-ui-rails'
-gem 'rails4-autocomplete'
 gem 'public_activity'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
