@@ -1,5 +1,7 @@
 class SuppliesController < ApplicationController
+
   layout 'supplies'
+
   def index
     if params[:name].present?
       @inventories = Supplies::Inventory.search_by_name(params[:name]).order(:name)

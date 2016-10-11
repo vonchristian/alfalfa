@@ -4,7 +4,7 @@
   <div class="col-md-4">
     <%=form_tag supplies_path, method: :get do %>
       <div class="input-group stylish-input-group">
-        <%=text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Search for a Product' %>
+        <%= text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Search Product...' %>
         <span class="input-group-addon">
           <button type="submit">
             <span class=" glyphicon glyphicon-search"></span>
@@ -17,43 +17,45 @@
 <div class="row"><hr class="with-padding"></div>
 <div class="row">
   <div class="col-md-7">
-    <% @inventories.each do |inventory| %>
-      <div class="card">
-        <div class="header">
-          <h4 class="title">
-            <%=inventory.name_category %>
-            <span class='pull-right'><small class="text-info"><%=number_to_currency inventory.price %></small></span>
-          </h4>
-        </div>
-        <div class="content">
-          <%=simple_form_for @line_item, url: :supplies_line_items do |f| %>
-            <div class="row">
-              <div class="col-md-3">
-                <%=f.input :quantity, label: false, placeholder: "QTY", as: :string, required: true, input_html: {class: 'input-sm'} %>
-                <%=f.input :inventory_id, input_html: {value: inventory.id }, as: :hidden %>
+    <% if params[:name].present? %>
+      <% @inventories.each do |inventory| %>
+        <div class="card">
+          <div class="header">
+            <h4 class="title">
+              <%=inventory.name_category %>
+              <span class='pull-right'><small class="text-info"><%=number_to_currency inventory.price %></small></span>
+            </h4>
+          </div>
+          <div class="content">
+            <%=simple_form_for @line_item, url: :supplies_line_items do |f| %>
+              <div class="row">
+                <div class="col-md-3">
+                  <%=f.input :quantity, label: false, placeholder: "QTY", as: :string, required: true, input_html: {class: 'input-sm'} %>
+                  <%=f.input :inventory_id, input_html: {value: inventory.id }, as: :hidden %>
+                </div>
+                <div class="col-md-2">
+                  <small class="title"><%=inventory.unit %></small>
+                </div>
+                <div class="col-md-4">
+                  <%=f.input :unit_cost, input_html: { value: inventory.price }, label: false, readonly: true, required: true %>
+                  <%= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
+                </div>
+                <div class="col-md-3">
+                  <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active pull-right" %>
+                </div>
               </div>
-              <div class="col-md-2">
-                <small class="title"><%=inventory.unit %></small>
-              </div>
-              <div class="col-md-4">
-                <%=f.input :unit_cost, input_html: { value: inventory.price }, label: false, readonly: true, required: true %>
-                <%= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
-              </div>
-              <div class="col-md-3">
-                <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active pull-right" %>
-              </div>
+            <% end %>
+            <div class="footer">
+              <hr>
+              <small><%=inventory.quantity%> <%=inventory.unit %> remaining</small>
             </div>
-          <% end %>
-          <div class="footer">
-            <hr>
-            <small><%=inventory.quantity%> <%=inventory.unit %> remaining</small>
           </div>
         </div>
+      <% end %>
+      <div class="modal-footer">
+        <center><%= paginate @inventories, :window => 1 unless params[:name].present? %></center>
       </div>
     <% end %>
-    <div class="modal-footer">
-      <center><%= paginate @inventories, :window => 1 unless params[:name].present? %></center>
-    </div>
   </div>
   <div class="col-md-5" id="cart">
     <%=render @cart %>

@@ -159,6 +159,7 @@ Rails.application.routes.draw do
       resources :payments, only:[:new, :create]
     end
     resources :inventories do
+      get :autocomplete_inventory_name, on: :collection
       resources :stocks, only: [:new, :create]
       match "/discontinue" => "inventories#discontinue", as: :discontinue, via: [:get, :post]
       match "/continue" => "inventories#continue", as: :continue, via: [:get, :post]
