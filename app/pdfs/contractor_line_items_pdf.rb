@@ -86,7 +86,7 @@ class ContractorLineItemsPdf < Prawn::Document
     if @inventory_id.present?
       if customer_line_items_inventory.present?
         [["Date", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
-        @table_data ||= customer_line_items_inventory.map { |e| [ e.date.strftime("%B %e, %Y"), e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.inventory.price), price(e.total_cost) ] } +
+        @table_data ||= customer_line_items_inventory.map { |e| [ e.date.strftime("%B %e, %Y"), e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.unit_cost), price(e.total_cost) ] } +
         @table_data ||= [["", "", "", "", "TOTAL", "#{price(total_orders)}"]]
       else
         [["Date", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
@@ -94,7 +94,7 @@ class ContractorLineItemsPdf < Prawn::Document
       end
     else
       [["Date", "Item", "Unit", "Quantity", "Unit Cost", "Total Cost"]] +
-      @table_data ||= customer_line_items.map { |e| [ e.date.strftime("%B %e, %Y"), e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.inventory.price), price(e.total_cost) ] } +
+      @table_data ||= customer_line_items.map { |e| [ e.date.strftime("%B %e, %Y"), e.inventory.try(:name), e.inventory.unit, e.quantity, price(e.unit_cost), price(e.total_cost) ] } +
       @table_data ||= [["", "", "", "", "TOTAL", "#{price(total_orders)}"]]
     end
   end
