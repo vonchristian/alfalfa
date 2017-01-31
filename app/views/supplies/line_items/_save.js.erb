@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @line_item.errors.any? %>
+  <% @line_item.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#line-item-modal").modal("hide")
+  window.location.reload();
+<% end %>

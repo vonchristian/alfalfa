@@ -17,21 +17,28 @@
       <div class="row"><hr></div>
     </div>
     <div class="content">
+        <p class="category">
+          <% if @order.purpose.blank? %>
+            Customer: <%= @order.try(:customer).try(:name) %>
+          <% elsif @order.purpose.present? %>
+            Purpose: <%=@order.purpose %></span></td>
+          <% end %>
+        </p>
       <table class="table table-hover">
         <thead>
           <tr>
-            <th colspan="4"><h4 class="title"><%=@order.customer.try(:name) || @order.name %></h4></th>
+            <th colspan="4"><h4 class="title"><%=@order.try(:customer).try(:name) || @order.name %></h4></th>
           </tr>
         </thead>
         <tbody>
           <% @line_items.each do |line_item| %>
             <tr>
-              <td><%= line_item.order.date_issued.strftime("%B %e, %Y") %></td>
+              <td><%= line_item.date.strftime("%B %e, %Y") %></td>
               <td><%=line_item.quantity %> <%=line_item.inventory.unit %></td>
               <td>
                 <%=line_item.inventory.name%>
                 <br />
-                <span class="text-muted"><small><%=number_to_currency line_item.inventory.price %></small></span>
+                <span class="text-muted"><small><%=number_to_currency line_item.unit_cost %></small></span>
               </td>
               <td><p class="pull-right"><%=number_to_currency line_item.total_price %></p></td>
               <td class="text-right">
@@ -41,6 +48,7 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <b class="caret"></b></a>
                       <ul class="dropdown-menu dropdown-menu-right">
                         <li><%= link_to 'Delete Item', supplies_line_item_path(line_item), method: :delete, data: {confirm: 'Are you sure?'} %></li>
+                        <li><%= link_to 'Edit', edit_supplies_line_item_path(id: line_item), remote: true %></li>
                       </ul>
                     </li>
                   </ul>
@@ -57,3 +65,4 @@
     </div>
   </div>
 </div>
+<div id="line-item-modal" class="modal fade"></div>

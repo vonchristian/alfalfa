@@ -20,6 +20,16 @@ class Supplies::LineItemsController < ApplicationController
     end
   end
 
+  def edit
+    @line_item = Supplies::LineItem.find(params[:id])
+  end
+
+  def update
+    @line_item = Supplies::LineItem.find(params[:id])
+    @line_item.update_attributes(line_item_update_params)
+    @line_item.order.update(:date_issued => @line_item.date)
+  end
+
   def destroy
     @line_item = Supplies::LineItem.find(params[:id])
     @order = @line_item.order
@@ -41,5 +51,9 @@ class Supplies::LineItemsController < ApplicationController
   private
   def line_item_params
     params.require(:supplies_line_item).permit(:inventory_id, :quantity, :unit_cost, :total_cost)
+  end
+
+  def line_item_update_params
+    params.require(:supplies_line_item).permit(:inventory_id, :quantity, :unit_cost, :total_cost, :date)
   end
 end

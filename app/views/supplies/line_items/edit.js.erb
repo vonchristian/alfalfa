@@ -1,0 +1,16 @@
+$("#line-item-modal").html("<%= escape_javascript(render 'edit') %>")
+$("#line-item-modal").modal("show")
+  // $('.date_picker').datetimepicker({
+  // 	format: 'MMM DD, YYYY',
+  // 	showClose: true,
+  //     widgetPositioning: {
+  //           horizontal: 'auto',
+  //           vertical: 'auto'
+  //     }
+  // });
+  $('.datepicker').datepicker({
+	  format: "yyyy/mm/dd",
+	  orientation: "auto bottom",
+	  todayHighlight: 'true',
+	  autoclose: 'true'
+  });

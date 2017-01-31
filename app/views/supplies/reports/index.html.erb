@@ -176,7 +176,7 @@
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <%= select_tag :customer_id, options_from_collection_for_select(Equipment.all, :id, :name, params[:customer_id]), include_blank: '- Select Contractor -', class: 'form-control', id: "equipment_customer_id", label: false, required: true %>
+                      <%= select_tag :customer_id, options_from_collection_for_select(Equipment.all, :id, :name, params[:customer_id]), include_blank: '- Select Equipment -', class: 'form-control', id: "equipment_customer_id", label: false, required: true %>
                     </div>
                   </div>
                   <div class="col-md-2">

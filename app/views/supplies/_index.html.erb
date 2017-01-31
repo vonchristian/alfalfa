@@ -37,8 +37,8 @@
                   <small class="title"><%=inventory.unit %></small>
                 </div>
                 <div class="col-md-4">
-                  <%=f.input :unit_cost, input_html: { value: inventory.price }, label: false, readonly: true, required: true %>
-                  <%= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
+                  <%=f.input :unit_cost, input_html: { value: inventory.price }, label: false, required: true %>
+                  <%#= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
                 </div>
                 <div class="col-md-3">
                   <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active pull-right" %>

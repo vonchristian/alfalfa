@@ -24,7 +24,7 @@
               <%=f.input :customer_type, collection: Supplies::Order.select_customer_types, as: :radio_buttons %>
               <div class="select">
                 <label>Select Contractor / Project / Equipment</label>
-                <%= f.input :customer_id, label: false, input_html: {class: 'col-md-12', :style => "width:100%"} do %>
+                <%= f.input :customer_id, label: false, input_html: { class: 'col-md-12', :style => "width:100%"} do %>
                   <%= f.select :customer_id, Project.all.map { |p| [p.id_number_and_location, p.id] } + Contractor.all.map { |c| [c.name, c.id] } + Equipment.all.map { |e| [e.name, e.id] } %>
                 <% end %>
               </div>
@@ -59,7 +59,13 @@
   $(document).ready(function() {
     $("#supplies_order_customer_id").select2({
       theme: "bootstrap",
-      width: '100%'
+      width: '100%',
+      allowClear: true,
+      placeholder: {
+                    id: "-1",
+                    text: "Please Select",
+                    selected: 'selected'
+                    }
     });
   });
 </script>

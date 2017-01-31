@@ -18,8 +18,8 @@
               <small class="title"><%=@inventory.unit %></small>
             </div>
             <div class="col-xs-4">
-              <%=f.input :unit_cost, input_html: { value: @inventory.price }, label: false, readonly: true %>
-              <%= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
+              <%=f.input :unit_cost, input_html: { value: @inventory.price }, label: false %>
+              <%#= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
             </div>
             <div class="col-xs-3">
               <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active" %>

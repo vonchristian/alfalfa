@@ -71,10 +71,10 @@
           <tbody>
             <% @orders.each do |order| %>
               <tr>
-                <% if order.customer_id.present? || !order.customer_type == "Customer"%>
-                  <td><span class="text-uppercase"><%=link_to order.customer.try(:name), order_path(order) %></span></td>
-                <% else %>
-                  <td><span class="text-uppercase"><%=link_to order.name, order_path(order) %></span></td>
+                <% if order.purpose.blank? %>
+                  <td><span class="text-uppercase"><%=link_to order.try(:customer).try(:name), order_path(order) %></span></td>
+                <% elsif order.purpose.present? %>
+                  <td><span class="text-uppercase"><%=link_to order.purpose, order_path(order) %></span></td>
                 <% end %>
                 <td><%=order.date_issued.strftime("%B %e, %Y") %></td>
                 <td><%=order.line_items.count %></td>

@@ -6,7 +6,7 @@ class Supplies::Order < ActiveRecord::Base
   enum pay_type:[:cash, :check]
   enum payment_status:[:paid, :unpaid]
   has_many :line_items, dependent: :destroy
-  validates :date_issued, :customer_type, :customer_id,  presence: true
+  validates :date_issued, :customer_type,  presence: true
 
   def self.for_projects
     all.select{ |a| a.customer_type="Project" }
@@ -52,6 +52,12 @@ class Supplies::Order < ActiveRecord::Base
   end
 
   def self.select_customer_types
-    ['Project', 'Contractor', 'Equipment']
+    ['Project', 'Contractor', 'Equipment', "Others"]
+  end
+
+  def check_customer_type
+    if self.customer_type = "Others"
+      customer_id = nil
+    end
   end
 end

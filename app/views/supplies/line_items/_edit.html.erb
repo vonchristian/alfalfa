@@ -1,0 +1,38 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title"><%= "Editing Line item" %></h4>
+    </div>
+    <%=simple_form_for @line_item, url: :supplies_line_item, remote: true do |f| %>
+      <div class="modal-body">
+        <ul class="errors text-danger">
+        </ul>
+
+        <div class="row">
+          <div class="col-md-12">
+            <%= f.input :date, as: :string, label: 'Date', input_html: { class: 'datepicker'} %>
+          </div>
+          <div class="col-md-12">
+            <h4><%= @line_item.inventory.name %></h4>
+          </div>
+          <div class="col-md-4">
+            <%=f.input :quantity, placeholder: "QTY", as: :string, required: true, input_html: {class: 'input-sm'} %>
+            <%=f.input :inventory_id, input_html: {value: @line_item.inventory.id }, as: :hidden %>
+          </div>
+          <div class="col-md-4">
+            <br>
+            <small class="title"><%=@line_item.inventory.unit %></small>
+          </div>
+          <div class="col-md-4">
+            <%=f.input :unit_cost, input_html: { value: @line_item.unit_cost }, required: true %>
+            <%#= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+        <%=f.submit "Update", class: "btn btn-success active pull-right" %>
+      </div>
+    <% end %>
+  </div>
+</div>

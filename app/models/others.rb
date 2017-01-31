@@ -1,0 +1,2 @@
+class Others < Project 
+end

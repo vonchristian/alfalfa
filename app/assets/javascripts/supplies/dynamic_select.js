@@ -13,6 +13,10 @@ $(document).ready(function(){
     } else if ( selected === "Equipment") {
       $("#purpose_field").show();
       $(".select").show();
+
+    } else if ( selected === "Others") {
+      $("#purpose_field").show();
+      $(".select").hide();
     }
   });
 });
