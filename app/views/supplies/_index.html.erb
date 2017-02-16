@@ -41,10 +41,10 @@
                   <%#= f.input :change_price, as: :boolean, input_html: { id: 'define_price'} %>
                 </div>
                 <div class="col-md-3">
-                  <% if inventory.quantity == 0 %>
+                  <% if inventory.quantity >= 1 %>
                     <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success active pull-right" %>
                   <% else %>
-                    <%=f.submit "Add to Cart", data: {disable_with: "Adding inventory..."}, class: "btn btn-success disabled pull-right" %>
+                    <a href="" class="btn btn-danger disabled pull-right">Add to Cart</a>
                   <% end %>
                 </div>
               </div>
